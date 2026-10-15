@@ -525,14 +525,54 @@ function defaultConfig(){return{baseRate:850000,provRates:{},cropRates:{},paymen
 function defaultOrders(){const n=Date.now();return[{id:uid(),code:"SP-1405-0128",name:"علی محمدی",phone:"09121112233",province:"تهران",city:"ورامین",village:"",crop:"گندم",area:18,date:"1405/07/23",notes:"",amount:18*850000,status:"scheduled",createdAt:n-2*864e5},{id:uid(),code:"SP-1405-0127",name:"رضا احمدی",phone:"09123334455",province:"اصفهان",city:"کاشان",village:"",crop:"ذرت",area:10,date:"1405/07/25",notes:"",amount:10*850000,status:"pending",createdAt:n-3*864e5},{id:uid(),code:"SP-1405-0126",name:"حسین کریمی",phone:"09135556677",province:"فارس",city:"شیراز",village:"",crop:"باغ میوه",area:24,date:"1405/07/20",notes:"",amount:24*850000,status:"in_progress",createdAt:n-5*864e5}];}
 function defaultMessages(){return[{id:uid(),from:"customer",text:"سلام، برای سفارش SP-1405-0128 امکان تغییر زمان وجود دارد؟",createdAt:Date.now()-3600e3,read:false}];}
 async function seedIfNeeded(){if(localStorage.getItem(LS.seeded))return;const salt=rand(16);const hash=await sha256(salt+"Admin@1405");write(LS.auth,{user:"admin",salt,hash,mustChange:true});write(LS.config,defaultConfig());write(LS.orders,defaultOrders());write(LS.messages,defaultMessages());localStorage.setItem(LS.seeded,"1");}
-const getConfig=()=>Object.assign(defaultConfig(),read(LS.config,{}));
-const setConfig=c=>write(LS.config,c);
+const getConfig=()=>Object.assign(defaultConfig(),cache.config||{});
+const setConfig=c=>{cache.config=c;write(LS.config,c);syncConfig(c);};
 const getOrders=()=>read(LS.orders,[]);
 const setOrders=o=>write(LS.orders,o);
-const getMessages=()=>read(LS.messages,[]);
-const setMessages=m=>write(LS.messages,m);
+const getMessages=()=>cache.messages;
+const setMessages=m=>{cache.messages=m;write(LS.messages,m);syncMessages(m);};
 function calcPrice({area,province,crop},cfg=getConfig()){const base=+cfg.baseRate||0;const rate=+cfg.cropRates?.[crop]||+cfg.provRates?.[province]||base;return Math.round((+area||0)*rate);}
 const STATUS={pending:{label:"در انتظار پرداخت",cls:""},scheduled:{label:"زمان‌بندی شد",cls:"green"},in_progress:{label:"در حال انجام",cls:"blue"},done:{label:"تکمیل شده",cls:"green"},cancelled:{label:"لغو شده",cls:"red"}};
+async function syncOrders(list){
+try{
+const remote=await fetch(API_URL+"/api/orders").then(r=>r.json());
+for(const r of remote){if(!list.find(x=>x.id===r.id))await fetch(API_URL+"/api/orders/"+r.id,{method:"DELETE"});}
+for(const item of list){
+const found=remote.find(x=>x.id===item.id);
+if(found){
+await fetch(API_URL+"/api/orders/"+item.id,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(item)});
+}else{
+await fetch(API_URL+"/api/orders",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(item)});
+}
+}
+}catch(e){console.error("syncOrders:",e);}
+}
+async function syncMessages(list){
+try{
+const remote=await fetch(API_URL+"/api/messages").then(r=>r.json());
+for(const item of list){
+if(!remote.find(x=>x.id===item.id)){
+await fetch(API_URL+"/api/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(item)});
+}
+}
+}catch(e){console.error("syncMessages:",e);}
+}
+async function syncConfig(c){
+try{
+await fetch(API_URL+"/api/config",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(c)});
+}catch(e){console.error("syncConfig:",e);}
+}
+async function loadFromAPI(){
+try{
+const [o,m,c]=await Promise.all([
+fetch(API_URL+"/api/orders").then(r=>r.json()),
+fetch(API_URL+"/api/messages").then(r=>r.json()),
+fetch(API_URL+"/api/config").then(r=>r.json())
+]);
+cache.orders=Array.isArray(o)?o:[];
+cache.messages=Array.isArray(m)?m:[];
+cache.config=(c&&Object.keys(c).length)?c:null;
+}catch(e){console.error("loadFromAPI:",e);}
 const Auth=(()=>{
 const TTL=30*60*1000,MAX=5,LOCK=5*60*1000;
 function getSession(){try{const s=JSON.parse(sessionStorage.getItem(LS.session)||"null");if(!s||!s.expires||s.expires<Date.now()){sessionStorage.removeItem(LS.session);return null;}return s;}catch{return null;}}
@@ -977,7 +1017,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&panel.classList.con
 return{init};
 })();
 (async function(){
-await seedIfNeeded();
+await loadFromAPI();
 Admin.init();
 refreshSelects();
 refreshCustomerPayment();
