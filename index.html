@@ -576,7 +576,7 @@ $$(".nav button").forEach(b=>{const on=b.dataset.screen===name;if(on)b.setAttrib
 $("#page-title").textContent=TITLES[name]||"سم‌پاش هوشمند";
 window.scrollTo({top:0,behavior:"smooth"});
 }
-document.addEventListener("click",e=>{const go=e.target.closest("[data-go]");if(go){showScreen(go.dataset.go);return;}const t=e.target.closest("[data-toast]");if(t)toast(t.dataset.toast);});
+document.addEventListener("click",e=>{const go=e.target.closest("[data-go]");if(go){showScreen(go.dataset.go);return;}const scr=e.target.closest("[data-screen]");if(scr){showScreen(scr.dataset.screen);return;}const t=e.target.closest("[data-toast]");if(t)toast(t.dataset.toast);});
 function fillSelect(sel,items,ph){if(!sel)return;const cur=sel.value;sel.innerHTML="";if(ph){const o=document.createElement("option");o.value="";o.textContent=ph;sel.appendChild(o);}items.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;sel.appendChild(o);});if(items.includes(cur))sel.value=cur;}
 function refreshSelects(){const c=getConfig();fillSelect($("#province"),c.provinces,"انتخاب استان");fillSelect($("#crop"),c.crops,"انتخاب محصول");}
 function refreshCustomerPayment(){const c=getConfig();const card=$("#cardno"),iban=$("#iban"),rate=$("#base-rate");if(card)card.value=c.payment.card||"";if(iban)iban.value=c.payment.iban||"";if(rate)rate.textContent=fmt(c.baseRate);}
