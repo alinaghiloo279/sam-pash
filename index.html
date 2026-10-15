@@ -525,12 +525,15 @@ function defaultConfig(){return{baseRate:850000,provRates:{},cropRates:{},paymen
 function defaultOrders(){const n=Date.now();return[{id:uid(),code:"SP-1405-0128",name:"علی محمدی",phone:"09121112233",province:"تهران",city:"ورامین",village:"",crop:"گندم",area:18,date:"1405/07/23",notes:"",amount:18*850000,status:"scheduled",createdAt:n-2*864e5},{id:uid(),code:"SP-1405-0127",name:"رضا احمدی",phone:"09123334455",province:"اصفهان",city:"کاشان",village:"",crop:"ذرت",area:10,date:"1405/07/25",notes:"",amount:10*850000,status:"pending",createdAt:n-3*864e5},{id:uid(),code:"SP-1405-0126",name:"حسین کریمی",phone:"09135556677",province:"فارس",city:"شیراز",village:"",crop:"باغ میوه",area:24,date:"1405/07/20",notes:"",amount:24*850000,status:"in_progress",createdAt:n-5*864e5}];}
 function defaultMessages(){return[{id:uid(),from:"customer",text:"سلام، برای سفارش SP-1405-0128 امکان تغییر زمان وجود دارد؟",createdAt:Date.now()-3600e3,read:false}];}
 async function seedIfNeeded(){if(localStorage.getItem(LS.seeded))return;const salt=rand(16);const hash=await sha256(salt+"Admin@1405");write(LS.auth,{user:"admin",salt,hash,mustChange:true});write(LS.config,defaultConfig());write(LS.orders,defaultOrders());write(LS.messages,defaultMessages());localStorage.setItem(LS.seeded,"1");}
+const const API="https://cold-grass-e1f3sam-pash-api.ali-naghiloo279.workers.dev";
+const cache={orders:[],messages:[],config:null};
+async function loadAll(){try{const[o,ms,cf]=await Promise.all([fetch(API+"/api/orders").then(r=>r.json()),fetch(API+"/api/messages").then(r=>r.json()),fetch(API+"/api/config").then(r=>r.json())]);cache.orders=Array.isArray(o)?o:[];cache.messages=Array.isArray(ms)?ms:[];cache.config=(cf&&Object.keys(cf).length)?cf:null;}catch(e){console.error(e);}}
 const getConfig=()=>Object.assign(defaultConfig(),cache.config||{});
-const setConfig=c=>{cache.config=c;write(LS.config,c);syncConfig(c);};
-const getOrders=()=>read(LS.orders,[]);
-const setOrders=o=>write(LS.orders,o);
+const setConfig=c=>{cache.config=c;write(LS.config,c);fetch(API+"/api/config",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(c)}).catch(()=>{});};
+const getOrders=()=>cache.orders;
+const setOrders=o=>{cache.orders=o;write(LS.orders,o);(async()=>{try{const r=await fetch(API+"/api/orders").then(x=>x.json());for(const it of o){if(r.find(x=>x.id===it.id)){await fetch(API+"/api/orders/"+it.id,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(it)});}else{await fetch(API+"/api/orders",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(it)});}}for(const r2 of r){if(!o.find(x=>x.id===r2.id)){await fetch(API+"/api/orders/"+r2.id,{method:"DELETE"});}}}catch(e){}})();};
 const getMessages=()=>cache.messages;
-const setMessages=m=>{cache.messages=m;write(LS.messages,m);syncMessages(m);};
+const setMessages=m=>{cache.messages=m;write(LS.messages,m);(async()=>{try{const r=await fetch(API+"/api/messages").then(x=>x.json());for(const it of m){if(!r.find(x=>x.id===it.id)){await fetch(API+"/api/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(it)});}}}catch(e){}})();};
 function calcPrice({area,province,crop},cfg=getConfig()){const base=+cfg.baseRate||0;const rate=+cfg.cropRates?.[crop]||+cfg.provRates?.[province]||base;return Math.round((+area||0)*rate);}
 const STATUS={pending:{label:"در انتظار پرداخت",cls:""},scheduled:{label:"زمان‌بندی شد",cls:"green"},in_progress:{label:"در حال انجام",cls:"blue"},done:{label:"تکمیل شده",cls:"green"},cancelled:{label:"لغو شده",cls:"red"}};
 async function syncOrders(list){
