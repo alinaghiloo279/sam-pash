@@ -340,7 +340,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="field-wrap"><label for="village">روستا / منطقه</label><input id="village" name="village" placeholder="نام روستا"></div>
 <div class="field-wrap"><label for="crop">نوع محصول *</label><select id="crop" name="crop" required><option value="">انتخاب محصول</option></select><span class="error" data-error-for="crop"></span></div>
 <div class="field-wrap"><label for="area">مساحت (متر مربع) *</label><input id="area" name="area" required inputmode="decimal" class="ltr" type="text" value="10000"><span class="error" data-error-for="area"></span></div>
-<div class="field-wrap"><label for="date">تاریخ پیشنهادی (شمسی)</label><input id="date" name="date" inputmode="text" class="ltr" placeholder="1405/07/23" maxlength="10"><span class="hint">قالب: 1405/07/23</span><span class="error" data-error-for="date"></span></div>
+<div class="field-wrap"><label>تاریخ پیشنهادی (شمسی)</label><div style="display:flex;gap:6px"><select id="date-y" class="ltr" style="flex:1"></select><select id="date-m" class="ltr" style="flex:1"></select><select id="date-d" class="ltr" style="flex:1"></select></div><input type="hidden" id="date" name="date"><span class="error" data-error-for="date"></span></div>
 <div class="field-wrap span-2"><label for="notes">توضیحات و نشانی</label><textarea id="notes" name="notes" rows="3" placeholder="نام آفت، وضعیت مزرعه..."></textarea></div>
 </div>
 <div class="price-card"><div><small>برآورد هزینه سفارش</small><div class="rate">نرخ پایه: <b id="base-rate">—</b> تومان/هکتار</div></div><strong id="total-price">—</strong></div>
@@ -532,6 +532,7 @@ function renderPayInfo(){const el=document.getElementById("pay-info");if(!el)ret
 const cache={orders:[],messages:[],config:null};
 async function loadAll(){try{const[o,ms,cf]=await Promise.all([fetch(API+"/api/orders").then(r=>r.json()),fetch(API+"/api/messages").then(r=>r.json()),fetch(API+"/api/config").then(r=>r.json())]);cache.orders=Array.isArray(o)?o:[];cache.messages=Array.isArray(ms)?ms:[];cache.config=(cf&&Object.keys(cf).length)?cf:null;}catch(e){console.error(e);}}
 function updateNotifBadge(){const seen=read("sph_admin_seen",0);const count=getOrders().filter(o=>o.createdAt>seen).length;const badge=document.getElementById("notif-badge");const dot=document.getElementById("notif-dot");if(!badge)return;if(count>0){badge.textContent=toFa(count);badge.hidden=false;if(dot)dot.hidden=false;}else{badge.hidden=true;if(dot)dot.hidden=true;}}
+function initDatePickers(){const y=document.getElementById("date-y");const m=document.getElementById("date-m");const d=document.getElementById("date-d");if(!y||!m||!d)return;const curY=1405;const years=[];for(let i=curY-1;i<=curY+2;i++)years.push(i);y.innerHTML=years.map(v=>`<option value="${v}" ${v===curY?"selected":""}>${toFa(v)}</option>`).join("");const months=[];for(let i=1;i<=12;i++)months.push(i);m.innerHTML='<option value="">ماه</option>'+months.map(v=>`<option value="${v}">${toFa(v)}</option>`).join("");const days=[];for(let i=1;i<=31;i++)days.push(i);d.innerHTML='<option value="">روز</option>'+days.map(v=>`<option value="${v}">${toFa(v)}</option>`).join("");function sync(){const yy=y.value,mm=m.value,dd=d.value;const inp=document.getElementById("date");if(yy&&mm&&dd){inp.value=`${yy}/${String(mm).padStart(2,"0")}/${String(dd).padStart(2,"0")}`;}else{inp.value="";}}y.addEventListener("change",sync);m.addEventListener("change",sync);d.addEventListener("change",sync);}
 const getConfig=()=>{const d=defaultConfig();const c=Object.assign(d,cache.config||{});if(!Array.isArray(c.provinces)||!c.provinces.length)c.provinces=d.provinces;if(!Array.isArray(c.crops)||!c.crops.length)c.crops=d.crops;if(!c.payment||typeof c.payment!=="object")c.payment=d.payment;return c;};
 const setConfig=c=>{cache.config=c;write(LS.config,c);fetch(API+"/api/config",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(c)}).catch(()=>{});};
 const getOrders=()=>cache.orders;
@@ -608,8 +609,10 @@ box.appendChild(row);
 });
 }
 function attachDigitNormalizer(input,{integer=false}={}){if(!input)return;input.addEventListener("input",()=>{let v=toEn(input.value);v=integer?v.replace(/\D+/g,""):v.replace(/[^\d./]/g,"");if(input.value!==v)input.value=v;});input.addEventListener("blur",()=>{input.value=toEn(input.value);});}
-["phone","track-phone"].forEach(id=>attachDigitNormalizer(document.getElementById(id),{integer:true}));
-["area","date"].forEach(id=>attachDigitNormalizer(document.getElementById(id)));
+  ["phone","track-phone"].forEach(id=>attachDigitNormalizer(document.getElementById(id),{integer:true}));
+attachDigitNormalizer(document.getElementById("area"));
+const FIELD_MESSAGES={
+  attachDigitNormalizer(document.getElementById("area"));
 const FIELD_MESSAGES={
 cust:v=>v.trim().length>=3?"":"نام را کامل وارد کنید.",
 phone:v=>/^09\d{9}$/.test(v)?"":"شماره باید با ۰۹ و ۱۱ رقم باشد.",
@@ -987,6 +990,7 @@ return{init};
 })();
 (async function(){
 await seedIfNeeded();
+initDatePickers();
 await loadAll();
 Admin.init();
 refreshSelects();
