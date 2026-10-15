@@ -56,8 +56,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .hero h3{font-size:28px;line-height:1.5;max-width:520px;margin:14px 0 8px;font-weight:900;letter-spacing:-.5px}
 .hero p{font-size:14px;line-height:1.95;color:#c6dccd;max-width:480px;margin:0 0 18px}
 .hero-cta{display:flex;gap:9px;flex-wrap:wrap;margin-top:6px}
-.btn-hero{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg,#f0cf8c,#d9a94e);color:#2a2415;border-radius:12px;padding:13px 20px;font-weight:800;font-size:13.5px;box-shadow:0 10px 24px rgba(216,169,78,.35),inset 0 1px 0 rgba(255,255,255,.4);transition:transform .15s ease}
-.btn-hero:hover{transform:translateY(-1px)}
+.btn-hero{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg,#f0cf8c,#d9a94e);color:#2a2415;border-radius:12px;padding:13px 20px;font-weight:800;font-size:13.5px;box-shadow:0 10px 24px rgba(216,169,78,.35);transition:transform .15s ease}
 .btn-hero svg{width:16px;height:16px}
 .btn-hero-ghost{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.22);border-radius:12px;padding:13px 20px;font-weight:700;font-size:13.5px}
 .btn-hero-ghost svg{width:16px;height:16px}
@@ -75,7 +74,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .hero-price strong{color:#fbe0a8;font-size:17px;font-weight:800}
 .trust-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:22px 0 0}
 .trust-stat{background:linear-gradient(160deg,#ffffff,#f5faf6);border:1px solid var(--b100);border-radius:var(--r-l);padding:20px 16px;text-align:center;box-shadow:var(--sh1);transition:transform .2s}
-.trust-stat:hover{transform:translateY(-3px)}
 .trust-stat-icon{width:50px;height:50px;border-radius:14px;background:linear-gradient(145deg,var(--b100),var(--b200));color:var(--b700);display:grid;place-items:center;margin:0 auto 12px}
 .trust-stat-icon svg{width:24px;height:24px}
 .trust-stat strong{display:block;font-size:24px;font-weight:900;color:var(--b800);letter-spacing:-.5px}
@@ -113,6 +111,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .status.blue{background:var(--inf-bg);color:var(--inf-fg);border-color:rgba(53,88,163,.1)}
 .status.red{background:var(--dng-bg);color:var(--dng-fg)}
 .status.purple{background:#f3e9fa;color:#6d28a8;border-color:rgba(109,40,168,.1)}
+.status.amber{background:var(--warn-bg);color:var(--warn-fg)}
 .quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .quick{border:1px solid var(--ln);background:var(--sur);border-radius:var(--r-m);padding:14px;text-align:right}
 .quick .q-icon{height:38px;width:38px;display:grid;place-items:center;background:linear-gradient(145deg,var(--b50),var(--b100));color:var(--b600);border-radius:11px;margin-bottom:11px}
@@ -199,6 +198,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .icon-mini{width:32px;height:32px;border-radius:9px;border:1px solid var(--ln);background:var(--sur);display:grid;place-items:center;color:var(--i500)}
 .icon-mini svg{width:15px;height:15px}
 .icon-mini.purple{color:#6d28d9;border-color:#e9d5ff}
+.icon-mini.ok{color:var(--ok-fg);border-color:rgba(15,111,78,.25)}
+.icon-mini.danger{color:var(--dng);border-color:rgba(160,42,30,.2)}
 .chip-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;min-height:32px;padding:8px;background:var(--inset);border-radius:var(--r-m);border:1px solid var(--ln)}
 .chip{display:inline-flex;align-items:center;gap:6px;background:var(--sur);border:1px solid var(--b100);color:var(--b700);border-radius:var(--r-f);padding:5px 8px 5px 11px;font-size:12px;font-weight:600}
 .chip button{border:0;background:transparent;color:inherit;display:grid;place-items:center;width:18px;height:18px;border-radius:50%}
@@ -239,7 +240,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .faq-section{margin:26px 0 20px}
 .faq-section > h3{font-size:19px;font-weight:800;color:var(--i900);margin:0 0 6px}
 .faq-section > p{color:var(--i400);font-size:13px;margin:0 0 16px}
-.faq-item{background:var(--sur);border:1px solid var(--ln);border-radius:var(--r-l);margin-bottom:8px;overflow:hidden;transition:border-color .2s}
+.faq-item{background:var(--sur);border:1px solid var(--ln);border-radius:var(--r-l);margin-bottom:8px;overflow:hidden}
 .faq-item[open]{border-color:var(--b300)}
 .faq-item summary{padding:14px 16px;font-weight:700;font-size:13.5px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;color:var(--i800)}
 .faq-item summary::-webkit-details-marker{display:none}
@@ -247,17 +248,39 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .faq-item[open] summary::before{content:"✓";background:var(--ok-bg);color:var(--ok-fg)}
 .faq-item .faq-body{padding:0 16px 14px 54px;color:var(--i600);font-size:13px;line-height:1.95}
 .fab-stack{position:fixed;bottom:24px;inset-inline-start:24px;z-index:90;display:flex;flex-direction:column-reverse;gap:12px}
-.fab{width:56px;height:56px;border-radius:50%;color:#fff;display:grid;place-items:center;box-shadow:0 10px 28px rgba(11,31,23,.28);transition:transform .15s ease;position:relative}
+.fab{width:56px;height:56px;border-radius:50%;color:#fff;display:grid;place-items:center;box-shadow:0 10px 28px rgba(11,31,23,.28);transition:transform .15s ease}
 .fab:hover{transform:scale(1.08)}
-.fab:active{transform:scale(.95)}
 .fab svg{width:24px;height:24px}
-.fab-ai{background:linear-gradient(145deg,var(--b500),var(--b700));box-shadow:0 12px 32px rgba(15,111,78,.42)}
-.fab-phone{background:linear-gradient(145deg,#4ba87e,#1f8a63);width:50px;height:50px;box-shadow:0 8px 24px rgba(31,138,99,.36)}
+.fab-ai{background:linear-gradient(145deg,var(--b500),var(--b700))}
+.fab-phone{background:linear-gradient(145deg,#4ba87e,#1f8a63);width:50px;height:50px}
 .fab-phone svg{width:22px;height:22px}
-.fab-wa{background:linear-gradient(145deg,#25D366,#128C7E);width:50px;height:50px;box-shadow:0 8px 24px rgba(37,211,102,.4)}
+.fab-wa{background:linear-gradient(145deg,#25D366,#128C7E);width:50px;height:50px}
 .fab-wa svg{width:24px;height:24px}
 .fab.pulse{animation:pulseFab 2.2s infinite}
 @keyframes pulseFab{0%,100%{box-shadow:0 8px 24px rgba(31,138,99,.35),0 0 0 0 rgba(31,138,99,.5)}50%{box-shadow:0 8px 24px rgba(31,138,99,.35),0 0 0 12px rgba(31,138,99,0)}}
+.receipt-preview{display:flex;align-items:center;gap:12px;background:linear-gradient(160deg,var(--ok-bg),#f5faf6);border:1px solid rgba(15,111,78,.15);border-radius:var(--r-m);padding:12px;margin-top:12px}
+.receipt-preview img{width:70px;height:70px;object-fit:cover;border-radius:9px;border:1px solid var(--ln);flex-shrink:0;background:#fff}
+.receipt-preview .rp-info{flex:1;min-width:0}
+.receipt-preview strong{display:block;font-size:13px;color:var(--ok-fg);font-weight:800}
+.receipt-preview small{display:block;font-size:11.5px;color:var(--i500);margin-top:2px;word-break:break-all}
+.receipt-preview button{margin-inline-start:auto;background:transparent;border:1px solid rgba(160,42,30,.2);color:var(--dng);padding:6px 10px;border-radius:8px;font-size:11.5px;font-weight:700;cursor:pointer;flex-shrink:0}
+.receipt-thumb{width:44px;height:44px;border-radius:8px;border:1px solid var(--ln);object-fit:cover;cursor:pointer;display:block;background:#fff}
+.receipt-thumb-pdf{width:44px;height:44px;border-radius:8px;border:1px solid var(--ln);background:#fdecea;color:#a02a1e;display:grid;place-items:center;font-size:10px;font-weight:800;cursor:pointer}
+.receipt-none{color:var(--i300);font-size:11px}
+.timeline{position:relative;padding-inline-start:28px;margin-top:18px;padding-top:6px}
+.timeline::before{content:"";position:absolute;inset-inline-start:8px;top:12px;bottom:20px;width:2px;background:var(--ln);border-radius:2px}
+.tl-item{position:relative;padding:4px 0 18px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{content:"";position:absolute;inset-inline-start:-26px;top:7px;width:14px;height:14px;border-radius:50%;background:var(--sur);border:2px solid var(--ln);box-sizing:border-box}
+.tl-item.done::before{background:var(--ok-dot);border-color:var(--ok-dot);box-shadow:0 0 0 3px rgba(34,160,107,.15)}
+.tl-item.current::before{background:var(--sur);border-color:var(--a500);border-width:3px;box-shadow:0 0 0 4px rgba(217,169,78,.18)}
+.tl-item strong{display:block;font-size:13px;color:var(--i800);font-weight:700}
+.tl-item small{display:block;font-size:11.5px;color:var(--i400);margin-top:2px}
+.tl-item.done strong{color:var(--ok-fg)}
+.tl-item.current strong{color:var(--warn-fg)}
+.track-actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+.refresh-badge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--i400);background:var(--inset);border:1px solid var(--ln);padding:5px 12px;border-radius:var(--r-f);margin-top:14px}
+.refresh-dot{width:6px;height:6px;border-radius:50%;background:var(--ok-dot);animation:onlinePulse 2s infinite}
 .ai-panel{position:fixed;bottom:96px;inset-inline-start:24px;z-index:95;width:min(420px,calc(100vw - 32px));height:min(620px,calc(100vh - 130px));background:var(--sur);border:1px solid var(--ln);border-radius:var(--r-2);box-shadow:var(--sh5);display:none;flex-direction:column;overflow:hidden}
 .ai-panel.show{display:flex}
 .ai-head{padding:14px 16px;background:linear-gradient(135deg,var(--b700),var(--b500));color:#fff;display:flex;align-items:center;gap:11px}
@@ -323,6 +346,9 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
 <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z"/></symbol>
 <symbol id="i-trend" viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8"/><path d="M17 7h4v4"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></symbol>
+<symbol id="i-wallet" viewBox="0 0 24 24"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></symbol>
+<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></symbol>
 </svg>
 
 <div class="shell">
@@ -419,11 +445,11 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="faq-section">
 <h3>سؤالات پرتکرار 🌾</h3>
 <p>پاسخ سؤالایی که همیشه پرسیده می‌شن</p>
-<details class="faq-item"><summary>هزینهٔ سم‌پاشی چطور محاسبه می‌شه؟</summary><div class="faq-body">هزینه بر اساس <strong>متر مربع</strong> مزرعهٔ شما محاسبه می‌شه. هر ۱۰٬۰۰۰ متر مربع معادل یک هکتار حساب می‌شه (به بالا رند می‌شه). نرخ پایه از ۸۵۰,۰۰۰ تومان برای هر هکتار شروع می‌شه و بسته به نوع محصول و منطقه ممکنه متفاوت باشه.</div></details>
-<details class="faq-item"><summary>چقدر طول می‌کشه تا بیاید مزرعه؟</summary><div class="faq-body">پس از تأیید سفارش توسط مدیر، معمولاً بین <strong>۲۴ تا ۷۲ ساعت</strong> تیم ما در مزرعهٔ شما حاضر می‌شه. شما می‌تونید زمان دقیق رو در فرم سفارش انتخاب کنید.</div></details>
-<details class="faq-item"><summary>چه مناطقی رو پوشش می‌دید؟</summary><div class="faq-body">بیشتر استان‌های کشور رو پوشش می‌دیم. اگه سفارش شما از منطقه‌ای باشه که خودمان حضور نداشته باشیم، به <strong>همکار متخصص</strong> در همون استان ارجاع می‌دیم و شما تجربهٔ یکسانی دریافت می‌کنید.</div></details>
-<details class="faq-item"><summary>پرداخت چطوریه؟ می‌تونم بعد از انجام پرداخت کنم؟</summary><div class="faq-body">پس از ثبت سفارش، به صفحهٔ پرداخت هدایت می‌شید و می‌تونید <strong>فیش واریزی</strong> رو بارگذاری کنید. تا زمانی که فیش تأیید نشه، سفارش در حالت «در انتظار پرداخت» می‌مونه. امکان پرداخت پس از انجام هم در برخی موارد وجود داره — با پشتیبانی تماس بگیرید.</div></details>
-<details class="faq-item"><summary>آیا سم‌پاشی برای محصول من مناسبه؟</summary><div class="faq-body">پهپادهای ما برای همهٔ محصولات زراعی و باغی مناسب هستن. اگه مطمئن نیستید، نوع محصولتون رو در فرم سفارش وارد کنید و <strong>مشاورهٔ رایگان</strong> دریافت کنید.</div></details>
+<details class="faq-item"><summary>هزینهٔ سم‌پاشی چطور محاسبه می‌شه؟</summary><div class="faq-body">هزینه بر اساس <strong>متر مربع</strong> مزرعهٔ شما محاسبه می‌شه. هر ۱۰٬۰۰۰ متر مربع معادل یک هکتار حساب می‌شه (به بالا رند می‌شه). نرخ پایه از ۸۵۰,۰۰۰ تومان برای هر هکتار شروع می‌شه.</div></details>
+<details class="faq-item"><summary>چقدر طول می‌کشه تا بیاید مزرعه؟</summary><div class="faq-body">پس از تأیید سفارش توسط مدیر، معمولاً بین <strong>۲۴ تا ۷۲ ساعت</strong> تیم ما در مزرعهٔ شما حاضر می‌شه.</div></details>
+<details class="faq-item"><summary>چه مناطقی رو پوشش می‌دید؟</summary><div class="faq-body">بیشتر استان‌های کشور رو پوشش می‌دیم. اگه سفارش از منطقه‌ای باشه که خودمان حضور نداشته باشیم، به <strong>همکار متخصص</strong> در همون استان ارجاع می‌دیم.</div></details>
+<details class="faq-item"><summary>پرداخت چطوریه؟</summary><div class="faq-body">پس از ثبت سفارش، به صفحهٔ پرداخت هدایت می‌شید و می‌تونید <strong>فیش واریزی</strong> رو بارگذاری کنید. پس از تأیید مدیر، وضعیت سفارش تغییر می‌کنه.</div></details>
+<details class="faq-item"><summary>آیا می‌تونم سفارشم رو لغو کنم؟</summary><div class="faq-body">بله، تا قبل از تأیید پرداخت و شروع کار، از صفحهٔ <strong>پیگیری سفارش</strong> می‌تونید سفارشتون رو لغو کنید.</div></details>
 </div>
 </section>
 
@@ -472,6 +498,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="field-wrap span-2"><label for="cardno">شماره کارت</label><input id="cardno" class="ltr" readonly></div>
 <div class="field-wrap span-2"><label for="iban">شماره شبا</label><input id="iban" class="ltr" readonly></div>
 <div class="field-wrap span-2"><label for="receipt">تصویر فیش واریزی</label><input type="file" id="receipt" accept="image/png,image/jpeg,image/webp,application/pdf"><span class="hint">حداکثر ۵ مگابایت — JPG/PNG/WebP/PDF</span><span class="error" data-error-for="receipt"></span></div>
+<div class="field-wrap span-2" id="receipt-preview-box"></div>
 </div>
 <div class="actions"><button class="btn btn-green" type="submit">ارسال فیش برای بررسی</button><button class="btn btn-light" type="button" id="copy-card">کپی شماره کارت</button></div>
 </form>
@@ -517,9 +544,10 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="admin-tabs" id="admin-tabs">
 <button data-tab="dash" aria-selected="true">📊 داشبورد</button>
 <button data-tab="orders" aria-selected="false">📋 سفارش‌ها</button>
+<button data-tab="payments" aria-selected="false">💰 تأیید فیش‌ها</button>
 <button data-tab="partners" aria-selected="false">🤝 همکاران</button>
 <button data-tab="schedule" aria-selected="false">🗓️ زمان‌بندی</button>
-<button data-tab="pricing" aria-selected="false">💰 تعرفه‌ها</button>
+<button data-tab="pricing" aria-selected="false">💵 تعرفه‌ها</button>
 <button data-tab="payment" aria-selected="false">💳 پرداخت</button>
 <button data-tab="regions" aria-selected="false">🗺️ مناطق</button>
 <button data-tab="crops" aria-selected="false">🌾 محصولات</button>
@@ -548,8 +576,20 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <button class="btn btn-green btn-sm" id="ord-add-btn"><svg class="icon"><use href="#i-plus"/></svg> سفارش جدید</button>
 <button class="btn btn-light btn-sm" id="ord-export-btn"><svg class="icon"><use href="#i-download"/></svg> خروجی JSON</button>
 </div>
-<div class="table-scroll"><table class="mini-table"><thead><tr><th>شماره</th><th>مشتری</th><th>محصول</th><th>مساحت</th><th>مبلغ</th><th>وضعیت</th><th>همکار</th><th>زمان</th><th>عملیات</th></tr></thead><tbody id="ord-tbody"></tbody></table></div>
+<div class="table-scroll"><table class="mini-table"><thead><tr><th>شماره</th><th>مشتری</th><th>محصول</th><th>مبلغ</th><th>وضعیت</th><th>فیش</th><th>زمان</th><th>عملیات</th></tr></thead><tbody id="ord-tbody"></tbody></table></div>
 <div id="ord-pager" style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap"></div>
+</div>
+</div>
+
+<div class="admin-panel" data-panel="payments">
+<div class="admin-card">
+<h4>تأیید فیش‌های واریزی</h4>
+<p class="sub">فیش‌های ارسال‌شده توسط مشتریان. پس از بررسی، تأیید یا رد کنید.</p>
+<div class="filter-bar">
+<select id="pay-filter"><option value="pending">در انتظار بررسی</option><option value="approved">تأییدشده</option><option value="rejected">ردشده</option><option value="">همه</option></select>
+<button class="btn btn-light btn-sm" id="pay-refresh-btn"><svg class="icon"><use href="#i-refresh"/></svg> بازخوانی</button>
+</div>
+<div id="payments-list"></div>
 </div>
 </div>
 
@@ -668,12 +708,12 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 <div class="admin-card">
 <h4>سفارش‌های ارجاع‌شده</h4>
-<div class="table-scroll"><table class="mini-table"><thead><tr><th>شماره</th><th>مشتری</th><th>آدرس</th><th>محصول</th><th>مساحت</th><th>مبلغ</th><th>سهم من</th><th>زمان</th><th>وضعیت</th></tr></thead><tbody id="ptn-tbody"></tbody></table></div>
+<div class="table-scroll"><table class="mini-table"><thead><tr><th>شماره</th><th>مشتری</th><th>آدرس</th><th>محصول</th><th>مساحت</th><th>سهم من</th><th>زمان</th><th>وضعیت</th></tr></thead><tbody id="ptn-tbody"></tbody></table></div>
 </div>
 </div>
 </section>
 
-<div class="footer-note">سم‌پاش هوشمند · نسخه ۵.۲ · با ❤️ برای کشاورزان ایران</div>
+<div class="footer-note">سم‌پاش هوشمند · نسخه ۵.۳ · با ❤️ برای کشاورزان ایران</div>
 </main>
 </div>
 
@@ -736,6 +776,7 @@ async function seedIfNeeded(){const auth=read(LS.auth,null);if(!auth){const salt
 const API="https://cold-grass-e1f3sam-pash-api.ali-naghiloo279.workers.dev";
 const cache={orders:[],messages:[],config:null};
 let PAY_ORDER=null;
+let trackRefreshTimer=null;
 
 async function loadAll(){
 try{
@@ -762,7 +803,7 @@ const setSlots=s=>{write(LS.slots,s);const cfg=getConfig();cfg._slots=s;setConfi
 const getCustomerPhone=()=>read(LS.cust_phone,"");
 const setCustomerPhone=p=>{if(p)write(LS.cust_phone,toEn(p));else localStorage.removeItem(LS.cust_phone);renderCustomerAuth();refreshHomeStats();};
 
-function updateNotifBadge(){const seen=read(LS.seen,0);const badge=document.getElementById("notif-badge");const dot=document.getElementById("notif-dot");if(!badge)return;const count=Number(read("sph_new_count",0))||0;if(count>0){badge.textContent=toFa(count);badge.hidden=false;if(dot)dot.hidden=false;}else{badge.hidden=true;if(dot)dot.hidden=true;}}
+function updateNotifBadge(){const badge=document.getElementById("notif-badge");const dot=document.getElementById("notif-dot");if(!badge)return;const count=Number(read("sph_new_count",0))||0;if(count>0){badge.textContent=toFa(count);badge.hidden=false;if(dot)dot.hidden=false;}else{badge.hidden=true;if(dot)dot.hidden=true;}}
 
 const getConfig=()=>{const d=defaultConfig();const c=Object.assign(d,cache.config||{});if(!Array.isArray(c.provinces)||!c.provinces.length)c.provinces=d.provinces;if(!Array.isArray(c.crops)||!c.crops.length)c.crops=d.crops;if(!c.payment||typeof c.payment!=="object")c.payment=d.payment;return c;};
 const setConfig=c=>{cache.config=c;write(LS.config,c);fetch(API+"/api/config",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(c)}).catch(()=>{});};
@@ -802,12 +843,61 @@ const data=await res.json();
 return Array.isArray(data)?data:[];
 }catch(e){return [];}
 }
+async function fetchOrderByCode(code,phone){
+try{
+const res=await fetch(API+"/api/orders/lookup",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code,phone})});
+if(res.ok)return await res.json();
+return null;
+}catch(e){return null;}
+}
 
 const getMessages=()=>cache.messages;
 const setMessages=m=>{cache.messages=m;write(LS.messages,m);(async()=>{try{const r=await fetch(API+"/api/messages").then(x=>x.json());for(const it of m){if(!r.find(x=>x.id===it.id)){await fetch(API+"/api/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(it)});}}}catch(e){}})();};
 
 function calcPrice({area,province,crop},cfg=getConfig()){const base=+cfg.baseRate||0;const rate=+cfg.cropRates?.[crop]||+cfg.provRates?.[province]||base;return Math.round((+area||0)*rate);}
-const STATUS={pending:{label:"در انتظار پرداخت",cls:""},scheduled:{label:"زمان‌بندی شد",cls:"green"},assigned:{label:"ارجاع به همکار",cls:"purple"},in_progress:{label:"در حال انجام",cls:"blue"},done:{label:"تکمیل شده",cls:"green"},cancelled:{label:"لغو شده",cls:"red"}};
+
+const STATUS={
+pending:{label:"در انتظار پرداخت",cls:""},
+scheduled:{label:"زمان‌بندی شد",cls:"green"},
+assigned:{label:"ارجاع به همکار",cls:"purple"},
+in_progress:{label:"در حال انجام",cls:"blue"},
+done:{label:"تکمیل شده",cls:"green"},
+cancelled:{label:"لغو شده",cls:"red"},
+receipt_pending:{label:"در انتظار تأیید فیش",cls:"amber"},
+receipt_rejected:{label:"فیش رد شده",cls:"red"}
+};
+
+/* ============ CUSTOMER RECEIPT (upload to localStorage) ============ */
+function saveReceiptData(orderId,file){
+return new Promise((resolve)=>{
+if(!file)return resolve(false);
+if(file.type.startsWith("image/")){
+const reader=new FileReader();
+reader.onload=e=>{
+try{
+const receipts=read("sph_receipts",{});
+receipts[orderId]={type:file.type,name:file.name,size:file.size,data:e.target.result,uploadedAt:Date.now(),status:"pending"};
+write("sph_receipts",receipts);
+resolve(true);
+}catch(err){resolve(false);}
+};
+reader.onerror=()=>resolve(false);
+reader.readAsDataURL(file);
+}else{
+try{
+const receipts=read("sph_receipts",{});
+receipts[orderId]={type:file.type,name:file.name,size:file.size,data:null,uploadedAt:Date.now(),status:"pending"};
+write("sph_receipts",receipts);
+resolve(true);
+}catch(err){resolve(false);}
+}
+});
+}
+const getReceipt=id=>read("sph_receipts",{})[id]||null;
+const setReceiptStatus=(id,status)=>{
+const r=read("sph_receipts",{});
+if(r[id]){r[id].status=status;r[id].reviewedAt=Date.now();write("sph_receipts",r);}
+};
 
 const Auth=(()=>{const TTL=30*60*1000,MAX=5,LOCK=5*60*1000;function getSession(){try{const s=JSON.parse(sessionStorage.getItem(LS.session)||"null");if(!s||!s.expires||s.expires<Date.now()){sessionStorage.removeItem(LS.session);return null;}return s;}catch{return null;}}function setSession(u){sessionStorage.setItem(LS.session,JSON.stringify({user:u,started:Date.now(),expires:Date.now()+TTL}));}function touch(){const s=getSession();if(s){s.expires=Date.now()+TTL;sessionStorage.setItem(LS.session,JSON.stringify(s));}}function logout(){sessionStorage.removeItem(LS.session);}const getLockout=()=>read(LS.lockout,{attempts:0,until:0});const setLockout=l=>write(LS.lockout,l);async function login(user,pass){const l=getLockout();if(l.until&&l.until>Date.now()){const m=Math.ceil((l.until-Date.now())/60000);return{ok:false,msg:`ورود تا ${toFa(m)} دقیقه دیگر قفل است.`};}const auth=read(LS.auth,null);if(!auth)return{ok:false,msg:"اطلاعات احراز هویت یافت نشد."};const h=await sha256(auth.salt+pass);if(user===auth.user&&h===auth.hash){setLockout({attempts:0,until:0});setSession(auth.user);return{ok:true};}const attempts=(l.attempts||0)+1;if(attempts>=MAX){setLockout({attempts:0,until:Date.now()+LOCK});return{ok:false,msg:"تلاش ناموفق بیش از حد. ۵ دقیقه قفل شد."};}setLockout({attempts,until:0});return{ok:false,msg:`نام کاربری یا رمز نادرست. (${toFa(attempts)}/${toFa(MAX)})`};}async function changePassword(cur,np,cp){const auth=read(LS.auth,null);if(!auth)return{ok:false,msg:"اطلاعات احراز هویت یافت نشد."};const h=await sha256(auth.salt+cur);if(h!==auth.hash)return{ok:false,msg:"رمز فعلی نادرست است."};if(np.length<8)return{ok:false,msg:"رمز جدید باید حداقل ۸ کاراکتر باشد."};if(!/[A-Za-z]/.test(np)||!/\d/.test(np))return{ok:false,msg:"رمز باید شامل حرف و عدد باشد."};if(np!==cp)return{ok:false,msg:"تکرار رمز مطابقت ندارد."};const salt=rand(16);write(LS.auth,{...auth,salt,hash:await sha256(salt+np),mustChange:false});return{ok:true};}return{getSession,setSession,touch,logout,login,changePassword};})();
 
@@ -821,7 +911,8 @@ return{getSession,setSession,logout,login,register};
 })();
 
 const TITLES={home:"سلام! امروز چطور کمکت کنم؟ 👋",order:"ثبت سفارش جدید",track:"پیگیری سفارش",payment:"پرداخت و فاکتور",messages:"گفت‌وگو با مدیر",admin:"پنل مدیریت",partner:"پنل همکار"};
-function showScreen(name){const t=document.getElementById("screen-"+name);if(!t)return;
+function showScreen(name){
+const t=document.getElementById("screen-"+name);if(!t)return;
 if(name==="admin"){const has=!!Auth.getSession();$("#admin-login-view").hidden=has;$("#admin-panel-view").hidden=!has;if(has){Admin.refreshAll();write(LS.seen,Date.now());write("sph_new_count",0);updateNotifBadge();}}
 if(name==="partner"){const has=!!PartnerAuth.getSession();$("#partner-login-view").hidden=has;$("#partner-panel-view").hidden=!has;if(has)PartnerPanel.refresh();}
 if(name==="payment")renderPayInfo();
@@ -850,7 +941,7 @@ box.innerHTML=mine.map(x=>{const st=STATUS[x.status]||STATUS.pending;const partn
 function refreshHomeStats(){
 const ph=getCustomerPhone();
 const o=cache.orders.filter(x=>ph&&x.phone===ph);
-const pending=o.filter(x=>["pending","scheduled","assigned","in_progress"].includes(x.status)).length;
+const pending=o.filter(x=>["pending","scheduled","assigned","in_progress","receipt_pending"].includes(x.status)).length;
 const area=o.reduce((s,x)=>s+(+x.area||0),0);
 const next=o.filter(x=>x.slotDate).map(x=>toEn(x.slotDate)).sort()[0]||o.filter(x=>x.date).map(x=>toEn(x.date)).sort()[0];
 $("#stat-orders-count").textContent=toFa(o.length);
@@ -890,6 +981,7 @@ function updatePrice(){const a=$("#area"),p=$("#total-price");if(!a||!p)return;c
 
 function submitWithValidation(form,names,onValid){if(!form)return;form.addEventListener("submit",e=>{e.preventDefault();let ok=true,first=null;for(const n of names){if(!validateField(n)){ok=false;if(!first)first=document.getElementById(n);}}if(!ok){first?.focus();toast("لطفاً خطاها را برطرف کنید.",true);return;}onValid();});}
 
+/* ============ ORDER CREATE ============ */
 submitWithValidation($("#order-form"),["cust","phone","province","city","crop","area","slot-select"],async()=>{
 const form=$("#order-form");
 const data=Object.fromEntries(new FormData(form));
@@ -913,37 +1005,199 @@ toast(`سفارش ${code} ثبت شد ✅`);
 showScreen("payment");
 });
 
+/* ============ TRACK ORDER + TIMELINE + CANCEL ============ */
+function renderTimeline(order){
+const steps=[
+{key:"pending",label:"سفارش ثبت شد",desc:"اطلاعات شما دریافت شد"},
+{key:"paid",label:"پرداخت تأیید شد",desc:"فیش واریزی توسط مدیر بررسی شد"},
+{key:"assigned",label:"ارجاع به اپراتور",desc:"اپراتور منطقه انتخاب شد"},
+{key:"in_progress",label:"در حال انجام",desc:"سم‌پاشی در حال انجام است"},
+{key:"done",label:"تکمیل شد",desc:"کار با موفقیت انجام شد"}
+];
+const order_status=order.status||"pending";
+const receipt=getReceipt(order.id);
+const receiptApproved=receipt&&receipt.status==="approved";
+const receiptPending=receipt&&receipt.status==="pending";
+let currentIdx=0;
+if(order_status==="pending"){
+if(receiptApproved)currentIdx=1;
+else if(receiptPending)currentIdx=0;
+else currentIdx=0;
+}
+if(order_status==="scheduled")currentIdx=1;
+if(order_status==="assigned")currentIdx=2;
+if(order_status==="in_progress")currentIdx=3;
+if(order_status==="done")currentIdx=4;
+if(order_status==="cancelled")currentIdx=-1;
+if(order_status==="receipt_rejected")currentIdx=0;
+return steps.map((s,i)=>{
+let cls="";
+if(i<currentIdx)cls="done";
+else if(i===currentIdx)cls="current";
+if(order_status==="done"&&i===4)cls="done";
+return `<div class="tl-item ${cls}"><strong>${s.label}</strong><small>${s.desc}</small></div>`;
+}).join("");
+}
+
 submitWithValidation($("#track-form"),["track-code","track-phone"],async()=>{
 const code=toEn($("#track-code").value.trim()).toUpperCase();
 const phone=toEn($("#track-phone").value);
 const box=$("#track-result");
 let found=cache.orders.find(o=>o.code.toUpperCase()===code&&o.phone===phone);
 if(!found){
-try{
-const res=await fetch(API+"/api/orders/lookup",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code,phone})});
-if(res.ok)found=await res.json();
-}catch(e){}
+found=await fetchOrderByCode(code,phone);
+if(found){
+const existing=cache.orders.find(o=>o.id===found.id);
+if(!existing)cache.orders.push(found);
 }
-if(!found){box.innerHTML='<div class="notice" style="margin-top:16px">سفارشی با این مشخصات یافت نشد. لطفاً شمارهٔ سفارش و موبایل رو بررسی کن.</div>';return;}
-const st=STATUS[found.status]||STATUS.pending;
-const partner=found.partnerId?getPartners().find(p=>p.id===found.partnerId):null;
-let partnerHtml="";
-if(partner){partnerHtml=`<div class="admin-card" style="margin-top:14px;background:linear-gradient(145deg,#f3e9fa,#faf5ff);border-color:#e9d5ff"><h4 style="color:#6d28d9">🛩️ اپراتور سم‌پاش شما</h4><div class="admin-grid"><div><small style="color:var(--i400)">نام اپراتور</small><div><strong>${esc(partner.name)}</strong></div></div><div><small style="color:var(--i400)">موبایل</small><div><strong style="direction:ltr;display:inline-block">${esc(partner.phone)}</strong></div></div><div><small style="color:var(--i400)">استان</small><div><strong>${esc(partner.province)}</strong></div></div></div></div>`;}
-let slotHtml="";
-if(found.slotDate){slotHtml=`<div class="admin-card" style="margin-top:14px;background:linear-gradient(145deg,#f3e9fa,#faf5ff);border-color:#e9d5ff"><h4 style="color:#6d28d9">🕐 زمان سم‌پاشی</h4><div><strong>${toFa(found.slotDate)} — ساعت ${toFa(found.slotTime||"")}</strong></div></div>`;}
-box.innerHTML=`<div class="admin-card" style="margin-top:16px"><h4>سفارش ${esc(found.code)}</h4><div class="admin-grid"><div><small style="color:var(--i400)">محصول</small><div><strong>${esc(found.crop)}</strong></div></div><div><small style="color:var(--i400)">مساحت</small><div><strong>${toFa(found.area)} هکتار</strong></div></div><div><small style="color:var(--i400)">مبلغ</small><div><strong>${fmtT(found.amount)}</strong></div></div><div><small style="color:var(--i400)">وضعیت</small><div><span class="status ${st.cls}">${st.label}</span></div></div></div></div>${slotHtml}${partnerHtml}`;
-const payBtn=document.createElement("button");
-payBtn.type="button";
-payBtn.className="btn btn-gold";
-payBtn.style.marginTop="14px";
-payBtn.textContent="💳 پرداخت این سفارش";
-payBtn.onclick=()=>{PAY_ORDER=found;showScreen("payment");renderPayInfo();};
-box.appendChild(payBtn);
+}
+if(!found){box.innerHTML='<div class="notice" style="margin-top:16px">سفارشی با این مشخصات یافت نشد.</div>';return;}
+renderTrackResult(found);
+startTrackAutoRefresh(code,phone);
 });
 
+function renderTrackResult(found){
+const box=$("#track-result");
+const st=STATUS[found.status]||STATUS.pending;
+const partner=found.partnerId?getPartners().find(p=>p.id===found.partnerId):null;
+const receipt=getReceipt(found.id);
+let receiptHtml="";
+if(receipt){
+if(receipt.status==="pending"){
+receiptHtml=`<div class="admin-card" style="margin-top:14px;background:linear-gradient(145deg,#fdf3dc,#fffbf0);border-color:#f1e2bd"><h4 style="color:var(--warn-fg)">🧾 فیش شما در انتظار تأیید</h4><div style="font-size:12.5px;color:var(--warn-fg);margin-top:6px">فیش ارسال شد و در انتظار بررسی توسط مدیر است.</div></div>`;
+}else if(receipt.status==="approved"){
+receiptHtml=`<div class="admin-card" style="margin-top:14px;background:linear-gradient(145deg,#e6f4ec,#f5faf6);border-color:rgba(15,111,78,.2)"><h4 style="color:var(--ok-fg)">✅ فیش شما تأیید شد</h4><div style="font-size:12.5px;color:var(--ok-fg);margin-top:6px">پرداخت شما تأیید شد. سفارش در حال آماده‌سازی است.</div></div>`;
+}else if(receipt.status==="rejected"){
+receiptHtml=`<div class="admin-card" style="margin-top:14px;background:linear-gradient(145deg,#fdecea,#fff);border-color:rgba(160,42,30,.2)"><h4 style="color:var(--dng)">❌ فیش شما رد شد</h4><div style="font-size:12.5px;color:var(--dng);margin-top:6px">لطفاً فیش صحیح را دوباره ارسال کنید یا با پشتیبانی تماس بگیرید.</div></div>`;
+}
+}
+let partnerHtml="";
+if(partner){
+partnerHtml=`<div class="admin-card" style="margin-top:14px;background:linear-gradient(145deg,#f3e9fa,#faf5ff);border-color:#e9d5ff"><h4 style="color:#6d28d9">🛩️ اپراتور سم‌پاش شما</h4><div class="admin-grid"><div><small style="color:var(--i400)">نام اپراتور</small><div><strong>${esc(partner.name)}</strong></div></div><div><small style="color:var(--i400)">موبایل</small><div><strong style="direction:ltr;display:inline-block">${esc(partner.phone)}</strong></div></div><div><small style="color:var(--i400)">استان</small><div><strong>${esc(partner.province)}</strong></div></div></div></div>`;
+}
+let slotHtml="";
+if(found.slotDate){slotHtml=`<div class="admin-card" style="margin-top:14px;background:linear-gradient(145deg,#f3e9fa,#faf5ff);border-color:#e9d5ff"><h4 style="color:#6d28d9">🕐 زمان سم‌پاشی</h4><div><strong>${toFa(found.slotDate)} — ساعت ${toFa(found.slotTime||"")}</strong></div></div>`;}
+const canCancel=found.status==="pending"||found.status==="scheduled"||found.status==="receipt_rejected";
+const cancelBtn=canCancel?`<button type="button" class="btn btn-danger" id="cancel-order-btn" data-id="${found.id}">لغو سفارش</button>`:"";
+const payBtn=found.status==="pending"&&!receipt?`<button type="button" class="btn btn-gold" id="pay-order-btn" data-id="${found.id}">💳 پرداخت این سفارش</button>`:"";
+box.innerHTML=`
+<div class="admin-card" style="margin-top:16px">
+<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap">
+<div>
+<h4 style="margin-bottom:6px">سفارش ${esc(found.code)}</h4>
+<span class="status ${st.cls}">${st.label}</span>
+</div>
+</div>
+<div class="admin-grid" style="margin-top:16px">
+<div><small style="color:var(--i400)">محصول</small><div><strong>${esc(found.crop)}</strong></div></div>
+<div><small style="color:var(--i400)">مساحت</small><div><strong>${toFa(found.area)} هکتار</strong></div></div>
+<div><small style="color:var(--i400)">مبلغ</small><div><strong>${fmtT(found.amount)}</strong></div></div>
+<div><small style="color:var(--i400)">تاریخ ثبت</small><div><strong>${new Date(found.createdAt||Date.now()).toLocaleDateString("fa-IR")}</strong></div></div>
+</div>
+<div class="timeline">${renderTimeline(found)}</div>
+</div>
+${slotHtml}
+${receiptHtml}
+${partnerHtml}
+<div class="track-actions">${payBtn}${cancelBtn}<button type="button" class="btn btn-light" id="track-refresh-btn"><svg class="icon"><use href="#i-refresh"/></svg> بازخوانی</button></div>
+<div class="refresh-badge"><span class="refresh-dot"></span>به‌روزرسانی خودکار هر ۳۰ ثانیه</div>`;
+
+$("#pay-order-btn")?.addEventListener("click",()=>{PAY_ORDER=found;showScreen("payment");renderPayInfo();});
+$("#track-refresh-btn")?.addEventListener("click",async()=>{
+const fresh=await fetchOrderByCode(found.code.toUpperCase(),found.phone);
+if(fresh){const idx=cache.orders.findIndex(o=>o.id===fresh.id);if(idx>=0)cache.orders[idx]=fresh;else cache.orders.push(fresh);write(LS.orders,cache.orders);renderTrackResult(fresh);refreshHomeStats();toast("به‌روزرسانی شد.");}else toast("خطا در بازخوانی.",true);
+});
+$("#cancel-order-btn")?.addEventListener("click",()=>{
+confirmModal("لغو سفارش",`آیا از لغو سفارش ${found.code} مطمئن هستید؟ این عملیات قابل بازگشت نیست.`,{
+danger:true,requireWord:"CANCEL",
+onConfirm:async()=>{
+found.status="cancelled";
+const idx=cache.orders.findIndex(o=>o.id===found.id);
+if(idx>=0)cache.orders[idx]=found;
+write(LS.orders,cache.orders);
+await updateOrderRemote(found.id,{status:"cancelled"});
+renderTrackResult(found);
+refreshHomeStats();
+refreshSlotSelect();
+toast("سفارش لغو شد.");
+}
+});
+});
+}
+
+function startTrackAutoRefresh(code,phone){
+clearInterval(trackRefreshTimer);
+trackRefreshTimer=setInterval(async()=>{
+const t=document.getElementById("screen-track");
+if(!t||!t.classList.contains("active"))return;
+const fresh=await fetchOrderByCode(code,phone);
+if(fresh){
+const old=cache.orders.find(o=>o.id===fresh.id);
+if(!old||old.status!==fresh.status){
+const idx=cache.orders.findIndex(o=>o.id===fresh.id);
+if(idx>=0)cache.orders[idx]=fresh;else cache.orders.push(fresh);
+write(LS.orders,cache.orders);
+renderTrackResult(fresh);
+refreshHomeStats();
+}
+}
+},30000);
+}
+
+/* ============ PAYMENT WITH RECEIPT PREVIEW ============ */
 function renderPayInfo(){const el=document.getElementById("pay-info");if(!el)return;const o=PAY_ORDER;if(!o){el.innerHTML='<div class="notice" style="margin-bottom:14px">برای پرداخت، از صفحهٔ «پیگیری سفارش» سفارش خود را جست‌وجو کنید یا «سفارش جدید» ثبت کنید.</div>';return;}const slot=o.slotDate?`<div><small>زمان سم‌پاشی</small><strong>${toFa(o.slotDate)} · ${toFa(o.slotTime||"")}</strong></div>`:"";el.innerHTML=`<div class="receipt-card"><div class="receipt-head"><div class="check"><svg class="icon"><use href="#i-check"/></svg></div><div style="flex:1"><strong>سفارش با موفقیت ثبت شد</strong><small>کد پیگیری: <code class="ltr">${esc(o.code)}</code></small></div></div><div class="receipt-body"><div><small>مشتری</small><strong>${esc(o.name)}</strong></div><div><small>محصول · مساحت</small><strong>${esc(o.crop)} · ${toFa(o.area)} هکتار</strong></div><div><small>مبلغ قابل پرداخت</small><strong style="color:var(--b700);font-size:18px">${fmtT(o.amount)}</strong></div>${slot}<div><small>وضعیت</small><strong><span class="status">در انتظار پرداخت</span></strong></div></div><div class="notice" style="margin-top:16px">لطفاً مبلغ را به شماره کارت زیر واریز کرده و تصویر فیش را در قسمت پایین بارگذاری کنید.</div></div>`;}
 
-(function(){const r=$("#receipt");r?.addEventListener("change",()=>{const cfg=getConfig();const max=(cfg.receiptMax||5)*1024*1024;const f=r.files?.[0];if(!f){setFieldError("receipt","");return;}if(!["image/jpeg","image/png","image/webp","application/pdf"].includes(f.type)){setFieldError("receipt","فرمت مجاز نیست.");r.value="";return;}if(f.size>max){setFieldError("receipt","حجم زیاد است.");r.value="";return;}setFieldError("receipt","");});$("#payment-form")?.addEventListener("submit",e=>{e.preventDefault();if(r?.getAttribute("aria-invalid")==="true"){toast("ابتدا خطا را برطرف کنید.",true);return;}toast("✅ فیش شما ثبت شد. بعد از بررسی، وضعیت سفارش تغییر می‌کند.");});$("#copy-card")?.addEventListener("click",async()=>{const v=($("#cardno")?.value||"").replace(/\s+/g,"");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(v);toast("شماره کارت کپی شد.");}else toast("کپی خودکار فعال نیست.");}catch{toast("کپی ناموفق.",true);}});})();
+(function(){
+const r=$("#receipt");
+const previewBox=$("#receipt-preview-box");
+r?.addEventListener("change",()=>{
+const cfg=getConfig();
+const max=(cfg.receiptMax||5)*1024*1024;
+const f=r.files?.[0];
+previewBox.innerHTML="";
+if(!f){setFieldError("receipt","");return;}
+if(!["image/jpeg","image/png","image/webp","application/pdf"].includes(f.type)){setFieldError("receipt","فرمت مجاز نیست.");r.value="";return;}
+if(f.size>max){setFieldError("receipt","حجم زیاد است.");r.value="";return;}
+setFieldError("receipt","");
+const sizeKB=(f.size/1024).toFixed(1);
+if(f.type.startsWith("image/")){
+const reader=new FileReader();
+reader.onload=e=>{
+previewBox.innerHTML=`<div class="receipt-preview"><img src="${e.target.result}" alt="پیش‌نمایش"><div class="rp-info"><strong>✅ فایل آماده ارسال</strong><small>${esc(f.name)} · ${toFa(sizeKB)} کیلوبایت</small></div><button type="button" id="rm-receipt">حذف</button></div>`;
+$("#rm-receipt").onclick=()=>{r.value="";previewBox.innerHTML="";};
+};
+reader.readAsDataURL(f);
+}else{
+previewBox.innerHTML=`<div class="receipt-preview"><div style="width:70px;height:70px;border-radius:9px;background:#fdecea;color:#a02a1e;display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0">PDF</div><div class="rp-info"><strong>✅ فایل آماده ارسال</strong><small>${esc(f.name)} · ${toFa(sizeKB)} کیلوبایت</small></div><button type="button" id="rm-receipt">حذف</button></div>`;
+$("#rm-receipt").onclick=()=>{r.value="";previewBox.innerHTML="";};
+}
+});
+$("#payment-form")?.addEventListener("submit",async e=>{
+e.preventDefault();
+if(r?.getAttribute("aria-invalid")==="true"){toast("ابتدا خطای فایل را برطرف کنید.",true);return;}
+if(!PAY_ORDER){toast("سفارشی برای پرداخت انتخاب نشده.",true);return;}
+const f=r?.files?.[0];
+if(!f){toast("لطفاً تصویر فیش را بارگذاری کنید.",true);return;}
+const ok=await saveReceiptData(PAY_ORDER.id,f);
+if(!ok){toast("خطا در ذخیره فایل.",true);return;}
+const idx=cache.orders.findIndex(o=>o.id===PAY_ORDER.id);
+if(idx>=0){
+cache.orders[idx].status="receipt_pending";
+write(LS.orders,cache.orders);
+await updateOrderRemote(PAY_ORDER.id,{status:"receipt_pending"});
+}
+toast("✅ فیش شما ارسال شد. بعد از تأیید مدیر، وضعیت سفارش تغییر می‌کند.");
+r.value="";
+previewBox.innerHTML="";
+});
+$("#copy-card")?.addEventListener("click",async()=>{
+const v=($("#cardno")?.value||"").replace(/\s+/g,"");
+try{
+if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(v);toast("شماره کارت کپی شد.");}
+else toast("کپی خودکار فعال نیست.");
+}catch{toast("کپی ناموفق.",true);}
+});
+})();
 
 (function(){const form=$("#msg-form"),input=$("#msg-input"),body=$("#chat-body");if(!form)return;form.addEventListener("submit",e=>{e.preventDefault();const t=input.value.trim();if(!t){toast("متن خالی است.",true);return;}const msgs=getMessages();msgs.push({id:uid(),from:"customer",text:t,createdAt:Date.now(),read:false});setMessages(msgs);const b=document.createElement("div");b.className="bubble";b.textContent=t;body.appendChild(b);input.value="";body.scrollTop=body.scrollHeight;toast("پیام ثبت شد.");});})();
 
@@ -952,13 +1206,87 @@ const Admin=(()=>{
 function openModal(html){const back=$("#modal-back"),body=$("#modal-body");body.innerHTML=html;back.classList.add("show");back.onclick=e=>{if(e.target===back)closeModal();};}
 function closeModal(){$("#modal-back").classList.remove("show");$("#modal-body").innerHTML="";}
 function confirmModal(title,sub,{danger=false,requireWord=null,onConfirm}={}){const wl=requireWord?`<div class="field-wrap" style="margin-top:12px"><label>برای تأیید، کلمهٔ <code>${requireWord}</code> را تایپ کنید</label><input id="cf-word" class="ltr"></div>`:"";openModal(`<h3>${esc(title)}</h3><p class="m-sub">${esc(sub||"")}</p>${wl}<div class="modal-actions"><button class="btn ${danger?"btn-danger":"btn-green"}" id="cf-ok">تأیید</button><button class="btn btn-light" id="cf-no">انصراف</button></div>`);$("#cf-no").onclick=closeModal;$("#cf-ok").onclick=()=>{if(requireWord){const w=($("#cf-word").value||"").trim();if(w!==requireWord){toast("کلمه مطابقت ندارد.",true);return;}}closeModal();onConfirm();};}
-function bindTabs(){$("#admin-tabs")?.addEventListener("click",e=>{const b=e.target.closest("button[data-tab]");if(!b)return;const tab=b.dataset.tab;$$("#admin-tabs button").forEach(x=>x.setAttribute("aria-selected",x===b?"true":"false"));$$(".admin-panel").forEach(p=>p.classList.toggle("active",p.dataset.panel===tab));({dash:renderDashboard,orders:()=>loadOrdersPage(true),partners:renderPartners,schedule:renderSlots,pricing:renderPricing,payment:renderPayment,regions:renderRegions,crops:renderCrops,messages:renderMessages,customers:renderCustomers,settings:renderSettings})[tab]?.();});}
+function bindTabs(){$("#admin-tabs")?.addEventListener("click",e=>{const b=e.target.closest("button[data-tab]");if(!b)return;const tab=b.dataset.tab;$$("#admin-tabs button").forEach(x=>x.setAttribute("aria-selected",x===b?"true":"false"));$$(".admin-panel").forEach(p=>p.classList.toggle("active",p.dataset.panel===tab));({dash:renderDashboard,orders:()=>loadOrdersPage(true),payments:renderPayments,partners:renderPartners,schedule:renderSlots,pricing:renderPricing,payment:renderPayment,regions:renderRegions,crops:renderCrops,messages:renderMessages,customers:renderCustomers,settings:renderSettings})[tab]?.();});}
 
-function renderDashboard(){const o=cache.orders;const stats=read("sph_stats_cache",null);if(stats&&Date.now()-(stats.t||0)<60000){$("#ad-total").textContent=toFa(stats.total);$("#ad-pending").textContent=toFa(stats.pending);$("#ad-revenue").textContent=fmt(stats.revenue);$("#ad-customers").textContent=toFa(stats.customers);}else{const total=o.length;const pending=o.filter(x=>["pending","scheduled","assigned"].includes(x.status)).length;const revenue=o.filter(x=>x.status!=="cancelled").reduce((s,x)=>s+(+x.amount||0),0);const customers=new Set(o.map(x=>x.phone)).size;$("#ad-total").textContent=toFa(total);$("#ad-pending").textContent=toFa(pending);$("#ad-revenue").textContent=fmt(revenue);$("#ad-customers").textContent=toFa(customers);write("sph_stats_cache",{total,pending,revenue,customers,t:Date.now()});}
+function renderDashboard(){const o=cache.orders;const total=o.length;const pending=o.filter(x=>["pending","scheduled","assigned","receipt_pending"].includes(x.status)).length;const revenue=o.filter(x=>x.status!=="cancelled").reduce((s,x)=>s+(+x.amount||0),0);const customers=new Set(o.map(x=>x.phone)).size;$("#ad-total").textContent=toFa(total);$("#ad-pending").textContent=toFa(pending);$("#ad-revenue").textContent=fmt(revenue);$("#ad-customers").textContent=toFa(customers);
 const box=$("#ad-recent-orders");
 const recent=o.slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,5);
 if(!recent.length){box.innerHTML='<div class="empty"><span class="empty-emoji">📋</span><strong>هنوز سفارشی ثبت نشده</strong></div>';return;}
-box.innerHTML=recent.map(x=>{const st=STATUS[x.status]||STATUS.pending;const p=x.partnerId?getPartners().find(y=>y.id===x.partnerId):null;const pn=p?` · 🤝 ${esc(p.name)}`:"";const sl=x.slotTime?` · 🕐 ${esc(x.slotDate)}`:" ";return `<div class="order-row"><div class="order-icon"><svg class="icon"><use href="#i-order"/></svg></div><div class="order-main"><strong>${esc(x.code)} — ${esc(x.name)}</strong><small>${esc(x.crop)} · ${toFa(x.area)} هکتار · ${fmtT(x.amount)}${pn}${sl}</small></div><span class="status ${st.cls}">${st.label}</span></div>`;}).join("");}
+box.innerHTML=recent.map(x=>{const st=STATUS[x.status]||STATUS.pending;const p=x.partnerId?getPartners().find(y=>y.id===x.partnerId):null;const pn=p?` · 🤝 ${esc(p.name)}`:"";return `<div class="order-row"><div class="order-icon"><svg class="icon"><use href="#i-order"/></svg></div><div class="order-main"><strong>${esc(x.code)} — ${esc(x.name)}</strong><small>${esc(x.crop)} · ${toFa(x.area)} هکتار · ${fmtT(x.amount)}${pn}</small></div><span class="status ${st.cls}">${st.label}</span></div>`;}).join("");}
+
+/* ============ PAYMENTS (admin confirms receipts) ============ */
+let payFilter="pending";
+function renderPayments(){
+const box=$("#payments-list");if(!box)return;
+const receipts=read("sph_receipts",{});
+const list=cache.orders.filter(o=>receipts[o.id]).map(o=>({order:o,receipt:receipts[o.id]}));
+let filtered=list;
+if(payFilter)filtered=list.filter(x=>x.receipt.status===payFilter);
+if(!filtered.length){
+box.innerHTML=`<div class="empty"><span class="empty-emoji">💳</span><strong>فیشی برای نمایش نیست</strong>وقتی مشتری فیش بارگذاری کنه، اینجا نمایش داده می‌شه</div>`;
+return;
+}
+box.innerHTML=filtered.sort((a,b)=>(b.receipt.uploadedAt||0)-(a.receipt.uploadedAt||0)).map(({order,receipt})=>{
+const statusBadge=receipt.status==="pending"?'<span class="status amber">⏳ در انتظار بررسی</span>':receipt.status==="approved"?'<span class="status green">✅ تأیید شده</span>':'<span class="status red">❌ رد شده</span>';
+let thumb;
+if(receipt.data&&receipt.type.startsWith("image/")){
+thumb=`<img src="${receipt.data}" class="receipt-thumb" data-img="${receipt.data}" alt="فیش">`;
+}else if(receipt.type==="application/pdf"){
+thumb=`<div class="receipt-thumb-pdf">PDF</div>`;
+}else{
+thumb=`<span class="receipt-none">—</span>`;
+}
+const actions=receipt.status==="pending"?`
+<button class="btn btn-green btn-sm" data-pay-approve="${order.id}"><svg class="icon"><use href="#i-check"/></svg> تأیید</button>
+<button class="btn btn-danger btn-sm" data-pay-reject="${order.id}"><svg class="icon"><use href="#i-x"/></svg> رد</button>`:"";
+const dateStr=new Date(receipt.uploadedAt||Date.now()).toLocaleString("fa-IR");
+return `<div class="admin-card">
+<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:12px">
+<div>
+<h4 style="margin-bottom:4px">فیش سفارش ${esc(order.code)}</h4>
+<small style="color:var(--i400);font-size:12px">${esc(order.name)} · ${fmtT(order.amount)} · ${dateStr}</small>
+</div>
+${statusBadge}
+</div>
+<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+${thumb}
+<div style="flex:1;min-width:150px">
+<small style="color:var(--i400);display:block;font-size:11.5px">فایل ارسالی</small>
+<strong style="font-size:12.5px">${esc(receipt.name||"—")}</strong>
+</div>
+<div class="actions" style="margin-top:0">${actions}</div>
+</div>
+</div>`;
+}).join("");
+box.querySelectorAll("[data-img]").forEach(img=>{
+img.addEventListener("click",()=>{
+openModal(`<h3>پیش‌نمایش فیش</h3><p class="m-sub">برای بستن، بیرون تصویر را لمس کنید</p><img src="${img.dataset.img}" style="width:100%;border-radius:12px;border:1px solid var(--ln)">`);
+});
+});
+box.querySelectorAll("[data-pay-approve]").forEach(b=>b.onclick=async()=>{
+const id=b.dataset.payApprove;
+setReceiptStatus(id,"approved");
+const idx=cache.orders.findIndex(o=>o.id===id);
+if(idx>=0){cache.orders[idx].status="scheduled";write(LS.orders,cache.orders);await updateOrderRemote(id,{status:"scheduled"});}
+renderPayments();renderDashboard();toast("✅ فیش تأیید شد.");
+});
+box.querySelectorAll("[data-pay-reject]").forEach(b=>b.onclick=()=>{
+confirmModal("رد فیش","آیا از رد این فیش مطمئن هستید؟",{
+danger:true,
+onConfirm:async()=>{
+const id=b.dataset.payReject;
+setReceiptStatus(id,"rejected");
+const idx=cache.orders.findIndex(o=>o.id===id);
+if(idx>=0){cache.orders[idx].status="receipt_rejected";write(LS.orders,cache.orders);await updateOrderRemote(id,{status:"receipt_rejected"});}
+renderPayments();renderDashboard();toast("فیش رد شد.");
+}
+});
+});
+}
+function bindPayments(){
+$("#pay-filter")?.addEventListener("change",e=>{payFilter=e.target.value;renderPayments();});
+$("#pay-refresh-btn")?.addEventListener("click",()=>renderPayments());
+}
 
 const orderFilters={q:"",status:"",offset:0,limit:20,total:0,hasMore:false,loading:false};
 let searchDebounce=null;
@@ -975,27 +1303,27 @@ orderFilters.offset=cache.orders.length;
 orderFilters.loading=false;
 renderOrders();
 renderPager();
-write("sph_stats_cache",null);
 }
 function renderOrders(){
-const tb=$("#ord-tbody");
-if(!tb)return;
+const tb=$("#ord-tbody");if(!tb)return;
 const filtered=cache.orders;
-if(!filtered.length){
-tb.innerHTML='<tr><td colspan="9"><div class="empty"><span class="empty-emoji">🔍</span><strong>نتیجه‌ای یافت نشد</strong>فیلترها رو تغییر بده یا سفارش جدید اضافه کن</div></td></tr>';
-return;
-}
+if(!filtered.length){tb.innerHTML='<tr><td colspan="8"><div class="empty"><span class="empty-emoji">🔍</span><strong>نتیجه‌ای یافت نشد</strong></div></td></tr>';return;}
 tb.innerHTML=filtered.map(o=>{
 const st=STATUS[o.status]||STATUS.pending;
-const p=o.partnerId?getPartners().find(y=>y.id===o.partnerId):null;
-const pn=p?`<span class="status purple" style="font-size:10px">${esc(p.name)}</span>`:'<span style="color:var(--i400);font-size:11px">—</span>';
-const sl=o.slotDate?`<small style="color:#6d28d9;font-size:10px;display:block">🕐 ${esc(o.slotTime||"")}</small>`:"";
-return `<tr><td><code class="ltr">${esc(o.code)}</code></td><td>${esc(o.name)}<br><small style="color:var(--i400);direction:ltr;display:inline-block">${esc(o.phone)}</small></td><td>${esc(o.crop)}</td><td>${toFa(o.area)} هکتار</td><td>${fmtT(o.amount)}</td><td><span class="status ${st.cls}">${st.label}</span></td><td>${pn}</td><td>${esc(o.slotDate||"—")}${sl}</td><td><div class="row-actions"><button class="icon-mini" title="ویرایش" data-ord-edit="${o.id}"><svg class="icon"><use href="#i-edit"/></svg></button><button class="icon-mini purple" title="ارجاع به همکار" data-ord-assign="${o.id}"><svg class="icon"><use href="#i-partner"/></svg></button><button class="icon-mini" title="حذف" data-ord-del="${o.id}"><svg class="icon"><use href="#i-trash"/></svg></button></div></td></tr>`;
+const receipts=read("sph_receipts",{});
+const hasReceipt=receipts[o.id];
+const receiptStatus=hasReceipt?hasReceipt.status:"";
+let receiptIcon='<span class="receipt-none">—</span>';
+if(hasReceipt){
+if(receiptStatus==="pending")receiptIcon='<span class="status amber">⏳</span>';
+else if(receiptStatus==="approved")receiptIcon='<span class="status green">✅</span>';
+else if(receiptStatus==="rejected")receiptIcon='<span class="status red">❌</span>';
+}
+return `<tr><td><code class="ltr">${esc(o.code)}</code></td><td>${esc(o.name)}<br><small style="color:var(--i400);direction:ltr;display:inline-block">${esc(o.phone)}</small></td><td>${esc(o.crop)}<br><small style="color:var(--i400)">${toFa(o.area)} هکتار</small></td><td>${fmtT(o.amount)}</td><td><span class="status ${st.cls}">${st.label}</span></td><td>${receiptIcon}</td><td>${esc(o.slotDate||"—")}</td><td><div class="row-actions"><button class="icon-mini" title="ویرایش" data-ord-edit="${o.id}"><svg class="icon"><use href="#i-edit"/></svg></button><button class="icon-mini purple" title="ارجاع به همکار" data-ord-assign="${o.id}"><svg class="icon"><use href="#i-partner"/></svg></button><button class="icon-mini danger" title="حذف" data-ord-del="${o.id}"><svg class="icon"><use href="#i-trash"/></svg></button></div></td></tr>`;
 }).join("");
 }
 function renderPager(){
-const box=$("#ord-pager");
-if(!box)return;
+const box=$("#ord-pager");if(!box)return;
 const shown=cache.orders.length;
 const total=orderFilters.total;
 let html=`<span style="font-size:12px;color:var(--i400)">نمایش ${toFa(shown)} از ${toFa(total)} سفارش</span>`;
@@ -1006,15 +1334,8 @@ box.innerHTML=html;
 $("#ord-loadmore")?.addEventListener("click",()=>loadOrdersPage(false));
 }
 function bindOrders(){
-$("#ord-search")?.addEventListener("input",e=>{
-orderFilters.q=e.target.value;
-clearTimeout(searchDebounce);
-searchDebounce=setTimeout(()=>loadOrdersPage(true),400);
-});
-$("#ord-filter-status")?.addEventListener("change",e=>{
-orderFilters.status=e.target.value;
-loadOrdersPage(true);
-});
+$("#ord-search")?.addEventListener("input",e=>{orderFilters.q=e.target.value;clearTimeout(searchDebounce);searchDebounce=setTimeout(()=>loadOrdersPage(true),400);});
+$("#ord-filter-status")?.addEventListener("change",e=>{orderFilters.status=e.target.value;loadOrdersPage(true);});
 $("#ord-tbody")?.addEventListener("click",e=>{
 const ed=e.target.closest("[data-ord-edit]");if(ed)return openOrderEdit(ed.dataset.ordEdit);
 const as=e.target.closest("[data-ord-assign]");if(as)return openAssignModal(as.dataset.ordAssign);
@@ -1030,26 +1351,25 @@ toast("دانلود شد.");
 });
 }
 
-function openAssignModal(id){const o=cache.orders.find(x=>x.id===id);if(!o)return;const partners=getPartners().filter(p=>p.status!=="pending"&&p.active!==false);if(!partners.length){toast("هنوز همکار فعالی ندارید. ابتدا از تب «همکاران» تأیید کنید.",true);return;}const same=partners.filter(p=>p.province===o.province);const others=partners.filter(p=>p.province!==o.province);const list=[...same,...others];openModal(`<h3>ارجاع سفارش ${esc(o.code)}</h3><p class="m-sub">استان مزرعه: <strong>${esc(o.province)}</strong> — همکاران هم‌استان اول لیست هستند.</p><div class="field-wrap"><label>انتخاب همکار</label><select id="asg-partner" class="ltr">${list.map(p=>{const share=+p.share||30;const partnerShare=Math.round(o.amount*share/100);const badge=p.province===o.province?"✅ هم‌استان":"";return `<option value="${p.id}">${esc(p.name)} — ${esc(p.province)} (سهم ${toFa(share)}٪ ≈ ${fmtT(partnerShare)}) ${badge}</option>`;}).join("")}</select></div><div class="notice" style="margin-top:14px">پس از ارجاع، اطلاعات اپراتور (نام و شماره تماس) در صفحهٔ پیگیری سفارش به مشتری نمایش داده می‌شود.</div><div class="modal-actions"><button class="btn btn-purple" id="asg-ok">تأیید ارجاع</button><button class="btn btn-light" id="asg-no">انصراف</button></div>`);$("#asg-no").onclick=closeModal;$("#asg-ok").onclick=async()=>{const pid=$("#asg-partner").value;const idx=cache.orders.findIndex(x=>x.id===id);if(idx<0){closeModal();return;}const p=getPartners().find(x=>x.id===pid);const updates={partnerId:pid,partnerName:p?.name||"",partnerPhone:p?.phone||"",partnerShare:+p?.share||30,status:"assigned"};cache.orders[idx]={...cache.orders[idx],...updates};write(LS.orders,cache.orders);await updateOrderRemote(id,updates);closeModal();renderOrders();renderDashboard();toast(`به ${p?.name||"همکار"} ارجاع شد.`);};}
+function openAssignModal(id){const o=cache.orders.find(x=>x.id===id);if(!o)return;const partners=getPartners().filter(p=>p.status!=="pending"&&p.active!==false);if(!partners.length){toast("هنوز همکار فعالی ندارید. ابتدا از تب «همکاران» تأیید کنید.",true);return;}const same=partners.filter(p=>p.province===o.province);const others=partners.filter(p=>p.province!==o.province);const list=[...same,...others];openModal(`<h3>ارجاع سفارش ${esc(o.code)}</h3><p class="m-sub">استان مزرعه: <strong>${esc(o.province)}</strong></p><div class="field-wrap"><label>انتخاب همکار</label><select id="asg-partner" class="ltr">${list.map(p=>{const share=+p.share||30;const partnerShare=Math.round(o.amount*share/100);const badge=p.province===o.province?"✅ هم‌استان":"";return `<option value="${p.id}">${esc(p.name)} — ${esc(p.province)} (${fmtT(partnerShare)}) ${badge}</option>`;}).join("")}</select></div><div class="modal-actions"><button class="btn btn-purple" id="asg-ok">تأیید ارجاع</button><button class="btn btn-light" id="asg-no">انصراف</button></div>`);$("#asg-no").onclick=closeModal;$("#asg-ok").onclick=async()=>{const pid=$("#asg-partner").value;const idx=cache.orders.findIndex(x=>x.id===id);if(idx<0){closeModal();return;}const p=getPartners().find(x=>x.id===pid);const updates={partnerId:pid,partnerName:p?.name||"",partnerPhone:p?.phone||"",partnerShare:+p?.share||30,status:"assigned"};cache.orders[idx]={...cache.orders[idx],...updates};write(LS.orders,cache.orders);await updateOrderRemote(id,updates);closeModal();renderOrders();renderDashboard();toast(`به ${p?.name||"همکار"} ارجاع شد.`);};}
 
-function openOrderEdit(id){const cfg=getConfig();const isNew=!id;const o=isNew?{id:null,code:"",name:"",phone:"",province:cfg.provinces[0],city:"",village:"",crop:cfg.crops[0],area:0,notes:"",amount:0,status:"pending"}:cache.orders.find(x=>x.id===id);if(!o)return;const provOptions=cfg.provinces.map(p=>`<option ${p===o.province?"selected":""}>${esc(p)}</option>`).join("");const cropOptions=cfg.crops.map(c=>`<option ${c===o.crop?"selected":""}>${esc(c)}</option>`).join("");const statusOptions=Object.entries(STATUS).map(([k,v])=>`<option value="${k}" ${k===o.status?"selected":""}>${v.label}</option>`).join("");openModal(`<h3>${isNew?"افزودن سفارش":"ویرایش سفارش"}</h3><p class="m-sub">${isNew?"اطلاعات جدید":"کد: "+esc(o.code)}</p><form id="ord-edit-form"><div class="form-grid"><div class="field-wrap"><label>نام</label><input name="name" required value="${esc(o.name)}"></div><div class="field-wrap"><label>موبایل</label><input name="phone" required class="ltr" maxlength="11" value="${esc(o.phone)}"></div><div class="field-wrap"><label>استان</label><select name="province" required>${provOptions}</select></div><div class="field-wrap"><label>شهر</label><input name="city" required value="${esc(o.city)}"></div><div class="field-wrap"><label>روستا</label><input name="village" value="${esc(o.village)}"></div><div class="field-wrap"><label>محصول</label><select name="crop" required>${cropOptions}</select></div><div class="field-wrap"><label>مساحت (هکتار)</label><input name="area" required class="ltr" value="${o.area||""}"></div><div class="field-wrap"><label>وضعیت</label><select name="status">${statusOptions}</select></div><div class="field-wrap"><label>مبلغ</label><input name="amount" class="ltr" value="${o.amount||0}"></div><div class="field-wrap span-2"><label>توضیحات</label><textarea name="notes" rows="2">${esc(o.notes)}</textarea></div></div><div class="modal-actions"><button type="submit" class="btn btn-green">${isNew?"افزودن":"ذخیره"}</button><button type="button" class="btn btn-light" id="ord-cancel">انصراف</button></div></form>`);$("#ord-cancel").onclick=closeModal;$("#ord-edit-form").addEventListener("submit",async ev=>{ev.preventDefault();const data=Object.fromEntries(new FormData(ev.target));data.phone=toEn(data.phone);data.area=+toEn(data.area)||0;data.amount=+toEn(data.amount)||0;data.name=data.name.trim();data.city=data.city.trim();if(!/^09\d{9}$/.test(data.phone)){toast("موبایل نامعتبر.",true);return;}if(!data.name){toast("نام را وارد کنید.",true);return;}if(data.area<=0){toast("مساحت نامعتبر.",true);return;}
+function openOrderEdit(id){const cfg=getConfig();const isNew=!id;const o=isNew?{id:null,code:"",name:"",phone:"",province:cfg.provinces[0],city:"",village:"",crop:cfg.crops[0],area:0,notes:"",amount:0,status:"pending"}:cache.orders.find(x=>x.id===id);if(!o)return;const provOptions=cfg.provinces.map(p=>`<option ${p===o.province?"selected":""}>${esc(p)}</option>`).join("");const cropOptions=cfg.crops.map(c=>`<option ${c===o.crop?"selected":""}>${esc(c)}</option>`).join("");const statusOptions=Object.entries(STATUS).map(([k,v])=>`<option value="${k}" ${k===o.status?"selected":""}>${v.label}</option>`).join("");openModal(`<h3>${isNew?"افزودن سفارش":"ویرایش سفارش"}</h3><p class="m-sub">${isNew?"اطلاعات جدید":"کد: "+esc(o.code)}</p><form id="ord-edit-form"><div class="form-grid"><div class="field-wrap"><label>نام</label><input name="name" required value="${esc(o.name)}"></div><div class="field-wrap"><label>موبایل</label><input name="phone" required class="ltr" maxlength="11" value="${esc(o.phone)}"></div><div class="field-wrap"><label>استان</label><select name="province" required>${provOptions}</select></div><div class="field-wrap"><label>شهر</label><input name="city" required value="${esc(o.city)}"></div><div class="field-wrap"><label>محصول</label><select name="crop" required>${cropOptions}</select></div><div class="field-wrap"><label>مساحت (هکتار)</label><input name="area" required class="ltr" value="${o.area||""}"></div><div class="field-wrap"><label>وضعیت</label><select name="status">${statusOptions}</select></div><div class="field-wrap"><label>مبلغ</label><input name="amount" class="ltr" value="${o.amount||0}"></div><div class="field-wrap span-2"><label>توضیحات</label><textarea name="notes" rows="2">${esc(o.notes)}</textarea></div></div><div class="modal-actions"><button type="submit" class="btn btn-green">${isNew?"افزودن":"ذخیره"}</button><button type="button" class="btn btn-light" id="ord-cancel">انصراف</button></div></form>`);$("#ord-cancel").onclick=closeModal;$("#ord-edit-form").addEventListener("submit",async ev=>{ev.preventDefault();const data=Object.fromEntries(new FormData(ev.target));data.phone=toEn(data.phone);data.area=+toEn(data.area)||0;data.amount=+toEn(data.amount)||0;data.name=data.name.trim();data.city=data.city.trim();if(!/^09\d{9}$/.test(data.phone)){toast("موبایل نامعتبر.",true);return;}if(!data.name){toast("نام را وارد کنید.",true);return;}if(data.area<=0){toast("مساحت نامعتبر.",true);return;}
 if(isNew){const seq=String(cache.orders.length+1).padStart(4,"0");const newOrder={id:uid(),code:`SP-1405-${seq}`,...data,createdAt:Date.now()};cache.orders.push(newOrder);write(LS.orders,cache.orders);await createOrderRemote(newOrder);}
 else{const idx=cache.orders.findIndex(x=>x.id===id);cache.orders[idx]={...cache.orders[idx],...data};write(LS.orders,cache.orders);await updateOrderRemote(id,data);}
 closeModal();loadOrdersPage(true);renderDashboard();refreshHomeStats();updateNotifBadge();toast(isNew?"افزوده شد.":"ذخیره شد.");});}
 function openOrderDelete(id){const o=cache.orders.find(x=>x.id===id);if(!o)return;confirmModal("حذف سفارش",`آیا از حذف ${o.code} مطمئن هستید؟`,{danger:true,requireWord:"DELETE",onConfirm:async()=>{await deleteOrderRemote(id);setOrders(cache.orders.filter(x=>x.id!==id));loadOrdersPage(true);renderDashboard();refreshHomeStats();updateNotifBadge();toast("حذف شد.");}});}
 
 const ptnFilters={q:"",prov:""};
-function renderPartners(){const list=$("#partners-list");if(!list)return;const all=getPartners();const provSel=$("#ptn-filter-prov");if(provSel&&provSel.options.length<=1){getConfig().provinces.forEach(p=>{const o=document.createElement("option");o.value=p;o.textContent=p;provSel.appendChild(o);});}const q=ptnFilters.q.trim().toLowerCase();const filtered=all.filter(p=>{if(ptnFilters.prov&&p.province!==ptnFilters.prov)return false;if(q){const hay=[p.name,p.phone,p.province,p.city].join(" ").toLowerCase();if(!hay.includes(q))return false;}return true;});if(!filtered.length){list.innerHTML='<div class="empty"><span class="empty-emoji">🤝</span><strong>همکاری یافت نشد</strong>هنوز درخواستی ثبت نشده است.</div>';return;}list.innerHTML=filtered.map(p=>{const drones=getFleet().filter(d=>d.ownerId===p.id);const droneList=drones.length?drones.map(d=>`${esc(d.name)}${d.liter?` (${toFa(d.liter)}L)`:""}`).join("، "):"—";const stBadge=p.status==="pending"?'<span style="background:#fdf3dc;color:#8a6110;border-color:rgba(138,97,16,.15)">⏳ در انتظار تأیید</span>':p.status==="rejected"?'<span style="background:#fdecea;color:#a02a1e">❌ رد شده</span>':p.active===false?'<span>⛔ غیرفعال</span>':'<span>✅ فعال</span>';const approveBtn=p.status==="pending"?`<button class="icon-mini" style="color:#1f6a43;border-color:#c5e5cf" title="تأیید" data-ptn-approve="${p.id}"><svg class="icon"><use href="#i-check"/></svg></button><button class="icon-mini" style="color:#a02a1e;border-color:#eccfc9" title="رد" data-ptn-reject="${p.id}"><svg class="icon"><use href="#i-x"/></svg></button>`:"";return `<div class="partner-card ${p.status==="pending"?"pending":""} ${p.active===false?"inactive":""}"><div class="partner-avatar">${esc((p.name||"؟").slice(0,1))}</div><div class="partner-info"><strong>${esc(p.name)}</strong><small style="direction:ltr;display:inline-block">${esc(p.phone)}</small><div class="partner-meta"><span>📍 ${esc(p.province)}${p.city?" · "+esc(p.city):""}</span><span>💰 سهم ${toFa(p.share||30)}٪</span>${stBadge}</div><div class="partner-meta" style="margin-top:6px"><span style="background:#f3e9fa;border-color:#e9d5ff;color:#6d28d9">🛩️ ${droneList}</span></div></div><div class="row-actions">${approveBtn}<button class="icon-mini" title="ویرایش" data-ptn-edit="${p.id}"><svg class="icon"><use href="#i-edit"/></svg></button>${p.status!=="pending"?`<button class="icon-mini" title="${p.active===false?"فعال‌سازی":"غیرفعال‌سازی"}" data-ptn-toggle="${p.id}"><svg class="icon"><use href="#i-check"/></svg></button>`:""}<button class="icon-mini purple" title="پهپادها" data-ptn-fleet="${p.id}"><svg class="icon"><use href="#i-drone"/></svg></button><button class="icon-mini" title="حذف" data-ptn-del="${p.id}"><svg class="icon"><use href="#i-trash"/></svg></button></div></div>`;}).join("");}
-function bindPartners(){$("#ptn-search")?.addEventListener("input",e=>{ptnFilters.q=e.target.value;renderPartners();});$("#ptn-filter-prov")?.addEventListener("change",e=>{ptnFilters.prov=e.target.value;renderPartners();});$("#partners-list")?.addEventListener("click",e=>{const ap=e.target.closest("[data-ptn-approve]");if(ap){const ps=getPartners();const p=ps.find(x=>x.id===ap.dataset.ptnApprove);if(p){p.status="active";p.active=true;setPartners(ps);renderPartners();toast("✅ تأیید شد.");}return;}const rj=e.target.closest("[data-ptn-reject]");if(rj){const ps=getPartners();const p=ps.find(x=>x.id===rj.dataset.ptnReject);if(p){p.status="rejected";p.active=false;setPartners(ps);renderPartners();toast("رد شد.");}return;}const ed=e.target.closest("[data-ptn-edit]");if(ed)return openPartnerEdit(ed.dataset.ptnEdit);const tg=e.target.closest("[data-ptn-toggle]");if(tg){const ps=getPartners();const p=ps.find(x=>x.id===tg.dataset.ptnToggle);if(p){p.active=p.active===false?true:false;setPartners(ps);renderPartners();toast(p.active?"فعال شد.":"غیرفعال شد.");}return;}const fl=e.target.closest("[data-ptn-fleet]");if(fl)return openFleetFor(fl.dataset.ptnFleet);const dl=e.target.closest("[data-ptn-del]");if(dl){confirmModal("حذف همکار","آیا مطمئن هستید؟ همهٔ پهپادهای این همکار هم حذف می‌شوند.",{danger:true,requireWord:"DELETE",onConfirm:()=>{setPartners(getPartners().filter(x=>x.id!==dl.dataset.ptnDel));setFleet(getFleet().filter(x=>x.ownerId!==dl.dataset.ptnDel));renderPartners();toast("حذف شد.");}});}});}
-function openPartnerEdit(id){const cfg=getConfig();const p=getPartners().find(x=>x.id===id);if(!p)return;const provOptions=cfg.provinces.map(x=>`<option ${x===p.province?"selected":""}>${esc(x)}</option>`).join("");const drones=getFleet().filter(d=>d.ownerId===id);openModal(`<h3>ویرایش همکار</h3><p class="m-sub">${esc(p.name)} — ${esc(p.phone)}</p><form id="ptn-edit-form"><div class="form-grid"><div class="field-wrap"><label>نام</label><input name="name" required value="${esc(p.name)}"></div><div class="field-wrap"><label>موبایل</label><input name="phone" required class="ltr" maxlength="11" value="${esc(p.phone)}"></div><div class="field-wrap"><label>استان</label><select name="province" required>${provOptions}</select></div><div class="field-wrap"><label>شهر</label><input name="city" value="${esc(p.city||"")}"></div><div class="field-wrap"><label>سهم (٪)</label><input name="share" required class="ltr" value="${p.share||30}"></div><div class="field-wrap"><label>رمز جدید (اختیاری)</label><input name="password" type="text" class="ltr" placeholder="برای تغییر"></div><div class="field-wrap span-2"><label>🛩️ پهپادهای این همکار</label><div class="drone-list">${drones.length?drones.map(d=>`<div class="drone-item"><div class="d-icon"><svg class="icon"><use href="#i-drone"/></svg></div><div class="d-info"><strong>${esc(d.name)}</strong><small>${esc(d.model||"—")}${d.liter?` · <b>${toFa(d.liter)} لیتر</b>`:""}</small></div><button type="button" data-del-drone="${d.id}"><svg class="icon"><use href="#i-trash"/></svg></button></div>`).join(""):'<span style="color:var(--i400);font-size:12px">پهپادی ثبت نشده.</span>'}</div><div class="drone-add-form"><input id="ed-drone-name" placeholder="نام پهپاد"><input id="ed-drone-model" placeholder="مدل"><input id="ed-drone-liter" inputmode="numeric" class="ltr" placeholder="لیتر"><button type="button" class="btn btn-purple" id="ed-drone-add">افزودن</button></div></div></div><div class="modal-actions"><button type="submit" class="btn btn-green">ذخیره</button><button type="button" class="btn btn-light" id="ptn-cancel">انصراف</button></div></form>`);$("#ptn-cancel").onclick=closeModal;$("#ed-drone-add").onclick=()=>{const n=$("#ed-drone-name").value.trim();if(!n){toast("نام پهپاد را وارد کنید.",true);return;}const fl=getFleet();fl.push({id:uid(),name:n,model:$("#ed-drone-model").value.trim(),liter:+toEn($("#ed-drone-liter").value)||0,ownerId:id,status:"ready",createdAt:Date.now()});setFleet(fl);openPartnerEdit(id);toast("پهپاد افزوده شد.");};$$("#modal-body [data-del-drone]").forEach(b=>b.onclick=()=>{setFleet(getFleet().filter(x=>x.id!==b.dataset.delDrone));openPartnerEdit(id);toast("حذف شد.");});$("#ptn-edit-form").addEventListener("submit",async ev=>{ev.preventDefault();const data=Object.fromEntries(new FormData(ev.target));data.phone=toEn(data.phone);data.share=+toEn(data.share)||30;data.name=data.name.trim();if(!/^09\d{9}$/.test(data.phone)){toast("موبایل نامعتبر.",true);return;}const ps=getPartners();const idx=ps.findIndex(x=>x.id===id);if(idx<0)return;ps[idx]={...ps[idx],name:data.name,phone:data.phone,province:data.province,city:(data.city||"").trim(),share:data.share};if(data.password){const salt=rand(16);ps[idx].salt=salt;ps[idx].hash=await sha256(salt+data.password);}setPartners(ps);closeModal();renderPartners();toast("ذخیره شد.");});}
-
-function openFleetFor(partnerId){const p=getPartners().find(x=>x.id===partnerId);if(!p)return;const drones=getFleet().filter(d=>d.ownerId===partnerId);const html=`<h3>🛩️ پهپادهای ${esc(p.name)}</h3><p class="m-sub">استان: ${esc(p.province)} — تعداد: ${toFa(drones.length)}</p>${drones.length?`<div class="table-scroll"><table class="mini-table"><thead><tr><th>نام</th><th>مدل</th><th>لیتر</th><th>وضعیت</th></tr></thead><tbody>${drones.map(d=>`<tr><td>${esc(d.name)}</td><td>${esc(d.model||"—")}</td><td>${d.liter?toFa(d.liter)+" L":"—"}</td><td>${d.status==="busy"?'<span class="status amber">در حال انجام</span>':'<span class="status green">آماده</span>'}</td></tr>`).join("")}</tbody></table></div>`:'<div class="empty"><strong>پهپادی ثبت نشده</strong></div>'}<div class="modal-actions"><button class="btn btn-light" id="flt-close">بستن</button></div>`;openModal(html);$("#flt-close").onclick=closeModal;}
+function renderPartners(){const list=$("#partners-list");if(!list)return;const all=getPartners();const provSel=$("#ptn-filter-prov");if(provSel&&provSel.options.length<=1){getConfig().provinces.forEach(p=>{const o=document.createElement("option");o.value=p;o.textContent=p;provSel.appendChild(o);});}const q=ptnFilters.q.trim().toLowerCase();const filtered=all.filter(p=>{if(ptnFilters.prov&&p.province!==ptnFilters.prov)return false;if(q){const hay=[p.name,p.phone,p.province,p.city].join(" ").toLowerCase();if(!hay.includes(q))return false;}return true;});if(!filtered.length){list.innerHTML='<div class="empty"><span class="empty-emoji">🤝</span><strong>همکاری یافت نشد</strong></div>';return;}list.innerHTML=filtered.map(p=>{const drones=getFleet().filter(d=>d.ownerId===p.id);const droneList=drones.length?drones.map(d=>`${esc(d.name)}${d.liter?` (${toFa(d.liter)}L)`:""}`).join("، "):"—";const stBadge=p.status==="pending"?'<span style="background:#fdf3dc;color:#8a6110">⏳ در انتظار تأیید</span>':p.status==="rejected"?'<span style="background:#fdecea;color:#a02a1e">❌ رد شده</span>':p.active===false?'<span>⛔ غیرفعال</span>':'<span>✅ فعال</span>';const approveBtn=p.status==="pending"?`<button class="icon-mini ok" title="تأیید" data-ptn-approve="${p.id}"><svg class="icon"><use href="#i-check"/></svg></button><button class="icon-mini danger" title="رد" data-ptn-reject="${p.id}"><svg class="icon"><use href="#i-x"/></svg></button>`:"";return `<div class="partner-card ${p.status==="pending"?"pending":""} ${p.active===false?"inactive":""}"><div class="partner-avatar">${esc((p.name||"؟").slice(0,1))}</div><div class="partner-info"><strong>${esc(p.name)}</strong><small style="direction:ltr;display:inline-block">${esc(p.phone)}</small><div class="partner-meta"><span>📍 ${esc(p.province)}</span><span>💰 ${toFa(p.share||30)}٪</span>${stBadge}</div><div class="partner-meta" style="margin-top:6px"><span style="background:#f3e9fa;color:#6d28d9">🛩️ ${droneList}</span></div></div><div class="row-actions">${approveBtn}<button class="icon-mini" title="ویرایش" data-ptn-edit="${p.id}"><svg class="icon"><use href="#i-edit"/></svg></button>${p.status!=="pending"?`<button class="icon-mini" title="${p.active===false?"فعال‌سازی":"غیرفعال‌سازی"}" data-ptn-toggle="${p.id}"><svg class="icon"><use href="#i-check"/></svg></button>`:""}<button class="icon-mini purple" title="پهپادها" data-ptn-fleet="${p.id}"><svg class="icon"><use href="#i-drone"/></svg></button><button class="icon-mini danger" title="حذف" data-ptn-del="${p.id}"><svg class="icon"><use href="#i-trash"/></svg></button></div></div>`;}).join("");}
+function bindPartners(){$("#ptn-search")?.addEventListener("input",e=>{ptnFilters.q=e.target.value;renderPartners();});$("#ptn-filter-prov")?.addEventListener("change",e=>{ptnFilters.prov=e.target.value;renderPartners();});$("#partners-list")?.addEventListener("click",e=>{const ap=e.target.closest("[data-ptn-approve]");if(ap){const ps=getPartners();const p=ps.find(x=>x.id===ap.dataset.ptnApprove);if(p){p.status="active";p.active=true;setPartners(ps);renderPartners();toast("✅ تأیید شد.");}return;}const rj=e.target.closest("[data-ptn-reject]");if(rj){const ps=getPartners();const p=ps.find(x=>x.id===rj.dataset.ptnReject);if(p){p.status="rejected";p.active=false;setPartners(ps);renderPartners();toast("رد شد.");}return;}const ed=e.target.closest("[data-ptn-edit]");if(ed)return openPartnerEdit(ed.dataset.ptnEdit);const tg=e.target.closest("[data-ptn-toggle]");if(tg){const ps=getPartners();const p=ps.find(x=>x.id===tg.dataset.ptnToggle);if(p){p.active=p.active===false?true:false;setPartners(ps);renderPartners();toast(p.active?"فعال شد.":"غیرفعال شد.");}return;}const fl=e.target.closest("[data-ptn-fleet]");if(fl)return openFleetFor(fl.dataset.ptnFleet);const dl=e.target.closest("[data-ptn-del]");if(dl){confirmModal("حذف همکار","آیا مطمئن هستید؟",{danger:true,requireWord:"DELETE",onConfirm:()=>{setPartners(getPartners().filter(x=>x.id!==dl.dataset.ptnDel));setFleet(getFleet().filter(x=>x.ownerId!==dl.dataset.ptnDel));renderPartners();toast("حذف شد.");}});}});}
+function openPartnerEdit(id){const cfg=getConfig();const p=getPartners().find(x=>x.id===id);if(!p)return;const provOptions=cfg.provinces.map(x=>`<option ${x===p.province?"selected":""}>${esc(x)}</option>`).join("");openModal(`<h3>ویرایش همکار</h3><form id="ptn-edit-form"><div class="form-grid"><div class="field-wrap"><label>نام</label><input name="name" required value="${esc(p.name)}"></div><div class="field-wrap"><label>موبایل</label><input name="phone" required class="ltr" maxlength="11" value="${esc(p.phone)}"></div><div class="field-wrap"><label>استان</label><select name="province" required>${provOptions}</select></div><div class="field-wrap"><label>شهر</label><input name="city" value="${esc(p.city||"")}"></div><div class="field-wrap"><label>سهم (٪)</label><input name="share" required class="ltr" value="${p.share||30}"></div><div class="field-wrap"><label>رمز جدید (اختیاری)</label><input name="password" type="text" class="ltr"></div></div><div class="modal-actions"><button type="submit" class="btn btn-green">ذخیره</button><button type="button" class="btn btn-light" id="ptn-cancel">انصراف</button></div></form>`);$("#ptn-cancel").onclick=closeModal;$("#ptn-edit-form").addEventListener("submit",async ev=>{ev.preventDefault();const data=Object.fromEntries(new FormData(ev.target));data.phone=toEn(data.phone);data.share=+toEn(data.share)||30;data.name=data.name.trim();if(!/^09\d{9}$/.test(data.phone)){toast("موبایل نامعتبر.",true);return;}const ps=getPartners();const idx=ps.findIndex(x=>x.id===id);if(idx<0)return;ps[idx]={...ps[idx],name:data.name,phone:data.phone,province:data.province,city:(data.city||"").trim(),share:data.share};if(data.password){const salt=rand(16);ps[idx].salt=salt;ps[idx].hash=await sha256(salt+data.password);}setPartners(ps);closeModal();renderPartners();toast("ذخیره شد.");});}
+function openFleetFor(partnerId){const p=getPartners().find(x=>x.id===partnerId);if(!p)return;const drones=getFleet().filter(d=>d.ownerId===partnerId);openModal(`<h3>🛩️ پهپادهای ${esc(p.name)}</h3><p class="m-sub">تعداد: ${toFa(drones.length)}</p>${drones.length?`<div class="table-scroll"><table class="mini-table"><thead><tr><th>نام</th><th>مدل</th><th>لیتر</th></tr></thead><tbody>${drones.map(d=>`<tr><td>${esc(d.name)}</td><td>${esc(d.model||"—")}</td><td>${d.liter?toFa(d.liter)+" L":"—"}</td></tr>`).join("")}</tbody></table></div>`:'<div class="empty"><strong>پهپادی ثبت نشده</strong></div>'}<div class="modal-actions"><button class="btn btn-light" id="flt-close">بستن</button></div>`);$("#flt-close").onclick=closeModal;}
 
 function renderSlots(){const tbody=$("#slot-tbody");if(!tbody)return;const all=getSlots().sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start));if(!all.length){tbody.innerHTML='<tr><td colspan="6"><div class="empty"><strong>هنوز بازه‌ای ثبت نشده</strong></div></td></tr>';return;}tbody.innerHTML=all.map(s=>{const booked=cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length;const full=booked>=s.cap;const st=full?'<span class="status red">پر شد</span>':'<span class="status green">آزاد</span>';return `<tr><td><code class="ltr">${esc(s.date)}</code></td><td><code class="ltr">${esc(s.start)} - ${esc(s.end)}</code></td><td>${toFa(s.cap)}</td><td>${toFa(booked)}</td><td>${st}</td><td><div class="row-actions"><button class="icon-mini danger" data-slot-del="${s.id}"><svg class="icon"><use href="#i-trash"/></svg></button></div></td></tr>`;}).join("");}
 function bindSlots(){$("#slot-add-btn")?.addEventListener("click",()=>{const date=toEn($("#slot-date").value.trim());const start=toEn($("#slot-start").value.trim());const end=toEn($("#slot-end").value.trim());const cap=+toEn($("#slot-cap").value)||1;if(!isValidJalali(date)){toast("تاریخ نامعتبر.",true);return;}if(!/^\d{1,2}:\d{2}$/.test(start)||!/^\d{1,2}:\d{2}$/.test(end)){toast("ساعت به شکل 08:00 وارد کنید.",true);return;}if(cap<=0){toast("ظرفیت نامعتبر.",true);return;}const slots=getSlots();slots.push({id:uid(),date,start,end,cap,createdAt:Date.now()});setSlots(slots);$("#slot-date").value="";$("#slot-start").value="";$("#slot-end").value="";$("#slot-cap").value="2";renderSlots();refreshSlotSelect();toast("بازهٔ زمانی افزوده شد.");});$("#slot-tbody")?.addEventListener("click",e=>{const dl=e.target.closest("[data-slot-del]");if(!dl)return;setSlots(getSlots().filter(x=>x.id!==dl.dataset.slotDel));renderSlots();refreshSlotSelect();toast("حذف شد.");});}
 
 function renderPricing(){const cfg=getConfig();$("#cfg-base-rate").value=cfg.baseRate;fillSelect($("#cfg-rate-prov"),cfg.provinces);fillSelect($("#cfg-rate-crop"),cfg.crops);renderChips("#cfg-prov-rates-list",cfg.provRates,k=>{const c=getConfig();delete c.provRates[k];setConfig(c);renderPricing();});renderChips("#cfg-crop-rates-list",cfg.cropRates,k=>{const c=getConfig();delete c.cropRates[k];setConfig(c);renderPricing();});}
-function renderChips(sel,obj,onDel){const el=$(sel);if(!el)return;const entries=Object.entries(obj||{});if(!entries.length){el.innerHTML='<span style="color:var(--i400);font-size:12px">موردی ثبت نشده.</span>';return;}el.innerHTML="";entries.forEach(([k,v])=>{const chip=document.createElement("span");chip.className="chip";chip.innerHTML=`${esc(k)}: <b style="font-weight:800">${fmt(v)}</b> <button><svg class="icon"><use href="#i-x"/></svg></button>`;chip.querySelector("button").onclick=()=>onDel(k);el.appendChild(chip);});}
+function renderChips(sel,obj,onDel){const el=$(sel);if(!el)return;const entries=Object.entries(obj||{});if(!entries.length){el.innerHTML='<span style="color:var(--i400);font-size:12px">موردی ثبت نشده.</span>';return;}el.innerHTML="";entries.forEach(([k,v])=>{const chip=document.createElement("span");chip.className="chip";chip.innerHTML=`${esc(k)}: <b>${fmt(v)}</b> <button><svg class="icon"><use href="#i-x"/></svg></button>`;chip.querySelector("button").onclick=()=>onDel(k);el.appendChild(chip);});}
 function bindPricing(){$("#cfg-save-base")?.addEventListener("click",()=>{const v=+toEn($("#cfg-base-rate").value)||0;if(v<=0){toast("نرخ باید مثبت باشد.",true);return;}const c=getConfig();c.baseRate=v;setConfig(c);refreshCustomerPayment();updatePrice();toast("ذخیره شد.");});$("#cfg-add-prov-rate")?.addEventListener("click",()=>{const p=$("#cfg-rate-prov").value;const v=+toEn($("#cfg-rate-val").value)||0;if(!p||v<=0){toast("مقادیر کامل نیست.",true);return;}const c=getConfig();c.provRates[p]=v;setConfig(c);$("#cfg-rate-val").value="";renderPricing();updatePrice();toast("ذخیره شد.");});$("#cfg-add-crop-rate")?.addEventListener("click",()=>{const cr=$("#cfg-rate-crop").value;const v=+toEn($("#cfg-rate-crop-val").value)||0;if(!cr||v<=0){toast("مقادیر کامل نیست.",true);return;}const c=getConfig();c.cropRates[cr]=v;setConfig(c);$("#cfg-rate-crop-val").value="";renderPricing();updatePrice();toast("ذخیره شد.");});}
 function renderPayment(){const cfg=getConfig();$("#cfg-card").value=cfg.payment.card||"";$("#cfg-iban").value=cfg.payment.iban||"";$("#cfg-holder").value=cfg.payment.holder||"";$("#cfg-receipt-max").value=cfg.receiptMax||5;}
 function bindPayment(){$("#cfg-payment-form")?.addEventListener("submit",e=>{e.preventDefault();const c=getConfig();c.payment={card:$("#cfg-card").value.trim(),iban:$("#cfg-iban").value.trim(),holder:$("#cfg-holder").value.trim()};setConfig(c);refreshCustomerPayment();toast("ذخیره شد.");});$("#cfg-save-receipt")?.addEventListener("click",()=>{const v=+toEn($("#cfg-receipt-max").value)||5;const c=getConfig();c.receiptMax=v;setConfig(c);toast("ذخیره شد.");});}
@@ -1060,16 +1380,16 @@ function bindCrops(){$("#crop-add-btn")?.addEventListener("click",()=>{const v=$
 function renderMessages(){const msgs=getMessages();const box=$("#adm-messages-list");if(!msgs.length){box.innerHTML='<div class="empty"><span class="empty-emoji">💬</span><strong>پیامی نیست</strong></div>';return;}box.innerHTML=msgs.slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).map(m=>{const isC=m.from==="customer";const dt=new Date(m.createdAt||Date.now()).toLocaleString("fa-IR");return `<div class="admin-card" style="margin-bottom:10px;padding:14px"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:8px"><span class="status ${isC?"":"green"}">${isC?"مشتری":"مدیر"}</span><small style="color:var(--i400);font-size:11px">${dt}</small></div><div style="font-size:13px;line-height:1.9;color:var(--i700)">${esc(m.text)}</div></div>`;}).join("");}
 function renderCustomers(){const orders=cache.orders;const map=new Map();orders.forEach(o=>{const k=o.phone;if(!map.has(k))map.set(k,{name:o.name,phone:o.phone,count:0,area:0});const m=map.get(k);m.count++;m.area+=+o.area||0;});const tb=$("#adm-cust-tbody");const rows=Array.from(map.values()).sort((a,b)=>b.count-a.count);if(!rows.length){tb.innerHTML='<tr><td colspan="4"><div class="empty"><strong>مشتری‌ای یافت نشد</strong></div></td></tr>';return;}tb.innerHTML=rows.map(r=>`<tr><td>${esc(r.name)}</td><td><code class="ltr">${esc(r.phone)}</code></td><td>${toFa(r.count)} سفارش</td><td>${toFa(r.area)} هکتار</td></tr>`).join("");}
 function renderSettings(){const cfg=getConfig();$("#cfg-site-title").value=cfg.siteTitle||"";$("#cfg-support-phone").value=cfg.supportPhone||"";$("#cfg-support-note").value=cfg.supportNote||"";renderSupport();}
-function bindSettings(){$("#cfg-general-form")?.addEventListener("submit",e=>{e.preventDefault();const c=getConfig();c.siteTitle=$("#cfg-site-title").value.trim();c.supportPhone=$("#cfg-support-phone").value.trim();c.supportNote=$("#cfg-support-note").value.trim();setConfig(c);renderSupport();toast("ذخیره شد.");});$("#danger-reset")?.addEventListener("click",()=>{confirmModal("بازنشانی همهٔ داده‌ها","تمام داده‌ها پاک می‌شوند. مطمئنید؟",{danger:true,requireWord:"RESET",onConfirm:()=>{Object.values(LS).forEach(k=>localStorage.removeItem(k));location.reload();}});});}
+function bindSettings(){$("#cfg-general-form")?.addEventListener("submit",e=>{e.preventDefault();const c=getConfig();c.siteTitle=$("#cfg-site-title").value.trim();c.supportPhone=$("#cfg-support-phone").value.trim();c.supportNote=$("#cfg-support-note").value.trim();setConfig(c);renderSupport();toast("ذخیره شد.");});$("#danger-reset")?.addEventListener("click",()=>{confirmModal("بازنشانی همهٔ داده‌ها","تمام داده‌ها پاک می‌شوند. مطمئنید؟",{danger:true,requireWord:"RESET",onConfirm:()=>{Object.values(LS).forEach(k=>localStorage.removeItem(k));localStorage.removeItem("sph_receipts");location.reload();}});});}
 
 let timerHandle;
 function startTimer(){clearInterval(timerHandle);const tick=()=>{const s=Auth.getSession();if(!s){stopAndLogout();return;}Auth.touch();const left=Math.max(0,Math.floor((s.expires-Date.now())/1000));const m=Math.floor(left/60),sec=left%60;const el=$("#session-timer");if(el)el.textContent=`${toFa(m)}:${toFa(String(sec).padStart(2,"0"))}`;};tick();timerHandle=setInterval(tick,1000);}
 function stopAndLogout(){clearInterval(timerHandle);Auth.logout();$("#admin-login-view").hidden=false;$("#admin-panel-view").hidden=true;toast("نشست منقضی شد.",true);}
 function bindLogin(){$("#admin-login-form")?.addEventListener("submit",async e=>{e.preventDefault();const user=$("#admin-user").value.trim();const pass=$("#admin-pass").value;if(!user||!pass){toast("نام و رمز را وارد کنید.",true);return;}const res=await Auth.login(user,pass);if(!res.ok){toast(res.msg,true);$("#admin-pass").value="";return;}toast("ورود موفق.");$("#admin-pass").value="";$("#admin-login-view").hidden=true;$("#admin-panel-view").hidden=false;write(LS.seen,Date.now());write("sph_new_count",0);updateNotifBadge();startTimer();refreshAll();});}
-function openChangePassModal(){openModal(`<h3>تغییر رمز مدیر</h3><p class="m-sub">رمز جدید حداقل ۸ کاراکتر و شامل حرف و عدد.</p><form id="chg-pass-form"><div class="field-wrap" style="margin-bottom:10px"><label>رمز فعلی</label><input type="password" id="cp-cur" class="ltr" required></div><div class="field-wrap" style="margin-bottom:10px"><label>رمز جدید</label><input type="password" id="cp-new" class="ltr" required></div><div class="field-wrap"><label>تکرار رمز</label><input type="password" id="cp-confirm" class="ltr" required></div><div class="modal-actions"><button type="submit" class="btn btn-green">ذخیره</button><button type="button" class="btn btn-light" id="cp-cancel">انصراف</button></div></form>`);$("#cp-cancel").onclick=closeModal;$("#chg-pass-form").addEventListener("submit",async e=>{e.preventDefault();const cur=$("#cp-cur").value,np=$("#cp-new").value,cp=$("#cp-confirm").value;const res=await Auth.changePassword(cur,np,cp);if(!res.ok){toast(res.msg,true);return;}closeModal();toast("رمز تغییر کرد.");});}
+function openChangePassModal(){openModal(`<h3>تغییر رمز مدیر</h3><form id="chg-pass-form"><div class="field-wrap" style="margin-bottom:10px"><label>رمز فعلی</label><input type="password" id="cp-cur" class="ltr" required></div><div class="field-wrap" style="margin-bottom:10px"><label>رمز جدید</label><input type="password" id="cp-new" class="ltr" required></div><div class="field-wrap"><label>تکرار رمز</label><input type="password" id="cp-confirm" class="ltr" required></div><div class="modal-actions"><button type="submit" class="btn btn-green">ذخیره</button><button type="button" class="btn btn-light" id="cp-cancel">انصراف</button></div></form>`);$("#cp-cancel").onclick=closeModal;$("#chg-pass-form").addEventListener("submit",async e=>{e.preventDefault();const cur=$("#cp-cur").value,np=$("#cp-new").value,cp=$("#cp-confirm").value;const res=await Auth.changePassword(cur,np,cp);if(!res.ok){toast(res.msg,true);return;}closeModal();toast("رمز تغییر کرد.");});}
 function bindLogout(){$("#admin-logout-btn")?.addEventListener("click",()=>{confirmModal("خروج","از پنل خارج می‌شوید؟",{onConfirm:()=>{stopAndLogout();toast("خارج شدید.");}});});$("#admin-change-pass-btn")?.addEventListener("click",openChangePassModal);}
-function refreshAll(){loadOrdersPage(true);renderPartners();renderSlots();renderPricing();renderPayment();renderRegions();renderCrops();renderMessages();renderCustomers();renderSettings();}
-function init(){bindTabs();bindOrders();bindPartners();bindSlots();bindPricing();bindPayment();bindRegions();bindCrops();bindSettings();bindLogin();bindLogout();}
+function refreshAll(){loadOrdersPage(true);renderPayments();renderPartners();renderSlots();renderPricing();renderPayment();renderRegions();renderCrops();renderMessages();renderCustomers();renderSettings();}
+function init(){bindTabs();bindOrders();bindPayments();bindPartners();bindSlots();bindPricing();bindPayment();bindRegions();bindCrops();bindSettings();bindLogin();bindLogout();}
 return{init,refreshAll,closeModal};
 })();
 
@@ -1078,7 +1398,7 @@ const PartnerPanel=(()=>{
 let regDrones=[];
 function renderRegDrones(){const box=$("#ptn-drones-list");if(!box)return;if(!regDrones.length){box.innerHTML='<div style="color:var(--i400);font-size:12px;padding:8px 0">هنوز پهپادی اضافه نکرده‌اید.</div>';return;}box.innerHTML=regDrones.map((d,i)=>`<div class="drone-item"><div class="d-icon"><svg class="icon"><use href="#i-drone"/></svg></div><div class="d-info"><strong>${esc(d.name)}</strong><small>${esc(d.model||"—")}${d.liter?` · <b>${toFa(d.liter)} لیتر</b>`:""}</small></div><button type="button" data-reg-drone-del="${i}"><svg class="icon"><use href="#i-trash"/></svg></button></div>`).join("");$$("#ptn-drones-list [data-reg-drone-del]").forEach(b=>b.onclick=()=>{regDrones.splice(+b.dataset.regDroneDel,1);renderRegDrones();});}
 function bindDroneAdd(){$("#ptn-drone-add")?.addEventListener("click",()=>{const n=$("#ptn-drone-name").value.trim();if(!n){toast("نام پهپاد را وارد کنید.",true);return;}regDrones.push({name:n,model:$("#ptn-drone-model").value.trim(),liter:+toEn($("#ptn-drone-liter").value)||0});$("#ptn-drone-name").value="";$("#ptn-drone-model").value="";$("#ptn-drone-liter").value="";renderRegDrones();});}
-function refresh(){const s=PartnerAuth.getSession();if(!s)return;$("#ptn-name").textContent=s.name;const all=cache.orders.filter(o=>o.partnerId===s.partnerId);$("#ptn-stat-total").textContent=toFa(all.length);$("#ptn-stat-pending").textContent=toFa(all.filter(o=>["assigned","scheduled","in_progress"].includes(o.status)).length);const area=all.reduce((t,o)=>t+(+o.area||0),0);$("#ptn-stat-area").innerHTML=toFa(area)+' <span class="unit">هکتار</span>';const share=all.filter(o=>o.status!=="cancelled").reduce((t,o)=>t+Math.round((+o.amount||0)*(+o.partnerShare||30)/100),0);$("#ptn-stat-share").textContent=fmt(share);const myDrones=getFleet().filter(d=>d.ownerId===s.partnerId);const ftb=$("#ptn-fleet-tbody");if(ftb){if(!myDrones.length){ftb.innerHTML='<tr><td colspan="4"><div class="empty"><strong>پهپادی ثبت نشده</strong></div></td></tr>';}else{ftb.innerHTML=myDrones.map(d=>`<tr><td>${esc(d.name)}</td><td>${esc(d.model||"—")}</td><td><b style="color:#6d28d9">${d.liter?toFa(d.liter)+" لیتر":"—"}</b></td><td>${d.status==="busy"?'<span class="status amber">در حال انجام</span>':'<span class="status green">آماده</span>'}</td></tr>`).join("");}}const tb=$("#ptn-tbody");if(!all.length){tb.innerHTML='<tr><td colspan="9"><div class="empty"><span class="empty-emoji">📭</span><strong>سفارشی به شما ارجاع نشده</strong></div></td></tr>';return;}tb.innerHTML=all.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).map(o=>{const st=STATUS[o.status]||STATUS.pending;const addr=[o.province,o.city,o.village].filter(Boolean).join(" · ");const myShare=Math.round((+o.amount||0)*(+o.partnerShare||30)/100);const sl=o.slotDate?`<small style="color:#6d28d9;display:block">${esc(o.slotDate)} · ${esc(o.slotTime||"")}</small>`:"—";return `<tr><td><code class="ltr">${esc(o.code)}</code></td><td>${esc(o.name)}<br><small style="direction:ltr;display:inline-block;color:var(--i400)">${esc(o.phone)}</small></td><td>${esc(addr)}</td><td>${esc(o.crop)}</td><td>${toFa(o.area)} هکتار</td><td>${fmtT(o.amount)}</td><td><strong style="color:#6d28d9">${fmtT(myShare)}</strong></td><td>${sl}</td><td><span class="status ${st.cls}">${st.label}</span></td></tr>`;}).join("");}
+function refresh(){const s=PartnerAuth.getSession();if(!s)return;$("#ptn-name").textContent=s.name;const all=cache.orders.filter(o=>o.partnerId===s.partnerId);$("#ptn-stat-total").textContent=toFa(all.length);$("#ptn-stat-pending").textContent=toFa(all.filter(o=>["assigned","scheduled","in_progress"].includes(o.status)).length);const area=all.reduce((t,o)=>t+(+o.area||0),0);$("#ptn-stat-area").innerHTML=toFa(area)+' <span class="unit">هکتار</span>';const share=all.filter(o=>o.status!=="cancelled").reduce((t,o)=>t+Math.round((+o.amount||0)*(+o.partnerShare||30)/100),0);$("#ptn-stat-share").textContent=fmt(share);const myDrones=getFleet().filter(d=>d.ownerId===s.partnerId);const ftb=$("#ptn-fleet-tbody");if(ftb){if(!myDrones.length){ftb.innerHTML='<tr><td colspan="4"><div class="empty"><strong>پهپادی ثبت نشده</strong></div></td></tr>';}else{ftb.innerHTML=myDrones.map(d=>`<tr><td>${esc(d.name)}</td><td>${esc(d.model||"—")}</td><td><b style="color:#6d28d9">${d.liter?toFa(d.liter)+" لیتر":"—"}</b></td><td>${d.status==="busy"?'<span class="status amber">در حال انجام</span>':'<span class="status green">آماده</span>'}</td></tr>`).join("");}}const tb=$("#ptn-tbody");if(!all.length){tb.innerHTML='<tr><td colspan="8"><div class="empty"><span class="empty-emoji">📭</span><strong>سفارشی به شما ارجاع نشده</strong></div></td></tr>';return;}tb.innerHTML=all.sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).map(o=>{const st=STATUS[o.status]||STATUS.pending;const addr=[o.province,o.city,o.village].filter(Boolean).join(" · ");const myShare=Math.round((+o.amount||0)*(+o.partnerShare||30)/100);const sl=o.slotDate?`<small style="color:#6d28d9;display:block">${esc(o.slotDate)} · ${esc(o.slotTime||"")}</small>`:"—";return `<tr><td><code class="ltr">${esc(o.code)}</code></td><td>${esc(o.name)}<br><small style="direction:ltr;display:inline-block;color:var(--i400)">${esc(o.phone)}</small></td><td>${esc(addr)}</td><td>${esc(o.crop)}</td><td>${toFa(o.area)} هکتار</td><td><strong style="color:#6d28d9">${fmtT(myShare)}</strong></td><td>${sl}</td><td><span class="status ${st.cls}">${st.label}</span></td></tr>`;}).join("");}
 function bindTabs(){document.addEventListener("click",e=>{const t=e.target.closest("#ptn-tab-login, #ptn-tab-reg");if(!t)return;const isLogin=t.id==="ptn-tab-login";const lt=$("#ptn-tab-login"),rt=$("#ptn-tab-reg"),lf=$("#partner-login-form"),rf=$("#partner-register-form");if(!lt||!rt||!lf||!rf)return;if(isLogin){lt.className="btn btn-purple btn-sm";lt.style.flex="1";rt.className="btn btn-light btn-sm";rt.style.flex="1";lf.hidden=false;rf.hidden=true;}else{rt.className="btn btn-purple btn-sm";rt.style.flex="1";lt.className="btn btn-light btn-sm";lt.style.flex="1";lf.hidden=true;rf.hidden=false;const sel=$("#ptn-reg-prov");if(sel&&sel.options.length<=1){getConfig().provinces.forEach(p=>{const o=document.createElement("option");o.value=p;o.textContent=p;sel.appendChild(o);});}renderRegDrones();}});}
 function bindLogin(){$("#partner-login-form")?.addEventListener("submit",async e=>{e.preventDefault();const phone=$("#ptn-login-phone").value.trim();const pass=$("#ptn-login-pass").value;if(!phone||!pass){toast("شماره و رمز را وارد کنید.",true);return;}const res=await PartnerAuth.login(phone,pass);if(!res.ok){toast(res.msg,true);return;}toast("خوش آمدید "+(res.name||""));$("#ptn-login-pass").value="";$("#partner-login-view").hidden=true;$("#partner-panel-view").hidden=false;refresh();});}
 function bindRegister(){$("#partner-register-form")?.addEventListener("submit",async e=>{e.preventDefault();const data={name:$("#ptn-reg-name").value.trim(),phone:$("#ptn-reg-phone").value,province:$("#ptn-reg-prov").value,city:$("#ptn-reg-city").value.trim(),share:$("#ptn-reg-share").value,pass:$("#ptn-reg-pass").value,pass2:$("#ptn-reg-pass2").value,drones:regDrones.slice()};if(!data.name||!data.phone||!data.province||!data.city||!data.pass){toast("همهٔ فیلدهای اجباری را پر کنید.",true);return;}const res=await PartnerAuth.register(data);if(!res.ok){toast(res.msg,true);return;}toast("✅ درخواست شما ثبت شد. پس از تأیید مدیر، می‌توانید وارد شوید.");$("#partner-register-form").reset();regDrones=[];renderRegDrones();$("#ptn-tab-login").click();});}
@@ -1089,15 +1409,14 @@ return{refresh,bindTabs,bindLogin,bindRegister,bindLogout,bindDroneAdd};
 /* ============ AI ============ */
 const AIAssistant=(()=>{
 const WORKER_URL="https://cold-grass-e1f3sam-pash-api.ali-naghiloo279.workers.dev/api/chat";
-const SYSTEM_PROMPT="تو «دستیار هوشمند سم‌پاش» هستی. تخصص: HTML، CSS، JavaScript. کد را داخل بلاک کد با سه بک‌تیک بنویس. پاسخ‌ها کوتاه و کاربردی.";
+const SYSTEM_PROMPT="تو «دستیار هوشمند سم‌پاش» هستی. تخصص: HTML، CSS، JavaScript. کد را داخل بلاک کد بنویس.";
 let history=[{role:"user",content:SYSTEM_PROMPT}];let busy=false;
 const fab=$("#ai-fab"),panel=$("#ai-panel"),close=$("#ai-close"),body=$("#ai-body"),input=$("#ai-input"),send=$("#ai-send");
 function togglePanel(open){const should=open!==undefined?open:!panel.classList.contains("show");panel.classList.toggle("show",should);if(should){setTimeout(()=>input.focus(),100);}}
 function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function renderMarkdown(text){const parts=String(text).split(/```/);let html="";for(let i=0;i<parts.length;i++){if(i%2===1){const raw=parts[i];const nl=raw.indexOf("\n");const code=(nl>-1?raw.slice(nl+1):raw).replace(/\n$/,"");html+=`<div class="ai-code"><div class="ai-code-head"><span>code</span></div><pre><code>${escapeHtml(code)}</code></pre></div>`;}else{const t=parts[i].trim();if(!t)continue;let f=escapeHtml(t).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/\n/g,"<br>");html+=`<p>${f}</p>`;}}return html||`<p>${escapeHtml(text)}</p>`;}
+function renderMarkdown(text){const parts=String(text).split(/```/);let html="";for(let i=0;i<parts.length;i++){if(i%2===1){const raw=parts[i];const nl=raw.indexOf("\n");const code=(nl>-1?raw.slice(nl+1):raw).replace(/\n$/,"");html+=`<pre style="background:#0b1f17;color:#d4e8dc;padding:12px;border-radius:10px;overflow-x:auto;font-size:11.5px;direction:ltr;text-align:left"><code>${escapeHtml(code)}</code></pre>`;}else{const t=parts[i].trim();if(!t)continue;let f=escapeHtml(t).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/\n/g,"<br>");html+=`<p>${f}</p>`;}}return html||`<p>${escapeHtml(text)}</p>`;}
 function addMessage(text,role){const wrap=document.createElement("div");wrap.className="ai-msg "+(role==="user"?"user":"bot");const b=document.createElement("div");b.className="ai-bubble";if(role==="user")b.innerHTML=`<p>${escapeHtml(text).replace(/\n/g,"<br>")}</p>`;else b.innerHTML=renderMarkdown(text);wrap.appendChild(b);body.appendChild(wrap);requestAnimationFrame(()=>{body.scrollTop=body.scrollHeight;});}
-function addTyping(){const w=document.createElement("div");w.className="ai-msg bot";w.innerHTML='<div class="ai-typing"><span></span><span></span><span></span></div>';body.appendChild(w);requestAnimationFrame(()=>{body.scrollTop=body.scrollHeight;});return w;}
-async function submit(text){const msg=(text||input.value).trim();if(!msg||busy)return;busy=true;send.disabled=true;input.value="";addMessage(msg,"user");history.push({role:"user",content:msg});const t=addTyping();try{const res=await fetch(WORKER_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:history})});const data=await res.json();t.remove();if(data.error){addMessage("⚠️ "+data.error,"bot");}else{const r=data.reply||"پاسخی دریافت نشد.";addMessage(r,"bot");history.push({role:"assistant",content:r});}}catch(err){t.remove();addMessage("⚠️ اتصال برقرار نشد.","bot");}finally{busy=false;send.disabled=false;input.focus();}}
+async function submit(){const msg=input.value.trim();if(!msg||busy)return;busy=true;send.disabled=true;input.value="";addMessage(msg,"user");history.push({role:"user",content:msg});const t=document.createElement("div");t.className="ai-msg bot";t.innerHTML='<div class="ai-typing"><span></span><span></span><span></span></div>';body.appendChild(t);try{const res=await fetch(WORKER_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:history})});const data=await res.json();t.remove();if(data.error){addMessage("⚠️ "+data.error,"bot");}else{const r=data.reply||"پاسخی دریافت نشد.";addMessage(r,"bot");history.push({role:"assistant",content:r});}}catch(err){t.remove();addMessage("⚠️ اتصال برقرار نشد.","bot");}finally{busy=false;send.disabled=false;input.focus();}}
 function init(){if(!fab||!panel)return;fab.addEventListener("click",()=>togglePanel());close.addEventListener("click",()=>togglePanel(false));send.addEventListener("click",()=>submit());input.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();submit();}});}
 return{init};
 })();
@@ -1131,4 +1450,4 @@ AIAssistant.init();
 })();
 </script>
 </body>
-  </html>
+</html>
