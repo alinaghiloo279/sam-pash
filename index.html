@@ -887,7 +887,7 @@ function init(){bindTabs();bindOrders();bindPricing();bindPayment();bindRegions(
 return{init,refreshAll};
 })();
 const AIAssistant=(()=>{
-const WORKER_URL="";
+const WORKER_URL="https://cold-grass-e1f3sam-pash-api.ali-naghiloo279.workers.dev/api/chat";
 const SYSTEM_PROMPT="تو «دستیار هوشمند سم‌پاش» هستی. تخصص: HTML، CSS، JavaScript. کد را داخل بلاک کد بنویس. پاسخ‌ها کوتاه.";
 let history=[{role:"user",content:SYSTEM_PROMPT}];
 let busy=false;
