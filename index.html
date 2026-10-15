@@ -339,7 +339,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="field-wrap"><label for="city">شهرستان / شهر *</label><input id="city" name="city" required placeholder="نام شهر"><span class="error" data-error-for="city"></span></div>
 <div class="field-wrap"><label for="village">روستا / منطقه</label><input id="village" name="village" placeholder="نام روستا"></div>
 <div class="field-wrap"><label for="crop">نوع محصول *</label><select id="crop" name="crop" required><option value="">انتخاب محصول</option></select><span class="error" data-error-for="crop"></span></div>
-<div class="field-wrap"><label for="area">مساحت (هکتار) *</label><input id="area" name="area" required inputmode="decimal" class="ltr" type="text" value="10"><span class="error" data-error-for="area"></span></div>
+<div class="field-wrap"><label for="area">مساحت (متر مربع) *</label><input id="area" name="area" required inputmode="decimal" class="ltr" type="text" value="10000"><span class="error" data-error-for="area"></span></div>
 <div class="field-wrap"><label for="date">تاریخ پیشنهادی (شمسی)</label><input id="date" name="date" inputmode="text" class="ltr" placeholder="1405/07/23" maxlength="10"><span class="hint">قالب: 1405/07/23</span><span class="error" data-error-for="date"></span></div>
 <div class="field-wrap span-2"><label for="notes">توضیحات و نشانی</label><textarea id="notes" name="notes" rows="3" placeholder="نام آفت، وضعیت مزرعه..."></textarea></div>
 </div>
@@ -538,6 +538,7 @@ const getOrders=()=>cache.orders;
 const setOrders=o=>{cache.orders=o;write(LS.orders,o);(async()=>{try{const r=await fetch(API+"/api/orders").then(x=>x.json());for(const it of o){if(r.find(x=>x.id===it.id)){await fetch(API+"/api/orders/"+it.id,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(it)});}else{await fetch(API+"/api/orders",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(it)});}}for(const r2 of r){if(!o.find(x=>x.id===r2.id)){await fetch(API+"/api/orders/"+r2.id,{method:"DELETE"});}}}catch(e){}})();};
 const getMessages=()=>cache.messages;
 const setMessages=m=>{cache.messages=m;write(LS.messages,m);(async()=>{try{const r=await fetch(API+"/api/messages").then(x=>x.json());for(const it of m){if(!r.find(x=>x.id===it.id)){await fetch(API+"/api/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(it)});}}}catch(e){}})();};
+function m2ToHa(m2){const n=+m2||0;return n<=0?0:Math.ceil(n/10000);}
 function calcPrice({area,province,crop},cfg=getConfig()){const base=+cfg.baseRate||0;const rate=+cfg.cropRates?.[crop]||+cfg.provRates?.[province]||base;return Math.round((+area||0)*rate);}
 const STATUS={pending:{label:"در انتظار پرداخت",cls:""},scheduled:{label:"زمان‌بندی شد",cls:"green"},in_progress:{label:"در حال انجام",cls:"blue"},done:{label:"تکمیل شده",cls:"green"},cancelled:{label:"لغو شده",cls:"red"}};
 const Auth=(()=>{
@@ -623,7 +624,7 @@ date:v=>!v||isValidJalali(v)?"":"تاریخ را به شکل 1405/07/23 وارد
 function setFieldError(name,msg){const h=document.querySelector(`[data-error-for="${name}"]`);const f=document.getElementById(name);if(h)h.textContent=msg||"";if(f){if(msg)f.setAttribute("aria-invalid","true");else f.removeAttribute("aria-invalid");}}
 function validateField(name){const f=document.getElementById(name);if(!f)return true;const r=FIELD_MESSAGES[name];if(!r)return true;const m=r(f.value);setFieldError(name,m);return !m;}
 Object.keys(FIELD_MESSAGES).forEach(n=>{const f=document.getElementById(n);if(!f)return;f.addEventListener("blur",()=>validateField(n));f.addEventListener("input",()=>{if(f.getAttribute("aria-invalid")==="true")validateField(n);});});
-function updatePrice(){const a=$("#area"),p=$("#total-price");if(!a||!p)return;const n=Math.max(0,Number(toEn(a.value).replace(/[^\d.]/g,""))||0);const cfg=getConfig();const prov=$("#province")?.value||"";const crop=$("#crop")?.value||"";p.textContent=n>0?fmtT(calcPrice({area:n,province:prov,crop},cfg)):"—";}
+function updatePrice(){const a=$("#area"),p=$("#total-price");if(!a||!p)return;const n=Math.max(0,Number(toEn(a.value).replace(/[^\d.]/g,""))||0);const cfg=getConfig();const prov=$("#province")?.value||"";const crop=$("#crop")?.value||"";const ha=m2ToHa(n);p.textContent=n>0?fmtT(calcPrice({area:ha,province:prov,crop},cfg)):"—";}
 ["area","province","crop"].forEach(id=>{document.getElementById(id)?.addEventListener("input",updatePrice);});
 function submitWithValidation(form,names,onValid){if(!form)return;form.addEventListener("submit",e=>{e.preventDefault();let ok=true,first=null;for(const n of names){if(!validateField(n)){ok=false;if(!first)first=document.getElementById(n);}}if(!ok){first?.focus();toast("لطفاً خطاها را برطرف کنید.",true);return;}onValid();});}
 submitWithValidation($("#order-form"),["cust","phone","province","city","crop","area","date"],()=>{
@@ -631,7 +632,7 @@ const form=$("#order-form");
 const data=Object.fromEntries(new FormData(form));
 const seq=String(getOrders().length+1).padStart(4,"0");
 const code=`SP-1405-${seq}`;
-const order={id:uid(),code,name:data.cust.trim(),phone:toEn(data.phone),province:data.province,city:data.city.trim(),village:(data.village||"").trim(),crop:data.crop,area:+toEn(data.area),date:toEn(data.date||""),notes:(data.notes||"").trim(),amount:calcPrice({area:+toEn(data.area),province:data.province,crop:data.crop}),status:"pending",createdAt:Date.now()};
+const order={id:uid(),code,name:data.cust.trim(),phone:toEn(data.phone),province:data.province,city:data.city.trim(),village:(data.village||"").trim(),crop:data.crop,area:area:m2ToHa(+toEn(data.area)),date:toEn(data.date||""),notes:(data.notes||"").trim(),amount:calcPrice({area:+toEn(data.area),province:data.province,crop:data.crop}),status:"pending",createdAt:Date.now()};
 const orders=getOrders();orders.push(order);setOrders(orders);
 refreshHomeStats();form.reset();$("#area").value="10";updatePrice();
 updateNotifBadge();
