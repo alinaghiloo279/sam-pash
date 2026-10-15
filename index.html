@@ -703,6 +703,8 @@ function renderCustomerAuth(){const ph=getCustomerPhone();const prompt=$("#home-
 
 function renderHomeOrders(){const box=$("#home-orders");if(!box)return;const ph=getCustomerPhone();if(!ph){box.innerHTML='<div class="empty"><strong>شماره‌ای وارد نشده</strong>برای دیدن سفارش‌های خود، شمارهٔ موبایل را وارد کنید.</div>';return;}const mine=getOrders().filter(o=>o.phone===ph).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,5);if(!mine.length){box.innerHTML='<div class="empty"><strong>هنوز سفارشی ثبت نکرده‌اید</strong>از صفحهٔ «ثبت سفارش» اولین سفارش خود را ثبت کنید.</div>';return;}box.innerHTML=mine.map(x=>{const st=STATUS[x.status]||STATUS.pending;const partner=x.partnerId?getPartners().find(p=>p.id===x.partnerId):null;const pn=partner?` · 🛩️ ${esc(partner.name)}`:"";return `<div class="order-row"><div class="order-icon"><svg class="icon"><use href="#i-home"/></svg></div><div class="order-main"><strong>${esc(x.crop)} · ${toFa(x.area)} هکتار</strong><small>${esc(x.code)} · ${esc(x.date||"—")}${pn}</small></div><span class="status ${st.cls}">${st.label}</span></div>`;}).join("");}
 
+function renderSupport(){const cfg=getConfig();const btn=$("#support-phone-btn");const note=$("#support-note");if(note&&cfg.supportNote)note.textContent=cfg.supportNote;if(!btn)return;if(cfg.supportPhone){btn.href="tel:"+toEn(cfg.supportPhone);btn.textContent="📞 تماس با پشتیبانی: "+toFa(cfg.supportPhone);btn.target="_self";}else{btn.removeAttribute("href");btn.style.opacity=".6";btn.textContent="📞 شماره پشتیبانی تنظیم نشده";}}
+
 function refreshHomeStats(){const ph=getCustomerPhone();const o=getOrders().filter(x=>ph&&x.phone===ph);const pending=o.filter(x=>["pending","scheduled","assigned","in_progress"].includes(x.status)).length;const area=o.reduce((s,x)=>s+(+x.area||0),0);const next=o.filter(x=>x.date).map(x=>toEn(x.date)).sort()[0];$("#stat-orders-count").textContent=toFa(o.length);$("#stat-orders-pending").textContent=toFa(pending);$("#stat-area").innerHTML=toFa(area)+' <span class="unit">هکتار</span>';$("#stat-next").textContent=next?toFa(next):"—";renderHomeOrders();}
 
 function initDatePickers(){const y=document.getElementById("date-y"),m=document.getElementById("date-m"),d=document.getElementById("date-d");if(!y||!m||!d)return;const curY=1405;const years=[];for(let i=curY-1;i<=curY+2;i++)years.push(i);y.innerHTML=years.map(v=>`<option value="${v}" ${v===curY?"selected":""}>${toFa(v)}</option>`).join("");m.innerHTML='<option value="">ماه</option>'+[...Array(12)].map((_,i)=>`<option value="${i+1}">${toFa(i+1)}</option>`).join("");d.innerHTML='<option value="">روز</option>'+[...Array(31)].map((_,i)=>`<option value="${i+1}">${toFa(i+1)}</option>`).join("");function sync(){const yy=y.value,mm=m.value,dd=d.value;const inp=document.getElementById("date");inp.value=(yy&&mm&&dd)?`${yy}/${String(mm).padStart(2,"0")}/${String(dd).padStart(2,"0")}`:"";}y.addEventListener("change",sync);m.addEventListener("change",sync);d.addEventListener("change",sync);}
@@ -823,6 +825,7 @@ PartnerPanel.bindDroneAdd();
 renderCustomerAuth();
 refreshSelects();
 refreshCustomerPayment();
+renderSupport();
 refreshHomeStats();
 updatePrice();
 updateNotifBadge();
