@@ -341,7 +341,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="field-wrap span-2"><label for="notes">توضیحات و نشانی</label><textarea id="notes" name="notes" rows="3" placeholder="نام آفت، وضعیت مزرعه..."></textarea></div>
 </div>
 <div class="price-card"><div><small>برآورد هزینه سفارش</small><div class="rate">نرخ پایه: <b id="base-rate">—</b> تومان/هکتار</div></div><strong id="total-price">—</strong></div>
-<div class="notice">این نسخه پیش‌نمایش است و داده‌ها در مرورگر ذخیره می‌شوند.</div>
+<div class="notice">این نسخه پیش‌نمایش است و داده‌ها در سرور ذخیره می‌شوند.</div>
 <div class="actions"><button class="btn btn-green" type="submit">ثبت سفارش</button><button class="btn btn-light" type="button" data-go="home">بازگشت</button></div>
 </form>
 </div>
@@ -512,7 +512,12 @@ const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
 const rand=l=>Array.from(crypto.getRandomValues(new Uint8Array(l))).map(b=>b.toString(16).padStart(2,"0")).join("");
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const m2ToHa=m2=>{const n=+m2||0;return n<=0?0:Math.ceil(n/10000);};
-async function sha256(t){if(window.crypto?.subtle){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,"0")).join("");}let h=5381;for(let i=0;i<t.length;i++)h=((h<<5)+h)^t.charCodeAt(i);return "weak_"+(h>>>0).toString(16);}
+
+async function sha256(t){
+if(window.crypto?.subtle){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,"0")).join("");}
+let h=5381;for(let i=0;i<t.length;i++)h=((h<<5)+h)^t.charCodeAt(i);
+return "weak_"+(h>>>0).toString(16);
+}
 function isValidJalali(i){const m=toEn(i).trim().match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);if(!m)return false;const y=+m[1],mo=+m[2],d=+m[3];return y>=1300&&y<=1500&&mo>=1&&mo<=12&&d>=1&&d<=(mo>=7&&mo<=11?30:mo===12?29:31);}
 
 let toastTimer;
@@ -525,10 +530,15 @@ const LS={auth:"sph_auth",session:"sph_session",lockout:"sph_lockout",config:"sp
 const read=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v??d;}catch{return d;}};
 const write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 
-function defaultConfig(){return{baseRate:850000,provRates:{},cropRates:{},payment:{card:"6104 3374 3811 1567",iban:"IR09 0120 0200 0008 6808 6339 3",holder:"شرکت سم‌پاش هوشمند"},receiptMax:5,provinces:["تهران","اصفهان","فارس","خوزستان","خراسان رضوی","آذربایجان شرقی","آذربایجان غربی","گیلان","مازندران","کرمان","یزد","البرز","قم","مرکزی","گلستان","اردبیل","قزوین","همدان","کرمانشاه","هرمزگان","سیستان و بلوچستان","لرستان","کردستان","بوشهر","سمنان","زنجان","گلستان"],crops:["گندم","جو","آفتابگردان","سیب‌زمینی","ذرت","باغ میوه","یونجه","سایر"],siteTitle:"سم‌پاش هوشمند",supportPhone:"",supportNote:""};}
-function defaultMessages(){return[];}
+function defaultConfig(){
+return{baseRate:850000,provRates:{},cropRates:{},payment:{card:"6104 3374 3811 1567",iban:"IR09 0120 0200 0008 6808 6339 3",holder:"شرکت سم‌پاش هوشمند"},receiptMax:5,provinces:["تهران","اصفهان","فارس","خوزستان","خراسان رضوی","آذربایجان شرقی","آذربایجان غربی","گیلان","مازندران","کرمان","یزد","البرز","قم","مرکزی","گلستان","اردبیل","قزوین","همدان","کرمانشاه","هرمزگان","سیستان و بلوچستان","لرستان","کردستان","بوشهر","سمنان","زنجان"],crops:["گندم","جو","آفتابگردان","سیب‌زمینی","ذرت","باغ میوه","یونجه","سایر"],siteTitle:"سم‌پاش هوشمند",supportPhone:"",supportNote:""};
+}
+function defaultMessages(){return [];}
 
-async function seedIfNeeded(){const auth=read(LS.auth,null);if(!auth){const salt=rand(16);const hash=await sha256(salt+"Admin@1405");write(LS.auth,{user:"admin",salt,hash,mustChange:false});}}
+async function seedIfNeeded(){
+const auth=read(LS.auth,null);
+if(!auth){const salt=rand(16);const hash=await sha256(salt+"Admin@1405");write(LS.auth,{user:"admin",salt,hash,mustChange:false});}
+}
 
 const API="https://cold-grass-e1f3sam-pash-api.ali-naghiloo279.workers.dev";
 const cache={orders:[],messages:[],config:null};
@@ -603,6 +613,7 @@ return{getSession,setSession,touch,logout,login,changePassword};
 })();
 
 const TITLES={home:"خوش آمدید 👋",order:"ثبت سفارش جدید",track:"پیگیری سفارش",payment:"پرداخت و فاکتور",messages:"گفت‌وگو با مدیر",admin:"پنل مدیریت"};
+
 function showScreen(name){
 const t=document.getElementById("screen-"+name);if(!t)return;
 if(name==="admin"){const has=!!Auth.getSession();$("#admin-login-view").hidden=has;$("#admin-panel-view").hidden=!has;if(has){Admin.refreshAll();write(LS.seen,Date.now());updateNotifBadge();}}
@@ -612,6 +623,7 @@ $$(".nav button").forEach(b=>{const on=b.dataset.screen===name;if(on)b.setAttrib
 $("#page-title").textContent=TITLES[name]||"سم‌پاش هوشمند";
 window.scrollTo({top:0,behavior:"smooth"});
 }
+
 document.addEventListener("click",e=>{const go=e.target.closest("[data-go]");if(go){showScreen(go.dataset.go);return;}const scr=e.target.closest("[data-screen]");if(scr){showScreen(scr.dataset.screen);return;}const t=e.target.closest("[data-toast]");if(t)toast(t.dataset.toast);});
 
 function fillSelect(sel,items,ph){if(!sel)return;const cur=sel.value;sel.innerHTML="";if(ph){const o=document.createElement("option");o.value="";o.textContent=ph;sel.appendChild(o);}items.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;sel.appendChild(o);});if(items.includes(cur))sel.value=cur;}
@@ -961,7 +973,6 @@ let history=[{role:"user",content:SYSTEM_PROMPT}];
 let busy=false;
 const fab=$("#ai-fab"),panel=$("#ai-panel"),close=$("#ai-close"),body=$("#ai-body"),input=$("#ai-input"),send=$("#ai-send");
 function togglePanel(open){const should=open!==undefined?open:!panel.classList.contains("show");panel.classList.toggle("show",should);if(should){setTimeout(()=>input.focus(),100);}}
-function scrollBottom(){requestAnimationFrame(()=>{body.scrollTop=body.scrollHeight;});}
 function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function renderMarkdown(text){
 const parts=String(text).split(/```/);
@@ -987,29 +998,16 @@ wrap.className="ai-msg "+(role==="user"?"user":"bot");
 const b=document.createElement("div");b.className="ai-bubble";
 if(role==="user")b.innerHTML=`<p>${escapeHtml(text).replace(/\n/g,"<br>")}</p>`;
 else b.innerHTML=renderMarkdown(text);
-wrap.appendChild(b);body.appendChild(wrap);scrollBottom();
+wrap.appendChild(b);body.appendChild(wrap);
+requestAnimationFrame(()=>{body.scrollTop=body.scrollHeight;});
 }
 function addTyping(){
 const w=document.createElement("div");
 w.className="ai-msg bot";w.id="ai-typing";
 w.innerHTML='<div class="ai-typing"><span></span><span></span><span></span></div>';
-body.appendChild(w);scrollBottom();
+body.appendChild(w);
+requestAnimationFrame(()=>{body.scrollTop=body.scrollHeight;});
 return w;
-}
-body.addEventListener("click",e=>{
-const b=e.target.closest("[data-copy]");if(!b)return;
-const c=document.getElementById(b.dataset.copy);if(!c)return;
-const text=c.textContent;
-const done=()=>{b.textContent="کپی شد ✓";setTimeout(()=>b.textContent="کپی",1500);};
-if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(text).then(done).catch(()=>fallbackCopy(text,done));
-else fallbackCopy(text,done);
-});
-function fallbackCopy(text,done){
-const ta=document.createElement("textarea");
-ta.value=text;ta.style.position="fixed";ta.style.opacity="0";
-document.body.appendChild(ta);ta.select();
-try{document.execCommand("copy");done();}catch{}
-document.body.removeChild(ta);
 }
 async function submit(text){
 const msg=(text||input.value).trim();
