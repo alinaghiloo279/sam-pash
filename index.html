@@ -290,7 +290,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div><div class="crumb" id="today-label">امروز</div><h2 id="page-title">خوش آمدید 👋</h2></div>
 <div class="top-actions">
 <button class="icon-btn" data-go="track" aria-label="جستجو"><svg class="icon" width="18" height="18"><use href="#i-search"/></svg></button>
-<button class="icon-btn" data-toast="اعلان تازه‌ای وجود ندارد." aria-label="اعلان"><span class="dot"></span><svg class="icon" width="18" height="18"><use href="#i-bell"/></svg></button>
+<button class="icon-btn" id="notif-btn" aria-label="اعلان" style="position:relative"><span class="dot" id="notif-dot" hidden></span><span id="notif-badge" hidden style="position:absolute;top:-4px;inset-inline-end:-4px;background:#e0725b;color:#fff;font-size:10px;font-weight:800;border-radius:99px;min-width:18px;height:18px;display:grid;place-items:center;padding:0 5px;border:2px solid var(--sur)">۰</span><svg class="icon" width="18" height="18"><use href="#i-bell"/></svg></button>
 <div class="profile"><div class="avatar">ک</div><div class="profile-txt"><strong>کاربر کشاورز</strong><small>پنل مشتری</small></div></div>
 </div>
 </header>
@@ -367,6 +367,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <section class="screen" id="screen-payment">
 <div class="panel">
 <div class="panel-head"><div><h3>پرداخت و بارگذاری فیش</h3><p>اطلاعات بانکی و ارسال رسید.</p></div></div>
+<div id="pay-info"></div>
 <form id="payment-form" novalidate>
 <div class="form-grid">
 <div class="field-wrap span-2"><label for="cardno">شماره کارت</label><input id="cardno" class="ltr" readonly></div>
@@ -526,9 +527,11 @@ function defaultOrders(){const n=Date.now();return[{id:uid(),code:"SP-1405-0128"
 function defaultMessages(){return[{id:uid(),from:"customer",text:"سلام، برای سفارش SP-1405-0128 امکان تغییر زمان وجود دارد؟",createdAt:Date.now()-3600e3,read:false}];}
 async function seedIfNeeded(){if(localStorage.getItem(LS.seeded))return;const salt=rand(16);const hash=await sha256(salt+"Admin@1405");write(LS.auth,{user:"admin",salt,hash,mustChange:true});write(LS.config,defaultConfig());write(LS.orders,defaultOrders());write(LS.messages,defaultMessages());localStorage.setItem(LS.seeded,"1");}
 const API="https://cold-grass-e1f3sam-pash-api.ali-naghiloo279.workers.dev";
+let PAY_ORDER=null;
+function renderPayInfo(){const el=document.getElementById("pay-info");if(!el)return;const o=PAY_ORDER;if(!o){el.innerHTML='<div class="notice" style="margin-bottom:14px">برای پرداخت، از صفحهٔ «پیگیری سفارش» سفارش خود را جست‌وجو کنید یا «سفارش جدید» ثبت کنید.</div>';return;}el.innerHTML=`<div class="admin-card" style="margin-bottom:14px"><h4>💳 پرداخت سفارش ${esc(o.code)}</h4><div class="admin-grid"><div><small style="color:var(--i400)">مشتری</small><div><strong>${esc(o.name)}</strong></div></div><div><small style="color:var(--i400)">محصول</small><div><strong>${esc(o.crop)} · ${toFa(o.area)} هکتار</strong></div></div><div><small style="color:var(--i400)">مبلغ قابل پرداخت</small><div><strong style="color:var(--b700)">${fmtT(o.amount)}</strong></div></div></div></div>`;}
 const cache={orders:[],messages:[],config:null};
 async function loadAll(){try{const[o,ms,cf]=await Promise.all([fetch(API+"/api/orders").then(r=>r.json()),fetch(API+"/api/messages").then(r=>r.json()),fetch(API+"/api/config").then(r=>r.json())]);cache.orders=Array.isArray(o)?o:[];cache.messages=Array.isArray(ms)?ms:[];cache.config=(cf&&Object.keys(cf).length)?cf:null;}catch(e){console.error(e);}}
-const getConfig=()=>Object.assign(defaultConfig(),cache.config||{});
+function updateNotifBadge(){const seen=read("sph_admin_seen",0);const count=getOrders().filter(o=>o.createdAt>seen).length;const badge=document.getElementById("notif-badge");const dot=document.getElementById("notif-dot");if(!badge)return;if(count>0){badge.textContent=toFa(count);badge.hidden=false;if(dot)dot.hidden=false;}else{badge.hidden=true;if(dot)dot.hidden=true;}}
 const setConfig=c=>{cache.config=c;write(LS.config,c);fetch(API+"/api/config",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(c)}).catch(()=>{});};
 const getOrders=()=>cache.orders;
 const setOrders=o=>{cache.orders=o;write(LS.orders,o);(async()=>{try{const r=await fetch(API+"/api/orders").then(x=>x.json());for(const it of o){if(r.find(x=>x.id===it.id)){await fetch(API+"/api/orders/"+it.id,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(it)});}else{await fetch(API+"/api/orders",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(it)});}}for(const r2 of r){if(!o.find(x=>x.id===r2.id)){await fetch(API+"/api/orders/"+r2.id,{method:"DELETE"});}}}catch(e){}})();};
@@ -573,7 +576,7 @@ return{getSession,setSession,touch,logout,login,changePassword};
 const TITLES={home:"خوش آمدید 👋",order:"ثبت سفارش جدید",track:"پیگیری سفارش",payment:"پرداخت و فاکتور",messages:"گفت‌وگو با مدیر",admin:"پنل مدیریت"};
 function showScreen(name){
 const t=document.getElementById("screen-"+name);if(!t)return;
-if(name==="admin"){const has=!!Auth.getSession();$("#admin-login-view").hidden=has;$("#admin-panel-view").hidden=!has;if(has)Admin.refreshAll();}
+if(name==="admin"){const has=!!Auth.getSession();$("#admin-login-view").hidden=has;$("#admin-panel-view").hidden=!has;if(has){Admin.refreshAll();write("sph_admin_seen",Date.now());updateNotifBadge();}}
 $$(".screen").forEach(s=>s.classList.remove("active"));t.classList.add("active");
 $$(".nav button").forEach(b=>{const on=b.dataset.screen===name;if(on)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");});
 $("#page-title").textContent=TITLES[name]||"سم‌پاش هوشمند";
@@ -630,6 +633,7 @@ const code=`SP-1405-${seq}`;
 const order={id:uid(),code,name:data.cust.trim(),phone:toEn(data.phone),province:data.province,city:data.city.trim(),village:(data.village||"").trim(),crop:data.crop,area:+toEn(data.area),date:toEn(data.date||""),notes:(data.notes||"").trim(),amount:calcPrice({area:+toEn(data.area),province:data.province,crop:data.crop}),status:"pending",createdAt:Date.now()};
 const orders=getOrders();orders.push(order);setOrders(orders);
 refreshHomeStats();form.reset();$("#area").value="10";updatePrice();
+updateNotifBadge();
 toast(`سفارش ${code} ثبت شد.`);
 showScreen("track");
 });
@@ -986,6 +990,8 @@ Admin.init();
 refreshSelects();
 refreshCustomerPayment();
 refreshHomeStats();
+updateNotifBadge();
+document.getElementById("notif-btn")?.addEventListener("click",()=>{const seen=read("sph_admin_seen",0);const count=getOrders().filter(o=>o.createdAt>seen).length;if(count>0)toast(`🔔 ${toFa(count)} سفارش جدید`);else toast("اعلان تازه‌ای وجود ندارد.");});
 updatePrice();
 AIAssistant.init();
 })();
