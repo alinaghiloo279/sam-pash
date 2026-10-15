@@ -636,7 +636,7 @@ const orders=getOrders();orders.push(order);setOrders(orders);
 refreshHomeStats();form.reset();$("#area").value="10";updatePrice();
 updateNotifBadge();
 toast(`سفارش ${code} ثبت شد.`);
-showScreen("track");
+PAY_ORDER=order;showScreen("payment");
 });
 submitWithValidation($("#track-form"),["track-code","track-phone"],()=>{
 const code=toEn($("#track-code").value.trim()).toUpperCase();
