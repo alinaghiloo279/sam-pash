@@ -980,6 +980,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"&&panel.classList.con
 return{init};
 })();
 (async function(){
+await seedIfNeeded();
 await loadAll();
 Admin.init();
 refreshSelects();
