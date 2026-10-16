@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0f6f4e">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self' 'unsafe-inline'; connect-src 'self' https://cold-grass-e1f3sam-pash-api.ali-naghiloo279.workers.dev https://fonts.googleapis.com https://fonts.gstatic.com; object-src 'none'; base-uri 'self'">
 <meta name="description" content="سم‌پاش هوشمند — سم‌پاشی حرفه‌ای با پهپاد">
 <title>سم‌پاش هوشمند | سم‌پاشی حرفه‌ای با پهپاد</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -53,7 +52,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .menu-btn{width:40px;height:58px;border-radius:14px;border:1px solid var(--ln);background:var(--sur);display:grid;place-items:center;color:var(--i500);transition:all .15s}
 .menu-btn:hover{border-color:var(--b300);color:var(--b600)}
 .menu-panel{position:absolute;top:calc(100% + 8px);inset-inline-end:0;background:var(--sur);border:1px solid var(--ln);border-radius:14px;box-shadow:var(--sh5);min-width:210px;padding:6px;display:none;z-index:80}
-.menu-panel.show{display:block;animation:fadeIn .15s ease}
+.menu-panel.show{display:block}
 .menu-panel button{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border-radius:9px;text-align:right;font-size:13px;color:var(--i700);font-weight:600}
 .menu-panel button:hover{background:var(--inset)}
 .menu-panel button svg{width:16px;height:16px;color:var(--i500)}
@@ -80,11 +79,9 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .online-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(230,244,236,.92);color:var(--ok-fg);padding:6px 14px;border-radius:var(--r-f);font-size:12.5px;font-weight:700;border:1px solid rgba(15,111,78,.15);margin-bottom:14px;width:max-content}
 .online-dot{width:8px;height:8px;border-radius:50%;background:var(--ok-dot);box-shadow:0 0 0 4px rgba(34,160,107,.25);animation:onlinePulse 1.8s infinite}
 @keyframes onlinePulse{0%,100%{box-shadow:0 0 0 3px rgba(34,160,107,.25)}50%{box-shadow:0 0 0 6px rgba(34,160,107,.05)}}
-@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
 .trust-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 .trust-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:var(--r-f);padding:6px 13px;color:#e8f3eb;font-size:12px;font-weight:600}
 .trust-badge svg{width:14px;height:14px;color:#a7e2b7}
-/* نوار آمار افقی جدید */
 .trust-bar{display:flex;align-items:center;justify-content:space-around;background:linear-gradient(160deg,var(--sur),var(--inset));border:1px solid var(--b100);border-radius:var(--r-x);padding:18px 12px;margin:22px 0 0;box-shadow:var(--sh1)}
 .trust-bar .tb-item{display:flex;align-items:center;gap:11px;flex:1;justify-content:center;text-align:right}
 .trust-bar .tb-item .tb-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(145deg,var(--b100),var(--b200));color:var(--b700);display:grid;place-items:center;flex-shrink:0}
@@ -92,7 +89,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .trust-bar .tb-item strong{display:block;font-size:18px;font-weight:900;color:var(--b800);line-height:1.2}
 .trust-bar .tb-item small{display:block;font-size:11px;color:var(--i500);font-weight:600;margin-top:3px}
 .trust-bar .tb-divider{width:1px;height:38px;background:var(--ln);flex-shrink:0}
-/* بخش محتوا */
 .content-zone{margin:28px 0 20px;display:grid;gap:16px}
 .info-card{background:var(--sur);border:1px solid var(--ln);border-radius:var(--r-x);padding:22px;box-shadow:var(--sh1)}
 .info-card h3{margin:0 0 4px;font-size:16px;font-weight:800;color:var(--i900);display:flex;align-items:center;gap:9px}
@@ -230,7 +226,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .filter-bar input,.filter-bar select{border:1px solid var(--ln2);background:var(--sur);border-radius:10px;padding:10px 12px;min-width:150px;font-size:13px}
 .modal-back{position:fixed;inset:0;background:rgba(8,25,18,.5);display:none;align-items:center;justify-content:center;z-index:150;padding:16px}
-.modal-back.show{display:flex;animation:fadeIn .15s ease}
+.modal-back.show{display:flex}
 .modal{background:var(--sur);border-radius:var(--r-x);max-width:580px;width:100%;max-height:90vh;overflow:auto;padding:24px;box-shadow:var(--sh5)}
 .modal h3{margin:0 0 4px;font-size:16px;font-weight:800}
 .modal .m-sub{color:var(--i400);font-size:12.5px;margin:0 0 18px}
@@ -368,7 +364,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .sms-preview-box{background:linear-gradient(160deg,var(--b50),var(--inset));border:1px solid var(--b100);border-radius:var(--r-m);padding:14px;margin-top:12px}
 .sms-preview-box .sp-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:12px;color:var(--i500);font-weight:700}
 .sms-preview-box .sp-head svg{width:14px;height:14px;color:var(--b600)}
-.sms-preview-box .sp-body{background:var(--sur);border:1px solid var(--b100);border-radius:12px 12px 12px 4px;padding:12px 14px;font-size:13px;color:var(--i800);line-height:1.9;position:relative}
+.sms-preview-box .sp-body{background:var(--sur);border:1px solid var(--b100);border-radius:12px 12px 12px 4px;padding:12px 14px;font-size:13px;color:var(--i800);line-height:1.9}
 .sms-vars{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
 .sms-var{display:inline-flex;align-items:center;gap:4px;background:var(--purple-bg);color:var(--purple);border:1px solid #e9d5ff;border-radius:var(--r-f);padding:4px 10px;font-size:11.5px;font-weight:700;cursor:pointer;font-family:ui-monospace,Menlo,monospace;direction:ltr}
 .sms-char-counter{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:11.5px;color:var(--i400);gap:8px;flex-wrap:wrap}
@@ -448,7 +444,9 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 @media(max-width:1100px){.shell{grid-template-columns:220px minmax(0,1fr)}.main{padding:22px}.stats{grid-template-columns:repeat(2,1fr)}.content-grid{grid-template-columns:1fr}}
 @media(max-width:720px){.shell{display:block}.sidebar{position:sticky;top:0;z-index:10;height:auto;padding:11px 14px 0;border-inline-end:0;border-bottom:1px solid var(--ln);flex-direction:row;align-items:center;gap:12px;overflow-x:auto;background:var(--sur)}.brand{padding:0 0 10px;border:0;margin:0;flex-shrink:0}.brand-txt small{display:none}.brandmark{width:34px;height:34px}.nav-label{display:none}.nav{display:flex;gap:4px;padding-bottom:10px;flex-shrink:0}.nav button{padding:8px 11px;font-size:12px;gap:6px;flex-shrink:0}.nav button[aria-current="page"]::before{display:none}.side-bottom{display:none}.main{padding:16px 14px 40px}.topbar h2{font-size:19px}.profile{display:none}.icon-btn{width:50px;height:54px}.icon-btn .lbl{font-size:9px}.hero{grid-template-columns:1fr;min-height:0}.hero-copy{padding:22px 20px}.hero h3{font-size:21px}.hero-art{position:absolute;inset-inline-start:0;top:0;width:45%;height:100%;opacity:.3}.drone{width:150px;inset-inline-end:-6px}.trust-bar{padding:14px 8px}.trust-bar .tb-item{gap:8px}.trust-bar .tb-item .tb-icon{width:34px;height:34px}.trust-bar .tb-item strong{font-size:15px}.trust-bar .tb-item small{font-size:10px}.stats{gap:9px;grid-template-columns:repeat(2,1fr)}.stat{padding:12px}.stat-icon{width:36px;height:36px;flex-basis:36px}.stat strong{font-size:18px}.panel{padding:16px}.form-grid{grid-template-columns:1fr}.span-2{grid-column:span 1}.toast{inset-inline-start:12px;inset-inline-end:12px;bottom:12px}.fab-stack{bottom:16px;inset-inline-start:16px;gap:10px}.ai-panel{inset:auto 0 0 0;width:100%;height:min(78vh,640px);border-radius:var(--r-2) var(--r-2) 0 0;bottom:0}.receipt-body{grid-template-columns:1fr}.otp-inputs input{width:42px;height:50px;font-size:19px}.drone-add-form{grid-template-columns:1fr 1fr}.drone-add-form .btn{grid-column:span 2}.history-item{grid-template-columns:1fr}.history-item .row-actions{justify-content:flex-start}}
 </style>
-</head><body><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+</head><body>
+
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
 <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M12 21c-5-3-7-7-7-11 4 0 7 2 7 6 0-7 4-11 9-12 0 7-2 13-9 17Z"/><path d="M12 20v-7"/></symbol>
 <symbol id="i-dashboard" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="5" rx="2"/><rect x="13" y="10" width="8" height="11" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/></symbol>
 <symbol id="i-order" viewBox="0 0 24 24"><path d="M8 4H5a2 2 0 0 0-2 2v14h18V6a2 2 0 0 0-2-2h-3"/><rect x="8" y="2" width="8" height="5" rx="2"/><path d="M7 12h10M7 16h7"/></symbol>
@@ -485,7 +483,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
 <symbol id="i-verified" viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6Z"/><path d="m9 12 2 2 4-4"/></symbol>
 <symbol id="i-credit" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h5M9.5 14.5h5"/></symbol>
-<symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></symbol>
 <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
 <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></symbol>
 <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></symbol>
@@ -499,10 +496,173 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <symbol id="i-menu" viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.8" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.8" fill="currentColor" stroke="none"/><circle cx="12" cy="19" r="1.8" fill="currentColor" stroke="none"/></symbol>
 <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" fill="currentColor" stroke="none"/></symbol>
 <symbol id="i-droplet" viewBox="0 0 24 24"><path d="M12 2.7 5.6 9.3a9 9 0 1 0 12.8 0Z"/></symbol>
-<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
-<symbol id="i-wind" viewBox="0 0 24 24"><path d="M9.6 4.6A2 2 0 1 1 11 8H2M12.6 19.4A2 2 0 1 0 14 16H2M17.7 7.7A2.5 2.5 0 1 1 19.5 12H2"/></symbol>
-<symbol id="i-seed" viewBox="0 0 24 24"><path d="M12 22V12"/><path d="M12 12C12 7 8 3 3 3c0 5 4 9 9 9Z"/><path d="M12 12c0-5 4-9 9-9 0 5-4 9-9 9Z"/></symbol>
-  </svg><section class="screen" id="screen-order">
+<symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></symbol>
+                                                                                                                                            </svg>
+                                                                                                                                            <div class="shell">
+<aside class="sidebar">
+<div class="brand">
+<div class="brandmark"><svg class="icon"><use href="#i-leaf"/></svg></div>
+<div class="brand-txt"><h1>سم‌پاش هوشمند</h1><small>مدیریت هوشمند خدمات کشاورزی</small></div>
+</div>
+<p class="nav-label">منوی اصلی</p>
+<nav class="nav">
+<button data-screen="home" aria-current="page"><svg class="icon"><use href="#i-dashboard"/></svg>نمای کلی</button>
+<button data-screen="order"><svg class="icon"><use href="#i-order"/></svg>ثبت سفارش</button>
+<button data-screen="track"><svg class="icon"><use href="#i-track"/></svg>پیگیری سفارش</button>
+<button data-screen="history"><svg class="icon"><use href="#i-history"/></svg>تاریخچه سفارش‌ها</button>
+<button data-screen="profile"><svg class="icon"><use href="#i-users"/></svg>پروفایل من</button>
+<button data-screen="messages"><svg class="icon"><use href="#i-msg"/></svg>پیام به مدیر</button>
+</nav>
+<p class="nav-label">مدیریت</p>
+<nav class="nav">
+<button data-screen="admin"><svg class="icon"><use href="#i-shield"/></svg>پنل مدیریت</button>
+<button data-screen="partner"><svg class="icon"><use href="#i-partner"/></svg>پنل همکار</button>
+</nav>
+<div class="side-bottom">
+<div class="support">
+<strong>نیاز به راهنمایی دارید؟</strong>
+<p id="support-note">برای هماهنگی زمان سم‌پاشی با پشتیبانی در ارتباط باشید.</p>
+<a id="support-phone-btn" class="support-link" href="#">📞 تماس با پشتیبانی</a>
+</div>
+</div>
+</aside>
+
+<main class="main">
+<header class="topbar">
+<div><div class="crumb" id="today-label">امروز</div><h2 id="page-title">سلام! امروز چطور کمکت کنم؟ 👋</h2></div>
+<div class="top-actions">
+<button class="icon-btn" data-go="track" aria-label="پیگیری سفارش">
+<svg class="icon" width="18" height="18"><use href="#i-search"/></svg>
+<span class="lbl">پیگیری</span>
+</button>
+<button class="icon-btn" id="theme-btn" aria-label="حالت تاریک">
+<svg class="icon" width="18" height="18"><use href="#i-theme"/></svg>
+<span class="lbl">حالت</span>
+</button>
+<button class="icon-btn" id="notif-btn" aria-label="اعلان" style="position:relative">
+<span class="dot" id="notif-dot" hidden></span>
+<span id="notif-badge" hidden style="position:absolute;top:-4px;inset-inline-end:-4px;background:#e0725b;color:#fff;font-size:10px;font-weight:800;border-radius:99px;min-width:18px;height:18px;display:grid;place-items:center;padding:0 5px;border:2px solid var(--sur)">۰</span>
+<svg class="icon" width="18" height="18"><use href="#i-bell"/></svg>
+<span class="lbl">اعلان</span>
+</button>
+<div class="menu-dropdown">
+<button class="menu-btn" id="menu-btn" aria-label="منوی بیشتر">
+<svg class="icon" width="18" height="18"><use href="#i-menu"/></svg>
+</button>
+<div class="menu-panel" id="menu-panel">
+<button data-go="history"><svg class="icon"><use href="#i-history"/></svg> تاریخچه سفارش‌ها</button>
+<button data-go="profile"><svg class="icon"><use href="#i-users"/></svg> پروفایل من</button>
+<button data-go="messages"><svg class="icon"><use href="#i-msg"/></svg> پیام به مدیر</button>
+<button data-go="order"><svg class="icon"><use href="#i-plus"/></svg> سفارش جدید</button>
+<button data-go="partner"><svg class="icon"><use href="#i-partner"/></svg> پنل همکار</button>
+<button data-go="admin"><svg class="icon"><use href="#i-shield"/></svg> پنل مدیریت</button>
+<button id="menu-theme"><svg class="icon"><use href="#i-theme"/></svg> تغییر حالت نمایش</button>
+</div>
+</div>
+<div class="profile"><div class="avatar" id="user-avatar">ک</div><div class="profile-txt"><strong id="user-name">کاربر کشاورز</strong><small>پنل مشتری</small></div></div>
+</div>
+</header>
+
+<section class="screen active" id="screen-home">
+<div class="hero">
+<div class="hero-copy">
+<div class="online-badge"><span class="online-dot"></span>آنلاین هستیم — پاسخ‌گویی کمتر از ۱ ساعت</div>
+<div class="tag"><span class="tag-dot"></span> خدمات تخصصی سم‌پاشی مزارع با پهپاد</div>
+<h3>سلامت مزرعه‌ات،<br>از همین‌جا شروع می‌شود.</h3>
+<p>درخواست سم‌پاشی را ثبت کن، هزینه را شفاف ببین و همه مراحل سفارش را از یک پنل پیگیری کن.</p>
+<div class="hero-cta">
+<button class="btn-hero" data-go="order"><svg class="icon"><use href="#i-plus"/></svg> سم‌پاشی می‌خوام</button>
+<button class="btn-hero-ghost" data-go="track"><svg class="icon"><use href="#i-track"/></svg> سفارشم کجاست؟</button>
+</div>
+<div class="trust-badges">
+<div class="trust-badge"><svg class="icon"><use href="#i-shield"/></svg> تضمین کیفیت</div>
+<div class="trust-badge"><svg class="icon"><use href="#i-drone"/></svg> پهپادهای مدرن</div>
+<div class="trust-badge"><svg class="icon"><use href="#i-lock"/></svg> پرداخت امن</div>
+</div>
+</div>
+<div class="hero-art">
+<div class="sun"></div><div class="field"></div>
+<svg class="drone" viewBox="0 0 260 110" fill="none"><g stroke="#d7e6d8" stroke-width="5" stroke-linecap="round"><path d="M130 50 70 25M130 50 190 25M130 50 75 75M130 50 185 75"/><path d="M49 22h43M169 22h43M53 78h43M164 78h43" stroke-width="4"/></g><g fill="#eaf3e8" stroke="#aecdb8" stroke-width="2"><ellipse cx="70" cy="23" rx="29" ry="7"/><ellipse cx="190" cy="23" rx="29" ry="7"/><ellipse cx="75" cy="77" rx="25" ry="6"/><ellipse cx="185" cy="77" rx="25" ry="6"/><rect x="104" y="34" width="52" height="33" rx="13"/><rect x="113" y="59" width="34" height="24" rx="7" fill="#d5e7d6"/></g><path d="M120 83v10m20-10v10" stroke="#d7e6d8" stroke-width="3"/><path d="M120 94l-4 7m24-7 4 7" stroke="#b4d5bc" stroke-width="2"/><circle cx="130" cy="49" r="7" fill="#0f6f4e"/></svg>
+</div>
+</div>
+
+<div class="trust-bar">
+<div class="tb-item">
+<div class="tb-icon"><svg class="icon"><use href="#i-trend"/></svg></div>
+<div><strong id="trust-area">۲۴۷</strong><small>هکتار سمپاشی</small></div>
+</div>
+<div class="tb-divider"></div>
+<div class="tb-item">
+<div class="tb-icon"><svg class="icon"><use href="#i-users"/></svg></div>
+<div><strong id="trust-users">۴۷</strong><small>کشاورز راضی</small></div>
+</div>
+<div class="tb-divider"></div>
+<div class="tb-item">
+<div class="tb-icon"><svg class="icon"><use href="#i-star"/></svg></div>
+<div><strong id="trust-rating">۴.۸ / ۵</strong><small>میانگین امتیاز</small></div>
+</div>
+</div>
+
+<div class="stats" style="margin-top:24px">
+<div class="stat"><div class="stat-icon"><svg class="icon"><use href="#i-order"/></svg></div><div class="stat-body"><small>سفارش‌های من</small><strong id="stat-orders-count">۰</strong></div></div>
+<div class="stat" data-tone="amber"><div class="stat-icon"><svg class="icon"><use href="#i-clock"/></svg></div><div class="stat-body"><small>در انتظار انجام</small><strong id="stat-orders-pending">۰</strong></div></div>
+<div class="stat" data-tone="blue"><div class="stat-icon"><svg class="icon"><use href="#i-target"/></svg></div><div class="stat-body"><small>سطح زیر کشت</small><strong id="stat-area">۰ <span class="unit">هکتار</span></strong></div></div>
+<div class="stat" data-tone="teal"><div class="stat-icon"><svg class="icon"><use href="#i-cal"/></svg></div><div class="stat-body"><small>نوبت بعدی</small><strong id="stat-next">—</strong></div></div>
+</div>
+
+<div class="content-grid">
+<div class="panel">
+<div class="panel-head"><div><h3>آخرین سفارش‌های من</h3><p id="home-orders-sub">برای دیدن سفارش‌های خود وارد شوید</p></div><button class="text-btn" id="home-change-phone" hidden>تغییر شماره</button></div>
+<div id="home-phone-prompt" style="background:var(--inset);border:1px solid var(--ln);border-radius:var(--r-m);padding:14px;margin-bottom:14px">
+<div style="display:flex;gap:8px;flex-wrap:wrap"><input id="home-phone-input" class="ltr" inputmode="numeric" maxlength="11" placeholder="09123456789" style="flex:1;min-width:140px;border:1px solid var(--ln2);background:var(--sur);border-radius:10px;padding:11px 13px;font-size:13.5px"><button class="btn btn-green" id="home-phone-save"><svg class="icon"><use href="#i-sms"/></svg> ارسال کد تأیید</button></div>
+<div class="notice" style="margin-top:10px">شمارهٔ موبایلت رو وارد کن، یک کد ۶ رقمی برات پیامک می‌شه.</div>
+</div>
+<div id="home-orders"></div>
+</div>
+<div class="panel"><div class="panel-head"><div><h3>دسترسی سریع</h3><p>کارهای پرکاربرد</p></div></div><div class="quick-grid">
+<button class="quick" data-go="order"><span class="q-icon"><svg class="icon"><use href="#i-plus"/></svg></span><strong>سفارش جدید</strong><small>ثبت درخواست سم‌پاشی</small></button>
+<button class="quick" data-go="track"><span class="q-icon"><svg class="icon"><use href="#i-search"/></svg></span><strong>سفارشم کجاست؟</strong><small>پیگیری آخرین وضعیت</small></button>
+<button class="quick" data-go="history"><span class="q-icon"><svg class="icon"><use href="#i-history"/></svg></span><strong>تاریخچه</strong><small>همه سفارش‌ها</small></button>
+<button class="quick" data-go="profile"><span class="q-icon"><svg class="icon"><use href="#i-users"/></svg></span><strong>پروفایل</strong><small>اطلاعات من</small></button>
+</div></div>
+</div>
+
+<div class="content-zone">
+<div class="info-card">
+<h3><span class="ic"><svg class="icon"><use href="#i-drone"/></svg></span> چرا سم‌پاشی هوایی؟</h3>
+<p class="sub">مزایای سم‌پاشی با پهپاد نسبت به روش‌های سنتی</p>
+<div class="benefit-grid">
+<div class="benefit"><div class="b-ic"><svg class="icon"><use href="#i-zap"/></svg></div><div><strong>سرعت بالا</strong><small>۵ تا ۱۰ برابر سریع‌تر از روش دستی</small></div></div>
+<div class="benefit"><div class="b-ic amber"><svg class="icon"><use href="#i-target"/></svg></div><div><strong>دقت بالا</strong><small>پاشش یکنواخت روی کل سطح مزرعه</small></div></div>
+<div class="benefit"><div class="b-ic teal"><svg class="icon"><use href="#i-droplet"/></svg></div><div><strong>صرفه‌جویی در سم</strong><small>تا ۳۰٪ کاهش مصرف سموم</small></div></div>
+<div class="benefit"><div class="b-ic purple"><svg class="icon"><use href="#i-shield"/></svg></div><div><strong>امنیت کارگر</strong><small>بدون تماس انسان با مواد شیمیایی</small></div></div>
+</div>
+</div>
+
+<div class="info-card">
+<h3><span class="ic"><svg class="icon"><use href="#i-leaf"/></svg></span> نکات کاربردی کشاورزی</h3>
+<p class="sub">توصیه‌های روز برای مزرعه‌تان</p>
+<div class="tips-grid">
+<div class="tip"><strong>بهترین زمان سم‌پاشی</strong><p>صبح‌های زود یا عصرهای خنک. از سم‌پاشی در باد شدید یا گرمای ظهر خودداری کنید.</p></div>
+<div class="tip"><strong>بررسی آب و هوا</strong><p>قبل از سم‌پاشی، پیش‌بینی ۴۸ ساعت آینده رو چک کنید. بارش باران بعد از سم‌پاشی، اثرش رو از بین می‌بره.</p></div>
+<div class="tip"><strong>دور آبیاری</strong><p>۸ تا ۱۲ ساعت بعد از سم‌پاشی، آبیاری رو متوقف کنید تا سم به خوبی جذب بشه.</p></div>
+<div class="tip"><strong>چرخش سموم</strong><p>هر فصل از سموم مختلف استفاده کنید تا آفت‌ها مقاوم نشن.</p></div>
+<div class="tip"><strong>بازرسی منظم</strong><p>هفته‌ای یک‌بار مزرعه رو بازدید کنید و علائم آفت یا بیماری رو ثبت کنید.</p></div>
+<div class="tip"><strong>خاک سالم</strong><p>آزمایش خاک هر ۲ سال یکبار، بهترین راه برای افزایش بازدهیه.</p></div>
+</div>
+</div>
+</div>
+
+<div class="faq-section">
+<h3>سؤالات پرتکرار 🌾</h3>
+<p>پاسخ سؤالایی که همیشه پرسیده می‌شن</p>
+<details class="faq-item"><summary>هزینهٔ سم‌پاشی چطور محاسبه می‌شه؟</summary><div class="faq-body">هزینه بر اساس <strong>متر مربع</strong> محاسبه می‌شه. هر ۱۰٬۰۰۰ متر = ۱ هکتار. بعد از ورود اطلاعات مزرعه، هزینه دقیق محاسبه و نمایش داده می‌شه.</div></details>
+<details class="faq-item"><summary>چقدر طول می‌کشه تا بیاید مزرعه؟</summary><div class="faq-body">بین <strong>۲۴ تا ۷۲ ساعت</strong> تیم در مزرعه حاضر می‌شه.</div></details>
+<details class="faq-item"><summary>چطور از پیگیری سفارش باخبر بشم؟</summary><div class="faq-body">با هر تغییر وضعیت، <strong>پیامک اطلاع‌رسانی</strong> ارسال می‌شه.</div></details>
+</div>
+</section>
+
+<section class="screen" id="screen-order">
 <div class="panel">
 <div class="panel-head"><div><h3>ثبت سفارش سم‌پاشی</h3><p>اطلاعات مزرعه را وارد کنید.</p></div></div>
 <form id="order-form" novalidate>
@@ -1295,9 +1455,6 @@ function fillSelect(sel,items,ph){if(!sel)return;const cur=sel.value;sel.innerHT
 function refreshSelects(){const c=getConfig();fillSelect($("#province"),c.provinces,"انتخاب استان");fillSelect($("#crop"),c.crops,"انتخاب محصول");fillSelect($("#prof-province"),c.provinces,"انتخاب استان");}
 function refreshCustomerPayment(){const c=getConfig();const card=$("#cardno"),iban=$("#iban"),rate=$("#base-rate");if(card)card.value=c.payment.card||"";if(iban)iban.value=c.payment.iban||"";if(rate)rate.textContent=fmt(c.baseRate);}
 
-/* ============================================================
-   NOTIFICATIONS
-============================================================ */
 function updateNotifBadge(){const b=document.getElementById("notif-badge"),d=document.getElementById("notif-dot");if(!b)return;const c=Number(read("sph_new_count",0))||0;if(c>0){b.textContent=toFa(c);b.hidden=false;if(d)d.hidden=false;}else{b.hidden=true;if(d)d.hidden=true;}}
 
 /* ============================================================
@@ -1915,28 +2072,15 @@ return{init};
 })();
 
 /* ============================================================
-   MENU DROPDOWN (جدید)
+   MENU DROPDOWN
 ============================================================ */
 (function(){
 const btn=$("#menu-btn"),panel=$("#menu-panel");
 if(!btn||!panel)return;
-btn.addEventListener("click",e=>{
-e.stopPropagation();
-panel.classList.toggle("show");
-});
-document.addEventListener("click",e=>{
-if(!panel.contains(e.target)&&!btn.contains(e.target))panel.classList.remove("show");
-});
-panel.querySelectorAll("button[data-go]").forEach(b=>{
-b.addEventListener("click",()=>{
-panel.classList.remove("show");
-showScreen(b.dataset.go);
-});
-});
-$("#menu-theme")?.addEventListener("click",()=>{
-panel.classList.remove("show");
-toggleTheme();
-});
+btn.addEventListener("click",e=>{e.stopPropagation();panel.classList.toggle("show");});
+document.addEventListener("click",e=>{if(!panel.contains(e.target)&&!btn.contains(e.target))panel.classList.remove("show");});
+panel.querySelectorAll("button[data-go]").forEach(b=>{b.addEventListener("click",()=>{panel.classList.remove("show");showScreen(b.dataset.go);});});
+$("#menu-theme")?.addEventListener("click",()=>{panel.classList.remove("show");toggleTheme();});
 })();
 
 /* ============================================================
@@ -1987,3 +2131,5 @@ $("#notif-btn")?.addEventListener("click",()=>{const c=Number(read("sph_new_coun
 AIAssistant.init();
 })();
 </script>
+</body>
+</html>
