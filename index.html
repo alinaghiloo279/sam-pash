@@ -1293,6 +1293,7 @@ const setReviews=r=>write(LS.reviews,r);
 const getPhotos=()=>read(LS.photos,{});
 const setPhotos=p=>write(LS.photos,p);
 const getAudit=()=>read(LS.audit,[]);
+const getMessages=()=>cache.messages||[];
 const pushAudit=(action,detail="",icon="edit")=>{const l=getAudit();l.unshift({id:uid(),action,detail,icon,user:cache.me?.user||"مهمان",at:Date.now()});if(l.length>1000)l.length=1000;write(LS.audit,l);};
 
 const getCustomerPhone=()=>read(LS.cust_phone,"");
