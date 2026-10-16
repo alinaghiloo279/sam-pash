@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--b50:#eef7f2;--b100:#d6ecdf;--b200:#aad9bf;--b300:#7bc19e;--b400:#4ba87e;--b500:#1f8a63;--b600:#0f6f4e;--b700:#0a5a3f;--b800:#084733;--a400:#e8bd6b;--a500:#d9a94e;--i900:#0b1f17;--i800:#16261e;--i700:#24352d;--i600:#3a4a42;--i500:#4a5a52;--i400:#5a6560;--i300:#96a39b;--i200:#c8d0ca;--i100:#e8ece9;--i50:#f5f7f5;--ok-bg:#e6f4ec;--ok-fg:#0f6f4e;--ok-dot:#22a06b;--warn-bg:#fdf3dc;--warn-fg:#8a6110;--dng-bg:#fdecea;--dng-fg:#a02a1e;--dng:#b4372a;--inf-bg:#e8efff;--inf-fg:#3558a3;--bg:#f4f6f4;--sur:#fff;--inset:#f7f9f7;--ln:#e5ebe6;--ln2:#d4ddd6;--r-m:12px;--r-l:16px;--r-x:20px;--r-2:26px;--r-f:999px;--sh1:0 1px 2px rgba(11,31,23,.04);--sh3:0 4px 12px rgba(11,31,23,.06);--sh5:0 24px 56px rgba(11,31,23,.14);--focus:0 0 0 3px rgba(31,138,99,.18);--brand:0 8px 24px rgba(15,111,78,.22);--e:cubic-bezier(.32,.72,0,1)}
+:root{--b50:#eef7f2;--b100:#d6ecdf;--b200:#aad9bf;--b300:#7bc19e;--b400:#4ba87e;--b500:#1f8a63;--b600:#0f6f4e;--b700:#0a5a3f;--b800:#084733;--a400:#e8bd6b;--a500:#d9a94e;--i900:#0b1f17;--i800:#16261e;--i700:#24352d;--i600:#3a4a42;--i500:#4a5a52;--i400:#5a6560;--i300:#96a39b;--i200:#c8d0ca;--i100:#e8ece9;--i50:#f5f7f5;--ok-bg:#e6f4ec;--ok-fg:#0f6f4e;--ok-dot:#22a06b;--warn-bg:#fdf3dc;--warn-fg:#8a6110;--dng-bg:#fdecea;--dng-fg:#a02a1e;--dng:#b4372a;--inf-bg:#e8efff;--inf-fg:#3558a3;--purple:#6d28d9;--purple-bg:#f3e9fa;--bg:#f4f6f4;--sur:#fff;--inset:#f7f9f7;--ln:#e5ebe6;--ln2:#d4ddd6;--r-m:12px;--r-l:16px;--r-x:20px;--r-2:26px;--r-f:999px;--sh1:0 1px 2px rgba(11,31,23,.04);--sh3:0 4px 12px rgba(11,31,23,.06);--sh5:0 24px 56px rgba(11,31,23,.14);--focus:0 0 0 3px rgba(31,138,99,.18);--brand:0 8px 24px rgba(15,111,78,.22);--e:cubic-bezier(.32,.72,0,1)}
 *{box-sizing:border-box}html,body{margin:0;padding:0}
 body{background:var(--bg);color:var(--i800);font-family:Vazirmatn,Tahoma,sans-serif;font-size:14.5px;line-height:1.75;-webkit-font-smoothing:antialiased}
 button,input,select,textarea{font:inherit;color:inherit}button{cursor:pointer;background:none;border:0;padding:0}
@@ -73,7 +73,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .hero-price{display:inline-flex;align-items:center;gap:8px;background:rgba(232,189,107,.12);border:1px solid rgba(232,189,107,.28);border-radius:12px;padding:11px 16px;margin-top:14px;color:#f0d8a8;font-size:13px;width:max-content}
 .hero-price strong{color:#fbe0a8;font-size:17px;font-weight:800}
 .trust-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:22px 0 0}
-.trust-stat{background:linear-gradient(160deg,#ffffff,#f5faf6);border:1px solid var(--b100);border-radius:var(--r-l);padding:20px 16px;text-align:center;box-shadow:var(--sh1);transition:transform .2s}
+.trust-stat{background:linear-gradient(160deg,#ffffff,#f5faf6);border:1px solid var(--b100);border-radius:var(--r-l);padding:20px 16px;text-align:center;box-shadow:var(--sh1)}
 .trust-stat-icon{width:50px;height:50px;border-radius:14px;background:linear-gradient(145deg,var(--b100),var(--b200));color:var(--b700);display:grid;place-items:center;margin:0 auto 12px}
 .trust-stat-icon svg{width:24px;height:24px}
 .trust-stat strong{display:block;font-size:24px;font-weight:900;color:var(--b800);letter-spacing:-.5px}
@@ -84,10 +84,12 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .stat[data-tone="amber"]::after{background:var(--a500)}
 .stat[data-tone="blue"]::after{background:#5b8dc9}
 .stat[data-tone="teal"]::after{background:#2a9b8f}
+.stat[data-tone="purple"]::after{background:var(--purple)}
 .stat-icon{width:42px;height:42px;flex:0 0 42px;border-radius:12px;background:linear-gradient(145deg,var(--b50),var(--b100));color:var(--b600);display:grid;place-items:center;border:1px solid rgba(31,138,99,.09)}
 .stat[data-tone="amber"] .stat-icon{background:linear-gradient(145deg,#fdf3dc,#f8e6bb);color:#b8892f}
 .stat[data-tone="blue"] .stat-icon{background:linear-gradient(145deg,#eaf0fa,#dae6f6);color:#3a649e}
 .stat[data-tone="teal"] .stat-icon{background:linear-gradient(145deg,#e4f4f1,#cde9e3);color:#1f7f76}
+.stat[data-tone="purple"] .stat-icon{background:linear-gradient(145deg,#f3e9fa,#e9d5ff);color:var(--purple)}
 .stat-icon svg{width:20px;height:20px}
 .stat-body{min-width:0;flex:1}
 .stat small{display:block;color:var(--i400);font-size:12.5px;margin-bottom:4px;font-weight:600}
@@ -110,7 +112,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .status.green{background:var(--ok-bg);color:var(--ok-fg);border-color:rgba(15,111,78,.1)}
 .status.blue{background:var(--inf-bg);color:var(--inf-fg);border-color:rgba(53,88,163,.1)}
 .status.red{background:var(--dng-bg);color:var(--dng-fg)}
-.status.purple{background:#f3e9fa;color:#6d28a8;border-color:rgba(109,40,168,.1)}
+.status.purple{background:var(--purple-bg);color:var(--purple);border-color:rgba(109,40,168,.1)}
 .status.amber{background:var(--warn-bg);color:var(--warn-fg)}
 .quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .quick{border:1px solid var(--ln);background:var(--sur);border-radius:var(--r-m);padding:14px;text-align:right}
@@ -145,6 +147,9 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .btn-sm{padding:8px 13px;font-size:12px;border-radius:9px}
 .btn-sm svg{width:13px;height:13px}
 .notice{padding:12px 14px;background:var(--warn-bg);border:1px solid rgba(138,97,16,.14);color:var(--warn-fg);border-radius:var(--r-m);font-size:12.5px;line-height:1.9;margin-top:15px}
+.notice.ok{background:var(--ok-bg);border-color:rgba(15,111,78,.15);color:var(--ok-fg)}
+.notice.err{background:var(--dng-bg);border-color:rgba(160,42,30,.15);color:var(--dng-fg)}
+.notice.info{background:var(--inf-bg);border-color:rgba(53,88,163,.15);color:var(--inf-fg)}
 .table-scroll{overflow-x:auto;border-radius:var(--r-m);border:1px solid var(--ln)}
 .mini-table{width:100%;border-collapse:collapse;font-size:12.5px}
 .mini-table th,.mini-table td{text-align:right;border-bottom:1px solid var(--ln);padding:12px;vertical-align:middle}
@@ -160,9 +165,10 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .bubble.reply{background:var(--inset);color:var(--i700);border:1px solid var(--ln);margin:0 auto 10px 0;border-radius:14px 14px 14px 4px}
 .chat-compose{display:flex;gap:8px;padding:12px;border-top:1px solid var(--ln)}
 .chat-compose input{flex:1;min-width:0;border:1px solid var(--ln2);border-radius:10px;padding:11px 12px}
-.toast{position:fixed;bottom:22px;inset-inline-end:22px;background:linear-gradient(180deg,#123527,#0a271b);color:#fff;padding:14px 20px;border-radius:12px;box-shadow:var(--sh5);font-size:13px;font-weight:600;display:none;z-index:100;max-width:min(92vw,420px)}
+.toast{position:fixed;bottom:22px;inset-inline-end:22px;background:linear-gradient(180deg,#123527,#0a271b);color:#fff;padding:14px 20px;border-radius:12px;box-shadow:var(--sh5);font-size:13px;font-weight:600;display:none;z-index:200;max-width:min(92vw,420px)}
 .toast.show{display:block}
 .toast.err{background:#7a2418}
+.toast.ok{background:linear-gradient(180deg,#1a5a3c,#0f3f28)}
 .auth-wrap{max-width:440px;margin:30px auto}
 .auth-panel{padding:30px 28px}
 .auth-head{text-align:center;margin-bottom:22px}
@@ -188,7 +194,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .admin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
 .filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .filter-bar input,.filter-bar select{border:1px solid var(--ln2);background:var(--sur);border-radius:10px;padding:10px 12px;min-width:150px;font-size:13px}
-.modal-back{position:fixed;inset:0;background:rgba(8,25,18,.42);display:none;align-items:center;justify-content:center;z-index:80;padding:16px}
+.modal-back{position:fixed;inset:0;background:rgba(8,25,18,.42);display:none;align-items:center;justify-content:center;z-index:150;padding:16px}
 .modal-back.show{display:flex}
 .modal{background:var(--sur);border-radius:var(--r-x);max-width:580px;width:100%;max-height:90vh;overflow:auto;padding:24px;box-shadow:var(--sh5)}
 .modal h3{margin:0 0 4px;font-size:16px;font-weight:800}
@@ -197,7 +203,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .row-actions{display:flex;gap:5px;justify-content:flex-end;flex-wrap:wrap}
 .icon-mini{width:32px;height:32px;border-radius:9px;border:1px solid var(--ln);background:var(--sur);display:grid;place-items:center;color:var(--i500)}
 .icon-mini svg{width:15px;height:15px}
-.icon-mini.purple{color:#6d28d9;border-color:#e9d5ff}
+.icon-mini.purple{color:var(--purple);border-color:#e9d5ff}
 .icon-mini.ok{color:var(--ok-fg);border-color:rgba(15,111,78,.25)}
 .icon-mini.danger{color:var(--dng);border-color:rgba(160,42,30,.2)}
 .chip-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;min-height:32px;padding:8px;background:var(--inset);border-radius:var(--r-m);border:1px solid var(--ln)}
@@ -210,11 +216,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .empty strong{display:block;color:var(--i600);font-weight:700;margin-bottom:6px;font-size:14px}
 .empty .empty-emoji{font-size:38px;display:block;margin-bottom:10px}
 .empty .empty-cta{margin-top:14px;display:inline-flex}
-.pw-strength{height:5px;border-radius:var(--r-f);background:var(--i100);overflow:hidden;margin-top:6px}
-.pw-strength>span{display:block;height:100%;width:0;border-radius:inherit;transition:.2s}
-.pw-strength.weak>span{width:33%;background:#d68a80}
-.pw-strength.mid>span{width:66%;background:var(--a500)}
-.pw-strength.strong>span{width:100%;background:var(--ok-dot)}
 .partner-card{background:var(--sur);border:1px solid var(--ln);border-radius:var(--r-l);padding:16px;margin-bottom:12px;box-shadow:var(--sh1);display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center}
 .partner-card.inactive{opacity:.6}
 .partner-card.pending{border-color:#f1e2bd;background:linear-gradient(160deg,#fff8e8,#fdfbf5)}
@@ -233,10 +234,10 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .drone-item .d-info{flex:1;min-width:0}
 .drone-item .d-info strong{font-size:13px;font-weight:700;display:block;color:var(--i800)}
 .drone-item .d-info small{color:var(--i500);font-size:11.5px;display:flex;gap:8px;flex-wrap:wrap;margin-top:2px}
-.drone-item .d-info small b{color:#6d28d9;font-weight:700}
+.drone-item .d-info small b{color:var(--purple);font-weight:700}
 .drone-item button{border:0;background:transparent;color:#a02a1e;padding:6px;border-radius:6px;display:grid;place-items:center}
 .drone-item button svg{width:14px;height:14px}
-.slot-badge{display:inline-block;font-size:11.5px;background:#f3e9fa;color:#6d28a8;border-radius:6px;padding:3px 8px;margin-top:4px}
+.slot-badge{display:inline-block;font-size:11.5px;background:var(--purple-bg);color:var(--purple);border-radius:6px;padding:3px 8px;margin-top:4px}
 .faq-section{margin:26px 0 20px}
 .faq-section > h3{font-size:19px;font-weight:800;color:var(--i900);margin:0 0 6px}
 .faq-section > p{color:var(--i400);font-size:13px;margin:0 0 16px}
@@ -311,8 +312,66 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .receipt-body{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .receipt-body div small{display:block;font-size:11.5px;color:var(--i400);margin-bottom:3px;font-weight:600}
 .receipt-body div strong{font-size:14px;font-weight:800;color:var(--i800)}
+
+/* ==================== NEW: OTP + SMS ==================== */
+.otp-box{background:linear-gradient(160deg,#ffffff,#f5faf6);border:1px solid var(--b100);border-radius:var(--r-l);padding:18px;margin-top:12px}
+.otp-box-head{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.otp-box-head .o-icon{width:38px;height:38px;border-radius:11px;background:linear-gradient(145deg,var(--b100),var(--b200));color:var(--b700);display:grid;place-items:center;flex-shrink:0}
+.otp-box-head .o-icon svg{width:19px;height:19px}
+.otp-box-head strong{display:block;font-size:13.5px;font-weight:800;color:var(--b800)}
+.otp-box-head small{display:block;font-size:11.5px;color:var(--i500);margin-top:2px}
+.otp-inputs{display:flex;gap:8px;direction:ltr;justify-content:center;margin:16px 0 10px}
+.otp-inputs input{width:48px;height:56px;text-align:center;font-size:22px;font-weight:800;border:2px solid var(--ln2);border-radius:12px;background:var(--sur);color:var(--i900);padding:0;font-family:ui-monospace,Menlo,monospace;transition:border-color .15s,background .15s,transform .1s}
+.otp-inputs input:focus{border-color:var(--b500);box-shadow:var(--focus);outline:none;transform:translateY(-2px)}
+.otp-inputs input.filled{border-color:var(--b400);background:var(--b50)}
+.otp-inputs input.err{border-color:var(--dng);background:var(--dng-bg);animation:shake .35s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.otp-timer{text-align:center;font-size:12.5px;color:var(--i500);margin-top:6px}
+.otp-timer b{color:var(--b700);font-weight:800;font-variant-numeric:tabular-nums}
+.otp-timer.expired b{color:var(--dng)}
+.otp-resend{margin-top:10px;text-align:center}
+.otp-resend button{color:var(--b600);font-weight:700;font-size:12.5px;padding:6px 12px;border-radius:8px}
+.otp-resend button:disabled{color:var(--i300);cursor:not-allowed}
+.otp-badge{display:inline-flex;align-items:center;gap:5px;background:var(--inf-bg);color:var(--inf-fg);padding:4px 10px;border-radius:99px;font-size:11px;font-weight:700}
+.verified-badge{display:inline-flex;align-items:center;gap:5px;background:var(--ok-bg);color:var(--ok-fg);padding:4px 10px;border-radius:99px;font-size:11px;font-weight:700}
+.verified-badge::before{content:"✓";font-weight:900}
+.sms-preview-box{background:linear-gradient(160deg,#eef7f2,#f8fbf9);border:1px solid var(--b100);border-radius:var(--r-m);padding:14px;margin-top:12px}
+.sms-preview-box .sp-head{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:12px;color:var(--i500);font-weight:700}
+.sms-preview-box .sp-head svg{width:14px;height:14px;color:var(--b600)}
+.sms-preview-box .sp-body{background:#fff;border:1px solid var(--b100);border-radius:12px 12px 12px 4px;padding:12px 14px;font-size:13px;color:var(--i800);line-height:1.9;position:relative}
+.sms-preview-box .sp-body::before{content:"پیامک";position:absolute;top:-9px;inset-inline-start:14px;background:var(--b600);color:#fff;font-size:9px;font-weight:800;padding:2px 7px;border-radius:99px;letter-spacing:.4px}
+.sms-template-card{background:var(--sur);border:1px solid var(--ln);border-radius:var(--r-l);padding:16px;margin-bottom:12px}
+.sms-template-card h5{margin:0 0 6px;font-size:13.5px;font-weight:800;color:var(--i800);display:flex;align-items:center;gap:8px}
+.sms-template-card h5 .t-icon{width:26px;height:26px;border-radius:8px;background:var(--b50);color:var(--b700);display:grid;place-items:center;flex-shrink:0}
+.sms-template-card h5 .t-icon svg{width:14px;height:14px}
+.sms-template-card p.t-desc{font-size:11.5px;color:var(--i400);margin:0 0 10px}
+.sms-template-card textarea{width:100%;border:1px solid var(--ln2);border-radius:10px;padding:10px 12px;font-size:12.5px;font-family:inherit;resize:vertical;min-height:80px;line-height:1.85;color:var(--i700)}
+.sms-template-card textarea:focus{border-color:var(--b400);box-shadow:var(--focus);outline:none}
+.sms-template-card .t-tokens{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.sms-template-card .t-tokens span{background:var(--inset);border:1px solid var(--ln);color:var(--i600);font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:6px;font-family:ui-monospace,Menlo,monospace;direction:ltr;cursor:pointer}
+.sms-template-card .t-tokens span:hover{background:var(--b50);color:var(--b700);border-color:var(--b200)}
+.sms-template-card .t-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+.sms-template-card .t-count{font-size:11px;color:var(--i400);font-variant-numeric:tabular-nums}
+.sms-template-card .t-count b{color:var(--b700);font-weight:800}
+.sms-log-item{padding:12px 4px;border-bottom:1px solid var(--ln);display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start}
+.sms-log-item:last-child{border-bottom:0}
+.sms-log-item .sl-icon{width:36px;height:36px;border-radius:10px;background:linear-gradient(145deg,var(--b50),var(--b100));color:var(--b600);display:grid;place-items:center;flex-shrink:0}
+.sms-log-item .sl-icon svg{width:17px;height:17px}
+.sms-log-item .sl-main strong{font-size:13px;font-weight:700;display:block;direction:ltr;text-align:right}
+.sms-log-item .sl-main small{display:block;font-size:11.5px;color:var(--i500);margin-top:3px;line-height:1.7}
+.sms-log-item .sl-main .sl-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:5px}
+.sms-status{font-size:10.5px;padding:3px 9px;border-radius:99px;font-weight:800;white-space:nowrap}
+.sms-status.sent{background:var(--ok-bg);color:var(--ok-fg)}
+.sms-status.failed{background:var(--dng-bg);color:var(--dng-fg)}
+.sms-status.pending{background:var(--warn-bg);color:var(--warn-fg)}
+.sms-status.sim{background:var(--inf-bg);color:var(--inf-fg)}
+.sms-charge-bar{height:6px;border-radius:99px;background:var(--i100);overflow:hidden;margin-top:8px}
+.sms-charge-bar>span{display:block;height:100%;background:linear-gradient(90deg,var(--b500),var(--a400));border-radius:inherit;transition:width .3s}
+.credit-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(160deg,var(--b50),#f4faf6);border:1px solid var(--b100);color:var(--b700);padding:6px 12px;border-radius:99px;font-size:12px;font-weight:700}
+.credit-badge b{color:var(--b800);font-weight:800;font-variant-numeric:tabular-nums}
+
 @media(max-width:1100px){.shell{grid-template-columns:220px minmax(0,1fr)}.main{padding:22px}.stats{grid-template-columns:repeat(2,1fr)}.content-grid{grid-template-columns:1fr}.trust-stats{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:720px){.shell{display:block}.sidebar{position:sticky;top:0;z-index:10;height:auto;padding:11px 14px 0;border-inline-end:0;border-bottom:1px solid var(--ln);flex-direction:row;align-items:center;gap:12px;overflow-x:auto;background:rgba(255,255,255,.94)}.brand{padding:0 0 10px;border:0;margin:0;flex-shrink:0}.brand-txt small{display:none}.brandmark{width:34px;height:34px}.brandmark svg{width:18px;height:18px}.brand-txt h1{font-size:13px}.nav-label{display:none}.nav{display:flex;gap:4px;padding-bottom:10px;flex-shrink:0}.nav button{padding:8px 11px;font-size:12px;gap:6px;flex-shrink:0}.nav button svg{width:15px;height:15px}.nav button[aria-current="page"]::before{display:none}.side-bottom{display:none}.main{padding:16px 14px 40px}.topbar h2{font-size:19px}.profile{display:none}.hero{grid-template-columns:1fr;min-height:0}.hero-copy{padding:22px 20px}.hero h3{font-size:21px;line-height:1.6}.hero p{font-size:13px}.hero-art{position:absolute;inset-inline-start:0;top:0;width:45%;height:100%;opacity:.3}.drone{width:150px;inset-inline-end:-6px}.trust-stats{grid-template-columns:1fr;gap:8px}.trust-stat{padding:14px}.trust-stat strong{font-size:20px}.stats{gap:9px}.stat{padding:12px}.stat-icon{width:36px;height:36px;flex-basis:36px}.stat strong{font-size:18px}.panel{padding:16px}.form-grid{grid-template-columns:1fr}.span-2{grid-column:span 1}.toast{inset-inline-start:12px;inset-inline-end:12px;bottom:12px}.fab-stack{bottom:16px;inset-inline-start:16px;gap:10px}.fab{width:50px;height:50px}.fab svg{width:22px;height:22px}.fab-phone,.fab-wa{width:44px;height:44px}.fab-phone svg,.fab-wa svg{width:20px;height:20px}.ai-panel{inset:auto 0 0 0;width:100%;height:min(78vh,640px);border-radius:var(--r-2) var(--r-2) 0 0;bottom:0}.partner-card{grid-template-columns:auto 1fr}.partner-card .row-actions{grid-column:1/-1;justify-content:flex-start}.drone-add-form{grid-template-columns:1fr 1fr}.drone-add-form .btn{grid-column:span 2}.receipt-body{grid-template-columns:1fr}.faq-item .faq-body{padding-inline-start:16px}}
+@media(max-width:720px){.shell{display:block}.sidebar{position:sticky;top:0;z-index:10;height:auto;padding:11px 14px 0;border-inline-end:0;border-bottom:1px solid var(--ln);flex-direction:row;align-items:center;gap:12px;overflow-x:auto;background:rgba(255,255,255,.94)}.brand{padding:0 0 10px;border:0;margin:0;flex-shrink:0}.brand-txt small{display:none}.brandmark{width:34px;height:34px}.brandmark svg{width:18px;height:18px}.brand-txt h1{font-size:13px}.nav-label{display:none}.nav{display:flex;gap:4px;padding-bottom:10px;flex-shrink:0}.nav button{padding:8px 11px;font-size:12px;gap:6px;flex-shrink:0}.nav button svg{width:15px;height:15px}.nav button[aria-current="page"]::before{display:none}.side-bottom{display:none}.main{padding:16px 14px 40px}.topbar h2{font-size:19px}.profile{display:none}.hero{grid-template-columns:1fr;min-height:0}.hero-copy{padding:22px 20px}.hero h3{font-size:21px;line-height:1.6}.hero p{font-size:13px}.hero-art{position:absolute;inset-inline-start:0;top:0;width:45%;height:100%;opacity:.3}.drone{width:150px;inset-inline-end:-6px}.trust-stats{grid-template-columns:1fr;gap:8px}.trust-stat{padding:14px}.trust-stat strong{font-size:20px}.stats{gap:9px}.stat{padding:12px}.stat-icon{width:36px;height:36px;flex-basis:36px}.stat strong{font-size:18px}.panel{padding:16px}.form-grid{grid-template-columns:1fr}.span-2{grid-column:span 1}.toast{inset-inline-start:12px;inset-inline-end:12px;bottom:12px}.fab-stack{bottom:16px;inset-inline-start:16px;gap:10px}.fab{width:50px;height:50px}.fab svg{width:22px;height:22px}.fab-phone,.fab-wa{width:44px;height:44px}.fab-phone svg,.fab-wa svg{width:20px;height:20px}.ai-panel{inset:auto 0 0 0;width:100%;height:min(78vh,640px);border-radius:var(--r-2) var(--r-2) 0 0;bottom:0}.partner-card{grid-template-columns:auto 1fr}.partner-card .row-actions{grid-column:1/-1;justify-content:flex-start}.drone-add-form{grid-template-columns:1fr 1fr}.drone-add-form .btn{grid-column:span 2}.receipt-body{grid-template-columns:1fr}.faq-item .faq-body{padding-inline-start:16px}.otp-inputs input{width:42px;height:50px;font-size:19px}.sms-log-item{grid-template-columns:auto 1fr}.sms-log-item .sl-status{grid-column:2}}
 </style>
 </head><body>
 
@@ -349,9 +408,15 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></symbol>
 <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></symbol>
 <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></symbol>
-</svg>
-
-<div class="shell">
+<!-- NEW SMS/OTP ICONS -->
+<symbol id="i-sms" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/><path d="M8 9h8M8 13h5"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+<symbol id="i-verified" viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6Z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M6 2h12M6 22h12M6 2v4a6 6 0 0 0 6 6 6 6 0 0 1 6 6v4"/><path d="M18 2v4a6 6 0 0 1-6 6 6 6 0 0 0-6 6v4"/></symbol>
+<symbol id="i-credit" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h5M9.5 14.5h5"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+</svg><div class="shell">
 <aside class="sidebar">
 <div class="brand">
 <div class="brandmark"><svg class="icon"><use href="#i-leaf"/></svg></div>
@@ -388,10 +453,11 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </header>
 
+<!-- ==================== HOME ==================== -->
 <section class="screen active" id="screen-home">
 <div class="hero">
 <div class="hero-copy">
-<div class="online-badge"><span class="online-dot"></span>آنلاین هستیم — پاسخگویی کمتر از ۱ ساعت</div>
+<div class="online-badge"><span class="online-dot"></span>آنلاین هستیم — پاسخ‌گویی کمتر از ۱ ساعت</div>
 <div class="tag"><span class="tag-dot"></span> خدمات تخصصی سم‌پاشی مزارع با پهپاد</div>
 <h3>سلامت مزرعه‌ات،<br>از همین‌جا شروع می‌شود.</h3>
 <p>درخواست سم‌پاشی را ثبت کن، هزینه را شفاف ببین و همه مراحل سفارش را از یک پنل پیگیری کن.</p>
@@ -429,8 +495,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="panel">
 <div class="panel-head"><div><h3>آخرین سفارش‌های من</h3><p id="home-orders-sub">برای دیدن سفارش‌های خود وارد شوید</p></div><button class="text-btn" id="home-change-phone" hidden>تغییر شماره</button></div>
 <div id="home-phone-prompt" class="customer-auth" style="background:var(--inset);border:1px solid var(--ln);border-radius:var(--r-m);padding:14px;margin-bottom:14px">
-<div style="display:flex;gap:8px;flex-wrap:wrap"><input id="home-phone-input" class="ltr" inputmode="numeric" maxlength="11" placeholder="09123456789" style="flex:1;min-width:140px;border:1px solid var(--ln2);background:var(--sur);border-radius:10px;padding:11px 13px;font-size:13.5px"><button class="btn btn-green" id="home-phone-save">نمایش سفارش‌های من</button></div>
-<div class="notice" style="margin-top:10px">شمارهٔ موبایلت رو وارد کن، فقط سفارش‌های خودت رو می‌بینی.</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><input id="home-phone-input" class="ltr" inputmode="numeric" maxlength="11" placeholder="09123456789" style="flex:1;min-width:140px;border:1px solid var(--ln2);background:var(--sur);border-radius:10px;padding:11px 13px;font-size:13.5px"><button class="btn btn-green" id="home-phone-save"><svg class="icon"><use href="#i-sms"/></svg> ارسال کد تأیید</button></div>
+<div class="notice" style="margin-top:10px">شمارهٔ موبایلت رو وارد کن، یک کد ۶ رقمی برات پیامک می‌شه.</div>
 </div>
 <div id="home-orders"></div>
 </div>
@@ -449,17 +515,18 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <details class="faq-item"><summary>چقدر طول می‌کشه تا بیاید مزرعه؟</summary><div class="faq-body">پس از تأیید سفارش توسط مدیر، معمولاً بین <strong>۲۴ تا ۷۲ ساعت</strong> تیم ما در مزرعهٔ شما حاضر می‌شه.</div></details>
 <details class="faq-item"><summary>چه مناطقی رو پوشش می‌دید؟</summary><div class="faq-body">بیشتر استان‌های کشور رو پوشش می‌دیم. اگه سفارش از منطقه‌ای باشه که خودمان حضور نداشته باشیم، به <strong>همکار متخصص</strong> در همون استان ارجاع می‌دیم.</div></details>
 <details class="faq-item"><summary>پرداخت چطوریه؟</summary><div class="faq-body">پس از ثبت سفارش، به صفحهٔ پرداخت هدایت می‌شید و می‌تونید <strong>فیش واریزی</strong> رو بارگذاری کنید. پس از تأیید مدیر، وضعیت سفارش تغییر می‌کنه.</div></details>
-<details class="faq-item"><summary>آیا می‌تونم سفارشم رو لغو کنم؟</summary><div class="faq-body">بله، تا قبل از تأیید پرداخت و شروع کار، از صفحهٔ <strong>پیگیری سفارش</strong> می‌تونید سفارشتون رو لغو کنید.</div></details>
+<details class="faq-item"><summary>آیا پیامک تأیید میاد؟</summary><div class="faq-body">بله. هنگام ثبت سفارش و تغییر وضعیت آن (تأیید پرداخت، ارجاع، تکمیل)، پیامک اطلاع‌رسانی برای شما ارسال می‌شه.</div></details>
 </div>
 </section>
 
+<!-- ==================== ORDER ==================== -->
 <section class="screen" id="screen-order">
 <div class="panel">
 <div class="panel-head"><div><h3>ثبت سفارش سم‌پاشی</h3><p>اطلاعات مزرعه را وارد کنید.</p></div><span class="status green">مرحله ۱ از ۳</span></div>
 <form id="order-form" novalidate>
 <div class="form-grid">
 <div class="field-wrap"><label for="cust">نام و نام خانوادگی *</label><input id="cust" name="cust" required placeholder="مثلاً علی محمدی"><span class="error" data-error-for="cust"></span></div>
-<div class="field-wrap"><label for="phone">شماره موبایل *</label><input id="phone" name="phone" required inputmode="numeric" class="ltr" placeholder="09123456789" maxlength="11"><span class="error" data-error-for="phone"></span></div>
+<div class="field-wrap"><label for="phone">شماره موبایل *</label><input id="phone" name="phone" required inputmode="numeric" class="ltr" placeholder="09123456789" maxlength="11"><span class="hint">یک کد تأیید برای این شماره پیامک می‌شود.</span><span class="error" data-error-for="phone"></span></div>
 <div class="field-wrap"><label for="province">استان *</label><select id="province" name="province" required><option value="">انتخاب استان</option></select><span class="error" data-error-for="province"></span></div>
 <div class="field-wrap"><label for="city">شهرستان / شهر *</label><input id="city" name="city" required placeholder="نام شهر"><span class="error" data-error-for="city"></span></div>
 <div class="field-wrap"><label for="village">روستا / منطقه</label><input id="village" name="village" placeholder="نام روستا"></div>
@@ -469,12 +536,13 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="field-wrap span-2"><label for="notes">توضیحات و نشانی</label><textarea id="notes" name="notes" rows="3" placeholder="نام آفت، وضعیت مزرعه..."></textarea></div>
 </div>
 <div class="price-card"><div><small>برآورد هزینه سفارش</small><div class="rate">نرخ پایه: <b id="base-rate">—</b> تومان/هکتار</div></div><strong id="total-price">—</strong></div>
-<div class="notice">داده‌ها روی سرور ذخیره می‌شوند و از اطلاعات شما محافظت می‌کنیم.</div>
-<div class="actions"><button class="btn btn-gold" type="submit">ثبت سفارش و ادامه به پرداخت</button><button class="btn btn-light" type="button" data-go="home">بازگشت</button></div>
+<div class="notice">پس از ثبت، یک کد تأیید برای شماره موبایل شما ارسال می‌شود.</div>
+<div class="actions"><button class="btn btn-gold" type="submit">ثبت سفارش و تأیید شماره</button><button class="btn btn-light" type="button" data-go="home">بازگشت</button></div>
 </form>
 </div>
 </section>
 
+<!-- ==================== TRACK ==================== -->
 <section class="screen" id="screen-track">
 <div class="panel">
 <div class="panel-head"><div><h3>پیگیری سفارش</h3><p>شماره سفارش و موبایل را وارد کنید.</p></div></div>
@@ -489,6 +557,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
+<!-- ==================== PAYMENT ==================== -->
 <section class="screen" id="screen-payment">
 <div class="panel">
 <div class="panel-head"><div><h3>پرداخت و بارگذاری فیش</h3><p>اطلاعات بانکی و ارسال رسید.</p></div></div>
@@ -505,6 +574,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
+<!-- ==================== MESSAGES ==================== -->
 <section class="screen" id="screen-messages">
 <div class="panel">
 <div class="panel-head"><div><h3>ارسال اطلاعات به مدیر</h3><p>پیام شما در پرونده ثبت می‌شود.</p></div></div>
@@ -519,6 +589,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
+<!-- ==================== ADMIN PANEL ==================== -->
 <section class="screen" id="screen-admin">
 <div id="admin-login-view" class="auth-wrap">
 <div class="panel auth-panel">
@@ -534,7 +605,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 
 <div id="admin-panel-view" hidden>
 <div class="admin-head">
-<div><h3>پنل مدیریت سامانه</h3><p>کنترل کامل سفارش‌ها، همکاران، زمان‌بندی و تنظیمات</p></div>
+<div><h3>پنل مدیریت سامانه</h3><p>کنترل کامل سفارش‌ها، همکاران، زمان‌بندی، پیامک و تنظیمات</p></div>
 <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
 <span class="session-badge"><span class="session-dot"></span><span id="session-timer">فعال</span></span>
 <button class="btn btn-light btn-sm" id="admin-change-pass-btn"><svg class="icon"><use href="#i-key"/></svg> تغییر رمز</button>
@@ -549,6 +620,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <button data-tab="schedule" aria-selected="false">🗓️ زمان‌بندی</button>
 <button data-tab="pricing" aria-selected="false">💵 تعرفه‌ها</button>
 <button data-tab="payment" aria-selected="false">💳 پرداخت</button>
+<button data-tab="sms" aria-selected="false">📱 پیامک</button>
 <button data-tab="regions" aria-selected="false">🗺️ مناطق</button>
 <button data-tab="crops" aria-selected="false">🌾 محصولات</button>
 <button data-tab="messages" aria-selected="false">💬 پیام‌ها</button>
@@ -556,20 +628,22 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <button data-tab="settings" aria-selected="false">⚙️ تنظیمات</button>
 </div>
 
+<!-- DASHBOARD -->
 <div class="admin-panel active" data-panel="dash">
 <div class="stats">
 <div class="stat"><div class="stat-icon"><svg class="icon"><use href="#i-order"/></svg></div><div class="stat-body"><small>کل سفارش‌ها</small><strong id="ad-total">۰</strong></div></div>
 <div class="stat" data-tone="amber"><div class="stat-icon"><svg class="icon"><use href="#i-clock"/></svg></div><div class="stat-body"><small>در انتظار تأیید</small><strong id="ad-pending">۰</strong></div></div>
 <div class="stat" data-tone="blue"><div class="stat-icon"><svg class="icon"><use href="#i-card"/></svg></div><div class="stat-body"><small>درآمد کل</small><strong id="ad-revenue" style="font-size:15px">—</strong></div></div>
-<div class="stat" data-tone="teal"><div class="stat-icon"><svg class="icon"><use href="#i-target"/></svg></div><div class="stat-body"><small>مشتریان یکتا</small><strong id="ad-customers">۰</strong></div></div>
+<div class="stat" data-tone="purple"><div class="stat-icon"><svg class="icon"><use href="#i-sms"/></svg></div><div class="stat-body"><small>پیامک ارسالی</small><strong id="ad-sms-count">۰</strong></div></div>
 </div>
 <div class="admin-card"><h4>سفارش‌های اخیر</h4><div id="ad-recent-orders"></div></div>
 </div>
 
+<!-- ORDERS -->
 <div class="admin-panel" data-panel="orders">
 <div class="admin-card">
 <h4>مدیریت سفارش‌ها</h4>
-<p class="sub">جستجو، فیلتر، ارجاع به همکار، ویرایش و حذف</p>
+<p class="sub">جستجو، فیلتر، ارجاع به همکار، ویرایش، پیامک و حذف</p>
 <div class="filter-bar">
 <input id="ord-search" placeholder="جستجو در نام، موبایل، کد..." type="search">
 <select id="ord-filter-status"><option value="">همهٔ وضعیت‌ها</option><option value="pending">در انتظار پرداخت</option><option value="scheduled">زمان‌بندی شد</option><option value="assigned">ارجاع به همکار</option><option value="in_progress">در حال انجام</option><option value="done">تکمیل شده</option><option value="cancelled">لغو شده</option></select>
@@ -581,6 +655,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </div>
 
+<!-- PAYMENTS -->
 <div class="admin-panel" data-panel="payments">
 <div class="admin-card">
 <h4>تأیید فیش‌های واریزی</h4>
@@ -593,6 +668,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </div>
 
+<!-- PARTNERS -->
 <div class="admin-panel" data-panel="partners">
 <div class="admin-card">
 <h4>شبکهٔ همکاران</h4>
@@ -605,6 +681,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </div>
 
+<!-- SCHEDULE -->
 <div class="admin-panel" data-panel="schedule">
 <div class="admin-card">
 <h4>افزودن بازهٔ زمانی جدید</h4>
@@ -623,25 +700,172 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </div>
 
+<!-- PRICING -->
 <div class="admin-panel" data-panel="pricing">
 <div class="admin-card"><h4>نرخ پایه</h4><p class="sub">مبلغ به ازای هر هکتار (تومان)</p><div class="admin-grid"><div class="field-wrap"><label for="cfg-base-rate">نرخ پایه</label><input id="cfg-base-rate" class="ltr" inputmode="numeric"></div><div class="field-wrap" style="align-self:end"><button class="btn btn-green" id="cfg-save-base">ذخیره</button></div></div></div>
 <div class="admin-card"><h4>نرخ اختصاصی استان</h4><p class="sub">در صورت خالی بودن، نرخ پایه اعمال می‌شود.</p><div class="admin-grid"><div class="field-wrap"><label for="cfg-rate-prov">استان</label><select id="cfg-rate-prov"></select></div><div class="field-wrap"><label for="cfg-rate-val">نرخ</label><input id="cfg-rate-val" class="ltr" inputmode="numeric"></div><div class="field-wrap" style="align-self:end"><button class="btn btn-green" id="cfg-add-prov-rate">افزودن</button></div></div><div class="chip-list" id="cfg-prov-rates-list"></div></div>
 <div class="admin-card"><h4>نرخ اختصاصی محصول</h4><p class="sub">در صورت خالی بودن، نرخ استان یا پایه اعمال می‌شود.</p><div class="admin-grid"><div class="field-wrap"><label for="cfg-rate-crop">محصول</label><select id="cfg-rate-crop"></select></div><div class="field-wrap"><label for="cfg-rate-crop-val">نرخ</label><input id="cfg-rate-crop-val" class="ltr" inputmode="numeric"></div><div class="field-wrap" style="align-self:end"><button class="btn btn-green" id="cfg-add-crop-rate">افزودن</button></div></div><div class="chip-list" id="cfg-crop-rates-list"></div></div>
 </div>
 
+<!-- PAYMENT SETTINGS -->
 <div class="admin-panel" data-panel="payment">
 <div class="admin-card"><h4>اطلاعات پرداخت</h4><form id="cfg-payment-form" class="form-grid" novalidate><div class="field-wrap span-2"><label for="cfg-card">شماره کارت</label><input id="cfg-card" class="ltr"></div><div class="field-wrap span-2"><label for="cfg-iban">شماره شبا</label><input id="cfg-iban" class="ltr"></div><div class="field-wrap span-2"><label for="cfg-holder">نام صاحب حساب</label><input id="cfg-holder"></div><div class="span-2"><button type="submit" class="btn btn-green">ذخیره</button></div></form></div>
 <div class="admin-card"><h4>تنظیمات فیش</h4><div class="admin-grid"><div class="field-wrap"><label for="cfg-receipt-max">حداکثر حجم (MB)</label><input id="cfg-receipt-max" class="ltr" inputmode="numeric"></div><div class="field-wrap" style="align-self:end"><button class="btn btn-green" id="cfg-save-receipt">ذخیره</button></div></div></div>
 </div>
 
+<!-- ==================== SMS PANEL ==================== -->
+<div class="admin-panel" data-panel="sms">
+<div class="admin-head" style="margin-bottom:14px">
+<div><h4 style="margin:0;font-size:15px">📱 مدیریت پیامک</h4><p style="margin:4px 0 0;font-size:12px;color:var(--i400)">تنظیمات سرویس، قالب‌ها، ارسال دستی و گزارش</p></div>
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+<span class="credit-badge"><svg class="icon" width="14" height="14"><use href="#i-credit"/></svg> اعتبار: <b id="sms-credit">—</b></span>
+<span class="verified-badge" id="sms-conn-badge" hidden>متصل</span>
+<span class="otp-badge" id="sms-offline-badge">حالت شبیه‌سازی</span>
+</div>
+</div>
+
+<div class="admin-tabs" id="sms-tabs" style="margin-bottom:14px">
+<button data-sms-tab="send" aria-selected="true">✉️ ارسال پیامک</button>
+<button data-sms-tab="templates" aria-selected="false">📝 قالب‌ها</button>
+<button data-sms-tab="auto" aria-selected="false">🔔 اعلان خودکار</button>
+<button data-sms-tab="log" aria-selected="false">📨 گزارش ارسال</button>
+<button data-sms-tab="settings" aria-selected="false">⚙️ تنظیمات سرویس</button>
+</div>
+
+<!-- SMS: SEND -->
+<div class="sms-subpanel active" data-sms-panel="send">
+<div class="admin-card">
+<h4>ارسال پیامک جدید</h4>
+<p class="sub">می‌توانید به یک شماره، به یک سفارش خاص، یا به گروهی از مشتریان پیامک بفرستید.</p>
+<div class="admin-grid">
+<div class="field-wrap">
+<label for="sms-mode">حالت ارسال</label>
+<select id="sms-mode">
+<option value="single">📱 شماره دلخواه</option>
+<option value="order">📋 بر اساس سفارش</option>
+<option value="all-customers">👥 همه مشتریان</option>
+<option value="by-province">🗺️ مشتریان یک استان</option>
+</select>
+</div>
+<div class="field-wrap" id="sms-single-wrap"><label for="sms-phone">شماره موبایل</label><input id="sms-phone" class="ltr" inputmode="numeric" maxlength="11" placeholder="09123456789"></div>
+<div class="field-wrap" id="sms-order-wrap" hidden><label for="sms-order-select">انتخاب سفارش</label><select id="sms-order-select"></select></div>
+<div class="field-wrap" id="sms-province-wrap" hidden><label for="sms-province-select">استان</label><select id="sms-province-select"></select></div>
+</div>
+<div class="field-wrap" style="margin-top:12px">
+<label for="sms-text">متن پیامک</label>
+<textarea id="sms-text" rows="4" placeholder="متن پیامک خود را اینجا بنویسید…" maxlength="500"></textarea>
+<div class="sms-vars" id="sms-vars-box">
+<span class="sms-var" data-var="{name}">{name}</span>
+<span class="sms-var" data-var="{code}">{code}</span>
+<span class="sms-var" data-var="{amount}">{amount}</span>
+<span class="sms-var" data-var="{crop}">{crop}</span>
+<span class="sms-var" data-var="{area}">{area}</span>
+<span class="sms-var" data-var="{date}">{date}</span>
+</div>
+<div class="sms-char-counter">
+<span>تعداد کاراکتر: <b id="sms-len">۰</b></span>
+<span class="sms-parts" id="sms-parts">۱ پیامک</span>
+</div>
+</div>
+<div class="sms-preview-box">
+<div class="sp-head"><svg class="icon"><use href="#i-sms"/></svg><span>پیش‌نمایش</span></div>
+<div class="sp-body" id="sms-preview">متن پیامک شما اینجا نمایش داده می‌شود…</div>
+</div>
+<div class="actions" style="margin-top:14px">
+<button class="btn btn-purple" id="sms-send-btn"><svg class="icon"><use href="#i-send"/></svg> ارسال پیامک</button>
+<button class="btn btn-light" id="sms-clear-btn">پاک کردن</button>
+</div>
+</div>
+</div>
+
+<!-- SMS: TEMPLATES -->
+<div class="sms-subpanel" data-sms-panel="templates">
+<div class="admin-card">
+<h4>قالب‌های پیامک</h4>
+<p class="sub">در متن قالب می‌توانید از متغیرها استفاده کنید. متغیرها هنگام ارسال خودکار جایگزین می‌شوند.</p>
+<div id="sms-templates-list"></div>
+<div class="actions"><button class="btn btn-green" id="sms-tpl-save"><svg class="icon"><use href="#i-check"/></svg> ذخیره همه قالب‌ها</button><button class="btn btn-light" id="sms-tpl-reset">بازگردانی پیش‌فرض</button></div>
+</div>
+</div>
+
+<!-- SMS: AUTO -->
+<div class="sms-subpanel" data-sms-panel="auto">
+<div class="admin-card">
+<h4>اعلان‌های خودکار</h4>
+<p class="sub">در هر تغییر وضعیت سفارش، پیامک خودکار برای مشتری ارسال می‌شود.</p>
+<div id="sms-auto-toggles"></div>
+<div class="notice info" style="margin-top:14px">💡 برای فعال بودن، ابتدا در تب «تنظیمات سرویس» کلید API را وارد کنید.</div>
+</div>
+</div>
+
+<!-- SMS: LOG -->
+<div class="sms-subpanel" data-sms-panel="log">
+<div class="admin-card">
+<h4>گزارش پیامک‌های ارسالی</h4>
+<p class="sub">تاریخچهٔ کامل پیامک‌های ارسال‌شده</p>
+<div class="filter-bar">
+<input id="sms-log-search" placeholder="جستجو در شماره یا متن…" type="search">
+<select id="sms-log-filter"><option value="">همه وضعیت‌ها</option><option value="sent">موفق</option><option value="failed">ناموفق</option><option value="sim">شبیه‌سازی</option></select>
+<button class="btn btn-light btn-sm" id="sms-log-refresh"><svg class="icon"><use href="#i-refresh"/></svg> بازخوانی</button>
+<button class="btn btn-danger btn-sm" id="sms-log-clear"><svg class="icon"><use href="#i-trash"/></svg> پاک کردن</button>
+</div>
+<div id="sms-log-list"></div>
+</div>
+</div>
+
+<!-- SMS: SETTINGS -->
+<div class="sms-subpanel" data-sms-panel="settings">
+<div class="admin-card">
+<h4>تنظیمات سرویس پیامک</h4>
+<p class="sub">اطلاعات سرویس‌دهندهٔ پیامک (کاوه‌نگار، ملی‌پیامک، sms.ir و…)</p>
+<div class="admin-grid">
+<div class="field-wrap">
+<label for="sms-provider">سرویس‌دهنده</label>
+<select id="sms-provider">
+<option value="sim">🔵 شبیه‌سازی (بدون ارسال واقعی)</option>
+<option value="kavenegar">🟢 کاوه‌نگار</option>
+<option value="mellipayamak">🟠 ملی‌پیامک</option>
+<option value="smsir">🟣 sms.ir</option>
+<option value="custom">⚙️ سفارشی (Webhook)</option>
+</select>
+</div>
+<div class="field-wrap">
+<label for="sms-sender">شماره فرستنده</label>
+<input id="sms-sender" class="ltr" placeholder="10008663">
+</div>
+<div class="field-wrap span-2">
+<label for="sms-apikey">کلید API</label>
+<input id="sms-apikey" class="ltr" type="text" placeholder="کلید API خود را اینجا وارد کنید">
+<span class="hint">🔒 کلید فقط در مرورگر شما ذخیره می‌شود و از طریق سرور ارسال می‌شود.</span>
+</div>
+<div class="field-wrap span-2" id="sms-custom-url-wrap" hidden>
+<label for="sms-custom-url">آدرس Webhook سفارشی</label>
+<input id="sms-custom-url" class="ltr" placeholder="https://your-domain.com/send-sms">
+</div>
+</div>
+<div class="actions" style="margin-top:16px">
+<button class="btn btn-green" id="sms-settings-save">ذخیره تنظیمات</button>
+<button class="btn btn-light" id="sms-test-btn"><svg class="icon"><use href="#i-send"/></svg> ارسال پیامک آزمایشی</button>
+<button class="btn btn-light" id="sms-credit-refresh"><svg class="icon"><use href="#i-refresh"/></svg> بررسی اعتبار</button>
+</div>
+<div class="notice" style="margin-top:14px">⚠️ در حالت «شبیه‌سازی»، پیامک واقعی ارسال نمی‌شود و فقط در گزارش ثبت می‌گردد. برای ارسال واقعی، کلید API معتبر وارد کنید.</div>
+</div>
+</div>
+</div>
+
+<!-- REGIONS -->
 <div class="admin-panel" data-panel="regions"><div class="admin-card"><h4>استان‌های فعال</h4><p class="sub">در فرم ثبت سفارش مشتری نمایش داده می‌شوند.</p><div class="inline-add"><input id="prov-new" placeholder="نام استان جدید"><button class="btn btn-green btn-sm" id="prov-add-btn">افزودن</button></div><div class="chip-list" id="prov-list"></div></div></div>
 
+<!-- CROPS -->
 <div class="admin-panel" data-panel="crops"><div class="admin-card"><h4>محصولات کشاورزی</h4><p class="sub">فهرست محصولات در فرم ثبت سفارش.</p><div class="inline-add"><input id="crop-new" placeholder="نام محصول جدید"><button class="btn btn-green btn-sm" id="crop-add-btn">افزودن</button></div><div class="chip-list" id="crop-list"></div></div></div>
 
+<!-- MESSAGES -->
 <div class="admin-panel" data-panel="messages"><div class="admin-card"><h4>پیام‌های مشتریان</h4><div id="adm-messages-list"></div></div></div>
 
+<!-- CUSTOMERS -->
 <div class="admin-panel" data-panel="customers"><div class="admin-card"><h4>مشتریان</h4><div class="table-scroll"><table class="mini-table"><thead><tr><th>نام</th><th>موبایل</th><th>تعداد سفارش</th><th>مجموع مساحت</th></tr></thead><tbody id="adm-cust-tbody"></tbody></table></div></div></div>
 
+<!-- SETTINGS -->
 <div class="admin-panel" data-panel="settings">
 <div class="admin-card"><h4>تنظیمات عمومی</h4><form id="cfg-general-form" class="form-grid" novalidate><div class="field-wrap"><label for="cfg-site-title">عنوان سایت</label><input id="cfg-site-title"></div><div class="field-wrap"><label for="cfg-support-phone">تلفن پشتیبانی</label><input id="cfg-support-phone" class="ltr" placeholder="09123456789"></div><div class="field-wrap span-2"><label for="cfg-support-note">متن پشتیبانی</label><input id="cfg-support-note"></div><div class="span-2"><button type="submit" class="btn btn-green">ذخیره</button></div></form></div>
 <div class="admin-card"><h4 style="color:var(--dng)">منطقهٔ خطر</h4><div class="actions" style="margin-top:0"><button class="btn btn-danger" id="danger-reset"><svg class="icon"><use href="#i-trash"/></svg> بازنشانی همهٔ داده‌ها</button></div></div>
@@ -649,6 +873,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
+<!-- ==================== PARTNER PANEL ==================== -->
 <section class="screen" id="screen-partner">
 <div id="partner-login-view" class="auth-wrap">
 <div class="panel auth-panel">
@@ -713,22 +938,52 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
-<div class="footer-note">سم‌پاش هوشمند · نسخه ۵.۳ · با ❤️ برای کشاورزان ایران</div>
+<div class="footer-note">سم‌پاش هوشمند · نسخه ۶.۰ · با ❤️ برای کشاورزان ایران</div>
 </main>
 </div>
 
+<!-- ==================== FAB STACK ==================== -->
 <div class="fab-stack">
 <button class="fab fab-ai" id="ai-fab" aria-label="باز کردن دستیار">
 <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/><circle cx="12" cy="12" r="4"/></svg>
 </button>
-<button class="fab fab-phone" id="phone-fab" aria-label="تماس با پشتیبانی">
-<svg class="icon"><use href="#i-phone"/></svg>
-</button>
-<button class="fab fab-wa" id="wa-fab" aria-label="چت در واتساپ">
-<svg class="icon"><use href="#i-wa"/></svg>
-</button>
+<button class="fab fab-phone" id="phone-fab" aria-label="تماس با پشتیبانی"><svg class="icon"><use href="#i-phone"/></svg></button>
+<button class="fab fab-wa" id="wa-fab" aria-label="چت در واتساپ"><svg class="icon"><use href="#i-wa"/></svg></button>
 </div>
 
+<!-- ==================== OTP MODAL ==================== -->
+<div class="modal-back" id="otp-modal-back">
+<div class="modal" style="max-width:440px">
+<h3 style="display:flex;align-items:center;gap:8px"><svg class="icon" width="20" height="20" style="color:var(--b600)"><use href="#i-sms"/></svg> تأیید شماره موبایل</h3>
+<p class="m-sub" id="otp-modal-sub">کد ۶ رقمی ارسال‌شده را وارد کنید</p>
+<div class="otp-box">
+<div class="otp-box-head">
+<div class="o-icon"><svg class="icon"><use href="#i-verified"/></svg></div>
+<div>
+<strong id="otp-modal-title">کد تأیید پیامک شد</strong>
+<small>شماره: <span id="otp-modal-phone" style="direction:ltr;display:inline-block;font-weight:700">—</span></small>
+</div>
+</div>
+<div class="otp-inputs" id="otp-inputs">
+<input type="text" inputmode="numeric" maxlength="1" data-idx="0" autocomplete="one-time-code">
+<input type="text" inputmode="numeric" maxlength="1" data-idx="1">
+<input type="text" inputmode="numeric" maxlength="1" data-idx="2">
+<input type="text" inputmode="numeric" maxlength="1" data-idx="3">
+<input type="text" inputmode="numeric" maxlength="1" data-idx="4">
+<input type="text" inputmode="numeric" maxlength="1" data-idx="5">
+</div>
+<div class="otp-timer" id="otp-timer">زمان باقی‌مانده: <b>02:00</b></div>
+<div class="notice" id="otp-demo-notice" style="margin-top:12px;font-size:12px;text-align:center">🔵 حالت شبیه‌سازی — کد: <b id="otp-demo-code" style="font-family:ui-monospace;letter-spacing:3px">------</b></div>
+<div class="otp-resend"><button type="button" id="otp-resend-btn" disabled>ارسال مجدد کد</button></div>
+</div>
+<div class="modal-actions" style="justify-content:center">
+<button class="btn btn-green" id="otp-verify-btn" style="min-width:160px"><svg class="icon"><use href="#i-check"/></svg> تأیید کد</button>
+<button class="btn btn-light" id="otp-cancel-btn">انصراف</button>
+</div>
+</div>
+</div>
+
+<!-- ==================== AI PANEL ==================== -->
 <div class="ai-panel" id="ai-panel">
 <div class="ai-head">
 <div class="ai-avatar"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/><circle cx="12" cy="12" r="4"/></svg></div>
@@ -748,6 +1003,9 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="modal-back" id="modal-back"><div class="modal" id="modal-body"></div></div>
 <script>
 "use strict";
+/* ============================================================
+   UTILITIES
+============================================================ */
 const $=(s,c=document)=>c.querySelector(s);
 const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
 const FA="۰۱۲۳۴۵۶۷۸۹",AR="٠١٢٣٤٥٦٧٨٩";
@@ -765,14 +1023,40 @@ let toastTimer;const toastEl=$("#toast");
 function toast(m,e=false){toastEl.textContent=m;toastEl.classList.toggle("err",e);toastEl.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove("show"),3600);}
 (function(){try{const f=new Intl.DateTimeFormat("fa-IR-u-ca-persian",{weekday:"long",day:"numeric",month:"long",year:"numeric"});$("#today-label").textContent=f.format(new Date());}catch{$("#today-label").textContent="امروز";}})();
 
-const LS={auth:"sph_auth",session:"sph_session",lockout:"sph_lockout",config:"sph_config",orders:"sph_orders",messages:"sph_messages",partners:"sph_partners",fleet:"sph_fleet",slots:"sph_slots",partner_session:"sph_ptn_session",seeded:"sph_seeded",seen:"sph_seen",cust_phone:"sph_cust_phone"};
+/* ============================================================
+   LOCALSTORAGE KEYS + HELPERS
+============================================================ */
+const LS={auth:"sph_auth",session:"sph_session",lockout:"sph_lockout",config:"sph_config",orders:"sph_orders",messages:"sph_messages",partners:"sph_partners",fleet:"sph_fleet",slots:"sph_slots",partner_session:"sph_ptn_session",seeded:"sph_seeded",seen:"sph_seen",cust_phone:"sph_cust_phone",
+sms_settings:"sph_sms_settings",sms_templates:"sph_sms_templates",sms_log:"sph_sms_log",sms_auto:"sph_sms_auto",otp_store:"sph_otp_store",cust_verified:"sph_cust_verified"};
 const read=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v??d;}catch{return d;}};
 const write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 
+/* ============================================================
+   DEFAULT CONFIG
+============================================================ */
 function defaultConfig(){return{baseRate:850000,provRates:{},cropRates:{},payment:{card:"6104 3374 3811 1567",iban:"IR09 0120 0200 0008 6808 6339 3",holder:"شرکت سم‌پاش هوشمند"},receiptMax:5,provinces:["تهران","اصفهان","فارس","خوزستان","خراسان رضوی","آذربایجان شرقی","آذربایجان غربی","گیلان","مازندران","کرمان","یزد","البرز","قم","مرکزی","گلستان","اردبیل","قزوین","همدان","کرمانشاه","هرمزگان","سیستان و بلوچستان","لرستان","کردستان","بوشهر","سمنان","زنجان"],crops:["گندم","جو","آفتابگردان","سیب‌زمینی","ذرت","باغ میوه","یونجه","سایر"],siteTitle:"سم‌پاش هوشمند",supportPhone:"",supportNote:"برای هماهنگی زمان سم‌پاشی یا پیگیری درخواست با پشتیبانی در ارتباط باشید."};}
 
-async function seedIfNeeded(){const auth=read(LS.auth,null);if(!auth){const salt=rand(16);const hash=await sha256(salt+"Admin@1405");write(LS.auth,{user:"admin",salt,hash,mustChange:false});}if(!read(LS.partners,null))write(LS.partners,[]);if(!read(LS.fleet,null))write(LS.fleet,[]);if(!read(LS.slots,null))write(LS.slots,[]);}
+/* ============================================================
+   SMS: DEFAULT SETTINGS / TEMPLATES / AUTO
+============================================================ */
+function defaultSmsSettings(){return{provider:"sim",sender:"",apiKey:"",customUrl:""};}
+function defaultSmsTemplates(){
+return{
+otp:{label:"کد تأیید ورود",desc:"پیامک کد ۶ رقمی برای تأیید شماره موبایل مشتری",text:"کد تأیید شما در سم‌پاش هوشمند:\n{otp}\nاین کد را با کسی به اشتراک نگذارید."},
+order_created:{label:"ثبت سفارش",desc:"پس از ثبت موفق سفارش برای مشتری",text:"سلام {name} عزیز\nسفارش شما با کد {code} ثبت شد.\nمحصول: {crop} | مساحت: {area} هکتار\nمبلغ: {amount}\nسم‌پاش هوشمند"},
+payment_approved:{label:"تأیید پرداخت",desc:"پس از تأیید فیش توسط مدیر",text:"{name} عزیز\nپرداخت سفارش {code} تأیید شد.\nسفارش شما در حال آماده‌سازی است.\nسم‌پاش هوشمند"},
+partner_assigned:{label:"ارجاع به اپراتور",desc:"پس از ارجاع سفارش به همکار",text:"{name} عزیز\nسفارش {code} به اپراتور منطقه شما ارجاع شد.\nزمان مراجعه: {date}\nسم‌پاش هوشمند"},
+completed:{label:"تکمیل سفارش",desc:"پس از اتمام سم‌پاشی",text:"{name} عزیز\nسم‌پاشی سفارش {code} با موفقیت انجام شد.\nاز اعتماد شما سپاسگزاریم.\nسم‌پاش هوشمند"},
+cancelled:{label:"لغو سفارش",desc:"در صورت لغو سفارش",text:"{name} عزیز\nسفارش {code} لغو شد.\nدر صورت نیاز با پشتیبانی تماس بگیرید.\nسم‌پاش هوشمند"},
+receipt_rejected:{label:"رد فیش",desc:"در صورت رد فیش واریزی",text:"{name} عزیز\nفیش واریزی سفارش {code} تأیید نشد.\nلطفاً فیش صحیح را دوباره ارسال کنید.\nسم‌پاش هوشمند"},
+welcome:{label:"خوش‌آمدگویی",desc:"اولین بار ثبت نام مشتری",text:"سلام {name} عزیز\nبه سم‌پاش هوشمند خوش آمدید 🌿\nبرای ثبت سفارش سم‌پاشی با ما در تماس باشید."}
+};
+}
+function defaultSmsAuto(){return{order_created:true,payment_approved:true,partner_assigned:true,completed:true,cancelled:false,receipt_rejected:true};}
 
+/* ============================================================
+   API (Cloudflare Worker)
+============================================================ */
 const API="https://cold-grass-e1f3sam-pash-api.ali-naghiloo279.workers.dev";
 const cache={orders:[],messages:[],config:null};
 let PAY_ORDER=null;
@@ -781,8 +1065,8 @@ let trackRefreshTimer=null;
 async function loadAll(){
 try{
 const [ms,cf]=await Promise.all([
-fetch(API+"/api/messages").then(r=>r.json()),
-fetch(API+"/api/config").then(r=>r.json())
+fetch(API+"/api/messages").then(r=>r.json()).catch(()=>[]),
+fetch(API+"/api/config").then(r=>r.json()).catch(()=>({}))
 ]);
 cache.messages=Array.isArray(ms)?ms:[];
 cache.config=(cf&&Object.keys(cf).length)?cf:null;
@@ -793,123 +1077,83 @@ cache.config=read(LS.config,null);
 }
 }
 
+/* ============================================================
+   CONFIG
+============================================================ */
+const getConfig=()=>{const d=defaultConfig();const c=Object.assign(d,cache.config||{});if(!Array.isArray(c.provinces)||!c.provinces.length)c.provinces=d.provinces;if(!Array.isArray(c.crops)||!c.crops.length)c.crops=d.crops;if(!c.payment||typeof c.payment!=="object")c.payment=d.payment;return c;};
+const setConfig=c=>{cache.config=c;write(LS.config,c);fetch(API+"/api/config",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(c)}).catch(()=>{});};
+
+/* ============================================================
+   ORDERS / PARTNERS / SLOTS
+============================================================ */
+const getOrders=()=>cache.orders;
+const setOrders=o=>{cache.orders=o;write(LS.orders,o);};
 const getPartners=()=>read(LS.partners,[]);
 const setPartners=p=>{write(LS.partners,p);const cfg=getConfig();cfg._partners=p;setConfig(cfg);};
 const getFleet=()=>read(LS.fleet,[]);
 const setFleet=f=>write(LS.fleet,f);
 const getSlots=()=>read(LS.slots,[]);
 const setSlots=s=>{write(LS.slots,s);const cfg=getConfig();cfg._slots=s;setConfig(cfg);};
-
 const getCustomerPhone=()=>read(LS.cust_phone,"");
 const setCustomerPhone=p=>{if(p)write(LS.cust_phone,toEn(p));else localStorage.removeItem(LS.cust_phone);renderCustomerAuth();refreshHomeStats();};
+const isCustomerVerified=()=>{const v=read(LS.cust_verified,null);return v&&v.phone===getCustomerPhone()&&v.expires>Date.now();};
+const setCustomerVerified=(phone)=>{write(LS.cust_verified,{phone,at:Date.now(),expires:Date.now()+30*24*3600*1000});};
 
-function updateNotifBadge(){const badge=document.getElementById("notif-badge");const dot=document.getElementById("notif-dot");if(!badge)return;const count=Number(read("sph_new_count",0))||0;if(count>0){badge.textContent=toFa(count);badge.hidden=false;if(dot)dot.hidden=false;}else{badge.hidden=true;if(dot)dot.hidden=true;}}
-
-const getConfig=()=>{const d=defaultConfig();const c=Object.assign(d,cache.config||{});if(!Array.isArray(c.provinces)||!c.provinces.length)c.provinces=d.provinces;if(!Array.isArray(c.crops)||!c.crops.length)c.crops=d.crops;if(!c.payment||typeof c.payment!=="object")c.payment=d.payment;return c;};
-const setConfig=c=>{cache.config=c;write(LS.config,c);fetch(API+"/api/config",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(c)}).catch(()=>{});};
-const getOrders=()=>cache.orders;
-const setOrders=o=>{cache.orders=o;write(LS.orders,o);};
-
-async function createOrderRemote(order){
-try{
-const res=await fetch(API+"/api/orders",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(order)});
-return await res.json();
-}catch(e){return null;}
-}
-async function updateOrderRemote(id,data){
-try{
-const res=await fetch(API+"/api/orders/"+id,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
-return await res.json();
-}catch(e){return null;}
-}
-async function deleteOrderRemote(id){
-try{await fetch(API+"/api/orders/"+id,{method:"DELETE"});}catch(e){}
-}
-async function fetchOrdersPage(offset,limit,q,status){
-try{
-const params=new URLSearchParams({offset:String(offset||0),limit:String(limit||20)});
-if(q)params.set("q",q);
-if(status)params.set("status",status);
-const res=await fetch(API+"/api/orders?"+params.toString());
-const data=await res.json();
-if(Array.isArray(data))return {orders:data,total:data.length,hasMore:false};
-return data;
-}catch(e){return {orders:[],total:0,hasMore:false};}
-}
-async function fetchMyOrders(phone){
-try{
-const res=await fetch(API+"/api/orders/my",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({phone})});
-const data=await res.json();
-return Array.isArray(data)?data:[];
-}catch(e){return [];}
-}
-async function fetchOrderByCode(code,phone){
-try{
-const res=await fetch(API+"/api/orders/lookup",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code,phone})});
-if(res.ok)return await res.json();
-return null;
-}catch(e){return null;}
-}
+async function createOrderRemote(order){try{const res=await fetch(API+"/api/orders",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(order)});return await res.json();}catch{return null;}}
+async function updateOrderRemote(id,data){try{const res=await fetch(API+"/api/orders/"+id,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});return await res.json();}catch{return null;}}
+async function deleteOrderRemote(id){try{await fetch(API+"/api/orders/"+id,{method:"DELETE"});}catch{}}
+async function fetchOrdersPage(offset,limit,q,status){try{const params=new URLSearchParams({offset:String(offset||0),limit:String(limit||20)});if(q)params.set("q",q);if(status)params.set("status",status);const res=await fetch(API+"/api/orders?"+params.toString());const data=await res.json();if(Array.isArray(data))return{orders:data,total:data.length,hasMore:false};return data;}catch{return{orders:[],total:0,hasMore:false};}}
+async function fetchMyOrders(phone){try{const res=await fetch(API+"/api/orders/my",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({phone})});const data=await res.json();return Array.isArray(data)?data:[];}catch{return[];}}
+async function fetchOrderByCode(code,phone){try{const res=await fetch(API+"/api/orders/lookup",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code,phone})});if(res.ok)return await res.json();return null;}catch{return null;}}
 
 const getMessages=()=>cache.messages;
-const setMessages=m=>{cache.messages=m;write(LS.messages,m);(async()=>{try{const r=await fetch(API+"/api/messages").then(x=>x.json());for(const it of m){if(!r.find(x=>x.id===it.id)){await fetch(API+"/api/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(it)});}}}catch(e){}})();};
+const setMessages=m=>{cache.messages=m;write(LS.messages,m);};
 
+/* ============================================================
+   PRICING
+============================================================ */
 function calcPrice({area,province,crop},cfg=getConfig()){const base=+cfg.baseRate||0;const rate=+cfg.cropRates?.[crop]||+cfg.provRates?.[province]||base;return Math.round((+area||0)*rate);}
 
-const STATUS={
-pending:{label:"در انتظار پرداخت",cls:""},
-scheduled:{label:"زمان‌بندی شد",cls:"green"},
-assigned:{label:"ارجاع به همکار",cls:"purple"},
-in_progress:{label:"در حال انجام",cls:"blue"},
-done:{label:"تکمیل شده",cls:"green"},
-cancelled:{label:"لغو شده",cls:"red"},
-receipt_pending:{label:"در انتظار تأیید فیش",cls:"amber"},
-receipt_rejected:{label:"فیش رد شده",cls:"red"}
-};
+/* ============================================================
+   STATUS MAP
+============================================================ */
+const STATUS={pending:{label:"در انتظار پرداخت",cls:""},scheduled:{label:"زمان‌بندی شد",cls:"green"},assigned:{label:"ارجاع به همکار",cls:"purple"},in_progress:{label:"در حال انجام",cls:"blue"},done:{label:"تکمیل شده",cls:"green"},cancelled:{label:"لغو شده",cls:"red"},receipt_pending:{label:"در انتظار تأیید فیش",cls:"amber"},receipt_rejected:{label:"فیش رد شده",cls:"red"}};
 
-/* ============ CUSTOMER RECEIPT (upload to localStorage) ============ */
-function saveReceiptData(orderId,file){
-return new Promise((resolve)=>{
-if(!file)return resolve(false);
-if(file.type.startsWith("image/")){
-const reader=new FileReader();
-reader.onload=e=>{
-try{
-const receipts=read("sph_receipts",{});
-receipts[orderId]={type:file.type,name:file.name,size:file.size,data:e.target.result,uploadedAt:Date.now(),status:"pending"};
-write("sph_receipts",receipts);
-resolve(true);
-}catch(err){resolve(false);}
-};
-reader.onerror=()=>resolve(false);
-reader.readAsDataURL(file);
-}else{
-try{
-const receipts=read("sph_receipts",{});
-receipts[orderId]={type:file.type,name:file.name,size:file.size,data:null,uploadedAt:Date.now(),status:"pending"};
-write("sph_receipts",receipts);
-resolve(true);
-}catch(err){resolve(false);}
-}
-});
-}
+/* ============================================================
+   RECEIPTS
+============================================================ */
+function saveReceiptData(orderId,file){return new Promise(resolve=>{if(!file)return resolve(false);if(file.type.startsWith("image/")){const reader=new FileReader();reader.onload=e=>{try{const r=read("sph_receipts",{});r[orderId]={type:file.type,name:file.name,size:file.size,data:e.target.result,uploadedAt:Date.now(),status:"pending"};write("sph_receipts",r);resolve(true);}catch{resolve(false);}};reader.onerror=()=>resolve(false);reader.readAsDataURL(file);}else{try{const r=read("sph_receipts",{});r[orderId]={type:file.type,name:file.name,size:file.size,data:null,uploadedAt:Date.now(),status:"pending"};write("sph_receipts",r);resolve(true);}catch{resolve(false);}}});}
 const getReceipt=id=>read("sph_receipts",{})[id]||null;
-const setReceiptStatus=(id,status)=>{
-const r=read("sph_receipts",{});
-if(r[id]){r[id].status=status;r[id].reviewedAt=Date.now();write("sph_receipts",r);}
-};
+const setReceiptStatus=(id,status)=>{const r=read("sph_receipts",{});if(r[id]){r[id].status=status;r[id].reviewedAt=Date.now();write("sph_receipts",r);}};
 
-const Auth=(()=>{const TTL=30*60*1000,MAX=5,LOCK=5*60*1000;function getSession(){try{const s=JSON.parse(sessionStorage.getItem(LS.session)||"null");if(!s||!s.expires||s.expires<Date.now()){sessionStorage.removeItem(LS.session);return null;}return s;}catch{return null;}}function setSession(u){sessionStorage.setItem(LS.session,JSON.stringify({user:u,started:Date.now(),expires:Date.now()+TTL}));}function touch(){const s=getSession();if(s){s.expires=Date.now()+TTL;sessionStorage.setItem(LS.session,JSON.stringify(s));}}function logout(){sessionStorage.removeItem(LS.session);}const getLockout=()=>read(LS.lockout,{attempts:0,until:0});const setLockout=l=>write(LS.lockout,l);async function login(user,pass){const l=getLockout();if(l.until&&l.until>Date.now()){const m=Math.ceil((l.until-Date.now())/60000);return{ok:false,msg:`ورود تا ${toFa(m)} دقیقه دیگر قفل است.`};}const auth=read(LS.auth,null);if(!auth)return{ok:false,msg:"اطلاعات احراز هویت یافت نشد."};const h=await sha256(auth.salt+pass);if(user===auth.user&&h===auth.hash){setLockout({attempts:0,until:0});setSession(auth.user);return{ok:true};}const attempts=(l.attempts||0)+1;if(attempts>=MAX){setLockout({attempts:0,until:Date.now()+LOCK});return{ok:false,msg:"تلاش ناموفق بیش از حد. ۵ دقیقه قفل شد."};}setLockout({attempts,until:0});return{ok:false,msg:`نام کاربری یا رمز نادرست. (${toFa(attempts)}/${toFa(MAX)})`};}async function changePassword(cur,np,cp){const auth=read(LS.auth,null);if(!auth)return{ok:false,msg:"اطلاعات احراز هویت یافت نشد."};const h=await sha256(auth.salt+cur);if(h!==auth.hash)return{ok:false,msg:"رمز فعلی نادرست است."};if(np.length<8)return{ok:false,msg:"رمز جدید باید حداقل ۸ کاراکتر باشد."};if(!/[A-Za-z]/.test(np)||!/\d/.test(np))return{ok:false,msg:"رمز باید شامل حرف و عدد باشد."};if(np!==cp)return{ok:false,msg:"تکرار رمز مطابقت ندارد."};const salt=rand(16);write(LS.auth,{...auth,salt,hash:await sha256(salt+np),mustChange:false});return{ok:true};}return{getSession,setSession,touch,logout,login,changePassword};})();
+/* ============================================================
+   AUTH (Admin)
+============================================================ */
+const Auth=(()=>{const TTL=30*60*1000,MAX=5,LOCK=5*60*1000;
+function getSession(){try{const s=JSON.parse(sessionStorage.getItem(LS.session)||"null");if(!s||!s.expires||s.expires<Date.now()){sessionStorage.removeItem(LS.session);return null;}return s;}catch{return null;}}
+function setSession(u){sessionStorage.setItem(LS.session,JSON.stringify({user:u,started:Date.now(),expires:Date.now()+TTL}));}
+function touch(){const s=getSession();if(s){s.expires=Date.now()+TTL;sessionStorage.setItem(LS.session,JSON.stringify(s));}}
+function logout(){sessionStorage.removeItem(LS.session);}
+const getLockout=()=>read(LS.lockout,{attempts:0,until:0});
+const setLockout=l=>write(LS.lockout,l);
+async function login(user,pass){const l=getLockout();if(l.until&&l.until>Date.now()){const m=Math.ceil((l.until-Date.now())/60000);return{ok:false,msg:`ورود تا ${toFa(m)} دقیقه دیگر قفل است.`};}const auth=read(LS.auth,null);if(!auth)return{ok:false,msg:"اطلاعات احراز هویت یافت نشد."};const h=await sha256(auth.salt+pass);if(user===auth.user&&h===auth.hash){setLockout({attempts:0,until:0});setSession(auth.user);return{ok:true};}const attempts=(l.attempts||0)+1;if(attempts>=MAX){setLockout({attempts:0,until:Date.now()+LOCK});return{ok:false,msg:"تلاش ناموفق بیش از حد. ۵ دقیقه قفل شد."};}setLockout({attempts,until:0});return{ok:false,msg:`نام کاربری یا رمز نادرست. (${toFa(attempts)}/${toFa(MAX)})`};}
+async function changePassword(cur,np,cp){const auth=read(LS.auth,null);if(!auth)return{ok:false,msg:"اطلاعات احراز هویت یافت نشد."};const h=await sha256(auth.salt+cur);if(h!==auth.hash)return{ok:false,msg:"رمز فعلی نادرست است."};if(np.length<8)return{ok:false,msg:"رمز جدید باید حداقل ۸ کاراکتر باشد."};if(!/[A-Za-z]/.test(np)||!/\d/.test(np))return{ok:false,msg:"رمز باید شامل حرف و عدد باشد."};if(np!==cp)return{ok:false,msg:"تکرار رمز مطابقت ندارد."};const salt=rand(16);write(LS.auth,{...auth,salt,hash:await sha256(salt+np),mustChange:false});return{ok:true};}
+return{getSession,setSession,touch,logout,login,changePassword};})();
 
+/* ============================================================
+   PARTNER AUTH
+============================================================ */
 const PartnerAuth=(()=>{
 function getSession(){try{const s=JSON.parse(sessionStorage.getItem(LS.partner_session)||"null");if(!s||!s.expires||s.expires<Date.now()){sessionStorage.removeItem(LS.partner_session);return null;}return s;}catch{return null;}}
 function setSession(p){sessionStorage.setItem(LS.partner_session,JSON.stringify({partnerId:p.id,name:p.name,phone:p.phone,expires:Date.now()+8*60*60*1000}));}
 function logout(){sessionStorage.removeItem(LS.partner_session);}
 async function login(phone,pass){const partners=getPartners();const p=partners.find(x=>x.phone===toEn(phone));if(!p)return{ok:false,msg:"همکاری با این شماره ثبت نشده."};if(p.status==="pending")return{ok:false,msg:"درخواست شما در انتظار تأیید مدیر است."};if(p.status==="rejected")return{ok:false,msg:"درخواست شما توسط مدیر رد شده است."};if(p.active===false)return{ok:false,msg:"حساب شما غیرفعال است."};const h=await sha256(p.salt+pass);if(h!==p.hash)return{ok:false,msg:"رمز عبور نادرست است."};setSession(p);return{ok:true,name:p.name};}
 async function register(data){const partners=getPartners();const phone=toEn(data.phone);if(!/^09\d{9}$/.test(phone))return{ok:false,msg:"شماره موبایل نامعتبر."};if(partners.some(x=>x.phone===phone))return{ok:false,msg:"این شماره قبلاً ثبت شده."};if(data.pass.length<8)return{ok:false,msg:"رمز باید حداقل ۸ کاراکتر باشد."};if(!/[A-Za-z]/.test(data.pass)||!/\d/.test(data.pass))return{ok:false,msg:"رمز باید شامل حرف و عدد باشد."};if(data.pass!==data.pass2)return{ok:false,msg:"تکرار رمز مطابقت ندارد."};if(!data.drones||!data.drones.length)return{ok:false,msg:"حداقل یک پهپاد اضافه کنید."};const salt=rand(16);const hash=await sha256(salt+data.pass);const pid=uid();partners.push({id:pid,name:data.name.trim(),phone,province:data.province,city:data.city.trim(),share:+data.share||30,salt,hash,status:"pending",active:false,createdAt:Date.now()});setPartners(partners);const fleet=getFleet();data.drones.forEach(d=>fleet.push({id:uid(),name:d.name,model:d.model||"",liter:+d.liter||0,ownerId:pid,status:"ready",createdAt:Date.now()}));setFleet(fleet);return{ok:true};}
-return{getSession,setSession,logout,login,register};
-})();
+return{getSession,setSession,logout,login,register};})();
 
+/* ============================================================
+   NAVIGATION
+============================================================ */
 const TITLES={home:"سلام! امروز چطور کمکت کنم؟ 👋",order:"ثبت سفارش جدید",track:"پیگیری سفارش",payment:"پرداخت و فاکتور",messages:"گفت‌وگو با مدیر",admin:"پنل مدیریت",partner:"پنل همکار"};
 function showScreen(name){
 const t=document.getElementById("screen-"+name);if(!t)return;
@@ -923,16 +1167,292 @@ $("#page-title").textContent=TITLES[name]||"سم‌پاش هوشمند";
 window.scrollTo({top:0,behavior:"smooth"});}
 document.addEventListener("click",e=>{const go=e.target.closest("[data-go]");if(go){showScreen(go.dataset.go);return;}const scr=e.target.closest("[data-screen]");if(scr){showScreen(scr.dataset.screen);return;}const t=e.target.closest("[data-toast]");if(t)toast(t.dataset.toast);});
 
+/* ============================================================
+   SELECT HELPERS
+============================================================ */
 function fillSelect(sel,items,ph){if(!sel)return;const cur=sel.value;sel.innerHTML="";if(ph){const o=document.createElement("option");o.value="";o.textContent=ph;sel.appendChild(o);}items.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;sel.appendChild(o);});if(items.includes(cur))sel.value=cur;}
 function refreshSelects(){const c=getConfig();fillSelect($("#province"),c.provinces,"انتخاب استان");fillSelect($("#crop"),c.crops,"انتخاب محصول");}
 function refreshCustomerPayment(){const c=getConfig();const card=$("#cardno"),iban=$("#iban"),rate=$("#base-rate");if(card)card.value=c.payment.card||"";if(iban)iban.value=c.payment.iban||"";if(rate)rate.textContent=fmt(c.baseRate);const hp=$("#hero-price");if(hp)hp.textContent=fmt(c.baseRate);}
 
-function renderCustomerAuth(){const ph=getCustomerPhone();const prompt=$("#home-phone-prompt");const changeBtn=$("#home-change-phone");const sub=$("#home-orders-sub");const inp=$("#home-phone-input");if(prompt)prompt.hidden=!!ph;if(changeBtn)changeBtn.hidden=!ph;if(sub)sub.textContent=ph?`سفارش‌های شماره ${toFa(ph)}`:"برای دیدن سفارش‌های خود شماره موبایل بزن";if(inp&&!ph)inp.value="";}
+/* ============================================================
+   NOTIFICATIONS
+============================================================ */
+function updateNotifBadge(){const badge=document.getElementById("notif-badge");const dot=document.getElementById("notif-dot");if(!badge)return;const count=Number(read("sph_new_count",0))||0;if(count>0){badge.textContent=toFa(count);badge.hidden=false;if(dot)dot.hidden=false;}else{badge.hidden=true;if(dot)dot.hidden=true;}}
+
+/* ============================================================
+   ⭐ SMS SERVICE
+============================================================ */
+const SmsService=(()=>{
+const getSettings=()=>Object.assign(defaultSmsSettings(),read(LS.sms_settings,{}));
+const setSettings=s=>write(LS.sms_settings,s);
+const getTemplates=()=>Object.assign(defaultSmsTemplates(),read(LS.sms_templates,{}));
+const setTemplates=t=>write(LS.sms_templates,t);
+const getAuto=()=>Object.assign(defaultSmsAuto(),read(LS.sms_auto,{}));
+const setAuto=a=>write(LS.sms_auto,a);
+const getLog=()=>read(LS.sms_log,[]);
+const addLog=entry=>{const l=getLog();l.unshift(entry);if(l.length>500)l.length=500;write(LS.sms_log,l);};
+
+function renderTemplate(tpl,vars={}){
+let out=String(tpl||"");
+Object.entries(vars).forEach(([k,v])=>{out=out.split(`{${k}}`).join(String(v??""));});
+return out;
+}
+
+async function send(to,text,{kind="manual",meta={}}={}){
+const s=getSettings();
+const phone=toEn(String(to||"").replace(/\D/g,""));
+if(!/^09\d{9}$/.test(phone)){
+addLog({id:uid(),to:phone,text,kind,status:"failed",error:"شماره نامعتبر",createdAt:Date.now(),...meta});
+return{ok:false,error:"شماره نامعتبر"};
+}
+const entry={id:uid(),to:phone,text,kind,status:"pending",createdAt:Date.now(),provider:s.provider,...meta};
+try{
+if(s.provider==="sim"){
+// شبیه‌سازی: ثبت موفق بدون ارسال واقعی
+await new Promise(r=>setTimeout(r,400));
+addLog({...entry,status:"sim"});
+return{ok:true,sim:true};
+}
+// ارسال واقعی از طریق Cloudflare Worker
+const url=(API+"/api/sms/send");
+const res=await fetch(url,{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({provider:s.provider,apiKey:s.apiKey,sender:s.sender,to:phone,text,customUrl:s.customUrl})
+});
+const data=await res.json().catch(()=>({}));
+if(res.ok&&(data.ok||data.status===1||data.return?.status===200)){
+addLog({...entry,status:"sent",response:data});
+return{ok:true,response:data};
+}else{
+const err=data.error||data.message||`HTTP ${res.status}`;
+addLog({...entry,status:"failed",error:err,response:data});
+return{ok:false,error:err};
+}
+}catch(e){
+addLog({...entry,status:"failed",error:e.message||"خطای شبکه"});
+return{ok:false,error:e.message||"خطای شبکه"};
+}
+}
+
+async function checkCredit(){
+const s=getSettings();
+if(s.provider==="sim")return{ok:true,credit:1000,sim:true};
+try{
+const res=await fetch(API+"/api/sms/credit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({provider:s.provider,apiKey:s.apiKey})});
+const data=await res.json().catch(()=>({}));
+if(res.ok)return{ok:true,credit:data.credit??data.remaincredit??"?"};
+return{ok:false,error:data.error||`HTTP ${res.status}`};
+}catch(e){return{ok:false,error:e.message};}
+}
+
+async function sendByEvent(eventKey,order){
+const auto=getAuto();
+if(!auto[eventKey])return{ok:false,skipped:true,error:"غیرفعال"};
+const settings=getSettings();
+if(settings.provider==="sim"&&false){/* در حالت sim هم ارسال شبیه‌سازی می‌شود */ }
+const templates=getTemplates();
+const tpl=templates[eventKey];
+if(!tpl||!tpl.text)return{ok:false,skipped:true,error:"قالب تعریف نشده"};
+if(!order?.phone)return{ok:false,skipped:true,error:"شماره مشتری موجود نیست"};
+const vars={name:order.name||"کشاورز عزیز",code:order.code||"",amount:order.amount?fmtT(order.amount):"",crop:order.crop||"",area:order.area?toFa(order.area):"",date:order.slotDate?toFa(order.slotDate):"—",otp:order._otp||""};
+const text=renderTemplate(tpl.text,vars);
+return await send(order.phone,text,{kind:"auto_"+eventKey,meta:{orderId:order.id,orderCode:order.code}});
+}
+
+return{getSettings,setSettings,getTemplates,setTemplates,getAuto,setAuto,getLog,addLog:entry=>{const l=getLog();l.unshift(entry);if(l.length>500)l.length=500;write(LS.sms_log,l);},send,sendByEvent,renderTemplate,checkCredit,clearLog:()=>write(LS.sms_log,[])};
+})();
+
+/* ============================================================
+   ⭐ OTP SERVICE
+============================================================ */
+const OtpService=(()=>{
+const STORE=LS.otp_store;
+const getStore=()=>read(STORE,{});
+const setStore=s=>write(STORE,s);
+const gen6=()=>String(Math.floor(100000+Math.random()*900000));
+
+function create(phone,purpose="verify"){
+const code=gen6();
+const store=getStore();
+store[phone]={code,purpose,expires:Date.now()+2*60*1000,attempts:0,createdAt:Date.now(),lastSentAt:Date.now()};
+setStore(store);
+return code;
+}
+function verify(phone,code){
+const store=getStore();
+const rec=store[phone];
+if(!rec)return{ok:false,msg:"کدی برای این شماره ثبت نشده."};
+if(rec.expires<Date.now())return{ok:false,msg:"کد منقضی شده. دوباره درخواست کنید."};
+if(rec.attempts>=5)return{ok:false,msg:"تلاش بیش از حد. لطفاً کد جدید درخواست کنید."};
+if(String(toEn(code))!==String(rec.code)){rec.attempts++;setStore(store);return{ok:false,msg:`کد نادرست است. (${toFa(rec.attempts)}/۵)`};}
+delete store[phone];setStore(store);
+return{ok:true};
+}
+function getRemaining(phone){
+const store=getStore();
+const rec=store[phone];
+if(!rec)return 0;
+return Math.max(0,Math.floor((rec.expires-Date.now())/1000));
+}
+function canResend(phone){
+const store=getStore();
+const rec=store[phone];
+if(!rec)return true;
+return(Date.now()-rec.lastSentAt)>60000;
+}
+function clear(phone){const store=getStore();delete store[phone];setStore(store);}
+return{create,verify,getRemaining,canResend,clear};
+})();
+
+/* ============================================================
+   ⭐ OTP MODAL UI
+============================================================ */
+const OtpModal=(()=>{
+let currentPhone=null,currentPurpose=null,onSuccess=null,timerHandle=null,resendTimerHandle=null;
+const back=$("#otp-modal-back");
+const inputs=$$("#otp-inputs input");
+const timerEl=$("#otp-timer");
+const resendBtn=$("#otp-resend-btn");
+const demoNotice=$("#otp-demo-notice");
+const demoCode=$("#otp-demo-code");
+
+function setDigitStyles(){
+inputs.forEach(inp=>inp.classList.toggle("filled",!!inp.value));
+}
+function clearInputs(){inputs.forEach(i=>{i.value="";i.classList.remove("filled","err");});setDigitStyles();inputs[0].focus();}
+function getCode(){return inputs.map(i=>toEn(i.value)).join("");}
+
+function startCountdown(){
+clearInterval(timerHandle);
+const tick=()=>{
+const left=OtpService.getRemaining(currentPhone);
+if(left<=0){timerEl.classList.add("expired");timerEl.innerHTML='زمان تمام شد — کد جدید بگیرید';resendBtn.disabled=false;clearInterval(timerHandle);return;}
+timerEl.classList.remove("expired");
+const m=Math.floor(left/60),s=left%60;
+timerEl.innerHTML=`زمان باقی‌مانده: <b>${toFa(String(m).padStart(2,"0"))}:${toFa(String(s).padStart(2,"0"))}</b>`;
+};
+tick();timerHandle=setInterval(tick,1000);
+}
+function startResendCooldown(){
+clearInterval(resendTimerHandle);
+let left=60;
+const upd=()=>{
+if(left<=0){resendBtn.disabled=false;resendBtn.textContent="ارسال مجدد کد";clearInterval(resendTimerHandle);return;}
+resendBtn.disabled=true;resendBtn.textContent=`ارسال مجدد در ${toFa(left)} ثانیه…`;
+left--;
+};
+upd();resendTimerHandle=setInterval(upd,1000);
+}
+
+async function sendCode(phone,purpose="verify"){
+currentPhone=phone;currentPurpose=purpose;
+const code=OtpService.create(phone,purpose);
+const tpls=SmsService.getTemplates();
+const text=SmsService.renderTemplate(tpls.otp?.text||"کد تأیید: {otp}",{otp:code});
+const res=await SmsService.send(phone,text,{kind:"otp",meta:{purpose}});
+if(res.sim){
+demoNotice.hidden=false;
+demoCode.textContent=code;
+}else{
+demoNotice.hidden=true;
+}
+return{ok:true,sim:!!res.sim};
+}
+
+function show({phone,purpose="verify",successCb}){
+currentPhone=phone;currentPurpose=purpose;onSuccess=successCb;
+$("#otp-modal-phone").textContent=toFa(phone);
+$("#otp-modal-title").textContent="کد تأیید پیامک شد";
+$("#otp-modal-sub").textContent="کد ۶ رقمی ارسال‌شده را وارد کنید";
+clearInputs();
+back.classList.add("show");
+startCountdown();
+startResendCooldown();
+setTimeout(()=>inputs[0].focus(),120);
+}
+function hide(){back.classList.remove("show");clearInterval(timerHandle);clearInterval(resendTimerHandle);}
+function showError(){inputs.forEach(i=>{i.classList.add("err");});setTimeout(()=>inputs.forEach(i=>i.classList.remove("err")),450);}
+
+inputs.forEach((inp,idx)=>{
+inp.addEventListener("input",()=>{
+inp.value=toEn(inp.value).replace(/\D/g,"").slice(-1);
+setDigitStyles();
+if(inp.value&&idx<5)inputs[idx+1].focus();
+if(getCode().length===6)setTimeout(()=>$("#otp-verify-btn").click(),80);
+});
+inp.addEventListener("keydown",e=>{
+if(e.key==="Backspace"&&!inp.value&&idx>0){inputs[idx-1].focus();inputs[idx-1].value="";setDigitStyles();e.preventDefault();}
+if(e.key==="ArrowLeft"&&idx<5)inputs[idx+1].focus();
+if(e.key==="ArrowRight"&&idx>0)inputs[idx-1].focus();
+});
+inp.addEventListener("paste",e=>{
+e.preventDefault();
+const data=toEn((e.clipboardData||window.clipboardData).getData("text")).replace(/\D/g,"").slice(0,6);
+if(!data)return;
+data.split("").forEach((d,i)=>{if(inputs[i])inputs[i].value=d;});
+setDigitStyles();
+if(data.length===6)$("#otp-verify-btn").focus();else inputs[Math.min(data.length,5)].focus();
+});
+});
+
+resendBtn.addEventListener("click",async()=>{
+if(!OtpService.canResend(currentPhone))return toast("کمی صبر کنید.",true);
+await sendCode(currentPhone,currentPurpose);
+toast("کد جدید ارسال شد ✅");
+clearInputs();
+startCountdown();
+startResendCooldown();
+});
+
+$("#otp-verify-btn").addEventListener("click",()=>{
+const code=getCode();
+if(code.length!==6)return toast("کد ۶ رقمی را کامل وارد کنید.",true);
+const res=OtpService.verify(currentPhone,code);
+if(!res.ok){showError();return toast(res.msg,true);}
+toast("✅ شماره تأیید شد.");
+hide();
+setCustomerVerified(currentPhone);
+if(typeof onSuccess==="function")onSuccess();
+});
+
+$("#otp-cancel-btn").addEventListener("click",hide);
+back.addEventListener("click",e=>{if(e.target===back)hide();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&back.classList.contains("show"))hide();});
+
+return{show,hide,sendCode,get isOpen(){return back.classList.contains("show");}};
+})();
+
+/* ============================================================
+   FIELD VALIDATION
+============================================================ */
+function attachDigitNormalizer(input,{integer=false}={}){if(!input)return;input.addEventListener("input",()=>{let v=toEn(input.value);v=integer?v.replace(/\D+/g,""):v.replace(/[^\d.]/g,"");if(input.value!==v)input.value=v;});input.addEventListener("blur",()=>{input.value=toEn(input.value);});}
+["phone","track-phone","ptn-login-phone","ptn-reg-phone","home-phone-input","sms-phone"].forEach(id=>attachDigitNormalizer(document.getElementById(id),{integer:true}));
+["area","ptn-reg-share","ptn-drone-liter","slot-cap"].forEach(id=>attachDigitNormalizer(document.getElementById(id)));
+
+const FIELD_MESSAGES={cust:v=>v.trim().length>=3?"":"نام را کامل وارد کنید.",phone:v=>/^09\d{9}$/.test(v)?"":"شماره باید با ۰۹ و ۱۱ رقم باشد.",province:v=>v?"":"استان را انتخاب کنید.",city:v=>v.trim().length>=2?"":"نام شهر را وارد کنید.",crop:v=>v?"":"محصول را انتخاب کنید.",area:v=>{const n=Number(v);if(!v)return"مساحت را وارد کنید.";if(!isFinite(n)||n<=0)return"مساحت باید مثبت باشد.";if(n>10000000)return"مساحت غیرمنطقی است.";return"";},"track-code":v=>/^SP-\d{4}-\d{4}$/i.test(v.trim())?"":"قالب: SP-1405-0128","track-phone":v=>/^09\d{9}$/.test(v)?"":"شماره باید با ۰۹ و ۱۱ رقم باشد.","slot-select":v=>v?"":"زمان سم‌پاشی را انتخاب کنید."};
+function setFieldError(name,msg){const h=document.querySelector(`[data-error-for="${name}"]`);const f=document.getElementById(name);if(h)h.textContent=msg||"";if(f){if(msg)f.setAttribute("aria-invalid","true");else f.removeAttribute("aria-invalid");}}
+function validateField(name){const f=document.getElementById(name);if(!f)return true;const r=FIELD_MESSAGES[name];if(!r)return true;const m=r(f.value);setFieldError(name,m);return!m;}
+Object.keys(FIELD_MESSAGES).forEach(n=>{const f=document.getElementById(n);if(!f)return;f.addEventListener("blur",()=>validateField(n));f.addEventListener("input",()=>{if(f.getAttribute("aria-invalid")==="true")validateField(n);});});
+
+function submitWithValidation(form,names,onValid){if(!form)return;form.addEventListener("submit",e=>{e.preventDefault();let ok=true,first=null;for(const n of names){if(!validateField(n)){ok=false;if(!first)first=document.getElementById(n);}}if(!ok){first?.focus();toast("لطفاً خطاها را برطرف کنید.",true);return;}onValid();});}
+
+/* ============================================================
+   PRICE UPDATE
+============================================================ */
+function updatePrice(){const a=$("#area"),p=$("#total-price");if(!a||!p)return;const n=Math.max(0,Number(toEn(a.value).replace(/[^\d.]/g,""))||0);const cfg=getConfig();const prov=$("#province")?.value||"";const crop=$("#crop")?.value||"";const ha=m2ToHa(n);p.textContent=n>0?fmtT(calcPrice({area:ha,province:prov,crop},cfg)):"—";}
+["area","province","crop"].forEach(id=>{document.getElementById(id)?.addEventListener("input",updatePrice);});
+
+/* ============================================================
+   CUSTOMER HOME
+============================================================ */
+function renderCustomerAuth(){const ph=getCustomerPhone();const prompt=$("#home-phone-prompt");const changeBtn=$("#home-change-phone");const sub=$("#home-orders-sub");const inp=$("#home-phone-input");const verified=isCustomerVerified();if(prompt)prompt.hidden=!!ph&&verified;if(changeBtn)changeBtn.hidden=!ph;if(sub)sub.textContent=ph?`سفارش‌های شماره ${toFa(ph)}`:"برای دیدن سفارش‌های خود شماره موبایل بزن";if(inp&&!ph)inp.value="";}
 
 function renderHomeOrders(){
 const box=$("#home-orders");if(!box)return;
 const ph=getCustomerPhone();
 if(!ph){box.innerHTML='<div class="empty"><span class="empty-emoji">🌱</span><strong>سلام کشاورز عزیز!</strong>شمارهٔ موبایلت رو وارد کن تا سفارش‌هات رو ببینی.</div>';return;}
+if(!isCustomerVerified()){box.innerHTML='<div class="empty"><span class="empty-emoji">🔐</span><strong>شماره تأیید نشده</strong>برای دیدن سفارش‌ها، شماره‌ات را تأیید کن.<button class="btn btn-green btn-sm empty-cta" id="reverify-btn">تأیید شماره</button></div>';$("#reverify-btn")?.addEventListener("click",()=>startPhoneVerification(ph));return;}
 const mine=cache.orders.filter(o=>o.phone===ph).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,5);
 if(!mine.length){box.innerHTML='<div class="empty"><span class="empty-emoji">🌾</span><strong>مزرعه‌ات آمادهٔ سمپاشیه؟</strong>اولین سفارش رو ثبت کن<button class="btn btn-gold btn-sm empty-cta" data-go="order">ثبت سفارش</button></div>';return;}
 box.innerHTML=mine.map(x=>{const st=STATUS[x.status]||STATUS.pending;const partner=x.partnerId?getPartners().find(p=>p.id===x.partnerId):null;const pn=partner?` · 🛩️ ${esc(partner.name)}`:"";const sl=x.slotTime?`<div class="slot-badge">🕐 ${esc(x.slotDate||"")} · ${esc(x.slotTime)}</div>`:"";return `<div class="order-row"><div class="order-icon"><svg class="icon"><use href="#i-home"/></svg></div><div class="order-main"><strong>${esc(x.crop)} · ${toFa(x.area)} هکتار</strong><small>${esc(x.code)} · ${esc(x.date||"—")}${pn}</small>${sl}</div><span class="status ${st.cls}">${st.label}</span></div>`;}).join("");
@@ -940,7 +1460,8 @@ box.innerHTML=mine.map(x=>{const st=STATUS[x.status]||STATUS.pending;const partn
 
 function refreshHomeStats(){
 const ph=getCustomerPhone();
-const o=cache.orders.filter(x=>ph&&x.phone===ph);
+const verified=isCustomerVerified();
+const o=verified?cache.orders.filter(x=>x.phone===ph):[];
 const pending=o.filter(x=>["pending","scheduled","assigned","in_progress","receipt_pending"].includes(x.status)).length;
 const area=o.reduce((s,x)=>s+(+x.area||0),0);
 const next=o.filter(x=>x.slotDate).map(x=>toEn(x.slotDate)).sort()[0]||o.filter(x=>x.date).map(x=>toEn(x.date)).sort()[0];
@@ -953,7 +1474,7 @@ renderHomeOrders();
 
 async function refreshHomeOrdersFromServer(){
 const ph=getCustomerPhone();
-if(!ph)return;
+if(!ph||!isCustomerVerified())return;
 const list=await fetchMyOrders(ph);
 if(Array.isArray(list)&&list.length){
 const existing=cache.orders.filter(o=>o.phone!==ph);
@@ -963,28 +1484,46 @@ refreshHomeStats();
 }
 }
 
+async function startPhoneVerification(phone){
+const res=await OtpModal.sendCode(phone,"verify");
+OtpModal.show({phone,purpose:"verify",successCb:async()=>{
+setCustomerPhone(phone);
+await refreshHomeOrdersFromServer();
+toast("سفارش‌های شما نمایش داده شد ✅");
+}});
+if(res.sim)toast("🔵 حالت شبیه‌سازی — کد در مودال نمایش داده می‌شود.");
+}
+
+/* ============================================================
+   SUPPORT
+============================================================ */
 function renderSupport(){const cfg=getConfig();const btn=$("#support-phone-btn");const note=$("#support-note");const fab=$("#phone-fab");if(note&&cfg.supportNote)note.textContent=cfg.supportNote;if(btn){if(cfg.supportPhone){btn.href="tel:"+toEn(cfg.supportPhone);btn.textContent="📞 تماس با پشتیبانی: "+toFa(cfg.supportPhone);btn.target="_self";}else{btn.removeAttribute("href");btn.style.opacity=".6";btn.textContent="📞 شماره پشتیبانی تنظیم نشده";}}if(fab){if(cfg.supportPhone){fab.classList.add("pulse");fab.dataset.phone=toEn(cfg.supportPhone);}else{fab.classList.remove("pulse");fab.dataset.phone="";}}}
 
+/* ============================================================
+   SLOTS
+============================================================ */
 function refreshSlotSelect(){const sel=$("#slot-select"),hint=$("#slot-hint");if(!sel)return;const all=getSlots().sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start));const orders=cache.orders;const free=all.filter(s=>{const booked=orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length;return booked<s.cap;});sel.innerHTML=free.length?'<option value="">انتخاب بازهٔ زمانی</option>'+free.map(s=>{const booked=orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length;const left=s.cap-booked;return `<option value="${s.id}">${toFa(s.date)} — ساعت ${toFa(s.start)} تا ${toFa(s.end)} (${toFa(left)} جا باقی)</option>`;}).join(""):'<option value="">هیچ بازهٔ خالی وجود ندارد</option>';if(hint)hint.textContent=free.length?"":"مدیر باید بازهٔ زمانی تعریف کند.";}
 
-function attachDigitNormalizer(input,{integer=false}={}){if(!input)return;input.addEventListener("input",()=>{let v=toEn(input.value);v=integer?v.replace(/\D+/g,""):v.replace(/[^\d.]/g,"");if(input.value!==v)input.value=v;});input.addEventListener("blur",()=>{input.value=toEn(input.value);});}
-["phone","track-phone","ptn-login-phone","ptn-reg-phone","home-phone-input"].forEach(id=>attachDigitNormalizer(document.getElementById(id),{integer:true}));
-["area","ptn-reg-share","ptn-drone-liter","slot-cap"].forEach(id=>attachDigitNormalizer(document.getElementById(id)));
-
-const FIELD_MESSAGES={cust:v=>v.trim().length>=3?"":"نام را کامل وارد کنید.",phone:v=>/^09\d{9}$/.test(v)?"":"شماره باید با ۰۹ و ۱۱ رقم باشد.",province:v=>v?"":"استان را انتخاب کنید.",city:v=>v.trim().length>=2?"":"نام شهر را وارد کنید.",crop:v=>v?"":"محصول را انتخاب کنید.",area:v=>{const n=Number(v);if(!v)return "مساحت را وارد کنید.";if(!isFinite(n)||n<=0)return "مساحت باید مثبت باشد.";if(n>10000000)return "مساحت غیرمنطقی است.";return "";},"track-code":v=>/^SP-\d{4}-\d{4}$/i.test(v.trim())?"":"قالب: SP-1405-0128","track-phone":v=>/^09\d{9}$/.test(v)?"":"شماره باید با ۰۹ و ۱۱ رقم باشد.","slot-select":v=>v?"":"زمان سم‌پاشی را انتخاب کنید."};
-function setFieldError(name,msg){const h=document.querySelector(`[data-error-for="${name}"]`);const f=document.getElementById(name);if(h)h.textContent=msg||"";if(f){if(msg)f.setAttribute("aria-invalid","true");else f.removeAttribute("aria-invalid");}}
-function validateField(name){const f=document.getElementById(name);if(!f)return true;const r=FIELD_MESSAGES[name];if(!r)return true;const m=r(f.value);setFieldError(name,m);return !m;}
-Object.keys(FIELD_MESSAGES).forEach(n=>{const f=document.getElementById(n);if(!f)return;f.addEventListener("blur",()=>validateField(n));f.addEventListener("input",()=>{if(f.getAttribute("aria-invalid")==="true")validateField(n);});});
-
-function updatePrice(){const a=$("#area"),p=$("#total-price");if(!a||!p)return;const n=Math.max(0,Number(toEn(a.value).replace(/[^\d.]/g,""))||0);const cfg=getConfig();const prov=$("#province")?.value||"";const crop=$("#crop")?.value||"";const ha=m2ToHa(n);p.textContent=n>0?fmtT(calcPrice({area:ha,province:prov,crop},cfg)):"—";}
-["area","province","crop"].forEach(id=>{document.getElementById(id)?.addEventListener("input",updatePrice);});
-
-function submitWithValidation(form,names,onValid){if(!form)return;form.addEventListener("submit",e=>{e.preventDefault();let ok=true,first=null;for(const n of names){if(!validateField(n)){ok=false;if(!first)first=document.getElementById(n);}}if(!ok){first?.focus();toast("لطفاً خطاها را برطرف کنید.",true);return;}onValid();});}
-
-/* ============ ORDER CREATE ============ */
+/* ============================================================
+   ORDER SUBMIT (with OTP)
+============================================================ */
 submitWithValidation($("#order-form"),["cust","phone","province","city","crop","area","slot-select"],async()=>{
 const form=$("#order-form");
 const data=Object.fromEntries(new FormData(form));
+const phone=toEn(data.phone);
+
+// اگر شماره تأیید نشده → OTP بفرست و منتظر بمان
+if(!(isCustomerVerified()&&getCustomerPhone()===phone)){
+await OtpModal.sendCode(phone,"order");
+OtpModal.show({phone,purpose:"order",successCb:()=>{
+setCustomerPhone(phone);
+toast("✅ شماره تأیید شد. برای تکمیل، دوباره روی «ثبت سفارش» بزنید.");
+$("#order-form button[type=submit]")?.focus();
+}});
+return;
+}
+
+// ایجاد سفارش
 const seq=String(cache.orders.length+1).padStart(4,"0");
 const code=`SP-1405-${seq}`;
 const ha=m2ToHa(+toEn(data.area));
@@ -994,6 +1533,10 @@ cache.orders.push(order);
 write(LS.orders,cache.orders);
 setCustomerPhone(order.phone);
 await createOrderRemote(order);
+
+// ارسال پیامک ثبت سفارش
+SmsService.sendByEvent("order_created",order).catch(()=>{});
+
 refreshHomeStats();
 form.reset();
 $("#area").value="10000";
@@ -1001,42 +1544,26 @@ updatePrice();
 updateNotifBadge();
 refreshSlotSelect();
 PAY_ORDER=order;
-toast(`سفارش ${code} ثبت شد ✅`);
+toast(`✅ سفارش ${code} ثبت شد و پیامک ارسال گردید.`);
 showScreen("payment");
 });
 
-/* ============ TRACK ORDER + TIMELINE + CANCEL ============ */
+/* ============================================================
+   TRACK ORDER
+============================================================ */
 function renderTimeline(order){
-const steps=[
-{key:"pending",label:"سفارش ثبت شد",desc:"اطلاعات شما دریافت شد"},
-{key:"paid",label:"پرداخت تأیید شد",desc:"فیش واریزی توسط مدیر بررسی شد"},
-{key:"assigned",label:"ارجاع به اپراتور",desc:"اپراتور منطقه انتخاب شد"},
-{key:"in_progress",label:"در حال انجام",desc:"سم‌پاشی در حال انجام است"},
-{key:"done",label:"تکمیل شد",desc:"کار با موفقیت انجام شد"}
-];
+const steps=[{key:"pending",label:"سفارش ثبت شد",desc:"اطلاعات شما دریافت شد"},{key:"paid",label:"پرداخت تأیید شد",desc:"فیش واریزی توسط مدیر بررسی شد"},{key:"assigned",label:"ارجاع به اپراتور",desc:"اپراتور منطقه انتخاب شد"},{key:"in_progress",label:"در حال انجام",desc:"سم‌پاشی در حال انجام است"},{key:"done",label:"تکمیل شد",desc:"کار با موفقیت انجام شد"}];
 const order_status=order.status||"pending";
 const receipt=getReceipt(order.id);
 const receiptApproved=receipt&&receipt.status==="approved";
-const receiptPending=receipt&&receipt.status==="pending";
 let currentIdx=0;
-if(order_status==="pending"){
-if(receiptApproved)currentIdx=1;
-else if(receiptPending)currentIdx=0;
-else currentIdx=0;
-}
 if(order_status==="scheduled")currentIdx=1;
 if(order_status==="assigned")currentIdx=2;
 if(order_status==="in_progress")currentIdx=3;
 if(order_status==="done")currentIdx=4;
 if(order_status==="cancelled")currentIdx=-1;
 if(order_status==="receipt_rejected")currentIdx=0;
-return steps.map((s,i)=>{
-let cls="";
-if(i<currentIdx)cls="done";
-else if(i===currentIdx)cls="current";
-if(order_status==="done"&&i===4)cls="done";
-return `<div class="tl-item ${cls}"><strong>${s.label}</strong><small>${s.desc}</small></div>`;
-}).join("");
+return steps.map((s,i)=>{let cls="";if(i<currentIdx)cls="done";else if(i===currentIdx)cls="current";if(order_status==="done"&&i===4)cls="done";return `<div class="tl-item ${cls}"><strong>${s.label}</strong><small>${s.desc}</small></div>`;}).join("");
 }
 
 submitWithValidation($("#track-form"),["track-code","track-phone"],async()=>{
@@ -1044,13 +1571,7 @@ const code=toEn($("#track-code").value.trim()).toUpperCase();
 const phone=toEn($("#track-phone").value);
 const box=$("#track-result");
 let found=cache.orders.find(o=>o.code.toUpperCase()===code&&o.phone===phone);
-if(!found){
-found=await fetchOrderByCode(code,phone);
-if(found){
-const existing=cache.orders.find(o=>o.id===found.id);
-if(!existing)cache.orders.push(found);
-}
-}
+if(!found){found=await fetchOrderByCode(code,phone);if(found){const existing=cache.orders.find(o=>o.id===found.id);if(!existing)cache.orders.push(found);}}
 if(!found){box.innerHTML='<div class="notice" style="margin-top:16px">سفارشی با این مشخصات یافت نشد.</div>';return;}
 renderTrackResult(found);
 startTrackAutoRefresh(code,phone);
@@ -1063,18 +1584,12 @@ const partner=found.partnerId?getPartners().find(p=>p.id===found.partnerId):null
 const receipt=getReceipt(found.id);
 let receiptHtml="";
 if(receipt){
-if(receipt.status==="pending"){
-receiptHtml=`<div class="admin-card" style="margin-top:14px;background:linear-gradient(145deg,#fdf3dc,#fffbf0);border-color:#f1e2bd"><h4 style="color:var(--warn-fg)">🧾 فیش شما در انتظار تأیید</h4><div style="font-size:12.5px;color:var(--warn-fg);margin-top:6px">فیش ارسال شد و در انتظار بررسی توسط مدیر است.</div></div>`;
-}else if(receipt.status==="approved"){
-receiptHtml=`<div class="admin-card" style="margin-top:14px;background:linear-gradient(145deg,#e6f4ec,#f5faf6);border-color:rgba(15,111,78,.2)"><h4 style="color:var(--ok-fg)">✅ فیش شما تأیید شد</h4><div style="font-size:12.5px;color:var(--ok-fg);margin-top:6px">پرداخت شما تأیید شد. سفارش در حال آماده‌سازی است.</div></div>`;
-}else if(receipt.status==="rejected"){
-receiptHtml=`<div class="admin-card" style="margin-top:14px;background:linear-gradient(145deg,#fdecea,#fff);border-color:rgba(160,42,30,.2)"><h4 style="color:var(--dng)">❌ فیش شما رد شد</h4><div style="font-size:12.5px;color:var(--dng);margin-top:6px">لطفاً فیش صحیح را دوباره ارسال کنید یا با پشتیبانی تماس بگیرید.</div></div>`;
-}
+if(receipt.status==="pending")receiptHtml=`<div class="admin-card" style="margin-top:14px;background:linear-gradient(145deg,#fdf3dc,#fffbf0);border-color:#f1e2bd"><h4 style="color:var(--warn-fg)">🧾 فیش شما در انتظار تأیید</h4><div style="font-size:12.5px;color:var(--warn-fg);margin-top:6px">فیش ارسال شد و در انتظار بررسی توسط مدیر است.</div></div>`;
+else if(receipt.status==="approved")receiptHtml=`<div class="admin-card" style="margin-top:14px;background:linear-gradient(145deg,#e6f4ec,#f5faf6);border-color:rgba(15,111,78,.2)"><h4 style="color:var(--ok-fg)">✅ فیش شما تأیید شد</h4><div style="font-size:12.5px;color:var(--ok-fg);margin-top:6px">پرداخت شما تأیید شد. سفارش در حال آماده‌سازی است.</div></div>`;
+else if(receipt.status==="rejected")receiptHtml=`<div class="admin-card" style="margin-top:14px;background:linear-gradient(145deg,#fdecea,#fff);border-color:rgba(160,42,30,.2)"><h4 style="color:var(--dng)">❌ فیش شما رد شد</h4><div style="font-size:12.5px;color:var(--dng);margin-top:6px">لطفاً فیش صحیح را دوباره ارسال کنید.</div></div>`;
 }
 let partnerHtml="";
-if(partner){
-partnerHtml=`<div class="admin-card" style="margin-top:14px;background:linear-gradient(145deg,#f3e9fa,#faf5ff);border-color:#e9d5ff"><h4 style="color:#6d28d9">🛩️ اپراتور سم‌پاش شما</h4><div class="admin-grid"><div><small style="color:var(--i400)">نام اپراتور</small><div><strong>${esc(partner.name)}</strong></div></div><div><small style="color:var(--i400)">موبایل</small><div><strong style="direction:ltr;display:inline-block">${esc(partner.phone)}</strong></div></div><div><small style="color:var(--i400)">استان</small><div><strong>${esc(partner.province)}</strong></div></div></div></div>`;
-}
+if(partner)partnerHtml=`<div class="admin-card" style="margin-top:14px;background:linear-gradient(145deg,#f3e9fa,#faf5ff);border-color:#e9d5ff"><h4 style="color:#6d28d9">🛩️ اپراتور سم‌پاش شما</h4><div class="admin-grid"><div><small style="color:var(--i400)">نام اپراتور</small><div><strong>${esc(partner.name)}</strong></div></div><div><small style="color:var(--i400)">موبایل</small><div><strong style="direction:ltr;display:inline-block">${esc(partner.phone)}</strong></div></div><div><small style="color:var(--i400)">استان</small><div><strong>${esc(partner.province)}</strong></div></div></div></div>`;
 let slotHtml="";
 if(found.slotDate){slotHtml=`<div class="admin-card" style="margin-top:14px;background:linear-gradient(145deg,#f3e9fa,#faf5ff);border-color:#e9d5ff"><h4 style="color:#6d28d9">🕐 زمان سم‌پاشی</h4><div><strong>${toFa(found.slotDate)} — ساعت ${toFa(found.slotTime||"")}</strong></div></div>`;}
 const canCancel=found.status==="pending"||found.status==="scheduled"||found.status==="receipt_rejected";
@@ -1096,9 +1611,7 @@ box.innerHTML=`
 </div>
 <div class="timeline">${renderTimeline(found)}</div>
 </div>
-${slotHtml}
-${receiptHtml}
-${partnerHtml}
+${slotHtml}${receiptHtml}${partnerHtml}
 <div class="track-actions">${payBtn}${cancelBtn}<button type="button" class="btn btn-light" id="track-refresh-btn"><svg class="icon"><use href="#i-refresh"/></svg> بازخوانی</button></div>
 <div class="refresh-badge"><span class="refresh-dot"></span>به‌روزرسانی خودکار هر ۳۰ ثانیه</div>`;
 
@@ -1108,7 +1621,7 @@ const fresh=await fetchOrderByCode(found.code.toUpperCase(),found.phone);
 if(fresh){const idx=cache.orders.findIndex(o=>o.id===fresh.id);if(idx>=0)cache.orders[idx]=fresh;else cache.orders.push(fresh);write(LS.orders,cache.orders);renderTrackResult(fresh);refreshHomeStats();toast("به‌روزرسانی شد.");}else toast("خطا در بازخوانی.",true);
 });
 $("#cancel-order-btn")?.addEventListener("click",()=>{
-confirmModal("لغو سفارش",`آیا از لغو سفارش ${found.code} مطمئن هستید؟ این عملیات قابل بازگشت نیست.`,{
+Admin.confirmModal("لغو سفارش",`آیا از لغو سفارش ${found.code} مطمئن هستید؟`,{
 danger:true,requireWord:"CANCEL",
 onConfirm:async()=>{
 found.status="cancelled";
@@ -1116,6 +1629,7 @@ const idx=cache.orders.findIndex(o=>o.id===found.id);
 if(idx>=0)cache.orders[idx]=found;
 write(LS.orders,cache.orders);
 await updateOrderRemote(found.id,{status:"cancelled"});
+SmsService.sendByEvent("cancelled",found).catch(()=>{});
 renderTrackResult(found);
 refreshHomeStats();
 refreshSlotSelect();
@@ -1144,33 +1658,23 @@ refreshHomeStats();
 },30000);
 }
 
-/* ============ PAYMENT WITH RECEIPT PREVIEW ============ */
-function renderPayInfo(){const el=document.getElementById("pay-info");if(!el)return;const o=PAY_ORDER;if(!o){el.innerHTML='<div class="notice" style="margin-bottom:14px">برای پرداخت، از صفحهٔ «پیگیری سفارش» سفارش خود را جست‌وجو کنید یا «سفارش جدید» ثبت کنید.</div>';return;}const slot=o.slotDate?`<div><small>زمان سم‌پاشی</small><strong>${toFa(o.slotDate)} · ${toFa(o.slotTime||"")}</strong></div>`:"";el.innerHTML=`<div class="receipt-card"><div class="receipt-head"><div class="check"><svg class="icon"><use href="#i-check"/></svg></div><div style="flex:1"><strong>سفارش با موفقیت ثبت شد</strong><small>کد پیگیری: <code class="ltr">${esc(o.code)}</code></small></div></div><div class="receipt-body"><div><small>مشتری</small><strong>${esc(o.name)}</strong></div><div><small>محصول · مساحت</small><strong>${esc(o.crop)} · ${toFa(o.area)} هکتار</strong></div><div><small>مبلغ قابل پرداخت</small><strong style="color:var(--b700);font-size:18px">${fmtT(o.amount)}</strong></div>${slot}<div><small>وضعیت</small><strong><span class="status">در انتظار پرداخت</span></strong></div></div><div class="notice" style="margin-top:16px">لطفاً مبلغ را به شماره کارت زیر واریز کرده و تصویر فیش را در قسمت پایین بارگذاری کنید.</div></div>`;}
+/* ============================================================
+   PAYMENT
+============================================================ */
+function renderPayInfo(){const el=document.getElementById("pay-info");if(!el)return;const o=PAY_ORDER;if(!o){el.innerHTML='<div class="notice" style="margin-bottom:14px">برای پرداخت، از صفحهٔ «پیگیری سفارش» سفارش خود را جست‌وجو کنید یا «سفارش جدید» ثبت کنید.</div>';return;}const slot=o.slotDate?`<div><small>زمان سم‌پاشی</small><strong>${toFa(o.slotDate)} · ${toFa(o.slotTime||"")}</strong></div>`:"";el.innerHTML=`<div class="receipt-card"><div class="receipt-head"><div class="check"><svg class="icon"><use href="#i-check"/></svg></div><div style="flex:1"><strong>سفارش با موفقیت ثبت شد</strong><small>کد پیگیری: <code class="ltr">${esc(o.code)}</code></small></div></div><div class="receipt-body"><div><small>مشتری</small><strong>${esc(o.name)}</strong></div><div><small>محصول · مساحت</small><strong>${esc(o.crop)} · ${toFa(o.area)} هکتار</strong></div><div><small>مبلغ قابل پرداخت</small><strong style="color:var(--b700);font-size:18px">${fmtT(o.amount)}</strong></div>${slot}<div><small>وضعیت</small><strong><span class="status">در انتظار پرداخت</span></strong></div></div><div class="notice" style="margin-top:16px">لطفاً مبلغ را به شماره کارت زیر واریز کرده و تصویر فیش را بارگذاری کنید.</div></div>`;}
 
 (function(){
-const r=$("#receipt");
-const previewBox=$("#receipt-preview-box");
+const r=$("#receipt"),previewBox=$("#receipt-preview-box");
 r?.addEventListener("change",()=>{
-const cfg=getConfig();
-const max=(cfg.receiptMax||5)*1024*1024;
-const f=r.files?.[0];
+const cfg=getConfig(),max=(cfg.receiptMax||5)*1024*1024,f=r.files?.[0];
 previewBox.innerHTML="";
 if(!f){setFieldError("receipt","");return;}
 if(!["image/jpeg","image/png","image/webp","application/pdf"].includes(f.type)){setFieldError("receipt","فرمت مجاز نیست.");r.value="";return;}
 if(f.size>max){setFieldError("receipt","حجم زیاد است.");r.value="";return;}
 setFieldError("receipt","");
 const sizeKB=(f.size/1024).toFixed(1);
-if(f.type.startsWith("image/")){
-const reader=new FileReader();
-reader.onload=e=>{
-previewBox.innerHTML=`<div class="receipt-preview"><img src="${e.target.result}" alt="پیش‌نمایش"><div class="rp-info"><strong>✅ فایل آماده ارسال</strong><small>${esc(f.name)} · ${toFa(sizeKB)} کیلوبایت</small></div><button type="button" id="rm-receipt">حذف</button></div>`;
-$("#rm-receipt").onclick=()=>{r.value="";previewBox.innerHTML="";};
-};
-reader.readAsDataURL(f);
-}else{
-previewBox.innerHTML=`<div class="receipt-preview"><div style="width:70px;height:70px;border-radius:9px;background:#fdecea;color:#a02a1e;display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0">PDF</div><div class="rp-info"><strong>✅ فایل آماده ارسال</strong><small>${esc(f.name)} · ${toFa(sizeKB)} کیلوبایت</small></div><button type="button" id="rm-receipt">حذف</button></div>`;
-$("#rm-receipt").onclick=()=>{r.value="";previewBox.innerHTML="";};
-}
+if(f.type.startsWith("image/")){const reader=new FileReader();reader.onload=e=>{previewBox.innerHTML=`<div class="receipt-preview"><img src="${e.target.result}" alt="پیش‌نمایش"><div class="rp-info"><strong>✅ فایل آماده ارسال</strong><small>${esc(f.name)} · ${toFa(sizeKB)} کیلوبایت</small></div><button type="button" id="rm-receipt">حذف</button></div>`;$("#rm-receipt").onclick=()=>{r.value="";previewBox.innerHTML="";};};reader.readAsDataURL(f);}
+else{previewBox.innerHTML=`<div class="receipt-preview"><div style="width:70px;height:70px;border-radius:9px;background:#fdecea;color:#a02a1e;display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0">PDF</div><div class="rp-info"><strong>✅ فایل آماده ارسال</strong><small>${esc(f.name)} · ${toFa(sizeKB)} کیلوبایت</small></div><button type="button" id="rm-receipt">حذف</button></div>`;$("#rm-receipt").onclick=()=>{r.value="";previewBox.innerHTML="";};}
 });
 $("#payment-form")?.addEventListener("submit",async e=>{
 e.preventDefault();
@@ -1181,40 +1685,55 @@ if(!f){toast("لطفاً تصویر فیش را بارگذاری کنید.",true
 const ok=await saveReceiptData(PAY_ORDER.id,f);
 if(!ok){toast("خطا در ذخیره فایل.",true);return;}
 const idx=cache.orders.findIndex(o=>o.id===PAY_ORDER.id);
-if(idx>=0){
-cache.orders[idx].status="receipt_pending";
-write(LS.orders,cache.orders);
-await updateOrderRemote(PAY_ORDER.id,{status:"receipt_pending"});
-}
+if(idx>=0){cache.orders[idx].status="receipt_pending";write(LS.orders,cache.orders);await updateOrderRemote(PAY_ORDER.id,{status:"receipt_pending"});}
 toast("✅ فیش شما ارسال شد. بعد از تأیید مدیر، وضعیت سفارش تغییر می‌کند.");
-r.value="";
-previewBox.innerHTML="";
+r.value="";previewBox.innerHTML="";
 });
 $("#copy-card")?.addEventListener("click",async()=>{
 const v=($("#cardno")?.value||"").replace(/\s+/g,"");
-try{
-if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(v);toast("شماره کارت کپی شد.");}
-else toast("کپی خودکار فعال نیست.");
-}catch{toast("کپی ناموفق.",true);}
+try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(v);toast("شماره کارت کپی شد.");}else toast("کپی خودکار فعال نیست.");}catch{toast("کپی ناموفق.",true);}
 });
 })();
 
+/* ============================================================
+   MESSAGES
+============================================================ */
 (function(){const form=$("#msg-form"),input=$("#msg-input"),body=$("#chat-body");if(!form)return;form.addEventListener("submit",e=>{e.preventDefault();const t=input.value.trim();if(!t){toast("متن خالی است.",true);return;}const msgs=getMessages();msgs.push({id:uid(),from:"customer",text:t,createdAt:Date.now(),read:false});setMessages(msgs);const b=document.createElement("div");b.className="bubble";b.textContent=t;body.appendChild(b);input.value="";body.scrollTop=body.scrollHeight;toast("پیام ثبت شد.");});})();
 
-/* ============ ADMIN ============ */
+/* ============================================================
+   ADMIN PANEL
+============================================================ */
 const Admin=(()=>{
 function openModal(html){const back=$("#modal-back"),body=$("#modal-body");body.innerHTML=html;back.classList.add("show");back.onclick=e=>{if(e.target===back)closeModal();};}
 function closeModal(){$("#modal-back").classList.remove("show");$("#modal-body").innerHTML="";}
 function confirmModal(title,sub,{danger=false,requireWord=null,onConfirm}={}){const wl=requireWord?`<div class="field-wrap" style="margin-top:12px"><label>برای تأیید، کلمهٔ <code>${requireWord}</code> را تایپ کنید</label><input id="cf-word" class="ltr"></div>`:"";openModal(`<h3>${esc(title)}</h3><p class="m-sub">${esc(sub||"")}</p>${wl}<div class="modal-actions"><button class="btn ${danger?"btn-danger":"btn-green"}" id="cf-ok">تأیید</button><button class="btn btn-light" id="cf-no">انصراف</button></div>`);$("#cf-no").onclick=closeModal;$("#cf-ok").onclick=()=>{if(requireWord){const w=($("#cf-word").value||"").trim();if(w!==requireWord){toast("کلمه مطابقت ندارد.",true);return;}}closeModal();onConfirm();};}
-function bindTabs(){$("#admin-tabs")?.addEventListener("click",e=>{const b=e.target.closest("button[data-tab]");if(!b)return;const tab=b.dataset.tab;$$("#admin-tabs button").forEach(x=>x.setAttribute("aria-selected",x===b?"true":"false"));$$(".admin-panel").forEach(p=>p.classList.toggle("active",p.dataset.panel===tab));({dash:renderDashboard,orders:()=>loadOrdersPage(true),payments:renderPayments,partners:renderPartners,schedule:renderSlots,pricing:renderPricing,payment:renderPayment,regions:renderRegions,crops:renderCrops,messages:renderMessages,customers:renderCustomers,settings:renderSettings})[tab]?.();});}
 
-function renderDashboard(){const o=cache.orders;const total=o.length;const pending=o.filter(x=>["pending","scheduled","assigned","receipt_pending"].includes(x.status)).length;const revenue=o.filter(x=>x.status!=="cancelled").reduce((s,x)=>s+(+x.amount||0),0);const customers=new Set(o.map(x=>x.phone)).size;$("#ad-total").textContent=toFa(total);$("#ad-pending").textContent=toFa(pending);$("#ad-revenue").textContent=fmt(revenue);$("#ad-customers").textContent=toFa(customers);
+function bindTabs(){
+$("#admin-tabs")?.addEventListener("click",e=>{
+const b=e.target.closest("button[data-tab]");if(!b)return;
+const tab=b.dataset.tab;
+$$("#admin-tabs button").forEach(x=>x.setAttribute("aria-selected",x===b?"true":"false"));
+$$(".admin-panel").forEach(p=>p.classList.toggle("active",p.dataset.panel===tab));
+({dash:renderDashboard,orders:()=>loadOrdersPage(true),payments:renderPayments,partners:renderPartners,schedule:renderSlots,pricing:renderPricing,payment:renderPayment,sms:renderSmsPanel,regions:renderRegions,crops:renderCrops,messages:renderMessages,customers:renderCustomers,settings:renderSettings})[tab]?.();
+});
+}
+
+function renderDashboard(){
+const o=cache.orders,total=o.length;
+const pending=o.filter(x=>["pending","scheduled","assigned","receipt_pending"].includes(x.status)).length;
+const revenue=o.filter(x=>x.status!=="cancelled").reduce((s,x)=>s+(+x.amount||0),0);
+const smsCount=SmsService.getLog().length;
+$("#ad-total").textContent=toFa(total);
+$("#ad-pending").textContent=toFa(pending);
+$("#ad-revenue").textContent=fmt(revenue);
+$("#ad-sms-count").textContent=toFa(smsCount);
 const box=$("#ad-recent-orders");
 const recent=o.slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,5);
 if(!recent.length){box.innerHTML='<div class="empty"><span class="empty-emoji">📋</span><strong>هنوز سفارشی ثبت نشده</strong></div>';return;}
-box.innerHTML=recent.map(x=>{const st=STATUS[x.status]||STATUS.pending;const p=x.partnerId?getPartners().find(y=>y.id===x.partnerId):null;const pn=p?` · 🤝 ${esc(p.name)}`:"";return `<div class="order-row"><div class="order-icon"><svg class="icon"><use href="#i-order"/></svg></div><div class="order-main"><strong>${esc(x.code)} — ${esc(x.name)}</strong><small>${esc(x.crop)} · ${toFa(x.area)} هکتار · ${fmtT(x.amount)}${pn}</small></div><span class="status ${st.cls}">${st.label}</span></div>`;}).join("");}
+box.innerHTML=recent.map(x=>{const st=STATUS[x.status]||STATUS.pending;const p=x.partnerId?getPartners().find(y=>y.id===x.partnerId):null;const pn=p?` · 🤝 ${esc(p.name)}`:"";return `<div class="order-row"><div class="order-icon"><svg class="icon"><use href="#i-order"/></svg></div><div class="order-main"><strong>${esc(x.code)} — ${esc(x.name)}</strong><small>${esc(x.crop)} · ${toFa(x.area)} هکتار · ${fmtT(x.amount)}${pn}</small></div><span class="status ${st.cls}">${st.label}</span></div>`;}).join("");
+}
 
-/* ============ PAYMENTS (admin confirms receipts) ============ */
+/* ============ PAYMENTS ============ */
 let payFilter="pending";
 function renderPayments(){
 const box=$("#payments-list");if(!box)return;
@@ -1222,72 +1741,42 @@ const receipts=read("sph_receipts",{});
 const list=cache.orders.filter(o=>receipts[o.id]).map(o=>({order:o,receipt:receipts[o.id]}));
 let filtered=list;
 if(payFilter)filtered=list.filter(x=>x.receipt.status===payFilter);
-if(!filtered.length){
-box.innerHTML=`<div class="empty"><span class="empty-emoji">💳</span><strong>فیشی برای نمایش نیست</strong>وقتی مشتری فیش بارگذاری کنه، اینجا نمایش داده می‌شه</div>`;
-return;
-}
+if(!filtered.length){box.innerHTML=`<div class="empty"><span class="empty-emoji">💳</span><strong>فیشی برای نمایش نیست</strong>وقتی مشتری فیش بارگذاری کنه، اینجا نمایش داده می‌شه</div>`;return;}
 box.innerHTML=filtered.sort((a,b)=>(b.receipt.uploadedAt||0)-(a.receipt.uploadedAt||0)).map(({order,receipt})=>{
 const statusBadge=receipt.status==="pending"?'<span class="status amber">⏳ در انتظار بررسی</span>':receipt.status==="approved"?'<span class="status green">✅ تأیید شده</span>':'<span class="status red">❌ رد شده</span>';
 let thumb;
-if(receipt.data&&receipt.type.startsWith("image/")){
-thumb=`<img src="${receipt.data}" class="receipt-thumb" data-img="${receipt.data}" alt="فیش">`;
-}else if(receipt.type==="application/pdf"){
-thumb=`<div class="receipt-thumb-pdf">PDF</div>`;
-}else{
-thumb=`<span class="receipt-none">—</span>`;
-}
-const actions=receipt.status==="pending"?`
-<button class="btn btn-green btn-sm" data-pay-approve="${order.id}"><svg class="icon"><use href="#i-check"/></svg> تأیید</button>
-<button class="btn btn-danger btn-sm" data-pay-reject="${order.id}"><svg class="icon"><use href="#i-x"/></svg> رد</button>`:"";
+if(receipt.data&&receipt.type.startsWith("image/"))thumb=`<img src="${receipt.data}" class="receipt-thumb" data-img="${receipt.data}" alt="فیش">`;
+else if(receipt.type==="application/pdf")thumb=`<div class="receipt-thumb-pdf">PDF</div>`;
+else thumb=`<span class="receipt-none">—</span>`;
+const actions=receipt.status==="pending"?`<button class="btn btn-green btn-sm" data-pay-approve="${order.id}"><svg class="icon"><use href="#i-check"/></svg> تأیید</button><button class="btn btn-danger btn-sm" data-pay-reject="${order.id}"><svg class="icon"><use href="#i-x"/></svg> رد</button>`:"";
 const dateStr=new Date(receipt.uploadedAt||Date.now()).toLocaleString("fa-IR");
-return `<div class="admin-card">
-<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:12px">
-<div>
-<h4 style="margin-bottom:4px">فیش سفارش ${esc(order.code)}</h4>
-<small style="color:var(--i400);font-size:12px">${esc(order.name)} · ${fmtT(order.amount)} · ${dateStr}</small>
-</div>
-${statusBadge}
-</div>
-<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-${thumb}
-<div style="flex:1;min-width:150px">
-<small style="color:var(--i400);display:block;font-size:11.5px">فایل ارسالی</small>
-<strong style="font-size:12.5px">${esc(receipt.name||"—")}</strong>
-</div>
-<div class="actions" style="margin-top:0">${actions}</div>
-</div>
-</div>`;
-}).join("");
-box.querySelectorAll("[data-img]").forEach(img=>{
-img.addEventListener("click",()=>{
-openModal(`<h3>پیش‌نمایش فیش</h3><p class="m-sub">برای بستن، بیرون تصویر را لمس کنید</p><img src="${img.dataset.img}" style="width:100%;border-radius:12px;border:1px solid var(--ln)">`);
-});
-});
+return `<div class="admin-card"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;margin-bottom:12px"><div><h4 style="margin-bottom:4px">فیش سفارش ${esc(order.code)}</h4><small style="color:var(--i400);font-size:12px">${esc(order.name)} · ${fmtT(order.amount)} · ${dateStr}</small></div>${statusBadge}</div><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">${thumb}<div style="flex:1;min-width:150px"><small style="color:var(--i400);display:block;font-size:11.5px">فایل ارسالی</small><strong style="font-size:12.5px">${esc(receipt.name||"—")}</strong></div><div class="actions" style="margin-top:0">${actions}</div></div></div>`;}).join("");
+box.querySelectorAll("[data-img]").forEach(img=>img.addEventListener("click",()=>{openModal(`<h3>پیش‌نمایش فیش</h3><p class="m-sub">برای بستن، بیرون تصویر را لمس کنید</p><img src="${img.dataset.img}" style="width:100%;border-radius:12px;border:1px solid var(--ln)">`);}));
 box.querySelectorAll("[data-pay-approve]").forEach(b=>b.onclick=async()=>{
 const id=b.dataset.payApprove;
 setReceiptStatus(id,"approved");
 const idx=cache.orders.findIndex(o=>o.id===id);
-if(idx>=0){cache.orders[idx].status="scheduled";write(LS.orders,cache.orders);await updateOrderRemote(id,{status:"scheduled"});}
-renderPayments();renderDashboard();toast("✅ فیش تأیید شد.");
+if(idx>=0){
+cache.orders[idx].status="scheduled";
+write(LS.orders,cache.orders);
+await updateOrderRemote(id,{status:"scheduled"});
+SmsService.sendByEvent("payment_approved",cache.orders[idx]).catch(()=>{});
+}
+renderPayments();renderDashboard();toast("✅ فیش تأیید و پیامک ارسال شد.");
 });
 box.querySelectorAll("[data-pay-reject]").forEach(b=>b.onclick=()=>{
-confirmModal("رد فیش","آیا از رد این فیش مطمئن هستید؟",{
-danger:true,
-onConfirm:async()=>{
+confirmModal("رد فیش","آیا از رد این فیش مطمئن هستید؟",{danger:true,onConfirm:async()=>{
 const id=b.dataset.payReject;
 setReceiptStatus(id,"rejected");
 const idx=cache.orders.findIndex(o=>o.id===id);
-if(idx>=0){cache.orders[idx].status="receipt_rejected";write(LS.orders,cache.orders);await updateOrderRemote(id,{status:"receipt_rejected"});}
+if(idx>=0){cache.orders[idx].status="receipt_rejected";write(LS.orders,cache.orders);await updateOrderRemote(id,{status:"receipt_rejected"});SmsService.sendByEvent("receipt_rejected",cache.orders[idx]).catch(()=>{});}
 renderPayments();renderDashboard();toast("فیش رد شد.");
-}
+}});
 });
-});
 }
-function bindPayments(){
-$("#pay-filter")?.addEventListener("change",e=>{payFilter=e.target.value;renderPayments();});
-$("#pay-refresh-btn")?.addEventListener("click",()=>renderPayments());
-}
+function bindPayments(){$("#pay-filter")?.addEventListener("change",e=>{payFilter=e.target.value;renderPayments();});$("#pay-refresh-btn")?.addEventListener("click",()=>renderPayments());}
 
+/* ============ ORDERS ============ */
 const orderFilters={q:"",status:"",offset:0,limit:20,total:0,hasMore:false,loading:false};
 let searchDebounce=null;
 async function loadOrdersPage(reset){
@@ -1296,13 +1785,12 @@ orderFilters.loading=true;
 if(reset)orderFilters.offset=0;
 const res=await fetchOrdersPage(orderFilters.offset,orderFilters.limit,orderFilters.q,orderFilters.status);
 const list=res.orders||[];
-if(reset){cache.orders=list;}else{cache.orders=cache.orders.concat(list);}
+if(reset)cache.orders=list;else cache.orders=cache.orders.concat(list);
 orderFilters.total=res.total||0;
 orderFilters.hasMore=!!res.hasMore;
 orderFilters.offset=cache.orders.length;
 orderFilters.loading=false;
-renderOrders();
-renderPager();
+renderOrders();renderPager();
 }
 function renderOrders(){
 const tb=$("#ord-tbody");if(!tb)return;
@@ -1312,88 +1800,338 @@ tb.innerHTML=filtered.map(o=>{
 const st=STATUS[o.status]||STATUS.pending;
 const receipts=read("sph_receipts",{});
 const hasReceipt=receipts[o.id];
-const receiptStatus=hasReceipt?hasReceipt.status:"";
 let receiptIcon='<span class="receipt-none">—</span>';
-if(hasReceipt){
-if(receiptStatus==="pending")receiptIcon='<span class="status amber">⏳</span>';
-else if(receiptStatus==="approved")receiptIcon='<span class="status green">✅</span>';
-else if(receiptStatus==="rejected")receiptIcon='<span class="status red">❌</span>';
-}
-return `<tr><td><code class="ltr">${esc(o.code)}</code></td><td>${esc(o.name)}<br><small style="color:var(--i400);direction:ltr;display:inline-block">${esc(o.phone)}</small></td><td>${esc(o.crop)}<br><small style="color:var(--i400)">${toFa(o.area)} هکتار</small></td><td>${fmtT(o.amount)}</td><td><span class="status ${st.cls}">${st.label}</span></td><td>${receiptIcon}</td><td>${esc(o.slotDate||"—")}</td><td><div class="row-actions"><button class="icon-mini" title="ویرایش" data-ord-edit="${o.id}"><svg class="icon"><use href="#i-edit"/></svg></button><button class="icon-mini purple" title="ارجاع به همکار" data-ord-assign="${o.id}"><svg class="icon"><use href="#i-partner"/></svg></button><button class="icon-mini danger" title="حذف" data-ord-del="${o.id}"><svg class="icon"><use href="#i-trash"/></svg></button></div></td></tr>`;
+if(hasReceipt){const rs=hasReceipt.status;if(rs==="pending")receiptIcon='<span class="status amber">⏳</span>';else if(rs==="approved")receiptIcon='<span class="status green">✅</span>';else if(rs==="rejected")receiptIcon='<span class="status red">❌</span>';}
+return `<tr><td><code class="ltr">${esc(o.code)}</code></td><td>${esc(o.name)}<br><small style="color:var(--i400);direction:ltr;display:inline-block">${esc(o.phone)}</small></td><td>${esc(o.crop)}<br><small style="color:var(--i400)">${toFa(o.area)} هکتار</small></td><td>${fmtT(o.amount)}</td><td><span class="status ${st.cls}">${st.label}</span></td><td>${receiptIcon}</td><td>${esc(o.slotDate||"—")}</td><td><div class="row-actions"><button class="icon-mini" title="ویرایش" data-ord-edit="${o.id}"><svg class="icon"><use href="#i-edit"/></svg></button><button class="icon-mini purple" title="پیامک سریع" data-ord-sms="${o.id}"><svg class="icon"><use href="#i-sms"/></svg></button><button class="icon-mini purple" title="ارجاع" data-ord-assign="${o.id}"><svg class="icon"><use href="#i-partner"/></svg></button><button class="icon-mini danger" title="حذف" data-ord-del="${o.id}"><svg class="icon"><use href="#i-trash"/></svg></button></div></td></tr>`;
 }).join("");
 }
-function renderPager(){
-const box=$("#ord-pager");if(!box)return;
-const shown=cache.orders.length;
-const total=orderFilters.total;
-let html=`<span style="font-size:12px;color:var(--i400)">نمایش ${toFa(shown)} از ${toFa(total)} سفارش</span>`;
-if(orderFilters.hasMore){
-html+=`<button class="btn btn-light btn-sm" id="ord-loadmore">بارگذاری بیشتر ↓</button>`;
-}
-box.innerHTML=html;
-$("#ord-loadmore")?.addEventListener("click",()=>loadOrdersPage(false));
-}
+function renderPager(){const box=$("#ord-pager");if(!box)return;const shown=cache.orders.length;const total=orderFilters.total;let html=`<span style="font-size:12px;color:var(--i400)">نمایش ${toFa(shown)} از ${toFa(total)} سفارش</span>`;if(orderFilters.hasMore)html+=`<button class="btn btn-light btn-sm" id="ord-loadmore">بارگذاری بیشتر ↓</button>`;box.innerHTML=html;$("#ord-loadmore")?.addEventListener("click",()=>loadOrdersPage(false));}
+
 function bindOrders(){
 $("#ord-search")?.addEventListener("input",e=>{orderFilters.q=e.target.value;clearTimeout(searchDebounce);searchDebounce=setTimeout(()=>loadOrdersPage(true),400);});
 $("#ord-filter-status")?.addEventListener("change",e=>{orderFilters.status=e.target.value;loadOrdersPage(true);});
 $("#ord-tbody")?.addEventListener("click",e=>{
 const ed=e.target.closest("[data-ord-edit]");if(ed)return openOrderEdit(ed.dataset.ordEdit);
+const sm=e.target.closest("[data-ord-sms]");if(sm)return openQuickSms(sm.dataset.ordSms);
 const as=e.target.closest("[data-ord-assign]");if(as)return openAssignModal(as.dataset.ordAssign);
 const dl=e.target.closest("[data-ord-del]");if(dl)return openOrderDelete(dl.dataset.ordDel);
 });
 $("#ord-add-btn")?.addEventListener("click",()=>openOrderEdit(null));
-$("#ord-export-btn")?.addEventListener("click",()=>{
-const blob=new Blob([JSON.stringify(cache.orders,null,2)],{type:"application/json"});
-const a=document.createElement("a");
-a.href=URL.createObjectURL(blob);a.download="orders.json";a.click();
-URL.revokeObjectURL(a.href);
-toast("دانلود شد.");
-});
+$("#ord-export-btn")?.addEventListener("click",()=>{const blob=new Blob([JSON.stringify(cache.orders,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="orders.json";a.click();URL.revokeObjectURL(a.href);toast("دانلود شد.");});
 }
 
-function openAssignModal(id){const o=cache.orders.find(x=>x.id===id);if(!o)return;const partners=getPartners().filter(p=>p.status!=="pending"&&p.active!==false);if(!partners.length){toast("هنوز همکار فعالی ندارید. ابتدا از تب «همکاران» تأیید کنید.",true);return;}const same=partners.filter(p=>p.province===o.province);const others=partners.filter(p=>p.province!==o.province);const list=[...same,...others];openModal(`<h3>ارجاع سفارش ${esc(o.code)}</h3><p class="m-sub">استان مزرعه: <strong>${esc(o.province)}</strong></p><div class="field-wrap"><label>انتخاب همکار</label><select id="asg-partner" class="ltr">${list.map(p=>{const share=+p.share||30;const partnerShare=Math.round(o.amount*share/100);const badge=p.province===o.province?"✅ هم‌استان":"";return `<option value="${p.id}">${esc(p.name)} — ${esc(p.province)} (${fmtT(partnerShare)}) ${badge}</option>`;}).join("")}</select></div><div class="modal-actions"><button class="btn btn-purple" id="asg-ok">تأیید ارجاع</button><button class="btn btn-light" id="asg-no">انصراف</button></div>`);$("#asg-no").onclick=closeModal;$("#asg-ok").onclick=async()=>{const pid=$("#asg-partner").value;const idx=cache.orders.findIndex(x=>x.id===id);if(idx<0){closeModal();return;}const p=getPartners().find(x=>x.id===pid);const updates={partnerId:pid,partnerName:p?.name||"",partnerPhone:p?.phone||"",partnerShare:+p?.share||30,status:"assigned"};cache.orders[idx]={...cache.orders[idx],...updates};write(LS.orders,cache.orders);await updateOrderRemote(id,updates);closeModal();renderOrders();renderDashboard();toast(`به ${p?.name||"همکار"} ارجاع شد.`);};}
+function openQuickSms(orderId){
+const o=cache.orders.find(x=>x.id===orderId);if(!o)return;
+const tpls=SmsService.getTemplates();
+const options=Object.entries(tpls).map(([k,t])=>`<option value="${k}">${esc(t.label)}</option>`).join("");
+openModal(`<h3>📱 ارسال پیامک به ${esc(o.name)}</h3><p class="m-sub">${esc(o.phone)} — سفارش ${esc(o.code)}</p>
+<div class="field-wrap" style="margin-bottom:10px"><label>انتخاب قالب (اختیاری)</label><select id="qs-tpl"><option value="">— متن دستی —</option>${options}</select></div>
+<div class="field-wrap"><label>متن پیامک</label><textarea id="qs-text" rows="4" style="width:100%;border:1px solid var(--ln2);border-radius:10px;padding:10px;font-size:12.5px;font-family:inherit"></textarea></div>
+<div class="sms-preview-box" style="margin-top:12px"><div class="sp-head"><svg class="icon"><use href="#i-sms"/></svg><span>پیش‌نمایش</span></div><div class="sp-body" id="qs-preview">…</div></div>
+<div class="modal-actions"><button class="btn btn-purple" id="qs-send"><svg class="icon"><use href="#i-send"/></svg> ارسال</button><button class="btn btn-light" id="qs-cancel">انصراف</button></div>`);
+const textarea=$("#qs-text"),preview=$("#qs-preview"),sel=$("#qs-tpl");
+const update=()=>{preview.textContent=textarea.value||"…";};
+const applyTpl=()=>{
+const k=sel.value;
+if(!k){textarea.value="";update();return;}
+const vars={name:o.name,code:o.code,amount:o.amount?fmtT(o.amount):"",crop:o.crop,area:o.area?toFa(o.area):"",date:o.slotDate?toFa(o.slotDate):"—"};
+textarea.value=SmsService.renderTemplate(tpls[k].text,vars);
+update();
+};
+sel.onchange=applyTpl;textarea.oninput=update;
+applyTpl();
+$("#qs-cancel").onclick=closeModal;
+$("#qs-send").onclick=async()=>{
+const txt=textarea.value.trim();
+if(!txt)return toast("متن خالی است.",true);
+$("#qs-send").disabled=true;
+const res=await SmsService.send(o.phone,txt,{kind:"manual_order",meta:{orderId:o.id,orderCode:o.code}});
+$("#qs-send").disabled=false;
+if(res.ok){toast(res.sim?"🔵 ثبت در حالت شبیه‌سازی":"✅ پیامک ارسال شد.");closeModal();}
+else toast("❌ خطا: "+(res.error||"—"),true);
+};
+}
+
+function openAssignModal(id){const o=cache.orders.find(x=>x.id===id);if(!o)return;const partners=getPartners().filter(p=>p.status!=="pending"&&p.active!==false);if(!partners.length){toast("هنوز همکار فعالی ندارید.",true);return;}const same=partners.filter(p=>p.province===o.province);const others=partners.filter(p=>p.province!==o.province);const list=[...same,...others];openModal(`<h3>ارجاع سفارش ${esc(o.code)}</h3><p class="m-sub">استان مزرعه: <strong>${esc(o.province)}</strong></p><div class="field-wrap"><label>انتخاب همکار</label><select id="asg-partner" class="ltr">${list.map(p=>{const share=+p.share||30;const partnerShare=Math.round(o.amount*share/100);const badge=p.province===o.province?"✅ هم‌استان":"";return `<option value="${p.id}">${esc(p.name)} — ${esc(p.province)} (${fmtT(partnerShare)}) ${badge}</option>`;}).join("")}</select></div><div class="modal-actions"><button class="btn btn-purple" id="asg-ok">تأیید ارجاع</button><button class="btn btn-light" id="asg-no">انصراف</button></div>`);$("#asg-no").onclick=closeModal;$("#asg-ok").onclick=async()=>{const pid=$("#asg-partner").value;const idx=cache.orders.findIndex(x=>x.id===id);if(idx<0){closeModal();return;}const p=getPartners().find(x=>x.id===pid);const updates={partnerId:pid,partnerName:p?.name||"",partnerPhone:p?.phone||"",partnerShare:+p?.share||30,status:"assigned"};cache.orders[idx]={...cache.orders[idx],...updates};write(LS.orders,cache.orders);await updateOrderRemote(id,updates);SmsService.sendByEvent("partner_assigned",cache.orders[idx]).catch(()=>{});closeModal();renderOrders();renderDashboard();toast(`به ${p?.name||"همکار"} ارجاع و پیامک ارسال شد.`);};}
 
 function openOrderEdit(id){const cfg=getConfig();const isNew=!id;const o=isNew?{id:null,code:"",name:"",phone:"",province:cfg.provinces[0],city:"",village:"",crop:cfg.crops[0],area:0,notes:"",amount:0,status:"pending"}:cache.orders.find(x=>x.id===id);if(!o)return;const provOptions=cfg.provinces.map(p=>`<option ${p===o.province?"selected":""}>${esc(p)}</option>`).join("");const cropOptions=cfg.crops.map(c=>`<option ${c===o.crop?"selected":""}>${esc(c)}</option>`).join("");const statusOptions=Object.entries(STATUS).map(([k,v])=>`<option value="${k}" ${k===o.status?"selected":""}>${v.label}</option>`).join("");openModal(`<h3>${isNew?"افزودن سفارش":"ویرایش سفارش"}</h3><p class="m-sub">${isNew?"اطلاعات جدید":"کد: "+esc(o.code)}</p><form id="ord-edit-form"><div class="form-grid"><div class="field-wrap"><label>نام</label><input name="name" required value="${esc(o.name)}"></div><div class="field-wrap"><label>موبایل</label><input name="phone" required class="ltr" maxlength="11" value="${esc(o.phone)}"></div><div class="field-wrap"><label>استان</label><select name="province" required>${provOptions}</select></div><div class="field-wrap"><label>شهر</label><input name="city" required value="${esc(o.city)}"></div><div class="field-wrap"><label>محصول</label><select name="crop" required>${cropOptions}</select></div><div class="field-wrap"><label>مساحت (هکتار)</label><input name="area" required class="ltr" value="${o.area||""}"></div><div class="field-wrap"><label>وضعیت</label><select name="status">${statusOptions}</select></div><div class="field-wrap"><label>مبلغ</label><input name="amount" class="ltr" value="${o.amount||0}"></div><div class="field-wrap span-2"><label>توضیحات</label><textarea name="notes" rows="2">${esc(o.notes)}</textarea></div></div><div class="modal-actions"><button type="submit" class="btn btn-green">${isNew?"افزودن":"ذخیره"}</button><button type="button" class="btn btn-light" id="ord-cancel">انصراف</button></div></form>`);$("#ord-cancel").onclick=closeModal;$("#ord-edit-form").addEventListener("submit",async ev=>{ev.preventDefault();const data=Object.fromEntries(new FormData(ev.target));data.phone=toEn(data.phone);data.area=+toEn(data.area)||0;data.amount=+toEn(data.amount)||0;data.name=data.name.trim();data.city=data.city.trim();if(!/^09\d{9}$/.test(data.phone)){toast("موبایل نامعتبر.",true);return;}if(!data.name){toast("نام را وارد کنید.",true);return;}if(data.area<=0){toast("مساحت نامعتبر.",true);return;}
-if(isNew){const seq=String(cache.orders.length+1).padStart(4,"0");const newOrder={id:uid(),code:`SP-1405-${seq}`,...data,createdAt:Date.now()};cache.orders.push(newOrder);write(LS.orders,cache.orders);await createOrderRemote(newOrder);}
+if(isNew){const seq=String(cache.orders.length+1).padStart(4,"0");const newOrder={id:uid(),code:`SP-1405-${seq}`,...data,createdAt:Date.now()};cache.orders.push(newOrder);write(LS.orders,cache.orders);await createOrderRemote(newOrder);SmsService.sendByEvent("order_created",newOrder).catch(()=>{});}
 else{const idx=cache.orders.findIndex(x=>x.id===id);cache.orders[idx]={...cache.orders[idx],...data};write(LS.orders,cache.orders);await updateOrderRemote(id,data);}
 closeModal();loadOrdersPage(true);renderDashboard();refreshHomeStats();updateNotifBadge();toast(isNew?"افزوده شد.":"ذخیره شد.");});}
 function openOrderDelete(id){const o=cache.orders.find(x=>x.id===id);if(!o)return;confirmModal("حذف سفارش",`آیا از حذف ${o.code} مطمئن هستید؟`,{danger:true,requireWord:"DELETE",onConfirm:async()=>{await deleteOrderRemote(id);setOrders(cache.orders.filter(x=>x.id!==id));loadOrdersPage(true);renderDashboard();refreshHomeStats();updateNotifBadge();toast("حذف شد.");}});}
 
+/* ============ PARTNERS ============ */
 const ptnFilters={q:"",prov:""};
 function renderPartners(){const list=$("#partners-list");if(!list)return;const all=getPartners();const provSel=$("#ptn-filter-prov");if(provSel&&provSel.options.length<=1){getConfig().provinces.forEach(p=>{const o=document.createElement("option");o.value=p;o.textContent=p;provSel.appendChild(o);});}const q=ptnFilters.q.trim().toLowerCase();const filtered=all.filter(p=>{if(ptnFilters.prov&&p.province!==ptnFilters.prov)return false;if(q){const hay=[p.name,p.phone,p.province,p.city].join(" ").toLowerCase();if(!hay.includes(q))return false;}return true;});if(!filtered.length){list.innerHTML='<div class="empty"><span class="empty-emoji">🤝</span><strong>همکاری یافت نشد</strong></div>';return;}list.innerHTML=filtered.map(p=>{const drones=getFleet().filter(d=>d.ownerId===p.id);const droneList=drones.length?drones.map(d=>`${esc(d.name)}${d.liter?` (${toFa(d.liter)}L)`:""}`).join("، "):"—";const stBadge=p.status==="pending"?'<span style="background:#fdf3dc;color:#8a6110">⏳ در انتظار تأیید</span>':p.status==="rejected"?'<span style="background:#fdecea;color:#a02a1e">❌ رد شده</span>':p.active===false?'<span>⛔ غیرفعال</span>':'<span>✅ فعال</span>';const approveBtn=p.status==="pending"?`<button class="icon-mini ok" title="تأیید" data-ptn-approve="${p.id}"><svg class="icon"><use href="#i-check"/></svg></button><button class="icon-mini danger" title="رد" data-ptn-reject="${p.id}"><svg class="icon"><use href="#i-x"/></svg></button>`:"";return `<div class="partner-card ${p.status==="pending"?"pending":""} ${p.active===false?"inactive":""}"><div class="partner-avatar">${esc((p.name||"؟").slice(0,1))}</div><div class="partner-info"><strong>${esc(p.name)}</strong><small style="direction:ltr;display:inline-block">${esc(p.phone)}</small><div class="partner-meta"><span>📍 ${esc(p.province)}</span><span>💰 ${toFa(p.share||30)}٪</span>${stBadge}</div><div class="partner-meta" style="margin-top:6px"><span style="background:#f3e9fa;color:#6d28d9">🛩️ ${droneList}</span></div></div><div class="row-actions">${approveBtn}<button class="icon-mini" title="ویرایش" data-ptn-edit="${p.id}"><svg class="icon"><use href="#i-edit"/></svg></button>${p.status!=="pending"?`<button class="icon-mini" title="${p.active===false?"فعال‌سازی":"غیرفعال‌سازی"}" data-ptn-toggle="${p.id}"><svg class="icon"><use href="#i-check"/></svg></button>`:""}<button class="icon-mini purple" title="پهپادها" data-ptn-fleet="${p.id}"><svg class="icon"><use href="#i-drone"/></svg></button><button class="icon-mini danger" title="حذف" data-ptn-del="${p.id}"><svg class="icon"><use href="#i-trash"/></svg></button></div></div>`;}).join("");}
 function bindPartners(){$("#ptn-search")?.addEventListener("input",e=>{ptnFilters.q=e.target.value;renderPartners();});$("#ptn-filter-prov")?.addEventListener("change",e=>{ptnFilters.prov=e.target.value;renderPartners();});$("#partners-list")?.addEventListener("click",e=>{const ap=e.target.closest("[data-ptn-approve]");if(ap){const ps=getPartners();const p=ps.find(x=>x.id===ap.dataset.ptnApprove);if(p){p.status="active";p.active=true;setPartners(ps);renderPartners();toast("✅ تأیید شد.");}return;}const rj=e.target.closest("[data-ptn-reject]");if(rj){const ps=getPartners();const p=ps.find(x=>x.id===rj.dataset.ptnReject);if(p){p.status="rejected";p.active=false;setPartners(ps);renderPartners();toast("رد شد.");}return;}const ed=e.target.closest("[data-ptn-edit]");if(ed)return openPartnerEdit(ed.dataset.ptnEdit);const tg=e.target.closest("[data-ptn-toggle]");if(tg){const ps=getPartners();const p=ps.find(x=>x.id===tg.dataset.ptnToggle);if(p){p.active=p.active===false?true:false;setPartners(ps);renderPartners();toast(p.active?"فعال شد.":"غیرفعال شد.");}return;}const fl=e.target.closest("[data-ptn-fleet]");if(fl)return openFleetFor(fl.dataset.ptnFleet);const dl=e.target.closest("[data-ptn-del]");if(dl){confirmModal("حذف همکار","آیا مطمئن هستید؟",{danger:true,requireWord:"DELETE",onConfirm:()=>{setPartners(getPartners().filter(x=>x.id!==dl.dataset.ptnDel));setFleet(getFleet().filter(x=>x.ownerId!==dl.dataset.ptnDel));renderPartners();toast("حذف شد.");}});}});}
 function openPartnerEdit(id){const cfg=getConfig();const p=getPartners().find(x=>x.id===id);if(!p)return;const provOptions=cfg.provinces.map(x=>`<option ${x===p.province?"selected":""}>${esc(x)}</option>`).join("");openModal(`<h3>ویرایش همکار</h3><form id="ptn-edit-form"><div class="form-grid"><div class="field-wrap"><label>نام</label><input name="name" required value="${esc(p.name)}"></div><div class="field-wrap"><label>موبایل</label><input name="phone" required class="ltr" maxlength="11" value="${esc(p.phone)}"></div><div class="field-wrap"><label>استان</label><select name="province" required>${provOptions}</select></div><div class="field-wrap"><label>شهر</label><input name="city" value="${esc(p.city||"")}"></div><div class="field-wrap"><label>سهم (٪)</label><input name="share" required class="ltr" value="${p.share||30}"></div><div class="field-wrap"><label>رمز جدید (اختیاری)</label><input name="password" type="text" class="ltr"></div></div><div class="modal-actions"><button type="submit" class="btn btn-green">ذخیره</button><button type="button" class="btn btn-light" id="ptn-cancel">انصراف</button></div></form>`);$("#ptn-cancel").onclick=closeModal;$("#ptn-edit-form").addEventListener("submit",async ev=>{ev.preventDefault();const data=Object.fromEntries(new FormData(ev.target));data.phone=toEn(data.phone);data.share=+toEn(data.share)||30;data.name=data.name.trim();if(!/^09\d{9}$/.test(data.phone)){toast("موبایل نامعتبر.",true);return;}const ps=getPartners();const idx=ps.findIndex(x=>x.id===id);if(idx<0)return;ps[idx]={...ps[idx],name:data.name,phone:data.phone,province:data.province,city:(data.city||"").trim(),share:data.share};if(data.password){const salt=rand(16);ps[idx].salt=salt;ps[idx].hash=await sha256(salt+data.password);}setPartners(ps);closeModal();renderPartners();toast("ذخیره شد.");});}
 function openFleetFor(partnerId){const p=getPartners().find(x=>x.id===partnerId);if(!p)return;const drones=getFleet().filter(d=>d.ownerId===partnerId);openModal(`<h3>🛩️ پهپادهای ${esc(p.name)}</h3><p class="m-sub">تعداد: ${toFa(drones.length)}</p>${drones.length?`<div class="table-scroll"><table class="mini-table"><thead><tr><th>نام</th><th>مدل</th><th>لیتر</th></tr></thead><tbody>${drones.map(d=>`<tr><td>${esc(d.name)}</td><td>${esc(d.model||"—")}</td><td>${d.liter?toFa(d.liter)+" L":"—"}</td></tr>`).join("")}</tbody></table></div>`:'<div class="empty"><strong>پهپادی ثبت نشده</strong></div>'}<div class="modal-actions"><button class="btn btn-light" id="flt-close">بستن</button></div>`);$("#flt-close").onclick=closeModal;}
 
+/* ============ SCHEDULE ============ */
 function renderSlots(){const tbody=$("#slot-tbody");if(!tbody)return;const all=getSlots().sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start));if(!all.length){tbody.innerHTML='<tr><td colspan="6"><div class="empty"><strong>هنوز بازه‌ای ثبت نشده</strong></div></td></tr>';return;}tbody.innerHTML=all.map(s=>{const booked=cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length;const full=booked>=s.cap;const st=full?'<span class="status red">پر شد</span>':'<span class="status green">آزاد</span>';return `<tr><td><code class="ltr">${esc(s.date)}</code></td><td><code class="ltr">${esc(s.start)} - ${esc(s.end)}</code></td><td>${toFa(s.cap)}</td><td>${toFa(booked)}</td><td>${st}</td><td><div class="row-actions"><button class="icon-mini danger" data-slot-del="${s.id}"><svg class="icon"><use href="#i-trash"/></svg></button></div></td></tr>`;}).join("");}
 function bindSlots(){$("#slot-add-btn")?.addEventListener("click",()=>{const date=toEn($("#slot-date").value.trim());const start=toEn($("#slot-start").value.trim());const end=toEn($("#slot-end").value.trim());const cap=+toEn($("#slot-cap").value)||1;if(!isValidJalali(date)){toast("تاریخ نامعتبر.",true);return;}if(!/^\d{1,2}:\d{2}$/.test(start)||!/^\d{1,2}:\d{2}$/.test(end)){toast("ساعت به شکل 08:00 وارد کنید.",true);return;}if(cap<=0){toast("ظرفیت نامعتبر.",true);return;}const slots=getSlots();slots.push({id:uid(),date,start,end,cap,createdAt:Date.now()});setSlots(slots);$("#slot-date").value="";$("#slot-start").value="";$("#slot-end").value="";$("#slot-cap").value="2";renderSlots();refreshSlotSelect();toast("بازهٔ زمانی افزوده شد.");});$("#slot-tbody")?.addEventListener("click",e=>{const dl=e.target.closest("[data-slot-del]");if(!dl)return;setSlots(getSlots().filter(x=>x.id!==dl.dataset.slotDel));renderSlots();refreshSlotSelect();toast("حذف شد.");});}
 
+/* ============ PRICING ============ */
 function renderPricing(){const cfg=getConfig();$("#cfg-base-rate").value=cfg.baseRate;fillSelect($("#cfg-rate-prov"),cfg.provinces);fillSelect($("#cfg-rate-crop"),cfg.crops);renderChips("#cfg-prov-rates-list",cfg.provRates,k=>{const c=getConfig();delete c.provRates[k];setConfig(c);renderPricing();});renderChips("#cfg-crop-rates-list",cfg.cropRates,k=>{const c=getConfig();delete c.cropRates[k];setConfig(c);renderPricing();});}
 function renderChips(sel,obj,onDel){const el=$(sel);if(!el)return;const entries=Object.entries(obj||{});if(!entries.length){el.innerHTML='<span style="color:var(--i400);font-size:12px">موردی ثبت نشده.</span>';return;}el.innerHTML="";entries.forEach(([k,v])=>{const chip=document.createElement("span");chip.className="chip";chip.innerHTML=`${esc(k)}: <b>${fmt(v)}</b> <button><svg class="icon"><use href="#i-x"/></svg></button>`;chip.querySelector("button").onclick=()=>onDel(k);el.appendChild(chip);});}
 function bindPricing(){$("#cfg-save-base")?.addEventListener("click",()=>{const v=+toEn($("#cfg-base-rate").value)||0;if(v<=0){toast("نرخ باید مثبت باشد.",true);return;}const c=getConfig();c.baseRate=v;setConfig(c);refreshCustomerPayment();updatePrice();toast("ذخیره شد.");});$("#cfg-add-prov-rate")?.addEventListener("click",()=>{const p=$("#cfg-rate-prov").value;const v=+toEn($("#cfg-rate-val").value)||0;if(!p||v<=0){toast("مقادیر کامل نیست.",true);return;}const c=getConfig();c.provRates[p]=v;setConfig(c);$("#cfg-rate-val").value="";renderPricing();updatePrice();toast("ذخیره شد.");});$("#cfg-add-crop-rate")?.addEventListener("click",()=>{const cr=$("#cfg-rate-crop").value;const v=+toEn($("#cfg-rate-crop-val").value)||0;if(!cr||v<=0){toast("مقادیر کامل نیست.",true);return;}const c=getConfig();c.cropRates[cr]=v;setConfig(c);$("#cfg-rate-crop-val").value="";renderPricing();updatePrice();toast("ذخیره شد.");});}
+
+/* ============ PAYMENT SETTINGS ============ */
 function renderPayment(){const cfg=getConfig();$("#cfg-card").value=cfg.payment.card||"";$("#cfg-iban").value=cfg.payment.iban||"";$("#cfg-holder").value=cfg.payment.holder||"";$("#cfg-receipt-max").value=cfg.receiptMax||5;}
 function bindPayment(){$("#cfg-payment-form")?.addEventListener("submit",e=>{e.preventDefault();const c=getConfig();c.payment={card:$("#cfg-card").value.trim(),iban:$("#cfg-iban").value.trim(),holder:$("#cfg-holder").value.trim()};setConfig(c);refreshCustomerPayment();toast("ذخیره شد.");});$("#cfg-save-receipt")?.addEventListener("click",()=>{const v=+toEn($("#cfg-receipt-max").value)||5;const c=getConfig();c.receiptMax=v;setConfig(c);toast("ذخیره شد.");});}
+
+/* ============ SMS PANEL ============ */
+let currentSmsTab="send";
+function renderSmsPanel(){
+bindSmsTabs();
+renderSmsSettings();
+renderSmsTemplates();
+renderSmsAuto();
+renderSmsLog();
+renderSmsSendForm();
+updateSmsCredit();
+}
+function bindSmsTabs(){
+const tabs=$("#sms-tabs");if(!tabs||tabs.dataset.bound)return;tabs.dataset.bound="1";
+tabs.addEventListener("click",e=>{
+const b=e.target.closest("button[data-sms-tab]");if(!b)return;
+currentSmsTab=b.dataset.smsTab;
+$$("#sms-tabs button").forEach(x=>x.setAttribute("aria-selected",x===b?"true":"false"));
+$$(".sms-subpanel").forEach(p=>p.classList.toggle("active",p.dataset.smsPanel===currentSmsTab));
+});
+}
+function renderSmsSendForm(){
+const mode=$("#sms-mode");
+if(!mode||mode.dataset.bound)return;
+mode.dataset.bound="1";
+mode.addEventListener("change",updateSmsSendMode);
+$("#sms-send-btn")?.addEventListener("click",doManualSend);
+$("#sms-clear-btn")?.addEventListener("click",()=>{const t=$("#sms-text");if(t){t.value="";updateSmsCharCount();}});
+const txt=$("#sms-text");
+txt?.addEventListener("input",updateSmsCharCount);
+$$("#sms-vars-box .sms-var").forEach(el=>{
+el.addEventListener("click",()=>{
+const v=el.dataset.var;
+const pos=txt.selectionStart||txt.value.length;
+txt.value=txt.value.slice(0,pos)+v+txt.value.slice(pos);
+txt.focus();txt.selectionStart=txt.selectionEnd=pos+v.length;
+updateSmsCharCount();
+});
+});
+updateSmsSendMode();
+updateSmsCharCount();
+}
+function updateSmsSendMode(){
+const m=$("#sms-mode")?.value||"single";
+$("#sms-single-wrap").hidden=m!=="single";
+$("#sms-order-wrap").hidden=m!=="order";
+$("#sms-province-wrap").hidden=m!=="by-province";
+if(m==="order"){const sel=$("#sms-order-select");if(sel){sel.innerHTML=cache.orders.slice(0,100).map(o=>`<option value="${o.id}">${esc(o.code)} — ${esc(o.name)} (${esc(o.phone)})</option>`).join("")||'<option value="">— سفارشی نیست —</option>';}}
+if(m==="by-province"){const sel=$("#sms-province-select");if(sel&&sel.options.length<2){getConfig().provinces.forEach(p=>{const o=document.createElement("option");o.value=p;o.textContent=p;sel.appendChild(o);});}}
+}
+function updateSmsCharCount(){
+const t=$("#sms-text")?.value||"";
+const len=t.length;
+$("#sms-len").textContent=toFa(len);
+const parts=len===0?1:Math.ceil(len/70);
+$("#sms-parts").textContent=toFa(parts)+" پیامک";
+const p=$("#sms-preview");if(p)p.textContent=t||"متن پیامک شما اینجا نمایش داده می‌شود…";
+}
+async function doManualSend(){
+const m=$("#sms-mode")?.value||"single";
+const txt=$("#sms-text")?.value.trim();
+if(!txt)return toast("متن پیامک را وارد کنید.",true);
+const btn=$("#sms-send-btn");btn.disabled=true;
+let targets=[],contexts=[];
+if(m==="single"){const ph=toEn($("#sms-phone")?.value||"");if(!/^09\d{9}$/.test(ph)){btn.disabled=false;return toast("شماره نامعتبر.",true);}targets.push(ph);}
+else if(m==="order"){const id=$("#sms-order-select")?.value;const o=cache.orders.find(x=>x.id===id);if(!o){btn.disabled=false;return toast("سفارشی انتخاب نشده.",true);}targets.push(o.phone);contexts.push(o);}
+else if(m==="all-customers"){const phones=new Set(cache.orders.map(o=>o.phone));targets=Array.from(phones);}
+else if(m==="by-province"){const prov=$("#sms-province-select")?.value;const phones=new Set(cache.orders.filter(o=>o.province===prov).map(o=>o.phone));targets=Array.from(phones);}
+if(!targets.length){btn.disabled=false;return toast("هیچ مخاطبی پیدا نشد.",true);}
+let ok=0,fail=0;
+for(const t of targets){const res=await SmsService.send(t,txt,{kind:"manual_"+m});if(res.ok)ok++;else fail++;}
+btn.disabled=false;
+toast(`✅ ارسال شد: ${toFa(ok)} موفق${fail?` | ❌ ${toFa(fail)} ناموفق`:""}`);
+renderSmsLog();renderDashboard();
+}
+function renderSmsTemplates(){
+const list=$("#sms-templates-list");if(!list)return;
+const tpls=SmsService.getTemplates();
+list.innerHTML=Object.entries(tpls).map(([k,t])=>`
+<div class="sms-template-card">
+<h5><span class="t-icon"><svg class="icon"><use href="#i-sms"/></svg></span>${esc(t.label)}</h5>
+<p class="t-desc">${esc(t.desc||"")}</p>
+<textarea data-tpl-key="${k}">${esc(t.text||"")}</textarea>
+<div class="t-tokens">${["{name}","{code}","{amount}","{crop}","{area}","{date}","{otp}"].map(v=>`<span data-insert-tpl="${k}" data-var="${v}">${v}</span>`).join("")}</div>
+<div class="t-foot"><span class="t-count">کاراکتر: <b>${toFa((t.text||"").length)}</b></span></div>
+</div>`).join("");
+list.querySelectorAll("[data-insert-tpl]").forEach(span=>{
+span.addEventListener("click",()=>{
+const k=span.dataset.insertTpl,v=span.dataset.var;
+const ta=list.querySelector(`textarea[data-tpl-key="${k}"]`);
+if(!ta)return;
+const pos=ta.selectionStart||ta.value.length;
+ta.value=ta.value.slice(0,pos)+v+ta.value.slice(pos);
+ta.focus();ta.selectionStart=ta.selectionEnd=pos+v.length;
+});
+});
+list.querySelectorAll("textarea[data-tpl-key]").forEach(ta=>{
+ta.addEventListener("input",()=>{
+const c=ta.closest(".sms-template-card").querySelector(".t-count b");
+if(c)c.textContent=toFa(ta.value.length);
+});
+});
+$("#sms-tpl-save")?.addEventListener("click",()=>{
+const newTpls={...SmsService.getTemplates()};
+list.querySelectorAll("textarea[data-tpl-key]").forEach(ta=>{const k=ta.dataset.tplKey;newTpls[k]={...newTpls[k],text:ta.value};});
+SmsService.setTemplates(newTpls);toast("✅ قالب‌ها ذخیره شد.");
+},{once:true});
+$("#sms-tpl-reset")?.addEventListener("click",()=>{
+if(!confirm("قالب‌ها به حالت پیش‌فرض بازگردانده شوند؟"))return;
+SmsService.setTemplates(defaultSmsTemplates());
+renderSmsTemplates();toast("بازگردانی شد.");
+},{once:true});
+}
+function renderSmsAuto(){
+const box=$("#sms-auto-toggles");if(!box)return;
+const auto=SmsService.getAuto();
+const tpls=SmsService.getTemplates();
+const items=[
+["order_created","ثبت سفارش"],["payment_approved","تأیید پرداخت"],["partner_assigned","ارجاع به اپراتور"],
+["completed","تکمیل سفارش"],["cancelled","لغو سفارش"],["receipt_rejected","رد فیش"]
+];
+box.innerHTML=items.map(([k,label])=>{
+const enabled=auto[k]!==false;
+return `<div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--ln)">
+<div><strong style="font-size:13.5px;font-weight:700">${label}</strong><small style="display:block;color:var(--i400);font-size:11.5px;margin-top:2px">قالب: ${esc(tpls[k]?.label||"—")}</small></div>
+<label style="position:relative;display:inline-block;width:46px;height:26px;cursor:pointer">
+<input type="checkbox" data-auto-key="${k}" ${enabled?"checked":""} style="opacity:0;width:0;height:0;position:absolute">
+<span style="position:absolute;inset:0;background:${enabled?"var(--b500)":"var(--i200)"};border-radius:99px;transition:.2s" data-auto-track></span>
+<span style="position:absolute;top:3px;inset-inline-end:${enabled?"3px":"23px"};width:20px;height:20px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 2px 4px rgba(0,0,0,.15)" data-auto-knob></span>
+</label>
+</div>`;
+}).join("");
+box.querySelectorAll("[data-auto-key]").forEach(cb=>{
+cb.addEventListener("change",()=>{
+const a=SmsService.getAuto();
+a[cb.dataset.autoKey]=cb.checked;
+SmsService.setAuto(a);
+const track=cb.parentElement.querySelector("[data-auto-track]");
+const knob=cb.parentElement.querySelector("[data-auto-knob]");
+track.style.background=cb.checked?"var(--b500)":"var(--i200)";
+knob.style.insetInlineEnd=cb.checked?"3px":"23px";
+toast(cb.checked?"✅ فعال شد":"❌ غیرفعال شد");
+});
+});
+}
+function renderSmsLog(){
+const box=$("#sms-log-list");if(!box)return;
+const q=(($("#sms-log-search")?.value||"")).toLowerCase().trim();
+const f=$("#sms-log-filter")?.value||"";
+let log=SmsService.getLog();
+if(f)log=log.filter(x=>x.status===f);
+if(q)log=log.filter(x=>(x.to+x.text).toLowerCase().includes(q));
+if(!log.length){box.innerHTML='<div class="empty"><span class="empty-emoji">📭</span><strong>گزارشی برای نمایش نیست</strong></div>';return;}
+box.innerHTML=log.slice(0,200).map(item=>{
+const st=item.status;
+const cls=st==="sent"?"sent":st==="failed"?"failed":st==="pending"?"pending":"sim";
+const label=st==="sent"?"ارسال شد":st==="failed"?"ناموفق":st==="pending"?"در صف":"شبیه‌سازی";
+const dt=new Date(item.createdAt).toLocaleString("fa-IR");
+const kindLabels={otp:"کد تأیید",manual_single:"دستی — شماره",manual_order:"دستی — سفارش",manual_all_customers:"گروهی",manual_by_province:"استانی",order_created:"ثبت سفارش",payment_approved:"تأیید پرداخت",partner_assigned:"ارجاع",completed:"تکمیل",cancelled:"لغو",receipt_rejected:"رد فیش",welcome:"خوش‌آمد"};
+const kindLabel=kindLabels[item.kind]||item.kind||"دستی";
+return `<div class="sms-log-item">
+<div class="sl-icon"><svg class="icon"><use href="#i-sms"/></svg></div>
+<div class="sl-main">
+<strong>${esc(item.to)}</strong>
+<small>${esc(item.text||"").slice(0,180)}</small>
+<div class="sl-meta"><span style="background:var(--inset);color:var(--i600);padding:3px 9px;border-radius:99px;font-size:10.5px;font-weight:700">${kindLabel}</span><span style="color:var(--i400);font-size:11px">${dt}</span></div>
+</div>
+<span class="sms-status ${cls}">${label}</span>
+</div>`;
+}).join("");
+$("#sms-log-refresh")?.addEventListener("click",renderSmsLog,{once:true});
+$("#sms-log-clear")?.addEventListener("click",()=>{if(confirm("کل گزارش پاک شود؟")){SmsService.clearLog();renderSmsLog();toast("پاک شد.");}},{once:true});
+}
+$("#sms-log-search")?.addEventListener("input",()=>{clearTimeout(window._smsSearchT);window._smsSearchT=setTimeout(renderSmsLog,300);});
+$("#sms-log-filter")?.addEventListener("change",renderSmsLog);
+
+function renderSmsSettings(){
+const s=SmsService.getSettings();
+$("#sms-provider").value=s.provider||"sim";
+$("#sms-sender").value=s.sender||"";
+$("#sms-apikey").value=s.apiKey||"";
+$("#sms-custom-url").value=s.customUrl||"";
+$("#sms-custom-url-wrap").hidden=s.provider!=="custom";
+updateSmsConnBadge();
+}
+function updateSmsConnBadge(){
+const s=SmsService.getSettings();
+const connected=s.provider!=="sim"&&s.apiKey;
+$("#sms-conn-badge").hidden=!connected;
+$("#sms-offline-badge").hidden=!!connected;
+}
+function bindSmsSettings(){
+$("#sms-provider")?.addEventListener("change",e=>{
+$("#sms-custom-url-wrap").hidden=e.target.value!=="custom";
+});
+$("#sms-settings-save")?.addEventListener("click",()=>{
+const s={provider:$("#sms-provider").value,sender:$("#sms-sender").value.trim(),apiKey:$("#sms-apikey").value.trim(),customUrl:$("#sms-custom-url").value.trim()};
+SmsService.setSettings(s);
+updateSmsConnBadge();
+toast("✅ تنظیمات ذخیره شد.");
+});
+$("#sms-test-btn")?.addEventListener("click",async()=>{
+const ph=prompt("شماره موبایل برای تست:");
+if(!ph)return;
+const code=Math.floor(100000+Math.random()*900000);
+const res=await SmsService.send(ph,`پیامک آزمایشی سم‌پاش هوشمند\nکد تست: ${code}`,{kind:"test"});
+if(res.ok)toast(res.sim?"🔵 در حالت شبیه‌سازی ثبت شد.":"✅ پیامک تست ارسال شد.");
+else toast("❌ خطا: "+(res.error||"—"),true);
+renderSmsLog();
+});
+$("#sms-credit-refresh")?.addEventListener("click",async()=>{
+const res=await SmsService.checkCredit();
+if(res.ok)$("#sms-credit").textContent=res.sim?toFa(res.credit)+" (نمایشی)":toFa(res.credit);
+else toast("خطا در دریافت اعتبار: "+(res.error||""),true);
+});
+}
+async function updateSmsCredit(){
+const s=SmsService.getSettings();
+if(s.provider==="sim"){$("#sms-credit").textContent=toFa(1000)+" (نمایشی)";return;}
+const res=await SmsService.checkCredit();
+$("#sms-credit").textContent=res.ok?toFa(res.credit):"—";
+}
+
+/* ============ REGIONS / CROPS / MESSAGES / CUSTOMERS ============ */
 function renderRegions(){const cfg=getConfig();const list=$("#prov-list");list.innerHTML="";cfg.provinces.forEach(p=>{const chip=document.createElement("span");chip.className="chip";chip.innerHTML=`${esc(p)} <button><svg class="icon"><use href="#i-x"/></svg></button>`;chip.querySelector("button").onclick=()=>{const c=getConfig();c.provinces=c.provinces.filter(x=>x!==p);delete c.provRates[p];setConfig(c);renderRegions();refreshSelects();renderPricing();toast("حذف شد.");};list.appendChild(chip);});}
 function bindRegions(){$("#prov-add-btn")?.addEventListener("click",()=>{const v=$("#prov-new").value.trim();if(!v){toast("نام را وارد کنید.",true);return;}const c=getConfig();if(c.provinces.includes(v)){toast("قبلاً اضافه شده.",true);return;}c.provinces.push(v);setConfig(c);$("#prov-new").value="";renderRegions();refreshSelects();toast("اضافه شد.");});}
 function renderCrops(){const cfg=getConfig();const list=$("#crop-list");list.innerHTML="";cfg.crops.forEach(c=>{const chip=document.createElement("span");chip.className="chip";chip.innerHTML=`${esc(c)} <button><svg class="icon"><use href="#i-x"/></svg></button>`;chip.querySelector("button").onclick=()=>{const cc=getConfig();cc.crops=cc.crops.filter(x=>x!==c);delete cc.cropRates[c];setConfig(cc);renderCrops();refreshSelects();renderPricing();toast("حذف شد.");};list.appendChild(chip);});}
 function bindCrops(){$("#crop-add-btn")?.addEventListener("click",()=>{const v=$("#crop-new").value.trim();if(!v){toast("نام را وارد کنید.",true);return;}const c=getConfig();if(c.crops.includes(v)){toast("قبلاً اضافه شده.",true);return;}c.crops.push(v);setConfig(c);$("#crop-new").value="";renderCrops();refreshSelects();toast("اضافه شد.");});}
 function renderMessages(){const msgs=getMessages();const box=$("#adm-messages-list");if(!msgs.length){box.innerHTML='<div class="empty"><span class="empty-emoji">💬</span><strong>پیامی نیست</strong></div>';return;}box.innerHTML=msgs.slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).map(m=>{const isC=m.from==="customer";const dt=new Date(m.createdAt||Date.now()).toLocaleString("fa-IR");return `<div class="admin-card" style="margin-bottom:10px;padding:14px"><div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:8px"><span class="status ${isC?"":"green"}">${isC?"مشتری":"مدیر"}</span><small style="color:var(--i400);font-size:11px">${dt}</small></div><div style="font-size:13px;line-height:1.9;color:var(--i700)">${esc(m.text)}</div></div>`;}).join("");}
 function renderCustomers(){const orders=cache.orders;const map=new Map();orders.forEach(o=>{const k=o.phone;if(!map.has(k))map.set(k,{name:o.name,phone:o.phone,count:0,area:0});const m=map.get(k);m.count++;m.area+=+o.area||0;});const tb=$("#adm-cust-tbody");const rows=Array.from(map.values()).sort((a,b)=>b.count-a.count);if(!rows.length){tb.innerHTML='<tr><td colspan="4"><div class="empty"><strong>مشتری‌ای یافت نشد</strong></div></td></tr>';return;}tb.innerHTML=rows.map(r=>`<tr><td>${esc(r.name)}</td><td><code class="ltr">${esc(r.phone)}</code></td><td>${toFa(r.count)} سفارش</td><td>${toFa(r.area)} هکتار</td></tr>`).join("");}
-function renderSettings(){const cfg=getConfig();$("#cfg-site-title").value=cfg.siteTitle||"";$("#cfg-support-phone").value=cfg.supportPhone||"";$("#cfg-support-note").value=cfg.supportNote||"";renderSupport();}
-function bindSettings(){$("#cfg-general-form")?.addEventListener("submit",e=>{e.preventDefault();const c=getConfig();c.siteTitle=$("#cfg-site-title").value.trim();c.supportPhone=$("#cfg-support-phone").value.trim();c.supportNote=$("#cfg-support-note").value.trim();setConfig(c);renderSupport();toast("ذخیره شد.");});$("#danger-reset")?.addEventListener("click",()=>{confirmModal("بازنشانی همهٔ داده‌ها","تمام داده‌ها پاک می‌شوند. مطمئنید؟",{danger:true,requireWord:"RESET",onConfirm:()=>{Object.values(LS).forEach(k=>localStorage.removeItem(k));localStorage.removeItem("sph_receipts");location.reload();}});});}
 
+/* ============ SETTINGS ============ */
+function renderSettings(){const cfg=getConfig();$("#cfg-site-title").value=cfg.siteTitle||"";$("#cfg-support-phone").value=cfg.supportPhone||"";$("#cfg-support-note").value=cfg.supportNote||"";renderSupport();}
+function bindSettings(){
+$("#cfg-general-form")?.addEventListener("submit",e=>{e.preventDefault();const c=getConfig();c.siteTitle=$("#cfg-site-title").value.trim();c.supportPhone=$("#cfg-support-phone").value.trim();c.supportNote=$("#cfg-support-note").value.trim();setConfig(c);renderSupport();toast("ذخیره شد.");});
+$("#danger-reset")?.addEventListener("click",()=>{confirmModal("بازنشانی همهٔ داده‌ها","تمام داده‌ها پاک می‌شوند. مطمئنید؟",{danger:true,requireWord:"RESET",onConfirm:()=>{Object.values(LS).forEach(k=>localStorage.removeItem(k));localStorage.removeItem("sph_receipts");localStorage.removeItem("sph_new_count");location.reload();}});});
+}
+
+/* ============ SESSION / LOGIN ============ */
 let timerHandle;
 function startTimer(){clearInterval(timerHandle);const tick=()=>{const s=Auth.getSession();if(!s){stopAndLogout();return;}Auth.touch();const left=Math.max(0,Math.floor((s.expires-Date.now())/1000));const m=Math.floor(left/60),sec=left%60;const el=$("#session-timer");if(el)el.textContent=`${toFa(m)}:${toFa(String(sec).padStart(2,"0"))}`;};tick();timerHandle=setInterval(tick,1000);}
 function stopAndLogout(){clearInterval(timerHandle);Auth.logout();$("#admin-login-view").hidden=false;$("#admin-panel-view").hidden=true;toast("نشست منقضی شد.",true);}
 function bindLogin(){$("#admin-login-form")?.addEventListener("submit",async e=>{e.preventDefault();const user=$("#admin-user").value.trim();const pass=$("#admin-pass").value;if(!user||!pass){toast("نام و رمز را وارد کنید.",true);return;}const res=await Auth.login(user,pass);if(!res.ok){toast(res.msg,true);$("#admin-pass").value="";return;}toast("ورود موفق.");$("#admin-pass").value="";$("#admin-login-view").hidden=true;$("#admin-panel-view").hidden=false;write(LS.seen,Date.now());write("sph_new_count",0);updateNotifBadge();startTimer();refreshAll();});}
 function openChangePassModal(){openModal(`<h3>تغییر رمز مدیر</h3><form id="chg-pass-form"><div class="field-wrap" style="margin-bottom:10px"><label>رمز فعلی</label><input type="password" id="cp-cur" class="ltr" required></div><div class="field-wrap" style="margin-bottom:10px"><label>رمز جدید</label><input type="password" id="cp-new" class="ltr" required></div><div class="field-wrap"><label>تکرار رمز</label><input type="password" id="cp-confirm" class="ltr" required></div><div class="modal-actions"><button type="submit" class="btn btn-green">ذخیره</button><button type="button" class="btn btn-light" id="cp-cancel">انصراف</button></div></form>`);$("#cp-cancel").onclick=closeModal;$("#chg-pass-form").addEventListener("submit",async e=>{e.preventDefault();const cur=$("#cp-cur").value,np=$("#cp-new").value,cp=$("#cp-confirm").value;const res=await Auth.changePassword(cur,np,cp);if(!res.ok){toast(res.msg,true);return;}closeModal();toast("رمز تغییر کرد.");});}
 function bindLogout(){$("#admin-logout-btn")?.addEventListener("click",()=>{confirmModal("خروج","از پنل خارج می‌شوید؟",{onConfirm:()=>{stopAndLogout();toast("خارج شدید.");}});});$("#admin-change-pass-btn")?.addEventListener("click",openChangePassModal);}
-function refreshAll(){loadOrdersPage(true);renderPayments();renderPartners();renderSlots();renderPricing();renderPayment();renderRegions();renderCrops();renderMessages();renderCustomers();renderSettings();}
-function init(){bindTabs();bindOrders();bindPayments();bindPartners();bindSlots();bindPricing();bindPayment();bindRegions();bindCrops();bindSettings();bindLogin();bindLogout();}
-return{init,refreshAll,closeModal};
+function refreshAll(){loadOrdersPage(true);renderPayments();renderPartners();renderSlots();renderPricing();renderPayment();renderSmsPanel();renderRegions();renderCrops();renderMessages();renderCustomers();renderSettings();}
+function init(){bindTabs();bindOrders();bindPayments();bindPartners();bindSlots();bindPricing();bindPayment();bindRegions();bindCrops();bindSettings();bindLogin();bindLogout();bindSmsSettings();}
+return{init,refreshAll,closeModal,openModal,confirmModal};
 })();
 
-/* ============ PARTNER PANEL ============ */
+/* ============================================================
+   PARTNER PANEL
+============================================================ */
 const PartnerPanel=(()=>{
 let regDrones=[];
 function renderRegDrones(){const box=$("#ptn-drones-list");if(!box)return;if(!regDrones.length){box.innerHTML='<div style="color:var(--i400);font-size:12px;padding:8px 0">هنوز پهپادی اضافه نکرده‌اید.</div>';return;}box.innerHTML=regDrones.map((d,i)=>`<div class="drone-item"><div class="d-icon"><svg class="icon"><use href="#i-drone"/></svg></div><div class="d-info"><strong>${esc(d.name)}</strong><small>${esc(d.model||"—")}${d.liter?` · <b>${toFa(d.liter)} لیتر</b>`:""}</small></div><button type="button" data-reg-drone-del="${i}"><svg class="icon"><use href="#i-trash"/></svg></button></div>`).join("");$$("#ptn-drones-list [data-reg-drone-del]").forEach(b=>b.onclick=()=>{regDrones.splice(+b.dataset.regDroneDel,1);renderRegDrones();});}
@@ -1406,22 +2144,38 @@ function bindLogout(){$("#partner-logout-btn")?.addEventListener("click",()=>{Pa
 return{refresh,bindTabs,bindLogin,bindRegister,bindLogout,bindDroneAdd};
 })();
 
-/* ============ AI ============ */
+/* ============================================================
+   AI ASSISTANT
+============================================================ */
 const AIAssistant=(()=>{
-const WORKER_URL="https://cold-grass-e1f3sam-pash-api.ali-naghiloo279.workers.dev/api/chat";
+const WORKER_URL=API+"/api/chat";
 const SYSTEM_PROMPT="تو «دستیار هوشمند سم‌پاش» هستی. تخصص: HTML، CSS، JavaScript. کد را داخل بلاک کد بنویس.";
 let history=[{role:"user",content:SYSTEM_PROMPT}];let busy=false;
 const fab=$("#ai-fab"),panel=$("#ai-panel"),close=$("#ai-close"),body=$("#ai-body"),input=$("#ai-input"),send=$("#ai-send");
-function togglePanel(open){const should=open!==undefined?open:!panel.classList.contains("show");panel.classList.toggle("show",should);if(should){setTimeout(()=>input.focus(),100);}}
+function togglePanel(open){const should=open!==undefined?open:!panel.classList.contains("show");panel.classList.toggle("show",should);if(should)setTimeout(()=>input.focus(),100);}
 function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function renderMarkdown(text){const parts=String(text).split(/```/);let html="";for(let i=0;i<parts.length;i++){if(i%2===1){const raw=parts[i];const nl=raw.indexOf("\n");const code=(nl>-1?raw.slice(nl+1):raw).replace(/\n$/,"");html+=`<pre style="background:#0b1f17;color:#d4e8dc;padding:12px;border-radius:10px;overflow-x:auto;font-size:11.5px;direction:ltr;text-align:left"><code>${escapeHtml(code)}</code></pre>`;}else{const t=parts[i].trim();if(!t)continue;let f=escapeHtml(t).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/\n/g,"<br>");html+=`<p>${f}</p>`;}}return html||`<p>${escapeHtml(text)}</p>`;}
 function addMessage(text,role){const wrap=document.createElement("div");wrap.className="ai-msg "+(role==="user"?"user":"bot");const b=document.createElement("div");b.className="ai-bubble";if(role==="user")b.innerHTML=`<p>${escapeHtml(text).replace(/\n/g,"<br>")}</p>`;else b.innerHTML=renderMarkdown(text);wrap.appendChild(b);body.appendChild(wrap);requestAnimationFrame(()=>{body.scrollTop=body.scrollHeight;});}
-async function submit(){const msg=input.value.trim();if(!msg||busy)return;busy=true;send.disabled=true;input.value="";addMessage(msg,"user");history.push({role:"user",content:msg});const t=document.createElement("div");t.className="ai-msg bot";t.innerHTML='<div class="ai-typing"><span></span><span></span><span></span></div>';body.appendChild(t);try{const res=await fetch(WORKER_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:history})});const data=await res.json();t.remove();if(data.error){addMessage("⚠️ "+data.error,"bot");}else{const r=data.reply||"پاسخی دریافت نشد.";addMessage(r,"bot");history.push({role:"assistant",content:r});}}catch(err){t.remove();addMessage("⚠️ اتصال برقرار نشد.","bot");}finally{busy=false;send.disabled=false;input.focus();}}
+async function submit(){const msg=input.value.trim();if(!msg||busy)return;busy=true;send.disabled=true;input.value="";addMessage(msg,"user");history.push({role:"user",content:msg});const t=document.createElement("div");t.className="ai-msg bot";t.innerHTML='<div class="ai-typing"><span></span><span></span><span></span></div>';body.appendChild(t);try{const res=await fetch(WORKER_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:history})});const data=await res.json();t.remove();if(data.error)addMessage("⚠️ "+data.error,"bot");else{const r=data.reply||"پاسخی دریافت نشد.";addMessage(r,"bot");history.push({role:"assistant",content:r});}}catch(err){t.remove();addMessage("⚠️ اتصال برقرار نشد.","bot");}finally{busy=false;send.disabled=false;input.focus();}}
 function init(){if(!fab||!panel)return;fab.addEventListener("click",()=>togglePanel());close.addEventListener("click",()=>togglePanel(false));send.addEventListener("click",()=>submit());input.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();submit();}});}
 return{init};
 })();
 
-/* ============ BOOT ============ */
+/* ============================================================
+   SEED + BOOT
+============================================================ */
+async function seedIfNeeded(){
+const auth=read(LS.auth,null);
+if(!auth){const salt=rand(16);const hash=await sha256(salt+"Admin@1405");write(LS.auth,{user:"admin",salt,hash,mustChange:false});}
+if(!read(LS.partners,null))write(LS.partners,[]);
+if(!read(LS.fleet,null))write(LS.fleet,[]);
+if(!read(LS.slots,null))write(LS.slots,[]);
+if(!read(LS.sms_settings,null))write(LS.sms_settings,defaultSmsSettings());
+if(!read(LS.sms_templates,null))write(LS.sms_templates,defaultSmsTemplates());
+if(!read(LS.sms_auto,null))write(LS.sms_auto,defaultSmsAuto());
+if(!read(LS.sms_log,null))write(LS.sms_log,[]);
+}
+
 (async function(){
 await seedIfNeeded();
 await loadAll();
@@ -1440,14 +2194,18 @@ updatePrice();
 updateNotifBadge();
 refreshSlotSelect();
 await refreshHomeOrdersFromServer();
-document.getElementById("home-phone-save")?.addEventListener("click",async()=>{const v=toEn($("#home-phone-input").value.trim());if(!/^09\d{9}$/.test(v)){toast("شمارهٔ موبایل نامعتبر.",true);return;}setCustomerPhone(v);await refreshHomeOrdersFromServer();toast("سفارش‌های شما نمایش داده شد.");});
-document.getElementById("home-phone-input")?.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();$("#home-phone-save").click();}});
-document.getElementById("home-change-phone")?.addEventListener("click",()=>{setCustomerPhone("");toast("شماره پاک شد.");});
-document.getElementById("phone-fab")?.addEventListener("click",()=>{const fab=$("#phone-fab");const phone=fab?.dataset.phone;if(!phone){toast("شمارهٔ پشتیبانی هنوز تنظیم نشده.",true);return;}window.location.href="tel:"+phone;});
-document.getElementById("wa-fab")?.addEventListener("click",()=>{const cfg=getConfig();const phone=toEn(cfg.supportPhone||"");if(!phone){toast("شمارهٔ پشتیبانی تنظیم نشده.",true);return;}const wa=phone.startsWith("0")?"98"+phone.slice(1):phone;window.open("https://wa.me/"+wa,"_blank");});
-document.getElementById("notif-btn")?.addEventListener("click",()=>{const c=Number(read("sph_new_count",0))||0;if(c>0)toast(`🔔 ${toFa(c)} سفارش جدید`);else toast("اعلان تازه‌ای وجود ندارد.");});
+
+$("#home-phone-save")?.addEventListener("click",async()=>{
+const v=toEn($("#home-phone-input").value.trim());
+if(!/^09\d{9}$/.test(v)){toast("شمارهٔ موبایل نامعتبر.",true);return;}
+await startPhoneVerification(v);
+});
+$("#home-phone-input")?.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();$("#home-phone-save").click();}});
+$("#home-change-phone")?.addEventListener("click",()=>{setCustomerPhone("");localStorage.removeItem(LS.cust_verified);toast("شماره پاک شد.");});
+$("#phone-fab")?.addEventListener("click",()=>{const fab=$("#phone-fab");const phone=fab?.dataset.phone;if(!phone){toast("شمارهٔ پشتیبانی هنوز تنظیم نشده.",true);return;}window.location.href="tel:"+phone;});
+$("#wa-fab")?.addEventListener("click",()=>{const cfg=getConfig();const phone=toEn(cfg.supportPhone||"");if(!phone){toast("شمارهٔ پشتیبانی تنظیم نشده.",true);return;}const wa=phone.startsWith("0")?"98"+phone.slice(1):phone;window.open("https://wa.me/"+wa,"_blank");});
+$("#notif-btn")?.addEventListener("click",()=>{const c=Number(read("sph_new_count",0))||0;if(c>0)toast(`🔔 ${toFa(c)} سفارش جدید`);else toast("اعلان تازه‌ای وجود ندارد.");});
+
 AIAssistant.init();
 })();
-</script>
-</body>
-</html>
+  </script>
