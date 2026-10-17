@@ -1450,14 +1450,50 @@ return{getSettings,setSettings,getTemplates,setTemplates,getAuto,setAuto,getLog,
 
 /* OTP SERVICE */
 const OtpService=(()=>{
-const getStore=()=>read(LS.otp_local,{});
-const setStore=s=>write(LS.otp_local,s);
-const gen6=()=>String(Math.floor(100000+Math.random()*900000));
-async function createRemote(phone,purpose){const res=await apiFetch("/api/otp/send",{method:"POST",body:JSON.stringify({phone,purpose})});if(res.ok&&res.data.ok)return{ok:true,sim:res.data.sim,code:res.data.code};const code=gen6();const store=getStore();store[phone]={code,purpose,expires:Date.now()+2*60*1000,attempts:0,createdAt:Date.now(),lastSentAt:Date.now()};setStore(store);return{ok:true,sim:true,code,local:true};}
-async function verifyRemote(phone,code,purpose){const res=await apiFetch("/api/otp/verify",{method:"POST",body:JSON.stringify({phone,code,purpose})});if(res.ok&&res.data.ok)return{ok:true};if(res.status===400)return{ok:false,msg:res.data.error||"کد نامعتبر"};const store=getStore();const rec=store[phone];if(!rec)return{ok:false,msg:"کدی ثبت نشده."};if(rec.expires<Date.now())return{ok:false,msg:"کد منقضی شده."};if(rec.attempts>=5)return{ok:false,msg:"تلاش بیش از حد."};if(String(toEn(code))!==String(rec.code)){rec.attempts++;setStore(store);return{ok:false,msg:`کد نادرست (${toFa(rec.attempts)}/۵)`};}delete store[phone];setStore(store);return{ok:true};}
-function getRemaining(phone){const s=getStore()[phone];return s?Math.max(0,Math.floor((s.expires-Date.now())/1000)):0;}
-function canResend(phone){const s=getStore()[phone];return!s||(Date.now()-s.lastSentAt)>60000;}
-function getLocalCode(phone){return getStore()[phone]?.code||"";}
+  const getStore=()=>read(LS.otp_local,{});
+  const setStore=s=>write(LS.otp_local,s);
+  const gen6=()=>String(Math.floor(100000+Math.random()*900000));
+
+  async function createRemote(phone,purpose){
+    const res=await apiFetch("/api/otp/send",{method:"POST",body:JSON.stringify({phone,purpose})});
+    
+    if(res.ok && res.data.ok) {
+        return { ok: true, sim: res.data.sim, code: res.data.code };
+    } else {
+        // این خط دقیقاً دلیل خطای sms.ir رو بهت نشون میده
+        alert("خطای واقعی از سمت ورکر: \n" + JSON.stringify(res.data || res, null, 2));
+        
+        // کد شبیه‌سازی شده برای اینکه سایت از کار نیفته
+        const code=gen6();
+        const store=getStore();
+        store[phone]={code,purpose,expires:Date.now()+2*60*1000,attempts:0,createdAt:Date.now(),lastSentAt:Date.now()};
+        setStore(store);
+        return { ok: true, sim: true, code, local: true };
+    }
+  }
+
+  async function verifyRemote(phone,code,purpose){
+    const res=await apiFetch("/api/otp/verify",{method:"POST",body:JSON.stringify({phone,code,purpose})});
+    if(res.ok&&res.data.ok)return{ok:true};
+    if(res.status===400)return{ok:false,msg:res.data.error||"کد نامعتبر"};
+    
+    const store=getStore();
+    const rec=store[phone];
+    if(!rec)return{ok:false,msg:"کدی ثبت نشده."};
+    if(rec.expires<Date.now())return{ok:false,msg:"کد منقضی شده."};
+    if(rec.attempts>=5)return{ok:false,msg:"تلاش بیش از حد."};
+    if(String(toEn(code))!==String(rec.code)){
+      rec.attempts++;setStore(store);return{ok:false,msg:`کد نادرست (${toFa(rec.attempts)}/۵)`};
+    }
+    delete store[phone];setStore(store);return{ok:true};
+  }
+
+  function getRemaining(phone){const s=getStore()[phone];return s?Math.max(0,Math.floor((s.expires-Date.now())/1000)):0;}
+  function canResend(phone){const s=getStore()[phone];return!s||(Date.now()-s.lastSentAt)>60000;}
+  function getLocalCode(phone){return getStore()[phone]?.code||"";}
+
+  return{createRemote,verifyRemote,getRemaining,canResend,getLocalCode};
+})();
 return{createRemote,verifyRemote,getRemaining,canResend,getLocalCode};
 })();
 
