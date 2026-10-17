@@ -1408,45 +1408,7 @@ const SMS_TEMPLATE_IDS = {
     otp: 556701, 
     // order_created: 123456, 
 };
-const SmsService=(()=>{
-const getSettings=()=>Object.assign(defaultSmsSettings(),read(LS.sms_settings,{}));
-const setSettings=s=>write(LS.sms_settings,s);
-const getTemplates=()=>Object.assign(defaultSmsTemplates(),read(LS.sms_templates,{}));
-const setTemplates=t=>write(LS.sms_templates,t);
-const getAuto=()=>Object.assign(defaultSmsAuto(),read(LS.sms_auto,{}));
-const setAuto=a=>write(LS.sms_auto,a);
-const getLog=()=>read(LS.sms_log,[]);
-const addLog=e=>{const l=getLog();l.unshift(e);if(l.length>500)l.length=500;write(LS.sms_log,l);};
-function renderTemplate(tpl,vars={}){let out=String(tpl||"");Object.entries(vars).forEach(([k,v])=>{out=out.split(`{${k}}`).join(String(v??""));});return out;}
-async function send(to,text,{kind="manual",meta={}}={}){
-const phone=toEn(String(to||"").replace(/\D/g,""));
-if(!/^09\d{9}$/.test(phone)){addLog({id:uid(),to:phone,text,kind,status:"failed",error:"شماره نامعتبر",createdAt:Date.now(),...meta});return{ok:false,error:"شماره نامعتبر"};}
-const s=getSettings();
-const entry={id:uid(),to:phone,text,kind,status:"pending",createdAt:Date.now(),provider:s.provider,...meta};
-if(s.provider==="sim"){await new Promise(r=>setTimeout(r,300));addLog({...entry,status:"sim"});return{ok:true,sim:true};}
-const res=await apiFetch("/api/sms/send",{method:"POST",body:JSON.stringify({to:phone,text})});
-if(res.ok&&res.data.ok){addLog({...entry,status:"sent"});return{ok:true};}
-const err=res.data?.error||`HTTP ${res.status}`;addLog({...entry,status:"failed",error:err});return{ok:false,error:err};
-}
-async function checkCredit(){const s=getSettings();if(s.provider==="sim")return{ok:true,credit:1000,sim:true};const res=await apiFetch("/api/sms/credit",{method:"POST",body:JSON.stringify({})});if(res.ok)return{ok:true,credit:res.data.credit??"?"};return{ok:false,error:res.data?.error||"خطا"};}
-async function sendByEvent(ev,order){
-    if(!getAuto()[ev])return{ok:false,skipped:true};
-    const templateId=SMS_TEMPLATE_IDS[ev];
-    if(templateId){
-        const params=[
-            {name:"NAME",value:order.name||"کشاورز"},{name:"CODE",value:order.code||""},{name:"AMOUNT",value:order.amount?fmtT(order.amount):""},{name:"CROP",value:order.crop||""},{name:"AREA",value:order.area?toFa(order.area):""},{name:"DATE",value:order.slotDate?toFa(order.slotDate):"—"}
-        ];
-        const res=await apiFetch("/api/sms/send",{method:"POST",body:JSON.stringify({to:order.phone,templateId:templateId,parameters:params})});
-        if(res.ok&&res.data.ok){addLog({id:uid(),to:order.phone,text:`[قالب ${ev}]`,kind:"auto_"+ev,status:"sent",createdAt:Date.now(),provider:"sms.ir (Verify)"});return{ok:true};}
-        return{ok:false,error:res.data?.error||"خطای قالب"};
-    }
-    const tpl=getTemplates()[ev];
-    if(!tpl||!tpl.text||!order?.phone)return{ok:false,skipped:true};
-    const vars={name:order.name||"کشاورز",code:order.code||"",amount:order.amount?fmtT(order.amount):"",crop:order.crop||"",area:order.area?toFa(order.area):"",date:order.slotDate?toFa(order.slotDate):"—"};
-    return await send(order.phone,renderTemplate(tpl.text,vars),{kind:"auto_"+ev,meta:{orderId:order.id,orderCode:order.code}});
-}
-return{getSettings,setSettings,getTemplates,setTemplates,getAuto,setAuto,getLog,addLog,send,sendByEvent,renderTemplate,checkCredit,clearLog:()=>write(LS.sms_log,[])};
-})();
+const SmsService=(()=>{const getSettings=()=>Object.assign(defaultSmsSettings(),read(LS.sms_settings,{}));const setSettings=s=>write(LS.sms_settings,s);const getTemplates=()=>Object.assign(defaultSmsTemplates(),read(LS.sms_templates,{}));const setTemplates=t=>write(LS.sms_templates,t);const getAuto=()=>Object.assign(defaultSmsAuto(),read(LS.sms_auto,{}));const setAuto=a=>write(LS.sms_auto,a);const getLog=()=>read(LS.sms_log,[]);const addLog=e=>{const l=getLog();l.unshift(e);if(l.length>500)l.length=500;write(LS.sms_log,l);};function renderTemplate(tpl,vars={}){let out=String(tpl||"");Object.entries(vars).forEach(([k,v])=>{out=out.split(`{${k}}`).join(String(v??""));});return out;}async function send(to,text,{kind="manual",meta={}}={}){const phone=toEn(String(to||"").replace(/\D/g,""));if(!/^09\d{9}$/.test(phone)){addLog({id:uid(),to:phone,text,kind,status:"failed",error:"شماره نامعتبر",createdAt:Date.now(),...meta});return{ok:false,error:"شماره نامعتبر"};}const s=getSettings();const entry={id:uid(),to:phone,text,kind,status:"pending",createdAt:Date.now(),provider:s.provider,...meta};if(s.provider==="sim"){await new Promise(r=>setTimeout(r,300));addLog({...entry,status:"sim"});return{ok:true,sim:true};}const res=await apiFetch("/api/sms/send",{method:"POST",body:JSON.stringify({to:phone,text})});if(res.ok&&res.data.ok){addLog({...entry,status:"sent"});return{ok:true};}const err=res.data?.message||res.data?.error||`HTTP ${res.status}`;addLog({...entry,status:"failed",error:err});return{ok:false,error:err};}async function checkCredit(){const s=getSettings();if(s.provider==="sim")return{ok:true,credit:1000,sim:true};const res=await apiFetch("/api/sms/credit",{method:"POST",body:JSON.stringify({})});if(res.ok)return{ok:true,credit:res.data.credit??"?"};return{ok:false,error:res.data?.error||"خطا"};}async function sendByEvent(ev,order){if(!getAuto()[ev])return{ok:false,skipped:true};const templateId=SMS_TEMPLATE_IDS[ev];if(templateId){const params=[{name:"NAME",value:order.name||"کشاورز"},{name:"CODE",value:order.code||""},{name:"AMOUNT",value:order.amount?fmtT(order.amount):""},{name:"CROP",value:order.crop||""},{name:"AREA",value:order.area?toFa(order.area):""},{name:"DATE",value:order.slotDate?toFa(order.slotDate):"—"}];const res=await apiFetch("/api/sms/send",{method:"POST",body:JSON.stringify({to:order.phone,templateId:templateId,parameters:params})});if(res.ok&&res.data.ok){addLog({id:uid(),to:order.phone,text:`[قالب ${ev}]`,kind:"auto_"+ev,status:"sent",createdAt:Date.now(),provider:"sms.ir (Verify)"});return{ok:true};}return{ok:false,error:res.data?.error||"خطای قالب"};}const tpl=getTemplates()[ev];if(!tpl||!tpl.text||!order?.phone)return{ok:false,skipped:true};const vars={name:order.name||"کشاورز",code:order.code||"",amount:order.amount?fmtT(order.amount):"",crop:order.crop||"",area:order.area?toFa(order.area):"",date:order.slotDate?toFa(order.slotDate):"—"};return await send(order.phone,renderTemplate(tpl.text,vars),{kind:"auto_"+ev,meta:{orderId:order.id,orderCode:order.code}});}return{getSettings,setSettings,getTemplates,setTemplates,getAuto,setAuto,getLog,addLog,send,sendByEvent,renderTemplate,checkCredit,clearLog:()=>write(LS.sms_log,[])};})();
 
 /* OTP SERVICE */
 const OtpService=(()=>{const getStore=()=>read(LS.otp_local,{});const setStore=s=>write(LS.otp_local,s);const gen6=()=>String(Math.floor(100000+Math.random()*900000));async function createRemote(phone,purpose){const res=await apiFetch("/api/otp/send",{method:"POST",body:JSON.stringify({phone,purpose})});if(res.ok&&res.data.ok)return{ok:true,sim:res.data.sim,code:res.data.code};alert("خطای sms.ir: "+JSON.stringify(res.data||"خطای شبکه",null,2));const code=gen6();const store=getStore();store[phone]={code,purpose,expires:Date.now()+2*60*1000,attempts:0,createdAt:Date.now(),lastSentAt:Date.now()};setStore(store);return{ok:true,sim:true,code,local:true};}async function verifyRemote(phone,code,purpose){const res=await apiFetch("/api/otp/verify",{method:"POST",body:JSON.stringify({phone,code,purpose})});if(res.ok&&res.data.ok)return{ok:true};if(res.status===400)return{ok:false,msg:res.data.error||"کد نامعتبر"};const store=getStore();const rec=store[phone];if(!rec)return{ok:false,msg:"کدی ثبت نشده."};if(rec.expires<Date.now())return{ok:false,msg:"کد منقضی شده."};if(rec.attempts>=5)return{ok:false,msg:"تلاش بیش از حد."};if(String(toEn(code))!==String(rec.code)){rec.attempts++;setStore(store);return{ok:false,msg:`کد نادرست (${toFa(rec.attempts)}/۵)`};}delete store[phone];setStore(store);return{ok:true};}function getRemaining(phone){const s=getStore()[phone];return s?Math.max(0,Math.floor((s.expires-Date.now())/1000)):0;}function canResend(phone){const s=getStore()[phone];return!s||(Date.now()-s.lastSentAt)>60000;}function getLocalCode(phone){return getStore()[phone]?.code||"";}return{createRemote,verifyRemote,getRemaining,canResend,getLocalCode};})();
