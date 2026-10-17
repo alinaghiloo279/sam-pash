@@ -630,37 +630,36 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 
 <main class="main">
 <header class="topbar">
-  <div style="display:flex; align-items:center; gap:12px; min-width:0;">
-    <button class="icon-btn mobile-menu-btn" id="mobile-menu-btn" aria-label="منو" style="display:none; border:none; background:transparent; padding:0;">
-      <svg class="icon" width="26" height="26"><use href="#i-menu"/></svg>
+  <!-- بخش راست: منو و لوگوی پهپاد -->
+  <div class="topbar-right">
+    <button id="mobile-menu-btn" class="mobile-menu-btn" aria-label="منو">
+      <svg class="icon" width="28" height="28"><use href="#i-menu"/></svg>
     </button>
-    <!-- تصویر پهپاد که با کلیک به صفحه اصلی می‌رود -->
-    <div data-go="home" style="cursor:pointer; display:flex; align-items:center;" title="بازگشت به صفحه اصلی">
-      <img src="drone.jpg" alt="سم‌پاش هوشمند" style="height:48px; width:auto; max-width:120px; object-fit:contain; border-radius:10px; box-shadow:var(--sh1);" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-      <span style="display:none; font-weight:900; color:var(--b700); font-size:16px; white-space:nowrap;">سم‌پاش هوشمند</span>
+    
+    <div data-go="home" class="topbar-logo" title="صفحه اصلی">
+      <!-- عکس پهپاد شما -->
+      <img src="drone.jpg" alt="سم‌پاش" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+      <!-- اگر عکس لود نشد، این متن نمایش داده می‌شود -->
+      <span style="display:none;">سم‌پاش هوشمند</span>
     </div>
   </div>
   
-  <div class="top-actions">
-    <!-- پروفایل کشاورز (سمت راست) -->
-    <div class="profile" style="cursor:pointer; border:none; background:transparent; padding:4px; display:flex; flex-direction:column; align-items:center;" data-go="profile">
-      <div class="avatar" id="user-avatar" style="width:36px; height:36px; font-size:14px;">ک</div>
-      <div class="profile-txt" style="margin-top:4px; text-align:center;">
-        <small style="display:block; font-size:10.5px; font-weight:800; color:var(--i700);">کشاورز</small>
-      </div>
+  <!-- بخش چپ: پروفایل، مدیریت، همکار -->
+  <div class="topbar-left">
+    <div class="top-btn" data-go="profile">
+      <div class="avatar" id="user-avatar">ک</div>
+      <span class="lbl">کشاورز</span>
     </div>
     
-    <!-- پنل مدیریت (وسط) -->
-    <button class="icon-btn" data-go="admin" aria-label="پنل مدیریت" style="border:none; background:transparent; padding:4px; display:flex; flex-direction:column; align-items:center; min-width:50px;">
-      <svg class="icon" width="24" height="24"><use href="#i-shield"/></svg>
-      <span class="lbl" style="font-size:10.5px; font-weight:800; margin-top:6px; color:var(--i700);">مدیریت</span>
-    </button>
+    <div class="top-btn" data-go="admin">
+      <svg class="icon" width="22" height="22"><use href="#i-shield"/></svg>
+      <span class="lbl">مدیریت</span>
+    </div>
     
-    <!-- پنل همکار (سمت چپ) -->
-    <button class="icon-btn" data-go="partner" aria-label="پنل همکار" style="border:none; background:transparent; padding:4px; display:flex; flex-direction:column; align-items:center; min-width:50px;">
-      <svg class="icon" width="24" height="24"><use href="#i-partner"/></svg>
-      <span class="lbl" style="font-size:10.5px; font-weight:800; margin-top:6px; color:var(--i700);">همکار</span>
-    </button>
+    <div class="top-btn" data-go="partner">
+      <svg class="icon" width="22" height="22"><use href="#i-partner"/></svg>
+      <span class="lbl">همکار</span>
+    </div>
   </div>
 </header>
 
@@ -2083,32 +2082,70 @@ $$(".nav button, .brand").forEach(btn => {
 });
 })();
 /* ===== استایل و انیمیشن نوار بالای سایت ===== */
-@keyframes topbarIconFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-.top-actions .icon-btn svg, .top-actions .profile .avatar {
-  transition: all 0.3s ease;
-}
-.top-actions .icon-btn:hover svg, .top-actions .profile:hover .avatar {
-  animation: topbarIconFloat 1.2s ease-in-out infinite;
-  color: var(--b600);
-  transform: scale(1.1);
-}
-.top-actions .icon-btn:active, .top-actions .profile:active {
-  transform: scale(0.92);
+/* ===== استایل اختصاصی نوار بالا ===== */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: var(--sur);
+  border-bottom: 1px solid var(--ln);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-/* اصلاح استایل موبایل برای نمایش نام‌ها زیر آیکون‌ها */
-@media(max-width:720px){
-  .topbar { background: var(--sur); border-bottom: 1px solid var(--ln); padding: 8px 14px; }
-  .icon-btn { min-width: 50px !important; height: auto !important; padding: 4px !important; border: none !important; background: transparent !important; box-shadow: none !important; }
-  .icon-btn .lbl { display: block !important; font-size: 10.5px !important; margin-top: 4px; }
-  .profile { border: none !important; background: transparent !important; box-shadow: none !important; padding: 4px !important; }
-  .profile-txt { display: block !important; }
-  .profile-txt small { display: block !important; font-size: 10.5px !important; }
-  .mobile-menu-btn { display: flex !important; margin-left: 8px; }
-  }
+.topbar-right, .topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* لوگوی پهپاد */
+.topbar-logo { cursor: pointer; display: flex; align-items: center; transition: transform 0.2s; }
+.topbar-logo:hover { transform: scale(1.05); }
+.topbar-logo img { height: 44px; width: auto; max-width: 100px; object-fit: contain; border-radius: 8px; }
+.topbar-logo span { font-weight: 900; color: var(--b700); font-size: 16px; }
+
+/* دکمه‌های سمت چپ (پروفایل، مدیریت، همکار) */
+.top-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  color: var(--i600);
+  padding: 4px 8px;
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+.top-btn .lbl { font-size: 11px; font-weight: 800; color: var(--i700); }
+.top-btn .avatar { width: 32px; height: 32px; font-size: 12px; margin: 0; }
+
+/* انیمیشن شناور شدن آیکون‌ها */
+.top-btn svg, .top-btn .avatar { transition: transform 0.3s ease; }
+.top-btn:hover svg, .top-btn:hover .avatar { 
+  animation: floatIcon 1s ease-in-out infinite;
+  color: var(--b600); 
+}
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* دکمه منوی همبرگری (فقط موبایل) */
+.mobile-menu-btn { display: none; background: none; border: none; color: var(--i800); cursor: pointer; padding: 4px; }
+
+/* ===== تنظیمات مخصوص موبایل ===== */
+@media (max-width: 720px) {
+  .mobile-menu-btn { display: flex !important; }
+  .top-btn { padding: 4px; gap: 2px; }
+  .top-btn .lbl { font-size: 10px; }
+  .topbar-logo img { height: 38px; }
+  /* حذف استایل‌های مزاحم قبلی برای دکمه‌های هدر در موبایل */
+  .topbar .icon-btn, .topbar .profile { border: none !important; background: transparent !important; height: auto !important; min-width: auto !important; padding: 0 !important; box-shadow: none !important; }
+}
 </script>
 </body>
 </html>
