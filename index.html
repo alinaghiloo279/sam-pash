@@ -629,26 +629,30 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </aside>
 
 <main class="main">
-  <header class="custom-navbar-2024">
+<header style="display:flex; flex-direction:row; justify-content:space-between; align-items:center; width:100%; padding:10px 16px; background:var(--sur); border-bottom:1px solid var(--ln); position:sticky; top:0; z-index:9999; box-sizing:border-box; height:70px; margin:0; direction:rtl;">
+  
   <!-- سمت راست: دکمه منو -->
-  <div class="navbar-right-side">
-    <button id="mobile-menu-btn" class="nav-menu-btn">
+  <div style="display:flex; align-items:center;">
+    <button id="mobile-menu-btn" style="display:flex; background:none; border:none; padding:0; cursor:pointer; color:var(--i900);">
       <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-menu"/></svg>
     </button>
   </div>
   
   <!-- سمت چپ: مدیریت و همکاران -->
-  <div class="navbar-left-side">
-    <div class="nav-action-btn" data-go="admin">
+  <div style="display:flex; flex-direction:row; align-items:center; gap:24px;">
+    
+    <div data-go="admin" style="display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; color:var(--i800);">
       <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-shield"/></svg>
-      <span>مدیریت</span>
+      <span style="font-size:11px; font-weight:800; margin-top:4px;">مدیریت</span>
     </div>
-    <div class="nav-action-btn" data-go="partner">
+    
+    <div data-go="partner" style="display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; color:var(--i800);">
       <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-partner"/></svg>
-      <span>همکاران</span>
+      <span style="font-size:11px; font-weight:800; margin-top:4px;">همکاران</span>
     </div>
+
   </div>
-  </header>
+</header>
 <section class="screen active" id="screen-home">
 <div class="hero">
 <div class="hero-copy">
