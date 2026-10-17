@@ -1307,7 +1307,7 @@ function defaultSmsAuto(){return{order_created:true,payment_approved:true,partne
 function defaultAiSettings(){return{provider:"sim",model:"gpt-4o-mini",apiKey:"",customUrl:"",system:"تو «دستیار هوشمند سم‌پاش» هستی. متخصص کشاورزی و سم‌پاشی با پهپاد. پاسخ‌های کوتاه، دقیق و به زبان فارسی بده."};}
 
 /* API + STATE */
-const API=window.location.origin; 
+const API = "https://cold-grass-e1f3sam-pash-api.ali-naghiloo279.workers.dev";
 const cache={orders:[],messages:[],config:null,me:null};
 let PAY_ORDER=null,TRACK_TIMER=null;
 const getMessages=()=>cache.messages||[];
