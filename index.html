@@ -630,30 +630,26 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 
 <main class="main">
 <header class="my-custom-header">
-  <div class="header-right">
-    <button id="mobile-menu-btn" class="menu-toggle">
-      <svg class="icon" width="28" height="28"><use href="#i-menu"/></svg>
+<header class="thin-header">
+  <!-- سمت راست: دکمه منو -->
+  <div class="thin-header-right">
+    <button id="mobile-menu-btn" class="menu-toggle-btn">
+      <svg class="icon" width="32" height="32"><use href="#i-menu"/></svg>
     </button>
-    <div data-go="home" class="header-logo" title="صفحه اصلی">
-      <img src="drone.jpg" alt="سم‌پاش" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-      <span style="display:none;">سم‌پاش هوشمند</span>
-    </div>
   </div>
   
-  <div class="header-left">
-    <div class="header-btn" data-go="profile">
-      <div class="avatar" id="user-avatar">ک</div>
-      <span>کشاورز</span>
-    </div>
-    <div class="header-btn" data-go="admin">
-      <svg class="icon" width="22" height="22"><use href="#i-shield"/></svg>
+  <!-- سمت چپ: فقط مدیریت و همکاران -->
+  <div class="thin-header-left">
+    <div class="thin-btn" data-go="admin">
+      <svg class="icon"><use href="#i-shield"/></svg>
       <span>مدیریت</span>
     </div>
-    <div class="header-btn" data-go="partner">
-      <svg class="icon" width="22" height="22"><use href="#i-partner"/></svg>
-      <span>همکار</span>
+    <div class="thin-btn" data-go="partner">
+      <svg class="icon"><use href="#i-partner"/></svg>
+      <span>همکاران</span>
     </div>
   </div>
+</header>
 </header>
 
 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
