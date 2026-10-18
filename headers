@@ -1,0 +1,8 @@
+/manifest.json
+  Access-Control-Allow-Origin: *
+
+/sw.js
+  Access-Control-Allow-Origin: *
+
+/logo.png
+  Access-Control-Allow-Origin: *
