@@ -9,7 +9,6 @@ self.addEventListener('activate', (e) => {
 });
 
 self.addEventListener('fetch', (e) => {
-  // به درخواست‌های API (دیتابیس و پیامک) کاری نداشته باش
   if (e.request.url.includes('/api/')) {
     return;
   }
