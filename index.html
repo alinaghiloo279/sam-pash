@@ -6,6 +6,9 @@
 <meta name="theme-color" content="#0f6f4e">
 <title>سم‌پاش هوشمند</title>
 <link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="پهپاد کار">
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -2041,6 +2044,18 @@ $$(".nav button, .brand").forEach(btn => {
         $("#sidebar-#sidebar-r-overlay")?.classList.remove("show");
     });
 });
+  // ثبت سرویس ورکر برای PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('ServiceWorker registered successfully');
+      })
+      .catch(error => {
+        console.log('ServiceWorker registration failed:', error);
+      });
+  });
+}
 })();
 </script>
 </body>
