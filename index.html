@@ -1686,29 +1686,69 @@ document.addEventListener("click",e=>{
   document.querySelectorAll(".kv-tab[data-kv-tab]").forEach(t=>t.classList.toggle("active",t===tab));
   document.querySelectorAll("#screen-knowledge .kv-panel").forEach(p=>p.classList.toggle("active",p.id==="kv-panel-"+key));
 });
-function renderVideoAdmin(){
-  const box=document.getElementById("kv-admin-videos-list");if(!box)return;
-  const items=KV_CACHE.videos||MOCK_VIDEOS;
-  if(!items.length){box.innerHTML='<div class="kv-empty"><strong>ویدیویی نیست</strong></div>';return;}
-  box.innerHTML=items.map((v,i)=>`
-    <div class="video-admin-item">
-      <div class="va-thumb"><video preload="metadata" muted playsinline><source src="${esc(v.url)}#t=0.5"></video></div>
-      <div class="va-info"><strong>${esc(v.title)}</strong><small>${esc(v.desc||"")}</small></div>
-      <div class="va-actions"><button class="icon-mini danger" data-del-video="${i}" title="حذف"><svg class="icon"><use href="#i-trash"/></svg></button></div>
-    </div>`).join("");
-  box.querySelectorAll("[data-del-video]").forEach(b=>{
-    b.onclick=()=>{
-      if(!confirm("حذف شود؟"))return;
-      const cur=(KV_CACHE.videos||MOCK_VIDEOS).slice();
-      cur.splice(+b.dataset.delVideo,1);
-      KV_CACHE.videos=cur;
-      renderVideoAdmin();kvRenderVideos(cur);
-      toast("حذف شد");
-    };
-  });
+async function renderVideoAdmin() {
+  const box = document.getElementById("kv-admin-videos-list"); if (!box) return;
+  try {
+      const r = await fetch(API + "/api/videos");
+      const items = r.ok ? await r.json() : [];
+      if (!items.length) { box.innerHTML = '<div class="kv-empty"><strong>ویدیویی نیست</strong></div>'; return; }
+      
+      box.innerHTML = items.map((v, i) => `
+        <div class="video-admin-item">
+          <div class="va-thumb" style="display:flex;align-items:center;justify-content:center;background:#0f6f4e;color:#fff;font-size:24px;">▶</div>
+          <div class="va-info"><strong>${esc(v.title)}</strong><small>${esc(v.description || "")}</small></div>
+          <div class="va-actions"><button class="icon-mini danger" data-del-video="${v.id}" title="حذف"><svg class="icon"><use href="#i-trash"/></svg></button></div>
+        </div>`).join("");
+        
+      box.querySelectorAll("[data-del-video]").forEach(b => {
+        b.onclick = async () => {
+          if (!confirm("حذف شود؟")) return;
+          await fetch(API + "/api/videos/" + b.dataset.delVideo, { method: "DELETE" });
+          renderVideoAdmin();
+          renderVideos();
+          toast("حذف شد");
+        };
+      });
+  } catch (e) {
+      box.innerHTML = '<div class="kv-empty"><strong>خطا در دریافت اطلاعات</strong></div>';
+  }
 }
-document.getElementById("kv-upload-form")?.addEventListener("submit",async e=>{
+document.getElementById("kv-upload-form")?.addEventListener("submit", async e => {
   e.preventDefault();
+  const f = e.target;
+  const title = f.querySelector("[name=vtitle]").value.trim();
+  const desc = f.querySelector("[name=vdesc]").value.trim();
+  const url = f.querySelector("[name=vurl]").value.trim();
+
+  if (!title || !url) return toast("عنوان و لینک را وارد کن", true);
+
+  const btn = f.querySelector("button[type=submit]");
+  btn.disabled = true;
+  btn.innerHTML = "در حال ثبت...";
+
+  const payload = { id: "v" + Date.now(), title, description: desc, url, createdAt: Date.now() };
+
+  try {
+      const res = await fetch(API + "/api/videos", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+      });
+      if (res.ok) {
+          toast("✅ ویدیو ثبت شد");
+          f.reset();
+          renderVideoAdmin();
+          renderVideos();
+      } else {
+          toast("خطا در ثبت ویدیو", true);
+      }
+  } catch (err) {
+      toast("خطای شبکه", true);
+  } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<svg class="icon"><use href="#i-upload"/></svg> ثبت ویدیو';
+  }
+});
   const f=e.target;
   const file=f.querySelector("input[type=file]").files[0];
   if(!file)return toast("فایل انتخاب کن",true);
