@@ -1518,7 +1518,17 @@ $("#invoice-print-btn")?.addEventListener("click",()=>window.print());
 function renderSupport(){const c=getConfig();const b=$("#support-phone-btn"),n=$("#support-note"),f=$("#phone-fab");if(n&&c.supportNote)n.textContent=c.supportNote;if(b){if(c.supportPhone){b.href="tel:"+toEn(c.supportPhone);b.textContent="📞 "+toFa(c.supportPhone);}else{b.removeAttribute("href");b.style.opacity=".6";b.textContent="📞 تنظیم نشده";}}if(f){if(c.supportPhone){f.classList.add("pulse");f.dataset.phone=toEn(c.supportPhone);}else f.classList.remove("pulse");}}
 function refreshSlotSelect(){const sel=$("#slot-select"),hint=$("#slot-hint");if(!sel)return;const all=getSlots().sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start));const orders=cache.orders;const free=all.filter(s=>{const b=orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length;return b<s.cap;});sel.innerHTML=free.length?'<option value="">انتخاب بازه</option>'+free.map(s=>{const b=orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length;const l=s.cap-b;return`<option value="${s.id}">${toFa(s.date)} — ${toFa(s.start)} تا ${toFa(s.end)} (${toFa(l)} جا)</option>`;}).join(""):'<option value="">بازه‌ای نیست</option>';if(hint)hint.textContent=free.length?"":"مدیر باید بازه تعریف کند.";}
 function attachNum(input,{integer=false}={}){if(!input)return;input.addEventListener("input",()=>{let v=toEn(input.value);v=integer?v.replace(/\D+/g,""):v.replace(/[^\d.]/g,"");if(input.value!==v)input.value=v;});input.addEventListener("blur",()=>{input.value=toEn(input.value);});}
-["phone","track-phone","ptn-login-phone","ptn-reg-phone","home-phone-input","sms-phone","prof-postal"].forEach(id=>attachNum(document.getElementById(id),{integer:true}));
+["phone","track-phone","ptn-login-phone","ptn-reg-phone","home-phone-input","sms-phone","prof-postal"].forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+    attachNum(el, {integer:true});
+    el.addEventListener("input", () => {
+        let v = toEn(el.value);
+        if ((id === "home-phone-input" || id === "phone" || id === "sms-phone" || id === "track-phone") && v.length === 10 && v.startsWith("9")) {
+            el.value = "0" + v;
+        }
+    });
+});
 ["area","ptn-reg-share","ptn-drone-liter","slot-cap"].forEach(id=>attachNum(document.getElementById(id)));
 const FIELD_MSG={cust:v=>v.trim().length>=3?"":"نام کامل.",phone:v=>/^09\d{9}$/.test(v)?"":"شماره ۱۱ رقمی با ۰۹.",province:v=>v?"":"استان.",city:v=>v.trim().length>=2?"":"نام شهر.",crop:v=>v?"":"محصول.",area:v=>{const n=Number(v);if(!v)return"مساحت.";if(!isFinite(n)||n<=0)return"مساحت مثبت.";if(n>10000000)return"زیاد.";return"";},"track-code":v=>/^SP-\d{4}-\d{4}$/i.test(v.trim())?"":"قالب: SP-1405-0128","track-phone":v=>/^09\d{9}$/.test(v)?"":"شماره نامعتبر.","slot-select":v=>v?"":"زمان."};
 function setErr(name,msg){const h=document.querySelector(`[data-error-for="${name}"]`);const f=document.getElementById(name);if(h)h.textContent=msg||"";if(f){if(msg)f.setAttribute("aria-invalid","true");else f.removeAttribute("aria-invalid");}}
