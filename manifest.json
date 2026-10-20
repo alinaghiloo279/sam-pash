@@ -1,4 +1,5 @@
-"id": "/",
+{
+  "id": "/",
   "name": "پهپاد کار",
   "short_name": "پهپاد کار",
   "description": "سامانه جامع خدمات کشاورزی و سم‌پاشی با پهپاد",
@@ -19,19 +20,6 @@
     },
     {
       "src": "logo.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "logo.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    }
-  ]
-}
-"src": "logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
