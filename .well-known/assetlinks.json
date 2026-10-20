@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "ir.sampash.pahpadkar",
+        "sha256_cert_fingerprints": ["0E:46:D2:AB:24:30:17:87:E0:DA:8D:F1:A2:D3:43:48:01:04:81:33:37:AA:FB:20:BD:CB:2F:A1:9D:BB:6F:4C"]
+      }
+    }]
