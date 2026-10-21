@@ -439,7 +439,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .faq-item[open] summary::before{content:"✓";background:var(--ok-bg);color:var(--ok-fg)}
 .faq-item .faq-body{padding:0 16px 14px 54px;color:var(--i600);font-size:13px;line-height:1.95}
 
-/* ==== کشتیار (دستیار AI) — پنل شناور ==== */
+/* ==== کشتیار (دستیار AI) — پنل شناور (FIXED) ==== */
 #ai-panel.ai-container-new{
   display:none;
   position:fixed !important;
@@ -449,8 +449,10 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   width:min(420px,calc(100vw - 32px)) !important;
   max-width:420px;
   height:min(620px,calc(100vh - 130px));
+  max-height:calc(100vh - 130px);
   margin:0 !important;
   flex-direction:column;
+  flex-wrap:nowrap;
   border-radius:var(--r-2);
   box-shadow:var(--sh5);
   border:1px solid var(--ln);
@@ -459,31 +461,33 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   font-family:Vazirmatn,Tahoma,sans-serif;
 }
 #ai-panel.ai-container-new.show{display:flex !important}
-.ai-welcome-new{padding:26px 18px;text-align:center;background:var(--inset);height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center}
-.ai-avatar-new{width:76px;height:76px;background:linear-gradient(145deg,var(--b500),var(--b700));border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:36px;color:#fff;margin-bottom:14px;box-shadow:0 6px 18px rgba(15,111,78,.28)}
+.ai-welcome-new{flex:1 1 auto;min-height:0;overflow-y:auto;padding:26px 18px;text-align:center;background:var(--inset);display:flex;flex-direction:column;justify-content:center;align-items:center}
+.ai-avatar-new{width:76px;height:76px;background:linear-gradient(145deg,var(--b500),var(--b700));border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:36px;color:#fff;margin-bottom:14px;box-shadow:0 6px 18px rgba(15,111,78,.28);flex-shrink:0}
 .ai-welcome-new h2{color:var(--b700);margin:0 0 8px;font-size:19px;font-weight:900}
 .ai-welcome-new p{color:var(--i500);font-size:13px;line-height:1.7;margin:0 0 18px}
 .ai-features-new{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;margin-bottom:22px}
 .ai-feature-card-new{background:var(--sur);padding:12px 10px;border-radius:12px;border:1px solid var(--ln);font-size:12px;color:var(--i700);font-weight:600}
 .ai-feature-card-new span{display:block;font-size:20px;margin-bottom:6px}
-.btn-start-ai-new{background:linear-gradient(180deg,var(--b500),var(--b600));color:#fff;border:none;padding:12px 30px;border-radius:24px;font-size:14px;font-weight:800;cursor:pointer;transition:.3s;width:100%;max-width:200px;font-family:inherit;box-shadow:var(--brand)}
+.btn-start-ai-new{background:linear-gradient(180deg,var(--b500),var(--b600));color:#fff;border:none;padding:12px 30px;border-radius:24px;font-size:14px;font-weight:800;cursor:pointer;transition:.3s;width:100%;max-width:200px;font-family:inherit;box-shadow:var(--brand);flex-shrink:0}
 .btn-start-ai-new:hover{background:linear-gradient(180deg,var(--b600),var(--b700));transform:translateY(-2px)}
-.ai-chat-screen-new{display:none;flex-direction:column;height:100%;overflow:hidden}
+.ai-chat-screen-new{display:none;flex:1 1 auto;min-height:0;flex-direction:column;overflow:hidden}
 .ai-chat-header-new{background:linear-gradient(135deg,var(--b700),var(--b500));color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px;flex-shrink:0}
 .ai-chat-header-new strong{font-size:14px;font-weight:800}
 .ai-chat-header-new .status-new{font-size:10.5px;opacity:.85;display:block;margin-top:1px}
-.ai-chat-messages-new{flex:1;padding:14px;overflow-y:auto;background:var(--inset);display:flex;flex-direction:column;gap:10px}
-.msg-new{max-width:85%;padding:10px 13px;border-radius:14px;font-size:13px;line-height:1.85;word-wrap:break-word}
+.ai-chat-messages-new{flex:1 1 auto;min-height:0;padding:14px;overflow-y:auto;background:var(--inset);display:flex;flex-direction:column;gap:10px;-webkit-overflow-scrolling:touch}
+.msg-new{max-width:85%;padding:10px 13px;border-radius:14px;font-size:13px;line-height:1.85;word-wrap:break-word;flex-shrink:0}
 .msg-new.user{background:linear-gradient(145deg,var(--b500),var(--b600));color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
 .msg-new.bot{background:var(--sur);color:var(--i800);align-self:flex-start;border-bottom-left-radius:4px;border:1px solid var(--ln)}
 .ai-chat-input-area-new{padding:10px;background:var(--sur);border-top:1px solid var(--ln);display:flex;align-items:center;gap:6px;flex-shrink:0}
 .ai-chat-input-area-new input[type="text"]{flex:1;padding:10px 12px;border:1px solid var(--ln2);border-radius:20px;outline:none;font-family:inherit;font-size:13px;background:var(--inset);color:var(--i800);min-width:0}
 .ai-chat-input-area-new button{background:linear-gradient(180deg,var(--b500),var(--b600));color:#fff;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;justify-content:center;align-items:center;font-size:16px;flex-shrink:0;font-family:inherit}
 .btn-img-new{background:linear-gradient(145deg,var(--b100),var(--b200))!important;color:var(--b700)!important}
-.image-preview-container-new{display:none;padding:8px 10px;background:var(--inset);border-top:1px solid var(--ln);text-align:right}
+.image-preview-container-new{display:none;padding:8px 10px;background:var(--inset);border-top:1px solid var(--ln);text-align:right;flex-shrink:0}
 .image-preview-new{height:50px;border-radius:8px;border:2px solid var(--b500)}
-.ai-close-new{margin-right:auto;background:none;border:none;color:#fff;cursor:pointer;font-size:16px;padding:4px 8px;border-radius:8px;font-family:inherit}
-.ai-close-new:hover{background:rgba(255,255,255,.12)}
+.ai-close-new{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;cursor:pointer;font-size:14px;padding:5px 10px;border-radius:8px;font-family:inherit;font-weight:700;flex-shrink:0}
+.ai-close-new:hover{background:rgba(255,255,255,.22)}
+.ai-back-new{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;cursor:pointer;font-size:11.5px;padding:5px 10px;border-radius:8px;font-family:inherit;font-weight:700;flex-shrink:0}
+.ai-back-new:hover{background:rgba(255,255,255,.22)}
 
 @media(max-width:1100px){.shell{grid-template-columns:220px minmax(0,1fr)}.main{padding:22px}.stats{grid-template-columns:repeat(2,1fr)}.content-grid{grid-template-columns:1fr}}
 @media(max-width:720px){
@@ -516,7 +520,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   .video-admin-item{grid-template-columns:1fr}
   .video-admin-item .va-thumb{width:100%;height:150px}
   .slot-pill{padding:8px 11px;font-size:12px;min-width:60px}
-  #ai-panel.ai-container-new{inset:0 !important;width:100% !important;max-width:100% !important;height:100vh !important;border-radius:0 !important;}
+  #ai-panel.ai-container-new{inset:0 !important;width:100% !important;max-width:100% !important;height:100vh !important;height:100dvh !important;border-radius:0 !important;}
 }
 @media(min-width:721px){#mobile-menu-btn{display:none!important}}
 </style>
@@ -659,7 +663,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="content-grid">
 <div class="panel">
 <div class="panel-head"><div><h3>آخرین سفارش‌های من</h3><p id="home-orders-sub">برای دیدن سفارش‌ها شماره خود را وارد کنید</p></div></div>
-<!-- پنل ورودی شماره (OTP) -->
 <div id="home-phone-prompt" style="background:var(--inset);border:1px solid var(--ln);border-radius:var(--r-m);padding:14px;margin-bottom:14px">
 <div style="display:flex;gap:8px;flex-wrap:wrap">
 <input id="home-phone-input" class="ltr" inputmode="numeric" maxlength="11" placeholder="09123456789" style="flex:1;min-width:140px;border:1px solid var(--ln2);background:var(--sur);border-radius:10px;padding:11px 13px;font-size:13.5px">
@@ -667,7 +670,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 <div class="notice" style="margin-top:10px">شماره‌ات را وارد کن، یک کد ۶ رقمی برات پیامک می‌شه.</div>
 </div>
-<!-- عکس پهپاد -->
 <div style="margin-bottom:16px;border-radius:16px;overflow:hidden;box-shadow:var(--sh3);border:1px solid var(--ln)">
   <img src="drone.jpg" alt="پهپاد سم‌پاش هوشمند"
        style="width:100%;display:block;height:auto;object-fit:cover;max-height:280px"
@@ -1081,9 +1083,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 <div class="actions"><button type="submit" class="btn btn-green"><svg class="icon"><use href="#i-plus"/></svg> افزودن</button></div>
 </form>
-<div class="notice info" style="margin-top:12px">
-💡 ویدیو از لینک اضافه می‌شود. اگر از YouTube/Aparat استفاده می‌کنی، فقط لینک صفحه ویدیو را کپی کن.
-</div>
+<div class="notice info" style="margin-top:12px">💡 ویدیو از لینک اضافه می‌شود. اگر از YouTube/Aparat استفاده می‌کنی، فقط لینک صفحه ویدیو را کپی کن.</div>
 </div>
 <div class="admin-card">
 <h4>📼 لیست ویدیوها</h4>
@@ -1230,12 +1230,15 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   </div>
   <div class="ai-chat-screen-new" id="ai-chat-screen">
     <div class="ai-chat-header-new">
-      <div class="ai-avatar-new" style="width:35px;height:35px;font-size:18px;margin:0;box-shadow:none;">🤖</div>
+      <div class="ai-avatar-new" style="width:35px;height:35px;font-size:18px;margin:0;box-shadow:none;flex-shrink:0">🤖</div>
       <div>
         <strong>کشتیار</strong>
         <span class="status-new">آنلاین و آماده پاسخگویی</span>
       </div>
-      <button class="ai-close-new" onclick="closeAIChat()" title="بستن">✕</button>
+      <div style="display:flex;gap:6px;margin-inline-start:auto;flex-shrink:0">
+        <button class="ai-back-new" onclick="backToWelcome()" title="بازگشت به صفحه اول">← بازگشت</button>
+        <button class="ai-close-new" onclick="closeAIChat()" title="بستن پنل">✕</button>
+      </div>
     </div>
     <div class="ai-chat-messages-new" id="ai-chat-box">
       <div class="msg-new bot">سلام! من کشتیار هستم. عکس محصولت رو بفرست یا سوالت رو بپرس تا راهنماییت کنم.</div>
@@ -1267,6 +1270,10 @@ function closeAIChat(){
   document.getElementById('ai-chat-screen').style.display='none';
   document.getElementById('ai-welcome-screen').style.display='flex';
   document.getElementById('ai-panel').classList.remove('show');
+}
+function backToWelcome(){
+  document.getElementById('ai-chat-screen').style.display='none';
+  document.getElementById('ai-welcome-screen').style.display='flex';
 }
 function handleImageUpload(event){
   const file=event.target.files[0]; if(!file) return;
@@ -1595,7 +1602,6 @@ async function register(data){const partners=getPartners();const phone=toEn(data
 return{getSession,setSession,logout,login,register};})();
 
 /* ==================== NAVIGATION ==================== */
-const TITLES={home:"سلام! امروز چطور کمکت کنم؟ 👋",order:"ثبت سفارش جدید",track:"پیگیری سفارش",history:"تاریخچه سفارش‌ها",profile:"پروفایل من",payment:"پرداخت و فاکتور",messages:"گفت‌وگو با مدیر",admin:"پنل مدیریت",partner:"پنل همکار",invoice:"فاکتور",videos:"🎬 گالری سمپاشی"};
 function showScreen(name){
 const t=document.getElementById("screen-"+name);if(!t)return;
 if(name==="admin"){const has=!!Auth.getSession();const lv=$("#admin-login-view"),pv=$("#admin-panel-view");if(lv)lv.hidden=has;if(pv)pv.hidden=!has;if(has){Admin.refreshAll();}}
@@ -1774,10 +1780,7 @@ async function renderVideos(){
   const grid = document.getElementById("kv-videos-grid");
   if(!grid) return;
   const local = read(LS.videos, []);
-  if(local.length){
-    renderVideoCardsLocal(local);
-    return;
-  }
+  if(local.length){ renderVideoCardsLocal(local); return; }
   grid.innerHTML = '<div class="kv-skeleton"></div><div class="kv-skeleton"></div><div class="kv-skeleton"></div>';
   try{
     const r = await fetch("https://api.sampash-ai.ir/api/videos");
@@ -1926,7 +1929,8 @@ $("#admin-tabs")?.addEventListener("click",e=>{
 const b=e.target.closest("button[data-tab]");if(!b)return;
 const tab=b.dataset.tab;
 $$("#admin-tabs button").forEach(x=>x.setAttribute("aria-selected",x===b?"true":"false"));
-$$(".admin-panel").forEach(p=>p.classList.toggle("active",p.dataset.panel===tab));
+/* ✅ FIX: فقط پنل‌های ادمین (نه پنل‌های همکار) */
+$$(".admin-panel[data-panel]").forEach(p=>p.classList.toggle("active",p.dataset.panel===tab));
 ({dash:renderDashboard,analytics:renderAnalytics,orders:()=>loadOrdersPage(true),payments:renderPayments,partners:renderPartners,schedule:()=>{SlotPicker.render();renderSlots();},pricing:renderPricing,payment:renderPayment,sms:renderSmsPanel,ai:renderAiPanel,regions:renderRegions,crops:renderCrops,messages:renderMessages,videos:()=>{renderVideoAdmin();bindVideoPanel();},customers:renderCustomers,audit:renderAudit,backup:()=>{},settings:renderSettings})[tab]?.();
 });
 }
@@ -1948,21 +1952,14 @@ if(orderFilters.q)p.set("q",orderFilters.q);
 if(orderFilters.status)p.set("status",orderFilters.status);
 const r=await apiFetch("/api/orders?"+p.toString());
 let list=[];
-if(r.ok&&r.data&&Array.isArray(r.data.orders)&&r.data.orders.length){
-  list=r.data.orders;
-} else if(reset){
-  list=read(LS.orders,[]);
-}
-if(reset) cache.orders=list;
-else cache.orders=cache.orders.concat(list);
+if(r.ok&&r.data&&Array.isArray(r.data.orders)&&r.data.orders.length){ list=r.data.orders; } else if(reset){ list=read(LS.orders,[]); }
+if(reset) cache.orders=list; else cache.orders=cache.orders.concat(list);
 write(LS.orders,cache.orders);
 orderFilters.total=(r.data&&r.data.total)||cache.orders.length;
 orderFilters.hasMore=!!(r.data&&r.data.hasMore);
 orderFilters.offset=cache.orders.length;
 orderFilters.loading=false;
-renderOrders();
-renderPager();
-renderTrustBar();
+renderOrders();renderPager();renderTrustBar();
 }
 function renderOrders(){const tb=$("#ord-tbody");if(!tb)return;let filtered=cache.orders;if(orderFilters.from){const f=toEn(orderFilters.from);filtered=filtered.filter(o=>toEn(o.slotDate||"").localeCompare(f)>=0);}if(orderFilters.to){const t=toEn(orderFilters.to);filtered=filtered.filter(o=>toEn(o.slotDate||"").localeCompare(t)<=0);}if(!filtered.length){tb.innerHTML='<tr><td colspan="8"><div class="empty">نتیجه‌ای نیست</div></td></tr>';return;}const recAll=read(LS.receipts,{});tb.innerHTML=filtered.map(o=>{const st=STATUS[o.status]||STATUS.pending;const r=recAll[o.id];let ri='<span class="receipt-none">—</span>';if(r){if(r.status==="pending")ri='<span class="status amber">⏳</span>';else if(r.status==="approved")ri='<span class="status green">✅</span>';else if(r.status==="rejected")ri='<span class="status red">❌</span>';}return`<tr><td><code class="ltr">${esc(o.code)}</code></td><td>${esc(o.name)}<br><small style="color:var(--i400);direction:ltr;display:inline-block">${esc(o.phone)}</small></td><td>${esc(o.crop)}<br><small>${toFa(o.area)} هکتار</small></td><td>${fmtT(o.amount)}</td><td><span class="status ${st.cls}">${st.label}</span></td><td>${ri}</td><td>${esc(o.slotDate||"—")}</td><td><div class="row-actions"><button class="icon-mini" data-ord-edit="${o.id}"><svg class="icon"><use href="#i-edit"/></svg></button><button class="icon-mini purple" data-ord-sms="${o.id}"><svg class="icon"><use href="#i-sms"/></svg></button><button class="icon-mini purple" data-ord-assign="${o.id}"><svg class="icon"><use href="#i-partner"/></svg></button><button class="icon-mini danger" data-ord-del="${o.id}"><svg class="icon"><use href="#i-trash"/></svg></button></div></td></tr>`;}).join("");}
 function renderPager(){const b=$("#ord-pager");if(!b)return;const s=cache.orders.length,t=orderFilters.total;let h=`<span style="font-size:12px;color:var(--i400)">${toFa(s)} از ${toFa(t)}</span>`;if(orderFilters.hasMore)h+=`<button class="btn btn-light btn-sm" id="ord-loadmore">بیشتر ↓</button>`;b.innerHTML=h;$("#ord-loadmore")?.addEventListener("click",()=>loadOrdersPage(false));}
@@ -1989,16 +1986,9 @@ $("#slot-add-btn")?.addEventListener("click",()=>{
   const c=+toEn($("#slot-cap").value)||1;
   if(c<=0)return toast("ظرفیت را وارد کن",true);
   const slots=getSlots();
-  if(slots.some(s=>s.date===sel.date&&s.start===sel.start&&s.end===sel.end)){
-    return toast("این بازه قبلاً ثبت شده",true);
-  }
+  if(slots.some(s=>s.date===sel.date&&s.start===sel.start&&s.end===sel.end)) return toast("این بازه قبلاً ثبت شده",true);
   slots.push({id:uid(),date:sel.date,start:sel.start,end:sel.end,cap:c,createdAt:Date.now()});
-  setSlots(slots);
-  $("#slot-cap").value="2";
-  renderSlots();
-  refreshSlotSelect();
-  SlotPicker.reset();
-  toast("✅ بازه اضافه شد");
+  setSlots(slots);$("#slot-cap").value="2";renderSlots();refreshSlotSelect();SlotPicker.reset();toast("✅ بازه اضافه شد");
 });
 $("#slot-tbody")?.addEventListener("click",e=>{const d=e.target.closest("[data-slot-del]");if(!d)return;setSlots(getSlots().filter(x=>x.id!==d.dataset.slotDel));renderSlots();refreshSlotSelect();toast("حذف");});
 function renderPricing(){const c=getConfig();$("#cfg-base-rate").value=c.baseRate;fillSelect($("#cfg-rate-prov"),c.provinces);fillSelect($("#cfg-rate-crop"),c.crops);renderChips("#cfg-prov-rates-list",c.provRates,k=>{const cc=getConfig();delete cc.provRates[k];setConfig(cc);renderPricing();});renderChips("#cfg-crop-rates-list",c.cropRates,k=>{const cc=getConfig();delete cc.cropRates[k];setConfig(cc);renderPricing();});}
@@ -2062,29 +2052,7 @@ function startTimer(){clearInterval(timerHandle);const tick=()=>{const s=Auth.ge
 function stopAndLogout(){clearInterval(timerHandle);Auth.logout();const lv=$("#admin-login-view"),pv=$("#admin-panel-view");if(lv)lv.hidden=false;if(pv)pv.hidden=true;toast("نشست منقضی شد.",true);}
 function bindLogin(){$("#admin-login-form")?.addEventListener("submit",async e=>{e.preventDefault();const u=$("#admin-user").value.trim(),p=$("#admin-pass").value;if(!u||!p)return toast("پر کن",true);const r=await Auth.login(u,p);if(!r.ok){toast(r.msg,true);$("#admin-pass").value="";return;}toast("ورود موفق");$("#admin-pass").value="";const lv=$("#admin-login-view"),pv=$("#admin-panel-view");if(lv)lv.hidden=true;if(pv)pv.hidden=false;pushAudit("login",`ورود ${u}`,"login");startTimer();refreshAll();});}
 function openChangePassModal(){openModal(`<h3>تغییر رمز</h3><form id="chg-form"><div class="field-wrap" style="margin-bottom:10px"><label>رمز فعلی</label><input type="password" id="cp-cur" class="ltr" required></div><div class="field-wrap" style="margin-bottom:10px"><label>رمز جدید</label><input type="password" id="cp-new" class="ltr" required></div><div class="field-wrap"><label>تکرار</label><input type="password" id="cp-conf" class="ltr" required></div><div class="modal-actions"><button type="submit" class="btn btn-green">ذخیره</button><button type="button" class="btn btn-light" id="cp-cancel">انصراف</button></div></form>`);$("#cp-cancel").onclick=closeModal;$("#chg-form").addEventListener("submit",async e=>{e.preventDefault();const r=await Auth.changePassword($("#cp-cur").value,$("#cp-new").value,$("#cp-conf").value);if(!r.ok)return toast(r.msg,true);closeModal();pushAudit("edit","تغییر رمز");toast("✅");});}
-function openChangeUserModal(){
-openModal(`
-<h3 style="display:flex;align-items:center;gap:8px"><svg class="icon" width="20" height="20" style="color:var(--b600)"><use href="#i-users"/></svg> تغییر نام کاربری مدیر</h3>
-<p class="m-sub">نام کاربری جدید و رمز فعلی را وارد کن</p>
-<form id="cu-form">
-<div class="field-wrap" style="margin-bottom:10px"><label>نام کاربری جدید</label><input type="text" id="cu-new" class="ltr" required placeholder="admin_new" autocomplete="username"><span class="hint">۳-۲۰ کاراکتر، حرف/عدد/underscore</span></div>
-<div class="field-wrap"><label>رمز فعلی</label><input type="password" id="cu-pass" class="ltr" required autocomplete="current-password"></div>
-<div class="modal-actions"><button type="submit" class="btn btn-green"><svg class="icon"><use href="#i-save"/></svg> ذخیره</button><button type="button" class="btn btn-light" id="cu-cancel">انصراف</button></div>
-</form>
-`);
-$("#cu-cancel").onclick=closeModal;
-$("#cu-form").addEventListener("submit",async e=>{
-e.preventDefault();
-const newUser=$("#cu-new").value.trim();
-const pass=$("#cu-pass").value;
-const r=await Auth.changeUsername(pass,newUser);
-if(!r.ok)return toast(r.msg,true);
-closeModal();
-pushAudit("edit",`تغییر نام کاربری به ${newUser}`);
-toast("✅ نام کاربری تغییر کرد — با نام جدید وارد شو");
-stopAndLogout();
-});
-}
+function openChangeUserModal(){openModal(`<h3 style="display:flex;align-items:center;gap:8px"><svg class="icon" width="20" height="20" style="color:var(--b600)"><use href="#i-users"/></svg> تغییر نام کاربری مدیر</h3><p class="m-sub">نام کاربری جدید و رمز فعلی را وارد کن</p><form id="cu-form"><div class="field-wrap" style="margin-bottom:10px"><label>نام کاربری جدید</label><input type="text" id="cu-new" class="ltr" required placeholder="admin_new" autocomplete="username"><span class="hint">۳-۲۰ کاراکتر، حرف/عدد/underscore</span></div><div class="field-wrap"><label>رمز فعلی</label><input type="password" id="cu-pass" class="ltr" required autocomplete="current-password"></div><div class="modal-actions"><button type="submit" class="btn btn-green"><svg class="icon"><use href="#i-save"/></svg> ذخیره</button><button type="button" class="btn btn-light" id="cu-cancel">انصراف</button></div></form>`);$("#cu-cancel").onclick=closeModal;$("#cu-form").addEventListener("submit",async e=>{e.preventDefault();const newUser=$("#cu-new").value.trim();const pass=$("#cu-pass").value;const r=await Auth.changeUsername(pass,newUser);if(!r.ok)return toast(r.msg,true);closeModal();pushAudit("edit",`تغییر نام کاربری به ${newUser}`);toast("✅ نام کاربری تغییر کرد — با نام جدید وارد شو");stopAndLogout();});}
 function bindLogout(){$("#admin-logout-btn")?.addEventListener("click",()=>{confirmModal("خروج","از پنل خارج می‌شوی؟",{onConfirm:()=>{stopAndLogout();toast("خارج شدی");}});});$("#admin-change-pass-btn")?.addEventListener("click",openChangePassModal);$("#admin-change-user-btn")?.addEventListener("click",openChangeUserModal);}
 function refreshAll(){loadOrdersPage(true);renderPayments();renderPartners();renderSlots();renderPricing();renderPayment();renderSmsPanel();renderAiPanel();renderRegions();renderCrops();renderMessages();renderVideoAdmin();renderCustomers();renderAnalytics();renderAudit();renderSettings();renderDashboard();renderTrustBar();}
 function init(){bindTabs();bindOrders();bindLogin();bindLogout();if(Auth.getSession()) startTimer();}
