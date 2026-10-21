@@ -806,7 +806,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <section class="screen" id="screen-videos">
 <div class="panel">
 <div class="panel-head"><div><h3>🎬 گالری سمپاشی</h3><p>ویدیوهای واقعی از عملیات سمپاشی پهپادی در مزارع</p></div></div>
-<div class="kv-grid" id="kv-videos-grid">
+<div class="kv-grid" id="kv-videos-grid"></div>
 </div>
   <script>
 document.addEventListener('DOMContentLoaded', async function() {
@@ -2435,9 +2435,12 @@ if ('serviceWorker' in navigator) {
 <script>
 document.addEventListener('DOMContentLoaded', async function() {
     const videoGrid = document.getElementById('kv-videos-grid');
-    if (!videoGrid) return;
+    if (!videoGrid) return; 
 
     try {
+        // پیام لودینگ
+        videoGrid.innerHTML = '<p style="text-align:center; width:100%;">در حال دریافت ویدیوها از یوتیوب...</p>';
+        
         const response = await fetch('https://api.sampash-ai.ir/api/videos');
         const data = await response.json();
         
@@ -2458,11 +2461,14 @@ document.addEventListener('DOMContentLoaded', async function() {
                     </div>
                 `;
             });
+        } else {
+            videoGrid.innerHTML = '<p style="text-align:center; width:100%; color: red;">سرور پاسخ داد اما ویدیویی پیدا نشد.</p>';
         }
     } catch (error) {
+        videoGrid.innerHTML = '<p style="text-align:center; width:100%; color: red;">خطا در اتصال به سرور: ' + error.message + '</p>';
         console.error("خطا در لود ویدیوها:", error);
     }
 });
-  </script>
+</script>
 </body>
   </html>
