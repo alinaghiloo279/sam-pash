@@ -261,29 +261,10 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .drone-item .d-info small{color:var(--i500);font-size:11.5px;display:flex;gap:8px;flex-wrap:wrap;margin-top:2px}
 .drone-item button{border:0;background:transparent;color:var(--dng);padding:6px;border-radius:6px;display:grid;place-items:center}
 .slot-badge{display:inline-block;font-size:11.5px;background:var(--purple-bg);color:var(--purple);border-radius:6px;padding:3px 8px;margin-top:4px}
-.faq-section{margin:26px 0 20px}
-.faq-section>h3{font-size:19px;font-weight:800;color:var(--i900);margin:0 0 6px}
-.faq-section>p{color:var(--i400);font-size:13px;margin:0 0 16px}
-.faq-item{background:var(--sur);border:1px solid var(--ln);border-radius:var(--r-l);margin-bottom:8px;overflow:hidden}
-.faq-item[open]{border-color:var(--b300)}
-.faq-item summary{padding:14px 16px;font-weight:700;font-size:13.5px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px}
-.faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary::before{content:"؟";width:28px;height:28px;border-radius:9px;background:var(--b50);color:var(--b700);display:grid;place-items:center;font-weight:800;flex-shrink:0;font-size:14px}
-.faq-item[open] summary::before{content:"✓";background:var(--ok-bg);color:var(--ok-fg)}
-.faq-item .faq-body{padding:0 16px 14px 54px;color:var(--i600);font-size:13px;line-height:1.95}
 .fab-stack{position:fixed;bottom:24px;inset-inline-end:24px;z-index:90;display:flex;flex-direction:column-reverse;gap:12px}
 .fab{width:56px;height:56px;border-radius:50%;color:#fff;display:grid;place-items:center;box-shadow:0 10px 28px rgba(11,31,23,.28);transition:transform .25s}
 .fab:hover{transform:scale(1.1)}
 .fab svg{width:24px;height:24px}
-.fab-ai{background:linear-gradient(145deg,var(--b500),var(--b700));animation:pulseFab 2.5s infinite}
-.fab-phone{background:linear-gradient(145deg,#4ba87e,#1f8a63);width:50px;height:50px}
-.fab-phone svg{width:22px;height:22px}
-.fab-wa{background:linear-gradient(145deg,#25D366,#128C7E);width:50px;height:50px}
-.fab-wa svg{width:24px;height:24px}
-.fab-theme{background:linear-gradient(145deg,#4a5a52,#2a3630);width:44px;height:44px}
-.fab-theme svg{width:20px;height:20px}
-.fab.pulse{animation:pulseFab 2.2s infinite}
-@keyframes pulseFab{0%,100%{box-shadow:0 10px 28px rgba(31,138,99,.35),0 0 0 0 rgba(31,138,99,.4)}50%{box-shadow:0 10px 28px rgba(31,138,99,.35),0 0 0 14px rgba(31,138,99,0)}}
 .receipt-preview{display:flex;align-items:center;gap:12px;background:linear-gradient(160deg,var(--ok-bg),var(--inset));border:1px solid rgba(15,111,78,.15);border-radius:var(--r-m);padding:12px;margin-top:12px}
 .receipt-preview img{width:70px;height:70px;object-fit:cover;border-radius:9px;border:1px solid var(--ln);flex-shrink:0;background:#fff}
 .receipt-preview .rp-info{flex:1;min-width:0}
@@ -305,26 +286,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .tl-item.done strong{color:var(--ok-fg)}
 .tl-item.current strong{color:var(--warn-fg)}
 .track-actions{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
-.ai-panel{position:fixed;bottom:96px;inset-inline-start:24px;z-index:95;width:min(420px,calc(100vw - 32px));height:min(620px,calc(100vh - 130px));background:var(--sur);border:1px solid var(--ln);border-radius:var(--r-2);box-shadow:var(--sh5);display:none;flex-direction:column;overflow:hidden}
-.ai-panel.show{display:flex}
-.ai-head{padding:14px 16px;background:linear-gradient(135deg,var(--b700),var(--b500));color:#fff;display:flex;align-items:center;gap:11px}
-.ai-avatar{width:36px;height:36px;border-radius:11px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.22);display:grid;place-items:center}
-.ai-avatar svg{width:19px;height:19px}
-.ai-head-info{flex:1}
-.ai-head-info strong{display:block;font-size:13px;font-weight:800}
-.ai-head-info small{display:block;font-size:10.5px;opacity:.85;margin-top:1px}
-.ai-close{width:32px;height:32px;border-radius:9px;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.18);display:grid;place-items:center}
-.ai-close svg{width:15px;height:15px}
-.ai-body{flex:1;overflow-y:auto;padding:16px;background:var(--inset);display:flex;flex-direction:column;gap:12px}
-.ai-msg{display:flex;gap:8px;max-width:92%}
-.ai-msg.user{margin-inline-start:auto;flex-direction:row-reverse}
-.ai-msg .ai-bubble{padding:12px 14px;border-radius:14px 14px 4px 14px;background:linear-gradient(145deg,var(--b500),var(--b600));color:#fff;font-size:13px;line-height:1.85;max-width:100%;word-wrap:break-word}
-.ai-msg.bot .ai-bubble{background:var(--sur);color:var(--i700);border:1px solid var(--ln);border-radius:14px 14px 14px 4px}
-.ai-msg .ai-bubble p{margin:0 0 8px}.ai-msg .ai-bubble p:last-child{margin:0}
-.ai-foot{padding:10px 12px;border-top:1px solid var(--ln);display:flex;gap:8px;align-items:flex-end}
-.ai-foot textarea{flex:1;resize:none;min-width:0;border:1px solid var(--ln2);background:var(--inset);border-radius:12px;padding:10px 12px;font-size:13px;max-height:120px;min-height:42px;font-family:inherit}
-.ai-send{width:44px;height:44px;border-radius:12px;background:linear-gradient(180deg,var(--b500),var(--b600));color:#fff;display:grid;place-items:center;flex-shrink:0}
-.ai-send svg{width:17px;height:17px}
 .receipt-card{background:linear-gradient(160deg,var(--inset),var(--sur));border:1px solid var(--b100);border-radius:var(--r-x);padding:24px;box-shadow:var(--sh3);position:relative;overflow:hidden}
 .receipt-card::before{content:"";position:absolute;top:0;inset-inline-start:0;inset-inline-end:0;height:6px;background:linear-gradient(90deg,var(--b500),var(--a400))}
 .receipt-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:18px;padding-bottom:18px;border-bottom:1px dashed var(--b200)}
@@ -423,31 +384,21 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .mini-chip.ok{background:var(--ok-bg);color:var(--ok-fg);border-color:rgba(15,111,78,.15)}
 .mini-chip.warn{background:var(--warn-bg);color:var(--warn-fg);border-color:rgba(138,97,16,.15)}
 .mini-chip.danger{background:var(--dng-bg);color:var(--dng-fg);border-color:rgba(160,42,30,.15)}
-@media print{.sidebar,.topbar,.fab-stack,.ai-panel,.toast,.modal-back,.no-print{display:none!important}.shell{display:block}.main{padding:0}.screen{display:none!important}#screen-invoice{display:block!important}body{background:#fff;color:#000}}
+@media print{.sidebar,.topbar,.toast,.modal-back,.no-print{display:none!important}.shell{display:block}.main{padding:0}.screen{display:none!important}#screen-invoice{display:block!important}body{background:#fff;color:#000}}
 .history-list{max-height:600px;overflow-y:auto}
 .history-item{display:grid;grid-template-columns:52px 1fr auto;gap:12px;padding:12px;border:1px solid var(--ln);border-radius:12px;margin-bottom:8px;background:var(--sur);align-items:center}
 .history-ic{width:52px;height:52px;border-radius:12px;background:linear-gradient(145deg,var(--b50),var(--b100));color:var(--b600);display:grid;place-items:center;flex-shrink:0}
 .history-ic svg{width:22px;height:22px}
 .history-main strong{display:block;font-size:13px;font-weight:700}
 .history-main small{display:block;font-size:11.5px;color:var(--i400);margin-top:3px}
-.kv-tabs{display:flex;gap:6px;border-bottom:2px solid var(--ln);margin-bottom:20px;flex-wrap:wrap}
-.kv-tab{padding:11px 18px;border:none;background:transparent;font-size:14px;font-weight:700;color:var(--i500);cursor:pointer;border-radius:10px 10px 0 0;transition:all .2s;font-family:inherit}
-.kv-tab:hover{background:var(--inset)}
-.kv-tab.active{color:var(--b700);background:var(--b50);border-bottom:3px solid var(--b500);margin-bottom:-2px}
-.kv-panel{display:none}
-.kv-panel.active{display:block;animation:screenIn .35s}
 .kv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
 .kv-card{background:var(--sur);border:1px solid var(--ln);border-radius:var(--r-l);overflow:hidden;transition:all .25s;box-shadow:var(--sh1)}
 .kv-card:hover{transform:translateY(-4px);box-shadow:var(--sh3);border-color:var(--b300)}
-.kv-card-img{height:170px;background:linear-gradient(135deg,var(--b50),var(--b100));background-size:cover;background-position:center;display:grid;place-items:center;color:var(--b600);font-size:42px;position:relative;overflow:hidden}
+.kv-card-img{height:170px;background:linear-gradient(135deg,var(--b50),var(--b100));display:grid;place-items:center;color:var(--b600);font-size:42px;position:relative;overflow:hidden}
 .kv-card-img img{width:100%;height:100%;object-fit:cover}
 .kv-card-body{padding:14px}
-.kv-card-meta{display:flex;justify-content:space-between;font-size:11.5px;color:var(--i400);margin-bottom:8px;font-weight:600;gap:8px;flex-wrap:wrap}
-.kv-badge{background:var(--b50);color:var(--b700);padding:2px 9px;border-radius:99px;font-weight:700;white-space:nowrap}
 .kv-card-title{font-size:14.5px;font-weight:800;margin:0 0 8px;line-height:1.7;color:var(--i900)}
 .kv-card-desc{font-size:12.5px;color:var(--i600);line-height:1.85;margin:0 0 10px}
-.kv-read-more{color:var(--b600);font-size:12.5px;font-weight:700;text-decoration:none;display:inline-block}
-.kv-read-more:hover{color:var(--b800)}
 .kv-skeleton{height:300px;background:linear-gradient(90deg,var(--i50) 25%,var(--i100) 50%,var(--i50) 75%);background-size:200% 100%;animation:kvShimmer 1.4s infinite;border-radius:var(--r-l)}
 @keyframes kvShimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 .kv-video-card{cursor:pointer}
@@ -458,19 +409,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .kv-empty{padding:40px 20px;text-align:center;color:var(--i400);font-size:13.5px;background:var(--inset);border-radius:var(--r-l);border:1px dashed var(--ln2);grid-column:1/-1}
 .kv-empty strong{display:block;font-size:16px;color:var(--i700);margin-bottom:8px;font-weight:800}
 .kv-empty .kv-empty-icon{font-size:44px;display:block;margin-bottom:10px}
-.kv-upload-box{background:linear-gradient(160deg,var(--b50),var(--inset));border:2px dashed var(--b300);border-radius:var(--r-l);padding:20px;margin-bottom:16px}
-.kv-upload-box h4{margin:0 0 14px;font-size:14.5px;font-weight:800;color:var(--b700);display:flex;align-items:center;gap:8px}
-.kv-upload-box label{display:block;margin-bottom:12px;font-size:12.5px;font-weight:700;color:var(--i700)}
-.kv-upload-box input[type=text],.kv-upload-box textarea,.kv-upload-box input[type=file]{width:100%;padding:10px 12px;border:1px solid var(--ln2);border-radius:10px;background:var(--sur);font-family:inherit;font-size:13px;margin-top:6px;color:var(--i800);box-sizing:border-box}
-.kv-upload-box textarea{resize:vertical;min-height:60px}
-.kv-progress{height:8px;background:var(--i100);border-radius:99px;overflow:hidden;margin:12px 0 6px;display:none}
-.kv-progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--b500),var(--b400));transition:width .2s}
-.kv-progress-pct{font-size:11.5px;color:var(--b700);font-weight:800;text-align:center;display:block;margin-bottom:6px}
-.video-admin-item{display:grid;grid-template-columns:120px 1fr auto;gap:12px;align-items:center;padding:12px;background:var(--sur);border:1px solid var(--ln);border-radius:12px;margin-bottom:10px}
-.video-admin-item .va-thumb{width:120px;height:70px;background:#000;border-radius:8px;overflow:hidden;position:relative}
-.video-admin-item .va-thumb video,.video-admin-item .va-thumb img{width:100%;height:100%;object-fit:cover}
-.video-admin-item .va-info strong{display:block;font-size:13.5px;font-weight:800;margin-bottom:4px;color:var(--i900)}
-.video-admin-item .va-info small{font-size:11.5px;color:var(--i500);display:block;line-height:1.7}
 .slot-strip-wrap{margin-bottom:16px}
 .slot-strip-label{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;color:var(--i700);margin-bottom:8px}
 .slot-strip-label .ss-icon{width:24px;height:24px;border-radius:7px;background:var(--b50);color:var(--b700);display:grid;place-items:center;flex-shrink:0}
@@ -489,6 +427,53 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .slot-preview strong{color:var(--b700)}
 .sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;display:none;backdrop-filter:blur(2px)}
 .sidebar-overlay.show{display:block}
+
+/* ==== کشتیار (دستیار AI) — پنل شناور ==== */
+#ai-panel.ai-container-new{
+  display:none;
+  position:fixed !important;
+  bottom:24px;
+  left:24px;
+  z-index:9998;
+  width:min(420px,calc(100vw - 32px)) !important;
+  max-width:420px;
+  height:min(620px,calc(100vh - 130px));
+  margin:0 !important;
+  flex-direction:column;
+  border-radius:var(--r-2);
+  box-shadow:var(--sh5);
+  border:1px solid var(--ln);
+  background:var(--sur);
+  overflow:hidden;
+  font-family:Vazirmatn,Tahoma,sans-serif;
+}
+#ai-panel.ai-container-new.show{display:flex !important}
+.ai-welcome-new{padding:26px 18px;text-align:center;background:var(--inset);height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.ai-avatar-new{width:76px;height:76px;background:linear-gradient(145deg,var(--b500),var(--b700));border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:36px;color:#fff;margin-bottom:14px;box-shadow:0 6px 18px rgba(15,111,78,.28)}
+.ai-welcome-new h2{color:var(--b700);margin:0 0 8px;font-size:19px;font-weight:900}
+.ai-welcome-new p{color:var(--i500);font-size:13px;line-height:1.7;margin:0 0 18px}
+.ai-features-new{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;margin-bottom:22px}
+.ai-feature-card-new{background:var(--sur);padding:12px 10px;border-radius:12px;border:1px solid var(--ln);font-size:12px;color:var(--i700);font-weight:600}
+.ai-feature-card-new span{display:block;font-size:20px;margin-bottom:6px}
+.btn-start-ai-new{background:linear-gradient(180deg,var(--b500),var(--b600));color:#fff;border:none;padding:12px 30px;border-radius:24px;font-size:14px;font-weight:800;cursor:pointer;transition:.3s;width:100%;max-width:200px;font-family:inherit;box-shadow:var(--brand)}
+.btn-start-ai-new:hover{background:linear-gradient(180deg,var(--b600),var(--b700));transform:translateY(-2px)}
+.ai-chat-screen-new{display:none;flex-direction:column;height:100%;overflow:hidden}
+.ai-chat-header-new{background:linear-gradient(135deg,var(--b700),var(--b500));color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px;flex-shrink:0}
+.ai-chat-header-new strong{font-size:14px;font-weight:800}
+.ai-chat-header-new .status-new{font-size:10.5px;opacity:.85;display:block;margin-top:1px}
+.ai-chat-messages-new{flex:1;padding:14px;overflow-y:auto;background:var(--inset);display:flex;flex-direction:column;gap:10px}
+.msg-new{max-width:85%;padding:10px 13px;border-radius:14px;font-size:13px;line-height:1.85;word-wrap:break-word}
+.msg-new.user{background:linear-gradient(145deg,var(--b500),var(--b600));color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.msg-new.bot{background:var(--sur);color:var(--i800);align-self:flex-start;border-bottom-left-radius:4px;border:1px solid var(--ln)}
+.ai-chat-input-area-new{padding:10px;background:var(--sur);border-top:1px solid var(--ln);display:flex;align-items:center;gap:6px;flex-shrink:0}
+.ai-chat-input-area-new input[type="text"]{flex:1;padding:10px 12px;border:1px solid var(--ln2);border-radius:20px;outline:none;font-family:inherit;font-size:13px;background:var(--inset);color:var(--i800);min-width:0}
+.ai-chat-input-area-new button{background:linear-gradient(180deg,var(--b500),var(--b600));color:#fff;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;justify-content:center;align-items:center;font-size:16px;flex-shrink:0;font-family:inherit}
+.btn-img-new{background:linear-gradient(145deg,var(--b100),var(--b200))!important;color:var(--b700)!important}
+.image-preview-container-new{display:none;padding:8px 10px;background:var(--inset);border-top:1px solid var(--ln);text-align:right}
+.image-preview-new{height:50px;border-radius:8px;border:2px solid var(--b500)}
+.ai-close-new{margin-right:auto;background:none;border:none;color:#fff;cursor:pointer;font-size:16px;padding:4px 8px;border-radius:8px;font-family:inherit}
+.ai-close-new:hover{background:rgba(255,255,255,.12)}
+
 @media(max-width:1100px){.shell{grid-template-columns:220px minmax(0,1fr)}.main{padding:22px}.stats{grid-template-columns:repeat(2,1fr)}.content-grid{grid-template-columns:1fr}}
 @media(max-width:720px){
   .shell{display:block}
@@ -511,23 +496,20 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   .form-grid{grid-template-columns:1fr}
   .span-2{grid-column:span 1}
   .toast{inset-inline-start:12px;inset-inline-end:12px;bottom:12px}
-  .fab-stack{bottom:16px;inset-inline-end:16px;gap:10px}
-  .ai-panel{inset:auto 0 0 0;width:100%;height:min(78vh,640px);border-radius:var(--r-2) var(--r-2) 0 0;bottom:0}
   .receipt-body{grid-template-columns:1fr}
   .otp-inputs input{width:42px;height:50px;font-size:19px}
   .drone-add-form{grid-template-columns:1fr 1fr}
   .drone-add-form .btn{grid-column:span 2}
   .history-item{grid-template-columns:1fr}
   .kv-grid{grid-template-columns:1fr}
-  .video-admin-item{grid-template-columns:1fr}
-  .video-admin-item .va-thumb{width:100%;height:150px}
   .slot-pill{padding:8px 11px;font-size:12px;min-width:60px}
+  #ai-panel.ai-container-new{inset:0 !important;width:100% !important;max-width:100% !important;height:100vh !important;border-radius:0 !important;}
 }
-@media(min-width:721px){
-  #mobile-menu-btn{display:none!important}
-}
+@media(min-width:721px){#mobile-menu-btn{display:none!important}}
 </style>
-</head><body>
+</head>
+<body>
+<!-- SVG Symbols -->
 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
 <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M12 21c-5-3-7-7-7-11 4 0 7 2 7 6 0-7 4-11 9-12 0 7-2 13-9 17Z"/><path d="M12 20v-7"/></symbol>
 <symbol id="i-dashboard" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="5" rx="2"/><rect x="13" y="10" width="8" height="11" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/></symbol>
@@ -555,7 +537,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <symbol id="i-partner" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
 <symbol id="i-drone" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M6.5 6.5 9 9M17.5 6.5 15 9M6.5 17.5 9 15M17.5 17.5 15 15"/></symbol>
 <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92Z"/></symbol>
-<symbol id="i-wa" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347Z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.83-1.438A9.956 9.956 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2Z" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
 <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
 <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z"/></symbol>
 <symbol id="i-trend" viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8"/><path d="M17 7h4v4"/></symbol>
@@ -569,7 +550,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></symbol>
 <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></symbol>
 <symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M17 21v-8H7v8M7 3v5h8"/></symbol>
-<symbol id="i-theme" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></symbol>
 <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></symbol>
 <symbol id="i-print" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></symbol>
 <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol>
@@ -582,6 +562,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </svg>
 
 <div class="shell">
+<!-- Sidebar -->
 <aside class="sidebar" id="sidebar">
 <a href="#" class="brand" data-go="home">
 <div class="brandmark"><img src="logo.png" alt="سم‌پاش" onerror="this.style.display='none';this.parentElement.innerHTML='<svg class=\'icon\'><use href=\'#i-leaf\'/></svg>'"></div>
@@ -594,6 +575,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <button data-screen="track"><svg class="icon"><use href="#i-track"/></svg>پیگیری سفارش</button>
 <button data-screen="history"><svg class="icon"><use href="#i-history"/></svg>تاریخچه</button>
 <button data-screen="profile"><svg class="icon"><use href="#i-users"/></svg>پروفایل من</button>
+<button data-screen="videos"><svg class="icon"><use href="#i-play"/></svg>گالری سمپاشی</button>
 <button data-screen="messages"><svg class="icon"><use href="#i-msg"/></svg>پیام به مدیر</button>
 </nav>
 <div class="side-bottom">
@@ -606,13 +588,19 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </aside>
 
 <main class="main">
+<!-- Header: دستیار + مدیریت + همکاران -->
 <header style="display:flex; flex-direction:row; justify-content:space-between; align-items:center; width:100%; padding:10px 16px; background:var(--sur); border-bottom:1px solid var(--ln); position:sticky; top:0; z-index:9999; box-sizing:border-box; height:70px; margin:0; direction:rtl;">
   <div style="display:flex; align-items:center;">
     <button id="mobile-menu-btn" class="mobile-menu-btn" style="background:none; border:none; padding:0; cursor:pointer; color:var(--i900);">
       <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-menu"/></svg>
     </button>
   </div>
-  <div style="display:flex; flex-direction:row; align-items:center; gap:24px;">
+  <div style="display:flex; flex-direction:row; align-items:center; gap:22px;">
+    <!-- ✨ دستیار -->
+    <div id="header-ai-btn" style="display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; color:var(--b700);">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-zap"/></svg>
+      <span style="font-size:11px; font-weight:800; margin-top:4px;">دستیار</span>
+    </div>
     <div data-go="admin" style="display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; color:var(--i800);">
       <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-shield"/></svg>
       <span style="font-size:11px; font-weight:800; margin-top:4px;">مدیریت</span>
@@ -624,6 +612,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   </div>
 </header>
 
+<!-- ============ HOME ============ -->
 <section class="screen active" id="screen-home">
 <div class="hero">
 <div class="hero-copy">
@@ -662,11 +651,15 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 
 <div class="content-grid">
 <div class="panel">
-<div class="panel-head"><div><h3>آخرین سفارش‌های من</h3><p id="home-orders-sub">برای دیدن سفارش‌های خود وارد شوید</p></div><button class="text-btn" id="home-change-phone" hidden>تغییر شماره</button></div>
-<div id="home-phone-prompt" style="background:var(--inset);border:1px solid var(--ln);border-radius:var(--r-m);padding:14px;margin-bottom:14px">
-<div style="display:flex;gap:8px;flex-wrap:wrap"><input id="home-phone-input" class="ltr" inputmode="numeric" maxlength="11" placeholder="09123456789" style="flex:1;min-width:140px;border:1px solid var(--ln2);background:var(--sur);border-radius:10px;padding:11px 13px;font-size:13.5px"><button class="btn btn-green" id="home-phone-save"><svg class="icon"><use href="#i-sms"/></svg> ارسال کد</button></div>
-<div class="notice" style="margin-top:10px">شماره‌ات را وارد کن، یک کد ۶ رقمی برات پیامک می‌شه.</div>
+<div class="panel-head"><div><h3>آخرین سفارش‌های من</h3><p id="home-orders-sub">برای دیدن سفارش‌ها ابتدا شماره را تأیید کنید</p></div></div>
+
+<!-- عکس پهپاد (جایگزین شماره) -->
+<div style="margin-bottom:16px;border-radius:16px;overflow:hidden;box-shadow:var(--sh3);border:1px solid var(--ln)">
+  <img src="drone.jpg" alt="پهپاد سم‌پاش هوشمند"
+       style="width:100%;display:block;height:auto;object-fit:cover;max-height:280px"
+       onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\'padding:40px 20px;text-align:center;color:var(--i400);background:var(--inset);font-size:13px\'>🌾 تصویر پهپاد سم‌پاش</div>'">
 </div>
+
 <div id="home-orders"></div>
 </div>
 <div class="panel"><div class="panel-head"><div><h3>دسترسی سریع</h3></div></div><div class="quick-grid">
@@ -674,7 +667,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <button class="quick" data-go="track"><span class="q-icon"><svg class="icon"><use href="#i-search"/></svg></span><strong>سفارشم کجاست؟</strong><small>پیگیری</small></button>
 <button class="quick" data-go="history"><span class="q-icon"><svg class="icon"><use href="#i-history"/></svg></span><strong>تاریخچه</strong><small>همه سفارش‌ها</small></button>
 <button class="quick" data-go="profile"><span class="q-icon"><svg class="icon"><use href="#i-users"/></svg></span><strong>پروفایل</strong><small>اطلاعات من</small></button>
-<button class="quick" data-go="knowledge"><span class="q-icon"><svg class="icon"><use href="#i-file"/></svg></span><strong>مرکز دانش</strong><small>اخبار و مقالات</small></button>
 <button class="quick" data-go="videos"><span class="q-icon"><svg class="icon"><use href="#i-play"/></svg></span><strong>گالری سمپاشی</strong><small>ویدیوها</small></button>
 </div></div>
 </div>
@@ -712,6 +704,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
+<!-- ============ ORDER ============ -->
 <section class="screen" id="screen-order">
 <div class="panel">
 <div class="panel-head"><div><h3>ثبت سفارش</h3><p>اطلاعات مزرعه را وارد کنید.</p></div></div>
@@ -733,6 +726,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
+<!-- ============ TRACK ============ -->
 <section class="screen" id="screen-track">
 <div class="panel">
 <div class="panel-head"><div><h3>پیگیری سفارش</h3></div></div>
@@ -745,8 +739,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </form>
 <div id="track-result"></div>
 </div>
-</section>
-
+  </section>
+  <!-- ============ HISTORY ============ -->
 <section class="screen" id="screen-history">
 <div class="panel">
 <div class="panel-head"><div><h3>تاریخچه سفارش‌ها</h3><p id="history-sub">همه سفارش‌های شما</p></div></div>
@@ -759,6 +753,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
+<!-- ============ PROFILE ============ -->
 <section class="screen" id="screen-profile">
 <div class="profile-card">
 <div class="profile-avatar-lg" id="profile-avatar-big">ک</div>
@@ -791,72 +786,21 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
-<section class="screen" id="screen-knowledge">
-<div class="panel">
-<div class="panel-head"><div><h3>📚 مرکز دانش</h3><p>آخرین اخبار صنعت پهپاد و مقالات تخصصی کشاورزی</p></div></div>
-<div class="kv-tabs">
-<button class="kv-tab active" data-kv-tab="news">📰 اخبار صنعت</button>
-<button class="kv-tab" data-kv-tab="articles">📄 مقالات کشاورزی</button>
-</div>
-<div class="kv-panel active" id="kv-panel-news"><div class="kv-grid" id="kv-news-grid"><div class="kv-skeleton"></div><div class="kv-skeleton"></div><div class="kv-skeleton"></div></div></div>
-<div class="kv-panel" id="kv-panel-articles"><div class="kv-grid" id="kv-articles-grid"><div class="kv-skeleton"></div><div class="kv-skeleton"></div><div class="kv-skeleton"></div></div></div>
-</div>
-</section>
-
+<!-- ============ VIDEOS ============ -->
 <section class="screen" id="screen-videos">
 <div class="panel">
 <div class="panel-head"><div><h3>🎬 گالری سمپاشی</h3><p>ویدیوهای واقعی از عملیات سمپاشی پهپادی در مزارع</p></div></div>
 <div class="kv-grid" id="kv-videos-grid"></div>
 </div>
-</script>
-  <script>
-document.addEventListener('DOMContentLoaded', async function() {
-    // پیدا کردن کانتینر ویدیوها در سایت شما
-    const videoGrid = document.getElementById('kv-videos-grid');
-    
-    // اگر کانتینر در صفحه وجود نداشت، کد متوقف شود
-    if (!videoGrid) return;
-
-    try {
-        // درخواست به بک‌اند کلودفلر شما برای گرفتن لیست ویدیوها
-        const response = await fetch('https://api.sampash-ai.ir/api/videos');
-        const data = await response.json();
-        
-        if (data.ok && data.videos.length > 0) {
-            // پاک کردن کادرهای مشکی یا اسکلت‌های قبلی
-            videoGrid.innerHTML = ''; 
-            
-            // ساخت کارت برای هر ویدیو
-            data.videos.forEach(video => {
-                videoGrid.innerHTML += `
-                    <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; margin-bottom: 15px;">
-                        <img src="${video.thumbnail}" 
-                             alt="${video.title}" 
-                             style="width: 100%; height: 180px; object-fit: cover; background: #ddd;"
-                             onerror="this.onerror=null; this.src='https://i.ytimg.com/vi/${video.id}/hqdefault.jpg';">
-                        <div style="padding: 15px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between;">
-                            <h3 style="font-size: 14px; margin: 0 0 15px 0; color: #333; line-height: 1.6; height: 65px; overflow: hidden;">${video.title}</h3>
-                            <a href="${video.url}" target="_blank" style="text-decoration: none; display: block; text-align: center; background: #1a5c38; color: white; padding: 10px; border-radius: 6px; font-size: 14px;">تماشا در یوتیوب</a>
-                        </div>
-                    </div>
-                `;
-            });
-        } else {
-            videoGrid.innerHTML = '<p style="text-align: center; width: 100%;">هیچ ویدیویی یافت نشد.</p>';
-        }
-    } catch (error) {
-        console.error("خطا در لود ویدیوها:", error);
-        videoGrid.innerHTML = '<p style="text-align: center; width: 100%; color: red;">خطا در ارتباط با سرور.</p>';
-    }
-});
-  </script>
 </section>
 
+<!-- ============ INVOICE ============ -->
 <section class="screen" id="screen-invoice">
 <div class="panel no-print"><div class="actions" style="margin:0"><button class="btn btn-light" data-go="home">← بازگشت</button><button class="btn btn-green" id="invoice-print-btn"><svg class="icon"><use href="#i-print"/></svg> چاپ</button></div></div>
 <div id="invoice-content" style="margin-top:14px"></div>
 </section>
 
+<!-- ============ PAYMENT ============ -->
 <section class="screen" id="screen-payment">
 <div class="panel">
 <div class="panel-head"><div><h3>پرداخت و فیش</h3></div></div>
@@ -873,6 +817,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 </div>
 </section>
 
+<!-- ============ MESSAGES ============ -->
 <section class="screen" id="screen-messages">
 <div class="panel">
 <div class="panel-head"><div><h3>گفت‌وگو با مدیر</h3></div></div>
@@ -887,6 +832,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 </div>
 </section>
 
+<!-- ============ ADMIN ============ -->
 <section class="screen" id="screen-admin">
 <div id="admin-login-view" class="auth-wrap">
 <div class="panel auth-panel">
@@ -923,7 +869,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 <button data-tab="regions" aria-selected="false">🗺️ مناطق</button>
 <button data-tab="crops" aria-selected="false">🌾 محصولات</button>
 <button data-tab="messages" aria-selected="false">💬 پیام‌ها</button>
-<button data-tab="videos" aria-selected="false">🎬 ویدیوها</button>
 <button data-tab="customers" aria-selected="false">👥 مشتریان</button>
 <button data-tab="audit" aria-selected="false">🔍 Audit</button>
 <button data-tab="backup" aria-selected="false">💾 بکاپ</button>
@@ -1120,91 +1065,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 <div class="admin-panel" data-panel="crops"><div class="admin-card"><h4>محصولات</h4><div class="inline-add"><input id="crop-new" placeholder="نام محصول"><button class="btn btn-green btn-sm" id="crop-add-btn">افزودن</button></div><div class="chip-list" id="crop-list"></div></div></div>
 <div class="admin-panel" data-panel="messages"><div class="admin-card"><h4>پیام‌های مشتریان</h4><div id="adm-messages-list"></div></div></div>
 
-<div class="admin-panel" data-panel="videos">
-<!-- ===== تنظیمات اتصال ===== -->
-<div class="admin-card">
-<h4>🔌 اتصال به آپارات و یوتیوب</h4>
-<p class="sub">برای آپلود مستقیم، کلیدها را وارد کن</p>
-<div class="admin-grid">
-<div class="field-wrap">
-<label for="vid-aparat-key">کلید API آپارات</label>
-<input id="vid-aparat-key" class="ltr" placeholder="aparat api key">
-<span class="hint">از <code class="ltr">aparat.com/user/api</code></span>
-</div>
-<div class="field-wrap">
-<label for="vid-aparat-proxy">پراکسی آپارات (اختیاری)</label>
-<input id="vid-aparat-proxy" class="ltr" placeholder="https://your-worker.workers.dev/aparat-upload">
-<span class="hint">برای دور زدن CORS</span>
-</div>
-<div class="field-wrap span-2">
-<label for="vid-youtube-client">YouTube OAuth Client ID</label>
-<input id="vid-youtube-client" class="ltr" placeholder="xxxxx.apps.googleusercontent.com">
-</div>
-<div class="field-wrap span-2">
-<label>وضعیت اتصال یوتیوب</label>
-<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-<span id="vid-youtube-status" class="mini-chip">قطع</span>
-<button type="button" class="btn btn-purple btn-sm" id="vid-youtube-connect"><svg class="icon"><use href="#i-verified"/></svg> اتصال به یوتیوب</button>
-<button type="button" class="btn btn-light btn-sm" id="vid-youtube-disconnect">قطع اتصال</button>
-</div>
-</div>
-</div>
-<div class="actions" style="margin-top:14px">
-<button type="button" class="btn btn-green" id="vid-settings-save"><svg class="icon"><use href="#i-save"/></svg> ذخیره تنظیمات</button>
-</div>
-<div class="notice info" style="margin-top:12px">
-💡 <b>آپارات:</b> کلید از پنل کاربری. اگر CORS خطا داد، پراکسی را با Cloudflare Worker بساز.
-<br>💡 <b>یوتیوب:</b> OAuth Client ID از <code class="ltr">console.cloud.google.com</code> با redirect URI همین سایت.
-<br>🔒 کلیدها فقط در مرورگر شما ذخیره می‌شوند.
-</div>
-</div>
-
-<!-- ===== فرم آپلود ===== -->
-<div class="kv-upload-box">
-<h4>📤 آپلود ویدیوی جدید</h4>
-<form id="kv-upload-form">
-<div class="field-wrap" style="margin-bottom:12px">
-<label for="kv-source">مقصد آپلود</label>
-<select id="kv-source" name="source" style="width:100%;padding:10px 12px;border:1px solid var(--ln2);border-radius:10px;background:var(--sur)">
-<option value="aparat">🟣 آپارات (آپلود مستقیم)</option>
-<option value="youtube">🔴 یوتیوب (آپلود مستقیم)</option>
-<option value="link">🔗 لینک آماده (embed)</option>
-</select>
-</div>
-<div id="kv-file-wrap" style="margin-bottom:12px">
-<label>فایل ویدیو</label>
-<input type="file" name="vfile" accept="video/mp4,video/webm,video/quicktime" style="width:100%;padding:10px 12px;border:1px solid var(--ln2);border-radius:10px;background:var(--sur);margin-top:6px">
-<span class="hint">حداکثر ~۱۰۰ مگابایت</span>
-</div>
-<div id="kv-url-wrap" style="margin-bottom:12px" hidden>
-<label>لینک ویدیو</label>
-<input type="text" name="vurl" placeholder="https://aparat.com/v/xxxx  یا  https://youtu.be/xxxx" dir="ltr" style="width:100%;padding:10px 12px;border:1px solid var(--ln2);border-radius:10px;background:var(--sur);margin-top:6px;text-align:left">
-</div>
-<div class="field-wrap" style="margin-bottom:12px">
-<label for="kv-vtitle">عنوان ویدیو</label>
-<input type="text" id="kv-vtitle" name="vtitle" required placeholder="مثلاً: سمپاشی مزرعه گندم در دزفول">
-</div>
-<div class="field-wrap" style="margin-bottom:12px">
-<label for="kv-vdesc">توضیح کوتاه</label>
-<textarea id="kv-vdesc" name="vdesc" rows="2" placeholder="۱-۲ خط توضیح..."></textarea>
-</div>
-<div class="kv-progress" id="kv-progress" style="display:none">
-<div class="kv-progress-fill" id="kv-progress-fill"></div>
-</div>
-<span class="kv-progress-pct" id="kv-progress-pct" style="display:none"></span>
-<button type="submit" class="btn btn-green" style="margin-top:10px">
-<svg class="icon"><use href="#i-upload"/></svg> شروع آپلود
-</button>
-</form>
-</div>
-
-<!-- ===== لیست ویدیوها ===== -->
-<div class="admin-card">
-<h4>📼 ویدیوهای موجود</h4>
-<div id="kv-admin-videos-list"></div>
-</div>
-</div>
-
 <div class="admin-panel" data-panel="customers">
 <div class="admin-card">
 <h4>مشتریان</h4>
@@ -1232,8 +1092,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 <div class="admin-card"><h4 style="color:var(--dng)">منطقه خطر</h4><div class="actions" style="margin-top:0"><button class="btn btn-danger" id="danger-reset"><svg class="icon"><use href="#i-trash"/></svg> بازنشانی همه</button></div></div>
 </div>
 </div>
-</section>
-
+  </section>
+  <!-- ============ PARTNER ============ -->
 <section class="screen" id="screen-partner">
 <div id="partner-login-view" class="auth-wrap">
 <div class="panel auth-panel">
@@ -1310,14 +1170,10 @@ document.addEventListener('DOMContentLoaded', async function() {
 
 <div class="footer-note">سم‌پاش هوشمند · نسخه ۹.۰ · با ❤️ برای کشاورزان ایران</div>
 </main>
-</div><div class="sidebar-overlay" id="sidebar-overlay"></div>
-<div class="fab-stack">
-<button class="fab fab-ai" id="ai-fab" aria-label="دستیار"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/><circle cx="12" cy="12" r="4"/></svg></button>
-<button class="fab fab-phone" id="phone-fab"><svg class="icon"><use href="#i-phone"/></svg></button>
-<button class="fab fab-wa" id="wa-fab"><svg class="icon"><use href="#i-wa"/></svg></button>
-<button class="fab fab-theme" id="theme-fab"><svg class="icon"><use href="#i-theme"/></svg></button>
 </div>
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
 
+<!-- ============ OTP MODAL ============ -->
 <div class="modal-back" id="otp-modal-back">
 <div class="modal" style="max-width:440px">
 <h3 style="display:flex;align-items:center;gap:8px"><svg class="icon" width="20" height="20" style="color:var(--b600)"><use href="#i-sms"/></svg> تأیید شماره</h3>
@@ -1333,173 +1189,146 @@ document.addEventListener('DOMContentLoaded', async function() {
 </div>
 </div>
 
-<!-- ================= شروع کد جدید: دستیار هوشمند کشتیار ================= -->
-<style>
-    .ai-container-new { font-family: Tahoma, sans-serif; width: 100%; max-width: 450px; background: #fff; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); overflow: hidden; display: flex; flex-direction: column; height: 600px; margin: 0 auto; border: 1px solid #e0e0e0; }
-    .ai-welcome-new { padding: 30px 20px; text-align: center; background: #f8fbf9; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-    .ai-avatar-new { width: 80px; height: 80px; background: #1a5c38; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 40px; color: white; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(26,92,56,0.3); }
-    .ai-welcome-new h2 { color: #1a5c38; margin-bottom: 10px; }
-    .ai-welcome-new p { color: #666; font-size: 13px; line-height: 1.6; margin-bottom: 20px; }
-    .ai-features-new { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-bottom: 25px; }
-    .ai-feature-card-new { background: white; padding: 12px; border-radius: 10px; border: 1px solid #e0e0e0; font-size: 12px; color: #333; }
-    .ai-feature-card-new span { display: block; font-size: 20px; margin-bottom: 8px; }
-    .btn-start-ai-new { background: #1a5c38; color: white; border: none; padding: 12px 30px; border-radius: 25px; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; width: 100%; max-width: 200px; }
-    .btn-start-ai-new:hover { background: #2e8b57; }
-    .ai-chat-screen-new { display: none; flex-direction: column; height: 100%; }
-    .ai-chat-header-new { background: #1a5c38; color: white; padding: 12px 15px; display: flex; align-items: center; gap: 10px; }
-    .ai-chat-header-new .status-new { font-size: 10px; opacity: 0.8; display: block; }
-    .ai-chat-messages-new { flex-grow: 1; padding: 15px; overflow-y: auto; background: #f9f9f9; display: flex; flex-direction: column; gap: 12px; }
-    .msg-new { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.6; }
-    .msg-new.user { background: #1a5c38; color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
-    .msg-new.bot { background: white; color: #333; align-self: flex-start; border-bottom-left-radius: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-    .ai-chat-input-area-new { padding: 10px; background: white; border-top: 1px solid #eee; display: flex; align-items: center; gap: 8px; }
-    .ai-chat-input-area-new input[type="text"] { flex-grow: 1; padding: 10px 12px; border: 1px solid #ddd; border-radius: 20px; outline: none; font-family: inherit; font-size: 13px; }
-    .ai-chat-input-area-new button { background: #1a5c38; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 16px; }
-    .btn-img-new { background: #e0f2e9 !important; color: #1a5c38 !important; }
-    .image-preview-container-new { display: none; padding: 8px 10px; background: #f0f4f8; border-top: 1px solid #eee; text-align: right; }
-    .image-preview-new { height: 50px; border-radius: 6px; border: 2px solid #1a5c38; }
-</style>
-
-<div class="ai-container-new" id="ai-panel">
-    <!-- صفحه معرفی -->
-    <div class="ai-welcome-new" id="ai-welcome-screen">
-        <div class="ai-avatar-new">🤖</div>
-        <h2>سلام! من کشتیار هستم</h2>
-        <p>دستیار هوشمند و متخصص شما در امور کشاورزی و پهپادهای سمپاش.</p>
-        <div class="ai-features-new">
-            <div class="ai-feature-card-new"><span>📸</span> تشخیص آفت از عکس</div>
-            <div class="ai-feature-card-new"><span>🧪</span> پیشنهاد سم و دوز</div>
-            <div class="ai-feature-card-new"><span>🚁</span> مشاوره پهپاد</div>
-            <div class="ai-feature-card-new"><span>💧</span> راهنمایی آبیاری</div>
-        </div>
-        <button class="btn-start-ai-new" onclick="startAIChat()">شروع گفتگو</button>
+<!-- ============ کشتیار (دستیار) ============ -->
+<div id="ai-panel" class="ai-container-new">
+  <div class="ai-welcome-new" id="ai-welcome-screen">
+    <div class="ai-avatar-new">🤖</div>
+    <h2>سلام! من کشتیار هستم</h2>
+    <p>دستیار هوشمند و متخصص شما در امور کشاورزی و پهپادهای سمپاش.</p>
+    <div class="ai-features-new">
+      <div class="ai-feature-card-new"><span>📸</span> تشخیص آفت از عکس</div>
+      <div class="ai-feature-card-new"><span>🧪</span> پیشنهاد سم و دوز</div>
+      <div class="ai-feature-card-new"><span>🚁</span> مشاوره پهپاد</div>
+      <div class="ai-feature-card-new"><span>💧</span> راهنمایی آبیاری</div>
     </div>
-
-    <!-- صفحه چت -->
-    <div class="ai-chat-screen-new" id="ai-chat-screen">
-        <div class="ai-chat-header-new">
-            <div class="ai-avatar-new" style="width:35px; height:35px; font-size:18px; margin:0; box-shadow:none;">🤖</div>
-            <div>
-                <strong>کشتیار</strong>
-                <span class="status-new">آنلاین و آماده پاسخگویی</span>
-            </div>
-            <button onclick="backToWelcome()" style="margin-right: auto; background: none; border: none; color: white; cursor: pointer; font-size: 12px;">بازگشت ✖</button>
-        </div>
-        <div class="ai-chat-messages-new" id="ai-chat-box">
-            <div class="msg-new bot">سلام! من کشتیار هستم. عکس محصولت رو بفرست یا سوالت رو بپرس تا راهنماییت کنم.</div>
-        </div>
-        <div class="image-preview-container-new" id="image-preview-container">
-            <img id="image-preview-img" class="image-preview-new" src="" alt="عکس">
-            <span style="font-size: 11px; color: #1a5c38; cursor: pointer;" onclick="removeImage()">حذف عکس ❌</span>
-        </div>
-        <div class="ai-chat-input-area-new">
-            <input type="file" id="ai-image-input" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
-            <button class="btn-img-new" onclick="document.getElementById('ai-image-input').click()" title="ارسال عکس">📷</button>
-            <input type="text" id="ai-text-input" placeholder="سوال خود را بنویسید..." onkeypress="handleEnter(event)">
-            <button onclick="sendMessage()" title="ارسال">➤</button>
-        </div>
+    <button class="btn-start-ai-new" onclick="startAIChat()">شروع گفتگو</button>
+  </div>
+  <div class="ai-chat-screen-new" id="ai-chat-screen">
+    <div class="ai-chat-header-new">
+      <div class="ai-avatar-new" style="width:35px;height:35px;font-size:18px;margin:0;box-shadow:none;">🤖</div>
+      <div>
+        <strong>کشتیار</strong>
+        <span class="status-new">آنلاین و آماده پاسخگویی</span>
+      </div>
+      <button class="ai-close-new" onclick="closeAIChat()" title="بستن">✕</button>
     </div>
+    <div class="ai-chat-messages-new" id="ai-chat-box">
+      <div class="msg-new bot">سلام! من کشتیار هستم. عکس محصولت رو بفرست یا سوالت رو بپرس تا راهنماییت کنم.</div>
+    </div>
+    <div class="image-preview-container-new" id="image-preview-container">
+      <img id="image-preview-img" class="image-preview-new" src="" alt="عکس">
+      <span style="font-size:11px;color:var(--b700);cursor:pointer;font-weight:700" onclick="removeImage()">حذف عکس ✕</span>
+    </div>
+    <div class="ai-chat-input-area-new">
+      <input type="file" id="ai-image-input" accept="image/*" style="display:none" onchange="handleImageUpload(event)">
+      <button class="btn-img-new" onclick="document.getElementById('ai-image-input').click()" title="ارسال عکس">📷</button>
+      <input type="text" id="ai-text-input" placeholder="سوال خود را بنویسید..." onkeypress="handleEnter(event)">
+      <button onclick="sendMessage()" title="ارسال">➤</button>
+    </div>
+  </div>
 </div>
-
-<script>
-    let selectedImageBase64 = null;
-    const apiUrl = 'https://api.sampash-ai.ir/api/ai';
-
-    function startAIChat() {
-        document.getElementById('ai-welcome-screen').style.display = 'none';
-        document.getElementById('ai-chat-screen').style.display = 'flex';
-    }
-
-    function backToWelcome() {
-        document.getElementById('ai-chat-screen').style.display = 'none';
-        document.getElementById('ai-welcome-screen').style.display = 'flex';
-    }
-
-    function handleImageUpload(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            selectedImageBase64 = e.target.result; 
-            document.getElementById('image-preview-img').src = selectedImageBase64;
-            document.getElementById('image-preview-container').style.display = 'block';
-        };
-        reader.readAsDataURL(file);
-    }
-
-    function removeImage() {
-        selectedImageBase64 = null;
-        document.getElementById('ai-image-input').value = '';
-        document.getElementById('image-preview-container').style.display = 'none';
-    }
-
-    function handleEnter(e) {
-        if (e.key === 'Enter') sendMessage();
-    }
-
-    async function sendMessage() {
-        const textInput = document.getElementById('ai-text-input');
-        const userText = textInput.value.trim();
-        if (!userText && !selectedImageBase64) return;
-
-        const chatBox = document.getElementById('ai-chat-box');
-        let userMsgHTML = '<div class="msg-new user">';
-        if (selectedImageBase64) {
-            userMsgHTML += `<img src="${selectedImageBase64}" style="max-width:100%; border-radius:8px; margin-bottom:8px; display:block;"><br>`;
-        }
-        if (userText) userMsgHTML += userText;
-        userMsgHTML += '</div>';
-        chatBox.innerHTML += userMsgHTML;
-
-        let messages = [];
-        if (selectedImageBase64) {
-            messages.push({
-                role: 'user',
-                content: [
-                    { type: 'text', text: userText || 'لطفا این عکس را بررسی کن و مشکل گیاه را تشخیص بده.' },
-                    { type: 'image_url', image_url: { url: selectedImageBase64 } }
-                ]
-            });
-        } else {
-            messages.push({ role: 'user', content: userText });
-        }
-
-        textInput.value = '';
-        removeImage();
-
-        const loadingId = 'loading-' + Date.now();
-        chatBox.innerHTML += `<div class="msg-new bot" id="${loadingId}">در حال بررسی...</div>`;
-        chatBox.scrollTop = chatBox.scrollHeight;
-
-        try {
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ messages: messages })
-            });
-            const data = await response.json();
-            document.getElementById(loadingId).remove();
-
-            if (data.choices && data.choices[0].message.content) {
-                let replyText = data.choices[0].message.content.replace(/\n/g, '<br>'); 
-                chatBox.innerHTML += `<div class="msg-new bot">${replyText}</div>`;
-            } else {
-                chatBox.innerHTML += `<div class="msg-new bot" style="color:red;">متاسفانه پاسخی دریافت نشد.</div>`;
-            }
-        } catch (error) {
-            document.getElementById(loadingId).remove();
-            chatBox.innerHTML += `<div class="msg-new bot" style="color:red;">خطا در ارتباط با سرور.</div>`;
-        }
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }
-</script>
-<!-- ================= پایان کد کشتیار ================= -->
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <div class="modal-back" id="modal-back"><div class="modal" id="modal-body"></div></div>
+
+<script>
+/* ========== کشتیار — توابع مستقل ========== */
+let selectedImageBase64 = null;
+const aiApiUrl = 'https://api.sampash-ai.ir/api/ai';
+
+function startAIChat(){
+  document.getElementById('ai-welcome-screen').style.display='none';
+  document.getElementById('ai-chat-screen').style.display='flex';
+}
+function closeAIChat(){
+  document.getElementById('ai-chat-screen').style.display='none';
+  document.getElementById('ai-welcome-screen').style.display='flex';
+  document.getElementById('ai-panel').classList.remove('show');
+}
+function handleImageUpload(event){
+  const file=event.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    selectedImageBase64=e.target.result;
+    document.getElementById('image-preview-img').src=selectedImageBase64;
+    document.getElementById('image-preview-container').style.display='block';
+  };
+  reader.readAsDataURL(file);
+}
+function removeImage(){
+  selectedImageBase64=null;
+  document.getElementById('ai-image-input').value='';
+  document.getElementById('image-preview-container').style.display='none';
+}
+function handleEnter(e){ if(e.key==='Enter') sendMessage(); }
+async function sendMessage(){
+  const textInput=document.getElementById('ai-text-input');
+  const userText=textInput.value.trim();
+  if(!userText && !selectedImageBase64) return;
+  const chatBox=document.getElementById('ai-chat-box');
+  let userMsgHTML='<div class="msg-new user">';
+  if(selectedImageBase64){
+    userMsgHTML+=`<img src="${selectedImageBase64}" style="max-width:100%;border-radius:8px;margin-bottom:8px;display:block;"><br>`;
+  }
+  if(userText) userMsgHTML+=userText;
+  userMsgHTML+='</div>';
+  chatBox.innerHTML+=userMsgHTML;
+
+  let messages=[];
+  if(selectedImageBase64){
+    messages.push({role:'user',content:[
+      {type:'text',text:userText||'لطفا این عکس را بررسی کن و مشکل گیاه را تشخیص بده.'},
+      {type:'image_url',image_url:{url:selectedImageBase64}}
+    ]});
+  } else {
+    messages.push({role:'user',content:userText});
+  }
+
+  textInput.value='';
+  removeImage();
+
+  const loadingId='loading-'+Date.now();
+  chatBox.innerHTML+=`<div class="msg-new bot" id="${loadingId}">در حال بررسی...</div>`;
+  chatBox.scrollTop=chatBox.scrollHeight;
+
+  try{
+    const response=await fetch(aiApiUrl,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({messages:messages})
+    });
+    const data=await response.json();
+    document.getElementById(loadingId).remove();
+    if(data.choices && data.choices[0].message.content){
+      const replyText=data.choices[0].message.content.replace(/\n/g,'<br>');
+      chatBox.innerHTML+=`<div class="msg-new bot">${replyText}</div>`;
+    } else {
+      chatBox.innerHTML+=`<div class="msg-new bot" style="color:red;">متاسفانه پاسخی دریافت نشد.</div>`;
+    }
+  } catch(error){
+    document.getElementById(loadingId).remove();
+    chatBox.innerHTML+=`<div class="msg-new bot" style="color:red;">خطا در ارتباط با سرور.</div>`;
+  }
+  chatBox.scrollTop=chatBox.scrollHeight;
+}
+
+/* باز کردن پنل از دکمه هدر */
+document.addEventListener('DOMContentLoaded',function(){
+  const btn=document.getElementById('header-ai-btn');
+  const panel=document.getElementById('ai-panel');
+  if(btn && panel){
+    btn.addEventListener('click',function(){
+      panel.classList.toggle('show');
+      if(panel.classList.contains('show')){
+        setTimeout(()=>document.getElementById('ai-text-input')?.focus(),120);
+      }
+    });
+  }
+});
+</script>
 <script>
 "use strict";
-/* UTILITIES */
+/* ==================== UTILITIES ==================== */
 const $=(s,c=document)=>c.querySelector(s);
 const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
 const FA="۰۱۲۳۴۵۶۷۸۹",AR="٠١٢٣٤٥٦٧٨٩";
@@ -1515,27 +1344,21 @@ async function sha256(t){if(window.crypto?.subtle){const b=await crypto.subtle.d
 function isValidJalali(i){const m=toEn(i).trim().match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);if(!m)return false;const y=+m[1],mo=+m[2],d=+m[3];return y>=1300&&y<=1500&&mo>=1&&mo<=12&&d>=1&&d<=(mo>=7&&mo<=11?30:mo===12?29:31);}
 let toastTimer;const toastEl=$("#toast");
 function toast(m,e=false){if(!toastEl)return;toastEl.textContent=m;toastEl.classList.toggle("err",e);toastEl.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove("show"),3600);}
-(function(){try{const f=new Intl.DateTimeFormat("fa-IR-u-ca-persian",{weekday:"long",day:"numeric",month:"long",year:"numeric"});const el=$("#today-label");if(el)el.textContent=f.format(new Date());}catch{}})();
 
-/* KEYS */
-const LS={auth:"sph_auth",session:"sph_session",lockout:"sph_lockout",config:"sph_config",orders:"sph_orders",messages:"sph_messages",partners:"sph_partners",fleet:"sph_fleet",slots:"sph_slots",partner_session:"sph_ptn_session",cust_phone:"sph_cust_phone",cust_verified:"sph_cust_verified",cust_profile:"sph_cust_profile",theme:"sph_theme",sms_settings:"sph_sms_settings",sms_templates:"sph_sms_templates",sms_log:"sph_sms_log",sms_auto:"sph_sms_auto",audit:"sph_audit",jwt:"sph_jwt",photos:"sph_work_photos",otp_local:"sph_otp_local",ai_settings:"sph_ai_settings",ai_history:"sph_ai_history",videos:"sph_videos",video_settings:"sph_video_settings",receipts:"sph_receipts"};
+/* ==================== STORAGE KEYS ==================== */
+const LS={auth:"sph_auth",session:"sph_session",lockout:"sph_lockout",config:"sph_config",orders:"sph_orders",messages:"sph_messages",partners:"sph_partners",fleet:"sph_fleet",slots:"sph_slots",partner_session:"sph_ptn_session",cust_phone:"sph_cust_phone",cust_verified:"sph_cust_verified",cust_profile:"sph_cust_profile",theme:"sph_theme",sms_settings:"sph_sms_settings",sms_templates:"sph_sms_templates",sms_log:"sph_sms_log",sms_auto:"sph_sms_auto",audit:"sph_audit",jwt:"sph_jwt",photos:"sph_work_photos",otp_local:"sph_otp_local",ai_settings:"sph_ai_settings",ai_history:"sph_ai_history",receipts:"sph_receipts"};
 const read=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v??d;}catch{return d;}};
 const write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 
-/* THEME */
-(function(){const t=localStorage.getItem(LS.theme)||"light";document.documentElement.setAttribute("data-theme",t);})();
-function toggleTheme(){const cur=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";document.documentElement.setAttribute("data-theme",cur);localStorage.setItem(LS.theme,cur);toast(cur==="dark"?"🌙 حالت تاریک":"☀️ حالت روشن");}
-
-/* DEFAULTS */
+/* ==================== DEFAULTS ==================== */
 function defaultConfig(){return{baseRate:850000,provRates:{},cropRates:{},payment:{card:"6104 3374 3811 1567",iban:"IR09 0120 0200 0008 6808 6339 3",holder:"شرکت سم‌پاش هوشمند"},receiptMax:5,provinces:["تهران","اصفهان","فارس","خوزستان","خراسان رضوی","آذربایجان شرقی","آذربایجان غربی","گیلان","مازندران","کرمان","یزد","البرز","قم","مرکزی","گلستان","اردبیل","قزوین","همدان","کرمانشاه","هرمزگان","سیستان و بلوچستان","لرستان","کردستان","بوشهر","سمنان","زنجان"],crops:["گندم","جو","آفتابگردان","سیب‌زمینی","ذرت","باغ میوه","یونجه","سایر"],siteTitle:"سم‌پاش هوشمند",supportPhone:"",supportNote:"برای هماهنگی با پشتیبانی تماس بگیرید."};}
 function defaultSmsSettings(){return{provider:"sim",sender:""};}
 function defaultSmsTemplates(){return{otp:{label:"کد تأیید",desc:"کد تأیید شماره موبایل",text:"کد تأیید شما در سم‌پاش هوشمند:\n{otp}\nاین کد را با کسی به اشتراک نگذارید."},order_created:{label:"ثبت سفارش",desc:"پس از ثبت موفق سفارش",text:"سلام {name} عزیز\nسفارش شما با کد {code} ثبت شد.\nمحصول: {crop} | مساحت: {area} هکتار\nمبلغ: {amount}"},payment_approved:{label:"تأیید پرداخت",desc:"پس از تأیید فیش",text:"{name} عزیز\nپرداخت سفارش {code} تأیید شد."},partner_assigned:{label:"ارجاع",desc:"پس از ارجاع به اپراتور",text:"{name} عزیز\nسفارش {code} به اپراتور ارجاع شد.\nزمان: {date}"},completed:{label:"تکمیل",desc:"پس از اتمام کار",text:"{name} عزیز\nسم‌پاشی سفارش {code} انجام شد."},cancelled:{label:"لغو",desc:"در صورت لغو سفارش",text:"{name} عزیز\nسفارش {code} لغو شد."},receipt_rejected:{label:"رد فیش",desc:"در صورت رد فیش",text:"{name} عزیز\nفیش سفارش {code} تأیید نشد."},welcome:{label:"خوش‌آمد",desc:"اولین بار ورود",text:"سلام {name} عزیز\nبه سم‌پاش هوشمند خوش آمدید 🌿"}};}
 function defaultSmsAuto(){return{order_created:true,payment_approved:true,partner_assigned:true,completed:true,cancelled:false,receipt_rejected:true};}
 function defaultAiSettings(){return{provider:"sim",model:"gpt-4o-mini",apiKey:"",customUrl:"",system:"تو «دستیار هوشمند سم‌پاش» هستی. متخصص کشاورزی و سم‌پاشی با پهپاد. پاسخ‌های کوتاه، دقیق و به زبان فارسی بده."};}
-function defaultVideoSettings(){return{aparatKey:"",aparatProxyUrl:"",youtubeClientId:"",youtubeAccessToken:"",youtubeTokenExpiry:0};}
 
-/* API + STATE */
-const API = "https://api.sampash-ai.ir";
+/* ==================== API ==================== */
+const API="https://api.sampash-ai.ir";
 const cache={orders:[],messages:[],config:null,me:null};
 let PAY_ORDER=null,TRACK_TIMER=null;
 const getMessages=()=>cache.messages||[];
@@ -1578,7 +1401,7 @@ const setConfig=c=>{cache.config=c;write(LS.config,c);apiFetch("/api/config",{me
 const calcPrice=({area,province,crop},cfg=getConfig())=>{const base=+cfg.baseRate||0;const rate=+cfg.cropRates?.[crop]||+cfg.provRates?.[province]||base;return Math.round((+area||0)*rate);};
 const STATUS={pending:{label:"در انتظار پرداخت",cls:""},scheduled:{label:"زمان‌بندی شد",cls:"green"},assigned:{label:"ارجاع به همکار",cls:"purple"},accepted:{label:"پذیرفته شده",cls:"blue"},in_progress:{label:"در حال انجام",cls:"blue"},done:{label:"تکمیل شده",cls:"green"},cancelled:{label:"لغو شده",cls:"red"},rejected:{label:"رد شده",cls:"red"},receipt_pending:{label:"در انتظار تأیید فیش",cls:"amber"},receipt_rejected:{label:"فیش رد شده",cls:"red"}};
 
-/* AI SERVICE */
+/* ==================== AI SERVICE ==================== */
 const AiService=(()=>{
 const getSettings=()=>Object.assign(defaultAiSettings(),read(LS.ai_settings,{}));
 const setSettings=s=>write(LS.ai_settings,s);
@@ -1630,11 +1453,11 @@ async function test(){return await chat([{role:"user",content:"سلام! یه ت
 return{getSettings,setSettings,getHistory,addHistory,clearHistory,chat,test};
 })();
 
-/* SMS SERVICE */
+/* ==================== SMS SERVICE ==================== */
 const SMS_TEMPLATE_IDS={otp:556701};
 const SmsService=(()=>{const getSettings=()=>Object.assign(defaultSmsSettings(),read(LS.sms_settings,{}));const setSettings=s=>write(LS.sms_settings,s);const getTemplates=()=>Object.assign(defaultSmsTemplates(),read(LS.sms_templates,{}));const setTemplates=t=>write(LS.sms_templates,t);const getAuto=()=>Object.assign(defaultSmsAuto(),read(LS.sms_auto,{}));const setAuto=a=>write(LS.sms_auto,a);const getLog=()=>read(LS.sms_log,[]);const addLog=e=>{const l=getLog();l.unshift(e);if(l.length>500)l.length=500;write(LS.sms_log,l);};function renderTemplate(tpl,vars={}){let out=String(tpl||"");Object.entries(vars).forEach(([k,v])=>{out=out.split(`{${k}}`).join(String(v??""));});return out;}async function send(to,text,{kind="manual",meta={}}={}){const phone=toEn(String(to||"").replace(/\D/g,""));if(!/^09\d{9}$/.test(phone)){addLog({id:uid(),to:phone,text,kind,status:"failed",error:"شماره نامعتبر",createdAt:Date.now(),...meta});return{ok:false,error:"شماره نامعتبر"};}const s=getSettings();const entry={id:uid(),to:phone,text,kind,status:"pending",createdAt:Date.now(),provider:s.provider,...meta};if(s.provider==="sim"){await new Promise(r=>setTimeout(r,300));addLog({...entry,status:"sim"});return{ok:true,sim:true};}const res=await apiFetch("/api/sms/send",{method:"POST",body:JSON.stringify({to:phone,text})});if(res.ok&&res.data.ok){addLog({...entry,status:"sent"});return{ok:true};}const err=res.data?.message||res.data?.error||`HTTP ${res.status}`;addLog({...entry,status:"failed",error:err});return{ok:false,error:err};}async function checkCredit(){const s=getSettings();if(s.provider==="sim")return{ok:true,credit:1000,sim:true};const res=await apiFetch("/api/sms/credit",{method:"POST",body:JSON.stringify({})});if(res.ok)return{ok:true,credit:res.data.credit??"?"};return{ok:false,error:res.data?.error||"خطا"};}async function sendByEvent(ev,order){if(!getAuto()[ev])return{ok:false,skipped:true};const templateId=SMS_TEMPLATE_IDS[ev];if(templateId){const params=[{name:"NAME",value:order.name||"کشاورز"},{name:"CODE",value:order.code||""},{name:"AMOUNT",value:order.amount?fmtT(order.amount):""},{name:"CROP",value:order.crop||""},{name:"AREA",value:order.area?toFa(order.area):""},{name:"DATE",value:order.slotDate?toFa(order.slotDate):"—"}];const res=await apiFetch("/api/sms/send",{method:"POST",body:JSON.stringify({to:order.phone,templateId:templateId,parameters:params})});if(res.ok&&res.data.ok){addLog({id:uid(),to:order.phone,text:`[قالب ${ev}]`,kind:"auto_"+ev,status:"sent",createdAt:Date.now(),provider:"sms.ir (Verify)"});return{ok:true};}return{ok:false,error:res.data?.error||"خطای قالب"};}const tpl=getTemplates()[ev];if(!tpl||!tpl.text||!order?.phone)return{ok:false,skipped:true};const vars={name:order.name||"کشاورز",code:order.code||"",amount:order.amount?fmtT(order.amount):"",crop:order.crop||"",area:order.area?toFa(order.area):"",date:order.slotDate?toFa(order.slotDate):"—"};return await send(order.phone,renderTemplate(tpl.text,vars),{kind:"auto_"+ev,meta:{orderId:order.id,orderCode:order.code}});}return{getSettings,setSettings,getTemplates,setTemplates,getAuto,setAuto,getLog,addLog,send,sendByEvent,renderTemplate,checkCredit,clearLog:()=>write(LS.sms_log,[])};})();
 
-/* OTP SERVICE */
+/* ==================== OTP SERVICE ==================== */
 const OtpService=(()=>{
 const getStore=()=>read(LS.otp_local,{});
 const setStore=s=>write(LS.otp_local,s);
@@ -1677,7 +1500,7 @@ function getLocalCode(phone){return getStore()[phone]?.code||"";}
 return{createRemote,verifyRemote,getRemaining,canResend,getLocalCode};
 })();
 
-/* OTP MODAL */
+/* ==================== OTP MODAL ==================== */
 const OtpModal=(()=>{
 let phone=null,purpose=null,cb=null,tH=null,rH=null;
 const back=$("#otp-modal-back"),inputs=$$("#otp-inputs input"),timerEl=$("#otp-timer"),resendBtn=$("#otp-resend-btn"),demoNotice=$("#otp-demo-notice"),demoCode=$("#otp-demo-code");
@@ -1702,7 +1525,7 @@ back?.addEventListener("click",e=>{if(e.target===back)hide();});
 return{show,hide,sendCode};
 })();
 
-/* AUTH (Admin) */
+/* ==================== ADMIN AUTH ==================== */
 const Auth=(()=>{
 const TTL=30*60*1000,MAX=5,LOCK=5*60*1000;
 function getSession(){try{const s=JSON.parse(sessionStorage.getItem(LS.session)||"null");if(!s||!s.expires||s.expires<Date.now()){sessionStorage.removeItem(LS.session);return null;}return s;}catch{return null;}}
@@ -1740,7 +1563,7 @@ return{ok:true};
 }
 return{getSession,setSession,touch,logout,login,changePassword,changeUsername};})();
 
-/* PARTNER AUTH */
+/* ==================== PARTNER AUTH ==================== */
 const PartnerAuth=(()=>{
 function getSession(){try{const s=JSON.parse(sessionStorage.getItem(LS.partner_session)||"null");if(!s||!s.expires||s.expires<Date.now()){sessionStorage.removeItem(LS.partner_session);return null;}return s;}catch{return null;}}
 function setSession(p){sessionStorage.setItem(LS.partner_session,JSON.stringify({partnerId:p.id,name:p.name,phone:p.phone,expires:Date.now()+8*60*60*1000}));}
@@ -1749,8 +1572,8 @@ async function login(phone,pass){const partners=getPartners();const p=partners.f
 async function register(data){const partners=getPartners();const phone=toEn(data.phone);if(!/^09\d{9}$/.test(phone))return{ok:false,msg:"موبایل نامعتبر."};if(partners.some(x=>x.phone===phone))return{ok:false,msg:"قبلاً ثبت شده."};if(data.pass.length<8)return{ok:false,msg:"رمز ۸+ کاراکتر."};if(!/[A-Za-z]/.test(data.pass)||!/\d/.test(data.pass))return{ok:false,msg:"رمز حرف و عدد."};if(data.pass!==data.pass2)return{ok:false,msg:"تکرار مطابقت ندارد."};if(!data.drones?.length)return{ok:false,msg:"حداقل یک پهپاد اضافه کن."};const salt=rand(16);const hash=await sha256(salt+data.pass);const pid=uid();partners.push({id:pid,name:data.name.trim(),phone,province:data.province,city:data.city.trim(),share:+data.share||30,salt,hash,status:"pending",active:false,available:true,createdAt:Date.now()});setPartners(partners);const fleet=getFleet();data.drones.forEach(d=>fleet.push({id:uid(),name:d.name,model:d.model||"",liter:+d.liter||0,ownerId:pid,status:"ready",createdAt:Date.now()}));setFleet(fleet);return{ok:true};}
 return{getSession,setSession,logout,login,register};})();
 
-/* NAVIGATION */
-const TITLES={home:"سلام! امروز چطور کمکت کنم؟ 👋",order:"ثبت سفارش جدید",track:"پیگیری سفارش",history:"تاریخچه سفارش‌ها",profile:"پروفایل من",payment:"پرداخت و فاکتور",messages:"گفت‌وگو با مدیر",admin:"پنل مدیریت",partner:"پنل همکار",invoice:"فاکتور",knowledge:"📚 مرکز دانش",videos:"🎬 گالری سمپاشی"};
+/* ==================== NAVIGATION ==================== */
+const TITLES={home:"سلام! امروز چطور کمکت کنم؟ 👋",order:"ثبت سفارش جدید",track:"پیگیری سفارش",history:"تاریخچه سفارش‌ها",profile:"پروفایل من",payment:"پرداخت و فاکتور",messages:"گفت‌وگو با مدیر",admin:"پنل مدیریت",partner:"پنل همکار",invoice:"فاکتور",videos:"🎬 گالری سمپاشی"};
 function showScreen(name){
 const t=document.getElementById("screen-"+name);if(!t)return;
 if(name==="admin"){const has=!!Auth.getSession();const lv=$("#admin-login-view"),pv=$("#admin-panel-view");if(lv)lv.hidden=has;if(pv)pv.hidden=!has;if(has){Admin.refreshAll();}}
@@ -1760,7 +1583,6 @@ if(name==="order")refreshSlotSelect();
 if(name==="history")renderHistory();
 if(name==="profile")renderProfile();
 if(name==="messages")renderChat();
-if(name==="knowledge")renderKnowledge();
 if(name==="videos")renderVideos();
 $$(".screen").forEach(s=>s.classList.remove("active"));t.classList.add("active");
 $$(".nav button").forEach(b=>{const on=b.dataset.screen===name;if(on)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");});
@@ -1768,15 +1590,22 @@ const pt=$("#page-title");if(pt)pt.textContent=TITLES[name]||"سم‌پاش هو
 window.scrollTo({top:0,behavior:"smooth"});}
 document.addEventListener("click",e=>{const go=e.target.closest("[data-go]");if(go){if(go.tagName==="A")e.preventDefault();showScreen(go.dataset.go);return;}const scr=e.target.closest("[data-screen]");if(scr){showScreen(scr.dataset.screen);return;}});
 
-/* SELECTS */
+/* ==================== SELECTS ==================== */
 function fillSelect(sel,items,ph){if(!sel)return;const cur=sel.value;sel.innerHTML="";if(ph){const o=document.createElement("option");o.value="";o.textContent=ph;sel.appendChild(o);}items.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;sel.appendChild(o);});if(items.includes(cur))sel.value=cur;}
 function refreshSelects(){const c=getConfig();fillSelect($("#province"),c.provinces,"انتخاب");fillSelect($("#crop"),c.crops,"انتخاب");fillSelect($("#prof-province"),c.provinces,"انتخاب");}
 function refreshCustomerPayment(){const c=getConfig();const card=$("#cardno"),iban=$("#iban"),rate=$("#base-rate");if(card)card.value=c.payment.card||"";if(iban)iban.value=c.payment.iban||"";if(rate)rate.textContent=fmt(c.baseRate);}
 
-/* HOME / PROFILE / HISTORY */
-function renderCustomerAuth(){const ph=getCustomerPhone();const prompt=$("#home-phone-prompt");const btn=$("#home-change-phone");const sub=$("#home-orders-sub");const inp=$("#home-phone-input");const ver=isCustomerVerified();if(prompt)prompt.hidden=!!ph&&ver;if(btn)btn.hidden=!ph;if(sub)sub.textContent=ph?`سفارش‌های شماره ${toFa(ph)}`:"برای دیدن سفارش‌ها شماره بزن";if(inp&&!ph)inp.value="";const av=$("#user-avatar"),nm=$("#user-name");if(av)av.textContent=(getCustomerProfile().name||"ک").slice(0,1);if(nm)nm.textContent=getCustomerProfile().name||"کاربر کشاورز";}
+/* ==================== HOME / PROFILE / HISTORY ==================== */
+function renderCustomerAuth(){
+  const ph=getCustomerPhone();
+  const sub=$("#home-orders-sub");
+  if(sub)sub.textContent=ph?`سفارش‌های شماره ${toFa(ph)}`:"سفارشی برای نمایش نیست";
+  const av=$("#user-avatar"),nm=$("#user-name");
+  if(av)av.textContent=(getCustomerProfile().name||"ک").slice(0,1);
+  if(nm)nm.textContent=getCustomerProfile().name||"کاربر کشاورز";
+}
 function renderTrustBar(){const allOrders=cache.orders.filter(o=>o.status!=="cancelled");const totalArea=allOrders.reduce((s,o)=>s+(+o.area||0),0);const users=new Set(allOrders.map(o=>o.phone)).size;const ta=$("#trust-area"),tu=$("#trust-users");if(ta)ta.textContent=toFa(totalArea);if(tu)tu.textContent=toFa(users);}
-function renderHomeOrders(){const box=$("#home-orders");if(!box)return;const ph=getCustomerPhone();if(!ph){box.innerHTML='<div class="empty"><span class="empty-emoji">🌱</span><strong>سلام!</strong>شماره‌ات را وارد کن.</div>';return;}if(!isCustomerVerified()){box.innerHTML='<div class="empty"><span class="empty-emoji">🔐</span><strong>شماره تأیید نشده</strong><button class="btn btn-green btn-sm empty-cta" id="reverify-btn">تأیید شماره</button></div>';setTimeout(()=>{$("#reverify-btn")?.addEventListener("click",()=>startPhoneVerification(ph));},10);return;}const mine=cache.orders.filter(o=>o.phone===ph).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,5);if(!mine.length){box.innerHTML='<div class="empty"><span class="empty-emoji">🌾</span><strong>مزرعه‌ات آماده است؟</strong><button class="btn btn-gold btn-sm empty-cta" data-go="order">ثبت سفارش</button></div>';return;}box.innerHTML=mine.map(x=>{const st=STATUS[x.status]||STATUS.pending;const p=x.partnerId?getPartners().find(y=>y.id===x.partnerId):null;const pn=p?` · 🛩️ ${esc(p.name)}`:"";const sl=x.slotTime?`<div class="slot-badge">🕐 ${esc(x.slotDate||"")} · ${esc(x.slotTime)}</div>`:"";return`<div class="order-row"><div class="order-icon"><svg class="icon"><use href="#i-home"/></svg></div><div class="order-main"><strong>${esc(x.crop)} · ${toFa(x.area)} هکتار</strong><small>${esc(x.code)}${pn}</small>${sl}</div><span class="status ${st.cls}">${st.label}</span></div>`;}).join("");}
+function renderHomeOrders(){const box=$("#home-orders");if(!box)return;const ph=getCustomerPhone();if(!ph){box.innerHTML='<div class="empty"><span class="empty-emoji">🌱</span><strong>سلام!</strong>برای دیدن سفارش‌ها ابتدا یک سفارش ثبت کنید یا با شماره قبلی وارد شوید.</div>';return;}if(!isCustomerVerified()){box.innerHTML='<div class="empty"><span class="empty-emoji">🔐</span><strong>شماره تأیید نشده</strong><button class="btn btn-green btn-sm empty-cta" id="reverify-btn">تأیید شماره</button></div>';setTimeout(()=>{$("#reverify-btn")?.addEventListener("click",()=>startPhoneVerification(ph));},10);return;}const mine=cache.orders.filter(o=>o.phone===ph).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,5);if(!mine.length){box.innerHTML='<div class="empty"><span class="empty-emoji">🌾</span><strong>مزرعه‌ات آماده است؟</strong><button class="btn btn-gold btn-sm empty-cta" data-go="order">ثبت سفارش</button></div>';return;}box.innerHTML=mine.map(x=>{const st=STATUS[x.status]||STATUS.pending;const p=x.partnerId?getPartners().find(y=>y.id===x.partnerId):null;const pn=p?` · 🛩️ ${esc(p.name)}`:"";const sl=x.slotTime?`<div class="slot-badge">🕐 ${esc(x.slotDate||"")} · ${esc(x.slotTime)}</div>`:"";return`<div class="order-row"><div class="order-icon"><svg class="icon"><use href="#i-home"/></svg></div><div class="order-main"><strong>${esc(x.crop)} · ${toFa(x.area)} هکتار</strong><small>${esc(x.code)}${pn}</small>${sl}</div><span class="status ${st.cls}">${st.label}</span></div>`;}).join("");}
 function refreshHomeStats(){const ph=getCustomerPhone();const ver=isCustomerVerified();const o=ver?cache.orders.filter(x=>x.phone===ph):[];const pend=o.filter(x=>["pending","scheduled","assigned","accepted","in_progress","receipt_pending"].includes(x.status)).length;const area=o.reduce((s,x)=>s+(+x.area||0),0);const next=o.filter(x=>x.slotDate).map(x=>toEn(x.slotDate)).sort()[0];const el1=$("#stat-orders-count"),el2=$("#stat-orders-pending"),el3=$("#stat-area"),el4=$("#stat-next");if(el1)el1.textContent=toFa(o.length);if(el2)el2.textContent=toFa(pend);if(el3)el3.innerHTML=toFa(area)+' <span class="unit">هکتار</span>';if(el4)el4.textContent=next?toFa(next):"—";renderHomeOrders();renderTrustBar();}
 async function refreshHomeOrdersFromServer(){const ph=getCustomerPhone();if(!ph||!isCustomerVerified())return;const res=await apiFetch("/api/orders/my",{method:"POST",body:JSON.stringify({phone:ph})});if(res.ok&&Array.isArray(res.data)&&res.data.length){const others=cache.orders.filter(o=>o.phone!==ph);cache.orders=others.concat(res.data);write(LS.orders,cache.orders);refreshHomeStats();}}
 async function startPhoneVerification(phone){const r=await OtpModal.sendCode(phone,"verify");OtpModal.show({phone,purpose:"verify",successCb:async()=>{setCustomerPhone(phone);await refreshHomeOrdersFromServer();toast("سفارش‌های شما نمایش داده شد ✅");}});if(r.sim||r.local)toast("🔵 کد در مودال.");}
@@ -1787,16 +1616,16 @@ $("#hist-filter")?.addEventListener("change",renderHistory);
 $("#hist-export")?.addEventListener("click",()=>{const ph=getCustomerPhone();const list=cache.orders.filter(o=>o.phone===ph);const csv=[["کد","محصول","مساحت","مبلغ","وضعیت","تاریخ"].join(",")].concat(list.map(o=>[o.code,o.crop,o.area,o.amount,STATUS[o.status]?.label||o.status,new Date(o.createdAt||Date.now()).toLocaleDateString("fa-IR")].join(","))).join("\n");const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="my-orders.csv";a.click();toast("دانلود شد.");});
 function showInvoice(order){const c=$("#invoice-content");if(!c)return;c.innerHTML=`<div class="receipt-card"><div class="receipt-head"><div class="check"><svg class="icon"><use href="#i-check"/></svg></div><div style="flex:1"><strong>فاکتور سفارش</strong><small>کد: <code class="ltr">${esc(order.code)}</code></small></div></div><div class="receipt-body"><div><small>مشتری</small><strong>${esc(order.name)}</strong></div><div><small>موبایل</small><strong style="direction:ltr;display:inline-block">${esc(order.phone)}</strong></div><div><small>محصول</small><strong>${esc(order.crop)} · ${toFa(order.area)} هکتار</strong></div><div><small>مبلغ</small><strong style="color:var(--b700);font-size:18px">${fmtT(order.amount)}</strong></div><div><small>وضعیت</small><strong><span class="status ${(STATUS[order.status]||STATUS.pending).cls}">${(STATUS[order.status]||STATUS.pending).label}</span></strong></div><div><small>تاریخ</small><strong>${new Date(order.createdAt||Date.now()).toLocaleDateString("fa-IR")}</strong></div></div></div>`;showScreen("invoice");}
 $("#invoice-print-btn")?.addEventListener("click",()=>window.print());
-function renderSupport(){const c=getConfig();const b=$("#support-phone-btn"),n=$("#support-note"),f=$("#phone-fab");if(n&&c.supportNote)n.textContent=c.supportNote;if(b){if(c.supportPhone){b.href="tel:"+toEn(c.supportPhone);b.textContent="📞 "+toFa(c.supportPhone);}else{b.removeAttribute("href");b.style.opacity=".6";b.textContent="📞 تنظیم نشده";}}if(f){if(c.supportPhone){f.classList.add("pulse");f.dataset.phone=toEn(c.supportPhone);}else f.classList.remove("pulse");}}
+function renderSupport(){const c=getConfig();const b=$("#support-phone-btn"),n=$("#support-note");if(n&&c.supportNote)n.textContent=c.supportNote;if(b){if(c.supportPhone){b.href="tel:"+toEn(c.supportPhone);b.textContent="📞 "+toFa(c.supportPhone);}else{b.removeAttribute("href");b.style.opacity=".6";b.textContent="📞 تنظیم نشده";}}}
 function refreshSlotSelect(){const sel=$("#slot-select"),hint=$("#slot-hint");if(!sel)return;const all=getSlots().sort((a,b)=>a.date.localeCompare(b.date)||a.start.localeCompare(b.start));const orders=cache.orders;const free=all.filter(s=>{const b=orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length;return b<s.cap;});sel.innerHTML=free.length?'<option value="">انتخاب بازه</option>'+free.map(s=>{const b=orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length;const l=s.cap-b;return`<option value="${s.id}">${toFa(s.date)} — ${toFa(s.start)} تا ${toFa(s.end)} (${toFa(l)} جا)</option>`;}).join(""):'<option value="">بازه‌ای نیست</option>';if(hint)hint.textContent=free.length?"":"مدیر باید بازه تعریف کند.";}
 function attachNum(input,{integer=false}={}){if(!input)return;input.addEventListener("input",()=>{let v=toEn(input.value);v=integer?v.replace(/\D+/g,""):v.replace(/[^\d.]/g,"");if(input.value!==v)input.value=v;});input.addEventListener("blur",()=>{input.value=toEn(input.value);});}
-["phone","track-phone","ptn-login-phone","ptn-reg-phone","home-phone-input","sms-phone","prof-postal"].forEach(id => {
+["phone","track-phone","ptn-login-phone","ptn-reg-phone","sms-phone","prof-postal"].forEach(id => {
     const el = document.getElementById(id);
     if(!el) return;
     attachNum(el, {integer:true});
     el.addEventListener("input", () => {
         let v = toEn(el.value);
-        if ((id === "home-phone-input" || id === "phone" || id === "sms-phone" || id === "track-phone") && v.length === 10 && v.startsWith("9")) {
+        if ((id === "phone" || id === "sms-phone" || id === "track-phone") && v.length === 10 && v.startsWith("9")) {
             el.value = "0" + v;
         }
     });
@@ -1902,403 +1731,42 @@ $("#copy-card")?.addEventListener("click",async()=>{const v=($("#cardno")?.value
 function renderChat(){const box=$("#chat-body");if(!box)return;const msgs=getMessages();if(!msgs.length){box.innerHTML='<div class="bubble reply">سلام 👋 پیامت رو بنویس.</div>';return;}box.innerHTML=msgs.slice(-50).map(m=>{const me=m.from==="customer";const dt=new Date(m.createdAt).toLocaleString("fa-IR",{hour:"2-digit",minute:"2-digit"});return`<div class="bubble ${me?"":"reply"}">${esc(m.text)}<small>${dt}</small></div>`;}).join("");box.scrollTop=box.scrollHeight;}
 $("#msg-form")?.addEventListener("submit",e=>{e.preventDefault();const v=$("#msg-input").value.trim();if(!v)return;const msgs=getMessages();const newMsg={id:uid(),from:"customer",phone:getCustomerPhone(),text:v,createdAt:Date.now()};msgs.push(newMsg);setMessages(msgs);apiFetch("/api/messages",{method:"POST",body:JSON.stringify(newMsg)});$("#msg-input").value="";renderChat();toast("پیام ثبت شد.");});
 
-/* KNOWLEDGE */
-const MOCK_NEWS=[
-  {title:"پهپادهای کشاورزی نسل جدید با باتری ۴۵ دقیقه‌ای",source:"DroneDJ",date:"۱۴۰۴/۰۷/۲۵",summary:"شرکت DJI از نسل جدید پهپادهای سمپاش با قابلیت پرواز پیوسته ۴۵ دقیقه رونمایی کرد.",link:"#"},
-  {title:"افزایش ۳۰ درصدی بهره‌وری با سمپاشی دقیق",source:"AgFunder",date:"۱۴۰۴/۰۷/۲۲",summary:"نتایج تحقیقات جدید نشان می‌دهد سمپاشی با پهپاد تا ۳۰٪ کاهش مصرف سموم را به همراه دارد.",link:"#"},
-  {title:"آموزش ۵۰۰ کشاورز خراسان رضوی برای استفاده از پهپاد",source:"ایسنا",date:"۱۴۰۴/۰۷/۲۰",summary:"دوره‌های آموزشی استفاده از پهپاد سمپاش برای ۵۰۰ کشاورز در مشهد برگزار شد.",link:"#"}
-];
-const MOCK_ARTICLES=[
-  {title:"بهترین زمان سمپاشی مزارع گندم",source:"سام‌پاش",date:"۱۴۰۴/۰۷/۱۸",summary:"صبح زود یا غروب؟ راهنمای کامل انتخاب زمان بهینه سمپاشی برای گندم.",link:"#"},
-  {title:"مقایسه سم‌پاشی پهپادی با روش سنتی",source:"سام‌پاش",date:"۱۴۰۴/۰۷/۱۵",summary:"هزینه، سرعت، دقت و ایمنی — بررسی کامل دو روش سمپاشی.",link:"#"},
-  {title:"اصول نگهداری پهپاد سمپاش در زمستان",source:"سام‌پاش",date:"۱۴۰۴/۰۷/۱۲",summary:"چک‌لیست کامل نگهداری باتری، نازل‌ها و موتورها در فصل سرد.",link:"#"}
-];
-const MOCK_VIDEOS=[
-  {id:"v1",title:"سمپاشی مزرعه گندم — ۵ هکتار در ۲۰ دقیقه",desc:"نمونه‌ای از عملیات واقعی سمپاشی پهپادی",url:"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",platform:"direct"},
-  {id:"v2",title:"پرواز آزمایشی پهپاد سمپاش",desc:"تست عملکرد نازل‌ها و پوشش سموم روی مزرعه نمونه",url:"https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",platform:"direct"}
-];
-const KV_CACHE={news:null,articles:null,videos:null};
-
-function kvRenderCards(gridId,items){
-  const grid=document.getElementById(gridId);if(!grid)return;
-  if(!items||!items.length){grid.innerHTML='<div class="kv-empty"><span class="kv-empty-icon">📭</span><strong>محتوایی نیست</strong>به‌زودی مطالب جدید اضافه می‌شود.</div>';return;}
-  grid.innerHTML=items.map(it=>`
-    <article class="kv-card">
-      <div class="kv-card-img">${it.image?`<img src="${esc(it.image)}" alt="${esc(it.title)}" loading="lazy">`:"📰"}</div>
-      <div class="kv-card-body">
-        <div class="kv-card-meta"><span class="kv-badge">${esc(it.source||"سام‌پاش")}</span><span>${esc(it.date||"")}</span></div>
-        <h3 class="kv-card-title">${esc(it.title)}</h3>
-        <p class="kv-card-desc">${esc((it.summary||"").slice(0,130))}${it.summary&&it.summary.length>130?"...":""}</p>
-        <a href="${esc(it.link||"#")}" target="_blank" rel="noopener" class="kv-read-more">ادامه مطلب ←</a>
-      </div>
-    </article>`).join("");
-}
-async function kvLoadData(kind,url,mock,gridId){
-  if(KV_CACHE[kind])return kvRenderCards(gridId,KV_CACHE[kind]);
-  try{const r=await fetch(url);if(r.ok){const d=await r.json();if(Array.isArray(d)&&d.length){KV_CACHE[kind]=d;return kvRenderCards(gridId,d);}}}catch{}
-  KV_CACHE[kind]=mock;
-  kvRenderCards(gridId,mock);
-}
-function renderKnowledge(){
-  kvLoadData("news","/api/news",MOCK_NEWS,"kv-news-grid");
-  kvLoadData("articles","/api/articles",MOCK_ARTICLES,"kv-articles-grid");
-}
-document.addEventListener("click",e=>{
-  const tab=e.target.closest(".kv-tab[data-kv-tab]");if(!tab)return;
-  const key=tab.dataset.kvTab;
-  document.querySelectorAll(".kv-tab[data-kv-tab]").forEach(t=>t.classList.toggle("active",t===tab));
-  document.querySelectorAll("#screen-knowledge .kv-panel").forEach(p=>p.classList.toggle("active",p.id==="kv-panel-"+key));
-});
-
-/* VIDEO SECTION — Aparat + YouTube */
-function getVideos(){ return read(LS.videos, null) || KV_CACHE.videos || MOCK_VIDEOS; }
-function setVideos(v){ write(LS.videos, v); KV_CACHE.videos = v; }
-
-function parseVideoUrl(url){
-  if(!url) return null;
-  const s = String(url);
-  const yt = s.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
-  if(yt) return { platform:"youtube", id:yt[1], url:`https://youtu.be/${yt[1]}`, embed:`https://www.youtube.com/embed/${yt[1]}` };
-  const ap = s.match(/aparat\.com\/v\/([a-zA-Z0-9]+)/);
-  if(ap) return { platform:"aparat", id:ap[1], url:`https://www.aparat.com/v/${ap[1]}`, embed:`https://www.aparat.com/video/video/embed/videohash/${ap[1]}/vt/frame` };
-  if(/\.(mp4|webm|ogg)(\?|$)/i.test(s)) return { platform:"direct", url:s };
-  return null;
-}
-
-function renderVideoSettings(){
-  const s = Object.assign(defaultVideoSettings(), read(LS.video_settings, {}));
-  const set=(id,v)=>{const el=document.getElementById(id);if(el)el.value=v||"";};
-  set("vid-aparat-key", s.aparatKey);
-  set("vid-aparat-proxy", s.aparatProxyUrl);
-  set("vid-youtube-client", s.youtubeClientId);
-  const badge = document.getElementById("vid-youtube-status");
-  if(badge){
-    const ok = s.youtubeAccessToken && Date.now() < s.youtubeTokenExpiry;
-    badge.textContent = ok ? "✅ متصل" : "⚪ قطع";
-    badge.className = "mini-chip " + (ok ? "ok" : "");
-  }
-}
-
-function connectYouTube(){
-  const s = Object.assign(defaultVideoSettings(), read(LS.video_settings, {}));
-  if(!s.youtubeClientId) return toast("ابتدا Client ID یوتیوب را وارد و ذخیره کن", true);
-  const redirect = location.origin + location.pathname;
-  const scope = "https://www.googleapis.com/auth/youtube.upload";
-  const state = "yt_" + Date.now();
-  sessionStorage.setItem("yt_oauth_state", state);
-  const url = "https://accounts.google.com/o/oauth2/v2/auth?" + new URLSearchParams({
-    client_id: s.youtubeClientId,
-    redirect_uri: redirect,
-    response_type: "token",
-    scope: scope,
-    include_granted_scopes: "true",
-    state: state
-  }).toString();
-  location.href = url;
-}
-
-function handleYouTubeOAuthCallback(){
-  if(!location.hash || location.hash.length < 10) return false;
-  const params = new URLSearchParams(location.hash.slice(1));
-  const accessToken = params.get("access_token");
-  const state = params.get("state");
-  const expiresIn = parseInt(params.get("expires_in") || "3600", 10);
-  const expected = sessionStorage.getItem("yt_oauth_state");
-  if(!accessToken || !state || state !== expected || !state.startsWith("yt_")) return false;
-  const s = Object.assign(defaultVideoSettings(), read(LS.video_settings, {}));
-  s.youtubeAccessToken = accessToken;
-  s.youtubeTokenExpiry = Date.now() + (expiresIn - 60) * 1000;
-  write(LS.video_settings, s);
-  sessionStorage.removeItem("yt_oauth_state");
-  history.replaceState(null, "", location.pathname + location.search);
-  toast("✅ به یوتیوب متصل شد");
-  return true;
-}
-
-async function uploadToAparat(file, title, desc, onProgress){
-  const s = Object.assign(defaultVideoSettings(), read(LS.video_settings, {}));
-  if(!s.aparatKey) throw new Error("کلید API آپارات تنظیم نشده");
-  const fd = new FormData();
-  fd.append("video", file);
-  fd.append("title", title);
-  fd.append("category", "1");
-  if(desc) fd.append("description", desc);
-  const target = s.aparatProxyUrl || "https://apiv2.aparat.com/api/fa/v1/video/video/add";
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", target);
-    xhr.setRequestHeader("X-API-Key", s.aparatKey);
-    xhr.upload.addEventListener("progress", e => { if(e.lengthComputable) onProgress(Math.round(e.loaded/e.total*100)); });
-    xhr.addEventListener("load", () => {
-      if(xhr.status >= 200 && xhr.status < 300){
-        try{
-          const d = JSON.parse(xhr.responseText);
-          const uid = d?.data?.video?.uid || d?.video?.uid;
-          if(!uid) return reject(new Error("پاسخ آپارات نامعتبر"));
-          resolve({ platform:"aparat", videoId:uid, url:`https://www.aparat.com/v/${uid}`, embed:`https://www.aparat.com/video/video/embed/videohash/${uid}/vt/frame` });
-        } catch(e){ reject(e); }
-      } else {
-        reject(new Error("HTTP "+xhr.status+" — احتمالاً CORS. پراکسی تنظیم کن."));
-      }
-    });
-    xhr.addEventListener("error", () => reject(new Error("خطای شبکه — CORS. پراکسی تنظیم کن.")));
-    xhr.send(fd);
-  });
-}
-
-async function uploadToYouTube(file, title, desc, onProgress){
-  const s = Object.assign(defaultVideoSettings(), read(LS.video_settings, {}));
-  if(!s.youtubeAccessToken) throw new Error("به یوتیوب متصل نیستی");
-  if(Date.now() > (s.youtubeTokenExpiry||0)) throw new Error("توکن یوتیوب منقضی — دوباره متصل شو");
-  const meta = { snippet:{ title, description: desc||"" }, status:{ privacyStatus:"unlisted" } };
-  const initRes = await fetch(
-    "https://www.googleapis.com/upload/youtube/v3/videos?uploadType=resumable&part=snippet,status",
-    {
-      method:"POST",
-      headers:{
-        "Authorization":"Bearer "+s.youtubeAccessToken,
-        "Content-Type":"application/json; charset=UTF-8",
-        "X-Upload-Content-Type":file.type||"video/mp4",
-        "X-Upload-Content-Length":String(file.size)
-      },
-      body:JSON.stringify(meta)
-    }
-  );
-  if(!initRes.ok){
-    const err = await initRes.json().catch(()=>({}));
-    if(initRes.status===401) throw new Error("توکن یوتیوب منقضی");
-    throw new Error(err.error?.message || "HTTP "+initRes.status);
-  }
-  const uploadUrl = initRes.headers.get("Location");
-  if(!uploadUrl) throw new Error("آدرس آپلود دریافت نشد");
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open("PUT", uploadUrl);
-    xhr.setRequestHeader("Content-Type", file.type||"video/mp4");
-    xhr.upload.addEventListener("progress", e => { if(e.lengthComputable) onProgress(Math.round(e.loaded/e.total*100)); });
-    xhr.addEventListener("load", () => {
-      if(xhr.status >= 200 && xhr.status < 300){
-        try{
-          const d = JSON.parse(xhr.responseText);
-          if(!d.id) return reject(new Error("پاسخ یوتیوب نامعتبر"));
-          resolve({ platform:"youtube", videoId:d.id, url:`https://youtu.be/${d.id}`, embed:`https://www.youtube.com/embed/${d.id}` });
-        } catch(e){ reject(e); }
-      } else {
-        try{ reject(new Error(JSON.parse(xhr.responseText).error?.message||"HTTP "+xhr.status)); }
-        catch{ reject(new Error("HTTP "+xhr.status)); }
-      }
-    });
-    xhr.addEventListener("error", () => reject(new Error("خطای شبکه")));
-    xhr.send(file);
-  });
-}
-
-function renderVideoCards(items){
+/* ==================== VIDEOS (فقط از API) ==================== */
+async function renderVideos(){
   const grid = document.getElementById("kv-videos-grid");
   if(!grid) return;
-  if(!items?.length){
-    grid.innerHTML='<div class="kv-empty"><span class="kv-empty-icon">🎬</span><strong>هنوز ویدیویی نیست</strong>به‌زودی ویدیوهای سمپاشی اضافه می‌شود.</div>';
-    return;
-  }
-  grid.innerHTML = items.map((v,i) => {
-    const p = v.platform ? v : (parseVideoUrl(v.url) || {});
-    let thumb = "";
-    if(p.platform === "youtube" && p.videoId){
-      thumb = `<img src="https://img.youtube.com/vi/${p.videoId}/mqdefault.jpg" alt="" style="width:100%;height:100%;object-fit:cover" loading="lazy">`;
-    } else if(p.platform === "aparat"){
-      thumb = `<div style="width:100%;height:100%;background:linear-gradient(135deg,#7c3aed,#5b21b6);display:grid;place-items:center;color:#fff;font-size:22px;font-weight:800;letter-spacing:2px">آپارات</div>`;
-    } else {
-      thumb = `<video preload="metadata" muted playsinline><source src="${esc(v.url)}#t=0.5"></video>`;
-    }
-    return `<article class="kv-card kv-video-card" data-video-idx="${i}">
-      <div class="video-thumb">
-        ${thumb}
-        <div class="play-btn">▶</div>
-      </div>
-      <div class="kv-card-body">
-        <h3 class="kv-card-title">${esc(v.title)}</h3>
-        <p class="kv-card-desc">${esc(v.desc||"")}</p>
-      </div>
-    </article>`;
-  }).join("");
-
-  grid.querySelectorAll("[data-video-idx]").forEach(card => {
-    card.addEventListener("click", () => {
-      const v = items[+card.dataset.videoIdx];
-      if(!v) return;
-      const p = v.platform ? v : (parseVideoUrl(v.url) || {});
-      let player = "";
-      if((p.platform === "youtube" || p.platform === "aparat") && p.embed){
-        player = `<iframe src="${esc(p.embed)}" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="width:100%;aspect-ratio:16/9;border-radius:12px;background:#000;display:block;margin-bottom:14px"></iframe>`;
-      } else if(v.url){
-        player = `<video src="${esc(v.url)}" controls playsinline style="width:100%;border-radius:12px;background:#000;display:block;margin-bottom:14px"></video>`;
-      }
-      Admin.openModal(`
-        <div style="position:relative">
-          <button type="button" id="kv-modal-close" style="position:absolute;top:-8px;left:-8px;width:36px;height:36px;border-radius:50%;background:var(--dng-bg);color:var(--dng-fg);border:1px solid rgba(160,42,30,.25);display:grid;place-items:center;z-index:2;cursor:pointer;font-size:16px;font-weight:700">✕</button>
-          ${player}
-          <h3 style="margin:0 0 6px;font-size:15px;font-weight:800">${esc(v.title)}</h3>
-          <p style="margin:0;color:var(--i500);font-size:13px;line-height:1.85">${esc(v.desc||"")}</p>
-        </div>
-      `);
-      const mb = document.getElementById("modal-body");
-      if(mb) mb.style.maxWidth = "960px";
-      document.getElementById("kv-modal-close")?.addEventListener("click", () => {
-        const vid = document.querySelector("#modal-body video");
-        if(vid) vid.pause();
-        Admin.closeModal();
-        if(mb) mb.style.maxWidth = "";
-      });
-    });
-  });
-}
-
-function renderVideoAdmin(){
-  const box = document.getElementById("kv-admin-videos-list");
-  if(!box) return;
-  const items = getVideos();
-  if(!items?.length){
-    box.innerHTML = '<div class="kv-empty"><strong>ویدیویی نیست</strong></div>';
-    return;
-  }
-  box.innerHTML = items.map((v,i) => {
-    const p = v.platform ? v : (parseVideoUrl(v.url) || {});
-    let thumb = "";
-    if(p.platform === "youtube" && p.videoId){
-      thumb = `<img src="https://img.youtube.com/vi/${p.videoId}/mqdefault.jpg" alt="" style="width:100%;height:100%;object-fit:cover">`;
-    } else if(p.platform === "aparat"){
-      thumb = `<div style="width:100%;height:100%;display:grid;place-items:center;background:linear-gradient(135deg,#7c3aed,#5b21b6);color:#fff;font-weight:800">آپارات</div>`;
-    } else {
-      thumb = `<video preload="metadata" muted playsinline><source src="${esc(v.url)}#t=0.5"></video>`;
-    }
-    const platformLabel = p.platform === "youtube" ? "🔴 YouTube" : p.platform === "aparat" ? "🟣 Aparat" : "🔗 Link";
-    return `<div class="video-admin-item">
-      <div class="va-thumb">${thumb}</div>
-      <div class="va-info">
-        <strong>${esc(v.title)}</strong>
-        <small>${esc(v.desc||"")}</small>
-        <small style="color:var(--purple);font-weight:700;margin-top:4px">${platformLabel}</small>
-      </div>
-      <div class="va-actions">
-        <button class="icon-mini danger" data-del-video="${i}" title="حذف">
-          <svg class="icon"><use href="#i-trash"/></svg>
-        </button>
-      </div>
-    </div>`;
-  }).join("");
-
-  box.querySelectorAll("[data-del-video]").forEach(b => {
-    b.onclick = () => {
-      if(!confirm("حذف شود؟")) return;
-      const cur = getVideos().slice();
-      cur.splice(+b.dataset.delVideo, 1);
-      setVideos(cur);
-      renderVideoAdmin();
-      renderVideoCards(cur);
-      toast("حذف شد");
-    };
-  });
-}
-
-function bindVideoPanel(){
-  const src = document.getElementById("kv-source");
-  if(src && !src.dataset.bound){
-    src.dataset.bound = "1";
-    src.addEventListener("change", () => {
-      const mode = src.value;
-      const fw = document.getElementById("kv-file-wrap");
-      const uw = document.getElementById("kv-url-wrap");
-      if(fw) fw.hidden = (mode === "link");
-      if(uw) uw.hidden = (mode !== "link");
-    });
-  }
-  document.getElementById("vid-settings-save")?.addEventListener("click", () => {
-    const s = Object.assign(defaultVideoSettings(), read(LS.video_settings, {}));
-    s.aparatKey = document.getElementById("vid-aparat-key").value.trim();
-    s.aparatProxyUrl = document.getElementById("vid-aparat-proxy").value.trim();
-    s.youtubeClientId = document.getElementById("vid-youtube-client").value.trim();
-    write(LS.video_settings, s);
-    renderVideoSettings();
-    toast("✅ ذخیره شد");
-  });
-  document.getElementById("vid-youtube-connect")?.addEventListener("click", connectYouTube);
-  document.getElementById("vid-youtube-disconnect")?.addEventListener("click", () => {
-    const s = Object.assign(defaultVideoSettings(), read(LS.video_settings, {}));
-    s.youtubeAccessToken = "";
-    s.youtubeTokenExpiry = 0;
-    write(LS.video_settings, s);
-    renderVideoSettings();
-    toast("قطع شد");
-  });
-}
-
-document.getElementById("kv-upload-form")?.addEventListener("submit", async e => {
-  e.preventDefault();
-  const f = e.target;
-  const mode = document.getElementById("kv-source").value;
-  const title = f.querySelector("[name=vtitle]").value.trim();
-  const desc = f.querySelector("[name=vdesc]").value.trim();
-  if(!title) return toast("عنوان را وارد کن", true);
-
-  const progress = document.getElementById("kv-progress");
-  const fill = document.getElementById("kv-progress-fill");
-  const pct = document.getElementById("kv-progress-pct");
-  const showProg = () => { if(progress) progress.style.display = "block"; if(pct) pct.style.display = "block"; };
-  const hideProg = () => { if(progress) progress.style.display = "none"; if(pct) pct.style.display = "none"; if(fill) fill.style.width = "0"; if(pct) pct.textContent = ""; };
-  const onProgress = p => { if(fill) fill.style.width = p + "%"; if(pct) pct.textContent = toFa(p) + "٪"; };
-
+  grid.innerHTML = '<div class="kv-skeleton"></div><div class="kv-skeleton"></div><div class="kv-skeleton"></div>';
   try{
-    let vid = null;
-    if(mode === "link"){
-      const url = f.querySelector("[name=vurl]").value.trim();
-      if(!url) return toast("لینک را وارد کن", true);
-      const p = parseVideoUrl(url);
-      if(!p) return toast("لینک پشتیبانی نمی‌شود", true);
-      vid = { id: "v" + Date.now(), title, desc, url: p.url, platform: p.platform, videoId: p.id, embed: p.embed };
+    const r = await fetch("https://api.sampash-ai.ir/api/videos");
+    const d = await r.json();
+    if(d.ok && Array.isArray(d.videos) && d.videos.length){
+      grid.innerHTML = d.videos.map(v => `
+        <article class="kv-card kv-video-card" data-video-url="${encodeURIComponent(v.url||'')}" style="cursor:pointer">
+          <div class="video-thumb">
+            <img src="${esc(v.thumbnail||'')}" alt="${esc(v.title||'')}"
+                 onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${esc(v.id||'')}/mqdefault.jpg'"
+                 style="width:100%;height:100%;object-fit:cover" loading="lazy">
+            <div class="play-btn">▶</div>
+          </div>
+          <div class="kv-card-body">
+            <h3 class="kv-card-title">${esc(v.title||'')}</h3>
+          </div>
+        </article>`).join("");
+      grid.querySelectorAll("[data-video-url]").forEach(card => {
+        card.addEventListener("click", () => {
+          const url = decodeURIComponent(card.dataset.videoUrl);
+          if(url) window.open(url, "_blank");
+        });
+      });
     } else {
-      const file = f.querySelector("[name=vfile]").files[0];
-      if(!file) return toast("فایل انتخاب کن", true);
-      if(file.size > 100 * 1024 * 1024) return toast("بیشتر از ۱۰۰MB", true);
-      showProg();
-      if(mode === "aparat"){
-        const r = await uploadToAparat(file, title, desc, onProgress);
-        vid = { id: "v" + Date.now(), title, desc, ...r };
-      } else {
-        const r = await uploadToYouTube(file, title, desc, onProgress);
-        vid = { id: "v" + Date.now(), title, desc, ...r };
-      }
-      hideProg();
+      grid.innerHTML = '<div class="kv-empty"><span class="kv-empty-icon">🎬</span><strong>هنوز ویدیویی نیست</strong>به‌زودی ویدیوهای سمپاشی اضافه می‌شود.</div>';
     }
-    const cur = getVideos().slice();
-    cur.unshift(vid);
-    setVideos(cur);
-    renderVideoAdmin();
-    renderVideoCards(cur);
-    f.reset();
-    toast("✅ ویدیو ثبت شد");
-  } catch(err){
-    hideProg();
-    toast("❌ " + (err.message || err), true);
-  }
-});
-
-async function renderVideos(){
-  renderVideoSettings();
-  bindVideoPanel();
-  const items = getVideos();
-  renderVideoCards(items);
-  if(!read(LS.videos, null)){
-    try{
-      const r = await fetch("/api/videos");
-      if(r.ok){
-        const d = await r.json();
-        if(Array.isArray(d) && d.length){ setVideos(d); renderVideoCards(d); }
-      }
-    } catch{}
+  } catch(e){
+    grid.innerHTML = '<div class="kv-empty"><span class="kv-empty-icon">⚠️</span><strong>خطا در ارتباط با سرور</strong>لطفاً بعداً تلاش کنید.</div>';
   }
 }
 
-/* SlotPicker */
+/* ==================== SLOT PICKER ==================== */
 const SlotPicker=(()=>{
 let selDate=null,selStart=null,selEnd=null;
 function jalaliString(date){const f=new Intl.DateTimeFormat("fa-IR-u-ca-persian",{year:"numeric",month:"2-digit",day:"2-digit"});const p=f.formatToParts(date);const y=toEn(p.find(x=>x.type==="year").value);const m=toEn(p.find(x=>x.type==="month").value).padStart(2,"0");const d=toEn(p.find(x=>x.type==="day").value).padStart(2,"0");return`${y}/${m}/${d}`;}
@@ -2313,7 +1781,7 @@ function getSelection(){if(!selDate||!selStart||!selEnd)return null;return{date:
 return{render,reset,getSelection};
 })();
 
-/* ADMIN PANEL */
+/* ==================== ADMIN PANEL ==================== */
 const Admin=(()=>{
 function openModal(html){const b=$("#modal-back"),m=$("#modal-body");m.innerHTML=html;b.classList.add("show");b.onclick=e=>{if(e.target===b)closeModal();};}
 function closeModal(){$("#modal-back").classList.remove("show");$("#modal-body").innerHTML="";}
@@ -2324,7 +1792,7 @@ const b=e.target.closest("button[data-tab]");if(!b)return;
 const tab=b.dataset.tab;
 $$("#admin-tabs button").forEach(x=>x.setAttribute("aria-selected",x===b?"true":"false"));
 $$(".admin-panel").forEach(p=>p.classList.toggle("active",p.dataset.panel===tab));
-({dash:renderDashboard,analytics:renderAnalytics,orders:()=>loadOrdersPage(true),payments:renderPayments,partners:renderPartners,schedule:()=>{SlotPicker.render();renderSlots();},pricing:renderPricing,payment:renderPayment,sms:renderSmsPanel,ai:renderAiPanel,regions:renderRegions,crops:renderCrops,messages:renderMessages,videos:()=>{renderVideoAdmin();renderVideoSettings();bindVideoPanel();},customers:renderCustomers,audit:renderAudit,backup:()=>{},settings:renderSettings})[tab]?.();
+({dash:renderDashboard,analytics:renderAnalytics,orders:()=>loadOrdersPage(true),payments:renderPayments,partners:renderPartners,schedule:()=>{SlotPicker.render();renderSlots();},pricing:renderPricing,payment:renderPayment,sms:renderSmsPanel,ai:renderAiPanel,regions:renderRegions,crops:renderCrops,messages:renderMessages,customers:renderCustomers,audit:renderAudit,backup:()=>{},settings:renderSettings})[tab]?.();
 });
 }
 function renderDashboard(){const o=cache.orders,total=o.length;const pend=o.filter(x=>["pending","scheduled","assigned","accepted","receipt_pending"].includes(x.status)).length;const rev=o.filter(x=>x.status!=="cancelled").reduce((s,x)=>s+(+x.amount||0),0);const el1=$("#ad-total"),el2=$("#ad-pending"),el3=$("#ad-revenue"),el4=$("#ad-sms-count");if(el1)el1.textContent=toFa(total);if(el2)el2.textContent=toFa(pend);if(el3)el3.textContent=fmt(rev);if(el4)el4.textContent=toFa(SmsService.getLog().length);const box=$("#ad-recent-orders");if(!box)return;const recent=o.slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,5);if(!recent.length){box.innerHTML='<div class="empty"><span class="empty-emoji">📋</span><strong>هنوز سفارشی نیست</strong></div>';return;}box.innerHTML=recent.map(x=>{const st=STATUS[x.status]||STATUS.pending;const p=x.partnerId?getPartners().find(y=>y.id===x.partnerId):null;const pn=p?` · 🤝 ${esc(p.name)}`:"";return`<div class="order-row"><div class="order-icon"><svg class="icon"><use href="#i-order"/></svg></div><div class="order-main"><strong>${esc(x.code)} — ${esc(x.name)}</strong><small>${esc(x.crop)} · ${toFa(x.area)} هکتار · ${fmtT(x.amount)}${pn}</small></div><span class="status ${st.cls}">${st.label}</span></div>`;}).join("");}
@@ -2428,7 +1896,7 @@ $("#sms-test-btn")?.addEventListener("click",async()=>{const p=prompt("شمار�
 $("#sms-credit-refresh")?.addEventListener("click",async()=>{const r=await SmsService.checkCredit();if(r.ok)$("#sms-credit").textContent=r.sim?toFa(r.credit)+" (نمایشی)":toFa(r.credit);else toast("خطا: "+(r.error||""),true);});
 async function updateSmsCredit(){const s=SmsService.getSettings();if(s.provider==="sim"){$("#sms-credit").textContent=toFa(1000)+" (نمایشی)";return;}const r=await SmsService.checkCredit();$("#sms-credit").textContent=r.ok?toFa(r.credit):"—";}
 function renderAiPanel(){const s=AiService.getSettings();const prov=$("#ai-provider"),model=$("#ai-model"),key=$("#ai-apikey"),curl=$("#ai-custom-url"),sys=$("#ai-system");if(prov)prov.value=s.provider||"sim";if(model)model.value=s.model||"";if(key)key.value=s.apiKey||"";if(curl)curl.value=s.customUrl||"";if(sys)sys.value=s.system||"";if(curl)curl.parentElement.hidden=s.provider!=="custom";updateAiBadge();renderAiHistory();}
-function updateAiBadge(){const s=AiService.getSettings();const connected=s.provider!=="sim"&&s.apiKey;$("#ai-conn-badge").hidden=!connected;$("#ai-offline-badge").hidden=!!connected;const st=$("#ai-status-label");if(st)st.textContent=connected?"متصل به "+(s.provider==="openai"?"OpenAI":s.provider==="gemini"?"Gemini":s.provider==="claude"?"Claude":s.provider==="openrouter"?"OpenRouter":"سفارشی"):"حالت شبیه‌سازی";}
+function updateAiBadge(){const s=AiService.getSettings();const connected=s.provider!=="sim"&&s.apiKey;$("#ai-conn-badge").hidden=!connected;$("#ai-offline-badge").hidden=!!connected;}
 function renderAiHistory(){const b=$("#ai-history-list");if(!b)return;const h=AiService.getHistory();if(!h.length){b.innerHTML='<div class="empty"><span class="empty-emoji">💬</span><strong>گفت‌وگویی ثبت نشده</strong></div>';return;}b.innerHTML=h.slice(0,20).map(x=>{const dt=new Date(x.at).toLocaleString("fa-IR");return`<div style="padding:10px 4px;border-bottom:1px solid var(--ln);font-size:12.5px"><div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:4px"><strong style="color:var(--b700)">👤 کاربر</strong><small style="color:var(--i400);font-size:11px">${dt}</small></div><div style="margin-bottom:8px;color:var(--i700);line-height:1.8">${esc(x.q||"").slice(0,200)}</div><div style="background:var(--inset);border-radius:8px;padding:8px 10px;font-size:11.5px;color:var(--i600);line-height:1.8">${esc(x.a||"").slice(0,200)}</div></div>`;}).join("");}
 $("#ai-provider")?.addEventListener("change",e=>{const c=$("#ai-custom-url");if(c)c.parentElement.hidden=e.target.value!=="custom";const m=$("#ai-model");if(e.target.value==="openai"&&m&&!m.value)m.value="gpt-4o-mini";if(e.target.value==="gemini"&&m&&!m.value)m.value="gemini-1.5-flash";if(e.target.value==="claude"&&m&&!m.value)m.value="claude-3-5-sonnet-20241022";if(e.target.value==="openrouter"&&m&&!m.value)m.value="openai/gpt-4o-mini";});
 $("#ai-settings-save")?.addEventListener("click",()=>{const s={provider:$("#ai-provider").value,model:$("#ai-model").value.trim(),apiKey:$("#ai-apikey").value.trim(),customUrl:$("#ai-custom-url").value.trim(),system:$("#ai-system").value.trim()};AiService.setSettings(s);updateAiBadge();toast("✅ تنظیمات AI ذخیره شد");});
@@ -2446,9 +1914,9 @@ function renderAudit(){const b=$("#audit-list");if(!b)return;const f=$("#audit-f
 $("#audit-filter")?.addEventListener("change",renderAudit);
 $("#audit-refresh")?.addEventListener("click",renderAudit);
 $("#audit-clear")?.addEventListener("click",()=>{if(confirm("پاک شود؟")){write(LS.audit,[]);renderAudit();toast("پاک");}});
-$("#backup-dl")?.addEventListener("click",()=>{const data={exportedAt:new Date().toISOString(),version:"9.0",orders:cache.orders,partners:getPartners(),fleet:getFleet(),slots:getSlots(),messages:getMessages(),config:getConfig(),receipts:read(LS.receipts,{}),videos:getVideos(),videoSettings:read(LS.video_settings,{}),sms:{settings:SmsService.getSettings(),templates:SmsService.getTemplates(),auto:SmsService.getAuto()},ai:{settings:AiService.getSettings()}};const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`sph-backup-${Date.now()}.json`;a.click();pushAudit("create","بکاپ دانلود شد","create");toast("دانلود");});
+$("#backup-dl")?.addEventListener("click",()=>{const data={exportedAt:new Date().toISOString(),version:"9.0",orders:cache.orders,partners:getPartners(),fleet:getFleet(),slots:getSlots(),messages:getMessages(),config:getConfig(),receipts:read(LS.receipts,{}),sms:{settings:SmsService.getSettings(),templates:SmsService.getTemplates(),auto:SmsService.getAuto()},ai:{settings:AiService.getSettings()}};const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`sph-backup-${Date.now()}.json`;a.click();pushAudit("create","بکاپ دانلود شد","create");toast("دانلود");});
 $("#backup-csv")?.addEventListener("click",()=>{const rows=[["کد","نام","موبایل","استان","شهر","محصول","هکتار","مبلغ","وضعیت","تاریخ"]].concat(cache.orders.map(o=>[o.code,o.name,o.phone,o.province,o.city,o.crop,o.area,o.amount,STATUS[o.status]?.label||o.status,new Date(o.createdAt||Date.now()).toLocaleDateString("fa-IR")]));const csv=rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(",")).join("\n");const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="orders.csv";a.click();toast("دانلود");});
-$("#restore-btn")?.addEventListener("click",async()=>{const f=$("#restore-file")?.files?.[0];if(!f)return toast("فایل را انتخاب کن",true);try{const data=JSON.parse(await f.text());if(!confirm("داده‌های فعلی جایگزین می‌شوند؟"))return;if(data.orders){cache.orders=data.orders;write(LS.orders,data.orders);}if(data.partners)setPartners(data.partners);if(data.fleet)setFleet(data.fleet);if(data.slots)setSlots(data.slots);if(data.config)setConfig(data.config);if(data.receipts)write(LS.receipts,data.receipts);if(data.videos)setVideos(data.videos);if(data.videoSettings)write(LS.video_settings,data.videoSettings);if(data.sms){if(data.sms.settings)SmsService.setSettings(data.sms.settings);if(data.sms.templates)SmsService.setTemplates(data.sms.templates);if(data.sms.auto)SmsService.setAuto(data.sms.auto);}if(data.ai&&data.ai.settings)AiService.setSettings(data.ai.settings);pushAudit("create","بازیابی","create");toast("✅ بازیابی شد");location.reload();}catch(e){toast("فایل نامعتبر: "+e.message,true);}});
+$("#restore-btn")?.addEventListener("click",async()=>{const f=$("#restore-file")?.files?.[0];if(!f)return toast("فایل را انتخاب کن",true);try{const data=JSON.parse(await f.text());if(!confirm("داده‌های فعلی جایگزین می‌شوند؟"))return;if(data.orders){cache.orders=data.orders;write(LS.orders,data.orders);}if(data.partners)setPartners(data.partners);if(data.fleet)setFleet(data.fleet);if(data.slots)setSlots(data.slots);if(data.config)setConfig(data.config);if(data.receipts)write(LS.receipts,data.receipts);if(data.sms){if(data.sms.settings)SmsService.setSettings(data.sms.settings);if(data.sms.templates)SmsService.setTemplates(data.sms.templates);if(data.sms.auto)SmsService.setAuto(data.sms.auto);}if(data.ai&&data.ai.settings)AiService.setSettings(data.ai.settings);pushAudit("create","بازیابی","create");toast("✅ بازیابی شد");location.reload();}catch(e){toast("فایل نامعتبر: "+e.message,true);}});
 $("#clear-sms-log")?.addEventListener("click",()=>{if(confirm("پاک شود؟")){SmsService.clearLog();renderSmsLog();toast("پاک");}});
 $("#clear-audit")?.addEventListener("click",()=>{if(confirm("پاک شود؟")){write(LS.audit,[]);renderAudit();toast("پاک");}});
 function renderSettings(){const c=getConfig();$("#cfg-site-title").value=c.siteTitle||"";$("#cfg-support-phone").value=c.supportPhone||"";$("#cfg-support-note").value=c.supportNote||"";renderSupport();}
@@ -2488,7 +1956,7 @@ function init(){bindTabs();bindOrders();bindLogin();bindLogout();if(Auth.getSess
 return{init,refreshAll,closeModal,openModal,confirmModal};
 })();
 
-/* PARTNER PANEL */
+/* ==================== PARTNER PANEL ==================== */
 const PartnerPanel=(()=>{
 let regDrones=[];
 function renderRegDrones(){const b=$("#ptn-drones-list");if(!b)return;if(!regDrones.length){b.innerHTML='<div style="color:var(--i400);font-size:12px;padding:8px 0">پهپادی نیست.</div>';return;}b.innerHTML=regDrones.map((d,i)=>`<div class="drone-item"><div class="d-icon"><svg class="icon"><use href="#i-drone"/></svg></div><div class="d-info"><strong>${esc(d.name)}</strong><small>${esc(d.model||"—")}${d.liter?` · ${toFa(d.liter)} L`:""}</small></div><button type="button" data-reg-drone-del="${i}"><svg class="icon"><use href="#i-trash"/></svg></button></div>`).join("");$$("#ptn-drones-list [data-reg-drone-del]").forEach(b=>b.onclick=()=>{regDrones.splice(+b.dataset.regDroneDel,1);renderRegDrones();});}
@@ -2506,20 +1974,7 @@ function bindLogout(){$("#partner-logout-btn")?.addEventListener("click",()=>{Pa
 return{refresh,bindTabs,bindLogin,bindRegister,bindLogout,bindDroneAdd};
 })();
 
-/* AI Assistant */
-const AIAssistant=(()=>{
-let hist=[],busy=false;
-const fab=$("#ai-fab"),panel=$("#ai-panel"),close=$("#ai-close"),body=$("#ai-body"),input=$("#ai-input"),send=$("#ai-send");
-function toggle(o){const s=o!==undefined?o:!panel.classList.contains("show");panel.classList.toggle("show",s);if(s)setTimeout(()=>input.focus(),100);}
-function escH(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-function md(t){const p=String(t).split(/```/);let h="";for(let i=0;i<p.length;i++){if(i%2===1){const r=p[i];const n=r.indexOf("\n");const c=(n>-1?r.slice(n+1):r).replace(/\n$/,"");h+=`<pre style="background:#0b1f17;color:#d4e8dc;padding:12px;border-radius:10px;overflow-x:auto;font-size:11.5px;direction:ltr;text-align:left"><code>${escH(c)}</code></pre>`;}else{const x=p[i].trim();if(!x)continue;let f=escH(x).replace(/\*\*(.+?)\*\*/g,"<strong>$1</strong>").replace(/\n/g,"<br>");h+=`<p>${f}</p>`;}}return h||`<p>${escH(t)}</p>`;}
-function add(t,r){const w=document.createElement("div");w.className="ai-msg "+(r==="user"?"user":"bot");const b=document.createElement("div");b.className="ai-bubble";if(r==="user")b.innerHTML=`<p>${escH(t).replace(/\n/g,"<br>")}</p>`;else b.innerHTML=md(t);w.appendChild(b);body.appendChild(w);requestAnimationFrame(()=>{body.scrollTop=body.scrollHeight;});}
-async function submit(){const m=input.value.trim();if(!m||busy)return;busy=true;send.disabled=true;input.value="";add(m,"user");hist.push({role:"user",content:m});const t=document.createElement("div");t.className="ai-msg bot";t.innerHTML='<div style="padding:8px 14px">...</div>';body.appendChild(t);const r=await AiService.chat(hist);t.remove();if(r.ok){add(r.reply,"bot");hist.push({role:"assistant",content:r.reply});AiService.addHistory({q:m,a:r.reply,at:Date.now()});if(hist.length>20)hist=hist.slice(-10);}else add("⚠️ خطا: "+r.error,"bot");busy=false;send.disabled=false;input.focus();}
-function init(){if(!fab||!panel)return;fab.addEventListener("click",()=>toggle());close.addEventListener("click",()=>toggle(false));send.addEventListener("click",submit);input.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();submit();}});}
-return{init};
-})();
-
-/* SEED + BOOT */
+/* ==================== SEED + BOOT ==================== */
 async function seedIfNeeded(){
 if(!read(LS.partners,null))write(LS.partners,[]);
 if(!read(LS.fleet,null))write(LS.fleet,[]);
@@ -2531,11 +1986,9 @@ if(!read(LS.sms_log,null))write(LS.sms_log,[]);
 if(!read(LS.audit,null))write(LS.audit,[]);
 if(!read(LS.ai_settings,null))write(LS.ai_settings,defaultAiSettings());
 if(!read(LS.ai_history,null))write(LS.ai_history,[]);
-if(!read(LS.video_settings,null))write(LS.video_settings,defaultVideoSettings());
 }
 (async function boot(){
 await seedIfNeeded();
-handleYouTubeOAuthCallback();
 await loadAll();
 Admin.init();
 PartnerPanel.bindTabs();
@@ -2553,15 +2006,9 @@ refreshSlotSelect();
 renderChat();
 renderTrustBar();
 await refreshHomeOrdersFromServer();
-$("#home-phone-save")?.addEventListener("click",async()=>{const v=toEn($("#home-phone-input").value.trim());if(!/^09\d{9}$/.test(v))return toast("شماره نامعتبر",true);await startPhoneVerification(v);});
-$("#home-phone-input")?.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();$("#home-phone-save").click();}});
-$("#home-change-phone")?.addEventListener("click",()=>{setCustomerPhone("");localStorage.removeItem(LS.cust_verified);toast("پاک شد");});
+
 $("#profile-form")?.addEventListener("submit",e=>{e.preventDefault();const prof={...getCustomerProfile(),name:$("#prof-name").value.trim(),province:$("#prof-province").value,city:$("#prof-city").value.trim(),village:$("#prof-village").value.trim(),postal:toEn($("#prof-postal").value),address:$("#prof-address").value.trim()};setCustomerProfile(prof);renderCustomerAuth();toast("✅ ذخیره شد");});
 $("#prof-logout")?.addEventListener("click",()=>{setCustomerPhone("");localStorage.removeItem(LS.cust_verified);showScreen("home");toast("خارج شدی");});
-$("#phone-fab")?.addEventListener("click",()=>{const f=$("#phone-fab");const p=f?.dataset.phone;if(!p)return toast("شماره تنظیم نشده",true);window.location.href="tel:"+p;});
-$("#wa-fab")?.addEventListener("click",()=>{const c=getConfig();const p=toEn(c.supportPhone||"");if(!p)return toast("شماره تنظیم نشده",true);const w=p.startsWith("0")?"98"+p.slice(1):p;window.open("https://wa.me/"+w,"_blank");});
-$("#theme-fab")?.addEventListener("click",toggleTheme);
-AIAssistant.init();
 
 $("#mobile-menu-btn")?.addEventListener("click", () => {
     if(!window.matchMedia("(max-width:720px)").matches) return;
@@ -2585,53 +2032,5 @@ if ('serviceWorker' in navigator) {
 }
 })();
 </script>
-<script defer>
-// تاخیر ۱.۵ ثانیه‌ای تا مطمئن شویم سایت اصلی کاملاً لود شده است
-setTimeout(function() {
-    const videoGrid = document.getElementById('kv-videos-grid');
-    
-    if (!videoGrid) {
-        // اگر کانتینر پیدا نشد، یک هشدار بده
-        console.log("کانتینر پیدا نشد!");
-        return;
-    }
-
-    // ۱. نمایش پیام لودینگ
-    videoGrid.innerHTML = '<p style="text-align:center; width:100%; color: blue;">در حال دریافت ویدیوها از یوتیوب...</p>';
-    
-    // ۲. درخواست به کلودفلر
-    fetch('https://api.sampash-ai.ir/api/videos')
-        .then(response => {
-            if (!response.ok) throw new Error("پاسخ سرور مناسب نبود");
-            return response.json();
-        })
-        .then(data => {
-            if (data.ok && data.videos.length > 0) {
-                videoGrid.innerHTML = ''; 
-                
-                data.videos.forEach(video => {
-                    videoGrid.innerHTML += `
-                        <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); display: flex; flex-direction: column; margin-bottom: 15px;">
-                            <img src="${video.thumbnail}" 
-                                 alt="${video.title}" 
-                                 style="width: 100%; height: 180px; object-fit: cover; background: #ddd;"
-                                 onerror="this.onerror=null; this.src='https://i.ytimg.com/vi/${video.id}/hqdefault.jpg';">
-                            <div style="padding: 15px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between;">
-                                <h3 style="font-size: 14px; margin: 0 0 15px 0; color: #333; line-height: 1.6; height: 65px; overflow: hidden;">${video.title}</h3>
-                                <a href="${video.url}" target="_blank" style="text-decoration: none; display: block; text-align: center; background: #1a5c38; color: white; padding: 10px; border-radius: 6px; font-size: 14px;">تماشا در یوتیوب</a>
-                            </div>
-                        </div>
-                    `;
-                });
-            } else {
-                videoGrid.innerHTML = '<p style="text-align:center; width:100%; color: red;">سرور پاسخ داد اما ویدیویی در لیست نبود.</p>';
-            }
-        })
-        .catch(error => {
-            // اگر اتصال به کلودفلر برقرار نشد، این خطا روی صفحه نمایش داده می‌شود
-            videoGrid.innerHTML = '<p style="text-align:center; width:100%; color: red;">خطای شبکه: ' + error.message + '</p>';
-        });
-}, 1500); // پایان تاخیر
-</script>
 </body>
-  </html>
+</html>
