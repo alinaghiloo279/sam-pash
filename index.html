@@ -1333,11 +1333,167 @@ document.addEventListener('DOMContentLoaded', async function() {
 </div>
 </div>
 
-<div class="ai-panel" id="ai-panel">
-<div class="ai-head">
-<div class="ai-avatar"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9 17 7M7 17l-2.1 2.1"/><circle cx="12" cy="12" r="4"/></svg></div>
-<div class="ai-head-info"><strong>دستیار هوشمند</strong><small id="ai-status-label">آماده</small></div>
-<button class="ai-close" id="ai-close"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+<!-- ================= شروع کد جدید: دستیار هوشمند کشتیار ================= -->
+<style>
+    .ai-container-new { font-family: Tahoma, sans-serif; width: 100%; max-width: 450px; background: #fff; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); overflow: hidden; display: flex; flex-direction: column; height: 600px; margin: 0 auto; border: 1px solid #e0e0e0; }
+    .ai-welcome-new { padding: 30px 20px; text-align: center; background: #f8fbf9; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+    .ai-avatar-new { width: 80px; height: 80px; background: #1a5c38; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 40px; color: white; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(26,92,56,0.3); }
+    .ai-welcome-new h2 { color: #1a5c38; margin-bottom: 10px; }
+    .ai-welcome-new p { color: #666; font-size: 13px; line-height: 1.6; margin-bottom: 20px; }
+    .ai-features-new { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-bottom: 25px; }
+    .ai-feature-card-new { background: white; padding: 12px; border-radius: 10px; border: 1px solid #e0e0e0; font-size: 12px; color: #333; }
+    .ai-feature-card-new span { display: block; font-size: 20px; margin-bottom: 8px; }
+    .btn-start-ai-new { background: #1a5c38; color: white; border: none; padding: 12px 30px; border-radius: 25px; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; width: 100%; max-width: 200px; }
+    .btn-start-ai-new:hover { background: #2e8b57; }
+    .ai-chat-screen-new { display: none; flex-direction: column; height: 100%; }
+    .ai-chat-header-new { background: #1a5c38; color: white; padding: 12px 15px; display: flex; align-items: center; gap: 10px; }
+    .ai-chat-header-new .status-new { font-size: 10px; opacity: 0.8; display: block; }
+    .ai-chat-messages-new { flex-grow: 1; padding: 15px; overflow-y: auto; background: #f9f9f9; display: flex; flex-direction: column; gap: 12px; }
+    .msg-new { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.6; }
+    .msg-new.user { background: #1a5c38; color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
+    .msg-new.bot { background: white; color: #333; align-self: flex-start; border-bottom-left-radius: 2px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    .ai-chat-input-area-new { padding: 10px; background: white; border-top: 1px solid #eee; display: flex; align-items: center; gap: 8px; }
+    .ai-chat-input-area-new input[type="text"] { flex-grow: 1; padding: 10px 12px; border: 1px solid #ddd; border-radius: 20px; outline: none; font-family: inherit; font-size: 13px; }
+    .ai-chat-input-area-new button { background: #1a5c38; color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 16px; }
+    .btn-img-new { background: #e0f2e9 !important; color: #1a5c38 !important; }
+    .image-preview-container-new { display: none; padding: 8px 10px; background: #f0f4f8; border-top: 1px solid #eee; text-align: right; }
+    .image-preview-new { height: 50px; border-radius: 6px; border: 2px solid #1a5c38; }
+</style>
+
+<div class="ai-container-new" id="ai-panel">
+    <!-- صفحه معرفی -->
+    <div class="ai-welcome-new" id="ai-welcome-screen">
+        <div class="ai-avatar-new">🤖</div>
+        <h2>سلام! من کشتیار هستم</h2>
+        <p>دستیار هوشمند و متخصص شما در امور کشاورزی و پهپادهای سمپاش.</p>
+        <div class="ai-features-new">
+            <div class="ai-feature-card-new"><span>📸</span> تشخیص آفت از عکس</div>
+            <div class="ai-feature-card-new"><span>🧪</span> پیشنهاد سم و دوز</div>
+            <div class="ai-feature-card-new"><span>🚁</span> مشاوره پهپاد</div>
+            <div class="ai-feature-card-new"><span>💧</span> راهنمایی آبیاری</div>
+        </div>
+        <button class="btn-start-ai-new" onclick="startAIChat()">شروع گفتگو</button>
+    </div>
+
+    <!-- صفحه چت -->
+    <div class="ai-chat-screen-new" id="ai-chat-screen">
+        <div class="ai-chat-header-new">
+            <div class="ai-avatar-new" style="width:35px; height:35px; font-size:18px; margin:0; box-shadow:none;">🤖</div>
+            <div>
+                <strong>کشتیار</strong>
+                <span class="status-new">آنلاین و آماده پاسخگویی</span>
+            </div>
+            <button onclick="backToWelcome()" style="margin-right: auto; background: none; border: none; color: white; cursor: pointer; font-size: 12px;">بازگشت ✖</button>
+        </div>
+        <div class="ai-chat-messages-new" id="ai-chat-box">
+            <div class="msg-new bot">سلام! من کشتیار هستم. عکس محصولت رو بفرست یا سوالت رو بپرس تا راهنماییت کنم.</div>
+        </div>
+        <div class="image-preview-container-new" id="image-preview-container">
+            <img id="image-preview-img" class="image-preview-new" src="" alt="عکس">
+            <span style="font-size: 11px; color: #1a5c38; cursor: pointer;" onclick="removeImage()">حذف عکس ❌</span>
+        </div>
+        <div class="ai-chat-input-area-new">
+            <input type="file" id="ai-image-input" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+            <button class="btn-img-new" onclick="document.getElementById('ai-image-input').click()" title="ارسال عکس">📷</button>
+            <input type="text" id="ai-text-input" placeholder="سوال خود را بنویسید..." onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()" title="ارسال">➤</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let selectedImageBase64 = null;
+    const apiUrl = 'https://api.sampash-ai.ir/api/ai';
+
+    function startAIChat() {
+        document.getElementById('ai-welcome-screen').style.display = 'none';
+        document.getElementById('ai-chat-screen').style.display = 'flex';
+    }
+
+    function backToWelcome() {
+        document.getElementById('ai-chat-screen').style.display = 'none';
+        document.getElementById('ai-welcome-screen').style.display = 'flex';
+    }
+
+    function handleImageUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            selectedImageBase64 = e.target.result; 
+            document.getElementById('image-preview-img').src = selectedImageBase64;
+            document.getElementById('image-preview-container').style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function removeImage() {
+        selectedImageBase64 = null;
+        document.getElementById('ai-image-input').value = '';
+        document.getElementById('image-preview-container').style.display = 'none';
+    }
+
+    function handleEnter(e) {
+        if (e.key === 'Enter') sendMessage();
+    }
+
+    async function sendMessage() {
+        const textInput = document.getElementById('ai-text-input');
+        const userText = textInput.value.trim();
+        if (!userText && !selectedImageBase64) return;
+
+        const chatBox = document.getElementById('ai-chat-box');
+        let userMsgHTML = '<div class="msg-new user">';
+        if (selectedImageBase64) {
+            userMsgHTML += `<img src="${selectedImageBase64}" style="max-width:100%; border-radius:8px; margin-bottom:8px; display:block;"><br>`;
+        }
+        if (userText) userMsgHTML += userText;
+        userMsgHTML += '</div>';
+        chatBox.innerHTML += userMsgHTML;
+
+        let messages = [];
+        if (selectedImageBase64) {
+            messages.push({
+                role: 'user',
+                content: [
+                    { type: 'text', text: userText || 'لطفا این عکس را بررسی کن و مشکل گیاه را تشخیص بده.' },
+                    { type: 'image_url', image_url: { url: selectedImageBase64 } }
+                ]
+            });
+        } else {
+            messages.push({ role: 'user', content: userText });
+        }
+
+        textInput.value = '';
+        removeImage();
+
+        const loadingId = 'loading-' + Date.now();
+        chatBox.innerHTML += `<div class="msg-new bot" id="${loadingId}">در حال بررسی...</div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ messages: messages })
+            });
+            const data = await response.json();
+            document.getElementById(loadingId).remove();
+
+            if (data.choices && data.choices[0].message.content) {
+                let replyText = data.choices[0].message.content.replace(/\n/g, '<br>'); 
+                chatBox.innerHTML += `<div class="msg-new bot">${replyText}</div>`;
+            } else {
+                chatBox.innerHTML += `<div class="msg-new bot" style="color:red;">متاسفانه پاسخی دریافت نشد.</div>`;
+            }
+        } catch (error) {
+            document.getElementById(loadingId).remove();
+            chatBox.innerHTML += `<div class="msg-new bot" style="color:red;">خطا در ارتباط با سرور.</div>`;
+        }
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+</script>
+<!-- ================= پایان کد کشتیار ================= -->
 </div>
 <div class="ai-body" id="ai-body"><div class="ai-msg bot"><div class="ai-bubble"><p>سلام 👋 هر سؤالی داری بپرس.</p></div></div></div>
 <div class="ai-foot"><textarea id="ai-input" rows="1" placeholder="سؤالت..."></textarea><button class="ai-send" id="ai-send"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button></div>
