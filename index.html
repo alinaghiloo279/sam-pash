@@ -1296,6 +1296,7 @@ async function sendMessage(){
   const userText=textInput.value.trim();
   if(!userText && !selectedImageBase64) return;
   const chatBox=document.getElementById('ai-chat-box');
+  
   let userMsgHTML='<div class="msg-new user">';
   if(selectedImageBase64){
     userMsgHTML+=`<img src="${selectedImageBase64}" style="max-width:100%;border-radius:8px;margin-bottom:8px;display:block;"><br>`;
@@ -1304,14 +1305,17 @@ async function sendMessage(){
   userMsgHTML+='</div>';
   chatBox.innerHTML+=userMsgHTML;
 
-  let messages=[];
-  if(selectedImageBase64){
-    messages.push({role:'user',content:[
-      {type:'text',text:userText||'لطفا این عکس را بررسی کن و مشکل گیاه را تشخیص بده.'},
-      {type:'image_url',image_url:{url:selectedImageBase64}}
-    ]});
+  let messages = [];
+  if(selectedImageBase64) {
+      messages.push({
+          role: 'user', 
+          content: [
+              { type: 'text', text: userText || 'لطفا این عکس را بررسی کن.' },
+              { type: 'image_url', image_url: { url: selectedImageBase64 } }
+          ]
+      });
   } else {
-    messages.push({role:'user',content:userText});
+      messages.push({ role: 'user', content: userText });
   }
 
   textInput.value='';
@@ -1322,26 +1326,34 @@ async function sendMessage(){
   chatBox.scrollTop=chatBox.scrollHeight;
 
   try{
-    const response=await fetch(aiApiUrl,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({messages:messages})
+    // آدرس ورکر خود را اینجا بگذارید
+    const AI_ENDPOINT = 'https://api.sampash-ai.ir/api/ai'; 
+
+    const response = await fetch(AI_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: messages })
     });
-    const data=await response.json();
+
+    const data = await response.json();
     document.getElementById(loadingId).remove();
-    if(data.choices && data.choices[0].message.content){
-      const replyText=data.choices[0].message.content.replace(/\n/g,'<br>');
+
+    // خواندن پاسخ OpenRouter
+    if(data.choices && data.choices[0] && data.choices[0].message){
+      const replyText = data.choices[0].message.content.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
       chatBox.innerHTML+=`<div class="msg-new bot">${replyText}</div>`;
+    } else if(data.error) {
+      chatBox.innerHTML+=`<div class="msg-new bot" style="color:red;">خطای سرور: ${data.error.message}</div>`;
     } else {
-      chatBox.innerHTML+=`<div class="msg-new bot" style="color:red;">متاسفانه پاسخی دریافت نشد.</div>`;
+      chatBox.innerHTML+=`<div class="msg-new bot" style="color:red;">پاسخ نامعتبر از سرور.</div>`;
     }
+
   } catch(error){
     document.getElementById(loadingId).remove();
-    chatBox.innerHTML+=`<div class="msg-new bot" style="color:red;">خطا در ارتباط با سرور.</div>`;
+    chatBox.innerHTML+=`<div class="msg-new bot" style="color:red;">خطای شبکه: ${error.message}</div>`;
   }
   chatBox.scrollTop=chatBox.scrollHeight;
-}
-
+  }
 document.addEventListener('DOMContentLoaded',function(){
   const btn=document.getElementById('header-ai-btn');
   const panel=document.getElementById('ai-panel');
