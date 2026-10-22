@@ -1702,18 +1702,32 @@ function compressImage(file,maxDim=1200,quality=0.75){
 function saveReceiptData(orderId,file){
   return new Promise(async(resolve)=>{
     if(!file)return resolve(false);
-    const r=read(LS.receipts,{});
     try{
+      let dataToSave = null;
       if(file.type.startsWith("image/")){
-        const data=await compressImage(file);
-        r[orderId]={type:"image/jpeg",name:file.name,size:data.length,data,uploadedAt:Date.now(),status:"pending"};
+        dataToSave = await compressImage(file);
       } else {
-        r[orderId]={type:file.type,name:file.name,size:file.size,data:null,uploadedAt:Date.now(),status:"pending"};
+        // برای فایل‌های PDF فعلاً پیام خطا می‌دهیم (چون حجمشان بالاست)
+        toast("لطفاً فقط عکس (JPG/PNG) آپلود کنید",true);
+        return resolve(false);
       }
-      write(LS.receipts,r);
-      resolve(true);
+      
+      // ارسال به کلادفلر برای ذخیره
+      const res = await fetch("https://api.sampash-ai.ir/api/receipt", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ orderId, receiptData: dataToSave })
+      });
+      
+      if(res.ok) {
+          toast("✅ فیش با موفقیت در سرور ذخیره شد");
+          resolve(true);
+      } else {
+          toast("خطا در ذخیره فیش در سرور", true);
+          resolve(false);
+      }
     } catch(e){
-      toast("فضای ذخیره پر است — فیش‌های قدیمی را حذف کن",true);
+      toast("خطا در پردازش فایل: " + e.message, true);
       resolve(false);
     }
   });
