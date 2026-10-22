@@ -463,8 +463,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .ai-chat-input-area-new input[type="text"]{flex:1;padding:10px 12px;border:1px solid var(--ln2);border-radius:20px;outline:none;font-family:inherit;font-size:13px;background:var(--inset);color:var(--i800);min-width:0}
 .ai-chat-input-area-new button{background:linear-gradient(180deg,var(--b500),var(--b600));color:#fff;border:none;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;justify-content:center;align-items:center;font-size:16px;flex-shrink:0;font-family:inherit}
 .btn-img-new{background:linear-gradient(145deg,var(--b100),var(--b200))!important;color:var(--b700)!important}
-.image-preview-container-new{display:none;padding:8px 10px;background:var(--inset);border-top:1px solid var(--ln);text-align:right;flex-shrink:0}
-.image-preview-new{height:50px;border-radius:8px;border:2px solid var(--b500)}
 .ai-close-new{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;cursor:pointer;font-size:14px;padding:5px 10px;border-radius:8px;font-family:inherit;font-weight:700;flex-shrink:0}
 .ai-close-new:hover{background:rgba(255,255,255,.22)}
 .ai-back-new{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;cursor:pointer;font-size:11.5px;padding:5px 10px;border-radius:8px;font-family:inherit;font-weight:700;flex-shrink:0}
@@ -590,7 +588,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     </button>
   </div>
   <div style="display:flex; flex-direction:row; align-items:center; gap:22px;">
-    <!-- 🔹 دکمه دستیار با onclick مستقیم -->
     <div id="header-ai-btn" onclick="toggleAIPanel()" style="display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; color:var(--b700);">
       <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-zap"/></svg>
       <span style="font-size:11px; font-weight:800; margin-top:4px;">دستیار</span>
@@ -852,7 +849,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <button data-tab="pricing" aria-selected="false">💵 تعرفه‌ها</button>
 <button data-tab="payment" aria-selected="false">💳 پرداخت</button>
 <button data-tab="sms" aria-selected="false">📱 پیامک</button>
-<button data-tab="ai" aria-selected="false">🤖 هوش مصنوعی</button>
 <button data-tab="regions" aria-selected="false">🗺️ مناطق</button>
 <button data-tab="crops" aria-selected="false">🌾 محصولات</button>
 <button data-tab="messages" aria-selected="false">💬 پیام‌ها</button>
@@ -1022,33 +1018,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </div>
 
-<div class="admin-panel" data-panel="ai">
-<div class="admin-head" style="margin-bottom:14px">
-<div><h4 style="margin:0;font-size:15px">🤖 هوش مصنوعی</h4></div>
-<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-<span class="verified-badge" id="ai-conn-badge" hidden>متصل</span>
-<span class="otp-badge" id="ai-offline-badge">غیرفعال</span>
-</div>
-</div>
-<div class="admin-card">
-<h4>🔌 اتصال به سرویس</h4>
-<div class="admin-grid">
-<div class="field-wrap"><label for="ai-provider">سرویس‌دهنده</label><select id="ai-provider"><option value="sim">🔵 شبیه‌سازی</option><option value="openai">🟢 OpenAI</option><option value="gemini">🟣 Google Gemini</option><option value="claude">🟠 Anthropic Claude</option><option value="openrouter">🔷 OpenRouter</option><option value="custom">⚙️ سفارشی</option></select></div>
-<div class="field-wrap"><label for="ai-model">مدل</label><input id="ai-model" class="ltr" placeholder="gpt-4o-mini"></div>
-<div class="field-wrap span-2"><label for="ai-apikey">کلید API</label><input id="ai-apikey" class="ltr" type="text" placeholder="sk-..."></div>
-<div class="field-wrap span-2" id="ai-custom-url-wrap" hidden><label for="ai-custom-url">آدرس Endpoint</label><input id="ai-custom-url" class="ltr"></div>
-<div class="field-wrap span-2"><label for="ai-system">دستور سیستمی</label><textarea id="ai-system" rows="3"></textarea></div>
-</div>
-<div class="actions" style="margin-top:16px"><button class="btn btn-green" id="ai-settings-save">ذخیره</button><button class="btn btn-light" id="ai-test-btn"><svg class="icon"><use href="#i-send"/></svg> تست اتصال</button></div>
-<div class="notice info" style="margin-top:14px">💡 کلید API را از پنل سرویس‌دهنده بگیر (مثلاً <code class="ltr">platform.openai.com</code>). کلید در مرورگر شما ذخیره می‌شود.</div>
-</div>
-<div class="admin-card">
-<h4>📊 تاریخچه گفت‌وگو</h4>
-<div id="ai-history-list"></div>
-<div class="actions"><button class="btn btn-light btn-sm" id="ai-history-clear"><svg class="icon"><use href="#i-trash"/></svg> پاک</button></div>
-</div>
-</div>
-
 <div class="admin-panel" data-panel="regions"><div class="admin-card"><h4>استان‌ها</h4><div class="inline-add"><input id="prov-new" placeholder="نام استان"><button class="btn btn-green btn-sm" id="prov-add-btn">افزودن</button></div><div class="chip-list" id="prov-list"></div></div></div>
 <div class="admin-panel" data-panel="crops"><div class="admin-card"><h4>محصولات</h4><div class="inline-add"><input id="crop-new" placeholder="نام محصول"><button class="btn btn-green btn-sm" id="crop-add-btn">افزودن</button></div><div class="chip-list" id="crop-list"></div></div></div>
 <div class="admin-panel" data-panel="messages"><div class="admin-card"><h4>پیام‌های مشتریان</h4><div id="adm-messages-list"></div></div></div>
@@ -1196,18 +1165,13 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </div>
 
-<!-- کشتیار (دستیار AI) - فقط عکس -->
+<!-- کشتیار (دستیار AI) -->
 <div id="ai-panel" class="ai-container-new">
   <div class="ai-welcome-new" id="ai-welcome-screen">
     <div class="ai-avatar-new">🤖</div>
     <h2>سلام! من کشتیار هستم</h2>
     <p>دستیار هوشمند و متخصص شما در امور کشاورزی. عکس محصول خود را بفرستید تا آفت و راهکار درمان را به شما بگویم.</p>
     
-    <!-- 🌟 هشدار VPN -->
-    <div class="notice err" style="margin: 0 0 15px 0; font-size:12.5px; line-height:1.8; text-align:right; width:100%;">
-      ⚠️ <strong>توجه مهم:</strong> برای تحلیل تصویر توسط هوش مصنوعی، لطفاً در حین ارسال عکس <strong>VPN گوشی خود را روشن</strong> کنید.
-    </div>
-
     <div class="ai-features-new">
       <div class="ai-feature-card-new"><span>📸</span> تشخیص آفت از عکس</div>
       <div class="ai-feature-card-new"><span>🧪</span> پیشنهاد راهکار درمان</div>
@@ -1228,14 +1192,10 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
       </div>
     </div>
     <div class="ai-chat-messages-new" id="ai-chat-box">
-      <div class="msg-new bot">سلام! من کشتیار هستم. عکس محصولت رو بفرست تا آفت و راهکار درمان رو بهت بگم.<br><br><small style="color:var(--dng-fg);font-weight:bold;">⚠️ یادت نره VPN گوشی روشن باشه!</small></div>
+      <div class="msg-new bot">سلام! من کشتیار هستم. عکس محصولت رو بفرست تا آفت و راهکار درمان رو بهت بگم.</div>
     </div>
     
-    <!-- 🌟 کادر ورودی (با هشدار و محدودیت ۱۰ عکس) -->
     <div class="ai-chat-input-area-new" style="flex-direction:column; gap:8px; padding:12px;">
-      <div style="font-size:10.5px; color:var(--dng-fg); text-align:center; font-weight:bold;">
-        ⚠️ برای تحلیل، VPN گوشی باید روشن باشد.
-      </div>
       <div id="image-limit-msg" style="font-size:11px; color:var(--i500); text-align:center; font-weight:bold;">
         هر کاربر مجاز به ارسال ۱۰ عکس است. (ارسال شده: <span id="img-count" style="color:var(--b700)">0</span>/10)
       </div>
@@ -1255,19 +1215,16 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <script>
 /* ==================== کشتیار (دستیار AI) ==================== */
 let selectedImageBase64 = null;
-const IMAGE_LIMIT = 10; // 🌟 محدودیت به ۱۰ عکس تغییر کرد
+const IMAGE_LIMIT = 10; 
 
 function toggleAIPanel() {
   const panel = document.getElementById('ai-panel');
   if (panel) {
     panel.classList.toggle('show');
-    if (panel.classList.contains('show')) {
-      checkImageLimit();
-    }
+    if (panel.classList.contains('show')) checkImageLimit();
   }
 }
 
-// ۱. بررسی محدودیت هنگام باز شدن پنل
 function checkImageLimit() {
   let count = parseInt(localStorage.getItem('sph_img_count') || '0');
   const countEl = document.getElementById('img-count');
@@ -1282,51 +1239,77 @@ function checkImageLimit() {
     btn.style.cursor = 'not-allowed';
     btn.innerHTML = '<span>🚫</span> محدودیت ارسال عکس';
     const msg = document.getElementById('image-limit-msg');
-    if (msg) {
-        msg.innerHTML = 'شما به سقف مجاز ارسال عکس رسیده‌اید.';
-        msg.style.color = 'var(--dng-fg)';
-    }
+    if (msg) { msg.innerHTML = 'شما به سقف مجاز ارسال عکس رسیده‌اید.'; msg.style.color = 'var(--dng-fg)'; }
   } else {
     btn.disabled = false;
     btn.style.opacity = '1';
     btn.style.cursor = 'pointer';
     btn.innerHTML = '<span>📷</span> ارسال عکس برای آنالیز';
     const msg = document.getElementById('image-limit-msg');
-    if (msg) {
-        // 🌟 نمایش متن ۱۰ عکس
-        msg.innerHTML = `هر کاربر مجاز به ارسال ۱۰ عکس است. (ارسال شده: <span id="img-count" style="color:var(--b700)">${count}</span>/10)`;
-        msg.style.color = 'var(--i500)';
-    }
+    if (msg) { msg.innerHTML = `هر کاربر مجاز به ارسال ۱۰ عکس است. (ارسال شده: <span id="img-count" style="color:var(--b700)">${count}</span>/10)`; msg.style.color = 'var(--i500)'; }
   }
 }
 
-// ۲. پردازش عکس و ارسال خودکار
-function handleImageUpload(event) {
+// 🌟 فشرده‌سازی عکس قبل از ارسال
+function compressImageForAI(file, maxWidth = 800, quality = 0.8) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (event) => {
+      const img = new Image();
+      img.src = event.target.result;
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+        
+        if (width > maxWidth) {
+          height = Math.round((height * maxWidth) / width);
+          width = maxWidth;
+        }
+        
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = (err) => reject(err);
+    };
+    reader.onerror = (err) => reject(err);
+  });
+}
+
+async function handleImageUpload(event) {
   let count = parseInt(localStorage.getItem('sph_img_count') || '0');
-  if (count >= IMAGE_LIMIT) {
-    alert('شما مجاز به ارسال حداکثر ۱۰ عکس هستید.');
-    return;
-  }
+  if (count >= IMAGE_LIMIT) return alert('شما مجاز به ارسال حداکثر ۱۰ عکس هستید.');
 
   const file = event.target.files?.[0];
   if(!file) return;
   if(file.size > 5*1024*1024) return alert('حجم عکس باید کمتر از ۵ مگابایت باشد');
   if(!file.type.startsWith('image/')) return alert('فقط فایل تصویری مجاز است');
 
-  const reader = new FileReader();
-  reader.onload = function(e){
-    selectedImageBase64 = e.target.result;
-    sendImageForAnalysis(selectedImageBase64);
-  };
-  reader.readAsDataURL(file);
+  // نمایش لودینگ
+  const chatBox = document.getElementById('ai-chat-box');
+  const loadingId = 'loading-' + Date.now();
+  chatBox.innerHTML += `<div class="msg-new bot" id="${loadingId}">در حال آماده‌سازی عکس...</div>`;
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  try {
+    // فشرده‌سازی و ارسال
+    const compressedBase64 = await compressImageForAI(file);
+    document.getElementById(loadingId).remove();
+    sendImageForAnalysis(compressedBase64);
+  } catch (err) {
+    document.getElementById(loadingId).remove();
+    alert('خطا در پردازش عکس: ' + err.message);
+  }
 }
 
-// ۳. تابع اصلی ارسال به سرور (اتصال مستقیم به هوش مصنوعی سایت)
 async function sendImageForAnalysis(imageData) {
   const chatBox = document.getElementById('ai-chat-box');
   
-  let count = parseInt(localStorage.getItem('sph_img_count') || '0');
-  count++;
+  let count = parseInt(localStorage.getItem('sph_img_count') || '0') + 1;
   localStorage.setItem('sph_img_count', count);
   checkImageLimit(); 
 
@@ -1337,7 +1320,7 @@ async function sendImageForAnalysis(imageData) {
   chatBox.innerHTML += `<div class="msg-new bot" id="${loadingId}">در حال آنالیز دقیق عکس...</div>`;
   chatBox.scrollTop = chatBox.scrollHeight;
 
-  const hardcodedPrompt = `لطفا این تصویر را به دقت بررسی کن. تو یک متخصص کشاورزی هستی. پاسخ خود را دقیقا در سه بخش زیر و به زبان فارسی بنویس:
+  const promptText = `لطفا این تصویر را به دقت بررسی کن. تو یک متخصص کشاورزی هستی. پاسخ خود را دقیقا در سه بخش زیر و به زبان فارسی بنویس:
 ۱. نام دقیق آفت یا بیماری:
 ۲. دلیل و علائم بیماری:
 ۳. راهکار درمان و پیشگیری:`;
@@ -1345,27 +1328,35 @@ async function sendImageForAnalysis(imageData) {
   const messages = [{
     role: 'user',
     content: [
-      { type: 'text', text: hardcodedPrompt },
+      { type: 'text', text: promptText },
       { type: 'image_url', image_url: { url: imageData } }
     ]
   }];
 
   try {
-    // 🌟 اتصال مستقیم به هوش مصنوعی (بدون کلادفلر)
-    const result = await AiService.chat(messages);
+    // 🌟 اتصال مستقیم به Cloudflare Worker
+    const AI_ENDPOINT = 'https://api.sampash-ai.ir/api/ai'; 
+    const response = await fetch(AI_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: messages })
+    });
     
+    const data = await response.json();
     document.getElementById(loadingId).remove();
 
-    if(result.ok && result.reply){
-      const replyText = result.reply.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
-      chatBox.innerHTML += `<div class="msg-new bot">${replyText}</div>`;
+    if (data.choices && data.choices[0] && data.choices[0].message) {
+        const replyText = data.choices[0].message.content.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+        chatBox.innerHTML += `<div class="msg-new bot">${replyText}</div>`;
+    } else if (data.error) {
+        throw new Error(typeof data.error === 'string' ? data.error : (data.error.message || JSON.stringify(data.error)));
     } else {
-      chatBox.innerHTML += `<div class="msg-new bot" style="color:red;">خطا: ${result.error || 'پاسخی دریافت نشد.'}</div>`;
+        throw new Error("پاسخ نامعتبر از سرور");
     }
 
-  } catch(error) {
+  } catch (error) {
     document.getElementById(loadingId).remove();
-    chatBox.innerHTML += `<div class="msg-new bot" style="color:red;">خطای شبکه: ${error.message}</div>`;
+    chatBox.innerHTML += `<div class="msg-new bot" style="color:var(--dng-fg);">خطا: ${error.message}</div>`;
   }
   chatBox.scrollTop = chatBox.scrollHeight;
 }
@@ -1381,11 +1372,11 @@ function closeAIChat(){
   document.getElementById('ai-panel').classList.remove('show');
 }
 function backToWelcome(){
-  document.getElementById('ai-chat-box').innerHTML = '<div class="msg-new bot">سلام! من کشتیار هستم. عکس محصولت رو بفرست تا آفت و راهکار درمان رو بهت بگم.<br><br><small style="color:var(--dng-fg);font-weight:bold;">⚠️ یادت نره VPN گوشی روشن باشه!</small></div>';
+  document.getElementById('ai-chat-box').innerHTML = '<div class="msg-new bot">سلام! من کشتیار هستم. عکس محصولت رو بفرست تا آفت و راهکار درمان رو بهت بگم.</div>';
   document.getElementById('ai-chat-screen').style.display='none';
   document.getElementById('ai-welcome-screen').style.display='flex';
-  }
-  </script>
+}
+</script>
 <script>
 "use strict";
 /* ==================== UTILITIES ==================== */
@@ -1406,7 +1397,7 @@ let toastTimer;const toastEl=$("#toast");
 function toast(m,e=false){if(!toastEl)return;toastEl.textContent=m;toastEl.classList.toggle("err",e);toastEl.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove("show"),3600);}
 
 /* ==================== STORAGE KEYS ==================== */
-const LS={auth:"sph_auth",session:"sph_session",lockout:"sph_lockout",config:"sph_config",orders:"sph_orders",messages:"sph_messages",partners:"sph_partners",fleet:"sph_fleet",slots:"sph_slots",partner_session:"sph_ptn_session",cust_phone:"sph_cust_phone",cust_verified:"sph_cust_verified",cust_profile:"sph_cust_profile",theme:"sph_theme",sms_settings:"sph_sms_settings",sms_templates:"sph_sms_templates",sms_log:"sph_sms_log",sms_auto:"sph_sms_auto",audit:"sph_audit",jwt:"sph_jwt",photos:"sph_work_photos",otp_local:"sph_otp_local",ai_settings:"sph_ai_settings",ai_history:"sph_ai_history",receipts:"sph_receipts",videos:"sph_videos"};
+const LS={auth:"sph_auth",session:"sph_session",lockout:"sph_lockout",config:"sph_config",orders:"sph_orders",messages:"sph_messages",partners:"sph_partners",fleet:"sph_fleet",slots:"sph_slots",partner_session:"sph_ptn_session",cust_phone:"sph_cust_phone",cust_verified:"sph_cust_verified",cust_profile:"sph_cust_profile",theme:"sph_theme",sms_settings:"sph_sms_settings",sms_templates:"sph_sms_templates",sms_log:"sph_sms_log",sms_auto:"sph_sms_auto",audit:"sph_audit",jwt:"sph_jwt",photos:"sph_work_photos",otp_local:"sph_otp_local",receipts:"sph_receipts",videos:"sph_videos"};
 const read=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v??d;}catch{return d;}};
 const write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 
@@ -1415,7 +1406,6 @@ function defaultConfig(){return{baseRate:850000,provRates:{},cropRates:{},paymen
 function defaultSmsSettings(){return{provider:"sim",sender:""};}
 function defaultSmsTemplates(){return{otp:{label:"کد تأیید",desc:"کد تأیید شماره موبایل",text:"کد تأیید شما در سم‌پاش هوشمند:\n{otp}\nاین کد را با کسی به اشتراک نگذارید."},order_created:{label:"ثبت سفارش",desc:"پس از ثبت موفق سفارش",text:"سلام {name} عزیز\nسفارش شما با کد {code} ثبت شد.\nمحصول: {crop} | مساحت: {area} هکتار\nمبلغ: {amount}"},payment_approved:{label:"تأیید پرداخت",desc:"پس از تأیید فیش",text:"{name} عزیز\nپرداخت سفارش {code} تأیید شد."},partner_assigned:{label:"ارجاع",desc:"پس از ارجاع به اپراتور",text:"{name} عزیز\nسفارش {code} به اپراتور ارجاع شد.\nزمان: {date}"},completed:{label:"تکمیل",desc:"پس از اتمام کار",text:"{name} عزیز\nسم‌پاشی سفارش {code} انجام شد."},cancelled:{label:"لغو",desc:"در صورت لغو سفارش",text:"{name} عزیز\nسفارش {code} لغو شد."},receipt_rejected:{label:"رد فیش",desc:"در صورت رد فیش",text:"{name} عزیز\nفیش سفارش {code} تأیید نشد."},welcome:{label:"خوش‌آمد",desc:"اولین بار ورود",text:"سلام {name} عزیز\nبه سم‌پاش هوشمند خوش آمدید 🌿"}};}
 function defaultSmsAuto(){return{order_created:true,payment_approved:true,partner_assigned:true,completed:true,cancelled:false,receipt_rejected:true};}
-function defaultAiSettings(){return{provider:"sim",model:"gpt-4o-mini",apiKey:"",customUrl:"",system:"تو «دستیار هوشمند سم‌پاش» هستی. متخصص کشاورزی و سم‌پاشی با پهپاد. پاسخ‌های کوتاه، دقیق و به زبان فارسی بده."};}
 
 /* ==================== API ==================== */
 const API="https://api.sampash-ai.ir";
@@ -1460,58 +1450,6 @@ const getConfig=()=>{const d=defaultConfig();const c=Object.assign(d,cache.confi
 const setConfig=c=>{cache.config=c;write(LS.config,c);apiFetch("/api/config",{method:"PUT",body:JSON.stringify(c)});};
 const calcPrice=({area,province,crop},cfg=getConfig())=>{const base=+cfg.baseRate||0;const rate=+cfg.cropRates?.[crop]||+cfg.provRates?.[province]||base;return Math.round((+area||0)*rate);};
 const STATUS={pending:{label:"در انتظار پرداخت",cls:""},scheduled:{label:"زمان‌بندی شد",cls:"green"},assigned:{label:"ارجاع به همکار",cls:"purple"},accepted:{label:"پذیرفته شده",cls:"blue"},in_progress:{label:"در حال انجام",cls:"blue"},done:{label:"تکمیل شده",cls:"green"},cancelled:{label:"لغو شده",cls:"red"},rejected:{label:"رد شده",cls:"red"},receipt_pending:{label:"در انتظار تأیید فیش",cls:"amber"},receipt_rejected:{label:"فیش رد شده",cls:"red"}};
-
-/* ==================== AI SERVICE ==================== */
-const AiService=(()=>{
-const getSettings=()=>Object.assign(defaultAiSettings(),read(LS.ai_settings,{}));
-const setSettings=s=>write(LS.ai_settings,s);
-const getHistory=()=>read(LS.ai_history,[]);
-const addHistory=h=>{const l=getHistory();l.unshift(h);if(l.length>100)l.length=100;write(LS.ai_history,l);};
-const clearHistory=()=>write(LS.ai_history,[]);
-async function chat(messages){
-const s=getSettings();
-if(s.provider==="sim"||!s.apiKey){
-return{ok:true,sim:true,reply:"🔵 حالت شبیه‌سازی فعال است. برای پاسخ واقعی، در پنل مدیریت → تب هوش مصنوعی کلید API وارد کن.\n\nمن دستیار سم‌پاش هستم. نمونه سؤال:\n• قیمت سم‌پاشی چطور محاسبه می‌شه؟\n• بهترین زمان سم‌پاشی کیه؟\n• مزایای پهپاد سم‌پاش چیه؟"};
-}
-try{
-if(s.provider==="openai"){
-const res=await fetch("https://api.openai.com/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+s.apiKey},body:JSON.stringify({model:s.model||"gpt-4o-mini",messages:[{role:"system",content:s.system},...messages],temperature:.7})});
-const data=await res.json();
-if(!res.ok)throw new Error(data.error?.message||"HTTP "+res.status);
-return{ok:true,reply:data.choices?.[0]?.message?.content||"پاسخی دریافت نشد."};
-}
-if(s.provider==="gemini"){
-const url=`https://generativelanguage.googleapis.com/v1beta/models/${s.model||"gemini-1.5-flash"}:generateContent?key=${s.apiKey}`;
-const contents=messages.map(m=>({role:m.role==="assistant"?"model":"user",parts:[{text:m.content}]}));
-const res=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({contents,systemInstruction:{parts:[{text:s.system}]}})});
-const data=await res.json();
-if(!res.ok)throw new Error(data.error?.message||"HTTP "+res.status);
-return{ok:true,reply:data.candidates?.[0]?.content?.parts?.[0]?.text||"پاسخی دریافت نشد."};
-}
-if(s.provider==="claude"){
-const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":s.apiKey,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},body:JSON.stringify({model:s.model||"claude-3-5-sonnet-20241022",max_tokens:2000,system:s.system,messages:messages.map(m=>({role:m.role==="assistant"?"assistant":"user",content:m.content}))})});
-const data=await res.json();
-if(!res.ok)throw new Error(data.error?.message||"HTTP "+res.status);
-return{ok:true,reply:data.content?.[0]?.text||"پاسخی دریافت نشد."};
-}
-if(s.provider==="openrouter"){
-const res=await fetch("https://openrouter.ai/api/v1/chat/completions",{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+s.apiKey},body:JSON.stringify({model:s.model||"openai/gpt-4o-mini",messages:[{role:"system",content:s.system},...messages]})});
-const data=await res.json();
-if(!res.ok)throw new Error(data.error?.message||"HTTP "+res.status);
-return{ok:true,reply:data.choices?.[0]?.message?.content||"پاسخی دریافت نشد."};
-}
-if(s.provider==="custom"){
-if(!s.customUrl)throw new Error("آدرس سفارشی تنظیم نشده");
-const res=await fetch(s.customUrl,{method:"POST",headers:{"Content-Type":"application/json","Authorization":"Bearer "+s.apiKey},body:JSON.stringify({messages:[{role:"system",content:s.system},...messages]})});
-const data=await res.json();
-return{ok:true,reply:data.reply||data.choices?.[0]?.message?.content||data.message||"پاسخی دریافت نشد."};
-}
-return{ok:false,error:"سرویس ناشناخته"};
-}catch(e){return{ok:false,error:e.message||"خطای اتصال"};}
-}
-async function test(){return await chat([{role:"user",content:"سلام! یه تست کوتاه. ۵ کلمه جواب بده."}]);}
-return{getSettings,setSettings,getHistory,addHistory,clearHistory,chat,test};
-})();
 
 /* ==================== SMS SERVICE ==================== */
 const SMS_TEMPLATE_IDS={otp:556701};
@@ -1961,7 +1899,7 @@ const b=e.target.closest("button[data-tab]");if(!b)return;
 const tab=b.dataset.tab;
 $$("#admin-tabs button").forEach(x=>x.setAttribute("aria-selected",x===b?"true":"false"));
 $$(".admin-panel[data-panel]").forEach(p=>p.classList.toggle("active",p.dataset.panel===tab));
-({dash:renderDashboard,analytics:renderAnalytics,orders:()=>loadOrdersPage(true),payments:renderPayments,partners:renderPartners,schedule:()=>{SlotPicker.render();renderSlots();},pricing:renderPricing,payment:renderPayment,sms:renderSmsPanel,ai:renderAiPanel,regions:renderRegions,crops:renderCrops,messages:renderMessages,videos:()=>{renderVideoAdmin();bindVideoPanel();},customers:renderCustomers,audit:renderAudit,backup:()=>{},settings:renderSettings})[tab]?.();
+({dash:renderDashboard,analytics:renderAnalytics,orders:()=>loadOrdersPage(true),payments:renderPayments,partners:renderPartners,schedule:()=>{SlotPicker.render();renderSlots();},pricing:renderPricing,payment:renderPayment,sms:renderSmsPanel,regions:renderRegions,crops:renderCrops,messages:renderMessages,videos:()=>{renderVideoAdmin();bindVideoPanel();},customers:renderCustomers,audit:renderAudit,backup:()=>{},settings:renderSettings})[tab]?.();
 });
 }
 function renderDashboard(){const o=cache.orders,total=o.length;const pend=o.filter(x=>["pending","scheduled","assigned","accepted","receipt_pending"].includes(x.status)).length;const rev=o.filter(x=>x.status!=="cancelled").reduce((s,x)=>s+(+x.amount||0),0);const el1=$("#ad-total"),el2=$("#ad-pending"),el3=$("#ad-revenue"),el4=$("#ad-sms-count");if(el1)el1.textContent=toFa(total);if(el2)el2.textContent=toFa(pend);if(el3)el3.textContent=fmt(rev);if(el4)el4.textContent=toFa(SmsService.getLog().length);const box=$("#ad-recent-orders");if(!box)return;const recent=o.slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,5);if(!recent.length){box.innerHTML='<div class="empty"><span class="empty-emoji">📋</span><strong>هنوز سفارشی نیست</strong></div>';return;}box.innerHTML=recent.map(x=>{const st=STATUS[x.status]||STATUS.pending;const p=x.partnerId?getPartners().find(y=>y.id===x.partnerId):null;const pn=p?` · 🤝 ${esc(p.name)}`:"";return`<div class="order-row"><div class="order-icon"><svg class="icon"><use href="#i-order"/></svg></div><div class="order-main"><strong>${esc(x.code)} — ${esc(x.name)}</strong><small>${esc(x.crop)} · ${toFa(x.area)} هکتار · ${fmtT(x.amount)}${pn}</small></div><span class="status ${st.cls}">${st.label}</span></div>`;}).join("");}
@@ -2050,13 +1988,6 @@ $("#sms-settings-save")?.addEventListener("click",()=>{SmsService.setSettings({p
 $("#sms-test-btn")?.addEventListener("click",async()=>{const p=prompt("شماره تست:");if(!p)return;const c=Math.floor(100000+Math.random()*900000);const r=await SmsService.send(p,`پیامک آزمایشی\nکد: ${c}`,{kind:"test"});if(r.ok)toast(r.sim?"🔵 شبیه‌سازی":"✅ ارسال شد");else toast("خطا: "+(r.error||""),true);renderSmsLog();});
 $("#sms-credit-refresh")?.addEventListener("click",async()=>{const r=await SmsService.checkCredit();if(r.ok)$("#sms-credit").textContent=r.sim?toFa(r.credit)+" (نمایشی)":toFa(r.credit);else toast("خطا: "+(r.error||""),true);});
 async function updateSmsCredit(){const s=SmsService.getSettings();if(s.provider==="sim"){$("#sms-credit").textContent=toFa(1000)+" (نمایشی)";return;}const r=await SmsService.checkCredit();$("#sms-credit").textContent=r.ok?toFa(r.credit):"—";}
-function renderAiPanel(){const s=AiService.getSettings();const prov=$("#ai-provider"),model=$("#ai-model"),key=$("#ai-apikey"),curl=$("#ai-custom-url"),sys=$("#ai-system");if(prov)prov.value=s.provider||"sim";if(model)model.value=s.model||"";if(key)key.value=s.apiKey||"";if(curl)curl.value=s.customUrl||"";if(sys)sys.value=s.system||"";if(curl)curl.parentElement.hidden=s.provider!=="custom";updateAiBadge();renderAiHistory();}
-function updateAiBadge(){const s=AiService.getSettings();const connected=s.provider!=="sim"&&s.apiKey;$("#ai-conn-badge").hidden=!connected;$("#ai-offline-badge").hidden=!!connected;}
-function renderAiHistory(){const b=$("#ai-history-list");if(!b)return;const h=AiService.getHistory();if(!h.length){b.innerHTML='<div class="empty"><span class="empty-emoji">💬</span><strong>گفت‌وگویی ثبت نشده</strong></div>';return;}b.innerHTML=h.slice(0,20).map(x=>{const dt=new Date(x.at).toLocaleString("fa-IR");return`<div style="padding:10px 4px;border-bottom:1px solid var(--ln);font-size:12.5px"><div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:4px"><strong style="color:var(--b700)">👤 کاربر</strong><small style="color:var(--i400);font-size:11px">${dt}</small></div><div style="margin-bottom:8px;color:var(--i700);line-height:1.8">${esc(x.q||"").slice(0,200)}</div><div style="background:var(--inset);border-radius:8px;padding:8px 10px;font-size:11.5px;color:var(--i600);line-height:1.8">${esc(x.a||"").slice(0,200)}</div></div>`;}).join("");}
-$("#ai-provider")?.addEventListener("change",e=>{const c=$("#ai-custom-url");if(c)c.parentElement.hidden=e.target.value!=="custom";const m=$("#ai-model");if(e.target.value==="openai"&&m&&!m.value)m.value="gpt-4o-mini";if(e.target.value==="gemini"&&m&&!m.value)m.value="gemini-1.5-flash";if(e.target.value==="claude"&&m&&!m.value)m.value="claude-3-5-sonnet-20241022";if(e.target.value==="openrouter"&&m&&!m.value)m.value="openai/gpt-4o-mini";});
-$("#ai-settings-save")?.addEventListener("click",()=>{const s={provider:$("#ai-provider").value,model:$("#ai-model").value.trim(),apiKey:$("#ai-apikey").value.trim(),customUrl:$("#ai-custom-url").value.trim(),system:$("#ai-system").value.trim()};AiService.setSettings(s);updateAiBadge();toast("✅ تنظیمات AI ذخیره شد");});
-$("#ai-test-btn")?.addEventListener("click",async()=>{const b=$("#ai-test-btn");b.disabled=true;b.textContent="در حال تست...";const r=await AiService.test();b.disabled=false;b.innerHTML='<svg class="icon"><use href="#i-send"/></svg> تست اتصال';if(r.ok)toast(r.sim?"🔵 حالت شبیه‌سازی":"✅ اتصال موفق!");else toast("❌ خطا: "+r.error,true);});
-$("#ai-history-clear")?.addEventListener("click",()=>{if(confirm("پاک شود؟")){AiService.clearHistory();renderAiHistory();toast("پاک شد");}});
 function renderRegions(){const c=getConfig();const l=$("#prov-list");l.innerHTML="";c.provinces.forEach(p=>{const ch=document.createElement("span");ch.className="chip";ch.innerHTML=`${esc(p)} <button><svg class="icon"><use href="#i-x"/></svg></button>`;ch.querySelector("button").onclick=()=>{const cc=getConfig();cc.provinces=cc.provinces.filter(x=>x!==p);delete cc.provRates[p];setConfig(cc);renderRegions();refreshSelects();renderPricing();toast("حذف");};l.appendChild(ch);});}
 $("#prov-add-btn")?.addEventListener("click",()=>{const v=$("#prov-new").value.trim();if(!v)return;const c=getConfig();if(c.provinces.includes(v))return toast("قبلاً هست",true);c.provinces.push(v);setConfig(c);$("#prov-new").value="";renderRegions();refreshSelects();toast("افزوده شد");});
 function renderCrops(){const c=getConfig();const l=$("#crop-list");l.innerHTML="";c.crops.forEach(cr=>{const ch=document.createElement("span");ch.className="chip";ch.innerHTML=`${esc(cr)} <button><svg class="icon"><use href="#i-x"/></svg></button>`;ch.querySelector("button").onclick=()=>{const cc=getConfig();cc.crops=cc.crops.filter(x=>x!==cr);delete cc.cropRates[cr];setConfig(cc);renderCrops();refreshSelects();renderPricing();toast("حذف");};l.appendChild(ch);});}
@@ -2069,9 +2000,9 @@ function renderAudit(){const b=$("#audit-list");if(!b)return;const f=$("#audit-f
 $("#audit-filter")?.addEventListener("change",renderAudit);
 $("#audit-refresh")?.addEventListener("click",renderAudit);
 $("#audit-clear")?.addEventListener("click",()=>{if(confirm("پاک شود؟")){write(LS.audit,[]);renderAudit();toast("پاک");}});
-$("#backup-dl")?.addEventListener("click",()=>{const data={exportedAt:new Date().toISOString(),version:"9.0",orders:cache.orders,partners:getPartners(),fleet:getFleet(),slots:getSlots(),messages:getMessages(),config:getConfig(),receipts:read(LS.receipts,{}),videos:getVideos(),sms:{settings:SmsService.getSettings(),templates:SmsService.getTemplates(),auto:SmsService.getAuto()},ai:{settings:AiService.getSettings()}};const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`sph-backup-${Date.now()}.json`;a.click();pushAudit("create","بکاپ دانلود شد","create");toast("دانلود");});
+$("#backup-dl")?.addEventListener("click",()=>{const data={exportedAt:new Date().toISOString(),version:"9.0",orders:cache.orders,partners:getPartners(),fleet:getFleet(),slots:getSlots(),messages:getMessages(),config:getConfig(),receipts:read(LS.receipts,{}),videos:getVideos(),sms:{settings:SmsService.getSettings(),templates:SmsService.getTemplates(),auto:SmsService.getAuto()}};const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`sph-backup-${Date.now()}.json`;a.click();pushAudit("create","بکاپ دانلود شد","create");toast("دانلود");});
 $("#backup-csv")?.addEventListener("click",()=>{const rows=[["کد","نام","موبایل","استان","شهر","محصول","هکتار","مبلغ","وضعیت","تاریخ"]].concat(cache.orders.map(o=>[o.code,o.name,o.phone,o.province,o.city,o.crop,o.area,o.amount,STATUS[o.status]?.label||o.status,new Date(o.createdAt||Date.now()).toLocaleDateString("fa-IR")]));const csv=rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(",")).join("\n");const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="orders.csv";a.click();toast("دانلود");});
-$("#restore-btn")?.addEventListener("click",async()=>{const f=$("#restore-file")?.files?.[0];if(!f)return toast("فایل را انتخاب کن",true);try{const data=JSON.parse(await f.text());if(!confirm("داده‌های فعلی جایگزین می‌شوند؟"))return;if(data.orders){cache.orders=data.orders;write(LS.orders,data.orders);}if(data.partners)setPartners(data.partners);if(data.fleet)setFleet(data.fleet);if(data.slots)setSlots(data.slots);if(data.config)setConfig(data.config);if(data.receipts)write(LS.receipts,data.receipts);if(data.videos)setVideos(data.videos);if(data.sms){if(data.sms.settings)SmsService.setSettings(data.sms.settings);if(data.sms.templates)SmsService.setTemplates(data.sms.templates);if(data.sms.auto)SmsService.setAuto(data.sms.auto);}if(data.ai&&data.ai.settings)AiService.setSettings(data.ai.settings);pushAudit("create","بازیابی","create");toast("✅ بازیابی شد");location.reload();}catch(e){toast("فایل نامعتبر: "+e.message,true);}});
+$("#restore-btn")?.addEventListener("click",async()=>{const f=$("#restore-file")?.files?.[0];if(!f)return toast("فایل را انتخاب کن",true);try{const data=JSON.parse(await f.text());if(!confirm("داده‌های فعلی جایگزین می‌شوند؟"))return;if(data.orders){cache.orders=data.orders;write(LS.orders,data.orders);}if(data.partners)setPartners(data.partners);if(data.fleet)setFleet(data.fleet);if(data.slots)setSlots(data.slots);if(data.config)setConfig(data.config);if(data.receipts)write(LS.receipts,data.receipts);if(data.videos)setVideos(data.videos);if(data.sms){if(data.sms.settings)SmsService.setSettings(data.sms.settings);if(data.sms.templates)SmsService.setTemplates(data.sms.templates);if(data.sms.auto)SmsService.setAuto(data.sms.auto);}pushAudit("create","بازیابی","create");toast("✅ بازیابی شد");location.reload();}catch(e){toast("فایل نامعتبر: "+e.message,true);}});
 $("#clear-sms-log")?.addEventListener("click",()=>{if(confirm("پاک شود؟")){SmsService.clearLog();renderSmsLog();toast("پاک");}});
 $("#clear-audit")?.addEventListener("click",()=>{if(confirm("پاک شود؟")){write(LS.audit,[]);renderAudit();toast("پاک");}});
 function renderSettings(){const c=getConfig();$("#cfg-site-title").value=c.siteTitle||"";$("#cfg-support-phone").value=c.supportPhone||"";$("#cfg-support-note").value=c.supportNote||"";renderSupport();}
@@ -2084,7 +2015,7 @@ function bindLogin(){$("#admin-login-form")?.addEventListener("submit",async e=>
 function openChangePassModal(){openModal(`<h3>تغییر رمز</h3><form id="chg-form"><div class="field-wrap" style="margin-bottom:10px"><label>رمز فعلی</label><input type="password" id="cp-cur" class="ltr" required></div><div class="field-wrap" style="margin-bottom:10px"><label>رمز جدید</label><input type="password" id="cp-new" class="ltr" required></div><div class="field-wrap"><label>تکرار</label><input type="password" id="cp-conf" class="ltr" required></div><div class="modal-actions"><button type="submit" class="btn btn-green">ذخیره</button><button type="button" class="btn btn-light" id="cp-cancel">انصراف</button></div></form>`);$("#cp-cancel").onclick=closeModal;$("#chg-form").addEventListener("submit",async e=>{e.preventDefault();const r=await Auth.changePassword($("#cp-cur").value,$("#cp-new").value,$("#cp-conf").value);if(!r.ok)return toast(r.msg,true);closeModal();pushAudit("edit","تغییر رمز");toast("✅");});}
 function openChangeUserModal(){openModal(`<h3 style="display:flex;align-items:center;gap:8px"><svg class="icon" width="20" height="20" style="color:var(--b600)"><use href="#i-users"/></svg> تغییر نام کاربری مدیر</h3><p class="m-sub">نام کاربری جدید و رمز فعلی را وارد کن</p><form id="cu-form"><div class="field-wrap" style="margin-bottom:10px"><label>نام کاربری جدید</label><input type="text" id="cu-new" class="ltr" required placeholder="admin_new" autocomplete="username"><span class="hint">۳-۲۰ کاراکتر، حرف/عدد/underscore</span></div><div class="field-wrap"><label>رمز فعلی</label><input type="password" id="cu-pass" class="ltr" required autocomplete="current-password"></div><div class="modal-actions"><button type="submit" class="btn btn-green"><svg class="icon"><use href="#i-save"/></svg> ذخیره</button><button type="button" class="btn btn-light" id="cu-cancel">انصراف</button></div></form>`);$("#cu-cancel").onclick=closeModal;$("#cu-form").addEventListener("submit",async e=>{e.preventDefault();const newUser=$("#cu-new").value.trim();const pass=$("#cu-pass").value;const r=await Auth.changeUsername(pass,newUser);if(!r.ok)return toast(r.msg,true);closeModal();pushAudit("edit",`تغییر نام کاربری به ${newUser}`);toast("✅ نام کاربری تغییر کرد — با نام جدید وارد شو");stopAndLogout();});}
 function bindLogout(){$("#admin-logout-btn")?.addEventListener("click",()=>{confirmModal("خروج","از پنل خارج می‌شوی؟",{onConfirm:()=>{stopAndLogout();toast("خارج شدی");}});});$("#admin-change-pass-btn")?.addEventListener("click",openChangePassModal);$("#admin-change-user-btn")?.addEventListener("click",openChangeUserModal);}
-function refreshAll(){loadOrdersPage(true);renderPayments();renderPartners();renderSlots();renderPricing();renderPayment();renderSmsPanel();renderAiPanel();renderRegions();renderCrops();renderMessages();renderVideoAdmin();renderCustomers();renderAnalytics();renderAudit();renderSettings();renderDashboard();renderTrustBar();}
+function refreshAll(){loadOrdersPage(true);renderPayments();renderPartners();renderSlots();renderPricing();renderPayment();renderSmsPanel();renderRegions();renderCrops();renderMessages();renderVideoAdmin();renderCustomers();renderAnalytics();renderAudit();renderSettings();renderDashboard();renderTrustBar();}
 function init(){bindTabs();bindOrders();bindLogin();bindLogout();if(Auth.getSession()) startTimer();}
 return{init,refreshAll,closeModal,openModal,confirmModal};
 })();
@@ -2117,8 +2048,6 @@ if(!read(LS.sms_templates,null))write(LS.sms_templates,defaultSmsTemplates());
 if(!read(LS.sms_auto,null))write(LS.sms_auto,defaultSmsAuto());
 if(!read(LS.sms_log,null))write(LS.sms_log,[]);
 if(!read(LS.audit,null))write(LS.audit,[]);
-if(!read(LS.ai_settings,null))write(LS.ai_settings,defaultAiSettings());
-if(!read(LS.ai_history,null))write(LS.ai_history,[]);
 }
 (async function boot(){
 await seedIfNeeded();
