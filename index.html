@@ -1202,12 +1202,19 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     <div class="ai-avatar-new">🤖</div>
     <h2>سلام! من کشتیار هستم</h2>
     <p>دستیار هوشمند و متخصص شما در امور کشاورزی. عکس محصول خود را بفرستید تا آفت و راهکار درمان را به شما بگویم.</p>
+    
+    <!-- 🌟 هشدار VPN -->
+    <div class="notice err" style="margin: 0 0 15px 0; font-size:12.5px; line-height:1.8; text-align:right; width:100%;">
+      ⚠️ <strong>توجه مهم:</strong> برای تحلیل تصویر توسط هوش مصنوعی، لطفاً در حین ارسال عکس <strong>VPN گوشی خود را روشن</strong> کنید.
+    </div>
+
     <div class="ai-features-new">
       <div class="ai-feature-card-new"><span>📸</span> تشخیص آفت از عکس</div>
       <div class="ai-feature-card-new"><span>🧪</span> پیشنهاد راهکار درمان</div>
     </div>
     <button class="btn-start-ai-new" onclick="startAIChat()">شروع آنالیز عکس</button>
   </div>
+  
   <div class="ai-chat-screen-new" id="ai-chat-screen">
     <div class="ai-chat-header-new">
       <div class="ai-avatar-new" style="width:35px;height:35px;font-size:18px;margin:0;box-shadow:none;flex-shrink:0">🤖</div>
@@ -1221,13 +1228,16 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
       </div>
     </div>
     <div class="ai-chat-messages-new" id="ai-chat-box">
-      <div class="msg-new bot">سلام! من کشتیار هستم. عکس محصولت رو بفرست تا آفت و راهکار درمان رو بهت بگم.</div>
+      <div class="msg-new bot">سلام! من کشتیار هستم. عکس محصولت رو بفرست تا آفت و راهکار درمان رو بهت بگم.<br><br><small style="color:var(--dng-fg);font-weight:bold;">⚠️ یادت نره VPN گوشی روشن باشه!</small></div>
     </div>
     
-    <!-- 🌟 کادر ورودی جدید (فقط عکس) -->
+    <!-- 🌟 کادر ورودی (با هشدار و محدودیت ۱۰ عکس) -->
     <div class="ai-chat-input-area-new" style="flex-direction:column; gap:8px; padding:12px;">
+      <div style="font-size:10.5px; color:var(--dng-fg); text-align:center; font-weight:bold;">
+        ⚠️ برای تحلیل، VPN گوشی باید روشن باشد.
+      </div>
       <div id="image-limit-msg" style="font-size:11px; color:var(--i500); text-align:center; font-weight:bold;">
-        هر کاربر مجاز به ارسال ۲ عکس است. (ارسال شده: <span id="img-count" style="color:var(--b700)">0</span>/2)
+        هر کاربر مجاز به ارسال ۱۰ عکس است. (ارسال شده: <span id="img-count" style="color:var(--b700)">0</span>/10)
       </div>
       <div style="display:flex; width:100%; gap:8px;">
         <input type="file" id="ai-image-input" accept="image/*" style="display:none" onchange="handleImageUpload(event)">
@@ -1236,7 +1246,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
         </button>
       </div>
     </div>
-
   </div>
 </div>
 
@@ -1246,7 +1255,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <script>
 /* ==================== کشتیار (دستیار AI) ==================== */
 let selectedImageBase64 = null;
-const IMAGE_LIMIT = 2; // محدودیت ارسال عکس
+const IMAGE_LIMIT = 10; // 🌟 محدودیت به ۱۰ عکس تغییر کرد
 
 function toggleAIPanel() {
   const panel = document.getElementById('ai-panel');
@@ -1284,7 +1293,8 @@ function checkImageLimit() {
     btn.innerHTML = '<span>📷</span> ارسال عکس برای آنالیز';
     const msg = document.getElementById('image-limit-msg');
     if (msg) {
-        msg.innerHTML = `هر کاربر مجاز به ارسال ۲ عکس است. (ارسال شده: <span id="img-count" style="color:var(--b700)">${count}</span>/2)`;
+        // 🌟 نمایش متن ۱۰ عکس
+        msg.innerHTML = `هر کاربر مجاز به ارسال ۱۰ عکس است. (ارسال شده: <span id="img-count" style="color:var(--b700)">${count}</span>/10)`;
         msg.style.color = 'var(--i500)';
     }
   }
@@ -1294,7 +1304,7 @@ function checkImageLimit() {
 function handleImageUpload(event) {
   let count = parseInt(localStorage.getItem('sph_img_count') || '0');
   if (count >= IMAGE_LIMIT) {
-    alert('شما مجاز به ارسال حداکثر ۲ عکس هستید.');
+    alert('شما مجاز به ارسال حداکثر ۱۰ عکس هستید.');
     return;
   }
 
@@ -1311,7 +1321,7 @@ function handleImageUpload(event) {
   reader.readAsDataURL(file);
 }
 
-// ۳. تابع اصلی ارسال به سرور
+// ۳. تابع اصلی ارسال به سرور (اتصال مستقیم به هوش مصنوعی سایت)
 async function sendImageForAnalysis(imageData) {
   const chatBox = document.getElementById('ai-chat-box');
   
@@ -1341,34 +1351,16 @@ async function sendImageForAnalysis(imageData) {
   }];
 
   try {
-    const AI_ENDPOINT = 'https://api.sampash-ai.ir/api/ai'; 
-    const response = await fetch(AI_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: messages })
-    });
-
-    const textData = await response.text();
-    let data;
-
-    try {
-      data = JSON.parse(textData);
-    } catch (err) {
-      document.getElementById(loadingId).remove();
-      chatBox.innerHTML += `<div class="msg-new bot" style="color:red;">خطای سرور (HTML)</div>`;
-      return;
-    }
-
+    // 🌟 اتصال مستقیم به هوش مصنوعی (بدون کلادفلر)
+    const result = await AiService.chat(messages);
+    
     document.getElementById(loadingId).remove();
 
-    if(data.choices && data.choices[0] && data.choices[0].message){
-      const replyText = data.choices[0].message.content.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+    if(result.ok && result.reply){
+      const replyText = result.reply.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
       chatBox.innerHTML += `<div class="msg-new bot">${replyText}</div>`;
-    } else if (data.error) {
-      const errorMsg = typeof data.error === 'string' ? data.error : (data.error.message || JSON.stringify(data.error));
-      chatBox.innerHTML += `<div class="msg-new bot" style="color:red;font-size:12px;">Error: ${errorMsg}</div>`;
     } else {
-      chatBox.innerHTML += `<div class="msg-new bot" style="color:red;">پاسخ نامشخص از سرور.</div>`;
+      chatBox.innerHTML += `<div class="msg-new bot" style="color:red;">خطا: ${result.error || 'پاسخی دریافت نشد.'}</div>`;
     }
 
   } catch(error) {
@@ -1389,11 +1381,11 @@ function closeAIChat(){
   document.getElementById('ai-panel').classList.remove('show');
 }
 function backToWelcome(){
-  document.getElementById('ai-chat-box').innerHTML = '<div class="msg-new bot">سلام! من کشتیار هستم. عکس محصولت رو بفرست تا آفت و راهکار درمان رو بهت بگم.</div>';
+  document.getElementById('ai-chat-box').innerHTML = '<div class="msg-new bot">سلام! من کشتیار هستم. عکس محصولت رو بفرست تا آفت و راهکار درمان رو بهت بگم.<br><br><small style="color:var(--dng-fg);font-weight:bold;">⚠️ یادت نره VPN گوشی روشن باشه!</small></div>';
   document.getElementById('ai-chat-screen').style.display='none';
   document.getElementById('ai-welcome-screen').style.display='flex';
-}
-</script>
+  }
+  </script>
 <script>
 "use strict";
 /* ==================== UTILITIES ==================== */
