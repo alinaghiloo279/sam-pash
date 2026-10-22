@@ -1247,12 +1247,15 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
       <img id="image-preview-img" class="image-preview-new" src="" alt="عکس">
       <span style="font-size:11px;color:var(--b700);cursor:pointer;font-weight:700" onclick="removeImage()">حذف عکس ✕</span>
     </div>
-    <div class="ai-chat-input-area-new">
-      <input type="file" id="ai-image-input" accept="image/*" style="display:none" onchange="handleImageUpload(event)">
-      <button class="btn-img-new" onclick="document.getElementById('ai-image-input').click()" title="ارسال عکس">📷</button>
-      <input type="text" id="ai-text-input" placeholder="سوال خود را بنویسید..." onkeypress="handleEnter(event)">
-      <button onclick="sendMessage()" title="ارسال">➤</button>
-    </div>
+    <div class="ai-chat-input-area-new" style="flex-direction:column; gap:8px; padding:12px;">
+  <div id="image-limit-msg" style="font-size:11px; color:var(--i500); text-align:center; font-weight:bold;">
+    هر کاربر مجاز به ارسال ۲ عکس است. (ارسال شده: <span id="img-count" style="color:var(--b700)">0</span>/2)
+  </div>
+  <div style="display:flex; width:100%; gap:8px;">
+    <input type="file" id="ai-image-input" accept="image/*" style="display:none" onchange="handleImageUpload(event)">
+    <button class="btn-img-new" id="ai-upload-btn" onclick="document.getElementById('ai-image-input').click()" style="flex:1; width:auto; padding:0 20px; border-radius:20px; height:44px; font-size:13px; font-weight:bold; display:flex; align-items:center; justify-content:center; gap:8px;">
+      <span>📷</span> ارسال عکس برای آنالیز
+    </button>
   </div>
 </div>
 
@@ -1334,39 +1337,163 @@ async function sendMessage(){
     body: JSON.stringify({ messages: messages })
   });
 
-  const data = await response.json();
-  document.getElementById(loadingId).remove();
+<script>
+let selectedImageBase64 = null;
+const IMAGE_LIMIT = 2; // محدودیت ارسال عکس
 
-  // اگر پاسخ درست بود
-  if(data.choices && data.choices[0] && data.choices[0].message){
-    const replyText = data.choices[0].message.content.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
-    chatBox.innerHTML+=`<div class="msg-new bot">${replyText}</div>`;
-  } 
-  // اگر سرور خطا داد، دقیقاً همان خطا را نشان بده
-  else {
-    let errorMsg = "خطای ناشناخته";
-    if (data.error) {
-      errorMsg = typeof data.error === 'string' ? data.error : (data.error.message || JSON.stringify(data.error));
-    } else {
-      errorMsg = JSON.stringify(data);
+// ۱. بررسی محدودیت هنگام باز شدن پنل
+function checkImageLimit() {
+  let count = parseInt(localStorage.getItem('sph_img_count') || '0');
+  const countEl = document.getElementById('img-count');
+  if(countEl) countEl.textContent = count;
+  
+  const btn = document.getElementById('ai-upload-btn');
+  if (!btn) return;
+  
+  if (count >= IMAGE_LIMIT) {
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    btn.style.cursor = 'not-allowed';
+    btn.innerHTML = '<span>🚫</span> محدودیت ارسال عکس';
+    const msg = document.getElementById('image-limit-msg');
+    if (msg) {
+        msg.innerHTML = 'شما به سقف مجاز ارسال عکس رسیده‌اید.';
+        msg.style.color = 'var(--dng-fg)';
     }
-    chatBox.innerHTML+=`<div class="msg-new bot" style="color:red;direction:ltr;text-align:left;font-size:12px;">Error: ${errorMsg}</div>`;
+  } else {
+    btn.disabled = false;
+    btn.style.opacity = '1';
+    btn.style.cursor = 'pointer';
+    btn.innerHTML = '<span>📷</span> ارسال عکس برای آنالیز';
+    const msg = document.getElementById('image-limit-msg');
+    if (msg) {
+        msg.innerHTML = `هر کاربر مجاز به ارسال ۲ عکس است. (ارسال شده: <span id="img-count" style="color:var(--b700)">${count}</span>/2)`;
+        msg.style.color = 'var(--i500)';
+    }
+  }
+}
+
+// ۲. پردازش عکس و ارسال خودکار
+function handleImageUpload(event) {
+  let count = parseInt(localStorage.getItem('sph_img_count') || '0');
+  if (count >= IMAGE_LIMIT) {
+    alert('شما مجاز به ارسال حداکثر ۲ عکس هستید.');
+    return;
   }
 
-} catch(error){
-  document.getElementById(loadingId).remove();
-  chatBox.innerHTML+=`<div class="msg-new bot" style="color:red;">خطای شبکه: ${error.message}</div>`;
+  const file = event.target.files?.[0];
+  if(!file) return;
+  if(file.size > 5*1024*1024) return alert('حجم عکس باید کمتر از ۵ مگابایت باشد');
+  if(!file.type.startsWith('image/')) return alert('فقط فایل تصویری مجاز است');
+
+  const reader = new FileReader();
+  reader.onload = function(e){
+    selectedImageBase64 = e.target.result;
+    // بلافاصله عکس را برای آنالیز می‌فرستیم
+    sendImageForAnalysis(selectedImageBase64);
+  };
+  reader.readAsDataURL(file);
 }
-  chatBox.scrollTop=chatBox.scrollHeight;
+
+// ۳. تابع اصلی ارسال به سرور
+async function sendImageForAnalysis(imageData) {
+  const chatBox = document.getElementById('ai-chat-box');
+  
+  // افزایش شمارنده
+  let count = parseInt(localStorage.getItem('sph_img_count') || '0');
+  count++;
+  localStorage.setItem('sph_img_count', count);
+  checkImageLimit(); // آپدیت کردن ظاهر دکمه
+
+  // نمایش عکس در چت
+  chatBox.innerHTML += `<div class="msg-new user"><img src="${imageData}" style="max-width:100%;border-radius:8px;display:block;"></div>`;
+  document.getElementById('ai-image-input').value = ''; // خالی کردن اینپوت
+  
+  // پیام لودینگ
+  const loadingId = 'loading-' + Date.now();
+  chatBox.innerHTML += `<div class="msg-new bot" id="${loadingId}">در حال آنالیز دقیق عکس...</div>`;
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  // دستور مخفی اجباری برای هوش مصنوعی (دقیقا ۳ مرحله)
+  const hardcodedPrompt = `لطفا این تصویر را به دقت بررسی کن. تو یک متخصص کشاورزی هستی. پاسخ خود را دقیقا در سه بخش زیر و به زبان فارسی بنویس:
+۱. نام دقیق آفت یا بیماری:
+۲. دلیل و علائم بیماری:
+۳. راهکار درمان و پیشگیری:`;
+
+  const messages = [{
+    role: 'user',
+    content: [
+      { type: 'text', text: hardcodedPrompt },
+      { type: 'image_url', image_url: { url: imageData } }
+    ]
+  }];
+
+  try {
+    const AI_ENDPOINT = 'https://api.sampash-ai.ir/api/ai'; 
+    const response = await fetch(AI_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: messages })
+    });
+
+    const textData = await response.text();
+    let data;
+
+    try {
+      data = JSON.parse(textData);
+    } catch (err) {
+      document.getElementById(loadingId).remove();
+      chatBox.innerHTML += `<div class="msg-new bot" style="color:red;">خطای سرور (HTML)</div>`;
+      return;
+    }
+
+    document.getElementById(loadingId).remove();
+
+    if(data.choices && data.choices[0] && data.choices[0].message){
+      const replyText = data.choices[0].message.content.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+      chatBox.innerHTML += `<div class="msg-new bot">${replyText}</div>`;
+    } else if (data.error) {
+      const errorMsg = typeof data.error === 'string' ? data.error : (data.error.message || JSON.stringify(data.error));
+      chatBox.innerHTML += `<div class="msg-new bot" style="color:red;font-size:12px;">Error: ${errorMsg}</div>`;
+    } else {
+      chatBox.innerHTML += `<div class="msg-new bot" style="color:red;">پاسخ نامشخص از سرور.</div>`;
+    }
+
+  } catch(error) {
+    document.getElementById(loadingId).remove();
+    chatBox.innerHTML += `<div class="msg-new bot" style="color:red;">خطای شبکه: ${error.message}</div>`;
   }
-document.addEventListener('DOMContentLoaded',function(){
-  const btn=document.getElementById('header-ai-btn');
-  const panel=document.getElementById('ai-panel');
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// توابع بازگشت و بستن
+function startAIChat(){
+  document.getElementById('ai-welcome-screen').style.display='none';
+  document.getElementById('ai-chat-screen').style.display='flex';
+  checkImageLimit(); 
+}
+function closeAIChat(){
+  document.getElementById('ai-chat-screen').style.display='none';
+  document.getElementById('ai-welcome-screen').style.display='flex';
+  document.getElementById('ai-panel').classList.remove('show');
+}
+function backToWelcome(){
+  document.getElementById('ai-chat-box').innerHTML = '<div class="msg-new bot">سلام! من کشتیار هستم. عکس محصولت رو بفرست تا آفت و راهکار درمان رو بهت بگم.</div>';
+  document.getElementById('ai-chat-screen').style.display='none';
+  document.getElementById('ai-welcome-screen').style.display='flex';
+}
+
+// باز کردن پنل از دکمه هدر
+document.addEventListener('DOMContentLoaded', function(){
+  checkImageLimit();
+  
+  const btn = document.getElementById('header-ai-btn');
+  const panel = document.getElementById('ai-panel');
   if(btn && panel){
-    btn.addEventListener('click',function(){
+    btn.addEventListener('click', function(){
       panel.classList.toggle('show');
       if(panel.classList.contains('show')){
-        setTimeout(()=>document.getElementById('ai-text-input')?.focus(),120);
+        setTimeout(() => document.getElementById('ai-text-input')?.focus(), 150);
       }
     });
   }
