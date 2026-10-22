@@ -1326,32 +1326,37 @@ async function sendMessage(){
   chatBox.scrollTop=chatBox.scrollHeight;
 
   try{
-    // آدرس ورکر خود را اینجا بگذارید
-    const AI_ENDPOINT = 'https://api.sampash-ai.ir/api/ai'; 
+  const AI_ENDPOINT = 'https://api.sampash-ai.ir/api/ai'; 
 
-    const response = await fetch(AI_ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: messages })
-    });
+  const response = await fetch(AI_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ messages: messages })
+  });
 
-    const data = await response.json();
-    document.getElementById(loadingId).remove();
+  const data = await response.json();
+  document.getElementById(loadingId).remove();
 
-    // خواندن پاسخ OpenRouter
-    if(data.choices && data.choices[0] && data.choices[0].message){
-      const replyText = data.choices[0].message.content.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
-      chatBox.innerHTML+=`<div class="msg-new bot">${replyText}</div>`;
-    } else if(data.error) {
-      chatBox.innerHTML+=`<div class="msg-new bot" style="color:red;">خطای سرور: ${data.error.message}</div>`;
+  // اگر پاسخ درست بود
+  if(data.choices && data.choices[0] && data.choices[0].message){
+    const replyText = data.choices[0].message.content.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+    chatBox.innerHTML+=`<div class="msg-new bot">${replyText}</div>`;
+  } 
+  // اگر سرور خطا داد، دقیقاً همان خطا را نشان بده
+  else {
+    let errorMsg = "خطای ناشناخته";
+    if (data.error) {
+      errorMsg = typeof data.error === 'string' ? data.error : (data.error.message || JSON.stringify(data.error));
     } else {
-      chatBox.innerHTML+=`<div class="msg-new bot" style="color:red;">پاسخ نامعتبر از سرور.</div>`;
+      errorMsg = JSON.stringify(data);
     }
-
-  } catch(error){
-    document.getElementById(loadingId).remove();
-    chatBox.innerHTML+=`<div class="msg-new bot" style="color:red;">خطای شبکه: ${error.message}</div>`;
+    chatBox.innerHTML+=`<div class="msg-new bot" style="color:red;direction:ltr;text-align:left;font-size:12px;">Error: ${errorMsg}</div>`;
   }
+
+} catch(error){
+  document.getElementById(loadingId).remove();
+  chatBox.innerHTML+=`<div class="msg-new bot" style="color:red;">خطای شبکه: ${error.message}</div>`;
+}
   chatBox.scrollTop=chatBox.scrollHeight;
   }
 document.addEventListener('DOMContentLoaded',function(){
