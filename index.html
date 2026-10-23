@@ -2026,7 +2026,36 @@ $("#danger-reset")?.addEventListener("click",()=>{confirmModal("بازنشانی
 let timerHandle;
 function startTimer(){clearInterval(timerHandle);const tick=()=>{const s=Auth.getSession();if(!s){stopAndLogout();return;}Auth.touch();const left=Math.max(0,Math.floor((s.expires-Date.now())/1000));const m=Math.floor(left/60),sec=left%60;const el=$("#session-timer");if(el)el.textContent=`${toFa(m)}:${toFa(String(sec).padStart(2,"0"))}`;};tick();timerHandle=setInterval(tick,1000);}
 function stopAndLogout(){clearInterval(timerHandle);Auth.logout();const lv=$("#admin-login-view"),pv=$("#admin-panel-view");if(lv)lv.hidden=false;if(pv)pv.hidden=true;toast("نشست منقضی شد.",true);}
-function bindLogin(){$("#admin-login-form")?.addEventListener("submit",async e=>{e.preventDefault();const u=$("#admin-user").value.trim(),p=$("#admin-pass").value;if(!u||!p)return toast("پر کن",true);const r=await Auth.login(u,p);if(!r.ok){toast(r.msg,true);$("#admin-pass").value="";return;}toast("ورود موفق");$("#admin-pass").value="";const lv=$("#admin-login-view"),pv=$("#admin-panel-view");if(lv)lv.hidden=true;if(pv)pv.hidden=false;pushAudit("login",`ورود ${u}`,"login");startTimer();refreshAll();});}
+function bindLogin(){
+  $("#admin-login-form")?.addEventListener("submit", async e => {
+    e.preventDefault();
+    const u = $("#admin-user").value.trim(), p = $("#admin-pass").value, otp = $("#admin-otp").value.trim();
+    if(!u || !p || !otp) return toast("همه فیلدها (نام، رمز و کد امنیتی) را پر کنید", true);
+    
+    // ۱. بررسی کد 2FA از طریق ورکر کلادفلر
+    toast("در حال بررسی کد امنیتی...");
+    const res2fa = await apiFetch("/api/admin/login", { 
+        method: "POST", 
+        body: JSON.stringify({ otpCode: otp }) 
+    });
+    
+    if(!res2fa.ok || !res2fa.data.ok) {
+        return toast(res2fa.data?.error || "کد 2FA نادرست است", true);
+    }
+    
+    // ۲. بررسی رمز عبور
+    const r = await Auth.login(u, p);
+    if(!r.ok) { toast(r.msg, true); $("#admin-pass").value=""; return; }
+    
+    toast("ورود موفق");
+    $("#admin-pass").value = ""; $("#admin-otp").value = "";
+    const lv=$("#admin-login-view"),pv=$("#admin-panel-view");
+    if(lv)lv.hidden=true; if(pv)pv.hidden=false;
+    pushAudit("login",`ورود ${u}`,"login");
+    startTimer();
+    refreshAll();
+  });
+}
 function openChangePassModal(){openModal(`<h3>تغییر رمز</h3><form id="chg-form"><div class="field-wrap" style="margin-bottom:10px"><label>رمز فعلی</label><input type="password" id="cp-cur" class="ltr" required></div><div class="field-wrap" style="margin-bottom:10px"><label>رمز جدید</label><input type="password" id="cp-new" class="ltr" required></div><div class="field-wrap"><label>تکرار</label><input type="password" id="cp-conf" class="ltr" required></div><div class="modal-actions"><button type="submit" class="btn btn-green">ذخیره</button><button type="button" class="btn btn-light" id="cp-cancel">انصراف</button></div></form>`);$("#cp-cancel").onclick=closeModal;$("#chg-form").addEventListener("submit",async e=>{e.preventDefault();const r=await Auth.changePassword($("#cp-cur").value,$("#cp-new").value,$("#cp-conf").value);if(!r.ok)return toast(r.msg,true);closeModal();pushAudit("edit","تغییر رمز");toast("✅");});}
 function openChangeUserModal(){openModal(`<h3 style="display:flex;align-items:center;gap:8px"><svg class="icon" width="20" height="20" style="color:var(--b600)"><use href="#i-users"/></svg> تغییر نام کاربری مدیر</h3><p class="m-sub">نام کاربری جدید و رمز فعلی را وارد کن</p><form id="cu-form"><div class="field-wrap" style="margin-bottom:10px"><label>نام کاربری جدید</label><input type="text" id="cu-new" class="ltr" required placeholder="admin_new" autocomplete="username"><span class="hint">۳-۲۰ کاراکتر، حرف/عدد/underscore</span></div><div class="field-wrap"><label>رمز فعلی</label><input type="password" id="cu-pass" class="ltr" required autocomplete="current-password"></div><div class="modal-actions"><button type="submit" class="btn btn-green"><svg class="icon"><use href="#i-save"/></svg> ذخیره</button><button type="button" class="btn btn-light" id="cu-cancel">انصراف</button></div></form>`);$("#cu-cancel").onclick=closeModal;$("#cu-form").addEventListener("submit",async e=>{e.preventDefault();const newUser=$("#cu-new").value.trim();const pass=$("#cu-pass").value;const r=await Auth.changeUsername(pass,newUser);if(!r.ok)return toast(r.msg,true);closeModal();pushAudit("edit",`تغییر نام کاربری به ${newUser}`);toast("✅ نام کاربری تغییر کرد — با نام جدید وارد شو");stopAndLogout();});}
 function bindLogout(){$("#admin-logout-btn")?.addEventListener("click",()=>{confirmModal("خروج","از پنل خارج می‌شوی؟",{onConfirm:()=>{stopAndLogout();toast("خارج شدی");}});});$("#admin-change-pass-btn")?.addEventListener("click",openChangePassModal);$("#admin-change-user-btn")?.addEventListener("click",openChangeUserModal);}
