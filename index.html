@@ -1464,10 +1464,17 @@ const gen6=()=>String(Math.floor(100000+Math.random()*900000));
 async function createRemote(phone,purpose){
   const res=await apiFetch("/api/otp/send",{method:"POST",body:JSON.stringify({phone,purpose})});
   const store=getStore();
-  if(res.ok&&res.data.ok){
+  
+  if(res.ok && res.data.ok){
     store[phone]={code:"__remote__",purpose,expires:Date.now()+2*60*1000,attempts:0,createdAt:Date.now(),lastSentAt:Date.now(),remote:true};
     setStore(store);
     return{ok:true,sim:res.data.sim,code:res.data.code,remote:true};
+  }
+  
+  // 🌟 اگر خطا داد، دقیقاً متن خطای سرور را نشان بده
+  const errorMsg = res.data?.error || "خطای ناشناخته از سرور";
+  alert("خطا در ارسال پیامک: " + errorMsg); 
+  return {ok: false, error: errorMsg};
   }
   if(res.status!==0) toast("سرویس پیامک در دسترس نیست — حالت آفلاین فعال شد",true);
   const code=gen6();
