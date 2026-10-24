@@ -531,7 +531,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </style>
 </head>
 <body>
-<!-- SVG Symbols (همانطور که بود، خلاصه شده برای صرفه جویی در فضا) -->
 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
 <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M12 21c-5-3-7-7-7-11 4 0 7 2 7 6 0-7 4-11 9-12 0 7-2 13-9 17Z"/><path d="M12 20v-7"/></symbol>
 <symbol id="i-dashboard" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="5" rx="2"/><rect x="13" y="10" width="8" height="11" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/></symbol>
@@ -1194,7 +1193,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
-<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۰.۱ · با ❤️ برای کشاورزان ایران</div>
+<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۰.۲ · با ❤️ برای کشاورزان ایران</div>
 </main>
 </div>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
@@ -1220,13 +1219,13 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   <div class="ai-welcome-new" id="ai-welcome-screen">
     <div class="ai-avatar-new">🤖</div>
     <h2>سلام! من کشتیار هستم</h2>
-    <p>دستیار هوشمند و متخصص شما در امور کشاورزی. عکس محصول خود را بفرستید تا آفت و راهکار درمان را به شما بگویم.</p>
+    <p>دستیار هوشمند و متخصص شما در امور کشاورزی. عکس محصول خود را بفرستید یا سوال خود را تایپ کنید تا آفت و راهکار درمان را به شما بگویم.</p>
     
     <div class="ai-features-new">
       <div class="ai-feature-card-new"><span>📸</span> تشخیص آفت از عکس</div>
       <div class="ai-feature-card-new"><span>🧪</span> پیشنهاد راهکار درمان</div>
     </div>
-    <button class="btn-start-ai-new" onclick="startAIChat()">شروع آنالیز عکس</button>
+    <button class="btn-start-ai-new" onclick="startAIChat()">شروع گفتگو با کشتیار</button>
   </div>
   
   <div class="ai-chat-screen-new" id="ai-chat-screen">
@@ -1234,25 +1233,32 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
       <div class="ai-avatar-new" style="width:35px;height:35px;font-size:18px;margin:0;box-shadow:none;flex-shrink:0">🤖</div>
       <div>
         <strong>کشتیار</strong>
-        <span class="status-new">آماده آنالیز تصویر</span>
+        <span class="status-new">متخصص آفت، سم و سمپاشی</span>
       </div>
       <div style="display:flex;gap:6px;margin-inline-start:auto;flex-shrink:0">
-        <button class="ai-back-new" onclick="backToWelcome()" title="بازگشت">← بازگشت</button>
-        <button class="ai-close-new" onclick="closeAIChat()" title="بستن">✕</button>
+        <button class="ai-back-new" onclick="backToWelcome()" title="گفتگوی جدید" style="background:rgba(255,255,255,.15)">🔄</button>
+        <button class="ai-close-new" onclick="closeAIChat()" title="خروج" style="background:rgba(220,38,38,0.2); border-color:rgba(220,38,38,0.4); color:#fff;">❌</button>
       </div>
     </div>
     <div class="ai-chat-messages-new" id="ai-chat-box">
-      <div class="msg-new bot">سلام! من کشتیار هستم. عکس محصولت رو بفرست تا آفت و راهکار درمان رو بهت بگم.</div>
+      <div class="msg-new bot">سلام! من کشتیار هستم. عکس محصولت رو بفرست یا سوالت رو بپرس تا آفت و راهکار درمان رو بهت بگم.</div>
     </div>
     
     <div class="ai-chat-input-area-new" style="flex-direction:column; gap:8px; padding:12px;">
       <div id="image-limit-msg" style="font-size:11px; color:var(--i500); text-align:center; font-weight:bold;">
-        هر کاربر مجاز به ارسال ۱۰ عکس است. (ارسال شده: <span id="img-count" style="color:var(--b700)">0</span>/10)
+        هر کاربر مجاز به ارسال ۱۰ عکس در روز است. (ارسال شده امروز: <span id="img-count" style="color:var(--b700)">0</span>/10)
       </div>
-      <div style="display:flex; width:100%; gap:8px;">
+      <div style="display:flex; width:100%; gap:8px; align-items:center;">
         <input type="file" id="ai-image-input" accept="image/*" style="display:none" onchange="handleImageUpload(event)">
-        <button class="btn-img-new" id="ai-upload-btn" onclick="document.getElementById('ai-image-input').click()" style="flex:1; width:auto; padding:0 20px; border-radius:20px; height:44px; font-size:13px; font-weight:bold; display:flex; align-items:center; justify-content:center; gap:8px;">
-          <span>📷</span> ارسال عکس برای آنالیز
+        
+        <button class="btn-img-new" id="ai-upload-btn" onclick="document.getElementById('ai-image-input').click()" style="flex-shrink:0; width:44px; height:44px; padding:0; border-radius:50%; display:flex; align-items:center; justify-content:center; border:1px solid var(--b200); background:var(--b50); color:var(--b700);" title="ارسال عکس">
+          <span style="font-size:20px;">📷</span>
+        </button>
+        
+        <input type="text" id="ai-text-input" placeholder="سوال خود را بنویسید..." onkeypress="if(event.key === 'Enter') handleTextSend()" style="flex:1; padding:10px 14px; border-radius:20px; border:1px solid var(--ln2); background:var(--inset); font-size:13px; outline:none;">
+        
+        <button id="ai-send-btn" onclick="handleTextSend()" style="flex-shrink:0; width:44px; height:44px; padding:0; border-radius:50%; background:var(--b500); color:#fff; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-send"/></svg>
         </button>
       </div>
     </div>
@@ -1264,8 +1270,9 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 
 <script>
 /* ==================== کشتیار (دستیار AI) ==================== */
-let selectedImageBase64 = null;
 const IMAGE_LIMIT = 10; 
+
+const SYSTEM_PROMPT = "تو یک متخصص ارشد کشاورزی، گیاه‌پزشکی و پهپادهای سم‌پاش به نام 'کشتیار' هستی. وظیفه تو راهنمایی کشاورزان در زمینه شناسایی دقیق آفات و بیماری‌های گیاهی، انتخاب سموم مناسب، دوز مصرف صحیح، زمان‌بندی سم‌پاشی و نکات ایمنی است. پاسخ‌های تو باید کاملاً علمی، دقیق، کاربردی و به زبان فارسی روان باشد. اگر کاربر عکسی فرستاد، گیاه و آفت را شناسایی کن و راهکار درمان ارائه بده.";
 
 function toggleAIPanel() {
   const panel = document.getElementById('ai-panel');
@@ -1275,8 +1282,21 @@ function toggleAIPanel() {
   }
 }
 
+function getDailyImageCount() {
+  const today = new Date().toDateString();
+  const savedData = JSON.parse(localStorage.getItem('sph_ai_daily_limit') || '{"date":"","count":0}');
+  if (savedData.date !== today) return 0; // روز عوض شده
+  return savedData.count;
+}
+
+function incrementDailyImageCount() {
+  const today = new Date().toDateString();
+  const current = getDailyImageCount();
+  localStorage.setItem('sph_ai_daily_limit', JSON.stringify({ date: today, count: current + 1 }));
+}
+
 function checkImageLimit() {
-  let count = parseInt(localStorage.getItem('sph_img_count') || '0');
+  let count = getDailyImageCount();
   const countEl = document.getElementById('img-count');
   if(countEl) countEl.textContent = count;
   
@@ -1287,16 +1307,18 @@ function checkImageLimit() {
     btn.disabled = true;
     btn.style.opacity = '0.5';
     btn.style.cursor = 'not-allowed';
-    btn.innerHTML = '<span>🚫</span> محدودیت ارسال عکس';
+    btn.innerHTML = '<span>🚫</span>';
+    btn.title = 'محدودیت ارسال عکس روزانه';
     const msg = document.getElementById('image-limit-msg');
-    if (msg) { msg.innerHTML = 'شما به سقف مجاز ارسال عکس رسیده‌اید.'; msg.style.color = 'var(--dng-fg)'; }
+    if (msg) { msg.innerHTML = 'شما به سقف مجاز ارسال عکس (۱۰ عکس در روز) رسیده‌اید.'; msg.style.color = 'var(--dng-fg)'; }
   } else {
     btn.disabled = false;
     btn.style.opacity = '1';
     btn.style.cursor = 'pointer';
-    btn.innerHTML = '<span>📷</span> ارسال عکس برای آنالیز';
+    btn.innerHTML = '<span style="font-size:20px;">📷</span>';
+    btn.title = 'ارسال عکس';
     const msg = document.getElementById('image-limit-msg');
-    if (msg) { msg.innerHTML = `هر کاربر مجاز به ارسال ۱۰ عکس است. (ارسال شده: <span id="img-count" style="color:var(--b700)">${count}</span>/10)`; msg.style.color = 'var(--i500)'; }
+    if (msg) { msg.innerHTML = `هر کاربر مجاز به ارسال ۱۰ عکس در روز است. (ارسال شده امروز: <span id="img-count" style="color:var(--b700)">${count}</span>/10)`; msg.style.color = 'var(--i500)'; }
   }
 }
 
@@ -1320,8 +1342,8 @@ function compressImageForAI(file, maxWidth = 800, quality = 0.8) {
 }
 
 async function handleImageUpload(event) {
-  let count = parseInt(localStorage.getItem('sph_img_count') || '0');
-  if (count >= IMAGE_LIMIT) return alert('شما مجاز به ارسال حداکثر ۱۰ عکس هستید.');
+  let count = getDailyImageCount();
+  if (count >= IMAGE_LIMIT) return alert('شما مجاز به ارسال حداکثر ۱۰ عکس در روز هستید.');
 
   const file = event.target.files?.[0];
   if(!file) return;
@@ -1345,8 +1367,7 @@ async function handleImageUpload(event) {
 
 async function sendImageForAnalysis(imageData) {
   const chatBox = document.getElementById('ai-chat-box');
-  let count = parseInt(localStorage.getItem('sph_img_count') || '0') + 1;
-  localStorage.setItem('sph_img_count', count);
+  incrementDailyImageCount(); 
   checkImageLimit(); 
 
   chatBox.innerHTML += `<div class="msg-new user"><img src="${imageData}" style="max-width:100%;border-radius:8px;display:block;"></div>`;
@@ -1356,16 +1377,51 @@ async function sendImageForAnalysis(imageData) {
   chatBox.innerHTML += `<div class="msg-new bot" id="${loadingId}">در حال آنالیز دقیق عکس...</div>`;
   chatBox.scrollTop = chatBox.scrollHeight;
 
-  const promptText = `لطفا این تصویر را به دقت بررسی کن. تو یک متخصص کشاورزی هستی. پاسخ خود را دقیقا در سه بخش زیر و به زبان فارسی بنویس:
-۱. نام دقیق آفت یا بیماری:
-۲. دلیل و علائم بیماری:
-۳. راهکار درمان و پیشگیری:`;
+  const promptText = `این تصویر مربوط به یک محصول کشاورزی است. لطفاً به عنوان یک متخصص، موارد زیر را دقیق بررسی کن:
+۱. نام گیاه و آفت/بیماری دقیق:
+۲. علائم قابل مشاهده در تصویر:
+۳. راهکار درمان، نوع سم پیشنهادی و دوز مصرف:
+۴. نکات مهم برای سم‌پاشی با پهپاد:`;
 
-  const messages = [{ role: 'user', content: [{ type: 'text', text: promptText }, { type: 'image_url', image_url: { url: imageData } }] }];
+  const messages = [
+    { role: 'system', content: SYSTEM_PROMPT },
+    { role: 'user', content: [
+        { type: 'text', text: promptText }, 
+        { type: 'image_url', image_url: { url: imageData } }
+      ] 
+    }
+  ];
 
+  await callAIAPI(messages, loadingId);
+}
+
+async function handleTextSend() {
+  const input = document.getElementById('ai-text-input');
+  const text = input.value.trim();
+  if (!text) return;
+
+  const chatBox = document.getElementById('ai-chat-box');
+  
+  chatBox.innerHTML += `<div class="msg-new user">${esc(text)}</div>`;
+  input.value = '';
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  const loadingId = 'loading-' + Date.now();
+  chatBox.innerHTML += `<div class="msg-new bot" id="${loadingId}">در حال تایپ...</div>`;
+  chatBox.scrollTop = chatBox.scrollHeight;
+
+  const messages = [
+    { role: 'system', content: SYSTEM_PROMPT },
+    { role: 'user', content: text }
+  ];
+
+  await callAIAPI(messages, loadingId);
+}
+
+async function callAIAPI(messages, loadingId) {
+  const chatBox = document.getElementById('ai-chat-box');
   try {
     const AI_ENDPOINT = 'https://api.sampash-ai.ir/api/ai'; 
-    
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 45000);
 
@@ -1378,7 +1434,7 @@ async function sendImageForAnalysis(imageData) {
     
     clearTimeout(timeoutId);
     const data = await response.json();
-    document.getElementById(loadingId).remove();
+    document.getElementById(loadingId)?.remove();
 
     if (data.choices && data.choices[0] && data.choices[0].message) {
         const replyText = data.choices[0].message.content.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
@@ -1388,9 +1444,8 @@ async function sendImageForAnalysis(imageData) {
     } else {
         throw new Error("پاسخ نامعتبر از سرور");
     }
-
   } catch (error) {
-    document.getElementById(loadingId).remove();
+    document.getElementById(loadingId)?.remove();
     if (error.name === 'AbortError') {
         chatBox.innerHTML += `<div class="msg-new bot" style="color:var(--dng-fg);">زمان پاسخگویی سرور به پایان رسید. لطفاً دوباره تلاش کنید.</div>`;
     } else {
@@ -1405,13 +1460,17 @@ function startAIChat(){
   document.getElementById('ai-chat-screen').style.display='flex';
   checkImageLimit(); 
 }
+
 function closeAIChat(){
   document.getElementById('ai-chat-screen').style.display='none';
   document.getElementById('ai-welcome-screen').style.display='flex';
   document.getElementById('ai-panel').classList.remove('show');
+  // پاک کردن تاریخچه چت برای شروع بعدی
+  document.getElementById('ai-chat-box').innerHTML = '<div class="msg-new bot">سلام! من کشتیار هستم. عکس محصولت رو بفرست یا سوالت رو بپرس تا آفت و راهکار درمان رو بهت بگم.</div>';
 }
+
 function backToWelcome(){
-  document.getElementById('ai-chat-box').innerHTML = '<div class="msg-new bot">سلام! من کشتیار هستم. عکس محصولت رو بفرست تا آفت و راهکار درمان رو بهت بگم.</div>';
+  document.getElementById('ai-chat-box').innerHTML = '<div class="msg-new bot">سلام! من کشتیار هستم. عکس محصولت رو بفرست یا سوالت رو بپرس تا آفت و راهکار درمان رو بهت بگم.</div>';
   document.getElementById('ai-chat-screen').style.display='none';
   document.getElementById('ai-welcome-screen').style.display='flex';
 }
@@ -1549,7 +1608,18 @@ const getCode=()=>inputs.map(i=>toEn(i.value)).join("");
 function startCountdown(){clearInterval(tH);const tick=()=>{const left=OtpService.getRemaining(phone);if(left<=0){timerEl.classList.add("expired");timerEl.innerHTML='<b>زمان تمام شد</b>';resendBtn.disabled=false;clearInterval(tH);return;}timerEl.classList.remove("expired");const m=Math.floor(left/60),s=left%60;timerEl.innerHTML=`زمان: <b>${toFa(String(m).padStart(2,"0"))}:${toFa(String(s).padStart(2,"0"))}</b>`;};tick();tH=setInterval(tick,1000);}
 function startResend(){clearInterval(rH);let l=60;const u=()=>{if(l<=0){resendBtn.disabled=false;resendBtn.textContent="ارسال مجدد";clearInterval(rH);return;}resendBtn.disabled=true;resendBtn.textContent=`${toFa(l)} ثانیه…`;l--;};u();rH=setInterval(u,1000);}
 function showError(){inputs.forEach(i=>i.classList.add("err"));setTimeout(()=>inputs.forEach(i=>i.classList.remove("err")),450);}
-async function sendCode(p,pur="verify"){phone=p;purpose=pur;const res=await OtpService.createRemote(p,pur);if(res.sim||res.local){if(demoNotice)demoNotice.hidden=false;if(demoCode)demoCode.textContent=res.code||OtpService.getLocalCode(p)||"------";}else{if(demoNotice)demoNotice.hidden=true;}return res;}
+async function sendCode(p,pur="verify"){
+  phone=p;purpose=pur;
+  const res=await OtpService.createRemote(p,pur);
+  // فقط اگر سرور صراحتاً اعلام کرد که در حالت تست هستیم، کد را نشان بده
+  if(res.ok && res.sim === true){
+    if(demoNotice)demoNotice.hidden=false;
+    if(demoCode)demoCode.textContent=res.code||"------";
+  } else {
+    if(demoNotice)demoNotice.hidden=true;
+  }
+  return res;
+}
 function show({phone:ph,purpose:pur="verify",successCb}){phone=ph;purpose=pur;cb=successCb;const phEl=$("#otp-modal-phone");if(phEl)phEl.textContent=toFa(ph);clearInputs();back.classList.add("show");startCountdown();startResend();setTimeout(()=>inputs[0]&&inputs[0].focus(),120);}
 function hide(){back.classList.remove("show");clearInterval(tH);clearInterval(rH);}
 inputs.forEach((inp,i)=>{
@@ -1763,18 +1833,29 @@ function renderPayInfo(){const el=$("#pay-info");if(!el)return;const o=PAY_ORDER
 function compressImage(file,maxDim=1200,quality=0.75){
   return new Promise((resolve,reject)=>{
     const img=new Image();
+    const url = URL.createObjectURL(file);
     img.onload=()=>{
-      const scale=Math.min(1,maxDim/Math.max(img.width,img.height));
-      const c=document.createElement("canvas");
-      c.width=Math.round(img.width*scale);
-      c.height=Math.round(img.height*scale);
-      c.getContext("2d").drawImage(img,0,0,c.width,c.height);
-      try{ resolve(c.toDataURL("image/jpeg",quality)); }catch(e){ reject(e); }
+      URL.revokeObjectURL(url);
+      try {
+        const scale=Math.min(1,maxDim/Math.max(img.width,img.height));
+        const c=document.createElement("canvas");
+        c.width=Math.round(img.width*scale);
+        c.height=Math.round(img.height*scale);
+        const ctx = c.getContext("2d");
+        ctx.drawImage(img,0,0,c.width,c.height);
+        resolve(c.toDataURL("image/jpeg",quality));
+      } catch(err) {
+        reject(new Error("خطا در فشرده‌سازی تصویر"));
+      }
     };
-    img.onerror=reject;
-    img.src=URL.createObjectURL(file);
+    img.onerror=() => {
+      URL.revokeObjectURL(url);
+      reject(new Error("فایل انتخاب شده تصویر معتبری نیست یا فرمت آن پشتیبانی نمی‌شود."));
+    };
+    img.src = url;
   });
 }
+
 function saveReceiptData(orderId,file){
   return new Promise(async(resolve)=>{
     if(!file)return resolve(false);
@@ -1786,11 +1867,13 @@ function saveReceiptData(orderId,file){
         toast("لطفاً فقط عکس (JPG/PNG) آپلود کنید",true);
         return resolve(false);
       }
+      
       const res = await fetch("https://api.sampash-ai.ir/api/receipt", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ orderId, receiptData: dataToSave })
       });
+      
       if(res.ok) { 
           // ذخیره فیش در لوکال استوریج برای نمایش در پنل مدیریت
           const recs = read(LS.receipts, {});
@@ -1798,15 +1881,46 @@ function saveReceiptData(orderId,file){
           write(LS.receipts, recs);
           resolve(true); 
       } else { 
-          toast("خطا در ذخیره فیش در سرور", true); 
+          let errMsg = "خطا در ذخیره فیش در سرور";
+          try { const errData = await res.json(); errMsg = errData.error || errMsg; } catch(e){}
+          toast(errMsg, true); 
           resolve(false); 
       }
     } catch(e){
-      toast("خطا در پردازش فایل: " + e.message, true);
-      resolve(false);
+      // فال‌بک: اگر فشرده‌سازی خطا داد، عکس را بدون فشرده‌سازی ارسال می‌کنیم
+      console.warn("Canvas failed, using raw base64 fallback", e);
+      try {
+          const reader = new FileReader();
+          reader.onload = async (event) => {
+              const rawBase64 = event.target.result;
+              const res = await fetch("https://api.sampash-ai.ir/api/receipt", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ orderId, receiptData: rawBase64 })
+              });
+              if(res.ok) {
+                  const recs = read(LS.receipts, {});
+                  recs[orderId] = { status: "pending", uploadedAt: Date.now() };
+                  write(LS.receipts, recs);
+                  resolve(true);
+              } else {
+                  toast("خطا در ذخیره فیش در سرور", true);
+                  resolve(false);
+              }
+          };
+          reader.onerror = () => {
+              toast("خطا در پردازش فایل: " + (e.message || "خطای نامشخص"), true);
+              resolve(false);
+          };
+          reader.readAsDataURL(file);
+      } catch (fallbackErr) {
+          toast("خطا در پردازش فایل: " + (e.message || "خطای نامشخص"), true);
+          resolve(false);
+      }
     }
   });
 }
+
 const getReceipt=id=>read(LS.receipts,{})[id]||null;
 const setReceiptStatus=(id,st)=>{const r=read(LS.receipts,{});if(r[id]){r[id].status=st;r[id].reviewedAt=Date.now();write(LS.receipts,r);}};
 
