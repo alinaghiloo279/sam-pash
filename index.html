@@ -1420,11 +1420,25 @@ async function handleTextSend() {
 
 async function callAIAPI(messages, loadingId) {
   const chatBox = document.getElementById('ai-chat-box');
+  
+  // 1. حذف پیام "در حال تایپ..." از روی صفحه
+  const loadingEl = document.getElementById(loadingId);
+  if (loadingEl) loadingEl.remove(); 
+
+  // 2. ساخت یک حباب پیام خالی برای شروع تایپ
+  const msgId = 'msg-' + Date.now();
+  chatBox.innerHTML += `<div class="msg-new bot" id="${msgId}"></div>`;
+  const msgEl = document.getElementById(msgId);
+  chatBox.scrollTop = chatBox.scrollHeight;
+
   try {
     const AI_ENDPOINT = 'https://api.sampash-ai.ir/api/ai'; 
+    
+    // 3. تنظیم تایمر برای جلوگیری از انتظار بی‌نهایت (۹۰ ثانیه)
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 45000);
+    const timeoutId = setTimeout(() => controller.abort(), 90000);
 
+    // 4. ارسال درخواست به سرور (Cloudflare Worker)
     const response = await fetch(AI_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -1432,28 +1446,97 @@ async function callAIAPI(messages, loadingId) {
       signal: controller.signal
     });
     
-    clearTimeout(timeoutId);
-    const data = await response.json();
-    document.getElementById(loadingId)?.remove();
+    clearTimeout(timeoutId); // تایمر را متوقف کن چون جواب گرفتیم
 
-    if (data.choices && data.choices[0] && data.choices[0].message) {
-        const replyText = data.choices[0].message.content.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
-        chatBox.innerHTML += `<div class="msg-new bot">${replyText}</div>`;
-    } else if (data.error) {
-        throw new Error(typeof data.error === 'string' ? data.error : (data.error.message || JSON.stringify(data.error)));
-    } else {
-        throw new Error("پاسخ نامعتبر از سرور");
+    // 5. بررسی خطاهای HTTP (مثلاً خطای 500 یا 404)
+    if (!response.ok) {
+       const errData = await response.json().catch(()=>({}));
+       throw new Error(errData.error || "خطا در پاسخ سرور");
     }
+
+    // 6. بررسی نوع پاسخ (متنی است یا عکس؟)
+    const contentType = response.headers.get("Content-Type");
+    
+    // ==========================================================
+    // حالت اول: استریم (جواب متنی که باید کلمه به کلمه نوشته شود)
+    // ==========================================================
+    if (contentType && contentType.includes("text/event-stream")) {
+        // گرفتن یک "خواننده" برای خواندن جریان داده
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder("utf-8");
+        let fullText = "";
+
+        while (true) {
+            // خواندن تکه بعدی از داده‌ها
+            const { done, value } = await reader.read();
+            if (done) break; // اگر تمام شد، از حلقه خارج شو
+            
+            // تبدیل بایت‌های دریافتی به متن قابل خواندن
+            const chunk = decoder.decode(value, { stream: true });
+            const lines = chunk.split('\n');
+            
+            // پردازش خط به خط داده‌های دریافتی
+            for (const line of lines) {
+                if (line.startsWith('data: ')) {
+                    // حذف کلمه data: از ابتدای خط
+                    const dataStr = line.replace('data: ', '').trim();
+                    if (dataStr === '[DONE]') break;
+                    
+                    try {
+                        // تبدیل رشته متنی به آبجکت JSON
+                        const data = JSON.parse(dataStr);
+                        if (data.response) {
+                            // اضافه کردن کلمه جدید به کل متن
+                            fullText += data.response;
+                            
+                            // نمایش زنده روی صفحه (تبدیل ** به بولد و \n به خط جدید)
+                            msgEl.innerHTML = fullText
+                                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                                .replace(/\n/g, '<br>');
+                            
+                            // اسکرول خودکار به پایین
+                            chatBox.scrollTop = chatBox.scrollHeight;
+                        }
+                    } catch (e) {
+                        // اگر یک تکه از JSON ناقص بود، نادیده بگیر و برو جلو
+                    }
+                }
+            }
+        }
+    } 
+    // ==========================================================
+    // حالت دوم: پاسخ کامل (مربوط به زمانی که کاربر عکس فرستاده است)
+    // ==========================================================
+    else {
+        const data = await response.json();
+        if (data.choices && data.choices[0] && data.choices[0].message) {
+            const replyText = data.choices[0].message.content
+                .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\n/g, '<br>');
+            msgEl.innerHTML = replyText;
+        } else if (data.error) {
+            throw new Error(data.error);
+        }
+    }
+
   } catch (error) {
-    document.getElementById(loadingId)?.remove();
+    // ==========================================================
+    // مدیریت خطاها
+    // ==========================================================
+    if(msgEl) msgEl.remove(); // حذف حباب خالی
+    
     if (error.name === 'AbortError') {
+        // خطای مربوط به تموم شدن زمان ۹۰ ثانیه‌ای
         chatBox.innerHTML += `<div class="msg-new bot" style="color:var(--dng-fg);">زمان پاسخگویی سرور به پایان رسید. لطفاً دوباره تلاش کنید.</div>`;
     } else {
+        // سایر خطاها (مثل قطع اینترنت یا خطای هوش مصنوعی)
         chatBox.innerHTML += `<div class="msg-new bot" style="color:var(--dng-fg);">خطا: ${error.message}</div>`;
     }
   }
+  
+  // در نهایت یک بار دیگر اسکرول را به پایین ببر
   chatBox.scrollTop = chatBox.scrollHeight;
-}
+  }
 
 function startAIChat(){
   document.getElementById('ai-welcome-screen').style.display='none';
