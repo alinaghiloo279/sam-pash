@@ -12,8 +12,34 @@
 <link rel="icon" type="image/png" href="logo.png">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{--b50:#eef7f2;--b100:#d6ecdf;--b200:#aad9bf;--b300:#7bc19e;--b400:#4ba87e;--b500:#1f8a63;--b600:#0f6f4e;--b700:#0a5a3f;--b800:#084733;--a400:#e8bd6b;--a500:#d9a94e;--i900:#0b1f17;--i800:#16261e;--i700:#24352d;--i600:#3a4a42;--i500:#4a5a52;--i400:#5a6560;--i300:#96a39b;--i200:#c8d0ca;--i100:#e8ece9;--i50:#f5f7f5;--ok-bg:#e6f4ec;--ok-fg:#0f6f4e;--ok-dot:#22a06b;--warn-bg:#fdf3dc;--warn-fg:#8a6110;--dng-bg:#fdecea;--dng-fg:#a02a1e;--inf-bg:#e8efff;--inf-fg:#3558a3;--purple:#6d28d9;--purple-bg:#f3e9fa;--gold:#d9a94e;--bg:#f4f6f4;--sur:#fff;--inset:#f7f9f7;--ln:#e5ebe6;--ln2:#d4ddd6;--r-m:12px;--r-l:16px;--r-x:20px;--r-2:26px;--r-f:999px;--sh1:0 1px 2px rgba(11,31,23,.04);--sh3:0 4px 12px rgba(11,31,23,.06);--sh5:0 24px 56px rgba(11,31,23,.14);--focus:0 0 0 3px rgba(31,138,99,.18);--brand:0 8px 24px rgba(15,111,78,.22)}
-:root[data-theme="dark"]{--bg:#0d1411;--sur:#141d19;--inset:#18241f;--ln:#26332d;--ln2:#324038;--i900:#f0f5f2;--i800:#e2ebe6;--i700:#c8d6ce;--i600:#9eafa5;--i500:#7d9086;--i400:#5f7168;--i300:#4a5a52;--i200:#3a4842;--i100:#2a3630;--i50:#1f2a25;--b50:#0f2a1e;--b100:#153a2a;--ok-bg:#0f3324;--ok-fg:#5ee6a0;--warn-bg:#3a2c0e;--warn-fg:#f0c66d;--dng-bg:#3a1512;--dng-fg:#ff8a7a;--purple-bg:#2a1a47;--inf-bg:#14223f}
+:root{
+  --b50:#eef7f2;--b100:#d6ecdf;--b200:#aad9bf;--b300:#7bc19e;--b400:#4ba87e;--b500:#1f8a63;--b600:#0f6f4e;--b700:#0a5a3f;--b800:#084733;
+  --a400:#e8bd6b;--a500:#d9a94e;--gold:#d9a94e;
+  --i900:#0b1f17;--i800:#16261e;--i700:#24352d;--i600:#3a4a42;--i500:#4a5a52;--i400:#5a6560;--i300:#96a39b;--i200:#c8d0ca;--i100:#e8ece9;--i50:#f5f7f5;
+  --ok-bg:#e6f4ec;--ok-fg:#0f6f4e;--ok-dot:#22a06b;
+  --warn-bg:#fdf3dc;--warn-fg:#8a6110;
+  --dng:#a02a1e;--dng-bg:#fdecea;--dng-fg:#a02a1e;
+  --inf-bg:#e8efff;--inf-fg:#3558a3;
+  --purple:#6d28d9;--purple-bg:#f3e9fa;
+  --bg:#f4f6f4;--sur:#fff;--inset:#f7f9f7;--ln:#e5ebe6;--ln2:#d4ddd6;
+  --r-m:12px;--r-l:16px;--r-x:20px;--r-2:26px;--r-f:999px;
+  --sh1:0 1px 2px rgba(11,31,23,.04);--sh3:0 4px 12px rgba(11,31,23,.06);--sh5:0 24px 56px rgba(11,31,23,.14);
+  --focus:0 0 0 3px rgba(31,138,99,.18);--brand:0 8px 24px rgba(15,111,78,.22);
+  
+  /* Z-Index Layers */
+  --z-header:100;
+  --z-sidebar:1000;
+  --z-overlay:1100;
+  --z-ai:2500;
+  --z-modal:3000;
+  --z-toast:3100;
+}
+:root[data-theme="dark"]{
+  --bg:#0d1411;--sur:#141d19;--inset:#18241f;--ln:#26332d;--ln2:#324038;
+  --i900:#f0f5f2;--i800:#e2ebe6;--i700:#c8d6ce;--i600:#9eafa5;--i500:#7d9086;--i400:#5f7168;--i300:#4a5a52;--i200:#3a4842;--i100:#2a3630;--i50:#1f2a25;
+  --b50:#0f2a1e;--b100:#153a2a;--ok-bg:#0f3324;--ok-fg:#5ee6a0;--warn-bg:#3a2c0e;--warn-fg:#f0c66d;
+  --dng:#ff8a7a;--dng-bg:#3a1512;--dng-fg:#ff8a7a;--purple-bg:#2a1a47;--inf-bg:#14223f;
+}
 *{box-sizing:border-box}html,body{margin:0;padding:0}
 body{background:var(--bg);color:var(--i800);font-family:Vazirmatn,Tahoma,sans-serif;font-size:14.5px;line-height:1.75;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
 button,input,select,textarea{font:inherit;color:inherit}button{cursor:pointer;background:none;border:0;padding:0}
@@ -24,7 +50,7 @@ input,select,textarea{font-family:inherit}
 code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--inset);border:1px solid var(--ln);padding:1px 6px;border-radius:5px;direction:ltr;display:inline-block}
 .ltr{direction:ltr;text-align:left}
 .shell{max-width:1480px;margin:auto;display:grid;grid-template-columns:264px minmax(0,1fr);min-height:100vh}
-.sidebar{background:var(--sur);border-inline-end:1px solid var(--ln);padding:20px 14px;display:flex;flex-direction:column;gap:8px;position:sticky;top:0;height:100vh;overflow-y:auto;z-index:1000}
+.sidebar{background:var(--sur);border-inline-end:1px solid var(--ln);padding:20px 14px;display:flex;flex-direction:column;gap:8px;position:sticky;top:0;height:100vh;overflow-y:auto;z-index:var(--z-sidebar)}
 .brand{display:flex;align-items:center;gap:11px;padding:6px 8px 18px;border-bottom:1px solid var(--ln);margin-bottom:12px;text-decoration:none;cursor:pointer;transition:opacity .2s}
 .brand:hover{opacity:.8}
 .brandmark{width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,var(--b500),var(--b800));display:grid;place-items:center;color:#fff;box-shadow:var(--brand);flex-shrink:0;overflow:hidden}
@@ -194,7 +220,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .bubble small{display:block;font-size:10.5px;opacity:.7;margin-top:5px}
 .chat-compose{display:flex;gap:8px;padding:12px;border-top:1px solid var(--ln)}
 .chat-compose input{flex:1;min-width:0;border:1px solid var(--ln2);border-radius:10px;padding:11px 12px;background:var(--sur)}
-.toast{position:fixed;bottom:22px;inset-inline-end:22px;background:linear-gradient(180deg,#123527,#0a271b);color:#fff;padding:14px 20px;border-radius:12px;box-shadow:var(--sh5);font-size:13px;font-weight:600;display:none;z-index:200;max-width:min(92vw,420px)}
+.toast{position:fixed;bottom:22px;inset-inline-end:22px;background:linear-gradient(180deg,#123527,#0a271b);color:#fff;padding:14px 20px;border-radius:12px;box-shadow:var(--sh5);font-size:13px;font-weight:600;display:none;z-index:var(--z-toast);max-width:min(92vw,420px)}
 .toast.show{display:block}
 .toast.err{background:#7a2418}
 .auth-wrap{max-width:440px;margin:30px auto}
@@ -212,14 +238,14 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .admin-tabs{display:flex;gap:5px;overflow-x:auto;padding:5px;background:var(--sur);border:1px solid var(--ln);border-radius:var(--r-l);margin-bottom:16px}
 .admin-tabs button{flex:0 0 auto;padding:10px 14px;border-radius:10px;font-size:13px;color:var(--i500);font-weight:600;white-space:nowrap}
 .admin-tabs button[aria-selected="true"]{background:linear-gradient(180deg,var(--b500),var(--b600));color:#fff;font-weight:700}
-.admin-panel,.sms-subpanel{display:none}.admin-panel.active,.sms-subpanel.active{display:block}
+.admin-panel,.sms-subpanel,.vid-subpanel{display:none}.admin-panel.active,.sms-subpanel.active,.vid-subpanel.active{display:block}
 .admin-card{background:var(--sur);border:1px solid var(--ln);border-radius:var(--r-l);padding:18px;margin-bottom:14px;box-shadow:var(--sh1)}
 .admin-card h4{margin:0 0 14px;font-size:14.5px;font-weight:800}
 .admin-card .sub{font-size:12px;color:var(--i400);margin:-10px 0 14px}
 .admin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
 .filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .filter-bar input,.filter-bar select{border:1px solid var(--ln2);background:var(--sur);border-radius:10px;padding:10px 12px;min-width:150px;font-size:13px}
-.modal-back{position:fixed;inset:0;background:rgba(8,25,18,.5);display:none;align-items:center;justify-content:center;z-index:150;padding:16px}
+.modal-back{position:fixed;inset:0;background:rgba(8,25,18,.5);display:none;align-items:center;justify-content:center;z-index:var(--z-modal);padding:16px}
 .modal-back.show{display:flex}
 .modal{background:var(--sur);border-radius:var(--r-x);max-width:580px;width:100%;max-height:90vh;overflow:auto;padding:24px;box-shadow:var(--sh5)}
 .modal h3{margin:0 0 4px;font-size:16px;font-weight:800}
@@ -426,7 +452,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .slot-pill .sp-badge{display:block;font-size:9.5px;opacity:.85;margin-bottom:3px;font-weight:800;letter-spacing:.2px}
 .slot-preview{margin-top:12px;padding:12px 14px;background:linear-gradient(160deg,var(--b50),var(--inset));border:1px solid var(--b100);border-radius:var(--r-m);font-size:13px;font-weight:700;color:var(--b800);line-height:1.75;display:none}
 .slot-preview strong{color:var(--b700)}
-.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:999;display:none;backdrop-filter:blur(2px)}
+.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:var(--z-overlay);display:none;backdrop-filter:blur(2px)}
 .sidebar-overlay.show{display:block}
 .faq-section{margin:26px 0 20px}
 .faq-section>h3{font-size:19px;font-weight:800;color:var(--i900);margin:0 0 6px}
@@ -440,7 +466,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .faq-item .faq-body{padding:0 16px 14px 54px;color:var(--i600);font-size:13px;line-height:1.95}
 
 /* ==== کشتیار (دستیار AI) ==== */
-#ai-panel.ai-container-new{display:none;position:fixed !important;bottom:24px;left:24px;z-index:9998;width:min(420px,calc(100vw - 32px)) !important;max-width:420px;height:min(620px,calc(100vh - 130px));max-height:calc(100vh - 130px);margin:0 !important;flex-direction:column;flex-wrap:nowrap;border-radius:var(--r-2);box-shadow:var(--sh5);border:1px solid var(--ln);background:var(--sur);overflow:hidden;font-family:Vazirmatn,Tahoma,sans-serif;}
+#ai-panel.ai-container-new{display:none;position:fixed !important;bottom:24px;left:24px;z-index:var(--z-ai);width:min(420px,calc(100vw - 32px)) !important;max-width:420px;height:min(620px,calc(100vh - 130px));max-height:calc(100vh - 130px);margin:0 !important;flex-direction:column;flex-wrap:nowrap;border-radius:var(--r-2);box-shadow:var(--sh5);border:1px solid var(--ln);background:var(--sur);overflow:hidden;font-family:Vazirmatn,Tahoma,sans-serif;}
 #ai-panel.ai-container-new.show{display:flex !important}
 .ai-welcome-new{flex:1 1 auto;min-height:0;overflow-y:auto;padding:26px 18px;text-align:center;background:var(--inset);display:flex;flex-direction:column;justify-content:center;align-items:center}
 .ai-avatar-new{width:76px;height:76px;background:linear-gradient(145deg,var(--b500),var(--b700));border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:36px;color:#fff;margin-bottom:14px;box-shadow:0 6px 18px rgba(15,111,78,.28);flex-shrink:0}
@@ -471,7 +497,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 @media(max-width:1100px){.shell{grid-template-columns:220px minmax(0,1fr)}.main{padding:22px}.stats{grid-template-columns:repeat(2,1fr)}.content-grid{grid-template-columns:1fr}}
 @media(max-width:720px){
   .shell{display:block}
-  .sidebar{position:fixed;top:0;right:0;width:280px;height:100vh;z-index:1000;display:flex;flex-direction:column;padding:20px 14px;border-left:1px solid var(--ln);box-shadow:var(--sh5);overflow-y:auto;transform:translateX(100%);transition:transform .3s ease;background:var(--sur)}
+  .sidebar{position:fixed;top:0;right:0;width:280px;height:100vh;z-index:var(--z-sidebar);display:flex;flex-direction:column;padding:20px 14px;border-left:1px solid var(--ln);box-shadow:var(--sh5);overflow-y:auto;transform:translateX(100%);transition:transform .3s ease;background:var(--sur)}
   .sidebar.show{transform:translateX(0)}
   .main{padding:16px 14px 40px}
   .mobile-menu-btn{display:flex!important;min-width:44px;width:44px;height:44px;padding:0;border:none;background:transparent;color:var(--i800)}
@@ -505,6 +531,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </style>
 </head>
 <body>
+<!-- SVG Symbols (همانطور که بود، خلاصه شده برای صرفه جویی در فضا) -->
 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
 <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M12 21c-5-3-7-7-7-11 4 0 7 2 7 6 0-7 4-11 9-12 0 7-2 13-9 17Z"/><path d="M12 20v-7"/></symbol>
 <symbol id="i-dashboard" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="5" rx="2"/><rect x="13" y="10" width="8" height="11" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/></symbol>
@@ -513,7 +540,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <symbol id="i-msg" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8A8.5 8.5 0 0 1 8.7 3.9a8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8Z"/></symbol>
 <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></symbol>
 <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
-<symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></symbol>
 <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 20V9l8-5 8 5v11H4Z"/><path d="M9 20v-6h6v6"/></symbol>
 <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
 <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
@@ -531,9 +557,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5M12 3v12"/></symbol>
 <symbol id="i-partner" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
 <symbol id="i-drone" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M6.5 6.5 9 9M17.5 6.5 15 9M6.5 17.5 9 15M17.5 17.5 15 15"/></symbol>
-<symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92Z"/></symbol>
 <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
-<symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z"/></symbol>
 <symbol id="i-trend" viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8"/><path d="M17 7h4v4"/></symbol>
 <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></symbol>
 <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></symbol>
@@ -541,7 +565,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
 <symbol id="i-verified" viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6Z"/><path d="m9 12 2 2 4-4"/></symbol>
 <symbol id="i-credit" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5h5M9.5 14.5h5"/></symbol>
-<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
 <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></symbol>
 <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></symbol>
 <symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M17 21v-8H7v8M7 3v5h8"/></symbol>
@@ -581,29 +604,25 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </aside>
 
 <main class="main">
-<header style="display:flex; flex-direction:row; justify-content:space-between; align-items:center; width:100%; padding:10px 16px; background:var(--sur); border-bottom:1px solid var(--ln); position:sticky; top:0; z-index:9999; box-sizing:border-box; height:70px; margin:0; direction:rtl;">
+<header style="display:flex; flex-direction:row; justify-content:space-between; align-items:center; width:100%; padding:10px 16px; background:var(--sur); border-bottom:1px solid var(--ln); position:sticky; top:0; z-index:var(--z-header); box-sizing:border-box; height:70px; margin:0; direction:rtl;">
   <div style="display:flex; align-items:center;">
     <button id="mobile-menu-btn" class="mobile-menu-btn" style="background:none; border:none; padding:0; cursor:pointer; color:var(--i900);">
       <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-menu"/></svg>
     </button>
   </div>
   <div style="display:flex; flex-direction:row; align-items:center; gap:22px;">
-    <!-- دستیار -->
     <div id="header-ai-btn" onclick="toggleAIPanel()" style="display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; color:var(--b700);">
       <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-zap"/></svg>
       <span style="font-size:11px; font-weight:800; margin-top:4px;">دستیار</span>
     </div>
-    <!-- مدیریت -->
     <div data-go="admin" style="display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; color:var(--i800);">
       <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-shield"/></svg>
       <span style="font-size:11px; font-weight:800; margin-top:4px;">مدیریت</span>
     </div>
-    <!-- همکاران -->
     <div data-go="partner" style="display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; color:var(--i800);">
       <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-partner"/></svg>
       <span style="font-size:11px; font-weight:800; margin-top:4px;">همکاران</span>
     </div>
-    <!-- خروج مشتری -->
     <div id="header-logout-btn" onclick="logoutCustomer()" hidden style="display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; color:var(--dng);">
       <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-logout"/></svg>
       <span style="font-size:11px; font-weight:800; margin-top:4px;">خروج</span>
@@ -801,7 +820,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="form-grid">
 <div class="field-wrap span-2"><label for="cardno">شماره کارت</label><input id="cardno" class="ltr" readonly></div>
 <div class="field-wrap span-2"><label for="iban">شبا</label><input id="iban" class="ltr" readonly></div>
-<div class="field-wrap span-2"><label for="receipt">تصویر فیش</label><input type="file" id="receipt" accept="image/png,image/jpeg,image/webp,application/pdf"><span class="hint">حداکثر ۵ مگابایت</span><span class="error" data-error-for="receipt"></span></div>
+<div class="field-wrap span-2"><label for="receipt">تصویر فیش</label><input type="file" id="receipt" accept="image/png,image/jpeg,image/webp"><span class="hint">حداکثر ۵ مگابایت (فقط عکس)</span><span class="error" data-error-for="receipt"></span></div>
 <div class="field-wrap span-2" id="receipt-preview-box"></div>
 </div>
 <div class="actions"><button class="btn btn-green" type="submit">ارسال فیش</button><button class="btn btn-light" type="button" id="copy-card">کپی شماره کارت</button></div>
@@ -831,7 +850,11 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="field-wrap" style="margin-bottom:12px"><label for="admin-user">نام کاربری</label><input id="admin-user" class="ltr" required autocomplete="username"></div>
 <div class="field-wrap" style="margin-bottom:12px"><label for="admin-pass">رمز</label><input id="admin-pass" class="ltr" type="password" required autocomplete="current-password"></div>
 <!-- 🌟 فیلد کد امنیتی 2FA -->
-<div class="field-wrap" style="margin-bottom:12px"><label for="admin-otp">کد امنیتی (Authenticator)</label><input id="admin-otp" class="ltr" inputmode="numeric" maxlength="6" required placeholder="123456"></div>
+<div class="field-wrap" style="margin-bottom:12px">
+  <label for="admin-otp">کد امنیتی (Authenticator)</label>
+  <input id="admin-otp" class="ltr" inputmode="numeric" maxlength="6" required placeholder="123456">
+  <span class="hint">کد ۶ رقمی گوگل آتورنتایکیتور را وارد کنید.</span>
+</div>
 <div class="actions" style="margin-top:18px"><button class="btn btn-green" type="submit"><svg class="icon"><use href="#i-shield"/></svg> ورود امن</button><button class="btn btn-light" type="button" data-go="home">انصراف</button></div>
 </form>
 </div>
@@ -1030,24 +1053,43 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="admin-panel" data-panel="crops"><div class="admin-card"><h4>محصولات</h4><div class="inline-add"><input id="crop-new" placeholder="نام محصول"><button class="btn btn-green btn-sm" id="crop-add-btn">افزودن</button></div><div class="chip-list" id="crop-list"></div></div></div>
 <div class="admin-panel" data-panel="messages"><div class="admin-card"><h4>پیام‌های مشتریان</h4><div id="adm-messages-list"></div></div></div>
 
+<!-- پنل جدید ویدیوها با تب‌های لینک و آپلود -->
 <div class="admin-panel" data-panel="videos">
-<div class="admin-card">
-<h4>🎬 افزودن ویدیو</h4>
-<p class="sub">لینک ویدیو را وارد کن (MP4، YouTube، Aparat یا هر embed)</p>
-<form id="vid-add-form">
-<div class="admin-grid">
-<div class="field-wrap span-2"><label for="vid-title">عنوان *</label><input id="vid-title" required placeholder="مثلاً: سمپاشی مزرعه گندم در دزفول"></div>
-<div class="field-wrap span-2"><label for="vid-url">لینک ویدیو *</label><input id="vid-url" class="ltr" required placeholder="https://youtu.be/... یا https://aparat.com/v/... یا https://example.com/video.mp4"></div>
-<div class="field-wrap span-2"><label for="vid-desc">توضیح کوتاه</label><textarea id="vid-desc" rows="2" placeholder="۱-۲ خط توضیح..."></textarea></div>
-</div>
-<div class="actions"><button type="submit" class="btn btn-green"><svg class="icon"><use href="#i-plus"/></svg> افزودن</button></div>
-</form>
-<div class="notice info" style="margin-top:12px">💡 ویدیو از لینک اضافه می‌شود. اگر از YouTube/Aparat استفاده می‌کنی، فقط لینک صفحه ویدیو را کپی کن.</div>
-</div>
-<div class="admin-card">
-<h4>📼 لیست ویدیوها</h4>
-<div id="kv-admin-videos-list"></div>
-</div>
+  <div class="admin-tabs" id="vid-mode-tabs" style="margin-bottom:14px; background:var(--inset);">
+    <button data-vid-mode="url" aria-selected="true">🔗 افزودن با لینک (یوتیوب/آپارات)</button>
+    <button data-vid-mode="upload" aria-selected="false">📤 آپلود مستقیم فایل</button>
+  </div>
+
+  <div class="admin-card vid-subpanel active" data-vid-panel="url">
+    <h4>🎬 افزودن ویدیو با لینک</h4>
+    <p class="sub">لینک ویدیو را وارد کن (MP4، YouTube، Aparat یا هر embed)</p>
+    <form id="vid-add-form-url">
+      <div class="admin-grid">
+        <div class="field-wrap span-2"><label for="vid-title-url">عنوان *</label><input id="vid-title-url" required placeholder="مثلاً: سمپاشی مزرعه گندم در دزفول"></div>
+        <div class="field-wrap span-2"><label for="vid-url">لینک ویدیو *</label><input id="vid-url" class="ltr" required placeholder="https://youtu.be/... یا https://aparat.com/v/... یا https://example.com/video.mp4"></div>
+        <div class="field-wrap span-2"><label for="vid-desc-url">توضیح کوتاه</label><textarea id="vid-desc-url" rows="2" placeholder="۱-۲ خط توضیح..."></textarea></div>
+      </div>
+      <div class="actions"><button type="submit" class="btn btn-green"><svg class="icon"><use href="#i-plus"/></svg> افزودن</button></div>
+    </form>
+  </div>
+
+  <div class="admin-card vid-subpanel" data-vid-panel="upload">
+    <h4>📤 آپلود مستقیم فایل ویدیو</h4>
+    <p class="sub">فرمت‌های mp4, webm پیشنهاد می‌شود. حداکثر حجم 50MB</p>
+    <form id="vid-add-form-upload">
+      <div class="admin-grid">
+        <div class="field-wrap span-2"><label for="vid-title-upload">عنوان *</label><input id="vid-title-upload" required placeholder="عنوان ویدیو"></div>
+        <div class="field-wrap span-2"><label for="vid-file">فایل ویدیو *</label><input type="file" id="vid-file" accept="video/mp4,video/webm,video/ogg" required></div>
+        <div class="field-wrap span-2"><label for="vid-desc-upload">توضیح کوتاه</label><textarea id="vid-desc-upload" rows="2"></textarea></div>
+      </div>
+      <div class="actions"><button type="submit" class="btn btn-green"><svg class="icon"><use href="#i-upload"/></svg> آپلود و ذخیره</button><span id="vid-upload-progress" style="font-size:12px;color:var(--b600);margin-right:10px;font-weight:bold;"></span></div>
+    </form>
+  </div>
+
+  <div class="admin-card">
+    <h4>📼 لیست ویدیوها</h4>
+    <div id="kv-admin-videos-list"></div>
+  </div>
 </div>
 
 <div class="admin-panel" data-panel="customers">
@@ -1152,7 +1194,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
-<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۰.۰ · با ❤️ برای کشاورزان ایران</div>
+<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۰.۱ · با ❤️ برای کشاورزان ایران</div>
 </main>
 </div>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
@@ -1450,9 +1492,9 @@ const STATUS={pending:{label:"در انتظار پرداخت",cls:""},scheduled:
 
 /* ==================== SMS SERVICE ==================== */
 const SMS_TEMPLATE_IDS={otp:556701};
-const SmsService=(()=>{const getSettings=()=>Object.assign(defaultSmsSettings(),read(LS.sms_settings,{}));const setSettings=s=>write(LS.sms_settings,s);const getTemplates=()=>Object.assign(defaultSmsTemplates(),read(LS.sms_templates,{}));const setTemplates=t=>write(LS.sms_templates,t);const getAuto=()=>Object.assign(defaultSmsAuto(),read(LS.sms_auto,{}));const setAuto=a=>write(LS.sms_auto,a);const getLog=()=>read(LS.sms_log,[]);const addLog=e=>{const l=getLog();l.unshift(e);if(l.length>500)l.length=500;write(LS.sms_log,l);};function renderTemplate(tpl,vars={}){let out=String(tpl||"");Object.entries(vars).forEach(([k,v])=>{out=out.split(`{${k}}`).join(String(v??""));});return out;}async function send(to,text,{kind="manual",meta={}}={}){const phone=toEn(String(to||"").replace(/\D/g,""));if(!/^09\d{9}$/.test(phone)){addLog({id:uid(),to:phone,text,kind,status:"failed",error:"شماره نامعتبر",createdAt:Date.now(),...meta});return{ok:false,error:"شماره نامعتبر"};}const s=getSettings();const entry={id:uid(),to:phone,text,kind,status:"pending",createdAt:Date.now(),provider:s.provider,...meta};if(s.provider==="sim"){await new Promise(r=>setTimeout(r,300));addLog({...entry,status:"sim"});return{ok:true,sim:true};}const res=await apiFetch("/api/sms/send",{method:"POST",body:JSON.stringify({to:phone,text})});if(res.ok&&res.data.ok){addLog({...entry,status:"sent"});return{ok:true};}const err=res.data?.message||res.data?.error||`HTTP ${res.status}`;addLog({...entry,status:"failed",error:err});return{ok:false,error:err};}async function checkCredit(){const s=getSettings();if(s.provider==="sim")return{ok:true,credit:1000,sim:true};const res=await apiFetch("/api/sms/credit",{method:"POST",body:JSON.stringify({})});if(res.ok)return{ok:true,credit:res.data.credit??"?"};return{ok:false,error:res.data?.error||"خطا"};}async function sendByEvent(ev,order){if(!getAuto()[ev])return{ok:false,skipped:true};const templateId=SMS_TEMPLATE_IDS[ev];if(templateId){const params=[{name:"NAME",value:order.name||"کشاورز"},{name:"CODE",value:order.code||""},{name:"AMOUNT",value:order.amount?fmtT(order.amount):""},{name:"CROP",value:order.crop||""},{name:"AREA",value:order.area?toFa(order.area):""},{name:"DATE",value:order.slotDate?toFa(order.slotDate):"—"}];const res=await apiFetch("/api/sms/send",{method:"POST",body:JSON.stringify({to:order.phone,templateId:templateId,parameters:params})});if(res.ok&&res.data.ok){addLog({id:uid(),to:order.phone,text:`[قالب ${ev}]`,kind:"auto_"+ev,status:"sent",createdAt:Date.now(),provider:"sms.ir (Verify)"});return{ok:true};}return{ok:false,error:res.data?.error||"خطای قالب"};}const tpl=getTemplates()[ev];if(!tpl||!tpl.text||!order?.phone)return{ok:false,skipped:true};const vars={name:order.name||"کشاورز",code:order.code||"",amount:order.amount?fmtT(order.amount):"",crop:order.crop||"",area:order.area?toFa(order.area):"",date:order.slotDate?toFa(order.slotDate):"—"};return await send(order.phone,renderTemplate(tpl.text,vars),{kind:"auto_"+ev,meta:{orderId:order.id,orderCode:order.code}});}return{getSettings,setSettings,getTemplates,setTemplates,getAuto,setAuto,getLog,addLog,send,sendByEvent,renderTemplate,checkCredit,clearLog:()=>write(LS.sms_log,[])};})();
+const SmsService=(()=>{const getSettings=()=>Object.assign(defaultSmsSettings(),read(LS.sms_settings,{}));const setSettings=s=>write(LS.sms_settings,s);const getTemplates=()=>Object.assign(defaultSmsTemplates(),read(LS.sms_templates,{}));const setTemplates=t=>write(LS.sms_templates,t);const getAuto=()=>Object.assign(defaultSmsAuto(),read(LS.sms_auto,{}));const setAuto=a=>write(LS.sms_auto,a);const getLog=()=>read(LS.sms_log,[]);const addLog=e=>{const l=getLog();l.unshift(e);if(l.length>500)l.length=500;write(LS.sms_log,l);};function renderTemplate(tpl,vars={}){let out=String(tpl||"");Object.entries(vars).forEach(([k,v])=>{out=out.split(`{${k}}`).join(String(v??""));});return out;}async function send(to,text,{kind="manual",meta={}}={}){const phone=toEn(String(to||"").replace(/\D/g,""));if(!/^09\d{9}$/.test(phone)){addLog({id:uid(),to:phone,text,kind,status:"failed",error:"شماره نامعتبر",createdAt:Date.now(),...meta});return{ok:false,error:"شماره نامعتبر"};}const s=getSettings();const entry={id:uid(),to:phone,text,kind,status:"pending",createdAt:Date.now(),provider:s.provider,...meta};if(s.provider==="sim"){await new Promise(r=>setTimeout(r,300));addLog({...entry,status:"sim"});return{ok:true,sim:true};}const res=await apiFetch("/api/sms/send",{method:"POST",body:JSON.stringify({to:phone,text})});if(res.ok&&(res.data.ok||res.data.success||res.data.status==="ok")){addLog({...entry,status:"sent"});return{ok:true};}const err=res.data?.message||res.data?.error||`HTTP ${res.status}`;addLog({...entry,status:"failed",error:err});return{ok:false,error:err};}async function checkCredit(){const s=getSettings();if(s.provider==="sim")return{ok:true,credit:1000,sim:true};const res=await apiFetch("/api/sms/credit",{method:"POST",body:JSON.stringify({})});if(res.ok)return{ok:true,credit:res.data.credit??"?"};return{ok:false,error:res.data?.error||"خطا"};}async function sendByEvent(ev,order){if(!getAuto()[ev])return{ok:false,skipped:true};const templateId=SMS_TEMPLATE_IDS[ev];if(templateId){const params=[{name:"NAME",value:order.name||"کشاورز"},{name:"CODE",value:order.code||""},{name:"AMOUNT",value:order.amount?fmtT(order.amount):""},{name:"CROP",value:order.crop||""},{name:"AREA",value:order.area?toFa(order.area):""},{name:"DATE",value:order.slotDate?toFa(order.slotDate):"—"}];const res=await apiFetch("/api/sms/send",{method:"POST",body:JSON.stringify({to:order.phone,templateId:templateId,parameters:params})});if(res.ok&&(res.data.ok||res.data.success)){addLog({id:uid(),to:order.phone,text:`[قالب ${ev}]`,kind:"auto_"+ev,status:"sent",createdAt:Date.now(),provider:"sms.ir (Verify)"});return{ok:true};}return{ok:false,error:res.data?.error||"خطای قالب"};}const tpl=getTemplates()[ev];if(!tpl||!tpl.text||!order?.phone)return{ok:false,skipped:true};const vars={name:order.name||"کشاورز",code:order.code||"",amount:order.amount?fmtT(order.amount):"",crop:order.crop||"",area:order.area?toFa(order.area):"",date:order.slotDate?toFa(order.slotDate):"—"};return await send(order.phone,renderTemplate(tpl.text,vars),{kind:"auto_"+ev,meta:{orderId:order.id,orderCode:order.code}});}return{getSettings,setSettings,getTemplates,setTemplates,getAuto,setAuto,getLog,addLog,send,sendByEvent,renderTemplate,checkCredit,clearLog:()=>write(LS.sms_log,[])};})();
 
-/* ==================== OTP SERVICE ==================== */
+/* ==================== OTP SERVICE (FIXED) ==================== */
 const OtpService=(()=>{
 const getStore=()=>read(LS.otp_local,{});
 const setStore=s=>write(LS.otp_local,s);
@@ -1460,25 +1502,29 @@ const setStore=s=>write(LS.otp_local,s);
 async function createRemote(phone,purpose){
   const res=await apiFetch("/api/otp/send",{method:"POST",body:JSON.stringify({phone,purpose})});
   const store=getStore();
-  if(res.ok && res.data.ok){
-    store[phone]={code:"__remote__",purpose,expires:Date.now()+2*60*1000,attempts:0,createdAt:Date.now(),lastSentAt:Date.now(),remote:true};
+  // منعطف کردن بررسی موفقیت
+  if(res.ok && (res.data.ok === true || res.data.success === true || res.data.status === "ok" || res.data.sim === true || res.data.code)){
+    store[phone]={code:res.data.code || "__remote__",purpose,expires:Date.now()+2*60*1000,attempts:0,createdAt:Date.now(),lastSentAt:Date.now(),remote:true};
     setStore(store);
     return{ok:true,sim:res.data.sim,code:res.data.code,remote:true};
   }
-  const errorMsg = res.data?.error || "خطای ناشناخته از سرور";
+  const errorMsg = res.data?.error || res.data?.message || `خطای سرور (${res.status})`;
   alert("خطا در ارسال پیامک: " + errorMsg); 
   return {ok: false, error: errorMsg};
 }
+
 async function verifyRemote(phone,code,purpose){
   const store=getStore();
   const rec=store[phone];
   if(rec&&rec.remote){
     const res=await apiFetch("/api/otp/verify",{method:"POST",body:JSON.stringify({phone,code,purpose})});
-    if(res.ok&&res.data.ok){delete store[phone];setStore(store);return{ok:true};}
+    if(res.ok && (res.data.ok === true || res.data.success === true || res.data.status === "ok")){
+        delete store[phone];setStore(store);return{ok:true};
+    }
     if(rec.expires<Date.now())return{ok:false,msg:"کد منقضی شده."};
     if(rec.attempts>=5)return{ok:false,msg:"تلاش بیش از حد."};
     rec.attempts++;setStore(store);
-    return{ok:false,msg:res.data?.error||`کد نادرست (${toFa(rec.attempts)}/۵)`};
+    return{ok:false,msg:res.data?.error||res.data?.message||`کد نادرست (${toFa(rec.attempts)}/۵)`};
   }
   if(!rec)return{ok:false,msg:"کدی ثبت نشده."};
   if(rec.expires<Date.now())return{ok:false,msg:"کد منقضی شده."};
@@ -1713,7 +1759,7 @@ $("#cancel-order-btn")?.addEventListener("click",()=>{Admin.confirmModal("لغو
 function startTrackAutoRefresh(code,phone){clearInterval(TRACK_TIMER);TRACK_TIMER=setInterval(async()=>{const t=document.getElementById("screen-track");if(!t?.classList.contains("active"))return;const r=await apiFetch("/api/orders/lookup",{method:"POST",body:JSON.stringify({code,phone})});if(r.ok&&r.data.id){const old=cache.orders.find(o=>o.id===r.data.id);if(!old||old.status!==r.data.status){const i=cache.orders.findIndex(o=>o.id===r.data.id);if(i>=0)cache.orders[i]=r.data;else cache.orders.push(r.data);write(LS.orders,cache.orders);renderTrackResult(r.data);refreshHomeStats();}}},30000);}
 function renderPayInfo(){const el=$("#pay-info");if(!el)return;const o=PAY_ORDER;if(!o){el.innerHTML='<div class="notice" style="margin-bottom:14px">برای پرداخت، از «پیگیری» سفارش را جست‌وجو کن.</div>';return;}el.innerHTML=`<div class="receipt-card"><div class="receipt-head"><div class="check"><svg class="icon"><use href="#i-check"/></svg></div><div style="flex:1"><strong>سفارش ثبت شد</strong><small>کد: <code class="ltr">${esc(o.code)}</code></small></div></div><div class="receipt-body"><div><small>مشتری</small><strong>${esc(o.name)}</strong></div><div><small>محصول</small><strong>${esc(o.crop)} · ${toFa(o.area)} هکتار</strong></div><div><small>مبلغ</small><strong style="color:var(--b700);font-size:18px">${fmtT(o.amount)}</strong></div><div><small>وضعیت</small><strong><span class="status">در انتظار پرداخت</span></strong></div></div></div>`;}
 
-/* RECEIPT compress + save */
+/* RECEIPT compress + save (FIXED) */
 function compressImage(file,maxDim=1200,quality=0.75){
   return new Promise((resolve,reject)=>{
     const img=new Image();
@@ -1745,7 +1791,16 @@ function saveReceiptData(orderId,file){
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ orderId, receiptData: dataToSave })
       });
-      if(res.ok) { resolve(true); } else { toast("خطا در ذخیره فیش در سرور", true); resolve(false); }
+      if(res.ok) { 
+          // ذخیره فیش در لوکال استوریج برای نمایش در پنل مدیریت
+          const recs = read(LS.receipts, {});
+          recs[orderId] = { status: "pending", uploadedAt: Date.now() };
+          write(LS.receipts, recs);
+          resolve(true); 
+      } else { 
+          toast("خطا در ذخیره فیش در سرور", true); 
+          resolve(false); 
+      }
     } catch(e){
       toast("خطا در پردازش فایل: " + e.message, true);
       resolve(false);
@@ -1756,7 +1811,7 @@ const getReceipt=id=>read(LS.receipts,{})[id]||null;
 const setReceiptStatus=(id,st)=>{const r=read(LS.receipts,{});if(r[id]){r[id].status=st;r[id].reviewedAt=Date.now();write(LS.receipts,r);}};
 
 (function(){const r=$("#receipt"),pv=$("#receipt-preview-box");
-r?.addEventListener("change",()=>{const c=getConfig(),max=(c.receiptMax||5)*1024*1024,f=r.files?.[0];pv.innerHTML="";if(!f){setErr("receipt","");return;}if(!["image/jpeg","image/png","image/webp","application/pdf"].includes(f.type)){setErr("receipt","فرمت مجاز نیست.");r.value="";return;}if(f.size>max){setErr("receipt","حجم زیاد.");r.value="";return;}setErr("receipt","");const kb=(f.size/1024).toFixed(1);if(f.type.startsWith("image/")){const rd=new FileReader();rd.onload=e=>{pv.innerHTML=`<div class="receipt-preview"><img src="${e.target.result}"><div class="rp-info"><strong>✅ آماده</strong><small>${esc(f.name)} · ${toFa(kb)} KB</small></div><button type="button" id="rm-r">حذف</button></div>`;$("#rm-r").onclick=()=>{r.value="";pv.innerHTML="";};};rd.readAsDataURL(f);}else{pv.innerHTML=`<div class="receipt-preview"><div style="width:70px;height:70px;border-radius:9px;background:var(--dng-bg);color:var(--dng-fg);display:grid;place-items:center;font-weight:800;flex-shrink:0">PDF</div><div class="rp-info"><strong>✅ آماده</strong><small>${esc(f.name)} · ${toFa(kb)} KB</small></div><button type="button" id="rm-r">حذف</button></div>`;$("#rm-r").onclick=()=>{r.value="";pv.innerHTML="";};}});
+r?.addEventListener("change",()=>{const c=getConfig(),max=(c.receiptMax||5)*1024*1024,f=r.files?.[0];pv.innerHTML="";if(!f){setErr("receipt","");return;}if(!["image/jpeg","image/png","image/webp"].includes(f.type)){setErr("receipt","فرمت مجاز نیست.");r.value="";return;}if(f.size>max){setErr("receipt","حجم زیاد.");r.value="";return;}setErr("receipt","");const kb=(f.size/1024).toFixed(1);if(f.type.startsWith("image/")){const rd=new FileReader();rd.onload=e=>{pv.innerHTML=`<div class="receipt-preview"><img src="${e.target.result}"><div class="rp-info"><strong>✅ آماده</strong><small>${esc(f.name)} · ${toFa(kb)} KB</small></div><button type="button" id="rm-r">حذف</button></div>`;$("#rm-r").onclick=()=>{r.value="";pv.innerHTML="";};};rd.readAsDataURL(f);}});
 $("#payment-form")?.addEventListener("submit",async e=>{e.preventDefault();if(r?.getAttribute("aria-invalid")==="true")return toast("خطای فایل.",true);if(!PAY_ORDER)return toast("سفارشی نیست.",true);const f=r?.files?.[0];if(!f)return toast("فیش را بارگذاری کن.",true);const ok=await saveReceiptData(PAY_ORDER.id,f);if(!ok)return;const i=cache.orders.findIndex(o=>o.id===PAY_ORDER.id);if(i>=0){cache.orders[i].status="receipt_pending";write(LS.orders,cache.orders);await apiFetch("/api/orders/"+PAY_ORDER.id,{method:"PUT",body:JSON.stringify({status:"receipt_pending"})});}toast("✅ فیش ارسال شد.");r.value="";pv.innerHTML="";});
 $("#copy-card")?.addEventListener("click",async()=>{const v=($("#cardno")?.value||"").replace(/\s+/g,"");try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(v);toast("کپی شد.");}else toast("کپی خودکار نیست.");}catch{toast("ناموفق",true);}});
 })();
@@ -1899,32 +1954,86 @@ function renderVideoAdmin(){
 }
 
 function bindVideoPanel(){
-  const form = document.getElementById("vid-add-form");
-  if(!form || form.dataset.bound) return;
-  form.dataset.bound = "1";
-  form.addEventListener("submit", e => {
-    e.preventDefault();
-    const title = document.getElementById("vid-title").value.trim();
-    const url = document.getElementById("vid-url").value.trim();
-    const desc = document.getElementById("vid-desc").value.trim();
-    if(!title) return toast("عنوان را وارد کن", true);
-    if(!url) return toast("لینک را وارد کن", true);
-    const p = parseVideoUrl(url);
-    if(!p) return toast("لینک پشتیبانی نمی‌شود (MP4 / YouTube / Aparat)", true);
-    const cur = getVideos().slice();
-    cur.unshift({
-      id: "v" + Date.now(),
-      title, desc,
-      url: p.url,
-      platform: p.platform,
-      videoId: p.id,
-      embed: p.embed
+  // تب ها
+  const tabs = document.getElementById("vid-mode-tabs");
+  if(tabs && !tabs.dataset.bound) {
+      tabs.dataset.bound = "1";
+      tabs.addEventListener("click", e => {
+          const b = e.target.closest("button[data-vid-mode]");
+          if(!b) return;
+          $$("#vid-mode-tabs button").forEach(x => x.setAttribute("aria-selected", x===b?"true":"false"));
+          $$(".vid-subpanel").forEach(p => p.classList.toggle("active", p.dataset.vidPanel === b.dataset.vidMode));
+      });
+  }
+
+  // فرم لینک
+  const formUrl = document.getElementById("vid-add-form-url");
+  if(formUrl && !formUrl.dataset.bound) {
+    formUrl.dataset.bound = "1";
+    formUrl.addEventListener("submit", e => {
+      e.preventDefault();
+      const title = document.getElementById("vid-title-url").value.trim();
+      const url = document.getElementById("vid-url").value.trim();
+      const desc = document.getElementById("vid-desc-url").value.trim();
+      if(!title) return toast("عنوان را وارد کن", true);
+      if(!url) return toast("لینک را وارد کن", true);
+      const p = parseVideoUrl(url);
+      if(!p) return toast("لینک پشتیبانی نمی‌شود (MP4 / YouTube / Aparat)", true);
+      
+      const cur = getVideos().slice();
+      cur.unshift({ id: "v" + Date.now(), title, desc, url: p.url, platform: p.platform, videoId: p.id, embed: p.embed });
+      
+      setVideos(cur);
+      renderVideoAdmin();
+      formUrl.reset();
+      toast("✅ ویدیو با لینک اضافه شد");
     });
-    setVideos(cur);
-    renderVideoAdmin();
-    form.reset();
-    toast("✅ ویدیو اضافه شد");
-  });
+  }
+
+  // فرم آپلود فایل
+  const formUpload = document.getElementById("vid-add-form-upload");
+  if(formUpload && !formUpload.dataset.bound) {
+    formUpload.dataset.bound = "1";
+    formUpload.addEventListener("submit", async e => {
+      e.preventDefault();
+      const title = document.getElementById("vid-title-upload").value.trim();
+      const file = document.getElementById("vid-file").files[0];
+      const desc = document.getElementById("vid-desc-upload").value.trim();
+      const progress = document.getElementById("vid-upload-progress");
+      
+      if(!title) return toast("عنوان را وارد کن", true);
+      if(!file) return toast("فایل ویدیو را انتخاب کن", true);
+      
+      progress.textContent = "در حال آپلود... (لطفاً صبر کنید)";
+      const formData = new FormData();
+      formData.append("video", file);
+      
+      try {
+          // ارسال به سرور برای ذخیره فایل
+          const res = await fetch("https://api.sampash-ai.ir/api/videos/upload", {
+              method: "POST",
+              body: formData
+          });
+          
+          if(!res.ok) throw new Error("خطا در آپلود فایل به سرور");
+          const data = await res.json();
+          
+          if(!data.url) throw new Error("سرور آدرس ویدیو را برنگرداند");
+          
+          const cur = getVideos().slice();
+          cur.unshift({ id: "v" + Date.now(), title, desc, url: data.url, platform: "direct" });
+          
+          setVideos(cur);
+          renderVideoAdmin();
+          formUpload.reset();
+          progress.textContent = "";
+          toast("✅ ویدیو آپلود شد");
+      } catch(err) {
+          progress.textContent = "";
+          toast(err.message || "خطا در آپلود", true);
+      }
+    });
+  }
 }
 
 function bindTabs(){
@@ -2012,19 +2121,31 @@ async function renderPayments(){
   
   box.innerHTML = html;
   box.querySelectorAll("[data-img]").forEach(i=>i.onclick=()=>openModal(`<h3>پیش‌نمایش فیش</h3><img src="${i.dataset.img}" style="width:100%;border-radius:12px">`));
+  
   box.querySelectorAll("[data-pay-approve]").forEach(b=>b.onclick=async()=>{
       const id=b.dataset.payApprove;
       const i=cache.orders.findIndex(o=>o.id===id);
-      if(i>=0){cache.orders[i].status="scheduled";write(LS.orders,cache.orders);await apiFetch("/api/orders/"+id,{method:"PUT",body:JSON.stringify({status:"scheduled"})});}
-      const recs = read(LS.receipts, {}); delete recs[id]; write(LS.receipts, recs);
-      renderPayments();renderDashboard();toast("✅ تأیید شد");
+      if(i>=0){
+          cache.orders[i].status="scheduled";
+          write(LS.orders,cache.orders);
+          await apiFetch("/api/orders/"+id,{method:"PUT",body:JSON.stringify({status:"scheduled"})});
+          setReceiptStatus(id, "approved");
+          SmsService.sendByEvent("payment_approved", cache.orders[i]).catch(()=>{});
+      }
+      renderPayments();renderDashboard();toast("✅ فیش تأیید شد");
   });
+  
   box.querySelectorAll("[data-pay-reject]").forEach(b=>b.onclick=()=>{
       confirmModal("رد فیش","مطمئنی؟",{danger:true,onConfirm:async()=>{
           const id=b.dataset.payReject;
           const i=cache.orders.findIndex(o=>o.id===id);
-          if(i>=0){cache.orders[i].status="receipt_rejected";write(LS.orders,cache.orders);await apiFetch("/api/orders/"+id,{method:"PUT",body:JSON.stringify({status:"receipt_rejected"})});}
-          const recs = read(LS.receipts, {}); delete recs[id]; write(LS.receipts, recs);
+          if(i>=0){
+              cache.orders[i].status="receipt_rejected";
+              write(LS.orders,cache.orders);
+              await apiFetch("/api/orders/"+id,{method:"PUT",body:JSON.stringify({status:"receipt_rejected"})});
+              setReceiptStatus(id, "rejected");
+              SmsService.sendByEvent("receipt_rejected", cache.orders[i]).catch(()=>{});
+          }
           renderPayments();toast("رد شد");
       }});
   });
@@ -2102,20 +2223,33 @@ $("#danger-reset")?.addEventListener("click",()=>{confirmModal("بازنشانی
 let timerHandle;
 function startTimer(){clearInterval(timerHandle);const tick=()=>{const s=Auth.getSession();if(!s){stopAndLogout();return;}Auth.touch();const left=Math.max(0,Math.floor((s.expires-Date.now())/1000));const m=Math.floor(left/60),sec=left%60;const el=$("#session-timer");if(el)el.textContent=`${toFa(m)}:${toFa(String(sec).padStart(2,"0"))}`;};tick();timerHandle=setInterval(tick,1000);}
 function stopAndLogout(){clearInterval(timerHandle);Auth.logout();const lv=$("#admin-login-view"),pv=$("#admin-panel-view");if(lv)lv.hidden=false;if(pv)pv.hidden=true;toast("نشست منقضی شد.",true);}
+
 function bindLogin(){
   $("#admin-login-form")?.addEventListener("submit", async e => {
     e.preventDefault();
-    const u = $("#admin-user").value.trim(), p = $("#admin-pass").value, otp = $("#admin-otp").value.trim();
+    const u = $("#admin-user").value.trim();
+    const p = $("#admin-pass").value;
+    // تبدیل اعداد فارسی به انگلیسی برای کد 2FA ضروری است
+    const otp = toEn($("#admin-otp").value.trim()); 
+    
     if(!u || !p || !otp) return toast("همه فیلدها (نام، رمز و کد امنیتی) را پر کنید", true);
     
     toast("در حال بررسی کد امنیتی...");
-    const res2fa = await apiFetch("/api/admin/login", { method: "POST", body: JSON.stringify({ otpCode: otp }) });
     
-    if(!res2fa.ok || !res2fa.data.ok) {
-        return toast(res2fa.data?.error || "کد 2FA نادرست است", true);
+    // ارسال نام کاربری همراه با کد 2FA
+    const res2fa = await apiFetch("/api/admin/login", { 
+        method: "POST", 
+        body: JSON.stringify({ username: u, otpCode: otp }) 
+    });
+    
+    if(!res2fa.ok || !(res2fa.data.ok || res2fa.data.success)) {
+        return toast(res2fa.data?.error || res2fa.data?.message || "کد 2FA نادرست است", true);
     }
     
-    sessionStorage.setItem('admin_secure_token', res2fa.data.token);
+    // ذخیره توکن امنیتی برای درخواست‌های بعدی (مثل فیش‌ها)
+    if(res2fa.data.token) {
+        sessionStorage.setItem('admin_secure_token', res2fa.data.token);
+    }
     
     const r = await Auth.login(u, p);
     if(!r.ok) { toast(r.msg, true); $("#admin-pass").value=""; return; }
@@ -2221,4 +2355,4 @@ if ('serviceWorker' in navigator) {
 })();
 </script>
 </body>
-  </html>
+</html>
