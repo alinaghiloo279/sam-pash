@@ -711,8 +711,11 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
         </div>
 
         <div class="field-wrap">
-          <label>شهرستان / منطقه (اختیاری)</label>
-          <input id="srv-region" placeholder="خالی = سراسری" style="height:44px;">
+          <label>استان / منطقه (اختیاری)</label>
+          <select id="srv-region" style="height:44px; padding:0 10px;">
+            <option value="">سراسری (همه مناطق)</option>
+            <!-- گزینه‌ها در JS پر می‌شوند -->
+          </select>
         </div>
         
         <button class="btn btn-green" id="srv-add-btn" style="height:44px; padding:0 20px; width:100%;">
@@ -967,8 +970,11 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     </div>
 
     <div class="field-wrap" style="margin-bottom:20px;">
-      <label>شهرستان / منطقه (اختیاری)</label>
-      <input id="edit-srv-region" style="height:44px;" placeholder="خالی = سراسری">
+      <label>استان / منطقه (اختیاری)</label>
+      <select id="edit-srv-region" style="height:44px; padding:0 10px;">
+        <option value="">سراسری (همه مناطق)</option>
+        <!-- گزینه‌ها در JS پر می‌شوند -->
+      </select>
     </div>
     
     <div class="actions" style="justify-content:flex-end; margin-top:0;">
@@ -1241,7 +1247,14 @@ function renderProfile(){
   if(a)a.textContent=(prof.name||"ک").slice(0,1); if(n)n.textContent=prof.name||"کاربر کشاورز"; if(p)p.textContent=ph?toFa(ph):"—";
   const set=(id,v)=>{const el=document.getElementById(id);if(el)el.value=v;};
   set("prof-name",prof.name||""); set("prof-phone",ph?toFa(ph):""); set("prof-city",prof.city||"");
-  if(prof.province){const s=$("#prof-province");if(s)s.value=prof.province;}
+  
+  // 🔴 اضافه کردن لیست استان‌ها به پروفایل
+  const s = $("#prof-province");
+  if(s) {
+      const c = getConfig();
+      s.innerHTML = '<option value="">انتخاب</option>' + c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
+      if(prof.province) s.value = prof.province;
+  }
 }
 function renderHistory() {
   const box = $("#history-list"); if(!box) return;
@@ -1672,7 +1685,8 @@ document.getElementById('partner-login-form')?.addEventListener('submit', (e) =>
   list.innerHTML = myOrders.length ? myOrders.map(o => `<div class="admin-card"><strong>${esc(o.code)} - ${esc(o.serviceName)}</strong><div style="font-size:12px;color:var(--i500);margin:4px 0">${esc(o.name)} | ${esc(o.city)} | ${toFa(o.area)} هکتار</div></div>`).join("") : '<div class="empty">سفارشی ارجاع داده نشده</div>';
 });
 document.getElementById('partner-logout-btn')?.addEventListener('click', () => { $("#partner-login-view").hidden = false; $("#partner-panel-view").hidden = true; });
-  document.getElementById('admin-login-form')?.addEventListener('submit', async (e) => {
+
+document.getElementById('admin-login-form')?.addEventListener('submit', async (e) => {
   e.preventDefault(); const otp = toEn($("#admin-otp").value.trim()); toast("در حال بررسی...");
   const res = await apiFetch("/api/admin/login", { method: "POST", body: JSON.stringify({ username: $("#admin-user").value, otpCode: otp }) });
   if(res.ok && res.data.success) { 
@@ -2071,7 +2085,8 @@ document.getElementById('restore-btn')?.addEventListener('click', async () => {
     toast("✅ بازیابی با موفقیت انجام شد (نیاز به همگام‌سازی دستی با سرور دارد)"); setTimeout(() => location.reload(), 1000);
   } catch (e) { toast("فایل نامعتبر است: " + e.message, true); }
 });
-  document.getElementById("home-phone-save")?.addEventListener("click", async () => { const v = toEn(document.getElementById("home-phone-input").value.trim()); if(!/^09\d{9}$/.test(v)) return toast("شماره نامعتبر است.", true); await startPhoneVerification(v); });
+
+document.getElementById("home-phone-save")?.addEventListener("click", async () => { const v = toEn(document.getElementById("home-phone-input").value.trim()); if(!/^09\d{9}$/.test(v)) return toast("شماره نامعتبر است.", true); await startPhoneVerification(v); });
 document.getElementById("home-phone-input")?.addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); document.getElementById("home-phone-save").click(); } });
 document.getElementById("welcome-login-btn")?.addEventListener("click", () => { document.getElementById('welcome-overlay').classList.add('hidden'); showScreen("home"); document.getElementById("home-phone-input")?.focus(); });
 
@@ -2081,9 +2096,31 @@ document.getElementById('guest-btn')?.addEventListener('click', () => {
     showScreen("home"); 
 });
 
+// 🚀 تابع راه‌اندازی اولیه (Boot)
 (async function boot(){
   await loadAll();
   if (isCustomerVerified() || isGuest()) { document.getElementById('welcome-overlay').classList.add('hidden'); }
+  
+  const c = getConfig();
+  
+  // ۱. پر کردن استان‌ها در فرم ثبت نام همکار
+  const ptnProv = $("#ptn-reg-prov");
+  if(ptnProv) {
+      ptnProv.innerHTML = '<option value="">انتخاب</option>' + c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
+  }
+
+  // ۲. پر کردن استان‌ها در فرم افزودن خدمت
+  const srvRegion = $("#srv-region");
+  if(srvRegion) {
+      srvRegion.innerHTML = '<option value="">سراسری (همه مناطق)</option>' + c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
+  }
+
+  // ۳. پر کردن استان‌ها در مودال ویرایش خدمت
+  const editSrvRegion = $("#edit-srv-region");
+  if(editSrvRegion) {
+      editSrvRegion.innerHTML = '<option value="">سراسری (همه مناطق)</option>' + c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
+  }
+  
   refreshHomeStats(); renderCustomerAuth();
 })();
 </script>
