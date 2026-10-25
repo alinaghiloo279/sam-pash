@@ -1201,26 +1201,72 @@ async function startPhoneVerification(phone) {
   
   const back = $("#otp-modal-back");
   if(back) {
+    // پاک کردن مقادیر قبلی
     $("#otp-modal-phone").textContent = toFa(phone); 
-    $$("#otp-inputs input").forEach(i => i.value = ""); 
+    const otpInputs = $$("#otp-inputs input");
+    otpInputs.forEach(i => { i.value = ""; i.classList.remove("filled"); }); 
     back.classList.add("show");
-    
+    setTimeout(() => otpInputs[0].focus(), 100);
+
+    // 👇 کدهای مربوط به حرکت خودکار بین خانه‌های OTP 👇
+    otpInputs.forEach((inp, idx) => {
+      inp.oninput = () => {
+        inp.value = toEn(inp.value).replace(/\D/g, "").slice(-1);
+        inp.classList.toggle("filled", !!inp.value);
+        if(inp.value && idx < 5) otpInputs[idx+1].focus();
+        
+        // اگر ۶ رقم کامل شد، خودکار دکمه تایید زده شود
+        if(otpInputs.map(x => x.value).join("").length === 6) {
+          setTimeout(() => $("#otp-verify-btn")?.click(), 100);
+        }
+      };
+      inp.onkeydown = (e) => {
+        if(e.key === "Backspace" && !inp.value && idx > 0) {
+          otpInputs[idx-1].focus();
+          otpInputs[idx-1].value = "";
+          otpInputs[idx-1].classList.remove("filled");
+          e.preventDefault();
+        }
+      };
+      inp.onpaste = (e) => {
+        e.preventDefault();
+        const d = toEn((e.clipboardData || window.clipboardData).getData("text")).replace(/\D/g, "").slice(0,6);
+        d.split("").forEach((c, j) => { if(otpInputs[j]) { otpInputs[j].value = c; otpInputs[j].classList.add("filled"); } });
+        if(d.length === 6) setTimeout(() => $("#otp-verify-btn")?.click(), 100);
+      };
+    });
+
+    // 👇 کد دکمه تایید 👇
     $("#otp-verify-btn").onclick = async () => {
-      const code = $$("#otp-inputs input").map(i => toEn(i.value)).join("");
+      const code = otpInputs.map(i => toEn(i.value)).join("");
       if(code.length !== 6) return toast("کد کامل نیست", true);
+      
+      const btn = $("#otp-verify-btn");
+      btn.disabled = true;
+      btn.innerHTML = "در حال بررسی...";
+      
       const verify = await apiFetch("/api/otp/verify", { method: "POST", body: JSON.stringify({ phone, code }) });
+      
+      btn.disabled = false;
+      btn.innerHTML = "تأیید";
+      
       if(verify.ok) { 
         setCustomerVerified(phone); 
         setCustomerPhone(phone); 
         back.classList.remove("show"); 
-        toast("✅ تایید شد"); 
+        toast("✅ با موفقیت وارد شدید"); 
         renderCustomerAuth(); 
         refreshHomeStats(); 
-      } else { toast("کد نادرست است", true); }
+      } else { 
+        toast("کد نادرست است یا منقضی شده", true); 
+        otpInputs.forEach(i => i.value = "");
+        otpInputs[0].focus();
+      }
     };
+    
     $("#otp-cancel-btn").onclick = () => back.classList.remove("show");
   }
-  }
+}
   /* ==================== ORDER SUBMIT ==================== */
 document.getElementById('order-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
