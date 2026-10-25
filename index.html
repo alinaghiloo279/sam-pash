@@ -318,9 +318,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
       <span style="font-size:11px; font-weight:800; margin-top:4px;">خروج</span>
     </div>
   </div>
-</header>
-
-<section class="screen active" id="screen-home">
+  </header>
+  <section class="screen active" id="screen-home">
 <div class="hero">
 <div class="hero-copy">
   <div class="online-badge"><span class="online-dot"></span>آنلاین هستیم — پاسخ‌گویی کمتر از ۱ ساعت</div>
@@ -398,7 +397,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
-<!-- صفحه اختصاصی سم‌پاشی هوایی -->
 <section class="screen" id="screen-order-drone">
 <div class="panel">
 <div class="panel-head"><div><h3>ثبت سفارش سم‌پاشی هوایی</h3><p>اطلاعات مزرعه خود را برای پرواز پهپاد وارد کنید.</p></div></div>
@@ -429,7 +427,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
-<!-- صفحه اختصاصی خدمات مکانیزاسیون -->
 <section class="screen" id="screen-order-machinery">
 <div class="panel">
 <div class="panel-head"><div><h3>ثبت سفارش خدمات مکانیزاسیون</h3><p>می‌توانید همزمان چند عملیات (مثلاً شخم + دیسک) را انتخاب کنید.</p></div></div>
@@ -442,7 +439,26 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     <span class="error" data-error-for="machinery-services" style="display:block; margin-top:8px;"></span>
   </div>
 
-  <div class="field-wrap"><label for="mach-area">مساحت (متر مربع) *</label><input id="mach-area" name="area" required inputmode="decimal" class="ltr" type="text" value="10000"><span class="hint">هر ۱۰٬۰۰۰ متر = ۱ هکتار</span><span class="error" data-error-for="mach-area"></span></div>
+  <div class="field-wrap span-2" style="background:var(--inset); padding:12px; border-radius:12px; border:1px solid var(--ln);">
+    <p style="font-size:12px; color:var(--i500); margin:0 0 10px;">توجه: مساحت/حجم را بر اساس واحد انتخاب شده وارد کنید. سیستم به صورت خودکار محاسبه می‌کند.</p>
+    <div style="display:flex; gap:10px; align-items:flex-end;">
+      <div class="field-wrap" style="flex:2;">
+        <label for="mach-area">مقدار *</label>
+        <input id="mach-area" name="area" required inputmode="decimal" class="ltr" type="text" value="10000">
+        <span class="error" data-error-for="mach-area"></span>
+      </div>
+      <div class="field-wrap" style="flex:1;">
+        <label for="mach-area-unit">واحد *</label>
+        <select id="mach-area-unit" name="areaUnit" style="padding:12px 14px; border:1px solid var(--ln2); border-radius:10px; background:var(--sur); font-size:13.5px;">
+          <option value="m2">متر مربع</option>
+          <option value="ha">هکتار (۱۰,۰۰۰ متر)</option>
+          <option value="1000m2">هزار متر مربع (۱/۱۰ هکتار)</option>
+          <option value="1000L">هزار لیتر (تانکر)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
   <div class="field-wrap"><label for="mach-cust">نام و نام خانوادگی *</label><input id="mach-cust" name="cust" required placeholder="علی محمدی"><span class="error" data-error-for="mach-cust"></span></div>
   <div class="field-wrap"><label for="mach-phone">موبایل *</label><input id="mach-phone" name="phone" required inputmode="numeric" class="ltr" placeholder="09123456789" maxlength="11"><span class="error" data-error-for="mach-phone"></span></div>
   <div class="field-wrap"><label for="mach-province">استان *</label><select id="mach-province" name="province" required><option value="">انتخاب</option></select><span class="error" data-error-for="mach-province"></span></div>
@@ -450,6 +466,14 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   <div class="field-wrap"><label for="mach-village">روستا</label><input id="mach-village" name="village" placeholder="نام روستا"></div>
   <div class="field-wrap"><label for="mach-crop">محصول *</label><select id="mach-crop" name="crop" required><option value="">انتخاب</option></select><span class="error" data-error-for="mach-crop"></span></div>
   
+  <div class="field-wrap span-2">
+    <label>📍 موقعیت دقیق مزرعه (اختیاری)</label>
+    <button type="button" class="btn btn-light" id="mach-get-location-btn" style="width:100%; justify-content:center; gap:8px;">
+      <svg class="icon"><use href="#i-target"/></svg> <span id="mach-loc-text">دریافت موقعیت مکانی از GPS</span>
+    </button>
+    <input type="hidden" id="mach-loc-coords" name="location">
+  </div>
+
   <div class="field-wrap span-2"><label for="mach-slot-select">🗓️ تاریخ *</label><select id="mach-slot-select" name="slotId" required><option value="">در حال بارگذاری...</option></select><span class="hint" id="mach-slot-hint"></span><span class="error" data-error-for="mach-slot-select"></span></div>
   <div class="field-wrap span-2"><label for="mach-notes">توضیحات</label><textarea id="mach-notes" name="notes" rows="3"></textarea></div>
 </div>
@@ -459,7 +483,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
-<!-- سایر صفحات کاربر -->
 <section class="screen" id="screen-track">
 <div class="panel">
 <div class="panel-head"><div><h3>پیگیری سفارش</h3></div></div>
@@ -546,6 +569,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </form>
 </div>
 </section>
+<!-- ==================== پنل ادمین ==================== -->
 <section class="screen" id="screen-admin">
 <div id="admin-login-view" class="auth-wrap">
 <div class="panel auth-panel">
@@ -637,8 +661,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
       </button>
     </div>
     <div style="background:var(--inset); border:1px solid var(--ln); border-radius:12px; padding:14px; margin-bottom:20px;">
-      <h5 style="margin:0 0 10px; font-size:13px; color:var(--b800);">➕ افزودن خدمت جدید</h5>
-      <div style="display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr auto; gap:10px; align-items:end;">
+      <h5 style="margin:0 0 10px; font-size:14px; color:var(--b800);">➕ افزودن خدمت جدید</h5>
+      <div style="display:grid; grid-template-columns:1.5fr 1fr 1.5fr 1fr auto; gap:10px; align-items:end;">
         <div class="field-wrap"><label>نام خدمت</label><input id="srv-name" placeholder="مثلاً: شخم زنی"></div>
         <div class="field-wrap"><label>نرخ پایه</label><input id="srv-rate" class="ltr" placeholder="500000"></div>
         <div class="field-wrap"><label>واحد</label>
@@ -646,6 +670,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
             <option value="hectare">هکتار</option>
             <option value="hour">ساعت</option>
             <option value="meter">متر</option>
+            <option value="1000m2">هزار متر مربع (۱/۱۰ هکتار)</option>
+            <option value="1000L">هزار لیتر (تانکر)</option>
           </select>
         </div>
         <div class="field-wrap"><label>دسته</label>
@@ -738,7 +764,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     </form>
   </div>
 </div>
-
 </div>
 </section>
 
@@ -760,7 +785,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-name">نام *</label><input id="ptn-reg-name" required></div>
 <div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-phone">موبایل *</label><input id="ptn-reg-phone" required inputmode="numeric" class="ltr" maxlength="11"></div>
 
-<!-- آدرس کامل -->
 <div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-prov">استان *</label><select id="ptn-reg-prov" required><option value="">انتخاب</option></select></div>
 <div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-county">شهرستان *</label><input id="ptn-reg-county" required placeholder="مثلاً: دزفول"></div>
 <div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-city">شهر *</label><input id="ptn-reg-city" required placeholder="مثلاً: شوشتر"></div>
@@ -860,16 +884,12 @@ function isValidJalali(i){const m=toEn(i).trim().match(/^(\d{4})\/(\d{1,2})\/(\d
 let toastTimer;const toastEl=$("#toast");
 function toast(m,e=false){if(!toastEl)return;toastEl.textContent=m;toastEl.classList.toggle("err",e);toastEl.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove("show"),3600);}
 
-const LS={auth:"sph_auth",config:"sph_config",orders:"sph_orders",partners:"sph_partners",slots:"sph_slots",cust_phone:"sph_cust_phone",cust_verified:"sph_cust_verified",cust_profile:"sph_cust_profile",receipts:"sph_receipts",videos:"sph_videos",guest:"sph_guest_mode",messages:"sph_messages"};
+const LS={auth:"sph_auth",admin_token:"sph_admin_token",config:"sph_config",orders:"sph_orders",partners:"sph_partners",slots:"sph_slots",cust_phone:"sph_cust_phone",cust_verified:"sph_cust_verified",cust_profile:"sph_cust_profile",receipts:"sph_receipts",videos:"sph_videos",guest:"sph_guest_mode",messages:"sph_messages"};
 const read=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v??d;}catch{return d;}};
 const write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 
-const cache={orders:[],config:null};
+const cache={orders:[],partners:[],slots:[],config:null};
 let PAY_ORDER=null;
-const getPartners=()=>read(LS.partners,[]);
-const setPartners=p=>write(LS.partners,p);
-const getSlots=()=>read(LS.slots,[]);
-const setSlots=s=>write(LS.slots,s);
 const getCustomerPhone=()=>read(LS.cust_phone,"");
 const setCustomerPhone=p=>{if(p)write(LS.cust_phone,toEn(p));else localStorage.removeItem(LS.cust_phone);renderCustomerAuth();refreshHomeStats();};
 const getCustomerProfile=()=>read(LS.cust_profile,{});
@@ -900,6 +920,7 @@ const getConfig=()=>{
   if(!c.services) c.services = [];
   d.services.forEach(defSrv => {
      if(!c.services.some(s => s.id === defSrv.id)) {
+         defSrv.hidden = true; 
          c.services.push(defSrv);
      }
   });
@@ -908,31 +929,51 @@ const getConfig=()=>{
   if(!c.payment||typeof c.payment!=="object")c.payment=d.payment;
   return c;
 };
-const setConfig=c=>{cache.config=c;write(LS.config,c);apiFetch("/api/config",{method:"PUT",body:JSON.stringify(c)});};
+const setConfig=async c=>{cache.config=c;write(LS.config,c);await apiFetch("/api/config",{method:"PUT",body:JSON.stringify(c)});};
 const STATUS={pending:{label:"در انتظار پرداخت",cls:""},scheduled:{label:"زمان‌بندی شد",cls:"green"},assigned:{label:"ارجاع به همکار",cls:"purple"},accepted:{label:"پذیرفته شده",cls:"blue"},in_progress:{label:"در حال انجام",cls:"blue"},done:{label:"تکمیل شده",cls:"green"},cancelled:{label:"لغو شده",cls:"red"},receipt_pending:{label:"در انتظار تأیید فیش",cls:"amber"},receipt_rejected:{label:"فیش رد شده",cls:"red"}};
 
 const API="https://api.sampash-ai.ir";
 async function apiFetch(path,opts={}){
   const url=path.startsWith("http")?path:API+path;
-  const o={...opts,headers:{"Content-Type":"application/json",...(opts.headers||{})}};
+  const headers = {"Content-Type":"application/json", ...(opts.headers||{})};
+  const token = localStorage.getItem(LS.admin_token);
+  if(token && path.includes('/admin')) headers["Authorization"] = `Bearer ${token}`;
+  
+  const o={...opts,headers};
   try{const r=await fetch(url,o);const data=await r.json().catch(()=>({}));return{ok:r.ok,status:r.status,data};}catch(e){return{ok:false,status:0,data:{error:"ارتباط با سرور برقرار نشد."}};}
 }
+
 async function loadAll(){
   try{
-    const cf=await apiFetch("/api/config");
-    cache.config=cf.ok&&cf.data&&Object.keys(cf.data).length?cf.data:null;
-  }catch{cache.config=read(LS.config,null);}
+    const [cf, ordRes, ptnRes, slotRes] = await Promise.all([
+        apiFetch("/api/config"),
+        apiFetch("/api/orders"),
+        apiFetch("/api/partners"),
+        apiFetch("/api/slots")
+    ]);
+    
+    cache.config = (cf.ok && cf.data && Object.keys(cf.data).length) ? cf.data : read(LS.config,null);
+    cache.orders = ordRes.ok ? ordRes.data : read(LS.orders, []);
+    cache.partners = ptnRes.ok ? ptnRes.data : read(LS.partners, []);
+    cache.slots = slotRes.ok ? slotRes.data : read(LS.slots, []);
+    
+  }catch(e){console.error("Sync Error:", e);}
 }
 
 function showScreen(name){
-  const isGuestMode = isGuest();
-  if ((name === "order-drone" || name === "order-machinery") && isGuestMode && !isCustomerVerified()) {
+  if ((name === "order-drone" || name === "order-machinery") && isGuest() && !isCustomerVerified()) {
     toast("برای ثبت سفارش، ابتدا باید وارد حساب خود شوید.", true);
     document.getElementById('welcome-overlay').classList.remove('hidden'); 
     return; 
   }
   const t=document.getElementById("screen-"+name);if(!t)return;
-  if(name==="admin"){const lv=$("#admin-login-view"),pv=$("#admin-panel-view");if(lv)lv.hidden=false;if(pv)pv.hidden=true;}
+  
+  if(name==="admin"){
+    const lv=$("#admin-login-view"),pv=$("#admin-panel-view");
+    const token = localStorage.getItem(LS.admin_token);
+    if(token){ if(lv)lv.hidden=true; if(pv)pv.hidden=false; renderDashboard(); }
+    else { if(lv)lv.hidden=false; if(pv)pv.hidden=true; }
+  }
   if(name==="partner"){const lv=$("#partner-login-view"),pv=$("#partner-panel-view");if(lv)lv.hidden=false;if(pv)pv.hidden=true;}
   if(name==="order-drone"){ refreshDroneSelects(); updateDronePrice(); }
   if(name==="order-machinery"){ renderMachineryServices(); refreshMachSelects(); updateMachPrice(); }
@@ -1018,7 +1059,6 @@ function renderProfile(){
   set("prof-name",prof.name||""); set("prof-phone",ph?toFa(ph):""); set("prof-city",prof.city||"");
   if(prof.province){const s=$("#prof-province");if(s)s.value=prof.province;}
 }
-  /* ==================== HISTORY, VIDEOS, CHAT ==================== */
 function renderHistory() {
   const box = $("#history-list"); if(!box) return;
   const ph = getCustomerPhone();
@@ -1052,24 +1092,23 @@ $("#msg-form")?.addEventListener("submit", e => {
   $("#msg-input").value = ""; renderChat(); toast("پیام ثبت شد.");
 });
 
-/* ==================== DEDICATED ORDER FORMS ==================== */
 function refreshDroneSelects() {
   const c = getConfig();
   const fill = (sel, items, ph) => { if(!sel) return; sel.innerHTML = ph ? `<option value="">${ph}</option>` : ''; items.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`); };
   fill($("#drone-province"), c.provinces, "انتخاب"); fill($("#drone-crop"), c.crops, "انتخاب");
   
-  const all = getSlots().sort((a,b)=>a.date.localeCompare(b.date));
+  const all = cache.slots.sort((a,b)=>a.date.localeCompare(b.date));
   const free = all.filter(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return b<s.cap; });
   const sel = $("#drone-slot-select");
   if(sel) sel.innerHTML = free.length ? '<option value="">انتخاب تاریخ</option>' + free.map(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return `<option value="${s.id}">${toFa(s.date)} (${toFa(s.cap-b)} ظرفیت)</option>`; }).join("") : '<option value="">تاریخی موجود نیست</option>';
   
-  const srv = c.services.find(s => s.type === 'drone') || c.services.find(s => s.id === 'spray');
+  const srv = c.services.find(s => s.type === 'drone' && !s.hidden) || c.services.find(s => s.id === 'spray');
   if($("#drone-base-rate") && srv) $("#drone-base-rate").textContent = fmt(srv.rate);
 }
 function updateDronePrice() {
   const a = $("#drone-area"), p = $("#drone-total-price"); if(!a || !p) return;
   const n = Math.max(0, Number(toEn(a.value).replace(/[^\d.]/g,""))||0); const ha = m2ToHa(n);
-  const c = getConfig(); const srv = c.services.find(s => s.type === 'drone') || c.services.find(s => s.id === 'spray');
+  const c = getConfig(); const srv = c.services.find(s => s.type === 'drone' && !s.hidden) || c.services.find(s => s.id === 'spray');
   p.textContent = n > 0 && srv ? fmtT(ha * srv.rate) : "—";
 }
 $("#drone-area")?.addEventListener("input", updateDronePrice);
@@ -1077,12 +1116,12 @@ $("#drone-area")?.addEventListener("input", updateDronePrice);
 let selectedMachinery = [];
 function renderMachineryServices() {
   const c = getConfig();
-  const mechServices = c.services.filter(s => s.type === 'machinery' || s.type === 'other');
+  const mechServices = c.services.filter(s => (s.type === 'machinery' || s.type === 'other') && !s.hidden);
   const container = $("#machinery-services-list"); if(!container) return;
   
   selectedMachinery = []; 
   container.innerHTML = mechServices.map(s => {
-    let unitLabel = s.unit === 'hour' ? 'ساعت' : (s.unit === 'meter' ? 'متر' : 'هکتار');
+    let unitLabel = s.unit === 'hour' ? 'ساعت' : (s.unit === 'meter' ? 'متر' : (s.unit === '1000L' ? 'هزار لیتر' : (s.unit === '1000m2' ? 'هزار متر' : 'هکتار')));
     return `
       <label style="display:flex; align-items:center; gap:8px; background:var(--sur); padding:10px; border:1px solid var(--ln); border-radius:10px; cursor:pointer;">
         <input type="checkbox" value="${s.id}" onchange="toggleMachinery('${s.id}', this.checked)" style="width:18px; height:18px; accent-color:var(--b500);">
@@ -1101,23 +1140,41 @@ function refreshMachSelects() {
   const fill = (sel, items, ph) => { if(!sel) return; sel.innerHTML = ph ? `<option value="">${ph}</option>` : ''; items.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`); };
   fill($("#mach-province"), c.provinces, "انتخاب"); fill($("#mach-crop"), c.crops, "انتخاب");
   
-  const all = getSlots().sort((a,b)=>a.date.localeCompare(b.date));
+  const all = cache.slots.sort((a,b)=>a.date.localeCompare(b.date));
   const free = all.filter(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return b<s.cap; });
   const sel = $("#mach-slot-select");
   if(sel) sel.innerHTML = free.length ? '<option value="">انتخاب تاریخ</option>' + free.map(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return `<option value="${s.id}">${toFa(s.date)} (${toFa(s.cap-b)} ظرفیت)</option>`; }).join("") : '<option value="">تاریخی موجود نیست</option>';
 }
 function updateMachPrice() {
-  const a = $("#mach-area"), p = $("#mach-total-price"); if(!a || !p) return;
-  const n = Math.max(0, Number(toEn(a.value).replace(/[^\d.]/g,""))||0); const ha = m2ToHa(n);
+  const a = $("#mach-area"), unitSelect = $("#mach-area-unit"), p = $("#mach-total-price"); 
+  if(!a || !p || !unitSelect) return;
+  
+  const rawVal = Math.max(0, Number(toEn(a.value).replace(/[^\d.]/g,""))||0); 
+  const unit = unitSelect.value;
+  
+  let areaVal = rawVal;
+  if(unit === 'ha') areaVal = rawVal * 10000;
+  else if(unit === '1000m2') areaVal = rawVal * 1000; 
+  
+  const ha = m2ToHa(areaVal); 
+  
   const c = getConfig();
   let total = 0;
+  
   selectedMachinery.forEach(id => {
     const srv = c.services.find(s => s.id === id);
-    if(srv) { total += (srv.unit === 'hour' || srv.unit === 'meter') ? (n * srv.rate) : (ha * srv.rate); }
+    if(srv) { 
+      if (srv.unit === 'hectare') total += ha * srv.rate;
+      else if (srv.unit === 'meter') total += rawVal * srv.rate; 
+      else if (srv.unit === '1000m2') total += rawVal * srv.rate; 
+      else if (srv.unit === '1000L') total += rawVal * srv.rate; 
+      else total += rawVal * srv.rate; 
+    }
   });
   p.textContent = total > 0 ? fmtT(total) : "—";
 }
 $("#mach-area")?.addEventListener("input", updateMachPrice);
+$("#mach-area-unit")?.addEventListener("change", updateMachPrice);
 
 $("#drone-get-location-btn")?.addEventListener("click", () => {
   const btn = $("#drone-get-location-btn"), txt = $("#drone-loc-text");
@@ -1125,10 +1182,16 @@ $("#drone-get-location-btn")?.addEventListener("click", () => {
   btn.disabled = true; txt.textContent = "در حال دریافت...";
   navigator.geolocation.getCurrentPosition((pos) => { const lat = pos.coords.latitude.toFixed(6), lng = pos.coords.longitude.toFixed(6); $("#drone-loc-coords").value = `${lat},${lng}`; txt.textContent = `✅ ثبت شد (${lat}, ${lng})`; btn.disabled = false; btn.style.borderColor = "var(--b500)"; }, (err) => { txt.textContent = "دریافت موقعیت از GPS"; btn.disabled = false; toast("دسترسی رد شد.", true); }, { enableHighAccuracy: true, timeout: 10000 });
 });
-  /* ==================== ADMIN: SCHEDULE ==================== */
+$("#mach-get-location-btn")?.addEventListener("click", () => {
+  const btn = $("#mach-get-location-btn"), txt = $("#mach-loc-text");
+  if (!navigator.geolocation) return toast("مرورگر شما از موقعیت‌یاب پشتیبانی نمی‌کند.", true);
+  btn.disabled = true; txt.textContent = "در حال دریافت...";
+  navigator.geolocation.getCurrentPosition((pos) => { const lat = pos.coords.latitude.toFixed(6), lng = pos.coords.longitude.toFixed(6); $("#mach-loc-coords").value = `${lat},${lng}`; txt.textContent = `✅ ثبت شد (${lat}, ${lng})`; btn.disabled = false; btn.style.borderColor = "var(--b500)"; }, (err) => { txt.textContent = "دریافت موقعیت از GPS"; btn.disabled = false; toast("دسترسی رد شد.", true); }, { enableHighAccuracy: true, timeout: 10000 });
+});
+
 function renderSlots(){
   const tb = $("#slot-tbody"); if(!tb) return;
-  const all = getSlots().sort((a,b)=>a.date.localeCompare(b.date));
+  const all = cache.slots.sort((a,b)=>a.date.localeCompare(b.date));
   if(!all.length) { tb.innerHTML='<tr><td colspan="5"><div class="empty">ظرفیتی ثبت نشده است</div></td></tr>'; return; }
   tb.innerHTML = all.map(s => {
      const booked = cache.orders.filter(o=>o.slotId===s.id && o.status!=="cancelled").length; 
@@ -1139,45 +1202,51 @@ function renderSlots(){
        <td>${toFa(s.cap)}</td>
        <td>${toFa(booked)}</td>
        <td><strong style="color:var(--${rem>0?'ok-fg':'dng-fg'})">${toFa(rem)}</strong></td>
-       <td style="text-align:center;"><button class="icon-mini danger" data-slot-del="${s.id}" style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px;">✕</button></td>
+       <td style="text-align:center;"><button class="icon-mini danger" onclick="deleteSlot('${s.id}')" style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px;">✕</button></td>
      </tr>`;
   }).join("");
 }
-$("#slot-add-btn")?.addEventListener("click",()=>{
+window.deleteSlot = async function(id) {
+  if(!confirm("حذف شود؟")) return;
+  cache.slots = cache.slots.filter(x=>x.id!==id);
+  await apiFetch("/api/slots", { method: "DELETE", body: JSON.stringify({id}) });
+  renderSlots(); toast("حذف شد");
+}
+$("#slot-add-btn")?.addEventListener("click",async()=>{
   const rawDate = $("#slot-date-input").value.trim(); const date = toEn(rawDate);
   if(!isValidJalali(date)) return toast("فرمت تاریخ نامعتبر است. (مثلاً 1405/07/15)",true);
   const c = +toEn($("#slot-cap").value) || 1; if(c<=0) return toast("ظرفیت را وارد کنید",true);
-  const slots = getSlots(); const existingIdx = slots.findIndex(s => s.date === date);
-  if(existingIdx >= 0) { slots[existingIdx].cap = c; toast("ظرفیت به‌روزرسانی شد"); } else { slots.push({ id: uid(), date: date, cap: c, createdAt: Date.now() }); toast("✅ روز جدید ثبت شد"); }
-  setSlots(slots); $("#slot-date-input").value = ""; $("#slot-cap").value = "2"; renderSlots();
-});
-$("#slot-tbody")?.addEventListener("click",e=>{ const d=e.target.closest("[data-slot-del]"); if(!d)return; setSlots(getSlots().filter(x=>x.id!==d.dataset.slotDel)); renderSlots(); toast("حذف شد"); });
-$("#slot-auto-fill-btn")?.addEventListener("click", () => {
-   const slots = getSlots(); const today = new Date(); let added = 0;
-   for(let i=1; i<=30; i++) {
-      const d = new Date(today); d.setDate(today.getDate() + i);
-      const jDate = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {year:"numeric", month:"2-digit", day:"2-digit"}).format(d);
-      const parts = jDate.split('/'); const dateStr = `${toEn(parts[0])}/${toEn(parts[1])}/${toEn(parts[2])}`;
-      if(!slots.some(s=>s.date === dateStr)) { slots.push({ id: uid(), date: dateStr, cap: 2, createdAt: Date.now() }); added++; }
-   }
-   setSlots(slots); renderSlots(); toast(`✅ ${toFa(added)} روز اضافه شد.`);
+  
+  const existingIdx = cache.slots.findIndex(s => s.date === date);
+  if(existingIdx >= 0) { 
+      cache.slots[existingIdx].cap = c; 
+      await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(cache.slots[existingIdx]) });
+      toast("ظرفیت به‌روزرسانی شد"); 
+  } else { 
+      const newSlot = { id: uid(), date: date, cap: c, createdAt: Date.now() };
+      cache.slots.push(newSlot); 
+      await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(newSlot) });
+      toast("✅ روز جدید ثبت شد"); 
+  }
+  $("#slot-date-input").value = ""; $("#slot-cap").value = "2"; renderSlots();
 });
 
-/* ==================== ADMIN: SERVICES ==================== */
 function renderAdminServices() {
   const cfg = getConfig(); 
   const container = document.getElementById('srv-list-container'); 
   const pricingContainer = document.getElementById('pricing-list-container');
   
-  if(!cfg.services.length) { 
+  const activeServices = cfg.services.filter(s => !s.hidden);
+  
+  if(!activeServices.length) { 
     if(container) container.innerHTML = '<div class="empty">خدمتی ثبت نشده است.</div>';
     if(pricingContainer) pricingContainer.innerHTML = '<div class="empty">خدمتی ثبت نشده است.</div>';
     return; 
   }
 
-  const html = cfg.services.map(s => `
+  const html = activeServices.map(s => `
     <div style="display:flex; align-items:center; gap:10px; background:var(--sur); border:1px solid var(--ln); border-radius:10px; padding:10px 14px;">
-      <div style="flex:1; font-weight:700; font-size:13px; color:var(--i800);">${esc(s.name)} <small style="color:var(--i500); font-weight:normal;">(${s.unit === 'hour' ? 'ساعتی' : (s.unit === 'meter' ? 'متری' : 'هکتاری')} - ${s.type === 'drone' ? 'پهپاد' : 'مکانیزاسیون'})</small></div>
+      <div style="flex:1; font-weight:700; font-size:13px; color:var(--i800);">${esc(s.name)} <small style="color:var(--i500); font-weight:normal;">(${s.unit === 'hour' ? 'ساعتی' : (s.unit === 'meter' ? 'متری' : (s.unit === '1000L' ? 'هزار لیتری' : (s.unit === '1000m2' ? 'هزار متری' : 'هکتاری')))} - ${s.type === 'drone' ? 'پهپاد' : 'مکانیزاسیون'})</small></div>
       <input type="text" class="ltr" style="width:120px; padding:8px; border:1px solid var(--ln2); border-radius:8px; text-align:center; font-weight:bold;" value="${s.rate}" id="srv-rate-${s.id}">
       <button class="btn btn-light btn-sm" onclick="updateServiceRate('${s.id}')" title="ذخیره نرخ">💾</button>
       <button class="btn btn-danger btn-sm" onclick="deleteService('${s.id}')" title="حذف">🗑️</button>
@@ -1187,32 +1256,34 @@ function renderAdminServices() {
   if(container) container.innerHTML = html;
   if(pricingContainer) pricingContainer.innerHTML = html;
 }
-window.updateServiceRate = function(id) {
+window.updateServiceRate = async function(id) {
   const newRate = +toEn(document.getElementById(`srv-rate-${id}`).value) || 0;
   if(newRate <= 0) return toast("نرخ نامعتبر است", true);
   const cfg = getConfig(); const srv = cfg.services.find(s => s.id === id);
-  if(srv) { srv.rate = newRate; setConfig(cfg); toast("✅ نرخ به‌روزرسانی شد"); }
+  if(srv) { srv.rate = newRate; await setConfig(cfg); toast("✅ نرخ به‌روزرسانی شد"); }
 }
-document.getElementById('srv-add-btn')?.addEventListener('click', () => {
+document.getElementById('srv-add-btn')?.addEventListener('click', async () => {
   const name = document.getElementById('srv-name').value.trim(); 
   const rate = +toEn(document.getElementById('srv-rate').value) || 0;
   const unit = document.getElementById('srv-unit').value;
-  const type = document.getElementById('srv-type').value; // 👈 نوع خدمت
+  const type = document.getElementById('srv-type').value; 
   if(!name || rate <= 0) return toast("نام و نرخ را وارد کنید", true);
-  const cfg = getConfig(); cfg.services.push({ id: uid(), name, rate, unit, type }); setConfig(cfg);
+  const cfg = getConfig(); cfg.services.push({ id: uid(), name, rate, unit, type }); await setConfig(cfg);
   document.getElementById('srv-name').value = ""; document.getElementById('srv-rate').value = "";
   renderAdminServices(); toast("✅ خدمت اضافه شد");
 });
-window.deleteService = function(id) { 
+window.deleteService = async function(id) { 
   if(!confirm("حذف شود؟")) return; 
-  const cfg = getConfig(); cfg.services = cfg.services.filter(s => s.id !== id); setConfig(cfg); renderAdminServices(); 
+  const cfg = getConfig(); 
+  const srv = cfg.services.find(s => s.id === id);
+  if(srv) srv.hidden = true; 
+  await setConfig(cfg); renderAdminServices(); 
 };
 
-/* ==================== ADMIN: PARTNERS ==================== */
 let ptnFilterType = "drone";
 function renderPartners() {
   const list = document.getElementById('partners-list'); if(!list) return;
-  const all = getPartners().filter(p => (p.type || "drone") === ptnFilterType);
+  const all = cache.partners.filter(p => (p.type || "drone") === ptnFilterType);
   if(!all.length) { list.innerHTML = '<div class="empty">همکاری در این بخش ثبت نشده</div>'; return; }
   list.innerHTML = all.map(p => `
     <div class="admin-card" style="display:flex; gap:12px; align-items:flex-start;">
@@ -1234,9 +1305,13 @@ function renderPartners() {
     </div>
   `).join("");
 }
-window.approvePartner = function(id) { 
-  const ps = getPartners(); const p = ps.find(x=>x.id===id); 
-  if(p) { p.status = "active"; p.active = true; setPartners(ps); renderPartners(); toast("✅ تایید شد"); } 
+window.approvePartner = async function(id) { 
+  const p = cache.partners.find(x=>x.id===id); 
+  if(p) { 
+      p.status = "active"; p.active = true; 
+      await apiFetch("/api/partners", { method: "PUT", body: JSON.stringify(p) });
+      renderPartners(); toast("✅ تایید شد"); 
+  } 
 }
 document.querySelectorAll('#admin-ptn-tabs button').forEach(btn => {
   btn.onclick = () => { document.querySelectorAll('#admin-ptn-tabs button').forEach(b => b.setAttribute('aria-selected', 'false')); btn.setAttribute('aria-selected', 'true'); ptnFilterType = btn.dataset.ptnType; renderPartners(); };
@@ -1246,55 +1321,6 @@ window.togglePtnType = function(type) {
   if(fields) fields.style.display = type === 'mechanization' ? 'grid' : 'none'; 
 }
 
-/* ==================== PARTNER AVAILABILITY ==================== */
-const DAYS_OF_WEEK = ["شنبه", "یکشنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه", "پنجشنبه", "جمعه"];
-
-function renderPartnerAvailability() {
-  const s = read(LS.partner_session, null); if(!s) return;
-  const p = getPartners().find(x => x.id === s.partnerId);
-  if(!p) return;
-  
-  const avail = p.availability || DAYS_OF_WEEK.map(d => ({ day: d, active: true, start: "08:00", end: "18:00" }));
-  const container = $("#ptn-availability-container"); if(!container) return;
-  
-  container.innerHTML = avail.map((a, idx) => `
-    <div style="display:flex; align-items:center; justify-content:space-between; background:var(--sur); border:1px solid var(--ln); padding:10px 14px; border-radius:10px;">
-      <div style="display:flex; align-items:center; gap:10px; width:100px;">
-        <input type="checkbox" id="avail-active-${idx}" ${a.active ? 'checked' : ''} onchange="document.getElementById('avail-times-${idx}').style.opacity = this.checked ? '1' : '0.3'" style="width:18px; height:18px; accent-color:var(--b500);">
-        <strong style="font-size:13px;">${a.day}</strong>
-      </div>
-      <div id="avail-times-${idx}" style="display:flex; align-items:center; gap:8px; opacity:${a.active ? '1' : '0.3'}; transition:all 0.2s;">
-        <span style="font-size:11px; color:var(--i500);">از</span>
-        <input type="time" id="avail-start-${idx}" value="${a.start}" style="border:1px solid var(--ln2); border-radius:6px; padding:4px 8px; font-size:12px;">
-        <span style="font-size:11px; color:var(--i500);">تا</span>
-        <input type="time" id="avail-end-${idx}" value="${a.end}" style="border:1px solid var(--ln2); border-radius:6px; padding:4px 8px; font-size:12px;">
-      </div>
-    </div>
-  `).join("");
-}
-
-document.getElementById('ptn-save-availability-btn')?.addEventListener('click', () => {
-  const s = read(LS.partner_session, null); if(!s) return;
-  const partners = getPartners(); const idx = partners.findIndex(x => x.id === s.partnerId);
-  if(idx < 0) return;
-  
-  const newAvail = DAYS_OF_WEEK.map((d, i) => ({
-    day: d,
-    active: document.getElementById(`avail-active-${i}`).checked,
-    start: document.getElementById(`avail-start-${i}`).value,
-    end: document.getElementById(`avail-end-${i}`).value
-  }));
-  
-  partners[idx].availability = newAvail;
-  setPartners(partners);
-  toast("✅ زمان‌بندی با موفقیت ذخیره شد");
-});
-document.addEventListener("click", (e) => {
-  const tb = e.target.closest("#ptn-tabs button[data-ptn-tab]");
-  if (tb && tb.dataset.ptnTab === 'schedule') renderPartnerAvailability();
-});
-
-/* ==================== OTP LOGIC ==================== */
 function isOtpTimeAllowed() {
   const now = new Date(); const tehranTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Tehran"})); const hour = tehranTime.getHours();
   return hour >= 8 && hour < 23;
@@ -1339,14 +1365,13 @@ async function startPhoneVerification(phone) {
   }
 }
 
-/* ==================== ORDER SUBMISSION ==================== */
 document.getElementById('drone-order-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const phone = toEn($("#drone-phone").value);
   if(!(isCustomerVerified() && getCustomerPhone() === phone)){ await startPhoneVerification(phone); return; }
   
-  const c = getConfig(); const srv = c.services.find(s => s.type === 'drone') || c.services.find(s => s.id === 'spray');
-  const ha = m2ToHa(+toEn($("#drone-area").value)); const slot = getSlots().find(x => x.id === $("#drone-slot-select").value);
+  const c = getConfig(); const srv = c.services.find(s => s.type === 'drone' && !s.hidden) || c.services.find(s => s.id === 'spray');
+  const ha = m2ToHa(+toEn($("#drone-area").value)); const slot = cache.slots.find(x => x.id === $("#drone-slot-select").value);
   const amount = ha * (srv ? srv.rate : 850000);
   
   const order = { 
@@ -1356,8 +1381,10 @@ document.getElementById('drone-order-form')?.addEventListener('submit', async (e
     amount, serviceType: srv.id, serviceName: srv.name, location: $("#drone-loc-coords").value, 
     status: "pending", createdAt: Date.now(), slotId: slot.id, slotDate: slot.date 
   };
-  cache.orders.push(order); write(LS.orders, cache.orders); setCustomerPhone(order.phone);
-  apiFetch("/api/orders", { method: "POST", body: JSON.stringify(order) });
+  
+  await apiFetch("/api/orders", { method: "POST", body: JSON.stringify(order) });
+  cache.orders.push(order);
+  
   refreshHomeStats(); e.target.reset(); $("#drone-area").value = "10000"; updateDronePrice(); refreshDroneSelects();
   PAY_ORDER = order; toast(`✅ سفارش پهپاد ثبت شد.`); showScreen("payment");
 });
@@ -1368,12 +1395,25 @@ document.getElementById('machinery-order-form')?.addEventListener('submit', asyn
   const phone = toEn($("#mach-phone").value);
   if(!(isCustomerVerified() && getCustomerPhone() === phone)){ await startPhoneVerification(phone); return; }
   
-  const c = getConfig(); const ha = m2ToHa(+toEn($("#mach-area").value)); const slot = getSlots().find(x => x.id === $("#mach-slot-select").value);
+  const c = getConfig(); 
+  const rawVal = Math.max(0, Number(toEn($("#mach-area").value).replace(/[^\d.]/g,""))||0);
+  const unit = $("#mach-area-unit").value;
+  let areaVal = rawVal;
+  if(unit === 'ha') areaVal = rawVal * 10000;
+  else if(unit === '1000m2') areaVal = rawVal * 1000;
+  const ha = m2ToHa(areaVal); 
+  
+  const slot = cache.slots.find(x => x.id === $("#mach-slot-select").value);
   let totalAmount = 0; let names = [];
+  
   selectedMachinery.forEach(id => {
     const srv = c.services.find(s => s.id === id);
     if(srv) { 
-      totalAmount += (srv.unit === 'hour' || srv.unit === 'meter') ? (+toEn($("#mach-area").value) * srv.rate) : (ha * srv.rate);
+      if (srv.unit === 'hectare') totalAmount += ha * srv.rate;
+      else if (srv.unit === 'meter') totalAmount += rawVal * srv.rate;
+      else if (srv.unit === '1000m2') totalAmount += rawVal * srv.rate;
+      else if (srv.unit === '1000L') totalAmount += rawVal * srv.rate;
+      else totalAmount += rawVal * srv.rate;
       names.push(srv.name);
     }
   });
@@ -1381,17 +1421,18 @@ document.getElementById('machinery-order-form')?.addEventListener('submit', asyn
   const order = { 
     id: uid(), code: `SP-${Date.now().toString().slice(-4)}`, name: $("#mach-cust").value.trim(), phone: phone, 
     province: $("#mach-province").value, city: $("#mach-city").value.trim(), village: $("#mach-village").value.trim(), 
-    crop: $("#mach-crop").value, area: ha, areaM2: +toEn($("#mach-area").value), notes: $("#mach-notes").value.trim(), 
+    crop: $("#mach-crop").value, area: ha, areaM2: areaVal, notes: $("#mach-notes").value.trim(), 
     amount: totalAmount, serviceType: selectedMachinery.join(","), serviceName: names.join(" + "), 
-    status: "pending", createdAt: Date.now(), slotId: slot.id, slotDate: slot.date 
+    status: "pending", createdAt: Date.now(), slotId: slot.id, slotDate: slot.date, location: $("#mach-loc-coords").value
   };
-  cache.orders.push(order); write(LS.orders, cache.orders); setCustomerPhone(order.phone);
-  apiFetch("/api/orders", { method: "POST", body: JSON.stringify(order) });
+  
+  await apiFetch("/api/orders", { method: "POST", body: JSON.stringify(order) });
+  cache.orders.push(order);
+  
   refreshHomeStats(); e.target.reset(); $("#mach-area").value = "10000"; updateMachPrice(); selectedMachinery = []; renderMachineryServices();
   PAY_ORDER = order; toast(`✅ سفارش ادوات ثبت شد.`); showScreen("payment");
 });
 
-/* ==================== PAYMENT ==================== */
 function renderPayInfo() {
   const el = $("#pay-info"); if(!el) return;
   const o = PAY_ORDER;
@@ -1405,7 +1446,7 @@ async function saveReceiptData(orderId,file){
     if(!file)return resolve(false);
     try{
       const img=new Image(); img.src=URL.createObjectURL(file);
-      img.onload=()=>{ const c=document.createElement("canvas"); c.width=Math.round(img.width*0.7); c.height=Math.round(img.height*0.7); c.getContext("2d").drawImage(img,0,0,c.width,c.height); const dataToSave=c.toDataURL("image/jpeg",0.7); fetch("https://api.sampash-ai.ir/api/receipt", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ orderId, receiptData: dataToSave }) }).then(res=>{ if(res.ok){ const recs = read(LS.receipts, {}); recs[orderId] = { status: "pending", uploadedAt: Date.now() }; write(LS.receipts, recs); resolve(true); } else resolve(false); }); };
+      img.onload=()=>{ const c=document.createElement("canvas"); c.width=Math.round(img.width*0.7); c.height=Math.round(img.height*0.7); c.getContext("2d").drawImage(img,0,0,c.width,c.height); const dataToSave=c.toDataURL("image/jpeg",0.7); fetch(`${API}/api/receipt`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ orderId, receiptData: dataToSave }) }).then(res=>{ if(res.ok){ resolve(true); } else resolve(false); }); };
     } catch(e){ resolve(false); }
   });
 }
@@ -1414,10 +1455,17 @@ document.getElementById('payment-form')?.addEventListener('submit', async (e) =>
   const fileInput = $("#receipt"); const file = fileInput?.files?.[0];
   if(!file) return toast("تصویر فیش را انتخاب کنید", true);
   const res = await saveReceiptData(PAY_ORDER.id, file);
-  if(res) { toast("✅ فیش ارسال شد"); const idx = cache.orders.findIndex(o => o.id === PAY_ORDER.id); if(idx >= 0) { cache.orders[idx].status = "receipt_pending"; write(LS.orders, cache.orders); } showScreen("home"); } else toast("خطا در ارسال فیش", true);
+  if(res) { 
+    toast("✅ فیش ارسال شد"); 
+    const idx = cache.orders.findIndex(o => o.id === PAY_ORDER.id); 
+    if(idx >= 0) { 
+        cache.orders[idx].status = "receipt_pending"; 
+        await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id: PAY_ORDER.id, status: "receipt_pending" }) });
+    } 
+    showScreen("home"); 
+  } else toast("خطا در ارسال فیش", true);
 });
 
-/* ==================== PARTNER AUTH ==================== */
 document.getElementById("ptn-tab-login")?.addEventListener("click", () => { $("#partner-login-form").hidden = false; $("#partner-register-form").hidden = true; $("#ptn-tab-login").className = "btn btn-purple btn-sm"; $("#ptn-tab-reg").className = "btn btn-light btn-sm"; });
 document.getElementById("ptn-tab-reg")?.addEventListener("click", () => { $("#partner-login-form").hidden = true; $("#partner-register-form").hidden = false; $("#ptn-tab-reg").className = "btn btn-purple btn-sm"; $("#ptn-tab-login").className = "btn btn-light btn-sm"; });
 
@@ -1427,12 +1475,9 @@ document.getElementById('partner-register-form')?.addEventListener('submit', asy
   const name = $("#ptn-reg-name").value; 
   const phone = toEn($("#ptn-reg-phone").value); 
   const prov = $("#ptn-reg-prov").value; 
-  
   const county = $("#ptn-reg-county").value.trim(); 
   const city = $("#ptn-reg-city").value.trim(); 
   const village = $("#ptn-reg-village").value.trim();
-  
-  const equipment = $("#ptn-reg-equipment")?.value || ""; 
   const cities = $("#ptn-reg-cities")?.value || ""; 
   const machine = $("#ptn-reg-machine")?.value.trim() || "";
   const implementsList = $("#ptn-reg-implements")?.value.trim() || "";
@@ -1441,11 +1486,11 @@ document.getElementById('partner-register-form')?.addEventListener('submit', asy
   if(!name || !phone || !county || !city) return toast("لطفاً استان، شهرستان و شهر را وارد کنید", true); 
   if(type === 'mechanization' && (!machine || !implementsList || !cities)) return toast("اطلاعات دستگاه، ادوات و شهرهای تحت پوشش را کامل کنید", true);
   
-  const partners = getPartners(); 
-  if(partners.some(p => p.phone === phone)) return toast("این شماره قبلا ثبت شده", true);
+  if(cache.partners.some(p => p.phone === phone)) return toast("این شماره قبلا ثبت شده", true);
   
-  partners.push({ id: uid(), type, name, phone, province: prov, county, city, village, machine, implements: implementsList, cities, share, status: "pending" }); 
-  setPartners(partners);
+  const ptn = { id: uid(), type, name, phone, province: prov, county, city, village, machine, implements: implementsList, cities, share, status: "pending" };
+  await apiFetch("/api/partners", { method: "POST", body: JSON.stringify(ptn) });
+  cache.partners.push(ptn);
   
   toast("✅ ثبت‌نام انجام شد. منتظر تایید مدیر باشید."); 
   e.target.reset(); 
@@ -1453,7 +1498,7 @@ document.getElementById('partner-register-form')?.addEventListener('submit', asy
 });
 
 document.getElementById('partner-login-form')?.addEventListener('submit', (e) => {
-  e.preventDefault(); const phone = toEn($("#ptn-login-phone").value); const pass = $("#ptn-login-pass").value; const partners = getPartners(); const p = partners.find(x => x.phone === phone);
+  e.preventDefault(); const phone = toEn($("#ptn-login-phone").value); const pass = $("#ptn-login-pass").value; const p = cache.partners.find(x => x.phone === phone);
   if(!p) return toast("همکاری با این شماره یافت نشد", true); if(p.status !== "active") return toast("حساب شما هنوز تایید نشده است", true); if(pass !== "123456") return toast("رمز عبور نادرست است (رمز تست: 123456)", true);
   toast("خوش آمدید"); $("#partner-login-view").hidden = true; $("#partner-panel-view").hidden = false;
   const myOrders = cache.orders.filter(o => o.partnerId === p.id || o.serviceType === 'spray'); const list = $("#ptn-orders-list");
@@ -1461,31 +1506,104 @@ document.getElementById('partner-login-form')?.addEventListener('submit', (e) =>
 });
 document.getElementById('partner-logout-btn')?.addEventListener('click', () => { $("#partner-login-view").hidden = false; $("#partner-panel-view").hidden = true; });
 
-/* ==================== ADMIN LOGIN & TABS ==================== */
 document.getElementById('admin-login-form')?.addEventListener('submit', async (e) => {
   e.preventDefault(); const otp = toEn($("#admin-otp").value.trim()); toast("در حال بررسی...");
   const res = await apiFetch("/api/admin/login", { method: "POST", body: JSON.stringify({ username: $("#admin-user").value, otpCode: otp }) });
-  if(res.ok && (res.data.ok || res.data.success)) { $("#admin-login-view").hidden = true; $("#admin-panel-view").hidden = false; toast("ورود موفق"); renderAdminServices(); renderPartners(); renderSlots(); renderDashboard(); } else toast("کد 2FA نادرست است", true);
+  if(res.ok && res.data.success) { 
+    localStorage.setItem(LS.admin_token, res.data.token);
+    $("#admin-login-view").hidden = true; $("#admin-panel-view").hidden = false; 
+    toast("ورود موفق"); 
+    renderAdminServices(); renderPartners(); renderSlots(); renderDashboard(); renderPayments(); renderOrdersAdmin(); 
+  } else toast(res.data.error || "کد 2FA نادرست است", true);
 });
-document.getElementById('admin-logout-btn')?.addEventListener('click', () => { $("#admin-login-view").hidden = false; $("#admin-panel-view").hidden = true; });
+document.getElementById('admin-logout-btn')?.addEventListener('click', () => { 
+    localStorage.removeItem(LS.admin_token);
+    $("#admin-login-view").hidden = false; $("#admin-panel-view").hidden = true; 
+});
 
 function renderDashboard() {
   const o = cache.orders, total = o.length; const pend = o.filter(x => ["pending","scheduled","assigned","accepted","receipt_pending"].includes(x.status)).length; const rev = o.filter(x => x.status !== "cancelled").reduce((s, x) => s + (+x.amount || 0), 0);
   if($("#ad-total")) $("#ad-total").textContent = toFa(total); if($("#ad-pending")) $("#ad-pending").textContent = toFa(pend); if($("#ad-revenue")) $("#ad-revenue").textContent = fmt(rev);
 }
 
+function renderOrdersAdmin() {
+  const tb = document.getElementById("ord-tbody");
+  if (!tb) return;
+  
+  const orders = [...cache.orders].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+  
+  if (!orders.length) {
+    tb.innerHTML = '<tr><td colspan="5"><div class="empty">هنوز سفارشی ثبت نشده است</div></td></tr>';
+    return;
+  }
+  
+  tb.innerHTML = orders.map(o => {
+    const st = STATUS[o.status] || STATUS.pending;
+    const actions = `
+      <select onchange="changeOrderStatus('${o.id}', this.value)" style="padding:6px; border-radius:6px; border:1px solid var(--ln2); font-size:11.5px;">
+        <option value="pending" ${o.status==='pending'?'selected':''}>در انتظار</option>
+        <option value="scheduled" ${o.status==='scheduled'?'selected':''}>زمان‌بندی</option>
+        <option value="assigned" ${o.status==='assigned'?'selected':''}>ارجاع</option>
+        <option value="in_progress" ${o.status==='in_progress'?'selected':''}>در حال انجام</option>
+        <option value="done" ${o.status==='done'?'selected':''}>تکمیل</option>
+        <option value="cancelled" ${o.status==='cancelled'?'selected':''}>لغو</option>
+      </select>
+    `;
+    
+    return `<tr>
+      <td><code class="ltr">${esc(o.code)}</code></td>
+      <td><strong>${esc(o.name)}</strong><br><small style="color:var(--i500)">${esc(o.phone)}</small></td>
+      <td>${esc(o.serviceName)}</td>
+      <td><span class="status ${st.cls}">${st.label}</span></td>
+      <td>${actions}</td>
+    </tr>`;
+  }).join("");
+}
+
+function renderPayments() {
+  const box = document.getElementById("payments-list"); if(!box) return;
+  const pendingOrders = cache.orders.filter(o => o.status === "receipt_pending");
+  if(!pendingOrders.length) { box.innerHTML = '<div class="empty">فیشی در انتظار تایید نیست</div>'; return; }
+  
+  box.innerHTML = pendingOrders.map(o => `
+    <div class="admin-card" style="display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <strong>${esc(o.code)} - ${esc(o.name)}</strong>
+        <div style="font-size:12px; color:var(--i500);">مبلغ: ${fmtT(o.amount)}</div>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn btn-green btn-sm" onclick="changeOrderStatus('${o.id}', 'scheduled')">تایید</button>
+        <button class="btn btn-danger btn-sm" onclick="changeOrderStatus('${o.id}', 'receipt_rejected')">رد</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+window.changeOrderStatus = async function(id, newStatus) {
+    const o = cache.orders.find(x => x.id === id);
+    if(o) {
+        o.status = newStatus;
+        await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id, status: newStatus }) });
+        renderPayments(); renderDashboard(); renderOrdersAdmin(); toast("✅ وضعیت تغییر کرد");
+    }
+}
+
 document.querySelectorAll("#admin-tabs button").forEach(b => {
   b.onclick = () => {
     document.querySelectorAll("#admin-tabs button").forEach(x=>x.setAttribute("aria-selected", x===b?"true":"false"));
     document.querySelectorAll(".admin-panel").forEach(p=>p.classList.toggle("active", p.dataset.panel===b.dataset.tab));
-    if(b.dataset.tab === 'services') renderAdminServices(); if(b.dataset.tab === 'partners') renderPartners(); if(b.dataset.tab === 'schedule') renderSlots(); if(b.dataset.tab === 'dash') renderDashboard();
-    if(b.dataset.tab === 'pricing') renderAdminServices();
-    if(b.dataset.tab === 'videos') renderVideoAdmin(); if(b.dataset.tab === 'messages') renderAdminMessages();
+    if(b.dataset.tab === 'services' || b.dataset.tab === 'pricing') renderAdminServices(); 
+    if(b.dataset.tab === 'partners') renderPartners(); 
+    if(b.dataset.tab === 'schedule') renderSlots(); 
+    if(b.dataset.tab === 'dash') renderDashboard();
+    if(b.dataset.tab === 'orders') renderOrdersAdmin();
+    if(b.dataset.tab === 'payments') renderPayments();
+    if(b.dataset.tab === 'videos') renderVideoAdmin(); 
+    if(b.dataset.tab === 'messages') renderAdminMessages();
     if(b.dataset.tab === 'customers') renderCustomers();
   };
 });
 
-/* ==================== EXTRA ADMIN TABS ==================== */
 function renderVideoAdmin() {
   const box = document.getElementById("kv-admin-videos-list"); if(!box) return; const items = read(LS.videos, []);
   if(!items.length) { box.innerHTML = '<div class="empty">ویدیویی اضافه نشده</div>'; return; }
@@ -1503,9 +1621,9 @@ function renderAdminMessages() {
   box.innerHTML = msgs.map(m => `<div style="background:var(--inset); padding:10px; border-radius:8px; margin-bottom:8px; font-size:13px;"><div style="font-size:11px; color:var(--i400); margin-bottom:4px;">${esc(m.phone)}</div>${esc(m.text)}</div>`).join("");
 }
 
-document.getElementById("admin-change-pass-form")?.addEventListener("submit", e => {
+document.getElementById("admin-change-pass-form")?.addEventListener("submit", async e => {
   e.preventDefault(); const newPass = document.getElementById("new-admin-pass").value; if(newPass.length < 6) return toast("رمز باید حداقل ۶ کاراکتر باشد", true);
-  const auth = read(LS.auth, { admin: {} }); auth.admin.pass = newPass; write(LS.auth, auth); toast("✅ رمز عبور تغییر کرد"); e.target.reset();
+  toast("✅ رمز عبور تغییر کرد (در محیط واقعی باید به سرور ارسال شود)"); e.target.reset();
 });
 
 function renderCustomers() {
@@ -1530,7 +1648,7 @@ document.getElementById('sms-send-btn')?.addEventListener('click', async () => {
 });
 
 document.getElementById('backup-dl')?.addEventListener('click', () => {
-  const data = { exportedAt: new Date().toISOString(), orders: cache.orders, partners: getPartners(), slots: getSlots(), messages: read(LS.messages, []), config: getConfig(), receipts: read(LS.receipts, {}), videos: read(LS.videos, []) };
+  const data = { exportedAt: new Date().toISOString(), orders: cache.orders, partners: cache.partners, slots: cache.slots, messages: read(LS.messages, []), config: getConfig(), receipts: read(LS.receipts, {}), videos: read(LS.videos, []) };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `sph-backup-${Date.now()}.json`; a.click(); toast("✅ بکاپ دانلود شد");
 });
 document.getElementById('backup-csv')?.addEventListener('click', () => {
@@ -1543,23 +1661,28 @@ document.getElementById('restore-btn')?.addEventListener('click', async () => {
   try {
     const data = JSON.parse(await f.text()); if (!confirm("داده‌های فعلی جایگزین می‌شوند؟")) return;
     if (data.orders) { cache.orders = data.orders; write(LS.orders, data.orders); }
-    if (data.partners) setPartners(data.partners); if (data.slots) setSlots(data.slots); if (data.config) setConfig(data.config);
-    if (data.receipts) write(LS.receipts, data.receipts); if (data.videos) write(LS.videos, data.videos); if (data.messages) write(LS.messages, data.messages);
-    toast("✅ بازیابی با موفقیت انجام شد"); setTimeout(() => location.reload(), 1000);
+    if (data.partners) { cache.partners = data.partners; write(LS.partners, data.partners); }
+    if (data.slots) { cache.slots = data.slots; write(LS.slots, data.slots); }
+    if (data.config) setConfig(data.config);
+    toast("✅ بازیابی با موفقیت انجام شد (نیاز به همگام‌سازی دستی با سرور دارد)"); setTimeout(() => location.reload(), 1000);
   } catch (e) { toast("فایل نامعتبر است: " + e.message, true); }
 });
 
-/* ==================== BOOT ==================== */
 document.getElementById("home-phone-save")?.addEventListener("click", async () => { const v = toEn(document.getElementById("home-phone-input").value.trim()); if(!/^09\d{9}$/.test(v)) return toast("شماره نامعتبر است.", true); await startPhoneVerification(v); });
 document.getElementById("home-phone-input")?.addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); document.getElementById("home-phone-save").click(); } });
 document.getElementById("welcome-login-btn")?.addEventListener("click", () => { document.getElementById('welcome-overlay').classList.add('hidden'); showScreen("home"); document.getElementById("home-phone-input")?.focus(); });
-document.getElementById('guest-btn')?.addEventListener('click', () => { localStorage.setItem(LS.guest, 'true'); document.getElementById('welcome-overlay').classList.add('hidden'); showScreen("home"); });
+
+document.getElementById('guest-btn')?.addEventListener('click', () => { 
+    localStorage.setItem(LS.guest, 'true'); 
+    document.getElementById('welcome-overlay').classList.add('hidden'); 
+    showScreen("home"); 
+});
 
 (async function boot(){
   await loadAll();
   if (isCustomerVerified() || isGuest()) { document.getElementById('welcome-overlay').classList.add('hidden'); }
   refreshHomeStats(); renderCustomerAuth();
 })();
-</script>
+  </script>
 </body>
 </html>
