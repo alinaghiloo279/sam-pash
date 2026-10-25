@@ -318,8 +318,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
       <span style="font-size:11px; font-weight:800; margin-top:4px;">خروج</span>
     </div>
   </div>
-  </header>
-  <section class="screen active" id="screen-home">
+</header>
+<section class="screen active" id="screen-home">
 <div class="hero">
 <div class="hero-copy">
   <div class="online-badge"><span class="online-dot"></span>آنلاین هستیم — پاسخ‌گویی کمتر از ۱ ساعت</div>
@@ -429,14 +429,17 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 
 <section class="screen" id="screen-order-machinery">
 <div class="panel">
-<div class="panel-head"><div><h3>ثبت سفارش خدمات مکانیزاسیون</h3><p>می‌توانید همزمان چند عملیات (مثلاً شخم + دیسک) را انتخاب کنید.</p></div></div>
+<div class="panel-head"><div><h3>ثبت سفارش خدمات مکانیزاسیون</h3><p>می‌توانید همزمان چند عملیات را از منوی زیر انتخاب کنید.</p></div></div>
 <form id="machinery-order-form" novalidate>
 <div class="form-grid">
   
-  <div class="field-wrap span-2" style="background:var(--b50); padding:12px; border-radius:12px; border:1px solid var(--b200);">
+  <div class="field-wrap span-2" style="background:var(--b50); padding:16px; border-radius:12px; border:1px solid var(--b200);">
     <label style="color:var(--b800); font-size:14px; font-weight:800; margin-bottom:10px; display:block;">🚜 عملیات مورد نیاز را انتخاب کنید *</label>
-    <div id="machinery-services-list" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:10px;"></div>
+    <select id="machinery-services-select" class="ltr" style="width:100%; height:46px; padding:0 12px; border-radius:10px; border:1.5px solid var(--b300); background:var(--sur); font-weight:700; color:var(--i900); cursor:pointer;">
+      <option value="">در حال بارگذاری...</option>
+    </select>
     <span class="error" data-error-for="machinery-services" style="display:block; margin-top:8px;"></span>
+    <div id="selected-services-chips" style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;"></div>
   </div>
 
   <div class="field-wrap span-2" style="background:var(--inset); padding:12px; border-radius:12px; border:1px solid var(--ln);">
@@ -449,7 +452,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
       </div>
       <div class="field-wrap" style="flex:1;">
         <label for="mach-area-unit">واحد *</label>
-        <select id="mach-area-unit" name="areaUnit" style="padding:12px 14px; border:1px solid var(--ln2); border-radius:10px; background:var(--sur); font-size:13.5px;">
+        <select id="mach-area-unit" name="areaUnit" style="padding:12px 14px; height:46px; border:1px solid var(--ln2); border-radius:10px; background:var(--sur); font-size:13.5px;">
           <option value="m2">متر مربع</option>
           <option value="ha">هکتار (۱۰,۰۰۰ متر)</option>
           <option value="1000m2">هزار متر مربع (۱/۱۰ هکتار)</option>
@@ -482,7 +485,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </form>
 </div>
 </section>
-
 <section class="screen" id="screen-track">
 <div class="panel">
 <div class="panel-head"><div><h3>پیگیری سفارش</h3></div></div>
@@ -650,9 +652,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="admin-card">
   <div class="table-scroll"><table class="mini-table"><thead><tr><th>تاریخ</th><th>ظرفیت</th><th>رزرو</th><th>باقیمانده</th><th>عملیات</th></tr></thead><tbody id="slot-tbody"></tbody></table></div>
 </div>
-</div>
-
-<div class="admin-panel" data-panel="services">
+  </div>
+  <div class="admin-panel" data-panel="services">
   <div class="admin-card">
     <h4>مدیریت خدمات</h4>
     <div class="actions" style="margin-bottom:14px; justify-content:flex-end;">
@@ -663,10 +664,10 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     <div style="background:var(--inset); border:1px solid var(--ln); border-radius:12px; padding:14px; margin-bottom:20px;">
       <h5 style="margin:0 0 10px; font-size:14px; color:var(--b800);">➕ افزودن خدمت جدید</h5>
       <div style="display:grid; grid-template-columns:1.5fr 1fr 1.5fr 1fr auto; gap:10px; align-items:end;">
-        <div class="field-wrap"><label>نام خدمت</label><input id="srv-name" placeholder="مثلاً: شخم زنی"></div>
-        <div class="field-wrap"><label>نرخ پایه</label><input id="srv-rate" class="ltr" placeholder="500000"></div>
+        <div class="field-wrap"><label>نام خدمت</label><input id="srv-name" placeholder="مثلاً: شخم زنی" style="height:46px;"></div>
+        <div class="field-wrap"><label>نرخ پایه</label><input id="srv-rate" class="ltr" placeholder="500000" style="height:46px;" value="1"></div>
         <div class="field-wrap"><label>واحد</label>
-          <select id="srv-unit">
+          <select id="srv-unit" style="height:46px; padding:0 10px;">
             <option value="hectare">هکتار</option>
             <option value="hour">ساعت</option>
             <option value="meter">متر</option>
@@ -675,12 +676,12 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
           </select>
         </div>
         <div class="field-wrap"><label>دسته</label>
-          <select id="srv-type">
+          <select id="srv-type" style="height:46px; padding:0 10px;">
             <option value="machinery">مکانیزاسیون</option>
             <option value="drone">پهپاد</option>
           </select>
         </div>
-        <button class="btn btn-green" id="srv-add-btn">افزودن</button>
+        <button class="btn btn-green" id="srv-add-btn" style="height:46px; padding:0 20px;">افزودن</button>
       </div>
     </div>
     <div id="srv-list-container" style="display:flex; flex-direction:column; gap:8px;"></div>
@@ -852,6 +853,49 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </main>
 </div>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<!-- مودال ویرایش خدمت -->
+<div class="modal-back" id="edit-service-modal">
+  <div class="modal" style="max-width:400px;">
+    <h3 style="margin:0 0 16px; font-size:16px; color:var(--b800);">✏️ ویرایش خدمت</h3>
+    <input type="hidden" id="edit-srv-id">
+    
+    <div class="field-wrap" style="margin-bottom:12px;">
+      <label>نام خدمت</label>
+      <input id="edit-srv-name" style="height:46px;">
+    </div>
+    
+    <div class="field-wrap" style="margin-bottom:12px;">
+      <label>نرخ پایه (تومان)</label>
+      <input id="edit-srv-rate" class="ltr" style="height:46px;">
+    </div>
+    
+    <div class="field-wrap" style="margin-bottom:12px;">
+      <label>واحد</label>
+      <select id="edit-srv-unit" style="height:46px; padding:0 10px;">
+        <option value="hectare">هکتار</option>
+        <option value="hour">ساعت</option>
+        <option value="meter">متر</option>
+        <option value="1000m2">هزار متر مربع (۱/۱۰ هکتار)</option>
+        <option value="1000L">هزار لیتر (تانکر)</option>
+      </select>
+    </div>
+    
+    <div class="field-wrap" style="margin-bottom:20px;">
+      <label>دسته</label>
+      <select id="edit-srv-type" style="height:46px; padding:0 10px;">
+        <option value="machinery">مکانیزاسیون</option>
+        <option value="drone">پهپاد</option>
+      </select>
+    </div>
+    
+    <div class="actions" style="justify-content:flex-end; margin-top:0;">
+      <button class="btn btn-light" onclick="document.getElementById('edit-service-modal').classList.remove('show')">انصراف</button>
+      <button class="btn btn-green" id="save-edit-srv-btn">💾 ذخیره تغییرات</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-back" id="otp-modal-back">
 <div class="modal" style="max-width:440px">
 <h3 style="display:flex;align-items:center;gap:8px"><svg class="icon" width="20" height="20" style="color:var(--b600)"><use href="#i-sms"/></svg> تأیید شماره</h3>
@@ -1091,8 +1135,7 @@ $("#msg-form")?.addEventListener("submit", e => {
   const msgs = read(LS.messages, []); msgs.push({ id: uid(), from: "customer", phone: getCustomerPhone(), text: v, createdAt: Date.now() }); write(LS.messages, msgs);
   $("#msg-input").value = ""; renderChat(); toast("پیام ثبت شد.");
 });
-
-function refreshDroneSelects() {
+  function refreshDroneSelects() {
   const c = getConfig();
   const fill = (sel, items, ph) => { if(!sel) return; sel.innerHTML = ph ? `<option value="">${ph}</option>` : ''; items.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`); };
   fill($("#drone-province"), c.provinces, "انتخاب"); fill($("#drone-crop"), c.crops, "انتخاب");
@@ -1117,24 +1160,53 @@ let selectedMachinery = [];
 function renderMachineryServices() {
   const c = getConfig();
   const mechServices = c.services.filter(s => (s.type === 'machinery' || s.type === 'other') && !s.hidden);
-  const container = $("#machinery-services-list"); if(!container) return;
+  const select = $("#machinery-services-select"); 
+  if(!select) return;
   
-  selectedMachinery = []; 
-  container.innerHTML = mechServices.map(s => {
+  select.innerHTML = '<option value="">➕ افزودن خدمت به لیست...</option>' + mechServices.map(s => {
     let unitLabel = s.unit === 'hour' ? 'ساعت' : (s.unit === 'meter' ? 'متر' : (s.unit === '1000L' ? 'هزار لیتر' : (s.unit === '1000m2' ? 'هزار متر' : 'هکتار')));
-    return `
-      <label style="display:flex; align-items:center; gap:8px; background:var(--sur); padding:10px; border:1px solid var(--ln); border-radius:10px; cursor:pointer;">
-        <input type="checkbox" value="${s.id}" onchange="toggleMachinery('${s.id}', this.checked)" style="width:18px; height:18px; accent-color:var(--b500);">
-        <div><strong style="font-size:12px; display:block;">${esc(s.name)}</strong><small style="font-size:10.5px; color:var(--b600);">${fmt(s.rate)} / ${unitLabel}</small></div>
-      </label>
-    `;
+    return `<option value="${s.id}">${esc(s.name)} (${fmt(s.rate)} تومان / ${unitLabel})</option>`;
   }).join("");
+  
+  selectedMachinery = [];
+  renderSelectedChips();
 }
-window.toggleMachinery = function(id, isChecked) {
-  if(isChecked) { if(!selectedMachinery.includes(id)) selectedMachinery.push(id); }
-  else { selectedMachinery = selectedMachinery.filter(x => x !== id); }
+function renderSelectedChips() {
+  const box = $("#selected-services-chips");
+  if(!box) return;
+  
+  if(selectedMachinery.length === 0) {
+    box.innerHTML = '<span style="font-size:12px; color:var(--i500);">هنوز خدمتی انتخاب نشده است.</span>';
+  } else {
+    const c = getConfig();
+    box.innerHTML = selectedMachinery.map(id => {
+      const srv = c.services.find(s => s.id === id);
+      if(!srv) return '';
+      return `
+        <div style="background:var(--b500); color:#fff; padding:6px 12px; border-radius:20px; display:flex; align-items:center; gap:8px; font-size:12px; font-weight:700; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
+          <span>${esc(srv.name)}</span>
+          <button type="button" onclick="removeMachinery('${srv.id}')" style="background:rgba(255,255,255,0.2); border:none; border-radius:50%; width:20px; height:20px; display:grid; place-items:center; cursor:pointer; color:#fff; font-size:14px;">&times;</button>
+        </div>
+      `;
+    }).join("");
+  }
+}
+window.removeMachinery = function(id) {
+  selectedMachinery = selectedMachinery.filter(x => x !== id);
+  renderSelectedChips();
   updateMachPrice();
 }
+$("#machinery-services-select")?.addEventListener("change", function() {
+  const val = this.value;
+  if(!val) return;
+  if(!selectedMachinery.includes(val)) {
+    selectedMachinery.push(val);
+    renderSelectedChips();
+    updateMachPrice();
+  }
+  this.value = "";
+});
+
 function refreshMachSelects() {
   const c = getConfig();
   const fill = (sel, items, ph) => { if(!sel) return; sel.innerHTML = ph ? `<option value="">${ph}</option>` : ''; items.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`); };
@@ -1245,17 +1317,57 @@ function renderAdminServices() {
   }
 
   const html = activeServices.map(s => `
-    <div style="display:flex; align-items:center; gap:10px; background:var(--sur); border:1px solid var(--ln); border-radius:10px; padding:10px 14px;">
+    <div style="display:flex; align-items:center; gap:8px; background:var(--sur); border:1px solid var(--ln); border-radius:10px; padding:10px 14px;">
       <div style="flex:1; font-weight:700; font-size:13px; color:var(--i800);">${esc(s.name)} <small style="color:var(--i500); font-weight:normal;">(${s.unit === 'hour' ? 'ساعتی' : (s.unit === 'meter' ? 'متری' : (s.unit === '1000L' ? 'هزار لیتری' : (s.unit === '1000m2' ? 'هزار متری' : 'هکتاری')))} - ${s.type === 'drone' ? 'پهپاد' : 'مکانیزاسیون'})</small></div>
-      <input type="text" class="ltr" style="width:120px; padding:8px; border:1px solid var(--ln2); border-radius:8px; text-align:center; font-weight:bold;" value="${s.rate}" id="srv-rate-${s.id}">
-      <button class="btn btn-light btn-sm" onclick="updateServiceRate('${s.id}')" title="ذخیره نرخ">💾</button>
-      <button class="btn btn-danger btn-sm" onclick="deleteService('${s.id}')" title="حذف">🗑️</button>
+      <input type="text" class="ltr" style="width:120px; padding:8px; height:38px; border:1px solid var(--ln2); border-radius:8px; text-align:center; font-weight:bold;" value="${s.rate}" id="srv-rate-${s.id}">
+      <button class="btn btn-light btn-sm" onclick="updateServiceRate('${s.id}')" title="ذخیره سریع نرخ" style="height:38px;">💾</button>
+      <button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش کامل" style="height:38px;">✏️</button>
+      <button class="btn btn-danger btn-sm" onclick="deleteService('${s.id}')" title="حذف" style="height:38px;">🗑️</button>
     </div>
   `).join("");
 
   if(container) container.innerHTML = html;
   if(pricingContainer) pricingContainer.innerHTML = html;
 }
+
+window.openEditService = function(id) {
+  const cfg = getConfig();
+  const srv = cfg.services.find(s => s.id === id);
+  if(!srv) return;
+  
+  document.getElementById("edit-srv-id").value = srv.id;
+  document.getElementById("edit-srv-name").value = srv.name;
+  document.getElementById("edit-srv-rate").value = srv.rate;
+  document.getElementById("edit-srv-unit").value = srv.unit;
+  document.getElementById("edit-srv-type").value = srv.type;
+  
+  document.getElementById("edit-service-modal").classList.add("show");
+}
+
+document.getElementById("save-edit-srv-btn")?.addEventListener("click", async () => {
+  const id = document.getElementById("edit-srv-id").value;
+  const name = document.getElementById("edit-srv-name").value.trim();
+  const rate = +toEn(document.getElementById("edit-srv-rate").value) || 0;
+  const unit = document.getElementById("edit-srv-unit").value;
+  const type = document.getElementById("edit-srv-type").value;
+  
+  if(!name || rate <= 0) return toast("نام و نرخ را به درستی وارد کنید", true);
+  
+  const cfg = getConfig();
+  const srvIndex = cfg.services.findIndex(s => s.id === id);
+  if(srvIndex >= 0) {
+    cfg.services[srvIndex].name = name;
+    cfg.services[srvIndex].rate = rate;
+    cfg.services[srvIndex].unit = unit;
+    cfg.services[srvIndex].type = type;
+    
+    await setConfig(cfg);
+    document.getElementById("edit-service-modal").classList.remove("show");
+    renderAdminServices();
+    toast("✅ خدمت با موفقیت ویرایش شد");
+  }
+});
+
 window.updateServiceRate = async function(id) {
   const newRate = +toEn(document.getElementById(`srv-rate-${id}`).value) || 0;
   if(newRate <= 0) return toast("نرخ نامعتبر است", true);
@@ -1269,7 +1381,7 @@ document.getElementById('srv-add-btn')?.addEventListener('click', async () => {
   const type = document.getElementById('srv-type').value; 
   if(!name || rate <= 0) return toast("نام و نرخ را وارد کنید", true);
   const cfg = getConfig(); cfg.services.push({ id: uid(), name, rate, unit, type }); await setConfig(cfg);
-  document.getElementById('srv-name').value = ""; document.getElementById('srv-rate').value = "";
+  document.getElementById('srv-name').value = ""; document.getElementById('srv-rate').value = "1";
   renderAdminServices(); toast("✅ خدمت اضافه شد");
 });
 window.deleteService = async function(id) { 
