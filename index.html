@@ -583,8 +583,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="actions"><button class="btn btn-green" type="submit">ارسال فیش</button><button class="btn btn-light" type="button" id="copy-card">کپی شماره کارت</button></div>
 </form>
 </div>
-  </section>
-  <!-- ==================== پنل ادمین ==================== -->
+</section>
+<!-- ==================== پنل ادمین ==================== -->
 <section class="screen" id="screen-admin">
 <div id="admin-login-view" class="auth-wrap">
 <div class="panel auth-panel">
@@ -669,19 +669,31 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 
 <div class="admin-panel" data-panel="services">
   <div class="admin-card">
-    <h4>مدیریت خدمات</h4>
-    <div class="actions" style="margin-bottom:14px; justify-content:flex-end;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+      <h4 style="margin:0;">مدیریت خدمات</h4>
       <button class="btn btn-light btn-sm" onclick="if(confirm('لیست خدمات به حالت اولیه برگردد؟')){ localStorage.removeItem('sph_config'); location.reload(); }">
-        <svg class="icon"><use href="#i-refresh"/></svg> ریست لیست خدمات
+        <svg class="icon"><use href="#i-refresh"/></svg> ریست لیست
       </button>
     </div>
-    <div style="background:var(--inset); border:1px solid var(--ln); border-radius:12px; padding:14px; margin-bottom:20px;">
-      <h5 style="margin:0 0 10px; font-size:14px; color:var(--b800);">➕ افزودن خدمت جدید</h5>
-      <div style="display:grid; grid-template-columns:1.5fr 1fr 1.5fr 1fr auto; gap:10px; align-items:end;">
-        <div class="field-wrap"><label>نام خدمت</label><input id="srv-name" placeholder="مثلاً: شخم زنی" style="height:46px;"></div>
-        <div class="field-wrap"><label>نرخ پایه</label><input id="srv-rate" class="ltr" placeholder="500000" style="height:46px;" value="1"></div>
-        <div class="field-wrap"><label>واحد</label>
-          <select id="srv-unit" style="height:46px; padding:0 10px;">
+    
+    <!-- فرم افزودن خدمت جدید -->
+    <div style="background:var(--inset); border:1px solid var(--ln); border-radius:12px; padding:16px; margin-bottom:20px;">
+      <h5 style="margin:0 0 14px; font-size:14px; color:var(--b800); font-weight:800;">➕ افزودن خدمت جدید</h5>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; align-items:end;">
+        
+        <div class="field-wrap">
+          <label>نام خدمت *</label>
+          <input id="srv-name" placeholder="مثلاً: شخم زنی" style="height:44px;">
+        </div>
+        
+        <div class="field-wrap">
+          <label>نرخ پایه (تومان) *</label>
+          <input id="srv-rate" class="ltr" placeholder="500000" style="height:44px;" value="1">
+        </div>
+        
+        <div class="field-wrap">
+          <label>واحد *</label>
+          <select id="srv-unit" style="height:44px; padding:0 10px;">
             <option value="hectare">هکتار</option>
             <option value="hour">ساعت</option>
             <option value="meter">متر</option>
@@ -689,23 +701,51 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
             <option value="1000L">هزار لیتر (تانکر)</option>
           </select>
         </div>
-        <div class="field-wrap"><label>دسته</label>
-          <select id="srv-type" style="height:46px; padding:0 10px;">
+        
+        <div class="field-wrap">
+          <label>دسته *</label>
+          <select id="srv-type" style="height:44px; padding:0 10px;">
             <option value="machinery">مکانیزاسیون</option>
             <option value="drone">پهپاد</option>
           </select>
         </div>
-        <button class="btn btn-green" id="srv-add-btn" style="height:46px; padding:0 20px;">افزودن</button>
+
+        <div class="field-wrap">
+          <label>شهرستان / منطقه (اختیاری)</label>
+          <input id="srv-region" placeholder="خالی = سراسری" style="height:44px;">
+        </div>
+        
+        <button class="btn btn-green" id="srv-add-btn" style="height:44px; padding:0 20px; width:100%;">
+          <svg class="icon"><use href="#i-plus"/></svg> ثبت خدمت
+        </button>
+        
       </div>
     </div>
-    <div id="srv-list-container" style="display:flex; flex-direction:column; gap:8px;"></div>
+
+    <!-- لیست خدمات ثبت شده -->
+    <div id="srv-list-container" style="display:flex; flex-direction:column; gap:10px;"></div>
   </div>
 </div>
 
 <div class="admin-panel" data-panel="pricing">
   <div class="admin-card">
-    <h4>مدیریت تعرفه‌ها</h4>
-    <div id="pricing-list-container" style="display:flex; flex-direction:column; gap:8px;"></div>
+    <h4 style="margin:0 0 16px; font-size:15px;">💵 مدیریت تعرفه‌ها</h4>
+    <p style="font-size:12.5px; color:var(--i500); margin-top:-10px; margin-bottom:16px;">در اینجا می‌توانید نرخ تمام خدمات را مشاهده و به سرعت ویرایش کنید.</p>
+    
+    <div class="table-scroll">
+      <table class="mini-table">
+        <thead>
+          <tr>
+            <th>نام خدمت</th>
+            <th>منطقه / شهرستان</th>
+            <th>واحد</th>
+            <th>نرخ پایه (تومان)</th>
+            <th>عملیات</th>
+          </tr>
+        </thead>
+        <tbody id="pricing-tbody"></tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -863,7 +903,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
-<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۳.۰ · پلتفرم جامع کشاورزی</div>
+<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۴.۰ · پلتفرم جامع کشاورزی</div>
 </main>
 </div>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
@@ -891,23 +931,25 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 
 <!-- مودال ویرایش خدمت -->
 <div class="modal-back" id="edit-service-modal">
-  <div class="modal" style="max-width:400px;">
-    <h3 style="margin:0 0 16px; font-size:16px; color:var(--b800);">✏️ ویرایش خدمت</h3>
+  <div class="modal" style="max-width:420px;">
+    <h3 style="margin:0 0 16px; font-size:16px; color:var(--b800); display:flex; align-items:center; gap:8px;">
+      <svg class="icon" width="20" height="20" style="color:var(--b600)"><use href="#i-edit"/></svg> ویرایش خدمت
+    </h3>
     <input type="hidden" id="edit-srv-id">
     
     <div class="field-wrap" style="margin-bottom:12px;">
-      <label>نام خدمت</label>
-      <input id="edit-srv-name" style="height:46px;">
+      <label>نام خدمت *</label>
+      <input id="edit-srv-name" style="height:44px;">
     </div>
     
     <div class="field-wrap" style="margin-bottom:12px;">
-      <label>نرخ پایه (تومان)</label>
-      <input id="edit-srv-rate" class="ltr" style="height:46px;">
+      <label>نرخ پایه (تومان) *</label>
+      <input id="edit-srv-rate" class="ltr" style="height:44px;">
     </div>
     
     <div class="field-wrap" style="margin-bottom:12px;">
-      <label>واحد</label>
-      <select id="edit-srv-unit" style="height:46px; padding:0 10px;">
+      <label>واحد *</label>
+      <select id="edit-srv-unit" style="height:44px; padding:0 10px;">
         <option value="hectare">هکتار</option>
         <option value="hour">ساعت</option>
         <option value="meter">متر</option>
@@ -916,17 +958,24 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
       </select>
     </div>
     
-    <div class="field-wrap" style="margin-bottom:20px;">
-      <label>دسته</label>
-      <select id="edit-srv-type" style="height:46px; padding:0 10px;">
+    <div class="field-wrap" style="margin-bottom:12px;">
+      <label>دسته *</label>
+      <select id="edit-srv-type" style="height:44px; padding:0 10px;">
         <option value="machinery">مکانیزاسیون</option>
         <option value="drone">پهپاد</option>
       </select>
     </div>
+
+    <div class="field-wrap" style="margin-bottom:20px;">
+      <label>شهرستان / منطقه (اختیاری)</label>
+      <input id="edit-srv-region" style="height:44px;" placeholder="خالی = سراسری">
+    </div>
     
     <div class="actions" style="justify-content:flex-end; margin-top:0;">
       <button class="btn btn-light" onclick="document.getElementById('edit-service-modal').classList.remove('show')">انصراف</button>
-      <button class="btn btn-green" id="save-edit-srv-btn">💾 ذخیره تغییرات</button>
+      <button class="btn btn-green" id="save-edit-srv-btn">
+        <svg class="icon"><use href="#i-save"/></svg> ذخیره
+      </button>
     </div>
   </div>
 </div>
@@ -1075,8 +1124,10 @@ function showScreen(name){
     else { if(lv)lv.hidden=false; if(pv)pv.hidden=true; }
   }
   if(name==="partner"){const lv=$("#partner-login-view"),pv=$("#partner-panel-view");if(lv)lv.hidden=false;if(pv)pv.hidden=true;}
-  if(name==="order-drone"){ refreshDroneSelects(); updateDronePrice(); }
-  if(name==="order-machinery"){ renderMachineryServices(); refreshMachSelects(); updateMachPrice(); }
+  
+  if(name==="order-drone"){ refreshDroneSelects(); updateDronePrice(); autoFillOrderForm('drone'); }
+  if(name==="order-machinery"){ renderMachineryServices(); refreshMachSelects(); updateMachPrice(); autoFillOrderForm('mach'); }
+  
   if(name==="history")renderHistory();
   if(name==="profile")renderProfile();
   if(name==="messages")renderChat();
@@ -1164,14 +1215,13 @@ window.confirmOperatorArrival = async function(id) {
     if(confirm("آیا اپراتور در محل حاضر شده است؟ با تایید شما، عملیات آغاز می‌شود.")) {
         o.status = 'in_progress';
         await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id, status: "in_progress" }) });
-        refreshHomeStats(); toast("✅ حضور اپراتور تایید شد و عملیات آغاز شد.");
+        refreshHomeStats(); renderHistory(); toast("✅ حضور اپراتور تایید شد و عملیات آغاز شد.");
     }
 }
 
 window.openRatingModal = function(id) {
     document.getElementById('rating-order-id').value = id;
     document.getElementById('rating-review-text').value = "";
-    // ریست ستاره‌ها
     document.querySelectorAll('#star-rating-box span').forEach(s => s.style.color = "var(--ln2)");
     document.getElementById('rating-modal').classList.add('show');
 }
@@ -1271,7 +1321,23 @@ document.getElementById('submit-rating-btn')?.addEventListener('click', async ()
         toast("✅ از ثبت نظر و امتیاز شما سپاسگزاریم.");
     }
 });
-  function refreshDroneSelects() {
+  // 🔴 تابع جدید برای پر کردن خودکار فرم‌ها
+function autoFillOrderForm(type) {
+  const phone = getCustomerPhone();
+  if (!phone) return;
+  
+  const prof = getCustomerProfile();
+  const prefix = type === 'drone' ? 'drone' : 'mach';
+
+  if (prof.name) document.getElementById(`${prefix}-cust`).value = prof.name;
+  if (phone) document.getElementById(`${prefix}-phone`).value = phone;
+  if (prof.province) document.getElementById(`${prefix}-province`).value = prof.province;
+  if (prof.city) document.getElementById(`${prefix}-city`).value = prof.city;
+  if (prof.village) document.getElementById(`${prefix}-village`).value = prof.village;
+  if (prof.crop) document.getElementById(`${prefix}-crop`).value = prof.crop;
+}
+
+function refreshDroneSelects() {
   const c = getConfig();
   const fill = (sel, items, ph) => { if(!sel) return; sel.innerHTML = ph ? `<option value="">${ph}</option>` : ''; items.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`); };
   fill($("#drone-province"), c.provinces, "انتخاب"); fill($("#drone-crop"), c.crops, "انتخاب");
@@ -1301,7 +1367,8 @@ function renderMachineryServices() {
   
   select.innerHTML = '<option value="">➕ افزودن خدمت به لیست...</option>' + mechServices.map(s => {
     let unitLabel = s.unit === 'hour' ? 'ساعت' : (s.unit === 'meter' ? 'متر' : (s.unit === '1000L' ? 'هزار لیتر' : (s.unit === '1000m2' ? 'هزار متر' : 'هکتار')));
-    return `<option value="${s.id}">${esc(s.name)} (${fmt(s.rate)} تومان / ${unitLabel})</option>`;
+    const regionTxt = s.region ? ` - ${s.region}` : '';
+    return `<option value="${s.id}">${esc(s.name)}${regionTxt} (${fmt(s.rate)} تومان / ${unitLabel})</option>`;
   }).join("");
   
   selectedMachinery = [];
@@ -1397,178 +1464,6 @@ $("#mach-get-location-btn")?.addEventListener("click", () => {
   navigator.geolocation.getCurrentPosition((pos) => { const lat = pos.coords.latitude.toFixed(6), lng = pos.coords.longitude.toFixed(6); $("#mach-loc-coords").value = `${lat},${lng}`; txt.textContent = `✅ ثبت شد (${lat}, ${lng})`; btn.disabled = false; btn.style.borderColor = "var(--b500)"; }, (err) => { txt.textContent = "دریافت موقعیت از GPS"; btn.disabled = false; toast("دسترسی رد شد.", true); }, { enableHighAccuracy: true, timeout: 10000 });
 });
 
-function renderSlots(){
-  const tb = $("#slot-tbody"); if(!tb) return;
-  const all = cache.slots.sort((a,b)=>a.date.localeCompare(b.date));
-  if(!all.length) { tb.innerHTML='<tr><td colspan="5"><div class="empty">ظرفیتی ثبت نشده است</div></td></tr>'; return; }
-  tb.innerHTML = all.map(s => {
-     const booked = cache.orders.filter(o=>o.slotId===s.id && o.status!=="cancelled").length; 
-     const rem = s.cap - booked;
-     const st = rem <= 0 ? '<span class="status red">پر</span>' : '<span class="status green">آزاد</span>';
-     return `<tr>
-       <td><code class="ltr" style="font-size:12px;">${esc(s.date)}</code></td>
-       <td>${toFa(s.cap)}</td>
-       <td>${toFa(booked)}</td>
-       <td><strong style="color:var(--${rem>0?'ok-fg':'dng-fg'})">${toFa(rem)}</strong></td>
-       <td style="text-align:center;"><button class="icon-mini danger" onclick="deleteSlot('${s.id}')" style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px;">✕</button></td>
-     </tr>`;
-  }).join("");
-}
-window.deleteSlot = async function(id) {
-  if(!confirm("حذف شود؟")) return;
-  cache.slots = cache.slots.filter(x=>x.id!==id);
-  await apiFetch("/api/slots", { method: "DELETE", body: JSON.stringify({id}) });
-  renderSlots(); toast("حذف شد");
-}
-$("#slot-add-btn")?.addEventListener("click",async()=>{
-  const rawDate = $("#slot-date-input").value.trim(); const date = toEn(rawDate);
-  if(!isValidJalali(date)) return toast("فرمت تاریخ نامعتبر است. (مثلاً 1405/07/15)",true);
-  const c = +toEn($("#slot-cap").value) || 1; if(c<=0) return toast("ظرفیت را وارد کنید",true);
-  
-  const existingIdx = cache.slots.findIndex(s => s.date === date);
-  if(existingIdx >= 0) { 
-      cache.slots[existingIdx].cap = c; 
-      await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(cache.slots[existingIdx]) });
-      toast("ظرفیت به‌روزرسانی شد"); 
-  } else { 
-      const newSlot = { id: uid(), date: date, cap: c, createdAt: Date.now() };
-      cache.slots.push(newSlot); 
-      await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(newSlot) });
-      toast("✅ روز جدید ثبت شد"); 
-  }
-  $("#slot-date-input").value = ""; $("#slot-cap").value = "2"; renderSlots();
-});
-
-function renderAdminServices() {
-  const cfg = getConfig(); 
-  const container = document.getElementById('srv-list-container'); 
-  const pricingContainer = document.getElementById('pricing-list-container');
-  
-  const activeServices = cfg.services.filter(s => !s.hidden);
-  
-  if(!activeServices.length) { 
-    if(container) container.innerHTML = '<div class="empty">خدمتی ثبت نشده است.</div>';
-    if(pricingContainer) pricingContainer.innerHTML = '<div class="empty">خدمتی ثبت نشده است.</div>';
-    return; 
-  }
-
-  const html = activeServices.map(s => `
-    <div style="display:flex; align-items:center; gap:8px; background:var(--sur); border:1px solid var(--ln); border-radius:10px; padding:10px 14px;">
-      <div style="flex:1; font-weight:700; font-size:13px; color:var(--i800);">${esc(s.name)} <small style="color:var(--i500); font-weight:normal;">(${s.unit === 'hour' ? 'ساعتی' : (s.unit === 'meter' ? 'متری' : (s.unit === '1000L' ? 'هزار لیتری' : (s.unit === '1000m2' ? 'هزار متری' : 'هکتاری')))} - ${s.type === 'drone' ? 'پهپاد' : 'مکانیزاسیون'})</small></div>
-      <input type="text" class="ltr" style="width:120px; padding:8px; height:38px; border:1px solid var(--ln2); border-radius:8px; text-align:center; font-weight:bold;" value="${s.rate}" id="srv-rate-${s.id}">
-      <button class="btn btn-light btn-sm" onclick="updateServiceRate('${s.id}')" title="ذخیره سریع نرخ" style="height:38px;">💾</button>
-      <button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش کامل" style="height:38px;">✏️</button>
-      <button class="btn btn-danger btn-sm" onclick="deleteService('${s.id}')" title="حذف" style="height:38px;">🗑️</button>
-    </div>
-  `).join("");
-
-  if(container) container.innerHTML = html;
-  if(pricingContainer) pricingContainer.innerHTML = html;
-}
-
-window.openEditService = function(id) {
-  const cfg = getConfig();
-  const srv = cfg.services.find(s => s.id === id);
-  if(!srv) return;
-  
-  document.getElementById("edit-srv-id").value = srv.id;
-  document.getElementById("edit-srv-name").value = srv.name;
-  document.getElementById("edit-srv-rate").value = srv.rate;
-  document.getElementById("edit-srv-unit").value = srv.unit;
-  document.getElementById("edit-srv-type").value = srv.type;
-  
-  document.getElementById("edit-service-modal").classList.add("show");
-}
-
-document.getElementById("save-edit-srv-btn")?.addEventListener("click", async () => {
-  const id = document.getElementById("edit-srv-id").value;
-  const name = document.getElementById("edit-srv-name").value.trim();
-  const rate = +toEn(document.getElementById("edit-srv-rate").value) || 0;
-  const unit = document.getElementById("edit-srv-unit").value;
-  const type = document.getElementById("edit-srv-type").value;
-  
-  if(!name || rate <= 0) return toast("نام و نرخ را به درستی وارد کنید", true);
-  
-  const cfg = getConfig();
-  const srvIndex = cfg.services.findIndex(s => s.id === id);
-  if(srvIndex >= 0) {
-    cfg.services[srvIndex].name = name;
-    cfg.services[srvIndex].rate = rate;
-    cfg.services[srvIndex].unit = unit;
-    cfg.services[srvIndex].type = type;
-    
-    await setConfig(cfg);
-    document.getElementById("edit-service-modal").classList.remove("show");
-    renderAdminServices();
-    toast("✅ خدمت با موفقیت ویرایش شد");
-  }
-});
-
-window.updateServiceRate = async function(id) {
-  const newRate = +toEn(document.getElementById(`srv-rate-${id}`).value) || 0;
-  if(newRate <= 0) return toast("نرخ نامعتبر است", true);
-  const cfg = getConfig(); const srv = cfg.services.find(s => s.id === id);
-  if(srv) { srv.rate = newRate; await setConfig(cfg); toast("✅ نرخ به‌روزرسانی شد"); }
-}
-document.getElementById('srv-add-btn')?.addEventListener('click', async () => {
-  const name = document.getElementById('srv-name').value.trim(); 
-  const rate = +toEn(document.getElementById('srv-rate').value) || 0;
-  const unit = document.getElementById('srv-unit').value;
-  const type = document.getElementById('srv-type').value; 
-  if(!name || rate <= 0) return toast("نام و نرخ را وارد کنید", true);
-  const cfg = getConfig(); cfg.services.push({ id: uid(), name, rate, unit, type }); await setConfig(cfg);
-  document.getElementById('srv-name').value = ""; document.getElementById('srv-rate').value = "1";
-  renderAdminServices(); toast("✅ خدمت اضافه شد");
-});
-window.deleteService = async function(id) { 
-  if(!confirm("حذف شود؟")) return; 
-  const cfg = getConfig(); 
-  const srv = cfg.services.find(s => s.id === id);
-  if(srv) srv.hidden = true; 
-  await setConfig(cfg); renderAdminServices(); 
-};
-
-let ptnFilterType = "drone";
-function renderPartners() {
-  const list = document.getElementById('partners-list'); if(!list) return;
-  const all = cache.partners.filter(p => (p.type || "drone") === ptnFilterType);
-  if(!all.length) { list.innerHTML = '<div class="empty">همکاری در این بخش ثبت نشده</div>'; return; }
-  list.innerHTML = all.map(p => `
-    <div class="admin-card" style="display:flex; gap:12px; align-items:flex-start;">
-      <div style="width:40px; height:40px; border-radius:12px; background:var(--purple-bg); color:var(--purple); display:grid; place-items:center; font-weight:800;">${esc(p.name.charAt(0))}</div>
-      <div style="flex:1;">
-        <strong>${esc(p.name)}</strong>
-        <div style="font-size:12px; color:var(--i500); margin-top:2px;">${esc(p.phone)} | ${esc(p.province)} - ${esc(p.county||'')} - ${esc(p.city)} ${p.village ? ' - روستای ' + esc(p.village) : ''}</div>
-        ${p.type === 'mechanization' ? `
-          <div style="font-size:11.5px; color:var(--i600); margin-top:6px; background:var(--sur); padding:8px; border-radius:8px; border:1px solid var(--ln); line-height:1.8;">
-            <div><strong style="color:var(--b700);">🚜 دستگاه:</strong> ${esc(p.machine || p.equipment || '-')}</div>
-            <div><strong style="color:var(--b700);">⚙️ ادوات:</strong> ${esc(p.implements || '-')}</div>
-            <div><strong style="color:var(--b700);">📍 شهرها:</strong> ${esc(p.cities || '-')}</div>
-          </div>` : ''}
-      </div>
-      <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
-        <span class="status ${p.status==='active'?'green':'amber'}">${p.status==='active'?'تایید':'در انتظار'}</span>
-        ${p.status!=='active' ? `<button class="btn btn-green btn-sm" onclick="approvePartner('${p.id}')">تایید</button>` : ''}
-      </div>
-    </div>
-  `).join("");
-}
-window.approvePartner = async function(id) { 
-  const p = cache.partners.find(x=>x.id===id); 
-  if(p) { 
-      p.status = "active"; p.active = true; 
-      await apiFetch("/api/partners", { method: "PUT", body: JSON.stringify(p) });
-      renderPartners(); toast("✅ تایید شد"); 
-  } 
-}
-document.querySelectorAll('#admin-ptn-tabs button').forEach(btn => {
-  btn.onclick = () => { document.querySelectorAll('#admin-ptn-tabs button').forEach(b => b.setAttribute('aria-selected', 'false')); btn.setAttribute('aria-selected', 'true'); ptnFilterType = btn.dataset.ptnType; renderPartners(); };
-});
-window.togglePtnType = function(type) { 
-  const fields = document.getElementById('mechanization-fields'); 
-  if(fields) fields.style.display = type === 'mechanization' ? 'grid' : 'none'; 
-}
-
 function isOtpTimeAllowed() {
   const now = new Date(); const tehranTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Tehran"})); const hour = tehranTime.getHours();
   return hour >= 8 && hour < 23;
@@ -1639,6 +1534,15 @@ document.getElementById('drone-order-form')?.addEventListener('submit', async (e
   await apiFetch("/api/orders", { method: "POST", body: JSON.stringify(order) });
   cache.orders.push(order);
   
+  // ذخیره پروفایل برای سفارش بعدی
+  setCustomerProfile({
+      name: order.name,
+      province: order.province,
+      city: order.city,
+      village: order.village,
+      crop: order.crop
+  });
+  
   refreshHomeStats(); e.target.reset(); $("#drone-area").value = "10000"; updateDronePrice(); refreshDroneSelects();
   PAY_ORDER = order; toast(`✅ سفارش پهپاد ثبت شد.`); showScreen("payment");
 });
@@ -1682,6 +1586,15 @@ document.getElementById('machinery-order-form')?.addEventListener('submit', asyn
   
   await apiFetch("/api/orders", { method: "POST", body: JSON.stringify(order) });
   cache.orders.push(order);
+  
+  // ذخیره پروفایل برای سفارش بعدی
+  setCustomerProfile({
+      name: order.name,
+      province: order.province,
+      city: order.city,
+      village: order.village,
+      crop: order.crop
+  });
   
   refreshHomeStats(); e.target.reset(); $("#mach-area").value = "10000"; updateMachPrice(); selectedMachinery = []; renderMachineryServices();
   PAY_ORDER = order; toast(`✅ سفارش ادوات ثبت شد.`); showScreen("payment");
@@ -1759,8 +1672,7 @@ document.getElementById('partner-login-form')?.addEventListener('submit', (e) =>
   list.innerHTML = myOrders.length ? myOrders.map(o => `<div class="admin-card"><strong>${esc(o.code)} - ${esc(o.serviceName)}</strong><div style="font-size:12px;color:var(--i500);margin:4px 0">${esc(o.name)} | ${esc(o.city)} | ${toFa(o.area)} هکتار</div></div>`).join("") : '<div class="empty">سفارشی ارجاع داده نشده</div>';
 });
 document.getElementById('partner-logout-btn')?.addEventListener('click', () => { $("#partner-login-view").hidden = false; $("#partner-panel-view").hidden = true; });
-
-document.getElementById('admin-login-form')?.addEventListener('submit', async (e) => {
+  document.getElementById('admin-login-form')?.addEventListener('submit', async (e) => {
   e.preventDefault(); const otp = toEn($("#admin-otp").value.trim()); toast("در حال بررسی...");
   const res = await apiFetch("/api/admin/login", { method: "POST", body: JSON.stringify({ username: $("#admin-user").value, otpCode: otp }) });
   if(res.ok && res.data.success) { 
@@ -1862,6 +1774,240 @@ document.querySelectorAll("#admin-tabs button").forEach(b => {
   };
 });
 
+function renderSlots(){
+  const tb = $("#slot-tbody"); if(!tb) return;
+  const all = cache.slots.sort((a,b)=>a.date.localeCompare(b.date));
+  if(!all.length) { tb.innerHTML='<tr><td colspan="5"><div class="empty">ظرفیتی ثبت نشده است</div></td></tr>'; return; }
+  tb.innerHTML = all.map(s => {
+     const booked = cache.orders.filter(o=>o.slotId===s.id && o.status!=="cancelled").length; 
+     const rem = s.cap - booked;
+     const st = rem <= 0 ? '<span class="status red">پر</span>' : '<span class="status green">آزاد</span>';
+     return `<tr>
+       <td><code class="ltr" style="font-size:12px;">${esc(s.date)}</code></td>
+       <td>${toFa(s.cap)}</td>
+       <td>${toFa(booked)}</td>
+       <td><strong style="color:var(--${rem>0?'ok-fg':'dng-fg'})">${toFa(rem)}</strong></td>
+       <td style="text-align:center;"><button class="icon-mini danger" onclick="deleteSlot('${s.id}')" style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px;">✕</button></td>
+     </tr>`;
+  }).join("");
+}
+window.deleteSlot = async function(id) {
+  if(!confirm("حذف شود؟")) return;
+  cache.slots = cache.slots.filter(x=>x.id!==id);
+  await apiFetch("/api/slots", { method: "DELETE", body: JSON.stringify({id}) });
+  renderSlots(); toast("حذف شد");
+}
+$("#slot-add-btn")?.addEventListener("click",async()=>{
+  const rawDate = $("#slot-date-input").value.trim(); const date = toEn(rawDate);
+  if(!isValidJalali(date)) return toast("فرمت تاریخ نامعتبر است. (مثلاً 1405/07/15)",true);
+  const c = +toEn($("#slot-cap").value) || 1; if(c<=0) return toast("ظرفیت را وارد کنید",true);
+  
+  const existingIdx = cache.slots.findIndex(s => s.date === date);
+  if(existingIdx >= 0) { 
+      cache.slots[existingIdx].cap = c; 
+      await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(cache.slots[existingIdx]) });
+      toast("ظرفیت به‌روزرسانی شد"); 
+  } else { 
+      const newSlot = { id: uid(), date: date, cap: c, createdAt: Date.now() };
+      cache.slots.push(newSlot); 
+      await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(newSlot) });
+      toast("✅ روز جدید ثبت شد"); 
+  }
+  $("#slot-date-input").value = ""; $("#slot-cap").value = "2"; renderSlots();
+});
+
+function renderAdminServices() {
+  const cfg = getConfig(); 
+  const listContainer = document.getElementById('srv-list-container'); 
+  const pricingTbody = document.getElementById('pricing-tbody');
+  
+  const activeServices = cfg.services.filter(s => !s.hidden);
+  
+  if(!activeServices.length) { 
+    if(listContainer) listContainer.innerHTML = '<div class="empty">خدمتی ثبت نشده است.</div>';
+    if(pricingTbody) pricingTbody.innerHTML = '<tr><td colspan="5"><div class="empty">خدمتی ثبت نشده است.</div></td></tr>';
+    return; 
+  }
+
+  const unitFa = (u) => u === 'hour' ? 'ساعتی' : (u === 'meter' ? 'متری' : (u === '1000L' ? 'هزار لیتری' : (u === '1000m2' ? 'هزار متری' : 'هکتاری')));
+  const typeFa = (t) => t === 'drone' ? 'پهپاد' : 'مکانیزاسیون';
+
+  // ۱. ساخت لیست کارت‌های تب خدمات
+  if (listContainer) {
+    listContainer.innerHTML = activeServices.map(s => `
+      <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; background:var(--sur); border:1px solid var(--ln); border-radius:12px; padding:12px 16px;">
+        <div style="flex:1; min-width:200px; font-weight:700; font-size:13px; color:var(--i900);">
+          ${esc(s.name)} 
+          <small style="color:var(--i500); font-weight:normal; display:block; margin-top:4px;">
+            ${unitFa(s.unit)} - ${typeFa(s.type)} 
+            ${s.region ? `<span style="color:var(--b600); background:var(--b50); padding:2px 6px; border-radius:4px; margin-right:6px;">📍 ${esc(s.region)}</span>` : ''}
+          </small>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+          <input type="text" class="ltr" style="width:100px; padding:8px; height:36px; border:1px solid var(--ln2); border-radius:8px; text-align:center; font-weight:bold;" value="${s.rate}" id="srv-rate-${s.id}">
+          <button class="btn btn-light btn-sm" onclick="updateServiceRate('${s.id}')" title="ذخیره سریع نرخ" style="height:36px; width:36px; padding:0; display:grid; place-items:center;">
+            <svg class="icon" style="width:16px; height:16px;"><use href="#i-save"/></svg>
+          </button>
+          <button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش کامل" style="height:36px; width:36px; padding:0; display:grid; place-items:center;">
+            <svg class="icon" style="width:16px; height:16px;"><use href="#i-edit"/></svg>
+          </button>
+          <button class="btn btn-danger btn-sm" onclick="deleteService('${s.id}')" title="حذف" style="height:36px; width:36px; padding:0; display:grid; place-items:center;">
+            <svg class="icon" style="width:16px; height:16px;"><use href="#i-trash"/></svg>
+          </button>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  // ۲. ساخت جدول تب تعرفه‌ها
+  if (pricingTbody) {
+    pricingTbody.innerHTML = activeServices.map(s => `
+      <tr>
+        <td><strong>${esc(s.name)}</strong></td>
+        <td>${s.region ? `<span style="color:var(--b600); background:var(--b50); padding:2px 8px; border-radius:6px;">${esc(s.region)}</span>` : '<span style="color:var(--i400);">سراسری</span>'}</td>
+        <td>${unitFa(s.unit)}</td>
+        <td>
+          <div style="display:flex; align-items:center; gap:6px;">
+            <input type="text" class="ltr" style="width:100px; padding:6px; border:1px solid var(--ln2); border-radius:6px; text-align:center; font-weight:bold;" value="${s.rate}" id="price-tbl-${s.id}">
+            <button class="icon-mini" onclick="updateServiceRateFromTable('${s.id}')" title="ذخیره" style="width:28px; height:28px;">
+              <svg class="icon" style="width:14px; height:14px;"><use href="#i-save"/></svg>
+            </button>
+          </div>
+        </td>
+        <td>
+          <button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش کامل" style="height:32px; padding:0 10px;">
+             <svg class="icon" style="width:14px; height:14px;"><use href="#i-edit"/></svg> ویرایش
+          </button>
+        </td>
+      </tr>
+    `).join("");
+  }
+}
+
+window.updateServiceRateFromTable = async function(id) {
+  const newRate = +toEn(document.getElementById(`price-tbl-${id}`).value) || 0;
+  if(newRate <= 0) return toast("نرخ نامعتبر است", true);
+  const cfg = getConfig(); const srv = cfg.services.find(s => s.id === id);
+  if(srv) { srv.rate = newRate; await setConfig(cfg); renderAdminServices(); toast("✅ نرخ به‌روزرسانی شد"); }
+}
+
+window.updateServiceRate = async function(id) {
+  const newRate = +toEn(document.getElementById(`srv-rate-${id}`).value) || 0;
+  if(newRate <= 0) return toast("نرخ نامعتبر است", true);
+  const cfg = getConfig(); const srv = cfg.services.find(s => s.id === id);
+  if(srv) { srv.rate = newRate; await setConfig(cfg); renderAdminServices(); toast("✅ نرخ به‌روزرسانی شد"); }
+}
+
+window.openEditService = function(id) {
+  const cfg = getConfig();
+  const srv = cfg.services.find(s => s.id === id);
+  if(!srv) return;
+  
+  document.getElementById("edit-srv-id").value = srv.id;
+  document.getElementById("edit-srv-name").value = srv.name;
+  document.getElementById("edit-srv-rate").value = srv.rate;
+  document.getElementById("edit-srv-unit").value = srv.unit;
+  document.getElementById("edit-srv-type").value = srv.type;
+  document.getElementById("edit-srv-region").value = srv.region || ""; 
+  
+  document.getElementById("edit-service-modal").classList.add("show");
+}
+
+document.getElementById("save-edit-srv-btn")?.addEventListener("click", async () => {
+  const id = document.getElementById("edit-srv-id").value;
+  const name = document.getElementById("edit-srv-name").value.trim();
+  const rate = +toEn(document.getElementById("edit-srv-rate").value) || 0;
+  const unit = document.getElementById("edit-srv-unit").value;
+  const type = document.getElementById("edit-srv-type").value;
+  const region = document.getElementById("edit-srv-region").value.trim();
+  
+  if(!name || rate <= 0) return toast("نام و نرخ را به درستی وارد کنید", true);
+  
+  const cfg = getConfig();
+  const srvIndex = cfg.services.findIndex(s => s.id === id);
+  if(srvIndex >= 0) {
+    cfg.services[srvIndex].name = name;
+    cfg.services[srvIndex].rate = rate;
+    cfg.services[srvIndex].unit = unit;
+    cfg.services[srvIndex].type = type;
+    cfg.services[srvIndex].region = region; 
+    
+    await setConfig(cfg);
+    document.getElementById("edit-service-modal").classList.remove("show");
+    renderAdminServices();
+    toast("✅ خدمت با موفقیت ویرایش شد");
+  }
+});
+
+document.getElementById('srv-add-btn')?.addEventListener('click', async () => {
+  const name = document.getElementById('srv-name').value.trim(); 
+  const rate = +toEn(document.getElementById('srv-rate').value) || 0;
+  const unit = document.getElementById('srv-unit').value;
+  const type = document.getElementById('srv-type').value; 
+  const region = document.getElementById('srv-region').value.trim(); 
+  
+  if(!name || rate <= 0) return toast("نام و نرخ را وارد کنید", true);
+  
+  const cfg = getConfig(); 
+  cfg.services.push({ id: uid(), name, rate, unit, type, region }); 
+  await setConfig(cfg);
+  
+  document.getElementById('srv-name').value = ""; 
+  document.getElementById('srv-rate').value = "";
+  document.getElementById('srv-region').value = "";
+  
+  renderAdminServices(); toast("✅ خدمت اضافه شد");
+});
+
+window.deleteService = async function(id) { 
+  if(!confirm("حذف شود؟")) return; 
+  const cfg = getConfig(); 
+  const srv = cfg.services.find(s => s.id === id);
+  if(srv) srv.hidden = true; 
+  await setConfig(cfg); renderAdminServices(); 
+};
+
+let ptnFilterType = "drone";
+function renderPartners() {
+  const list = document.getElementById('partners-list'); if(!list) return;
+  const all = cache.partners.filter(p => (p.type || "drone") === ptnFilterType);
+  if(!all.length) { list.innerHTML = '<div class="empty">همکاری در این بخش ثبت نشده</div>'; return; }
+  list.innerHTML = all.map(p => `
+    <div class="admin-card" style="display:flex; gap:12px; align-items:flex-start;">
+      <div style="width:40px; height:40px; border-radius:12px; background:var(--purple-bg); color:var(--purple); display:grid; place-items:center; font-weight:800;">${esc(p.name.charAt(0))}</div>
+      <div style="flex:1;">
+        <strong>${esc(p.name)}</strong>
+        <div style="font-size:12px; color:var(--i500); margin-top:2px;">${esc(p.phone)} | ${esc(p.province)} - ${esc(p.county||'')} - ${esc(p.city)} ${p.village ? ' - روستای ' + esc(p.village) : ''}</div>
+        ${p.type === 'mechanization' ? `
+          <div style="font-size:11.5px; color:var(--i600); margin-top:6px; background:var(--sur); padding:8px; border-radius:8px; border:1px solid var(--ln); line-height:1.8;">
+            <div><strong style="color:var(--b700);">🚜 دستگاه:</strong> ${esc(p.machine || p.equipment || '-')}</div>
+            <div><strong style="color:var(--b700);">⚙️ ادوات:</strong> ${esc(p.implements || '-')}</div>
+            <div><strong style="color:var(--b700);">📍 شهرها:</strong> ${esc(p.cities || '-')}</div>
+          </div>` : ''}
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
+        <span class="status ${p.status==='active'?'green':'amber'}">${p.status==='active'?'تایید':'در انتظار'}</span>
+        ${p.status!=='active' ? `<button class="btn btn-green btn-sm" onclick="approvePartner('${p.id}')">تایید</button>` : ''}
+      </div>
+    </div>
+  `).join("");
+}
+window.approvePartner = async function(id) { 
+  const p = cache.partners.find(x=>x.id===id); 
+  if(p) { 
+      p.status = "active"; p.active = true; 
+      await apiFetch("/api/partners", { method: "PUT", body: JSON.stringify(p) });
+      renderPartners(); toast("✅ تایید شد"); 
+  } 
+}
+document.querySelectorAll('#admin-ptn-tabs button').forEach(btn => {
+  btn.onclick = () => { document.querySelectorAll('#admin-ptn-tabs button').forEach(b => b.setAttribute('aria-selected', 'false')); btn.setAttribute('aria-selected', 'true'); ptnFilterType = btn.dataset.ptnType; renderPartners(); };
+});
+window.togglePtnType = function(type) { 
+  const fields = document.getElementById('mechanization-fields'); 
+  if(fields) fields.style.display = type === 'mechanization' ? 'grid' : 'none'; 
+}
+
 function renderVideoAdmin() {
   const box = document.getElementById("kv-admin-videos-list"); if(!box) return; const items = read(LS.videos, []);
   if(!items.length) { box.innerHTML = '<div class="empty">ویدیویی اضافه نشده</div>'; return; }
@@ -1925,8 +2071,7 @@ document.getElementById('restore-btn')?.addEventListener('click', async () => {
     toast("✅ بازیابی با موفقیت انجام شد (نیاز به همگام‌سازی دستی با سرور دارد)"); setTimeout(() => location.reload(), 1000);
   } catch (e) { toast("فایل نامعتبر است: " + e.message, true); }
 });
-
-document.getElementById("home-phone-save")?.addEventListener("click", async () => { const v = toEn(document.getElementById("home-phone-input").value.trim()); if(!/^09\d{9}$/.test(v)) return toast("شماره نامعتبر است.", true); await startPhoneVerification(v); });
+  document.getElementById("home-phone-save")?.addEventListener("click", async () => { const v = toEn(document.getElementById("home-phone-input").value.trim()); if(!/^09\d{9}$/.test(v)) return toast("شماره نامعتبر است.", true); await startPhoneVerification(v); });
 document.getElementById("home-phone-input")?.addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); document.getElementById("home-phone-save").click(); } });
 document.getElementById("welcome-login-btn")?.addEventListener("click", () => { document.getElementById('welcome-overlay').classList.add('hidden'); showScreen("home"); document.getElementById("home-phone-input")?.focus(); });
 
