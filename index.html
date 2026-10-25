@@ -397,8 +397,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     </div>
   </div>
 </div>
-</section>
-<section class="screen" id="screen-order-drone">
+  </section>
+  <section class="screen" id="screen-order-drone">
 <div class="panel">
 <div class="panel-head"><div><h3>ثبت سفارش سم‌پاشی هوایی</h3><p>اطلاعات مزرعه خود را برای پرواز پهپاد وارد کنید.</p></div></div>
 <form id="drone-order-form" novalidate>
@@ -656,7 +656,12 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="admin-card">
   <h4>تعیین ظرفیت روزها</h4>
   <div class="admin-grid">
-    <div class="field-wrap"><label for="slot-date-input">تاریخ (مثلاً 1405/07/01)</label><input id="slot-date-input" class="ltr" placeholder="1405/07/01"></div>
+    <div class="field-wrap">
+      <label for="slot-date-select">تاریخ (کشویی)</label>
+      <select id="slot-date-select" class="ltr" style="height:46px; padding:0 10px; border-radius:10px; border:1px solid var(--ln2); width:100%;">
+        <option value="">در حال بارگذاری...</option>
+      </select>
+    </div>
     <div class="field-wrap"><label for="slot-cap">ظرفیت روزانه</label><input id="slot-cap" class="ltr" inputmode="numeric" value="2"></div>
     <div class="field-wrap" style="align-self:end"><button class="btn btn-green" id="slot-add-btn"><svg class="icon"><use href="#i-plus"/></svg> ثبت</button></div>
   </div>
@@ -693,13 +698,14 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
         
         <div class="field-wrap">
           <label>واحد *</label>
-          <select id="srv-unit" style="height:44px; padding:0 10px;">
+          <input id="srv-unit" list="unit-options" placeholder="مثلاً: هکتار یا تن" style="height:44px;">
+          <datalist id="unit-options">
             <option value="hectare">هکتار</option>
             <option value="hour">ساعت</option>
             <option value="meter">متر</option>
-            <option value="1000m2">هزار متر مربع (۱/۱۰ هکتار)</option>
+            <option value="1000m2">هزار متر مربع</option>
             <option value="1000L">هزار لیتر (تانکر)</option>
-          </select>
+          </datalist>
         </div>
         
         <div class="field-wrap">
@@ -711,14 +717,14 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
         </div>
 
         <div class="field-wrap">
-          <label>استان / منطقه (اختیاری)</label>
-          <select id="srv-region" style="height:44px; padding:0 10px;">
-            <option value="">سراسری (همه مناطق)</option>
-            <!-- گزینه‌ها در JS پر می‌شوند -->
+          <label>استان‌ها (چند انتخابی)</label>
+          <select id="srv-region" multiple style="height: 100px; padding: 10px; font-size:12px;">
+             <!-- گزینه‌ها با JS پر می‌شوند -->
           </select>
+          <span style="font-size:11px; color:var(--i500); margin-top:4px;">برای انتخاب چند استان، در موبایل روی گزینه‌ها ضربه بزنید. (خالی = سراسری)</span>
         </div>
         
-        <button class="btn btn-green" id="srv-add-btn" style="height:44px; padding:0 20px; width:100%;">
+        <button class="btn btn-green" id="srv-add-btn" style="height:44px; padding:0 20px; width:100%; margin-top:12px;">
           <svg class="icon"><use href="#i-plus"/></svg> ثبت خدمت
         </button>
         
@@ -906,7 +912,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
-<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۴.۰ · پلتفرم جامع کشاورزی</div>
+<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۵.۰ · پلتفرم جامع کشاورزی</div>
 </main>
 </div>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
@@ -952,13 +958,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     
     <div class="field-wrap" style="margin-bottom:12px;">
       <label>واحد *</label>
-      <select id="edit-srv-unit" style="height:44px; padding:0 10px;">
-        <option value="hectare">هکتار</option>
-        <option value="hour">ساعت</option>
-        <option value="meter">متر</option>
-        <option value="1000m2">هزار متر مربع (۱/۱۰ هکتار)</option>
-        <option value="1000L">هزار لیتر (تانکر)</option>
-      </select>
+      <input id="edit-srv-unit" list="unit-options" style="height:44px;">
     </div>
     
     <div class="field-wrap" style="margin-bottom:12px;">
@@ -970,10 +970,9 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     </div>
 
     <div class="field-wrap" style="margin-bottom:20px;">
-      <label>استان / منطقه (اختیاری)</label>
-      <select id="edit-srv-region" style="height:44px; padding:0 10px;">
-        <option value="">سراسری (همه مناطق)</option>
-        <!-- گزینه‌ها در JS پر می‌شوند -->
+      <label>استان‌ها (چند انتخابی)</label>
+      <select id="edit-srv-region" multiple style="height: 120px; padding: 10px; font-size:12px;">
+        <!-- گزینه‌ها با JS پر می‌شوند -->
       </select>
     </div>
     
@@ -1053,6 +1052,7 @@ const isCustomerVerified=()=>{const v=read(LS.cust_verified,null);return v&&v.ph
 const setCustomerVerified=phone=>write(LS.cust_verified,{phone,at:Date.now(),expires:Date.now()+90*24*3600*1000});
 const isGuest=()=>localStorage.getItem(LS.guest)==='true';
 
+// 🔴 لیست کامل ۳۱ استان ایران
 function defaultConfig(){
   return {
     baseRate: 850000,
@@ -1065,13 +1065,20 @@ function defaultConfig(){
       { id: "pipe", name: "لوله‌گذاری و نوار تیپ", rate: 50000, unit: "meter", type: "machinery" }
     ],
     payment:{card:"6104 3374 3811 1567",iban:"IR09 0120 0200 0008 6808 6339 3",holder:"شرکت سم‌پاش هوشمند"},
-    provinces: ["تهران","اصفهان","فارس","خوزستان","خراسان رضوی","آذربایجان شرقی","گیلان","مازندران","کرمان","یزد","البرز","قم","مرکزی","گلستان","اردبیل","قزوین","همدان","کرمانشاه","هرمزگان","سیستان و بلوچستان","لرستان","کردستان","بوشهر","سمنان","زنجان"],
+    provinces: [
+      "تهران","البرز","اصفهان","فارس","خراسان رضوی","خراسان شمالی","خراسان جنوبی","آذربایجان شرقی","آذربایجان غربی","اردبیل","بوشهر","چهارمحال و بختیاری","خوزستان","زنجان","سمنان","سیستان و بلوچستان","قزوین","قم","کردستان","کرمان","کرمانشاه","کهگیلویه و بویراحمد","گلستان","گیلان","لرستان","مازندران","مرکزی","هرمزگان","همدان","یزد","ایلام"
+    ],
     crops: ["گندم","جو","آفتابگردان","سیب‌زمینی","ذرت","باغ میوه","یونجه","سایر"]
   };
 }
+
+// 🔴 اصلاح getConfig برای اجبار لیست جدید استان‌ها
 const getConfig=()=>{
   const d=defaultConfig();
-  const c=Object.assign(d,cache.config||{});
+  const c=Object.assign({}, d, cache.config||{});
+  
+  c.provinces = d.provinces; // اجبار لیست کامل ۳۱ استان
+  
   if(!c.services) c.services = [];
   d.services.forEach(defSrv => {
      if(!c.services.some(s => s.id === defSrv.id)) {
@@ -1079,13 +1086,13 @@ const getConfig=()=>{
          c.services.push(defSrv);
      }
   });
-  if(!Array.isArray(c.provinces)||!c.provinces.length)c.provinces=d.provinces;
   if(!Array.isArray(c.crops)||!c.crops.length)c.crops=d.crops;
   if(!c.payment||typeof c.payment!=="object")c.payment=d.payment;
   return c;
 };
+
 const setConfig=async c=>{cache.config=c;write(LS.config,c);await apiFetch("/api/config",{method:"PUT",body:JSON.stringify(c)});};
-const STATUS={pending:{label:"در انتظار پرداخت",cls:""},scheduled:{label:"زمان‌بندی شد",cls:"green"},assigned:{label:"ارجاع به همکار",cls:"purple"},in_progress:{label:"در حال انجام",cls:"blue"},done:{label:"منتظر امتیاز",cls:"amber"},completed:{label:"تکمیل شده",cls:"green"},cancelled:{label:"لغو شده",cls:"red"},receipt_pending:{label:"در انتظار تأیید فیش",cls:"amber"},receipt_rejected:{label:"فیش رد شده",cls:"red"}};
+const STATUS={pending:{label:"در انتظار پرداخت",cls:""},scheduled:{label:"زمان‌بندی شد",cls:"green"},assigned:{label:"در راه / ارجاع",cls:"purple"},in_progress:{label:"در حال انجام",cls:"blue"},done:{label:"منتظر امتیاز",cls:"amber"},completed:{label:"تکمیل شده",cls:"green"},cancelled:{label:"لغو شده",cls:"red"},receipt_pending:{label:"در انتظار تأیید فیش",cls:"amber"},receipt_rejected:{label:"فیش رد شده",cls:"red"}};
 
 const API="https://api.sampash-ai.ir";
 async function apiFetch(path,opts={}){
@@ -1248,7 +1255,6 @@ function renderProfile(){
   const set=(id,v)=>{const el=document.getElementById(id);if(el)el.value=v;};
   set("prof-name",prof.name||""); set("prof-phone",ph?toFa(ph):""); set("prof-city",prof.city||"");
   
-  // 🔴 اضافه کردن لیست استان‌ها به پروفایل
   const s = $("#prof-province");
   if(s) {
       const c = getConfig();
@@ -1360,16 +1366,27 @@ function refreshDroneSelects() {
   const sel = $("#drone-slot-select");
   if(sel) sel.innerHTML = free.length ? '<option value="">انتخاب تاریخ</option>' + free.map(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return `<option value="${s.id}">${toFa(s.date)} (${toFa(s.cap-b)} ظرفیت)</option>`; }).join("") : '<option value="">تاریخی موجود نیست</option>';
   
-  const srv = c.services.find(s => s.type === 'drone' && !s.hidden) || c.services.find(s => s.id === 'spray');
-  if($("#drone-base-rate") && srv) $("#drone-base-rate").textContent = fmt(srv.rate);
+  updateDronePrice();
 }
+
 function updateDronePrice() {
   const a = $("#drone-area"), p = $("#drone-total-price"); if(!a || !p) return;
   const n = Math.max(0, Number(toEn(a.value).replace(/[^\d.]/g,""))||0); const ha = m2ToHa(n);
-  const c = getConfig(); const srv = c.services.find(s => s.type === 'drone' && !s.hidden) || c.services.find(s => s.id === 'spray');
+  
+  const selectedProv = $("#drone-province")?.value || "";
+  const c = getConfig(); 
+  const drones = c.services.filter(s => s.type === 'drone' && !s.hidden);
+  
+  // پیدا کردن خدمت پهپاد مخصوص استان، اگر نبود سراسری
+  let srv = drones.find(s => s.region && s.region.split(',').includes(selectedProv));
+  if (!srv) srv = drones.find(s => !s.region); 
+  if (!srv) srv = drones.find(s => s.id === 'spray'); 
+  
   p.textContent = n > 0 && srv ? fmtT(ha * srv.rate) : "—";
+  if($("#drone-base-rate") && srv) $("#drone-base-rate").textContent = fmt(srv.rate);
 }
 $("#drone-area")?.addEventListener("input", updateDronePrice);
+$("#drone-province")?.addEventListener("change", updateDronePrice);
 
 let selectedMachinery = [];
 function renderMachineryServices() {
@@ -1379,14 +1396,15 @@ function renderMachineryServices() {
   if(!select) return;
   
   select.innerHTML = '<option value="">➕ افزودن خدمت به لیست...</option>' + mechServices.map(s => {
-    let unitLabel = s.unit === 'hour' ? 'ساعت' : (s.unit === 'meter' ? 'متر' : (s.unit === '1000L' ? 'هزار لیتر' : (s.unit === '1000m2' ? 'هزار متر' : 'هکتار')));
-    const regionTxt = s.region ? ` - ${s.region}` : '';
+    let unitLabel = s.unit === 'hour' ? 'ساعت' : (s.unit === 'meter' ? 'متر' : (s.unit === '1000L' ? 'هزار لیتر' : (s.unit === '1000m2' ? 'هزار متر' : (s.unit === 'hectare' ? 'هکتار' : s.unit))));
+    const regionTxt = s.region ? ` - ${s.region.split(',').join('، ')}` : '';
     return `<option value="${s.id}">${esc(s.name)}${regionTxt} (${fmt(s.rate)} تومان / ${unitLabel})</option>`;
   }).join("");
   
   selectedMachinery = [];
   renderSelectedChips();
 }
+
 function renderSelectedChips() {
   const box = $("#selected-services-chips");
   if(!box) return;
@@ -1407,6 +1425,7 @@ function renderSelectedChips() {
     }).join("");
   }
 }
+
 window.removeMachinery = function(id) {
   selectedMachinery = selectedMachinery.filter(x => x !== id);
   renderSelectedChips();
@@ -1433,6 +1452,7 @@ function refreshMachSelects() {
   const sel = $("#mach-slot-select");
   if(sel) sel.innerHTML = free.length ? '<option value="">انتخاب تاریخ</option>' + free.map(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return `<option value="${s.id}">${toFa(s.date)} (${toFa(s.cap-b)} ظرفیت)</option>`; }).join("") : '<option value="">تاریخی موجود نیست</option>';
 }
+
 function updateMachPrice() {
   const a = $("#mach-area"), unitSelect = $("#mach-area-unit"), p = $("#mach-total-price"); 
   if(!a || !p || !unitSelect) return;
@@ -1532,7 +1552,13 @@ document.getElementById('drone-order-form')?.addEventListener('submit', async (e
   const phone = toEn($("#drone-phone").value);
   if(!(isCustomerVerified() && getCustomerPhone() === phone)){ await startPhoneVerification(phone); return; }
   
-  const c = getConfig(); const srv = c.services.find(s => s.type === 'drone' && !s.hidden) || c.services.find(s => s.id === 'spray');
+  const c = getConfig(); 
+  const selectedProv = $("#drone-province").value;
+  const drones = c.services.filter(s => s.type === 'drone' && !s.hidden);
+  let srv = drones.find(s => s.region && s.region.split(',').includes(selectedProv));
+  if (!srv) srv = drones.find(s => !s.region); 
+  if (!srv) srv = drones.find(s => s.id === 'spray');
+
   const ha = m2ToHa(+toEn($("#drone-area").value)); const slot = cache.slots.find(x => x.id === $("#drone-slot-select").value);
   const amount = ha * (srv ? srv.rate : 850000);
   
@@ -1547,7 +1573,6 @@ document.getElementById('drone-order-form')?.addEventListener('submit', async (e
   await apiFetch("/api/orders", { method: "POST", body: JSON.stringify(order) });
   cache.orders.push(order);
   
-  // ذخیره پروفایل برای سفارش بعدی
   setCustomerProfile({
       name: order.name,
       province: order.province,
@@ -1600,7 +1625,6 @@ document.getElementById('machinery-order-form')?.addEventListener('submit', asyn
   await apiFetch("/api/orders", { method: "POST", body: JSON.stringify(order) });
   cache.orders.push(order);
   
-  // ذخیره پروفایل برای سفارش بعدی
   setCustomerProfile({
       name: order.name,
       province: order.province,
@@ -1788,7 +1812,25 @@ document.querySelectorAll("#admin-tabs button").forEach(b => {
   };
 });
 
+// 🔴 تابع پر کردن منوی تاریخ برای زمان‌بندی
+function populateSlotDates() {
+    const sel = $("#slot-date-select");
+    if(!sel) return;
+    sel.innerHTML = '<option value="">انتخاب تاریخ</option>';
+    const today = new Date();
+    for(let i = 0; i <= 60; i++) {
+        const d = new Date(today);
+        d.setDate(today.getDate() + i);
+        const jDate = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {year:"numeric", month:"2-digit", day:"2-digit"}).format(d);
+        const parts = jDate.split('/');
+        const dateStr = `${toEn(parts[0])}/${toEn(parts[1])}/${toEn(parts[2])}`;
+        sel.innerHTML += `<option value="${dateStr}">${jDate}</option>`;
+    }
+}
+
 function renderSlots(){
+  populateSlotDates(); // پر کردن منوی تاریخ هر بار که تب باز می‌شود
+  
   const tb = $("#slot-tbody"); if(!tb) return;
   const all = cache.slots.sort((a,b)=>a.date.localeCompare(b.date));
   if(!all.length) { tb.innerHTML='<tr><td colspan="5"><div class="empty">ظرفیتی ثبت نشده است</div></td></tr>'; return; }
@@ -1811,10 +1853,14 @@ window.deleteSlot = async function(id) {
   await apiFetch("/api/slots", { method: "DELETE", body: JSON.stringify({id}) });
   renderSlots(); toast("حذف شد");
 }
-$("#slot-add-btn")?.addEventListener("click",async()=>{
-  const rawDate = $("#slot-date-input").value.trim(); const date = toEn(rawDate);
-  if(!isValidJalali(date)) return toast("فرمت تاریخ نامعتبر است. (مثلاً 1405/07/15)",true);
-  const c = +toEn($("#slot-cap").value) || 1; if(c<=0) return toast("ظرفیت را وارد کنید",true);
+
+// 🔴 دکمه ثبت روز جدید با منوی کشویی
+$("#slot-add-btn")?.addEventListener("click", async () => {
+  const date = $("#slot-date-select").value;
+  if(!date) return toast("لطفاً تاریخ را از منو انتخاب کنید", true);
+  
+  const c = +toEn($("#slot-cap").value) || 1; 
+  if(c <= 0) return toast("ظرفیت را وارد کنید", true);
   
   const existingIdx = cache.slots.findIndex(s => s.date === date);
   if(existingIdx >= 0) { 
@@ -1827,7 +1873,41 @@ $("#slot-add-btn")?.addEventListener("click",async()=>{
       await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(newSlot) });
       toast("✅ روز جدید ثبت شد"); 
   }
-  $("#slot-date-input").value = ""; $("#slot-cap").value = "2"; renderSlots();
+  $("#slot-cap").value = "2"; 
+  renderSlots();
+});
+
+// 🔴 دکمه پرکردن خودکار ۳۰ روز آینده (اصلاح شده)
+$("#slot-auto-fill-btn")?.addEventListener("click", async () => {
+   let added = 0;
+   const today = new Date();
+   const newSlotsToSync = [];
+
+   for(let i = 1; i <= 30; i++) {
+      const d = new Date(today); 
+      d.setDate(today.getDate() + i);
+      const jDate = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {year:"numeric", month:"2-digit", day:"2-digit"}).format(d);
+      const parts = jDate.split('/'); 
+      const dateStr = `${toEn(parts[0])}/${toEn(parts[1])}/${toEn(parts[2])}`;
+      
+      if(!cache.slots.some(s => s.date === dateStr)) { 
+          const newSlot = { id: uid(), date: dateStr, cap: 2, createdAt: Date.now() };
+          cache.slots.push(newSlot); 
+          newSlotsToSync.push(newSlot);
+          added++; 
+      }
+   }
+   
+   if(added > 0) {
+       toast("در حال ذخیره در سرور...");
+       for(const s of newSlotsToSync) {
+           await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(s) });
+       }
+       renderSlots(); 
+       toast(`✅ ${toFa(added)} روز به لیست اضافه شد.`);
+   } else {
+       toast("تمام ۳۰ روز آینده از قبل ثبت شده‌اند.");
+   }
 });
 
 function renderAdminServices() {
@@ -1843,10 +1923,17 @@ function renderAdminServices() {
     return; 
   }
 
-  const unitFa = (u) => u === 'hour' ? 'ساعتی' : (u === 'meter' ? 'متری' : (u === '1000L' ? 'هزار لیتری' : (u === '1000m2' ? 'هزار متری' : 'هکتاری')));
+  const unitFa = (u) => {
+      const map = { 'hectare': 'هکتار', 'hour': 'ساعت', 'meter': 'متر', '1000m2': 'هزار متر مربع', '1000L': 'هزار لیتر' };
+      return map[u] || u;
+  };
   const typeFa = (t) => t === 'drone' ? 'پهپاد' : 'مکانیزاسیون';
+  
+  const renderRegionTags = (r) => {
+      if(!r) return '<span style="color:var(--i400);">سراسری</span>';
+      return r.split(',').map(reg => `<span style="color:var(--b600); background:var(--b50); padding:2px 6px; border-radius:4px; margin-left:4px; display:inline-block; margin-bottom:4px; font-size:11px;">📍 ${esc(reg)}</span>`).join("");
+  };
 
-  // ۱. ساخت لیست کارت‌های تب خدمات
   if (listContainer) {
     listContainer.innerHTML = activeServices.map(s => `
       <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; background:var(--sur); border:1px solid var(--ln); border-radius:12px; padding:12px 16px;">
@@ -1854,8 +1941,8 @@ function renderAdminServices() {
           ${esc(s.name)} 
           <small style="color:var(--i500); font-weight:normal; display:block; margin-top:4px;">
             ${unitFa(s.unit)} - ${typeFa(s.type)} 
-            ${s.region ? `<span style="color:var(--b600); background:var(--b50); padding:2px 6px; border-radius:4px; margin-right:6px;">📍 ${esc(s.region)}</span>` : ''}
           </small>
+          <div style="margin-top:6px;">${renderRegionTags(s.region)}</div>
         </div>
         <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
           <input type="text" class="ltr" style="width:100px; padding:8px; height:36px; border:1px solid var(--ln2); border-radius:8px; text-align:center; font-weight:bold;" value="${s.rate}" id="srv-rate-${s.id}">
@@ -1873,12 +1960,11 @@ function renderAdminServices() {
     `).join("");
   }
 
-  // ۲. ساخت جدول تب تعرفه‌ها
   if (pricingTbody) {
     pricingTbody.innerHTML = activeServices.map(s => `
       <tr>
         <td><strong>${esc(s.name)}</strong></td>
-        <td>${s.region ? `<span style="color:var(--b600); background:var(--b50); padding:2px 8px; border-radius:6px;">${esc(s.region)}</span>` : '<span style="color:var(--i400);">سراسری</span>'}</td>
+        <td>${renderRegionTags(s.region)}</td>
         <td>${unitFa(s.unit)}</td>
         <td>
           <div style="display:flex; align-items:center; gap:6px;">
@@ -1922,7 +2008,15 @@ window.openEditService = function(id) {
   document.getElementById("edit-srv-rate").value = srv.rate;
   document.getElementById("edit-srv-unit").value = srv.unit;
   document.getElementById("edit-srv-type").value = srv.type;
-  document.getElementById("edit-srv-region").value = srv.region || ""; 
+  
+  const editSelect = document.getElementById("edit-srv-region");
+  Array.from(editSelect.options).forEach(opt => opt.selected = false);
+  if(srv.region) {
+      const srvRegions = srv.region.split(",");
+      Array.from(editSelect.options).forEach(opt => {
+          if(srvRegions.includes(opt.value)) opt.selected = true;
+      });
+  }
   
   document.getElementById("edit-service-modal").classList.add("show");
 }
@@ -1931,18 +2025,19 @@ document.getElementById("save-edit-srv-btn")?.addEventListener("click", async ()
   const id = document.getElementById("edit-srv-id").value;
   const name = document.getElementById("edit-srv-name").value.trim();
   const rate = +toEn(document.getElementById("edit-srv-rate").value) || 0;
-  const unit = document.getElementById("edit-srv-unit").value;
+  const unit = document.getElementById("edit-srv-unit").value.trim(); 
   const type = document.getElementById("edit-srv-type").value;
-  const region = document.getElementById("edit-srv-region").value.trim();
+  const selectedRegions = Array.from(document.getElementById("edit-srv-region").selectedOptions).map(opt => opt.value);
+  const region = selectedRegions.join(",");
   
-  if(!name || rate <= 0) return toast("نام و نرخ را به درستی وارد کنید", true);
+  if(!name || rate <= 0 || !unit) return toast("نام، نرخ و واحد را به درستی وارد کنید", true);
   
   const cfg = getConfig();
   const srvIndex = cfg.services.findIndex(s => s.id === id);
   if(srvIndex >= 0) {
     cfg.services[srvIndex].name = name;
     cfg.services[srvIndex].rate = rate;
-    cfg.services[srvIndex].unit = unit;
+    cfg.services[srvIndex].unit = unit; 
     cfg.services[srvIndex].type = type;
     cfg.services[srvIndex].region = region; 
     
@@ -1956,19 +2051,21 @@ document.getElementById("save-edit-srv-btn")?.addEventListener("click", async ()
 document.getElementById('srv-add-btn')?.addEventListener('click', async () => {
   const name = document.getElementById('srv-name').value.trim(); 
   const rate = +toEn(document.getElementById('srv-rate').value) || 0;
-  const unit = document.getElementById('srv-unit').value;
+  const unit = document.getElementById('srv-unit').value.trim(); 
   const type = document.getElementById('srv-type').value; 
-  const region = document.getElementById('srv-region').value.trim(); 
+  const selectedRegions = Array.from(document.getElementById("srv-region").selectedOptions).map(opt => opt.value);
+  const region = selectedRegions.join(",");
   
-  if(!name || rate <= 0) return toast("نام و نرخ را وارد کنید", true);
+  if(!name || rate <= 0 || !unit) return toast("نام، نرخ و واحد را وارد کنید", true);
   
   const cfg = getConfig(); 
   cfg.services.push({ id: uid(), name, rate, unit, type, region }); 
   await setConfig(cfg);
   
   document.getElementById('srv-name').value = ""; 
-  document.getElementById('srv-rate').value = "";
-  document.getElementById('srv-region').value = "";
+  document.getElementById('srv-rate').value = "1";
+  document.getElementById('srv-unit').value = "";
+  Array.from(document.getElementById("srv-region").options).forEach(opt => opt.selected = false);
   
   renderAdminServices(); toast("✅ خدمت اضافه شد");
 });
@@ -2109,16 +2206,16 @@ document.getElementById('guest-btn')?.addEventListener('click', () => {
       ptnProv.innerHTML = '<option value="">انتخاب</option>' + c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
   }
 
-  // ۲. پر کردن استان‌ها در فرم افزودن خدمت
+  // ۲. پر کردن استان‌ها در فرم افزودن خدمت (چند انتخابی)
   const srvRegion = $("#srv-region");
   if(srvRegion) {
-      srvRegion.innerHTML = '<option value="">سراسری (همه مناطق)</option>' + c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
+      srvRegion.innerHTML = c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
   }
 
-  // ۳. پر کردن استان‌ها در مودال ویرایش خدمت
+  // ۳. پر کردن استان‌ها در مودال ویرایش خدمت (چند انتخابی)
   const editSrvRegion = $("#edit-srv-region");
   if(editSrvRegion) {
-      editSrvRegion.innerHTML = '<option value="">سراسری (همه مناطق)</option>' + c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
+      editSrvRegion.innerHTML = c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
   }
   
   refreshHomeStats(); renderCustomerAuth();
