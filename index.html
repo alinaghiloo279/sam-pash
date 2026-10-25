@@ -2127,6 +2127,169 @@ document.addEventListener("DOMContentLoaded", async () => {
     $("#sidebar-overlay")?.classList.remove("show");
   });
 });
+  /* ==================== توابع تکمیلی و رفع خطا (نسخه نهایی) ==================== */
+
+// ۱. رندر کردن تاریخچه سفارش‌ها
+function renderHistory() {
+  const box = $("#history-list");
+  if(!box) return;
+  const ph = getCustomerPhone();
+  if(!ph || !isCustomerVerified()) {
+    box.innerHTML = '<div class="empty"><span class="empty-emoji">🔐</span><strong>شماره تأیید نشده</strong></div>';
+    return;
+  }
+  let list = cache.orders.filter(o => o.phone === ph).sort((a,b) => (b.createdAt||0) - (a.createdAt||0));
+  if(!list.length) {
+    box.innerHTML = '<div class="empty"><span class="empty-emoji">📭</span><strong>سفارشی نیست</strong></div>';
+    return;
+  }
+  box.innerHTML = list.map(o => {
+    const st = STATUS[o.status] || STATUS.pending;
+    const srv = getConfig().services.find(s=>s.id===o.serviceType) || {name: o.serviceType || o.crop};
+    return `<div class="history-item">
+      <div class="history-ic"><svg class="icon"><use href="#i-order"/></svg></div>
+      <div class="history-main">
+        <strong>${esc(srv.name)} · ${toFa(o.area)} هکتار</strong>
+        <small><code class="ltr">${esc(o.code)}</code> · ${new Date(o.createdAt||Date.now()).toLocaleDateString("fa-IR")}</small>
+        <div style="margin-top:6px"><span class="status ${st.cls}" style="font-size:10.5px">${st.label}</span></div>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+// ۲. رندر کردن گالری ویدیوها
+function renderVideos() {
+  const grid = document.getElementById("kv-videos-grid");
+  if(!grid) return;
+  const videos = read(LS.videos, []);
+  if(!videos.length) {
+    grid.innerHTML = '<div class="kv-empty"><span class="kv-empty-icon">🎬</span><strong>هنوز ویدیویی نیست</strong>به‌زودی ویدیوهای سمپاشی اضافه می‌شود.</div>';
+    return;
+  }
+  grid.innerHTML = videos.map(v => `
+    <article class="kv-card kv-video-card" onclick="window.open('${esc(v.url)}', '_blank')" style="cursor:pointer">
+      <div class="video-thumb" style="height:180px; background:#000; display:grid; place-items:center; color:#fff; font-size:40px;">▶</div>
+      <div class="kv-card-body">
+        <h3 class="kv-card-title">${esc(v.title||'')}</h3>
+        <p class="kv-card-desc">${esc(v.desc||'')}</p>
+      </div>
+    </article>
+  `).join("");
+}
+
+// ۳. رندر کردن چت (پیام به مدیر)
+function renderChat() {
+  const box = $("#chat-body");
+  if(!box) return;
+  const msgs = getMessages();
+  if(!msgs.length) {
+    box.innerHTML = '<div class="bubble reply">سلام 👋 پیامت رو بنویس.</div>';
+    return;
+  }
+  box.innerHTML = msgs.slice(-50).map(m => {
+    const me = m.from === "customer";
+    const dt = new Date(m.createdAt).toLocaleString("fa-IR", {hour:"2-digit",minute:"2-digit"});
+    return `<div class="bubble ${me?"":"reply"}">${esc(m.text)}<small>${dt}</small></div>`;
+  }).join("");
+  box.scrollTop = box.scrollHeight;
+}
+$("#msg-form")?.addEventListener("submit", e => {
+  e.preventDefault();
+  const v = $("#msg-input").value.trim();
+  if(!v) return;
+  const msgs = getMessages();
+  msgs.push({ id: uid(), from: "customer", phone: getCustomerPhone(), text: v, createdAt: Date.now() });
+  setMessages(msgs);
+  apiFetch("/api/messages", { method: "POST", body: JSON.stringify(msgs[msgs.length-1]) });
+  $("#msg-input").value = "";
+  renderChat();
+  toast("پیام ثبت شد.");
+});
+
+// ۴. اتصال مودال OTP واقعی (به جای prompt)
+async function startPhoneVerification(phone) {
+  if(!isOtpTimeAllowed()) return toast("ارسال پیامک فقط از ساعت ۸ صبح تا ۱۱ شب امکان‌پذیر است.", true);
+  
+  const res = await apiFetch("/api/otp/send", { method: "POST", body: JSON.stringify({ phone }) });
+  if(!res.ok) return toast(res.data.error || "خطا در ارسال پیامک", true);
+  
+  if(res.data.sim) toast(`کد تست: ${res.data.code}`, false);
+  
+  // باز کردن مودال OTP
+  const back = $("#otp-modal-back");
+  if(back) {
+    $("#otp-modal-phone").textContent = toFa(phone);
+    $$("#otp-inputs input").forEach(i => i.value = "");
+    back.classList.add("show");
+    setTimeout(() => $("#otp-inputs input")[0]?.focus(), 120);
+    
+    $("#otp-verify-btn").onclick = async () => {
+      const code = $$("#otp-inputs input").map(i => toEn(i.value)).join("");
+      if(code.length !== 6) return toast("کد کامل نیست", true);
+      
+      const verify = await apiFetch("/api/otp/verify", { method: "POST", body: JSON.stringify({ phone, code }) });
+      if(verify.ok) {
+        setCustomerVerified(phone);
+        setCustomerPhone(phone);
+        back.classList.remove("show");
+        toast("✅ تایید شد");
+        renderCustomerAuth();
+        refreshHomeStats();
+      } else {
+        toast("کد نادرست است", true);
+      }
+    };
+    $("#otp-cancel-btn").onclick = () => back.classList.remove("show");
+  }
+}
+
+// ۵. اتصال دکمه واقعی ورود ادمین به سرور (2FA)
+$("#admin-login-form")?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const u = $("#admin-user").value.trim();
+  const p = $("#admin-pass").value;
+  const otp = toEn($("#admin-otp").value.trim());
+  
+  if(!u || !p || !otp) return toast("همه فیلدها را پر کنید", true);
+  
+  toast("در حال بررسی...");
+  const res2fa = await apiFetch("/api/admin/login", { method: "POST", body: JSON.stringify({ username: u, otpCode: otp }) });
+  
+  if(!res2fa.ok || !(res2fa.data.ok || res2fa.data.success)) {
+    return toast("کد 2FA نادرست است", true);
+  }
+  
+  toast("ورود موفق");
+  $("#admin-login-view").hidden = true;
+  $("#admin-panel-view").hidden = false;
+  renderDashboard();
+});
+
+// ۶. اتصال دکمه افزودن ویدیو (لینک)
+$("#vid-add-form-url")?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const title = $("#vid-title-url").value;
+  const url = $("#vid-url").value;
+  if(!title || !url) return toast("عنوان و لینک الزامی است", true);
+  
+  const videos = read(LS.videos, []);
+  videos.push({ id: uid(), title, url, desc: $("#vid-desc-url").value });
+  write(LS.videos, videos);
+  toast("✅ ویدیو اضافه شد");
+  $("#vid-add-form-url").reset();
+  renderVideos();
+});
+
+// ۷. بارگذاری اطلاعات پروفایل
+function renderProfileData() {
+  const prof = getCustomerProfile();
+  if($("#prof-name")) $("#prof-name").value = prof.name || "";
+  if($("#prof-province")) $("#prof-province").value = prof.province || "";
+  if($("#prof-city")) $("#prof-city").value = prof.city || "";
+}
+// فراخوانی هنگام باز کردن سایت
+setTimeout(renderProfileData, 1000);
+
 </script>
 </body>
 </html>
