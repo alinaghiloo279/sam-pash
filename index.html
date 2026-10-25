@@ -401,12 +401,25 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="form-grid">
   
   <div class="field-wrap span-2" style="background:var(--b50); padding:12px; border-radius:12px; border:1px solid var(--b200);">
-    <label style="color:var(--b800); font-size:14px; display:flex; align-items:center; gap:6px;">
+    <label style="color:var(--b800); font-size:14px; display:flex; align-items:center; gap:6px; margin-bottom:10px;">
       <svg class="icon" style="width:18px;height:18px;"><use href="#i-drone"/></svg> نوع خدمت درخواستی *
     </label>
     <input type="hidden" id="service-type" name="serviceType" required>
-    <div id="order-service-cards" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px; margin-top:10px;"></div>
-    <span class="error" data-error-for="service-type"></span>
+    
+    <div style="font-size:11.5px; font-weight:800; color:var(--b700); margin-bottom:6px; border-bottom:1px dashed var(--b300); padding-bottom:4px;">🛩️ خدمات تخصصی پهپاد</div>
+    <div id="order-service-cards-drone" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:8px; margin-bottom:16px;"></div>
+
+    <div style="font-size:11.5px; font-weight:800; color:var(--b700); margin-bottom:6px; border-bottom:1px dashed var(--b300); padding-bottom:4px;">🚜 خدمات مکانیزاسیون و سایر</div>
+    <div id="order-service-cards-mech" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:8px;"></div>
+    
+    <span class="error" data-error-for="service-type" style="display:block; margin-top:8px;"></span>
+  </div>
+
+  <div class="field-wrap">
+    <label for="area" id="area-label">مساحت / مقدار *</label>
+    <input id="area" name="area" required inputmode="decimal" class="ltr" type="text" value="10000">
+    <span class="hint" id="area-hint">واحد را بر اساس نوع خدمت وارد کنید.</span>
+    <span class="error" data-error-for="area"></span>
   </div>
 
   <div class="field-wrap"><label for="cust">نام و نام خانوادگی *</label><input id="cust" name="cust" required placeholder="علی محمدی"><span class="error" data-error-for="cust"></span></div>
@@ -415,7 +428,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   <div class="field-wrap"><label for="city">شهر *</label><input id="city" name="city" required placeholder="نام شهر"><span class="error" data-error-for="city"></span></div>
   <div class="field-wrap"><label for="village">روستا</label><input id="village" name="village" placeholder="نام روستا"></div>
   <div class="field-wrap"><label for="crop">محصول *</label><select id="crop" name="crop" required><option value="">انتخاب</option></select><span class="error" data-error-for="crop"></span></div>
-  <div class="field-wrap"><label for="area">مساحت (متر مربع) *</label><input id="area" name="area" required inputmode="decimal" class="ltr" type="text" value="10000"><span class="hint">هر ۱۰٬۰۰۰ متر = ۱ هکتار</span><span class="error" data-error-for="area"></span></div>
   
   <div class="field-wrap span-2">
     <label>📍 موقعیت دقیق مزرعه (اختیاری)</label>
@@ -434,6 +446,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </form>
 </div>
 </section>
+
 <section class="screen" id="screen-track">
 <div class="panel">
 <div class="panel-head"><div><h3>پیگیری سفارش</h3></div></div>
@@ -601,13 +614,23 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 
 <div class="admin-panel" data-panel="services">
   <div class="admin-card">
-    <h4>مدیریت خدمات و تعرفه‌ها</h4>
-    <p class="sub" style="margin-bottom:14px">لیست خدمات موجود. برای تغییر قیمت، نرخ جدید را وارد کرده و دکمه به‌روزرسانی را بزنید.</p>
+    <h4>مدیریت خدمات</h4>
+    <div class="actions" style="margin-bottom:14px; justify-content:flex-end;">
+      <button class="btn btn-light btn-sm" onclick="if(confirm('لیست خدمات به حالت اولیه برگردد؟')){ localStorage.removeItem('sph_config'); location.reload(); }">
+        <svg class="icon"><use href="#i-refresh"/></svg> ریست لیست خدمات
+      </button>
+    </div>
     <div style="background:var(--inset); border:1px solid var(--ln); border-radius:12px; padding:14px; margin-bottom:20px;">
       <h5 style="margin:0 0 10px; font-size:13px; color:var(--b800);">➕ افزودن خدمت جدید</h5>
-      <div style="display:grid; grid-template-columns:1fr 1fr auto; gap:10px; align-items:end;">
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr auto; gap:10px; align-items:end;">
         <div class="field-wrap"><label>نام خدمت</label><input id="srv-name" placeholder="مثلاً: شخم زنی"></div>
         <div class="field-wrap"><label>نرخ پایه (تومان)</label><input id="srv-rate" class="ltr" placeholder="500000"></div>
+        <div class="field-wrap"><label>واحد محاسبه</label>
+          <select id="srv-unit">
+            <option value="hectare">هکتار (مساحت)</option>
+            <option value="hour">ساعت (زمان)</option>
+          </select>
+        </div>
         <button class="btn btn-green" id="srv-add-btn">افزودن</button>
       </div>
     </div>
@@ -677,6 +700,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-phone">موبایل *</label><input id="ptn-reg-phone" required inputmode="numeric" class="ltr" maxlength="11"></div>
 <div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-prov">استان *</label><select id="ptn-reg-prov" required><option value="">انتخاب</option></select></div>
 <div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-city">شهر *</label><input id="ptn-reg-city" required></div>
+
 <div class="field-wrap span-2" style="margin-bottom:12px; background:var(--inset); padding:12px; border-radius:12px; border:1px solid var(--ln);">
   <label style="margin-bottom:8px; display:block;">نوع همکاری *</label>
   <div style="display:flex; gap:16px;">
@@ -684,10 +708,12 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     <label style="display:flex; align-items:center; gap:6px; cursor:pointer;"><input type="radio" name="ptn-type" value="mechanization" onchange="togglePtnType('mechanization')"> مکانیزاسیون</label>
   </div>
 </div>
+
 <div id="mechanization-fields" style="display:none; grid-column:span 2; gap:12px;" class="form-grid">
   <div class="field-wrap span-2"><label>دستگاه‌ها (با کاما) *</label><input id="ptn-reg-equipment" placeholder="تراکتور، کمباین..."></div>
   <div class="field-wrap span-2"><label>شهرهای قابل پوشش (با کاما) *</label><input id="ptn-reg-cities" placeholder="تهران، کرج..."></div>
 </div>
+
 <div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-share">سهم ٪</label><input id="ptn-reg-share" inputmode="numeric" class="ltr" value="30"></div>
 <div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-pass">رمز *</label><input id="ptn-reg-pass" required type="password" class="ltr"></div>
 <div class="field-wrap"><label for="ptn-reg-pass2">تکرار *</label><input id="ptn-reg-pass2" required type="password" class="ltr"></div>
@@ -695,6 +721,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </form>
 </div>
 </div>
+
 <div id="partner-panel-view" hidden>
 <div class="admin-head"><div><h3>پنل همکار</h3></div><button class="btn btn-danger btn-sm" id="partner-logout-btn"><svg class="icon"><use href="#i-logout"/></svg></button></div>
 <div class="admin-card"><h4>سفارش‌های من</h4><div id="ptn-orders-list"></div></div>
@@ -705,6 +732,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </main>
 </div>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
 <div class="modal-back" id="otp-modal-back">
 <div class="modal" style="max-width:440px">
 <h3 style="display:flex;align-items:center;gap:8px"><svg class="icon" width="20" height="20" style="color:var(--b600)"><use href="#i-sms"/></svg> تأیید شماره</h3>
@@ -767,7 +795,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 
 <div class="toast" id="toast"></div>
 <div class="modal-back" id="modal-back"><div class="modal" id="modal-body"></div></div>
-
 <script>
 "use strict";
 const $=(s,c=document)=>c.querySelector(s);
@@ -806,9 +833,11 @@ function defaultConfig(){
   return {
     baseRate: 850000,
     services: [
-      { id: "spray", name: "سم‌پاشی هوایی با پهپاد", rate: 850000 },
-      { id: "plow", name: "شخم زنی با تراکتور", rate: 600000 },
-      { id: "harvest", name: "برداشت با کمباین", rate: 1500000 }
+      { id: "spray", name: "سم‌پاشی هوایی با پهپاد", rate: 850000, unit: "hectare" },
+      { id: "plow", name: "شخم زنی با تراکتور", rate: 600000, unit: "hectare" },
+      { id: "harvest", name: "برداشت با کمباین", rate: 1500000, unit: "hectare" },
+      { id: "crane", name: "اجاره جرثقیل یا لودر", rate: 500000, unit: "hour" },
+      { id: "labor", name: "کارگر فصلی", rate: 150000, unit: "hour" }
     ],
     payment:{card:"6104 3374 3811 1567",iban:"IR09 0120 0200 0008 6808 6339 3",holder:"شرکت سم‌پاش هوشمند"},
     provinces: ["تهران","اصفهان","فارس","خوزستان","خراسان رضوی","آذربایجان شرقی","گیلان","مازندران","کرمان","یزد","البرز","قم","مرکزی","گلستان","اردبیل","قزوین","همدان","کرمانشاه","هرمزگان","سیستان و بلوچستان","لرستان","کردستان","بوشهر","سمنان","زنجان"],
@@ -818,13 +847,18 @@ function defaultConfig(){
 const getConfig=()=>{
   const d=defaultConfig();
   const c=Object.assign(d,cache.config||{});
-  if(!c.services||!c.services.length)c.services=d.services;
+  if(!c.services) c.services = [];
+  d.services.forEach(defSrv => {
+     if(!c.services.some(s => s.id === defSrv.id)) {
+         c.services.push(defSrv);
+     }
+  });
   if(!Array.isArray(c.provinces)||!c.provinces.length)c.provinces=d.provinces;
   if(!Array.isArray(c.crops)||!c.crops.length)c.crops=d.crops;
+  if(!c.payment||typeof c.payment!=="object")c.payment=d.payment;
   return c;
 };
 const setConfig=c=>{cache.config=c;write(LS.config,c);apiFetch("/api/config",{method:"PUT",body:JSON.stringify(c)});};
-
 const STATUS={pending:{label:"در انتظار پرداخت",cls:""},scheduled:{label:"زمان‌بندی شد",cls:"green"},assigned:{label:"ارجاع به همکار",cls:"purple"},accepted:{label:"پذیرفته شده",cls:"blue"},in_progress:{label:"در حال انجام",cls:"blue"},done:{label:"تکمیل شده",cls:"green"},cancelled:{label:"لغو شده",cls:"red"},receipt_pending:{label:"در انتظار تأیید فیش",cls:"amber"},receipt_rejected:{label:"فیش رد شده",cls:"red"}};
 
 const API="https://api.sampash-ai.ir";
@@ -839,7 +873,8 @@ async function loadAll(){
     cache.config=cf.ok&&cf.data&&Object.keys(cf.data).length?cf.data:null;
   }catch{cache.config=read(LS.config,null);}
 }
-  function showScreen(name){
+
+function showScreen(name){
   const isGuestMode = isGuest();
   if (name === "order" && isGuestMode && !isCustomerVerified()) {
     toast("برای ثبت سفارش، ابتدا باید وارد حساب خود شوید.", true);
@@ -849,24 +884,34 @@ async function loadAll(){
   const t=document.getElementById("screen-"+name);if(!t)return;
   if(name==="admin"){const lv=$("#admin-login-view"),pv=$("#admin-panel-view");if(lv)lv.hidden=false;if(pv)pv.hidden=true;}
   if(name==="partner"){const lv=$("#partner-login-view"),pv=$("#partner-panel-view");if(lv)lv.hidden=false;if(pv)pv.hidden=true;}
-  
   if(name==="order")refreshSlotSelect();
   if(name==="history")renderHistory();
   if(name==="profile")renderProfile();
   if(name==="messages")renderChat();
   if(name==="videos")renderVideos();
   if(name==="payment")renderPayInfo();
-  
   $$(".screen").forEach(s=>s.classList.remove("active"));t.classList.add("active");
   $$(".nav button").forEach(b=>{const on=b.dataset.screen===name;if(on)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");});
   window.scrollTo({top:0,behavior:"smooth"});
 }
-
 document.addEventListener("click",e=>{
   const go=e.target.closest("[data-go]");
   if(go){if(go.tagName==="A")e.preventDefault();showScreen(go.dataset.go);return;}
   const scr=e.target.closest("[data-screen]");
   if(scr){showScreen(scr.dataset.screen);return;}
+});
+document.getElementById("mobile-menu-btn")?.addEventListener("click", (e) => {
+  e.preventDefault();
+  const sb = document.querySelector(".sidebar"), ov = document.getElementById("sidebar-overlay");
+  if(sb.classList.contains("show")) { sb.classList.remove("show"); ov.classList.remove("show"); } 
+  else { sb.classList.add("show"); ov.classList.add("show"); }
+});
+document.getElementById("sidebar-overlay")?.addEventListener("click", () => {
+  document.querySelector(".sidebar")?.classList.remove("show");
+  document.getElementById("sidebar-overlay")?.classList.remove("show");
+});
+document.querySelectorAll(".nav button").forEach(btn => {
+  btn.addEventListener("click", () => { document.querySelector(".sidebar")?.classList.remove("show"); document.getElementById("sidebar-overlay")?.classList.remove("show"); });
 });
 
 function renderCustomerAuth(){
@@ -875,12 +920,10 @@ function renderCustomerAuth(){
   const logoutBtn = document.getElementById('header-logout-btn'); if(logoutBtn) logoutBtn.hidden = !ver && !isGuest();
   const sub=$("#home-orders-sub"); if(sub) sub.textContent = ph ? `سفارش‌های شماره ${toFa(ph)}` : "برای دیدن سفارش‌ها شماره خود را وارد کنید";
 }
-
 window.logoutCustomer = function() {
   setCustomerPhone(""); localStorage.removeItem(LS.cust_verified); localStorage.removeItem(LS.guest);
   showScreen("home"); document.getElementById('welcome-overlay').classList.remove('hidden'); toast("با موفقیت خارج شدید");
 };
-
 function renderTrustBar(){
   const allOrders=cache.orders.filter(o=>o.status!=="cancelled");
   const totalArea=allOrders.reduce((s,o)=>s+(+o.area||0),0);
@@ -888,7 +931,6 @@ function renderTrustBar(){
   const ta=$("#trust-area"),tu=$("#trust-users");
   if(ta)ta.textContent=toFa(totalArea); if(tu)tu.textContent=toFa(users);
 }
-
 function renderHomeOrders(){
   const box=$("#home-orders");if(!box)return;
   const ph=getCustomerPhone();
@@ -909,7 +951,6 @@ function renderHomeOrders(){
     return`<div class="order-row"><div class="order-icon"><svg class="icon"><use href="#i-home"/></svg></div><div class="order-main"><strong>${esc(srv.name)} · ${toFa(x.area)} هکتار</strong><small>${esc(x.code)}</small></div><span class="status ${st.cls}">${st.label}</span></div>`;
   }).join("");
 }
-
 function refreshHomeStats(){
   const ph=getCustomerPhone();const ver=isCustomerVerified();
   const o=ver?cache.orders.filter(x=>x.phone===ph):[];
@@ -919,7 +960,6 @@ function refreshHomeStats(){
   if(el1)el1.textContent=toFa(o.length); if(el2)el2.textContent=toFa(pend); if(el3)el3.innerHTML=toFa(area)+' <span class="unit">هکتار</span>';
   renderHomeOrders(); renderTrustBar();
 }
-
 function renderProfile(){
   const ph=getCustomerPhone();const prof=getCustomerProfile();
   const a=$("#profile-avatar-big"),n=$("#profile-name-big"),p=$("#profile-phone-big");
@@ -929,13 +969,50 @@ function renderProfile(){
   if(prof.province){const s=$("#prof-province");if(s)s.value=prof.province;}
 }
 
+/* ==================== HISTORY, VIDEOS, CHAT ==================== */
+function renderHistory() {
+  const box = $("#history-list"); if(!box) return;
+  const ph = getCustomerPhone();
+  if(!ph || !isCustomerVerified()) { box.innerHTML = '<div class="empty"><strong>شماره تأیید نشده</strong></div>'; return; }
+  let list = cache.orders.filter(o => o.phone === ph).sort((a,b) => (b.createdAt||0) - (a.createdAt||0));
+  if(!list.length) { box.innerHTML = '<div class="empty"><strong>سفارشی نیست</strong></div>'; return; }
+  box.innerHTML = list.map(o => {
+    const st = STATUS[o.status] || STATUS.pending;
+    const srv = getConfig().services.find(s=>s.id===o.serviceType) || {name: o.serviceType || o.crop};
+    return `<div class="history-item" style="display:flex;gap:10px;padding:12px;border:1px solid var(--ln);border-radius:10px;margin-bottom:8px;"><div class="history-ic"><svg class="icon"><use href="#i-order"/></svg></div><div class="history-main"><strong>${esc(srv.name)} · ${toFa(o.area)} هکتار</strong><small><code class="ltr">${esc(o.code)}</code> · ${new Date(o.createdAt||Date.now()).toLocaleDateString("fa-IR")}</small><div style="margin-top:6px"><span class="status ${st.cls}" style="font-size:10.5px">${st.label}</span></div></div></div>`;
+  }).join("");
+}
+
+function renderVideos() {
+  const grid = document.getElementById("kv-videos-grid"); if(!grid) return;
+  const videos = read(LS.videos, []);
+  if(!videos.length) { grid.innerHTML = '<div class="kv-empty"><strong>هنوز ویدیویی نیست</strong></div>'; return; }
+  grid.innerHTML = videos.map(v => `<article class="kv-card kv-video-card" onclick="window.open('${esc(v.url)}', '_blank')" style="cursor:pointer"><div class="video-thumb" style="height:180px; background:#000; display:grid; place-items:center; color:#fff; font-size:40px;">▶</div><div class="kv-card-body"><h3 class="kv-card-title">${esc(v.title||'')}</h3></div></article>`).join("");
+}
+
+function renderChat() {
+  const box = $("#chat-body"); if(!box) return;
+  const msgs = read(LS.messages, []);
+  if(!msgs.length) { box.innerHTML = '<div class="bubble reply">سلام 👋 پیامت رو بنویس.</div>'; return; }
+  box.innerHTML = msgs.slice(-50).map(m => {
+    const me = m.from === "customer";
+    return `<div class="bubble ${me?"":"reply"}">${esc(m.text)}</div>`;
+  }).join("");
+  box.scrollTop = box.scrollHeight;
+}
+$("#msg-form")?.addEventListener("submit", e => {
+  e.preventDefault(); const v = $("#msg-input").value.trim(); if(!v) return;
+  const msgs = read(LS.messages, []); msgs.push({ id: uid(), from: "customer", phone: getCustomerPhone(), text: v, createdAt: Date.now() }); write(LS.messages, msgs);
+  $("#msg-input").value = ""; renderChat(); toast("پیام ثبت شد.");
+});
+
+/* ==================== SERVICES & DYNAMIC PRICING ==================== */
 function openServicesModal() { document.getElementById('services-modal-back').classList.add('show'); }
 document.getElementById('service-tabs')?.addEventListener('click', (e) => {
   const btn = e.target.closest('button[data-service-tab]'); if (!btn) return;
   document.querySelectorAll('#service-tabs button').forEach(b => b.setAttribute('aria-selected', b === btn ? 'true' : 'false'));
   document.querySelectorAll('.service-panel').forEach(p => { p.style.display = p.dataset.servicePanel === btn.dataset.serviceTab ? 'block' : 'none'; });
 });
-
 function requestService(serviceName, serviceId) {
   document.getElementById('services-modal-back').classList.remove('show');
   showScreen('order');
@@ -948,27 +1025,40 @@ document.getElementById('services-modal-back')?.addEventListener('click', (e) =>
 
 function fillServices() { 
   const cfg = getConfig(); 
-  const container = document.getElementById("order-service-cards");
-  if(!container) return;
+  const droneContainer = document.getElementById("order-service-cards-drone");
+  const mechContainer = document.getElementById("order-service-cards-mech");
+  if(!droneContainer || !mechContainer) return;
   
-  container.innerHTML = cfg.services.map(s => `
-    <div class="quick" onclick="selectOrderService('${s.id}')" id="srv-card-${s.id}" style="padding:10px 8px; border-radius:10px; text-align:center; border:2px solid var(--ln); transition:all 0.2s;">
-      <strong style="font-size:12px; display:block; color:var(--i800);">${esc(s.name)}</strong>
-      <small style="font-size:10.5px; color:var(--b600); font-weight:700;">${fmt(s.rate)} تومان</small>
-    </div>
-  `).join("");
+  const renderCard = (s) => {
+    const unitLabel = s.unit === 'hour' ? 'ساعت' : 'هکتار';
+    return `
+      <div class="quick" onclick="selectOrderService('${s.id}')" id="srv-card-${s.id}" style="padding:10px 8px; border-radius:10px; text-align:center; border:2px solid var(--ln); transition:all 0.2s;">
+        <strong style="font-size:12px; display:block; color:var(--i800);">${esc(s.name)}</strong>
+        <small style="font-size:10.5px; color:var(--b600); font-weight:700;">${fmt(s.rate)} / ${unitLabel}</small>
+      </div>
+    `;
+  };
+  const droneServices = cfg.services.filter(s => s.id === 'spray' || s.name.includes('پهپاد'));
+  const otherServices = cfg.services.filter(s => s.id !== 'spray' && !s.name.includes('پهپاد'));
+
+  droneContainer.innerHTML = droneServices.map(renderCard).join("");
+  mechContainer.innerHTML = otherServices.map(renderCard).join("");
 }
 
 window.selectOrderService = function(id) {
   document.getElementById("service-type").value = id;
-  document.querySelectorAll("#order-service-cards .quick").forEach(el => {
-    el.style.borderColor = "var(--ln)";
-    el.style.background = "var(--sur)";
+  document.querySelectorAll("#order-service-cards-drone .quick, #order-service-cards-mech .quick").forEach(el => {
+    el.style.borderColor = "var(--ln)"; el.style.background = "var(--sur)";
   });
   const card = document.getElementById("srv-card-" + id);
-  if(card) {
-    card.style.borderColor = "var(--b500)";
-    card.style.background = "var(--b50)";
+  if(card) { card.style.borderColor = "var(--b500)"; card.style.background = "var(--b50)"; }
+
+  const cfg = getConfig(); const srv = cfg.services.find(s => s.id === id);
+  const label = document.getElementById("area-label"), hint = document.getElementById("area-hint"), input = document.getElementById("area");
+  if (srv && srv.unit === 'hour') {
+    label.textContent = "مدت زمان (ساعت) *"; hint.textContent = "تعداد ساعات کارکرد را وارد کنید."; input.value = "1";
+  } else {
+    label.textContent = "مساحت (متر مربع) *"; hint.textContent = "هر ۱۰,۰۰۰ متر مربع = ۱ هکتار"; input.value = "10000";
   }
   updatePrice();
 }
@@ -976,10 +1066,20 @@ window.selectOrderService = function(id) {
 function updatePrice(){
   const a=$("#area"), p=$("#total-price"), srvId = $("#service-type")?.value;
   if(!a || !p) return;
-  const n=Math.max(0, Number(toEn(a.value).replace(/[^\d.]/g,""))||0); const ha=m2ToHa(n);
-  const cfg=getConfig(); if(!srvId) { p.textContent = "ابتدا خدمت را انتخاب کنید"; return; }
-  const srv = cfg.services.find(s => s.id === srvId); const rate = srv ? srv.rate : cfg.baseRate;
-  p.textContent = n > 0 ? fmtT(rate * ha) : "—"; if($("#base-rate")) $("#base-rate").textContent = fmt(rate);
+  const cfg=getConfig(); 
+  if(!srvId) { p.textContent = "ابتدا خدمت را انتخاب کنید"; return; }
+  const srv = cfg.services.find(s => s.id === srvId); if(!srv) return;
+
+  let amountValue = 0;
+  if (srv.unit === 'hour') {
+    amountValue = Math.max(0, Number(toEn(a.value).replace(/[^\d.]/g,""))||0);
+  } else {
+    const n = Math.max(0, Number(toEn(a.value).replace(/[^\d.]/g,""))||0);
+    amountValue = m2ToHa(n);
+  }
+  const rate = srv.rate;
+  p.textContent = amountValue > 0 ? fmtT(rate * amountValue) : "—"; 
+  if($("#base-rate")) $("#base-rate").textContent = fmt(rate) + (srv.unit === 'hour' ? " (ساعتی)" : " (هکتاری)");
 }
 $("#service-type")?.addEventListener("change", updatePrice); $("#area")?.addEventListener("input", updatePrice);
 
@@ -988,7 +1088,6 @@ function fillSelects(){
   const fill=(sel,items,ph)=>{if(!sel)return;sel.innerHTML=ph?`<option value="">${ph}</option>`:'';items.forEach(v=>sel.innerHTML+=`<option value="${v}">${v}</option>`);};
   fill($("#province"),c.provinces,"انتخاب"); fill($("#crop"),c.crops,"انتخاب"); fill($("#prof-province"),c.provinces,"انتخاب"); fill($("#ptn-reg-prov"),c.provinces,"انتخاب");
 }
-
 function refreshSlotSelect(){
   const sel=$("#slot-select"),hint=$("#slot-hint"); if(!sel)return;
   const all=getSlots().sort((a,b)=>a.date.localeCompare(b.date)); const orders=cache.orders;
@@ -1003,7 +1102,8 @@ $("#get-location-btn")?.addEventListener("click", () => {
   btn.disabled = true; txt.textContent = "در حال دریافت...";
   navigator.geolocation.getCurrentPosition((pos) => { const lat = pos.coords.latitude.toFixed(6), lng = pos.coords.longitude.toFixed(6); $("#loc-coords").value = `${lat},${lng}`; txt.textContent = `✅ ثبت شد (${lat}, ${lng})`; btn.disabled = false; btn.style.borderColor = "var(--b500)"; }, (err) => { txt.textContent = "دریافت موقعیت از GPS"; btn.disabled = false; toast("دسترسی رد شد.", true); }, { enableHighAccuracy: true, timeout: 10000 });
 });
-  function renderSlots(){
+  /* ==================== ADMIN: SCHEDULE ==================== */
+function renderSlots(){
   const tb = $("#slot-tbody"); if(!tb) return;
   const all = getSlots().sort((a,b)=>a.date.localeCompare(b.date));
   if(!all.length) { tb.innerHTML='<tr><td colspan="5"><div class="empty">ظرفیتی ثبت نشده است</div></td></tr>'; return; }
@@ -1033,6 +1133,7 @@ $("#slot-auto-fill-btn")?.addEventListener("click", () => {
    setSlots(slots); renderSlots(); refreshSlotSelect(); toast(`✅ ${toFa(added)} روز اضافه شد.`);
 });
 
+/* ==================== ADMIN: SERVICES ==================== */
 function renderAdminServices() {
   const cfg = getConfig(); 
   const container = document.getElementById('srv-list-container'); 
@@ -1046,7 +1147,7 @@ function renderAdminServices() {
 
   const html = cfg.services.map(s => `
     <div style="display:flex; align-items:center; gap:10px; background:var(--sur); border:1px solid var(--ln); border-radius:10px; padding:10px 14px;">
-      <div style="flex:1; font-weight:700; font-size:13px; color:var(--i800);">${esc(s.name)}</div>
+      <div style="flex:1; font-weight:700; font-size:13px; color:var(--i800);">${esc(s.name)} <small style="color:var(--i500); font-weight:normal;">(${s.unit === 'hour' ? 'ساعتی' : 'هکتاری'})</small></div>
       <input type="text" class="ltr" style="width:120px; padding:8px; border:1px solid var(--ln2); border-radius:8px; text-align:center; font-weight:bold;" value="${s.rate}" id="srv-rate-${s.id}">
       <button class="btn btn-light btn-sm" onclick="updateServiceRate('${s.id}')" title="ذخیره نرخ">💾</button>
       <button class="btn btn-danger btn-sm" onclick="deleteService('${s.id}')" title="حذف">🗑️</button>
@@ -1063,9 +1164,11 @@ window.updateServiceRate = function(id) {
   if(srv) { srv.rate = newRate; setConfig(cfg); toast("✅ نرخ به‌روزرسانی شد"); }
 }
 document.getElementById('srv-add-btn')?.addEventListener('click', () => {
-  const name = document.getElementById('srv-name').value.trim(); const rate = +toEn(document.getElementById('srv-rate').value) || 0;
+  const name = document.getElementById('srv-name').value.trim(); 
+  const rate = +toEn(document.getElementById('srv-rate').value) || 0;
+  const unit = document.getElementById('srv-unit').value;
   if(!name || rate <= 0) return toast("نام و نرخ را وارد کنید", true);
-  const cfg = getConfig(); cfg.services.push({ id: uid(), name, rate }); setConfig(cfg);
+  const cfg = getConfig(); cfg.services.push({ id: uid(), name, rate, unit }); setConfig(cfg);
   document.getElementById('srv-name').value = ""; document.getElementById('srv-rate').value = "";
   renderAdminServices(); fillServices(); toast("✅ خدمت اضافه شد");
 });
@@ -1074,6 +1177,7 @@ window.deleteService = function(id) {
   const cfg = getConfig(); cfg.services = cfg.services.filter(s => s.id !== id); setConfig(cfg); renderAdminServices(); fillServices(); 
 };
 
+/* ==================== ADMIN: PARTNERS ==================== */
 let ptnFilterType = "drone";
 function renderPartners() {
   const list = document.getElementById('partners-list'); if(!list) return;
@@ -1102,24 +1206,21 @@ window.togglePtnType = function(type) {
   if(fields) fields.style.display = type === 'mechanization' ? 'grid' : 'none'; 
 }
 
+/* ==================== OTP LOGIC ==================== */
 function isOtpTimeAllowed() {
   const now = new Date(); const tehranTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Tehran"})); const hour = tehranTime.getHours();
   return hour >= 8 && hour < 23;
 }
-
 async function startPhoneVerification(phone) {
   if(!isOtpTimeAllowed()) return toast("ارسال پیامک فقط از ساعت ۸ صبح تا ۱۱ شب امکان‌پذیر است.", true);
-  
   const res = await apiFetch("/api/otp/send", { method: "POST", body: JSON.stringify({ phone }) });
   if(!res.ok) return toast(res.data.error || "خطا در ارسال پیامک", true);
-  
   if(res.data.sim) toast(`کد تست: ${res.data.code}`, false);
   
   const back = document.getElementById("otp-modal-back");
   if(back) {
     document.getElementById("otp-modal-phone").textContent = toFa(phone); 
     const otpInputs = Array.from(document.querySelectorAll("#otp-inputs input"));
-    
     otpInputs.forEach(i => { i.value = ""; i.classList.remove("filled"); }); 
     back.classList.add("show");
     setTimeout(() => { if(otpInputs[0]) otpInputs[0].focus(); }, 100);
@@ -1129,38 +1230,29 @@ async function startPhoneVerification(phone) {
         inp.value = toEn(inp.value).replace(/\D/g, "").slice(-1);
         inp.classList.toggle("filled", !!inp.value);
         if(inp.value && idx < 5) otpInputs[idx+1].focus();
-        
         const currentCode = otpInputs.map(x => x.value).join("");
-        if(currentCode.length === 6) {
-          setTimeout(() => { document.getElementById("otp-verify-btn")?.click(); }, 100);
-        }
+        if(currentCode.length === 6) setTimeout(() => { document.getElementById("otp-verify-btn")?.click(); }, 100);
       };
       inp.onkeydown = (e) => {
-        if(e.key === "Backspace" && !inp.value && idx > 0) { 
-          otpInputs[idx-1].focus(); otpInputs[idx-1].value = ""; otpInputs[idx-1].classList.remove("filled"); e.preventDefault(); 
-        }
+        if(e.key === "Backspace" && !inp.value && idx > 0) { otpInputs[idx-1].focus(); otpInputs[idx-1].value = ""; otpInputs[idx-1].classList.remove("filled"); e.preventDefault(); }
       };
     });
 
     document.getElementById("otp-verify-btn").onclick = async () => {
       const code = otpInputs.map(i => toEn(i.value)).join("");
       if(code.length !== 6) return toast("کد ۶ رقمی را کامل وارد کنید", true);
-      
       const btn = document.getElementById("otp-verify-btn"); btn.disabled = true; btn.innerHTML = "در حال بررسی...";
       const verify = await apiFetch("/api/otp/verify", { method: "POST", body: JSON.stringify({ phone, code }) });
       btn.disabled = false; btn.innerHTML = "تأیید";
-      
-      if(verify.ok) { 
-        setCustomerVerified(phone); setCustomerPhone(phone); back.classList.remove("show"); toast("✅ با موفقیت وارد شدید"); renderCustomerAuth(); refreshHomeStats(); 
-      } else { 
-        toast("کد نادرست است یا منقضی شده", true); otpInputs.forEach(i => i.value = ""); otpInputs[0].focus();
-      }
+      if(verify.ok) { setCustomerVerified(phone); setCustomerPhone(phone); back.classList.remove("show"); toast("✅ با موفقیت وارد شدید"); renderCustomerAuth(); refreshHomeStats(); } 
+      else { toast("کد نادرست است یا منقضی شده", true); otpInputs.forEach(i => i.value = ""); otpInputs[0].focus(); }
     };
-    
     document.getElementById("otp-cancel-btn").onclick = () => { back.classList.remove("show"); };
   }
 }
-  document.getElementById('order-form')?.addEventListener('submit', async (e) => {
+
+/* ==================== ORDER & PAYMENT ==================== */
+document.getElementById('order-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
   if(isGuest() && !isCustomerVerified()) return toast("برای ثبت سفارش باید وارد حساب خود شوید.", true);
   const srvId = $("#service-type").value; if(!srvId) return toast("نوع خدمت را انتخاب کنید", true);
@@ -1169,7 +1261,12 @@ async function startPhoneVerification(phone) {
   
   const code = `SP-1405-${String(cache.orders.length + 1).padStart(4, "0")}`;
   const ha = m2ToHa(+toEn(data.area)); const slot = getSlots().find(x => x.id === data.slotId);
-  const srv = getConfig().services.find(s=>s.id===srvId); const amount = Math.round(ha * (srv?srv.rate:getConfig().baseRate));
+  const srv = getConfig().services.find(s=>s.id===srvId); 
+  
+  let amount = 0;
+  if (srv && srv.unit === 'hour') { amount = Math.round((+toEn(data.area) || 0) * (srv.rate || 0)); } 
+  else { amount = Math.round(ha * (srv ? srv.rate : getConfig().baseRate)); }
+
   const order = { id: uid(), code, name: data.cust.trim(), phone: toEn(data.phone), province: data.province, city: data.city.trim(), village: (data.village || "").trim(), crop: data.crop, area: ha, areaM2: +toEn(data.area), notes: (data.notes || "").trim(), amount, serviceType: srvId, serviceName: srv ? srv.name : "خدمت", location: data.location || "", status: "pending", createdAt: Date.now(), slotId: data.slotId, slotDate: slot ? slot.date : "" };
   cache.orders.push(order); write(LS.orders, cache.orders); setCustomerPhone(order.phone); apiFetch("/api/orders", { method: "POST", body: JSON.stringify(order) });
   refreshHomeStats(); e.target.reset(); $("#area").value = "10000"; updatePrice(); refreshSlotSelect(); PAY_ORDER = order; toast(`✅ سفارش ${code} ثبت شد.`); showScreen("payment");
@@ -1192,7 +1289,6 @@ async function saveReceiptData(orderId,file){
     } catch(e){ resolve(false); }
   });
 }
-
 document.getElementById('payment-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const fileInput = $("#receipt"); const file = fileInput?.files?.[0];
@@ -1201,6 +1297,7 @@ document.getElementById('payment-form')?.addEventListener('submit', async (e) =>
   if(res) { toast("✅ فیش ارسال شد"); const idx = cache.orders.findIndex(o => o.id === PAY_ORDER.id); if(idx >= 0) { cache.orders[idx].status = "receipt_pending"; write(LS.orders, cache.orders); } showScreen("home"); } else toast("خطا در ارسال فیش", true);
 });
 
+/* ==================== PARTNER AUTH ==================== */
 document.getElementById("ptn-tab-login")?.addEventListener("click", () => { $("#partner-login-form").hidden = false; $("#partner-register-form").hidden = true; $("#ptn-tab-login").className = "btn btn-purple btn-sm"; $("#ptn-tab-reg").className = "btn btn-light btn-sm"; });
 document.getElementById("ptn-tab-reg")?.addEventListener("click", () => { $("#partner-login-form").hidden = true; $("#partner-register-form").hidden = false; $("#ptn-tab-reg").className = "btn btn-purple btn-sm"; $("#ptn-tab-login").className = "btn btn-light btn-sm"; });
 document.getElementById('partner-register-form')?.addEventListener('submit', async (e) => {
@@ -1219,6 +1316,7 @@ document.getElementById('partner-login-form')?.addEventListener('submit', (e) =>
 });
 document.getElementById('partner-logout-btn')?.addEventListener('click', () => { $("#partner-login-view").hidden = false; $("#partner-panel-view").hidden = true; });
 
+/* ==================== ADMIN LOGIN & TABS ==================== */
 document.getElementById('admin-login-form')?.addEventListener('submit', async (e) => {
   e.preventDefault(); const otp = toEn($("#admin-otp").value.trim()); toast("در حال بررسی...");
   const res = await apiFetch("/api/admin/login", { method: "POST", body: JSON.stringify({ username: $("#admin-user").value, otpCode: otp }) });
@@ -1241,6 +1339,7 @@ document.querySelectorAll("#admin-tabs button").forEach(b => {
   };
 });
 
+/* ==================== EXTRA ADMIN TABS ==================== */
 function renderVideoAdmin() {
   const box = document.getElementById("kv-admin-videos-list"); if(!box) return; const items = read(LS.videos, []);
   if(!items.length) { box.innerHTML = '<div class="empty">ویدیویی اضافه نشده</div>'; return; }
@@ -1263,29 +1362,10 @@ document.getElementById("admin-change-pass-form")?.addEventListener("submit", e 
   const auth = read(LS.auth, { admin: {} }); auth.admin.pass = newPass; write(LS.auth, auth); toast("✅ رمز عبور تغییر کرد"); e.target.reset();
 });
 
+/* ==================== BOOT ==================== */
 document.getElementById("home-phone-save")?.addEventListener("click", async () => { const v = toEn(document.getElementById("home-phone-input").value.trim()); if(!/^09\d{9}$/.test(v)) return toast("شماره نامعتبر است.", true); await startPhoneVerification(v); });
 document.getElementById("home-phone-input")?.addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); document.getElementById("home-phone-save").click(); } });
 document.getElementById("welcome-login-btn")?.addEventListener("click", () => { document.getElementById('welcome-overlay').classList.add('hidden'); showScreen("home"); document.getElementById("home-phone-input")?.focus(); });
-
-document.getElementById("mobile-menu-btn")?.addEventListener("click", (e) => {
-  e.preventDefault();
-  const sb = document.querySelector(".sidebar");
-  const ov = document.getElementById("sidebar-overlay");
-  if(sb.classList.contains("show")) {
-    sb.classList.remove("show");
-    ov.classList.remove("show");
-  } else {
-    sb.classList.add("show");
-    ov.classList.add("show");
-  }
-});
-document.getElementById("sidebar-overlay")?.addEventListener("click", () => {
-  document.querySelector(".sidebar")?.classList.remove("show");
-  document.getElementById("sidebar-overlay")?.classList.remove("show");
-});
-document.querySelectorAll(".nav button").forEach(btn => {
-  btn.addEventListener("click", () => { document.querySelector(".sidebar")?.classList.remove("show"); document.getElementById("sidebar-overlay")?.classList.remove("show"); });
-});
 document.getElementById('guest-btn')?.addEventListener('click', () => { localStorage.setItem(LS.guest, 'true'); document.getElementById('welcome-overlay').classList.add('hidden'); showScreen("home"); });
 
 (async function boot(){
