@@ -152,6 +152,16 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .mini-table thead th{color:var(--i500);font-size:11px;font-weight:700;background:var(--i50)}
 .mini-table tbody tr:last-child td{border-bottom:0}
 .mini-table td{font-weight:600;color:var(--i700)}
+.chatbox{border:1px solid var(--ln);border-radius:var(--r-l);overflow:hidden}
+.chat-head{padding:14px 16px;background:var(--i50);display:flex;align-items:center;gap:11px;border-bottom:1px solid var(--ln)}
+.chat-head strong{font-size:13px;font-weight:700;display:block}
+.chat-head small{display:block;font-size:11px;color:var(--i400)}
+.chat-body{padding:16px;min-height:200px;max-height:400px;overflow-y:auto}
+.bubble{background:linear-gradient(145deg,var(--b500),var(--b600));color:#fff;padding:12px 14px;border-radius:14px 14px 4px 14px;font-size:13px;line-height:1.9;max-width:82%;margin:0 0 10px auto;word-wrap:break-word}
+.bubble.reply{background:var(--inset);color:var(--i700);border:1px solid var(--ln);margin:0 auto 10px 0;border-radius:14px 14px 14px 4px}
+.bubble small{display:block;font-size:10.5px;opacity:.7;margin-top:5px}
+.chat-compose{display:flex;gap:8px;padding:12px;border-top:1px solid var(--ln)}
+.chat-compose input{flex:1;min-width:0;border:1px solid var(--ln2);border-radius:10px;padding:11px 12px;background:var(--sur)}
 .toast{position:fixed;bottom:22px;inset-inline-end:22px;background:linear-gradient(180deg,#123527,#0a271b);color:#fff;padding:14px 20px;border-radius:12px;box-shadow:var(--sh5);font-size:13px;font-weight:600;display:none;z-index:var(--z-toast);max-width:min(92vw,420px)}
 .toast.show{display:block}
 .toast.err{background:#7a2418}
@@ -164,6 +174,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .admin-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;flex-wrap:wrap}
 .admin-head h3{margin:0;font-size:19px;font-weight:800}
 .session-badge{display:inline-flex;align-items:center;gap:7px;background:var(--ok-bg);color:var(--ok-fg);padding:6px 12px;border-radius:var(--r-f);font-size:11.5px;font-weight:700}
+.session-dot{width:7px;height:7px;border-radius:50%;background:var(--ok-dot)}
 .admin-tabs{display:flex;gap:5px;overflow-x:auto;padding:5px;background:var(--sur);border:1px solid var(--ln);border-radius:var(--r-l);margin-bottom:16px}
 .admin-tabs button{flex:0 0 auto;padding:10px 14px;border-radius:10px;font-size:13px;color:var(--i500);font-weight:600;white-space:nowrap}
 .admin-tabs button[aria-selected="true"]{background:linear-gradient(180deg,var(--b500),var(--b600));color:#fff;font-weight:700}
@@ -237,10 +248,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
 <symbol id="i-sms" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/><path d="M8 9h8M8 13h5"/></symbol>
 <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
-<symbol id="i-verified" viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6Z"/><path d="m9 12 2 2 4-4"/></symbol>
 <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></symbol>
 <symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"/><path d="M17 21v-8H7v8M7 3v5h8"/></symbol>
-<symbol id="i-print" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></symbol>
 <symbol id="i-play" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21" fill="currentColor"/></symbol>
 <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
 </svg>
@@ -390,15 +399,16 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="panel-head"><div><h3>ثبت سفارش</h3><p>اطلاعات مزرعه و نوع خدمت را وارد کنید.</p></div></div>
 <form id="order-form" novalidate>
 <div class="form-grid">
+  
   <div class="field-wrap span-2" style="background:var(--b50); padding:12px; border-radius:12px; border:1px solid var(--b200);">
-    <label for="service-type" style="color:var(--b800); font-size:14px; display:flex; align-items:center; gap:6px;">
+    <label style="color:var(--b800); font-size:14px; display:flex; align-items:center; gap:6px;">
       <svg class="icon" style="width:18px;height:18px;"><use href="#i-drone"/></svg> نوع خدمت درخواستی *
     </label>
-    <select id="service-type" name="serviceType" required style="border-color:var(--b300); font-weight:700; color:var(--b800);">
-      <option value="">-- انتخاب کنید --</option>
-    </select>
+    <input type="hidden" id="service-type" name="serviceType" required>
+    <div id="order-service-cards" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:8px; margin-top:10px;"></div>
     <span class="error" data-error-for="service-type"></span>
   </div>
+
   <div class="field-wrap"><label for="cust">نام و نام خانوادگی *</label><input id="cust" name="cust" required placeholder="علی محمدی"><span class="error" data-error-for="cust"></span></div>
   <div class="field-wrap"><label for="phone">موبایل *</label><input id="phone" name="phone" required inputmode="numeric" class="ltr" placeholder="09123456789" maxlength="11"><span class="error" data-error-for="phone"></span></div>
   <div class="field-wrap"><label for="province">استان *</label><select id="province" name="province" required><option value="">انتخاب</option></select><span class="error" data-error-for="province"></span></div>
@@ -406,6 +416,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   <div class="field-wrap"><label for="village">روستا</label><input id="village" name="village" placeholder="نام روستا"></div>
   <div class="field-wrap"><label for="crop">محصول *</label><select id="crop" name="crop" required><option value="">انتخاب</option></select><span class="error" data-error-for="crop"></span></div>
   <div class="field-wrap"><label for="area">مساحت (متر مربع) *</label><input id="area" name="area" required inputmode="decimal" class="ltr" type="text" value="10000"><span class="hint">هر ۱۰٬۰۰۰ متر = ۱ هکتار</span><span class="error" data-error-for="area"></span></div>
+  
   <div class="field-wrap span-2">
     <label>📍 موقعیت دقیق مزرعه (اختیاری)</label>
     <button type="button" class="btn btn-light" id="get-location-btn" style="width:100%; justify-content:center; gap:8px;">
@@ -414,6 +425,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     </button>
     <input type="hidden" id="loc-coords" name="location">
   </div>
+
   <div class="field-wrap span-2"><label for="slot-select">🗓️ تاریخ *</label><select id="slot-select" name="slotId" required><option value="">در حال بارگذاری...</option></select><span class="hint" id="slot-hint"></span><span class="error" data-error-for="slot-select"></span></div>
   <div class="field-wrap span-2"><label for="notes">توضیحات</label><textarea id="notes" name="notes" rows="3"></textarea></div>
 </div>
@@ -536,6 +548,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <button data-tab="partners" aria-selected="false">🤝 همکاران</button>
 <button data-tab="schedule" aria-selected="false">🗓️ زمان‌بندی</button>
 <button data-tab="services" aria-selected="false">🚜 خدمات</button>
+<button data-tab="pricing" aria-selected="false">💵 تعرفه‌ها</button>
 <button data-tab="messages" aria-selected="false">💬 پیام‌ها</button>
 <button data-tab="videos" aria-selected="false">🎬 ویدیوها</button>
 <button data-tab="settings" aria-selected="false">⚙️ تنظیمات و رمز</button>
@@ -599,6 +612,14 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
       </div>
     </div>
     <div id="srv-list-container" style="display:flex; flex-direction:column; gap:8px;"></div>
+  </div>
+</div>
+
+<div class="admin-panel" data-panel="pricing">
+  <div class="admin-card">
+    <h4>مدیریت تعرفه‌ها (قیمت‌گذاری)</h4>
+    <p class="sub" style="margin-bottom:14px">تعرفه هر خدمت را می‌توانید اینجا تغییر دهید.</p>
+    <div id="pricing-list-container" style="display:flex; flex-direction:column; gap:8px;"></div>
   </div>
 </div>
 
@@ -680,7 +701,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
-<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۱.۰ · پلتفرم جامع کشاورزی</div>
+<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۲.۰ · پلتفرم جامع کشاورزی</div>
 </main>
 </div>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
@@ -763,7 +784,7 @@ function isValidJalali(i){const m=toEn(i).trim().match(/^(\d{4})\/(\d{1,2})\/(\d
 let toastTimer;const toastEl=$("#toast");
 function toast(m,e=false){if(!toastEl)return;toastEl.textContent=m;toastEl.classList.toggle("err",e);toastEl.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove("show"),3600);}
 
-const LS={auth:"sph_auth",config:"sph_config",orders:"sph_orders",partners:"sph_partners",slots:"sph_slots",cust_phone:"sph_cust_phone",cust_verified:"sph_cust_verified",cust_profile:"sph_cust_profile",receipts:"sph_receipts",videos:"sph_videos",guest:"sph_guest_mode"};
+const LS={auth:"sph_auth",config:"sph_config",orders:"sph_orders",partners:"sph_partners",slots:"sph_slots",cust_phone:"sph_cust_phone",cust_verified:"sph_cust_verified",cust_profile:"sph_cust_profile",receipts:"sph_receipts",videos:"sph_videos",guest:"sph_guest_mode",messages:"sph_messages"};
 const read=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v??d;}catch{return d;}};
 const write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 
@@ -794,7 +815,6 @@ function defaultConfig(){
     crops: ["گندم","جو","آفتابگردان","سیب‌زمینی","ذرت","باغ میوه","یونجه","سایر"]
   };
 }
-
 const getConfig=()=>{
   const d=defaultConfig();
   const c=Object.assign(d,cache.config||{});
@@ -919,19 +939,38 @@ document.getElementById('service-tabs')?.addEventListener('click', (e) => {
 function requestService(serviceName, serviceId) {
   document.getElementById('services-modal-back').classList.remove('show');
   showScreen('order');
-  const srvSelect = document.getElementById('service-type');
-  if(srvSelect && serviceId) { 
-    if(!Array.from(srvSelect.options).some(o => o.value === serviceId)){
-       const opt = document.createElement('option'); opt.value = serviceId; opt.textContent = serviceName; srvSelect.appendChild(opt);
-    }
-    srvSelect.value = serviceId; updatePrice(); 
-  }
+  setTimeout(() => {
+    if(typeof selectOrderService === 'function') selectOrderService(serviceId);
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }, 100);
 }
 document.getElementById('services-modal-back')?.addEventListener('click', (e) => { if (e.target.id === 'services-modal-back') e.target.classList.remove('show'); });
 
 function fillServices() { 
-  const c=getConfig(); const sel = $("#service-type"); 
-  if(sel) sel.innerHTML = '<option value="">-- انتخاب کنید --</option>' + c.services.map(s=>`<option value="${s.id}">${esc(s.name)}</option>`).join(""); 
+  const cfg = getConfig(); 
+  const container = document.getElementById("order-service-cards");
+  if(!container) return;
+  
+  container.innerHTML = cfg.services.map(s => `
+    <div class="quick" onclick="selectOrderService('${s.id}')" id="srv-card-${s.id}" style="padding:10px 8px; border-radius:10px; text-align:center; border:2px solid var(--ln); transition:all 0.2s;">
+      <strong style="font-size:12px; display:block; color:var(--i800);">${esc(s.name)}</strong>
+      <small style="font-size:10.5px; color:var(--b600); font-weight:700;">${fmt(s.rate)} تومان</small>
+    </div>
+  `).join("");
+}
+
+window.selectOrderService = function(id) {
+  document.getElementById("service-type").value = id;
+  document.querySelectorAll("#order-service-cards .quick").forEach(el => {
+    el.style.borderColor = "var(--ln)";
+    el.style.background = "var(--sur)";
+  });
+  const card = document.getElementById("srv-card-" + id);
+  if(card) {
+    card.style.borderColor = "var(--b500)";
+    card.style.background = "var(--b50)";
+  }
+  updatePrice();
 }
 
 function updatePrice(){
@@ -995,9 +1034,17 @@ $("#slot-auto-fill-btn")?.addEventListener("click", () => {
 });
 
 function renderAdminServices() {
-  const cfg = getConfig(); const container = document.getElementById('srv-list-container'); if(!container) return;
-  if(!cfg.services.length) { container.innerHTML = '<div class="empty">خدمتی ثبت نشده است.</div>'; return; }
-  container.innerHTML = cfg.services.map(s => `
+  const cfg = getConfig(); 
+  const container = document.getElementById('srv-list-container'); 
+  const pricingContainer = document.getElementById('pricing-list-container');
+  
+  if(!cfg.services.length) { 
+    if(container) container.innerHTML = '<div class="empty">خدمتی ثبت نشده است.</div>';
+    if(pricingContainer) pricingContainer.innerHTML = '<div class="empty">خدمتی ثبت نشده است.</div>';
+    return; 
+  }
+
+  const html = cfg.services.map(s => `
     <div style="display:flex; align-items:center; gap:10px; background:var(--sur); border:1px solid var(--ln); border-radius:10px; padding:10px 14px;">
       <div style="flex:1; font-weight:700; font-size:13px; color:var(--i800);">${esc(s.name)}</div>
       <input type="text" class="ltr" style="width:120px; padding:8px; border:1px solid var(--ln2); border-radius:8px; text-align:center; font-weight:bold;" value="${s.rate}" id="srv-rate-${s.id}">
@@ -1005,6 +1052,9 @@ function renderAdminServices() {
       <button class="btn btn-danger btn-sm" onclick="deleteService('${s.id}')" title="حذف">🗑️</button>
     </div>
   `).join("");
+
+  if(container) container.innerHTML = html;
+  if(pricingContainer) pricingContainer.innerHTML = html;
 }
 window.updateServiceRate = function(id) {
   const newRate = +toEn(document.getElementById(`srv-rate-${id}`).value) || 0;
@@ -1059,54 +1109,58 @@ function isOtpTimeAllowed() {
 
 async function startPhoneVerification(phone) {
   if(!isOtpTimeAllowed()) return toast("ارسال پیامک فقط از ساعت ۸ صبح تا ۱۱ شب امکان‌پذیر است.", true);
+  
   const res = await apiFetch("/api/otp/send", { method: "POST", body: JSON.stringify({ phone }) });
   if(!res.ok) return toast(res.data.error || "خطا در ارسال پیامک", true);
   
   if(res.data.sim) toast(`کد تست: ${res.data.code}`, false);
   
-  const back = $("#otp-modal-back");
+  const back = document.getElementById("otp-modal-back");
   if(back) {
-    $("#otp-modal-phone").textContent = toFa(phone); 
-    const otpInputs = $$("#otp-inputs input");
+    document.getElementById("otp-modal-phone").textContent = toFa(phone); 
+    const otpInputs = Array.from(document.querySelectorAll("#otp-inputs input"));
+    
     otpInputs.forEach(i => { i.value = ""; i.classList.remove("filled"); }); 
     back.classList.add("show");
-    setTimeout(() => otpInputs[0].focus(), 100);
+    setTimeout(() => { if(otpInputs[0]) otpInputs[0].focus(); }, 100);
 
     otpInputs.forEach((inp, idx) => {
       inp.oninput = () => {
         inp.value = toEn(inp.value).replace(/\D/g, "").slice(-1);
         inp.classList.toggle("filled", !!inp.value);
         if(inp.value && idx < 5) otpInputs[idx+1].focus();
-        if(otpInputs.map(x => x.value).join("").length === 6) setTimeout(() => $("#otp-verify-btn")?.click(), 100);
+        
+        const currentCode = otpInputs.map(x => x.value).join("");
+        if(currentCode.length === 6) {
+          setTimeout(() => { document.getElementById("otp-verify-btn")?.click(); }, 100);
+        }
       };
       inp.onkeydown = (e) => {
-        if(e.key === "Backspace" && !inp.value && idx > 0) { otpInputs[idx-1].focus(); otpInputs[idx-1].value = ""; otpInputs[idx-1].classList.remove("filled"); e.preventDefault(); }
-      };
-      inp.onpaste = (e) => {
-        e.preventDefault();
-        const d = toEn((e.clipboardData || window.clipboardData).getData("text")).replace(/\D/g, "").slice(0,6);
-        d.split("").forEach((c, j) => { if(otpInputs[j]) { otpInputs[j].value = c; otpInputs[j].classList.add("filled"); } });
-        if(d.length === 6) setTimeout(() => $("#otp-verify-btn")?.click(), 100);
+        if(e.key === "Backspace" && !inp.value && idx > 0) { 
+          otpInputs[idx-1].focus(); otpInputs[idx-1].value = ""; otpInputs[idx-1].classList.remove("filled"); e.preventDefault(); 
+        }
       };
     });
 
-    $("#otp-verify-btn").onclick = async () => {
+    document.getElementById("otp-verify-btn").onclick = async () => {
       const code = otpInputs.map(i => toEn(i.value)).join("");
-      if(code.length !== 6) return toast("کد کامل نیست", true);
-      const btn = $("#otp-verify-btn"); btn.disabled = true; btn.innerHTML = "در حال بررسی...";
+      if(code.length !== 6) return toast("کد ۶ رقمی را کامل وارد کنید", true);
+      
+      const btn = document.getElementById("otp-verify-btn"); btn.disabled = true; btn.innerHTML = "در حال بررسی...";
       const verify = await apiFetch("/api/otp/verify", { method: "POST", body: JSON.stringify({ phone, code }) });
       btn.disabled = false; btn.innerHTML = "تأیید";
+      
       if(verify.ok) { 
         setCustomerVerified(phone); setCustomerPhone(phone); back.classList.remove("show"); toast("✅ با موفقیت وارد شدید"); renderCustomerAuth(); refreshHomeStats(); 
       } else { 
         toast("کد نادرست است یا منقضی شده", true); otpInputs.forEach(i => i.value = ""); otpInputs[0].focus();
       }
     };
-    $("#otp-cancel-btn").onclick = () => back.classList.remove("show");
+    
+    document.getElementById("otp-cancel-btn").onclick = () => { back.classList.remove("show"); };
   }
-  }
-  /* ==================== ORDER & PAYMENT ==================== */
-document.getElementById('order-form')?.addEventListener('submit', async (e) => {
+}
+  document.getElementById('order-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
   if(isGuest() && !isCustomerVerified()) return toast("برای ثبت سفارش باید وارد حساب خود شوید.", true);
   const srvId = $("#service-type").value; if(!srvId) return toast("نوع خدمت را انتخاب کنید", true);
@@ -1147,7 +1201,6 @@ document.getElementById('payment-form')?.addEventListener('submit', async (e) =>
   if(res) { toast("✅ فیش ارسال شد"); const idx = cache.orders.findIndex(o => o.id === PAY_ORDER.id); if(idx >= 0) { cache.orders[idx].status = "receipt_pending"; write(LS.orders, cache.orders); } showScreen("home"); } else toast("خطا در ارسال فیش", true);
 });
 
-/* ==================== PARTNER AUTH ==================== */
 document.getElementById("ptn-tab-login")?.addEventListener("click", () => { $("#partner-login-form").hidden = false; $("#partner-register-form").hidden = true; $("#ptn-tab-login").className = "btn btn-purple btn-sm"; $("#ptn-tab-reg").className = "btn btn-light btn-sm"; });
 document.getElementById("ptn-tab-reg")?.addEventListener("click", () => { $("#partner-login-form").hidden = true; $("#partner-register-form").hidden = false; $("#ptn-tab-reg").className = "btn btn-purple btn-sm"; $("#ptn-tab-login").className = "btn btn-light btn-sm"; });
 document.getElementById('partner-register-form')?.addEventListener('submit', async (e) => {
@@ -1166,7 +1219,6 @@ document.getElementById('partner-login-form')?.addEventListener('submit', (e) =>
 });
 document.getElementById('partner-logout-btn')?.addEventListener('click', () => { $("#partner-login-view").hidden = false; $("#partner-panel-view").hidden = true; });
 
-/* ==================== ADMIN LOGIN & TABS ==================== */
 document.getElementById('admin-login-form')?.addEventListener('submit', async (e) => {
   e.preventDefault(); const otp = toEn($("#admin-otp").value.trim()); toast("در حال بررسی...");
   const res = await apiFetch("/api/admin/login", { method: "POST", body: JSON.stringify({ username: $("#admin-user").value, otpCode: otp }) });
@@ -1184,11 +1236,11 @@ document.querySelectorAll("#admin-tabs button").forEach(b => {
     document.querySelectorAll("#admin-tabs button").forEach(x=>x.setAttribute("aria-selected", x===b?"true":"false"));
     document.querySelectorAll(".admin-panel").forEach(p=>p.classList.toggle("active", p.dataset.panel===b.dataset.tab));
     if(b.dataset.tab === 'services') renderAdminServices(); if(b.dataset.tab === 'partners') renderPartners(); if(b.dataset.tab === 'schedule') renderSlots(); if(b.dataset.tab === 'dash') renderDashboard();
+    if(b.dataset.tab === 'pricing') renderAdminServices();
     if(b.dataset.tab === 'videos') renderVideoAdmin(); if(b.dataset.tab === 'messages') renderAdminMessages();
   };
 });
 
-/* ==================== EXTRA ADMIN TABS ==================== */
 function renderVideoAdmin() {
   const box = document.getElementById("kv-admin-videos-list"); if(!box) return; const items = read(LS.videos, []);
   if(!items.length) { box.innerHTML = '<div class="empty">ویدیویی اضافه نشده</div>'; return; }
@@ -1211,23 +1263,31 @@ document.getElementById("admin-change-pass-form")?.addEventListener("submit", e 
   const auth = read(LS.auth, { admin: {} }); auth.admin.pass = newPass; write(LS.auth, auth); toast("✅ رمز عبور تغییر کرد"); e.target.reset();
 });
 
-/* ==================== MOBILE & FIXES ==================== */
 document.getElementById("home-phone-save")?.addEventListener("click", async () => { const v = toEn(document.getElementById("home-phone-input").value.trim()); if(!/^09\d{9}$/.test(v)) return toast("شماره نامعتبر است.", true); await startPhoneVerification(v); });
 document.getElementById("home-phone-input")?.addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); document.getElementById("home-phone-save").click(); } });
 document.getElementById("welcome-login-btn")?.addEventListener("click", () => { document.getElementById('welcome-overlay').classList.add('hidden'); showScreen("home"); document.getElementById("home-phone-input")?.focus(); });
 
-document.getElementById("mobile-menu-btn")?.addEventListener("click", () => {
-  document.querySelector(".sidebar")?.classList.toggle("show"); document.getElementById("sidebar-overlay")?.classList.toggle("show");
+document.getElementById("mobile-menu-btn")?.addEventListener("click", (e) => {
+  e.preventDefault();
+  const sb = document.querySelector(".sidebar");
+  const ov = document.getElementById("sidebar-overlay");
+  if(sb.classList.contains("show")) {
+    sb.classList.remove("show");
+    ov.classList.remove("show");
+  } else {
+    sb.classList.add("show");
+    ov.classList.add("show");
+  }
 });
 document.getElementById("sidebar-overlay")?.addEventListener("click", () => {
-  document.querySelector(".sidebar")?.classList.remove("show"); document.getElementById("sidebar-overlay")?.classList.remove("show");
+  document.querySelector(".sidebar")?.classList.remove("show");
+  document.getElementById("sidebar-overlay")?.classList.remove("show");
 });
 document.querySelectorAll(".nav button").forEach(btn => {
   btn.addEventListener("click", () => { document.querySelector(".sidebar")?.classList.remove("show"); document.getElementById("sidebar-overlay")?.classList.remove("show"); });
 });
 document.getElementById('guest-btn')?.addEventListener('click', () => { localStorage.setItem(LS.guest, 'true'); document.getElementById('welcome-overlay').classList.add('hidden'); showScreen("home"); });
 
-/* ==================== BOOT ==================== */
 (async function boot(){
   await loadAll();
   if (isCustomerVerified() || isGuest()) { document.getElementById('welcome-overlay').classList.add('hidden'); }
