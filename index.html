@@ -255,6 +255,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
 <symbol id="i-percent" viewBox="0 0 24 24"><line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="6.5" cy="6.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="17.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
 <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
 </svg>
 
 <div id="welcome-overlay">
@@ -319,6 +320,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     </div>
   </div>
 </header>
+
 <section class="screen active" id="screen-home">
 <div class="hero">
 <div class="hero-copy">
@@ -396,7 +398,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   </div>
 </div>
 </section>
-
 <section class="screen" id="screen-order-drone">
 <div class="panel">
 <div class="panel-head"><div><h3>ثبت سفارش سم‌پاشی هوایی</h3><p>اطلاعات مزرعه خود را برای پرواز پهپاد وارد کنید.</p></div></div>
@@ -422,6 +423,17 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   <div class="field-wrap span-2"><label for="drone-notes">توضیحات</label><textarea id="drone-notes" name="notes" rows="3"></textarea></div>
 </div>
 <div class="price-card"><div><small>برآورد هزینه</small><div class="rate">نرخ: <b id="drone-base-rate">—</b> تومان/هکتار</div></div><strong id="drone-total-price">—</strong></div>
+
+<div style="margin-top: 18px; display: flex; align-items: flex-start; gap: 10px; background: var(--inset); padding: 14px; border-radius: 12px; border: 1.5px solid var(--ln2);">
+  <input type="checkbox" id="drone-terms-checkbox" style="width: 20px; height: 20px; accent-color: var(--b500); margin-top: 2px; cursor: pointer;">
+  <label for="drone-terms-checkbox" style="font-size: 13px; color: var(--i800); cursor: pointer; line-height: 1.8; font-weight: 600;">
+    اینجانب با مطالعه 
+    <button type="button" onclick="document.getElementById('terms-modal').classList.add('show')" style="color: var(--b600); text-decoration: underline; background: none; border: none; font: inherit; cursor: pointer; padding: 0;">تعهدنامه و قوانین سم‌پاشی هوایی</button> 
+    موافقت کامل خود را اعلام می‌کنم. *
+  </label>
+</div>
+<span class="error" data-error-for="drone-terms-checkbox" style="display:block; margin-top:6px;"></span>
+
 <div class="actions"><button class="btn btn-gold" type="submit">ثبت سفارش پهپاد</button><button class="btn btn-light" type="button" data-go="home">بازگشت</button></div>
 </form>
 </div>
@@ -485,6 +497,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </form>
 </div>
 </section>
+
 <section class="screen" id="screen-track">
 <div class="panel">
 <div class="panel-head"><div><h3>پیگیری سفارش</h3></div></div>
@@ -570,8 +583,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="actions"><button class="btn btn-green" type="submit">ارسال فیش</button><button class="btn btn-light" type="button" id="copy-card">کپی شماره کارت</button></div>
 </form>
 </div>
-</section>
-<!-- ==================== پنل ادمین ==================== -->
+  </section>
+  <!-- ==================== پنل ادمین ==================== -->
 <section class="screen" id="screen-admin">
 <div id="admin-login-view" class="auth-wrap">
 <div class="panel auth-panel">
@@ -619,7 +632,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 
 <div class="admin-panel" data-panel="orders">
 <div class="admin-card">
-<div class="table-scroll"><table class="mini-table"><thead><tr><th>کد</th><th>مشتری</th><th>خدمت</th><th>وضعیت</th><th>عملیات</th></tr></thead><tbody id="ord-tbody"></tbody></table></div>
+<div class="table-scroll"><table class="mini-table"><thead><tr><th>کد</th><th>مشتری</th><th>خدمت</th><th>وضعیت</th><th>امتیاز</th><th>عملیات</th></tr></thead><tbody id="ord-tbody"></tbody></table></div>
 </div>
 </div>
 
@@ -652,8 +665,9 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="admin-card">
   <div class="table-scroll"><table class="mini-table"><thead><tr><th>تاریخ</th><th>ظرفیت</th><th>رزرو</th><th>باقیمانده</th><th>عملیات</th></tr></thead><tbody id="slot-tbody"></tbody></table></div>
 </div>
-  </div>
-  <div class="admin-panel" data-panel="services">
+</div>
+
+<div class="admin-panel" data-panel="services">
   <div class="admin-card">
     <h4>مدیریت خدمات</h4>
     <div class="actions" style="margin-bottom:14px; justify-content:flex-end;">
@@ -854,6 +868,27 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
+<!-- مودال تعهدنامه پهپاد -->
+<div class="modal-back" id="terms-modal">
+  <div class="modal" style="max-width:500px;">
+    <h3 style="margin:0 0 16px; font-size:16px; color:var(--b800); display:flex; align-items:center; gap:8px;">
+      <svg class="icon" width="20" height="20" style="color:var(--b600)"><use href="#i-shield"/></svg> تعهدنامه سم‌پاشی هوایی
+    </h3>
+    
+    <div style="background:var(--inset); border:1px solid var(--ln); border-radius:12px; padding:16px; height:300px; overflow-y:auto; font-size:13px; line-height:2; color:var(--i700); text-align:justify;">
+      <p><b>۱. صحت اطلاعات:</b> اینجانب متعهد می‌شوم کلیه اطلاعات وارد شده از جمله مساحت، نوع محصول، آدرس و موقعیت مکانی مزرعه را با نهایت دقت و صحت ثبت نمایم. هرگونه مغایرت در اطلاعات منجر به لغو سفارش یا محاسبه مجدد هزینه خواهد شد.</p>
+      <p><b>۲. مسئولیت نوع سم و دُز مصرفی:</b> تعیین نوع سم، دُز مصرفی و زمان مناسب سم‌پاشی بر عهده مالک مزرعه (سفارش‌دهنده) می‌باشد. تیم سم‌پاشی تنها مسئولیت اجرای دقیق عملیات مطابق با دستورات شما را بر عهده دارد و در قبال اثرگذاری نوع سم یا خسارت ناشی از آن مسئولیتی ندارد.</p>
+      <p><b>۳. شرایط جوی و بادبردگی:</b> عملیات سم‌پاشی با پهپاد وابسته به شرایط جوی (مانند باد شدید، بارش باران یا دید کم) است. در صورت نامساعد بودن هوا، تیم فنی حق لغو یا به تعویق انداختن پرواز را دارد. اما چنانچه به اصرار مشتری و با پذیرش ریسک از سوی وی، عملیات انجام شود، مسئولیت هرگونه عدم تأثیرگذاری سم، بادبردگی (پخش شدن سم در اثر وزش باد) و یا آسیب به محصولات همجوار، تماماً بر عهده مشتری می‌باشد.</p>
+      <p><b>۴. موانع فیزیکی:</b> سفارش‌دهنده موظف است موانع فیزیکی موجود در مزرعه (مانند درختان بلند، تیرهای برق، آنتن‌ها و...) را از قبل به تیم اطلاع دهد. در غیر این صورت، خسارات احتمالی به پهپاد بر عهده سفارش‌دهنده خواهد بود.</p>
+      <p><b>۵. ایمنی و فاصله مجاز:</b> در حین انجام عملیات، سفارش‌دهنده موظف است در صورت حضور افراد یا دام در محل، آن‌ها را نسبت به رعایت فاصله ایمنی کامل از محل پرواز و فرود پهپاد و همچنین محل سم‌پاشی تا شعاع حداقل ۱۰ متر مطلع و ملزم نماید. در صورت بروز هرگونه حادثه ناشی از عدم رعایت این فاصله، مسئولیت آن تماماً بر عهده سفارش‌دهنده می‌باشد.</p>
+    </div>
+    
+    <div class="actions" style="justify-content:center; margin-top:20px;">
+      <button class="btn btn-green" onclick="document.getElementById('terms-modal').classList.remove('show')" style="width:100%;">متوجه شدم و می‌پذیرم</button>
+    </div>
+  </div>
+</div>
+
 <!-- مودال ویرایش خدمت -->
 <div class="modal-back" id="edit-service-modal">
   <div class="modal" style="max-width:400px;">
@@ -892,6 +927,27 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     <div class="actions" style="justify-content:flex-end; margin-top:0;">
       <button class="btn btn-light" onclick="document.getElementById('edit-service-modal').classList.remove('show')">انصراف</button>
       <button class="btn btn-green" id="save-edit-srv-btn">💾 ذخیره تغییرات</button>
+    </div>
+  </div>
+</div>
+
+<!-- مودال ثبت امتیاز و نظر (برای مشتری) -->
+<div class="modal-back" id="rating-modal">
+  <div class="modal" style="max-width:400px; text-align:center;">
+    <h3 style="margin:0 0 16px; font-size:16px; color:var(--b800);">⭐ ثبت امتیاز و نظر</h3>
+    <input type="hidden" id="rating-order-id">
+    
+    <div id="star-rating-box" style="display:flex; justify-content:center; gap:8px; font-size:36px; color:var(--ln2); cursor:pointer; margin-bottom:20px; direction:ltr;">
+      <span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span>
+    </div>
+    
+    <div class="field-wrap" style="margin-bottom:20px; text-align:right;">
+      <label>دیدگاه شما (اختیاری)</label>
+      <textarea id="rating-review-text" rows="3" placeholder="تجربه خود از این سفارش را بنویسید..."></textarea>
+    </div>
+    
+    <div class="actions" style="justify-content:center; margin-top:0;">
+      <button class="btn btn-green" id="submit-rating-btn" style="width:100%;">ثبت امتیاز و بستن سفارش</button>
     </div>
   </div>
 </div>
@@ -974,7 +1030,7 @@ const getConfig=()=>{
   return c;
 };
 const setConfig=async c=>{cache.config=c;write(LS.config,c);await apiFetch("/api/config",{method:"PUT",body:JSON.stringify(c)});};
-const STATUS={pending:{label:"در انتظار پرداخت",cls:""},scheduled:{label:"زمان‌بندی شد",cls:"green"},assigned:{label:"ارجاع به همکار",cls:"purple"},accepted:{label:"پذیرفته شده",cls:"blue"},in_progress:{label:"در حال انجام",cls:"blue"},done:{label:"تکمیل شده",cls:"green"},cancelled:{label:"لغو شده",cls:"red"},receipt_pending:{label:"در انتظار تأیید فیش",cls:"amber"},receipt_rejected:{label:"فیش رد شده",cls:"red"}};
+const STATUS={pending:{label:"در انتظار پرداخت",cls:""},scheduled:{label:"زمان‌بندی شد",cls:"green"},assigned:{label:"ارجاع به همکار",cls:"purple"},in_progress:{label:"در حال انجام",cls:"blue"},done:{label:"منتظر امتیاز",cls:"amber"},completed:{label:"تکمیل شده",cls:"green"},cancelled:{label:"لغو شده",cls:"red"},receipt_pending:{label:"در انتظار تأیید فیش",cls:"amber"},receipt_rejected:{label:"فیش رد شده",cls:"red"}};
 
 const API="https://api.sampash-ai.ir";
 async function apiFetch(path,opts={}){
@@ -1067,6 +1123,7 @@ function renderTrustBar(){
   const ta=$("#trust-area"),tu=$("#trust-users");
   if(ta)ta.textContent=toFa(totalArea); if(tu)tu.textContent=toFa(users);
 }
+
 function renderHomeOrders(){
   const box=$("#home-orders");if(!box)return;
   const ph=getCustomerPhone();
@@ -1083,9 +1140,42 @@ function renderHomeOrders(){
   }
   box.innerHTML=mine.map(x=>{
     const st=STATUS[x.status]||STATUS.pending;
-    return`<div class="order-row"><div class="order-icon"><svg class="icon"><use href="#i-home"/></svg></div><div class="order-main"><strong>${esc(x.serviceName)} · ${toFa(x.area)} هکتار</strong><small>${esc(x.code)}</small></div><span class="status ${st.cls}">${st.label}</span></div>`;
+    let actionBtn = "";
+    if (x.status === 'assigned') {
+        actionBtn = `<button class="btn btn-green btn-sm" onclick="confirmOperatorArrival('${x.id}')" style="margin-top:8px; width:100%;">✅ تایید حضور اپراتور</button>`;
+    } else if (x.status === 'done') {
+        actionBtn = `<button class="btn btn-gold btn-sm" onclick="openRatingModal('${x.id}')" style="margin-top:8px; width:100%;">⭐ ثبت امتیاز و پایان کار</button>`;
+    }
+    
+    return`<div class="order-row" style="display:flex; flex-direction:column; align-items:stretch;">
+      <div style="display:flex; align-items:center; gap:12px; width:100%;">
+        <div class="order-icon"><svg class="icon"><use href="#i-home"/></svg></div>
+        <div class="order-main" style="flex:1;"><strong>${esc(x.serviceName)} · ${toFa(x.area)} هکتار</strong><small>${esc(x.code)}</small></div>
+        <span class="status ${st.cls}">${st.label}</span>
+      </div>
+      ${actionBtn}
+    </div>`;
   }).join("");
 }
+
+window.confirmOperatorArrival = async function(id) {
+    const o = cache.orders.find(x => x.id === id);
+    if(!o) return;
+    if(confirm("آیا اپراتور در محل حاضر شده است؟ با تایید شما، عملیات آغاز می‌شود.")) {
+        o.status = 'in_progress';
+        await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id, status: "in_progress" }) });
+        refreshHomeStats(); toast("✅ حضور اپراتور تایید شد و عملیات آغاز شد.");
+    }
+}
+
+window.openRatingModal = function(id) {
+    document.getElementById('rating-order-id').value = id;
+    document.getElementById('rating-review-text').value = "";
+    // ریست ستاره‌ها
+    document.querySelectorAll('#star-rating-box span').forEach(s => s.style.color = "var(--ln2)");
+    document.getElementById('rating-modal').classList.add('show');
+}
+
 function refreshHomeStats(){
   const ph=getCustomerPhone();const ver=isCustomerVerified();
   const o=ver?cache.orders.filter(x=>x.phone===ph):[];
@@ -1111,9 +1201,27 @@ function renderHistory() {
   if(!list.length) { box.innerHTML = '<div class="empty"><strong>سفارشی نیست</strong></div>'; return; }
   box.innerHTML = list.map(o => {
     const st = STATUS[o.status] || STATUS.pending;
-    return `<div class="history-item" style="display:flex;gap:10px;padding:12px;border:1px solid var(--ln);border-radius:10px;margin-bottom:8px;"><div class="history-ic"><svg class="icon"><use href="#i-order"/></svg></div><div class="history-main"><strong>${esc(o.serviceName)} · ${toFa(o.area)} هکتار</strong><small><code class="ltr">${esc(o.code)}</code> · ${new Date(o.createdAt||Date.now()).toLocaleDateString("fa-IR")}</small><div style="margin-top:6px"><span class="status ${st.cls}" style="font-size:10.5px">${st.label}</span></div></div></div>`;
+    let actionBtn = "";
+    if (o.status === 'assigned') {
+        actionBtn = `<button class="btn btn-green btn-sm" onclick="confirmOperatorArrival('${o.id}')" style="margin-top:8px;">✅ تایید حضور اپراتور</button>`;
+    } else if (o.status === 'done') {
+        actionBtn = `<button class="btn btn-gold btn-sm" onclick="openRatingModal('${o.id}')" style="margin-top:8px;">⭐ ثبت امتیاز</button>`;
+    }
+    
+    return `<div class="history-item" style="display:flex; flex-direction:column; gap:10px; padding:12px; border:1px solid var(--ln); border-radius:10px; margin-bottom:8px;">
+      <div style="display:flex; gap:10px;">
+        <div class="history-ic"><svg class="icon"><use href="#i-order"/></svg></div>
+        <div class="history-main">
+          <strong>${esc(o.serviceName)} · ${toFa(o.area)} هکتار</strong>
+          <small><code class="ltr">${esc(o.code)}</code> · ${new Date(o.createdAt||Date.now()).toLocaleDateString("fa-IR")}</small>
+          <div style="margin-top:6px"><span class="status ${st.cls}" style="font-size:10.5px">${st.label}</span></div>
+        </div>
+      </div>
+      ${actionBtn}
+    </div>`;
   }).join("");
 }
+
 function renderVideos() {
   const grid = document.getElementById("kv-videos-grid"); if(!grid) return;
   const videos = read(LS.videos, []);
@@ -1134,6 +1242,34 @@ $("#msg-form")?.addEventListener("submit", e => {
   e.preventDefault(); const v = $("#msg-input").value.trim(); if(!v) return;
   const msgs = read(LS.messages, []); msgs.push({ id: uid(), from: "customer", phone: getCustomerPhone(), text: v, createdAt: Date.now() }); write(LS.messages, msgs);
   $("#msg-input").value = ""; renderChat(); toast("پیام ثبت شد.");
+});
+
+// منطق ستاره‌های امتیاز
+let currentRating = 0;
+document.querySelectorAll('#star-rating-box span').forEach(star => {
+    star.addEventListener('click', function() {
+        currentRating = +this.getAttribute('data-val');
+        document.querySelectorAll('#star-rating-box span').forEach(s => {
+            s.style.color = (+s.getAttribute('data-val') <= currentRating) ? "var(--gold)" : "var(--ln2)";
+        });
+    });
+});
+
+document.getElementById('submit-rating-btn')?.addEventListener('click', async () => {
+    const id = document.getElementById('rating-order-id').value;
+    const review = document.getElementById('rating-review-text').value.trim();
+    if(currentRating === 0) return toast("لطفاً امتیاز خود را با کلیک روی ستاره‌ها انتخاب کنید.", true);
+    
+    const o = cache.orders.find(x => x.id === id);
+    if(o) {
+        o.status = 'completed';
+        o.rating = currentRating;
+        o.review = review;
+        await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id, status: "completed", rating: currentRating, review: review }) });
+        document.getElementById('rating-modal').classList.remove('show');
+        refreshHomeStats(); renderHistory();
+        toast("✅ از ثبت نظر و امتیاز شما سپاسگزاریم.");
+    }
 });
   function refreshDroneSelects() {
   const c = getConfig();
@@ -1479,6 +1615,12 @@ async function startPhoneVerification(phone) {
 
 document.getElementById('drone-order-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
+  
+  const termsCheckbox = $("#drone-terms-checkbox");
+  if (termsCheckbox && !termsCheckbox.checked) {
+    return toast("برای ثبت سفارش، ابتدا باید تعهدنامه را مطالعه و تایید کنید.", true);
+  }
+
   const phone = toEn($("#drone-phone").value);
   if(!(isCustomerVerified() && getCustomerPhone() === phone)){ await startPhoneVerification(phone); return; }
   
@@ -1634,7 +1776,7 @@ document.getElementById('admin-logout-btn')?.addEventListener('click', () => {
 });
 
 function renderDashboard() {
-  const o = cache.orders, total = o.length; const pend = o.filter(x => ["pending","scheduled","assigned","accepted","receipt_pending"].includes(x.status)).length; const rev = o.filter(x => x.status !== "cancelled").reduce((s, x) => s + (+x.amount || 0), 0);
+  const o = cache.orders, total = o.length; const pend = o.filter(x => ["pending","scheduled","assigned","accepted","receipt_pending","in_progress","done"].includes(x.status)).length; const rev = o.filter(x => x.status !== "cancelled").reduce((s, x) => s + (+x.amount || 0), 0);
   if($("#ad-total")) $("#ad-total").textContent = toFa(total); if($("#ad-pending")) $("#ad-pending").textContent = toFa(pend); if($("#ad-revenue")) $("#ad-revenue").textContent = fmt(rev);
 }
 
@@ -1645,7 +1787,7 @@ function renderOrdersAdmin() {
   const orders = [...cache.orders].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
   
   if (!orders.length) {
-    tb.innerHTML = '<tr><td colspan="5"><div class="empty">هنوز سفارشی ثبت نشده است</div></td></tr>';
+    tb.innerHTML = '<tr><td colspan="6"><div class="empty">هنوز سفارشی ثبت نشده است</div></td></tr>';
     return;
   }
   
@@ -1653,20 +1795,24 @@ function renderOrdersAdmin() {
     const st = STATUS[o.status] || STATUS.pending;
     const actions = `
       <select onchange="changeOrderStatus('${o.id}', this.value)" style="padding:6px; border-radius:6px; border:1px solid var(--ln2); font-size:11.5px;">
-        <option value="pending" ${o.status==='pending'?'selected':''}>در انتظار</option>
-        <option value="scheduled" ${o.status==='scheduled'?'selected':''}>زمان‌بندی</option>
-        <option value="assigned" ${o.status==='assigned'?'selected':''}>ارجاع</option>
-        <option value="in_progress" ${o.status==='in_progress'?'selected':''}>در حال انجام</option>
-        <option value="done" ${o.status==='done'?'selected':''}>تکمیل</option>
-        <option value="cancelled" ${o.status==='cancelled'?'selected':''}>لغو</option>
+        <option value="pending" ${o.status==='pending'?'selected':''}>در انتظار پرداخت</option>
+        <option value="receipt_pending" ${o.status==='receipt_pending'?'selected':''}>بررسی فیش</option>
+        <option value="scheduled" ${o.status==='scheduled'?'selected':''}>تایید شد/زمان‌بندی</option>
+        <option value="assigned" ${o.status==='assigned'?'selected':''}>در راه / ارجاع</option>
+        <option value="in_progress" ${o.status==='in_progress'?'selected':''}>در حال انجام (حضور تایید شد)</option>
+        <option value="done" ${o.status==='done'?'selected':''}>اتمام کار (منتظر امتیاز)</option>
+        <option value="completed" ${o.status==='completed'?'selected':''}>تکمیل شده</option>
+        <option value="cancelled" ${o.status==='cancelled'?'selected':''}>لغو شده</option>
       </select>
     `;
+    let ratingStars = o.rating ? '⭐'.repeat(o.rating) : '—';
     
     return `<tr>
       <td><code class="ltr">${esc(o.code)}</code></td>
       <td><strong>${esc(o.name)}</strong><br><small style="color:var(--i500)">${esc(o.phone)}</small></td>
       <td>${esc(o.serviceName)}</td>
       <td><span class="status ${st.cls}">${st.label}</span></td>
+      <td style="color:var(--gold); font-size:14px;">${ratingStars}</td>
       <td>${actions}</td>
     </tr>`;
   }).join("");
@@ -1764,7 +1910,7 @@ document.getElementById('backup-dl')?.addEventListener('click', () => {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `sph-backup-${Date.now()}.json`; a.click(); toast("✅ بکاپ دانلود شد");
 });
 document.getElementById('backup-csv')?.addEventListener('click', () => {
-  const rows = [["کد", "نام", "موبایل", "استان", "شهر", "خدمت", "مقدار", "مبلغ", "وضعیت", "تاریخ"]].concat(cache.orders.map(o => [o.code, o.name, o.phone, o.province, o.city, o.serviceName || o.serviceType, o.area, o.amount, STATUS[o.status]?.label || o.status, new Date(o.createdAt || Date.now()).toLocaleDateString("fa-IR")]));
+  const rows = [["کد", "نام", "موبایل", "استان", "شهر", "خدمت", "مقدار", "مبلغ", "وضعیت", "تاریخ", "امتیاز"]].concat(cache.orders.map(o => [o.code, o.name, o.phone, o.province, o.city, o.serviceName || o.serviceType, o.area, o.amount, STATUS[o.status]?.label || o.status, new Date(o.createdAt || Date.now()).toLocaleDateString("fa-IR"), o.rating || 0]));
   const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
   const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" }); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "orders-backup.csv"; a.click(); toast("✅ خروجی CSV دانلود شد");
 });
@@ -1795,6 +1941,6 @@ document.getElementById('guest-btn')?.addEventListener('click', () => {
   if (isCustomerVerified() || isGuest()) { document.getElementById('welcome-overlay').classList.add('hidden'); }
   refreshHomeStats(); renderCustomerAuth();
 })();
-  </script>
+</script>
 </body>
 </html>
