@@ -397,8 +397,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     </div>
   </div>
 </div>
-</section>
-<section class="screen" id="screen-order-drone">
+  </section>
+  <section class="screen" id="screen-order-drone">
 <div class="panel">
 <div class="panel-head"><div><h3>ثبت سفارش سم‌پاشی هوایی</h3><p>اطلاعات مزرعه خود را برای پرواز پهپاد وارد کنید.</p></div></div>
 <form id="drone-order-form" novalidate>
@@ -704,20 +704,23 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
         </div>
         
         <div class="field-wrap">
-          <label>واحد *</label>
-          <select id="srv-unit" style="height:44px; padding:0 10px;" onchange="toggleCustomUnit('srv')">
-            <option value="hectare">هکتار</option>
-            <option value="hour">ساعت</option>
-            <option value="meter">متر</option>
-            <option value="1000m2">هزار متر مربع</option>
-            <option value="1000L">هزار لیتر (تانکر)</option>
-            <option value="custom">سایر (واحد جدید)</option>
-          </select>
-          <input id="srv-unit-custom" type="text" placeholder="نام واحد را بنویسید..." style="height:44px; display:none; margin-top:8px;">
+          <label>واحد محاسبه *</label>
+          <input id="srv-unit" type="text" placeholder="مثلاً: هکتار، تن، ساعت" style="height:44px;">
         </div>
         
         <div class="field-wrap">
-          <label>دسته *</label>
+          <label>دسته‌بندی اصلی *</label>
+          <select id="srv-category" style="height:44px; padding:0 10px;">
+            <option value="land_prep">آماده‌سازی زمین</option>
+            <option value="planting">کاشت</option>
+            <option value="care">رسیدگی (سمپاشی، آبیاری...)</option>
+            <option value="harvest">برداشت</option>
+            <option value="other">سایر خدمات</option>
+          </select>
+        </div>
+
+        <div class="field-wrap">
+          <label>نوع دستگاه *</label>
           <select id="srv-type" style="height:44px; padding:0 10px;">
             <option value="machinery">مکانیزاسیون</option>
             <option value="drone">پهپاد</option>
@@ -774,17 +777,20 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 
 <div class="admin-panel" data-panel="videos">
   <div class="admin-card">
-    <h4>افزودن ویدیو (با لینک)</h4>
-    <form id="vid-add-form-url" class="form-grid" novalidate>
-      <div class="field-wrap span-2"><label>عنوان *</label><input id="vid-title-url" required placeholder="عنوان ویدیو"></div>
-      <div class="field-wrap span-2"><label>لینک *</label><input id="vid-url" class="ltr" required placeholder="https://..."></div>
-      <div class="field-wrap span-2"><label>توضیح</label><textarea id="vid-desc-url" rows="2"></textarea></div>
-      <div class="span-2"><button type="submit" class="btn btn-green">افزودن ویدیو</button></div>
-    </form>
+    <h4>📤 آپلود عکس و فیلم به گالری</h4>
+    <div class="form-grid" novalidate>
+      <div class="field-wrap span-2"><label>عنوان *</label><input id="gal-title" placeholder="عنوان عکس یا فیلم"></div>
+      <div class="field-wrap span-2"><label>توضیح</label><textarea id="gal-desc" rows="2"></textarea></div>
+      <div class="field-wrap span-2">
+        <label>فایل عکس یا فیلم *</label>
+        <input type="file" id="gal-file" accept="image/png, image/jpeg, video/mp4" style="padding:10px; border:1px dashed var(--b400);">
+      </div>
+      <div class="span-2"><button class="btn btn-green" id="gal-upload-btn">آپلود فایل</button></div>
+    </div>
   </div>
   <div class="admin-card">
-    <h4>لیست ویدیوها</h4>
-    <div id="kv-admin-videos-list"></div>
+    <h4>لیست فایل‌های گالری</h4>
+    <div id="kv-admin-videos-list" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:12px;"></div>
   </div>
 </div>
 
@@ -828,6 +834,16 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 
 <div class="admin-panel" data-panel="settings">
   <div class="admin-card">
+    <h4 style="margin-bottom:16px;">💳 تنظیمات پرداخت (درگاه/کارت)</h4>
+    <div class="form-grid">
+      <div class="field-wrap span-2"><label>شماره کارت</label><input id="cfg-pay-card" class="ltr" placeholder="6104..."></div>
+      <div class="field-wrap span-2"><label>شماره شبا</label><input id="cfg-pay-iban" class="ltr" placeholder="IR09..."></div>
+      <div class="field-wrap span-2"><label>نام صاحب حساب</label><input id="cfg-pay-holder" placeholder="شرکت..."></div>
+      <div class="span-2"><button class="btn btn-green" onclick="savePaymentSettings()">💾 ذخیره تنظیمات پرداخت</button></div>
+    </div>
+  </div>
+
+  <div class="admin-card">
     <h4>تغییر رمز عبور</h4>
     <form id="admin-change-pass-form" class="form-grid" novalidate>
       <div class="field-wrap span-2"><label>رمز جدید</label><input type="password" id="new-admin-pass" required minlength="6"></div>
@@ -836,9 +852,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   </div>
 </div>
 </div>
-</section>
-
-<!-- ==================== پنل همکار ==================== -->
+  </section>
+  <!-- ==================== پنل همکار ==================== -->
 <section class="screen" id="screen-partner">
 <div id="partner-login-view" class="auth-wrap">
 <div class="panel auth-panel">
@@ -947,7 +962,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
-<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۶.۰ · پلتفرم جامع کشاورزی</div>
+<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۷.۰ · پلتفرم جامع کشاورزی</div>
 </main>
 </div>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
@@ -992,20 +1007,23 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     </div>
     
     <div class="field-wrap" style="margin-bottom:12px;">
-      <label>واحد *</label>
-      <select id="edit-srv-unit" style="height:44px; padding:0 10px;" onchange="toggleCustomUnit('edit')">
-        <option value="hectare">هکتار</option>
-        <option value="hour">ساعت</option>
-        <option value="meter">متر</option>
-        <option value="1000m2">هزار متر مربع</option>
-        <option value="1000L">هزار لیتر (تانکر)</option>
-        <option value="custom">سایر (واحد جدید)</option>
-      </select>
-      <input id="edit-srv-unit-custom" type="text" placeholder="نام واحد را بنویسید..." style="height:44px; display:none; margin-top:8px;">
+      <label>واحد محاسبه *</label>
+      <input id="edit-srv-unit" type="text" style="height:44px;">
     </div>
     
     <div class="field-wrap" style="margin-bottom:12px;">
-      <label>دسته *</label>
+      <label>دسته‌بندی اصلی *</label>
+      <select id="edit-srv-category" style="height:44px; padding:0 10px;">
+        <option value="land_prep">آماده‌سازی زمین</option>
+        <option value="planting">کاشت</option>
+        <option value="care">رسیدگی (سمپاشی، آبیاری...)</option>
+        <option value="harvest">برداشت</option>
+        <option value="other">سایر خدمات</option>
+      </select>
+    </div>
+
+    <div class="field-wrap" style="margin-bottom:12px;">
+      <label>نوع دستگاه *</label>
       <select id="edit-srv-type" style="height:44px; padding:0 10px;">
         <option value="machinery">مکانیزاسیون</option>
         <option value="drone">پهپاد</option>
@@ -1021,9 +1039,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     
     <div class="actions" style="justify-content:flex-end; margin-top:0;">
       <button class="btn btn-light" onclick="document.getElementById('edit-service-modal').classList.remove('show')">انصراف</button>
-      <button class="btn btn-green" id="save-edit-srv-btn">
-        <svg class="icon"><use href="#i-save"/></svg> ذخیره
-      </button>
+      <button class="btn btn-green" id="save-edit-srv-btn"><svg class="icon"><use href="#i-save"/></svg> ذخیره</button>
     </div>
   </div>
 </div>
@@ -1045,6 +1061,17 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     
     <div class="actions" style="justify-content:center; margin-top:0;">
       <button class="btn btn-green" id="submit-rating-btn" style="width:100%;">ثبت امتیاز و بستن سفارش</button>
+    </div>
+  </div>
+</div>
+
+<!-- مودال مشاهده فیش پرداخت -->
+<div class="modal-back" id="receipt-view-modal">
+  <div class="modal" style="max-width:500px; text-align:center;">
+    <h3 style="margin:0 0 16px; font-size:16px; color:var(--b800);">🧾 تصویر فیش پرداخت</h3>
+    <div id="receipt-image-container" style="background:var(--inset); border:1px solid var(--ln); border-radius:12px; padding:10px; margin-bottom:20px; min-height:200px; display:flex; align-items:center; justify-content:center;"></div>
+    <div class="actions" style="justify-content:center; margin-top:0;">
+      <button class="btn btn-light" onclick="document.getElementById('receipt-view-modal').classList.remove('show')" style="width:100%;">بستن</button>
     </div>
   </div>
 </div>
@@ -1099,12 +1126,12 @@ function defaultConfig(){
   return {
     baseRate: 850000,
     services: [
-      { id: "spray", name: "سم‌پاشی هوایی با پهپاد", rate: 850000, unit: "hectare", type: "drone" },
-      { id: "plow", name: "شخم زنی با تراکتور", rate: 600000, unit: "hectare", type: "machinery" },
-      { id: "disc", name: "دیسک و تسطیح", rate: 400000, unit: "hectare", type: "machinery" },
-      { id: "harvest", name: "برداشت با کمباین", rate: 1500000, unit: "hectare", type: "machinery" },
-      { id: "crane", name: "اجاره جرثقیل یا لودر", rate: 500000, unit: "hour", type: "machinery" },
-      { id: "pipe", name: "لوله‌گذاری و نوار تیپ", rate: 50000, unit: "meter", type: "machinery" }
+      { id: "spray", name: "سم‌پاشی هوایی با پهپاد", rate: 850000, unit: "hectare", type: "drone", category: "care" },
+      { id: "plow", name: "شخم زنی با تراکتور", rate: 600000, unit: "hectare", type: "machinery", category: "land_prep" },
+      { id: "disc", name: "دیسک و تسطیح", rate: 400000, unit: "hectare", type: "machinery", category: "land_prep" },
+      { id: "harvest", name: "برداشت با کمباین", rate: 1500000, unit: "hectare", type: "machinery", category: "harvest" },
+      { id: "crane", name: "اجاره جرثقیل یا لودر", rate: 500000, unit: "hour", type: "machinery", category: "other" },
+      { id: "pipe", name: "لوله‌گذاری و نوار تیپ", rate: 50000, unit: "meter", type: "machinery", category: "care" }
     ],
     payment:{card:"6104 3374 3811 1567",iban:"IR09 0120 0200 0008 6808 6339 3",holder:"شرکت سم‌پاش هوشمند"},
     provinces: [
@@ -1116,9 +1143,7 @@ function defaultConfig(){
 const getConfig=()=>{
   const d=defaultConfig();
   const c=Object.assign({}, d, cache.config||{});
-  
-  c.provinces = d.provinces; // اجبار لیست کامل ۳۱ استان
-  
+  c.provinces = d.provinces; 
   if(!c.services) c.services = [];
   d.services.forEach(defSrv => {
      if(!c.services.some(s => s.id === defSrv.id)) {
@@ -1311,10 +1336,13 @@ function renderHistory() {
   box.innerHTML = list.map(o => {
     const st = STATUS[o.status] || STATUS.pending;
     let actionBtn = "";
-    if (o.status === 'assigned') {
-        actionBtn = `<button class="btn btn-green btn-sm" onclick="confirmOperatorArrival('${o.id}')" style="margin-top:8px;">✅ تایید حضور اپراتور</button>`;
+    
+    if (o.status === 'pending' || o.status === 'receipt_rejected') {
+        actionBtn = `<button class="btn btn-gold btn-sm" onclick="goToPayment('${o.id}')" style="margin-top:8px; width:100%;">💳 پرداخت و ارسال فیش</button>`;
+    } else if (o.status === 'assigned') {
+        actionBtn = `<button class="btn btn-green btn-sm" onclick="confirmOperatorArrival('${o.id}')" style="margin-top:8px; width:100%;">✅ تایید حضور اپراتور</button>`;
     } else if (o.status === 'done') {
-        actionBtn = `<button class="btn btn-gold btn-sm" onclick="openRatingModal('${o.id}')" style="margin-top:8px;">⭐ ثبت امتیاز</button>`;
+        actionBtn = `<button class="btn btn-gold btn-sm" onclick="openRatingModal('${o.id}')" style="margin-top:8px; width:100%;">⭐ ثبت امتیاز</button>`;
     }
     
     return `<div class="history-item" style="display:flex; flex-direction:column; gap:10px; padding:12px; border:1px solid var(--ln); border-radius:10px; margin-bottom:8px;">
@@ -1331,11 +1359,23 @@ function renderHistory() {
   }).join("");
 }
 
+window.goToPayment = function(id) {
+    const o = cache.orders.find(x => x.id === id);
+    if(!o) return;
+    PAY_ORDER = o;
+    showScreen("payment");
+}
+
 function renderVideos() {
   const grid = document.getElementById("kv-videos-grid"); if(!grid) return;
   const videos = read(LS.videos, []);
-  if(!videos.length) { grid.innerHTML = '<div class="kv-empty"><strong>هنوز ویدیویی نیست</strong></div>'; return; }
-  grid.innerHTML = videos.map(v => `<article class="kv-card kv-video-card" onclick="window.open('${esc(v.url)}', '_blank')" style="cursor:pointer"><div class="video-thumb" style="height:180px; background:#000; display:grid; place-items:center; color:#fff; font-size:40px;">▶</div><div class="kv-card-body"><h3 class="kv-card-title">${esc(v.title||'')}</h3></div></article>`).join("");
+  if(!videos.length) { grid.innerHTML = '<div class="kv-empty"><strong>هنوز فایلی نیست</strong></div>'; return; }
+  grid.innerHTML = videos.map(v => {
+    const isVideo = v.type === 'video';
+    return `<article class="kv-card" style="border:1px solid var(--ln); border-radius:12px; overflow:hidden; background:var(--sur);">
+        ${isVideo ? `<video src="${esc(v.url)}" style="width:100%; height:200px; object-fit:cover;" controls></video>` : `<img src="${esc(v.url)}" style="width:100%; height:200px; object-fit:cover;">`}
+        <div style="padding:12px;"><h3 style="font-size:14px; font-weight:800; margin:0 0 4px;">${esc(v.title)}</h3><p style="font-size:12px; color:var(--i500); margin:0;">${esc(v.desc || '')}</p></div></article>`;
+  }).join("");
 }
 function renderChat() {
   const box = $("#chat-body"); if(!box) return;
@@ -1377,6 +1417,15 @@ document.getElementById('submit-rating-btn')?.addEventListener('click', async ()
         document.getElementById('rating-modal').classList.remove('show');
         refreshHomeStats(); renderHistory();
         toast("✅ از ثبت نظر و امتیاز شما سپاسگزاریم.");
+    }
+});
+
+document.getElementById("receipt")?.addEventListener("change", function(e) {
+    const file = e.target.files[0];
+    const box = document.getElementById("receipt-preview-box");
+    if (file && box) {
+        const url = URL.createObjectURL(file);
+        box.innerHTML = `<img src="${url}" style="max-width:100%; border-radius:10px; border:1px solid var(--ln); max-height:200px; object-fit:contain;">`;
     }
 });
   function autoFillOrderForm(type) {
@@ -1434,11 +1483,23 @@ function renderMachineryServices() {
   const select = $("#machinery-services-select"); 
   if(!select) return;
   
-  select.innerHTML = '<option value="">➕ افزودن خدمت به لیست...</option>' + mechServices.map(s => {
-    let unitLabel = s.unit === 'hour' ? 'ساعت' : (s.unit === 'meter' ? 'متر' : (s.unit === '1000L' ? 'هزار لیتر' : (s.unit === '1000m2' ? 'هزار متر' : (s.unit === 'hectare' ? 'هکتار' : s.unit))));
-    const regionTxt = s.region ? ` - ${s.region.split(',').join('، ')}` : '';
-    return `<option value="${s.id}">${esc(s.name)}${regionTxt} (${fmt(s.rate)} تومان / ${unitLabel})</option>`;
-  }).join("");
+  const categories = {
+    land_prep: "🚜 آماده‌سازی زمین", planting: "🌱 کاشت", care: "💧 رسیدگی", harvest: "🌾 برداشت", other: "⚙️ سایر"
+  };
+
+  let optionsHtml = '<option value="">➕ افزودن خدمت به لیست...</option>';
+  for (const [catKey, catName] of Object.entries(categories)) {
+      const catServices = mechServices.filter(s => (s.category || 'other') === catKey);
+      if (catServices.length > 0) {
+          optionsHtml += `<optgroup label="${catName}">`;
+          optionsHtml += catServices.map(s => {
+              const regionTxt = s.region ? ` - ${s.region.split(',').join('، ')}` : '';
+              return `<option value="${s.id}">${esc(s.name)}${regionTxt} (${fmt(s.rate)} تومان / ${esc(s.unit)})</option>`;
+          }).join("");
+          optionsHtml += `</optgroup>`;
+      }
+  }
+  select.innerHTML = optionsHtml;
   
   selectedMachinery = [];
   renderSelectedChips();
@@ -1682,16 +1743,27 @@ document.getElementById('payment-form')?.addEventListener('submit', async (e) =>
   e.preventDefault();
   const fileInput = $("#receipt"); const file = fileInput?.files?.[0];
   if(!file) return toast("تصویر فیش را انتخاب کنید", true);
+  
+  const btn = e.target.querySelector('button[type="submit"]');
+  btn.disabled = true; btn.textContent = "در حال ارسال...";
+
   const res = await saveReceiptData(PAY_ORDER.id, file);
+  
+  btn.disabled = false; btn.textContent = "ارسال فیش";
+
   if(res) { 
-    toast("✅ فیش ارسال شد"); 
+    toast("✅ فیش ارسال شد. منتظر تایید مدیر باشید."); 
     const idx = cache.orders.findIndex(o => o.id === PAY_ORDER.id); 
     if(idx >= 0) { 
         cache.orders[idx].status = "receipt_pending"; 
         await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id: PAY_ORDER.id, status: "receipt_pending" }) });
     } 
-    showScreen("home"); 
-  } else toast("خطا در ارسال فیش", true);
+    fileInput.value = "";
+    const previewBox = document.getElementById("receipt-preview-box");
+    if(previewBox) previewBox.innerHTML = "";
+    
+    showScreen("history"); 
+  } else toast("خطا در ارسال فیش. لطفا دوباره تلاش کنید.", true);
 });
 
 // ---------------- پنل همکار ----------------
@@ -1867,44 +1939,31 @@ function renderOrdersAdmin() {
   if (!tb) return;
   
   const orders = [...cache.orders].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-  
-  if (!orders.length) {
-    tb.innerHTML = '<tr><td colspan="6"><div class="empty">هنوز سفارشی ثبت نشده است</div></td></tr>';
-    return;
-  }
+  if (!orders.length) { tb.innerHTML = '<tr><td colspan="6"><div class="empty">هنوز سفارشی نیست</div></td></tr>'; return; }
   
   tb.innerHTML = orders.map(o => {
     const st = STATUS[o.status] || STATUS.pending;
     const activePartners = cache.partners.filter(p => p.status === "active");
+    let assignSection = "";
     
-    let assignBtn = "";
     if (o.status === 'scheduled') {
-        assignBtn = `
-          <select onchange="assignToPartner('${o.id}', this.value)" style="margin-top:5px; padding:4px; font-size:11px; width:100%; border-radius:6px; border:1px solid var(--b300);">
-            <option value="">ارجاع به همکار...</option>
-            ${activePartners.map(p => `<option value="${p.id}">${esc(p.name)} (${esc(p.city)})</option>`).join("")}
-          </select>
-        `;
+        let matchingPartners = [];
+        if (o.serviceType === 'spray' || o.serviceType === 'drone') matchingPartners = activePartners.filter(p => p.type === 'drone');
+        else matchingPartners = activePartners.filter(p => p.type === 'mechanization');
+
+        if (matchingPartners.length > 0) {
+            assignSection = `<div style="margin-top:10px; padding:8px; background:var(--b50); border:1px dashed var(--b300); border-radius:8px;">
+                <label style="font-size:11px; color:var(--b800); font-weight:800; display:block; margin-bottom:6px;">👇 جهت ارجاع، همکار را انتخاب کنید:</label>
+                <select onchange="assignToPartner('${o.id}', this.value)" style="width:100%; padding:8px; font-size:12px; border-radius:6px; border:1px solid var(--b400); font-weight:bold;">
+                  <option value="">انتخاب همکار...</option>
+                  ${matchingPartners.map(p => `<option value="${p.id}">${esc(p.name)} (${esc(p.city)})</option>`).join("")}
+                </select></div>`;
+        } else { assignSection = `<div style="margin-top:8px; font-size:11px; color:var(--dng); font-weight:bold;">⚠️ همکار فعالی نیست!</div>`; }
     } else if (o.partnerId) {
         const ptn = activePartners.find(p => p.id === o.partnerId);
-        assignBtn = `<span style="font-size:11px; color:var(--purple);">👤 ${ptn ? ptn.name : 'همکار'}</span>`;
+        assignSection = `<div style="margin-top:8px; font-size:12px; font-weight:800; color:var(--purple);">👤 ارجاع به: ${ptn ? ptn.name : 'همکار'}</div>`;
     }
 
-    const actions = `
-      <div style="display:flex; flex-direction:column; gap:4px; min-width:130px;">
-          <select onchange="changeOrderStatus('${o.id}', this.value)" style="padding:6px; border-radius:6px; border:1px solid var(--ln2); font-size:11.5px;">
-            <option value="pending" ${o.status==='pending'?'selected':''}>در انتظار پرداخت</option>
-            <option value="receipt_pending" ${o.status==='receipt_pending'?'selected':''}>بررسی فیش</option>
-            <option value="scheduled" ${o.status==='scheduled'?'selected':''}>تایید شد/زمان‌بندی</option>
-            <option value="assigned" ${o.status==='assigned'?'selected':''}>ارجاع شده</option>
-            <option value="in_progress" ${o.status==='in_progress'?'selected':''}>در حال انجام</option>
-            <option value="done" ${o.status==='done'?'selected':''}>اتمام کار</option>
-            <option value="completed" ${o.status==='completed'?'selected':''}>تکمیل شده</option>
-            <option value="cancelled" ${o.status==='cancelled'?'selected':''}>لغو شده</option>
-          </select>
-          ${assignBtn}
-      </div>
-    `;
     let ratingStars = o.rating ? '⭐'.repeat(o.rating) : '—';
     
     return `<tr>
@@ -1913,27 +1972,30 @@ function renderOrdersAdmin() {
       <td>${esc(o.serviceName)}</td>
       <td><span class="status ${st.cls}">${st.label}</span></td>
       <td style="color:var(--gold); font-size:14px;">${ratingStars}</td>
-      <td>${actions}</td>
-    </tr>`;
+      <td style="min-width:180px;">
+        <select onchange="changeOrderStatus('${o.id}', this.value)" style="padding:6px; border-radius:6px; border:1px solid var(--ln2); font-size:11.5px; margin-bottom:4px; width:100%;">
+          <option value="pending" ${o.status==='pending'?'selected':''}>در انتظار پرداخت</option>
+          <option value="receipt_pending" ${o.status==='receipt_pending'?'selected':''}>بررسی فیش</option>
+          <option value="scheduled" ${o.status==='scheduled'?'selected':''}>تایید شد / زمان‌بندی</option>
+          <option value="assigned" ${o.status==='assigned'?'selected':''}>ارجاع شده</option>
+          <option value="in_progress" ${o.status==='in_progress'?'selected':''}>در حال انجام</option>
+          <option value="done" ${o.status==='done'?'selected':''}>اتمام کار</option>
+          <option value="completed" ${o.status==='completed'?'selected':''}>تکمیل شده</option>
+          <option value="cancelled" ${o.status==='cancelled'?'selected':''}>لغو شده</option>
+        </select>${assignSection}
+      </td></tr>`;
   }).join("");
 }
 
 window.assignToPartner = async function(orderId, partnerId) {
     if(!partnerId) return;
-    const o = cache.orders.find(x => x.id === orderId);
-    const p = cache.partners.find(x => x.id === partnerId);
+    const o = cache.orders.find(x => x.id === orderId); const p = cache.partners.find(x => x.id === partnerId);
     if(!o || !p) return;
-
-    o.partnerId = partnerId;
-    o.status = 'assigned';
-    
+    o.partnerId = partnerId; o.status = 'assigned';
     await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id: orderId, status: "assigned", partnerId: partnerId }) });
-    
-    const smsText = `سفارش جدید به شما ارجاع شد.\nکد: ${o.code}\nمشتری: ${o.name}\nمساحت: ${o.area} هکتار\nشهر: ${o.city}\nلطفا وارد پنل همکار شوید.`;
+    const smsText = `سلام ${p.name} عزیز،\nیک سفارش جدید به شما ارجاع شد.\nکد سفارش: ${o.code}\nنام مشتری: ${o.name}\nشهر: ${o.city}\nمساحت: ${o.area} هکتار\nلطفاً جهت مشاهده جزئیات و تایید، وارد پنل همکار شوید.\nسم‌پاش هوشمند`;
     await apiFetch("/api/sms/send", { method: "POST", body: JSON.stringify({ to: p.phone, text: smsText }) });
-
-    renderOrdersAdmin(); 
-    toast(`✅ سفارش به ${p.name} ارجاع شد و پیامک ارسال گردید.`);
+    renderOrdersAdmin(); toast(`✅ سفارش به ${p.name} ارجاع شد و پیامک ارسال گردید.`);
 }
 
 function renderPayments() {
@@ -1942,17 +2004,24 @@ function renderPayments() {
   if(!pendingOrders.length) { box.innerHTML = '<div class="empty">فیشی در انتظار تایید نیست</div>'; return; }
   
   box.innerHTML = pendingOrders.map(o => `
-    <div class="admin-card" style="display:flex; justify-content:space-between; align-items:center;">
-      <div>
-        <strong>${esc(o.code)} - ${esc(o.name)}</strong>
-        <div style="font-size:12px; color:var(--i500);">مبلغ: ${fmtT(o.amount)}</div>
-      </div>
-      <div style="display:flex; gap:8px;">
+    <div class="admin-card" style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px;">
+      <div style="flex:1; min-width:200px;"><strong>${esc(o.code)} - ${esc(o.name)}</strong><div style="font-size:12px; color:var(--i500); margin-top:4px;">مبلغ: ${fmtT(o.amount)}</div><div style="font-size:12px; color:var(--i500); margin-top:2px;">شماره: ${esc(o.phone)}</div></div>
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <button class="btn btn-light btn-sm" onclick="viewReceipt('${o.id}')">👁️ مشاهده فیش</button>
         <button class="btn btn-green btn-sm" onclick="changeOrderStatus('${o.id}', 'scheduled')">تایید</button>
         <button class="btn btn-danger btn-sm" onclick="changeOrderStatus('${o.id}', 'receipt_rejected')">رد</button>
       </div>
     </div>
   `).join("");
+}
+
+window.viewReceipt = async function(orderId) {
+    const container = document.getElementById("receipt-image-container");
+    container.innerHTML = '<span style="color:var(--i500);">در حال دریافت تصویر...</span>';
+    document.getElementById("receipt-view-modal").classList.add("show");
+    const res = await apiFetch(`/api/receipt?orderId=${orderId}`);
+    if(res.ok && res.data.data) container.innerHTML = `<img src="${res.data.data}" style="max-width:100%; border-radius:8px; max-height:400px; object-fit:contain;">`;
+    else container.innerHTML = '<span style="color:var(--dng);">تصویر فیش یافت نشد!</span>';
 }
 
 window.changeOrderStatus = async function(id, newStatus) {
@@ -1977,6 +2046,7 @@ document.querySelectorAll("#admin-tabs button").forEach(b => {
     if(b.dataset.tab === 'videos') renderVideoAdmin(); 
     if(b.dataset.tab === 'messages') renderAdminMessages();
     if(b.dataset.tab === 'customers') renderCustomers();
+    if(b.dataset.tab === 'settings') loadPaymentSettings();
   };
 });
 
@@ -2111,7 +2181,6 @@ function renderAdminServices() {
   const cfg = getConfig(); 
   const listContainer = document.getElementById('srv-list-container'); 
   const pricingTbody = document.getElementById('pricing-tbody');
-  
   const activeServices = cfg.services.filter(s => !s.hidden);
   
   if(!activeServices.length) { 
@@ -2120,11 +2189,10 @@ function renderAdminServices() {
     return; 
   }
 
-  const unitFa = (u) => {
-      const map = { 'hectare': 'هکتار', 'hour': 'ساعت', 'meter': 'متر', '1000m2': 'هزار متر مربع', '1000L': 'هزار لیتر' };
-      return map[u] || u;
+  const catFa = (c) => {
+      const map = { 'land_prep': 'آماده‌سازی', 'planting': 'کاشت', 'care': 'رسیدگی', 'harvest': 'برداشت', 'other': 'سایر' };
+      return map[c] || 'سایر';
   };
-  const typeFa = (t) => t === 'drone' ? 'پهپاد' : 'مکانیزاسیون';
   
   const renderRegionTags = (r) => {
       if(!r) return '<span style="color:var(--i400);">سراسری</span>';
@@ -2137,21 +2205,15 @@ function renderAdminServices() {
         <div style="flex:1; min-width:200px; font-weight:700; font-size:13px; color:var(--i900);">
           ${esc(s.name)} 
           <small style="color:var(--i500); font-weight:normal; display:block; margin-top:4px;">
-            ${unitFa(s.unit)} - ${typeFa(s.type)} 
+            واحد: ${esc(s.unit)} | دسته: ${catFa(s.category)} | ${s.type === 'drone' ? 'پهپاد' : 'مکانیزاسیون'}
           </small>
           <div style="margin-top:6px;">${renderRegionTags(s.region)}</div>
         </div>
         <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
           <input type="text" class="ltr" style="width:100px; padding:8px; height:36px; border:1px solid var(--ln2); border-radius:8px; text-align:center; font-weight:bold;" value="${s.rate}" id="srv-rate-${s.id}">
-          <button class="btn btn-light btn-sm" onclick="updateServiceRate('${s.id}')" title="ذخیره سریع نرخ" style="height:36px; width:36px; padding:0; display:grid; place-items:center;">
-            <svg class="icon" style="width:16px; height:16px;"><use href="#i-save"/></svg>
-          </button>
-          <button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش کامل" style="height:36px; width:36px; padding:0; display:grid; place-items:center;">
-            <svg class="icon" style="width:16px; height:16px;"><use href="#i-edit"/></svg>
-          </button>
-          <button class="btn btn-danger btn-sm" onclick="deleteService('${s.id}')" title="حذف" style="height:36px; width:36px; padding:0; display:grid; place-items:center;">
-            <svg class="icon" style="width:16px; height:16px;"><use href="#i-trash"/></svg>
-          </button>
+          <button class="btn btn-light btn-sm" onclick="updateServiceRate('${s.id}')" title="ذخیره سریع نرخ" style="height:36px; width:36px; padding:0; display:grid; place-items:center;"><svg class="icon" style="width:16px; height:16px;"><use href="#i-save"/></svg></button>
+          <button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش کامل" style="height:36px; width:36px; padding:0; display:grid; place-items:center;"><svg class="icon" style="width:16px; height:16px;"><use href="#i-edit"/></svg></button>
+          <button class="btn btn-danger btn-sm" onclick="deleteService('${s.id}')" title="حذف" style="height:36px; width:36px; padding:0; display:grid; place-items:center;"><svg class="icon" style="width:16px; height:16px;"><use href="#i-trash"/></svg></button>
         </div>
       </div>
     `).join("");
@@ -2162,19 +2224,15 @@ function renderAdminServices() {
       <tr>
         <td><strong>${esc(s.name)}</strong></td>
         <td>${renderRegionTags(s.region)}</td>
-        <td>${unitFa(s.unit)}</td>
+        <td>${esc(s.unit)}</td>
         <td>
           <div style="display:flex; align-items:center; gap:6px;">
             <input type="text" class="ltr" style="width:100px; padding:6px; border:1px solid var(--ln2); border-radius:6px; text-align:center; font-weight:bold;" value="${s.rate}" id="price-tbl-${s.id}">
-            <button class="icon-mini" onclick="updateServiceRateFromTable('${s.id}')" title="ذخیره" style="width:28px; height:28px;">
-              <svg class="icon" style="width:14px; height:14px;"><use href="#i-save"/></svg>
-            </button>
+            <button class="icon-mini" onclick="updateServiceRateFromTable('${s.id}')" title="ذخیره" style="width:28px; height:28px;"><svg class="icon" style="width:14px; height:14px;"><use href="#i-save"/></svg></button>
           </div>
         </td>
         <td>
-          <button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش کامل" style="height:32px; padding:0 10px;">
-             <svg class="icon" style="width:14px; height:14px;"><use href="#i-edit"/></svg> ویرایش
-          </button>
+          <button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش کامل" style="height:32px; padding:0 10px;"><svg class="icon" style="width:14px; height:14px;"><use href="#i-edit"/></svg> ویرایش</button>
         </td>
       </tr>
     `).join("");
@@ -2196,38 +2254,17 @@ window.updateServiceRate = async function(id) {
 }
 
 window.openEditService = function(id) {
-  const cfg = getConfig();
-  const srv = cfg.services.find(s => s.id === id);
-  if(!srv) return;
-  
+  const cfg = getConfig(); const srv = cfg.services.find(s => s.id === id); if(!srv) return;
   document.getElementById("edit-srv-id").value = srv.id;
   document.getElementById("edit-srv-name").value = srv.name;
   document.getElementById("edit-srv-rate").value = srv.rate;
-  
-  const standardUnits = ['hectare', 'hour', 'meter', '1000m2', '1000L'];
-  const unitSelect = document.getElementById("edit-srv-unit");
-  const unitCustom = document.getElementById("edit-srv-unit-custom");
-  
-  if(standardUnits.includes(srv.unit)) {
-      unitSelect.value = srv.unit;
-      unitCustom.style.display = 'none';
-  } else {
-      unitSelect.value = 'custom';
-      unitCustom.style.display = 'block';
-      unitCustom.value = srv.unit; 
-  }
-
+  document.getElementById("edit-srv-unit").value = srv.unit;
   document.getElementById("edit-srv-type").value = srv.type;
+  document.getElementById("edit-srv-category").value = srv.category || 'other';
   
   const editSelect = document.getElementById("edit-srv-region");
   Array.from(editSelect.options).forEach(opt => opt.selected = false);
-  if(srv.region) {
-      const srvRegions = srv.region.split(",");
-      Array.from(editSelect.options).forEach(opt => {
-          if(srvRegions.includes(opt.value)) opt.selected = true;
-      });
-  }
-  
+  if(srv.region) { srv.region.split(",").forEach(reg => { const opt = Array.from(editSelect.options).find(o => o.value === reg); if(opt) opt.selected = true; }); }
   document.getElementById("edit-service-modal").classList.add("show");
 }
 
@@ -2235,56 +2272,35 @@ document.getElementById("save-edit-srv-btn")?.addEventListener("click", async ()
   const id = document.getElementById("edit-srv-id").value;
   const name = document.getElementById("edit-srv-name").value.trim();
   const rate = +toEn(document.getElementById("edit-srv-rate").value) || 0;
+  const unit = document.getElementById("edit-srv-unit").value.trim();
   const type = document.getElementById("edit-srv-type").value;
+  const category = document.getElementById("edit-srv-category").value;
+  const region = Array.from(document.getElementById("edit-srv-region").selectedOptions).map(opt => opt.value).join(",");
   
-  const unitSelect = document.getElementById("edit-srv-unit").value;
-  const unit = unitSelect === 'custom' ? document.getElementById("edit-srv-unit-custom").value.trim() : unitSelect;
-  
-  const selectedRegions = Array.from(document.getElementById("edit-srv-region").selectedOptions).map(opt => opt.value);
-  const region = selectedRegions.join(",");
-  
-  if(!name || rate <= 0 || !unit) return toast("نام، نرخ و واحد را به درستی وارد کنید", true);
-  
-  const cfg = getConfig();
-  const srvIndex = cfg.services.findIndex(s => s.id === id);
+  if(!name || rate <= 0 || !unit) return toast("نام، نرخ و واحد را وارد کنید", true);
+  const cfg = getConfig(); const srvIndex = cfg.services.findIndex(s => s.id === id);
   if(srvIndex >= 0) {
-    cfg.services[srvIndex].name = name;
-    cfg.services[srvIndex].rate = rate;
-    cfg.services[srvIndex].unit = unit; 
-    cfg.services[srvIndex].type = type;
-    cfg.services[srvIndex].region = region; 
-    
-    await setConfig(cfg);
-    document.getElementById("edit-service-modal").classList.remove("show");
-    renderAdminServices();
-    toast("✅ خدمت با موفقیت ویرایش شد");
+    cfg.services[srvIndex].name = name; cfg.services[srvIndex].rate = rate; cfg.services[srvIndex].unit = unit; 
+    cfg.services[srvIndex].type = type; cfg.services[srvIndex].category = category; cfg.services[srvIndex].region = region; 
+    await setConfig(cfg); document.getElementById("edit-service-modal").classList.remove("show");
+    renderAdminServices(); toast("✅ خدمت ویرایش شد");
   }
 });
 
 document.getElementById('srv-add-btn')?.addEventListener('click', async () => {
   const name = document.getElementById('srv-name').value.trim(); 
   const rate = +toEn(document.getElementById('srv-rate').value) || 0;
+  const unit = document.getElementById('srv-unit').value.trim(); 
   const type = document.getElementById('srv-type').value; 
-  
-  const unitSelect = document.getElementById('srv-unit').value;
-  const unit = unitSelect === 'custom' ? document.getElementById('srv-unit-custom').value.trim() : unitSelect;
-  
-  const selectedRegions = Array.from(document.getElementById("srv-region").selectedOptions).map(opt => opt.value);
-  const region = selectedRegions.join(",");
+  const category = document.getElementById('srv-category').value;
+  const region = Array.from(document.getElementById("srv-region").selectedOptions).map(opt => opt.value).join(",");
   
   if(!name || rate <= 0 || !unit) return toast("نام، نرخ و واحد را وارد کنید", true);
-  
-  const cfg = getConfig(); 
-  cfg.services.push({ id: uid(), name, rate, unit, type, region }); 
+  const cfg = getConfig(); cfg.services.push({ id: uid(), name, rate, unit, type, category, region }); 
   await setConfig(cfg);
   
-  document.getElementById('srv-name').value = ""; 
-  document.getElementById('srv-rate').value = "1";
-  document.getElementById('srv-unit').value = "hectare";
-  document.getElementById('srv-unit-custom').value = "";
-  document.getElementById('srv-unit-custom').style.display = "none";
+  document.getElementById('srv-name').value = ""; document.getElementById('srv-rate').value = "1"; document.getElementById('srv-unit').value = "";
   Array.from(document.getElementById("srv-region").options).forEach(opt => opt.selected = false);
-  
   renderAdminServices(); toast("✅ خدمت اضافه شد");
 });
 
@@ -2296,7 +2312,55 @@ window.deleteService = async function(id) {
   await setConfig(cfg); renderAdminServices(); 
 };
 
-let ptnFilterType = "drone";
+window.loadPaymentSettings = function() {
+    const cfg = getConfig();
+    if(cfg.payment) {
+        if($("#cfg-pay-card")) $("#cfg-pay-card").value = cfg.payment.card || "";
+        if($("#cfg-pay-iban")) $("#cfg-pay-iban").value = cfg.payment.iban || "";
+        if($("#cfg-pay-holder")) $("#cfg-pay-holder").value = cfg.payment.holder || "";
+    }
+}
+
+window.savePaymentSettings = async function() {
+    const cfg = getConfig();
+    cfg.payment = { card: $("#cfg-pay-card").value.trim(), iban: $("#cfg-pay-iban").value.trim(), holder: $("#cfg-pay-holder").value.trim() };
+    await setConfig(cfg); toast("✅ تنظیمات پرداخت ذخیره شد");
+}
+
+document.getElementById("gal-upload-btn")?.addEventListener("click", async () => {
+  const title = document.getElementById("gal-title").value.trim();
+  const desc = document.getElementById("gal-desc").value.trim();
+  const file = document.getElementById("gal-file")?.files?.[0];
+  if(!title || !file) return toast("عنوان و فایل الزامی است", true);
+  
+  const btn = document.getElementById("gal-upload-btn"); btn.disabled = true; btn.textContent = "در حال آپلود...";
+  const formData = new FormData(); formData.append('file', file);
+
+  try {
+      const res = await fetch(`${API}/api/upload`, { method: 'POST', body: formData });
+      const data = await res.json();
+      if(data.ok) {
+          const videos = read(LS.videos, []); videos.push({ id: uid(), title, desc, url: data.url, type: data.type, createdAt: Date.now() });
+          write(LS.videos, videos); toast("✅ فایل آپلود شد");
+          document.getElementById("gal-title").value = ""; document.getElementById("gal-desc").value = ""; document.getElementById("gal-file").value = "";
+          renderVideoAdmin();
+      } else toast(data.error || "خطا", true);
+  } catch(e) { toast("خطای ارتباط", true); } finally { btn.disabled = false; btn.textContent = "آپلود فایل"; }
+});
+
+function renderVideoAdmin() {
+  const box = document.getElementById("kv-admin-videos-list"); if(!box) return; 
+  const items = read(LS.videos, []);
+  if(!items.length) { box.innerHTML = '<div class="empty">گالری خالی است</div>'; return; }
+  box.innerHTML = items.map((v, i) => `
+    <div style="background:var(--inset); border:1px solid var(--ln); border-radius:10px; overflow:hidden; display:flex; flex-direction:column;">
+      ${v.type === 'video' ? `<video src="${esc(v.url)}" style="width:100%; height:120px; object-fit:cover;" controls></video>` : `<img src="${esc(v.url)}" style="width:100%; height:120px; object-fit:cover;">`}
+      <div style="padding:10px; flex:1;"><strong style="font-size:12px; display:block; margin-bottom:4px;">${esc(v.title)}</strong><button class="btn btn-danger btn-sm" onclick="deleteVideo(${i})" style="width:100%; margin-top:8px;">حذف</button></div>
+    </div>
+  `).join("");
+}
+window.deleteVideo = function(i) { if(!confirm("حذف شود؟")) return; const videos = read(LS.videos, []); videos.splice(i, 1); write(LS.videos, videos); renderVideoAdmin(); toast("حذف شد"); }
+
 function renderPartners() {
   const list = document.getElementById('partners-list'); if(!list) return;
   const all = cache.partners.filter(p => (p.type || "drone") === ptnFilterType);
@@ -2336,17 +2400,6 @@ window.togglePtnType = function(type) {
   const fields = document.getElementById('mechanization-fields'); 
   if(fields) fields.style.display = type === 'mechanization' ? 'grid' : 'none'; 
 }
-
-function renderVideoAdmin() {
-  const box = document.getElementById("kv-admin-videos-list"); if(!box) return; const items = read(LS.videos, []);
-  if(!items.length) { box.innerHTML = '<div class="empty">ویدیویی اضافه نشده</div>'; return; }
-  box.innerHTML = items.map((v, i) => `<div class="video-admin-item" style="display:flex; justify-content:space-between; padding:10px; border-bottom:1px solid var(--ln);"><div><strong>${esc(v.title)}</strong><br><small style="color:var(--i400)">${esc(v.url)}</small></div><button class="btn btn-danger btn-sm" onclick="deleteVideo(${i})">حذف</button></div>`).join("");
-}
-document.getElementById("vid-add-form-url")?.addEventListener("submit", e => {
-  e.preventDefault(); const title = document.getElementById("vid-title-url").value.trim(); const url = document.getElementById("vid-url").value.trim();
-  if(!title || !url) return toast("عنوان و لینک الزامی است", true); const videos = read(LS.videos, []); videos.push({ id: uid(), title, url, desc: document.getElementById("vid-desc-url").value.trim() }); write(LS.videos, videos); toast("✅ ویدیو اضافه شد"); e.target.reset(); renderVideoAdmin();
-});
-window.deleteVideo = function(i) { if(!confirm("حذف شود؟")) return; const videos = read(LS.videos, []); videos.splice(i, 1); write(LS.videos, videos); renderVideoAdmin(); toast("حذف شد"); }
 
 function renderAdminMessages() {
   const box = document.getElementById("adm-messages-list"); if(!box) return; const msgs = read(LS.messages, []);
@@ -2416,21 +2469,14 @@ document.getElementById('guest-btn')?.addEventListener('click', () => {
   if (isCustomerVerified() || isGuest()) { document.getElementById('welcome-overlay').classList.add('hidden'); }
   
   const c = getConfig();
-  
   const ptnProv = $("#ptn-reg-prov");
-  if(ptnProv) {
-      ptnProv.innerHTML = '<option value="">انتخاب</option>' + c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
-  }
+  if(ptnProv) ptnProv.innerHTML = '<option value="">انتخاب</option>' + c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
 
   const srvRegion = $("#srv-region");
-  if(srvRegion) {
-      srvRegion.innerHTML = c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
-  }
+  if(srvRegion) srvRegion.innerHTML = c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
 
   const editSrvRegion = $("#edit-srv-region");
-  if(editSrvRegion) {
-      editSrvRegion.innerHTML = c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
-  }
+  if(editSrvRegion) editSrvRegion.innerHTML = c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
   
   refreshHomeStats(); renderCustomerAuth();
 })();
