@@ -397,8 +397,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     </div>
   </div>
 </div>
-  </section>
-  <section class="screen" id="screen-order-drone">
+</section>
+<section class="screen" id="screen-order-drone">
 <div class="panel">
 <div class="panel-head"><div><h3>ثبت سفارش سم‌پاشی هوایی</h3><p>اطلاعات مزرعه خود را برای پرواز پهپاد وارد کنید.</p></div></div>
 <form id="drone-order-form" novalidate>
@@ -632,7 +632,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 
 <div class="admin-panel" data-panel="orders">
 <div class="admin-card">
-<div class="table-scroll"><table class="mini-table"><thead><tr><th>کد</th><th>مشتری</th><th>خدمت</th><th>وضعیت</th><th>امتیاز</th><th>عملیات</th></tr></thead><tbody id="ord-tbody"></tbody></table></div>
+<div class="table-scroll"><table class="mini-table"><thead><tr><th>کد</th><th>مشتری</th><th>خدمت</th><th>وضعیت</th><th>امتیاز</th><th>عملیات و ارجاع</th></tr></thead><tbody id="ord-tbody"></tbody></table></div>
 </div>
 </div>
 
@@ -656,9 +656,17 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="admin-card">
   <h4>تعیین ظرفیت روزها</h4>
   <div class="admin-grid">
+    
+    <div class="field-wrap">
+      <label for="slot-service-select">انتخاب دستگاه / خدمت *</label>
+      <select id="slot-service-select" style="height:46px; padding:0 10px;">
+        <option value="">ابتدا دستگاه را انتخاب کنید</option>
+      </select>
+    </div>
+
     <div class="field-wrap">
       <label for="slot-date-select">تاریخ (کشویی)</label>
-      <select id="slot-date-select" class="ltr" style="height:46px; padding:0 10px; border-radius:10px; border:1px solid var(--ln2); width:100%;">
+      <select id="slot-date-select" style="height:46px; padding:0 10px; border-radius:10px; border:1px solid var(--ln2); width:100%;">
         <option value="">در حال بارگذاری...</option>
       </select>
     </div>
@@ -668,7 +676,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   <div style="margin-top:16px"><button class="btn btn-light btn-sm" id="slot-auto-fill-btn">✨ پر کردن خودکار ۳۰ روز آینده</button></div>
 </div>
 <div class="admin-card">
-  <div class="table-scroll"><table class="mini-table"><thead><tr><th>تاریخ</th><th>ظرفیت</th><th>رزرو</th><th>باقیمانده</th><th>عملیات</th></tr></thead><tbody id="slot-tbody"></tbody></table></div>
+  <div class="table-scroll"><table class="mini-table"><thead><tr><th>تاریخ</th><th>دستگاه</th><th>ظرفیت</th><th>رزرو</th><th>باقیمانده</th><th>عملیات</th></tr></thead><tbody id="slot-tbody"></tbody></table></div>
 </div>
 </div>
 
@@ -681,7 +689,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
       </button>
     </div>
     
-    <!-- فرم افزودن خدمت جدید -->
     <div style="background:var(--inset); border:1px solid var(--ln); border-radius:12px; padding:16px; margin-bottom:20px;">
       <h5 style="margin:0 0 14px; font-size:14px; color:var(--b800); font-weight:800;">➕ افزودن خدمت جدید</h5>
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; align-items:end;">
@@ -698,14 +705,15 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
         
         <div class="field-wrap">
           <label>واحد *</label>
-          <input id="srv-unit" list="unit-options" placeholder="مثلاً: هکتار یا تن" style="height:44px;">
-          <datalist id="unit-options">
+          <select id="srv-unit" style="height:44px; padding:0 10px;" onchange="toggleCustomUnit('srv')">
             <option value="hectare">هکتار</option>
             <option value="hour">ساعت</option>
             <option value="meter">متر</option>
             <option value="1000m2">هزار متر مربع</option>
             <option value="1000L">هزار لیتر (تانکر)</option>
-          </datalist>
+            <option value="custom">سایر (واحد جدید)</option>
+          </select>
+          <input id="srv-unit-custom" type="text" placeholder="نام واحد را بنویسید..." style="height:44px; display:none; margin-top:8px;">
         </div>
         
         <div class="field-wrap">
@@ -731,7 +739,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
       </div>
     </div>
 
-    <!-- لیست خدمات ثبت شده -->
     <div id="srv-list-container" style="display:flex; flex-direction:column; gap:10px;"></div>
   </div>
 </div>
@@ -893,6 +900,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="admin-tabs" id="ptn-tabs">
 <button data-ptn-tab="orders" aria-selected="true">📋 سفارش‌ها</button>
 <button data-ptn-tab="schedule" aria-selected="false">🗓️ زمان‌بندی کار من</button>
+<button data-ptn-tab="profile" aria-selected="false">⚙️ ویرایش دستگاه‌ها</button>
 </div>
 
 <div class="admin-panel active" data-ptn-panel="orders">
@@ -909,10 +917,37 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   </div>
 </div>
 </div>
+
+<div class="admin-panel" data-ptn-panel="profile">
+  <div class="admin-card">
+    <h4>ویرایش مشخصات و دستگاه‌ها</h4>
+    <form id="partner-edit-form" class="form-grid" novalidate>
+      <div class="field-wrap span-2" id="ptn-edit-mach-fields" style="display:none;">
+        <label>🚜 دستگاه اصلی</label>
+        <input id="ptn-edit-machine">
+      </div>
+      <div class="field-wrap span-2" id="ptn-edit-impl-fields" style="display:none;">
+        <label>⚙️ ادوات متصل</label>
+        <input id="ptn-edit-implements">
+      </div>
+      <div class="field-wrap span-2" id="ptn-edit-cities-fields" style="display:none;">
+        <label>📍 شهرهای قابل پوشش</label>
+        <input id="ptn-edit-cities">
+      </div>
+      <div class="field-wrap span-2">
+        <label>رمز عبور جدید (اختیاری)</label>
+        <input id="ptn-edit-pass" type="password" placeholder="برای تغییر رمز، اینجا را پر کنید">
+      </div>
+      <div class="span-2">
+        <button type="submit" class="btn btn-purple" style="width:100%;">💾 ذخیره تغییرات</button>
+      </div>
+    </form>
+  </div>
+</div>
 </div>
 </section>
 
-<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۵.۰ · پلتفرم جامع کشاورزی</div>
+<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۶.۰ · پلتفرم جامع کشاورزی</div>
 </main>
 </div>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
@@ -958,7 +993,15 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     
     <div class="field-wrap" style="margin-bottom:12px;">
       <label>واحد *</label>
-      <input id="edit-srv-unit" list="unit-options" style="height:44px;">
+      <select id="edit-srv-unit" style="height:44px; padding:0 10px;" onchange="toggleCustomUnit('edit')">
+        <option value="hectare">هکتار</option>
+        <option value="hour">ساعت</option>
+        <option value="meter">متر</option>
+        <option value="1000m2">هزار متر مربع</option>
+        <option value="1000L">هزار لیتر (تانکر)</option>
+        <option value="custom">سایر (واحد جدید)</option>
+      </select>
+      <input id="edit-srv-unit-custom" type="text" placeholder="نام واحد را بنویسید..." style="height:44px; display:none; margin-top:8px;">
     </div>
     
     <div class="field-wrap" style="margin-bottom:12px;">
@@ -1038,7 +1081,7 @@ function isValidJalali(i){const m=toEn(i).trim().match(/^(\d{4})\/(\d{1,2})\/(\d
 let toastTimer;const toastEl=$("#toast");
 function toast(m,e=false){if(!toastEl)return;toastEl.textContent=m;toastEl.classList.toggle("err",e);toastEl.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove("show"),3600);}
 
-const LS={auth:"sph_auth",admin_token:"sph_admin_token",config:"sph_config",orders:"sph_orders",partners:"sph_partners",slots:"sph_slots",cust_phone:"sph_cust_phone",cust_verified:"sph_cust_verified",cust_profile:"sph_cust_profile",receipts:"sph_receipts",videos:"sph_videos",guest:"sph_guest_mode",messages:"sph_messages"};
+const LS={auth:"sph_auth",admin_token:"sph_admin_token",config:"sph_config",orders:"sph_orders",partners:"sph_partners",slots:"sph_slots",cust_phone:"sph_cust_phone",cust_verified:"sph_cust_verified",cust_profile:"sph_cust_profile",receipts:"sph_receipts",videos:"sph_videos",guest:"sph_guest_mode",messages:"sph_messages",partner_session:"sph_partner_session"};
 const read=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v??d;}catch{return d;}};
 const write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 
@@ -1052,7 +1095,6 @@ const isCustomerVerified=()=>{const v=read(LS.cust_verified,null);return v&&v.ph
 const setCustomerVerified=phone=>write(LS.cust_verified,{phone,at:Date.now(),expires:Date.now()+90*24*3600*1000});
 const isGuest=()=>localStorage.getItem(LS.guest)==='true';
 
-// 🔴 لیست کامل ۳۱ استان ایران
 function defaultConfig(){
   return {
     baseRate: 850000,
@@ -1071,8 +1113,6 @@ function defaultConfig(){
     crops: ["گندم","جو","آفتابگردان","سیب‌زمینی","ذرت","باغ میوه","یونجه","سایر"]
   };
 }
-
-// 🔴 اصلاح getConfig برای اجبار لیست جدید استان‌ها
 const getConfig=()=>{
   const d=defaultConfig();
   const c=Object.assign({}, d, cache.config||{});
@@ -1313,7 +1353,6 @@ $("#msg-form")?.addEventListener("submit", e => {
   $("#msg-input").value = ""; renderChat(); toast("پیام ثبت شد.");
 });
 
-// منطق ستاره‌های امتیاز
 let currentRating = 0;
 document.querySelectorAll('#star-rating-box span').forEach(star => {
     star.addEventListener('click', function() {
@@ -1340,8 +1379,7 @@ document.getElementById('submit-rating-btn')?.addEventListener('click', async ()
         toast("✅ از ثبت نظر و امتیاز شما سپاسگزاریم.");
     }
 });
-  // 🔴 تابع جدید برای پر کردن خودکار فرم‌ها
-function autoFillOrderForm(type) {
+  function autoFillOrderForm(type) {
   const phone = getCustomerPhone();
   if (!phone) return;
   
@@ -1361,7 +1399,9 @@ function refreshDroneSelects() {
   const fill = (sel, items, ph) => { if(!sel) return; sel.innerHTML = ph ? `<option value="">${ph}</option>` : ''; items.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`); };
   fill($("#drone-province"), c.provinces, "انتخاب"); fill($("#drone-crop"), c.crops, "انتخاب");
   
-  const all = cache.slots.sort((a,b)=>a.date.localeCompare(b.date));
+  const droneSrv = c.services.find(s => s.type === 'drone' && !s.hidden) || c.services.find(s => s.id === 'spray');
+  
+  const all = cache.slots.filter(s => s.serviceId === droneSrv.id).sort((a,b)=>a.date.localeCompare(b.date));
   const free = all.filter(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return b<s.cap; });
   const sel = $("#drone-slot-select");
   if(sel) sel.innerHTML = free.length ? '<option value="">انتخاب تاریخ</option>' + free.map(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return `<option value="${s.id}">${toFa(s.date)} (${toFa(s.cap-b)} ظرفیت)</option>`; }).join("") : '<option value="">تاریخی موجود نیست</option>';
@@ -1377,7 +1417,6 @@ function updateDronePrice() {
   const c = getConfig(); 
   const drones = c.services.filter(s => s.type === 'drone' && !s.hidden);
   
-  // پیدا کردن خدمت پهپاد مخصوص استان، اگر نبود سراسری
   let srv = drones.find(s => s.region && s.region.split(',').includes(selectedProv));
   if (!srv) srv = drones.find(s => !s.region); 
   if (!srv) srv = drones.find(s => s.id === 'spray'); 
@@ -1404,7 +1443,6 @@ function renderMachineryServices() {
   selectedMachinery = [];
   renderSelectedChips();
 }
-
 function renderSelectedChips() {
   const box = $("#selected-services-chips");
   if(!box) return;
@@ -1425,7 +1463,6 @@ function renderSelectedChips() {
     }).join("");
   }
 }
-
 window.removeMachinery = function(id) {
   selectedMachinery = selectedMachinery.filter(x => x !== id);
   renderSelectedChips();
@@ -1447,7 +1484,9 @@ function refreshMachSelects() {
   const fill = (sel, items, ph) => { if(!sel) return; sel.innerHTML = ph ? `<option value="">${ph}</option>` : ''; items.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`); };
   fill($("#mach-province"), c.provinces, "انتخاب"); fill($("#mach-crop"), c.crops, "انتخاب");
   
-  const all = cache.slots.sort((a,b)=>a.date.localeCompare(b.date));
+  const machSrvs = c.services.filter(s => s.type === 'machinery' && !s.hidden).map(s => s.id);
+  
+  const all = cache.slots.filter(s => machSrvs.includes(s.serviceId)).sort((a,b)=>a.date.localeCompare(b.date));
   const free = all.filter(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return b<s.cap; });
   const sel = $("#mach-slot-select");
   if(sel) sel.innerHTML = free.length ? '<option value="">انتخاب تاریخ</option>' + free.map(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return `<option value="${s.id}">${toFa(s.date)} (${toFa(s.cap-b)} ظرفیت)</option>`; }).join("") : '<option value="">تاریخی موجود نیست</option>';
@@ -1543,11 +1582,8 @@ async function startPhoneVerification(phone) {
 
 document.getElementById('drone-order-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
-  
   const termsCheckbox = $("#drone-terms-checkbox");
-  if (termsCheckbox && !termsCheckbox.checked) {
-    return toast("برای ثبت سفارش، ابتدا باید تعهدنامه را مطالعه و تایید کنید.", true);
-  }
+  if (termsCheckbox && !termsCheckbox.checked) return toast("برای ثبت سفارش، ابتدا باید تعهدنامه را مطالعه و تایید کنید.", true);
 
   const phone = toEn($("#drone-phone").value);
   if(!(isCustomerVerified() && getCustomerPhone() === phone)){ await startPhoneVerification(phone); return; }
@@ -1573,13 +1609,7 @@ document.getElementById('drone-order-form')?.addEventListener('submit', async (e
   await apiFetch("/api/orders", { method: "POST", body: JSON.stringify(order) });
   cache.orders.push(order);
   
-  setCustomerProfile({
-      name: order.name,
-      province: order.province,
-      city: order.city,
-      village: order.village,
-      crop: order.crop
-  });
+  setCustomerProfile({ name: order.name, province: order.province, city: order.city, village: order.village, crop: order.crop });
   
   refreshHomeStats(); e.target.reset(); $("#drone-area").value = "10000"; updateDronePrice(); refreshDroneSelects();
   PAY_ORDER = order; toast(`✅ سفارش پهپاد ثبت شد.`); showScreen("payment");
@@ -1625,13 +1655,7 @@ document.getElementById('machinery-order-form')?.addEventListener('submit', asyn
   await apiFetch("/api/orders", { method: "POST", body: JSON.stringify(order) });
   cache.orders.push(order);
   
-  setCustomerProfile({
-      name: order.name,
-      province: order.province,
-      city: order.city,
-      village: order.village,
-      crop: order.crop
-  });
+  setCustomerProfile({ name: order.name, province: order.province, city: order.city, village: order.village, crop: order.crop });
   
   refreshHomeStats(); e.target.reset(); $("#mach-area").value = "10000"; updateMachPrice(); selectedMachinery = []; renderMachineryServices();
   PAY_ORDER = order; toast(`✅ سفارش ادوات ثبت شد.`); showScreen("payment");
@@ -1670,6 +1694,7 @@ document.getElementById('payment-form')?.addEventListener('submit', async (e) =>
   } else toast("خطا در ارسال فیش", true);
 });
 
+// ---------------- پنل همکار ----------------
 document.getElementById("ptn-tab-login")?.addEventListener("click", () => { $("#partner-login-form").hidden = false; $("#partner-register-form").hidden = true; $("#ptn-tab-login").className = "btn btn-purple btn-sm"; $("#ptn-tab-reg").className = "btn btn-light btn-sm"; });
 document.getElementById("ptn-tab-reg")?.addEventListener("click", () => { $("#partner-login-form").hidden = true; $("#partner-register-form").hidden = false; $("#ptn-tab-reg").className = "btn btn-purple btn-sm"; $("#ptn-tab-login").className = "btn btn-light btn-sm"; });
 
@@ -1686,13 +1711,17 @@ document.getElementById('partner-register-form')?.addEventListener('submit', asy
   const machine = $("#ptn-reg-machine")?.value.trim() || "";
   const implementsList = $("#ptn-reg-implements")?.value.trim() || "";
   const share = +toEn($("#ptn-reg-share").value) || 5; 
+  const pass = $("#ptn-reg-pass").value;
+  const pass2 = $("#ptn-reg-pass2").value;
 
   if(!name || !phone || !county || !city) return toast("لطفاً استان، شهرستان و شهر را وارد کنید", true); 
   if(type === 'mechanization' && (!machine || !implementsList || !cities)) return toast("اطلاعات دستگاه، ادوات و شهرهای تحت پوشش را کامل کنید", true);
+  if(pass.length < 6) return toast("رمز باید حداقل ۶ کاراکتر باشد", true);
+  if(pass !== pass2) return toast("تکرار رمز عبور مطابقت ندارد", true);
   
   if(cache.partners.some(p => p.phone === phone)) return toast("این شماره قبلا ثبت شده", true);
   
-  const ptn = { id: uid(), type, name, phone, province: prov, county, city, village, machine, implements: implementsList, cities, share, status: "pending" };
+  const ptn = { id: uid(), type, name, phone, province: prov, county, city, village, machine, implements: implementsList, cities, share, status: "pending", password: pass };
   await apiFetch("/api/partners", { method: "POST", body: JSON.stringify(ptn) });
   cache.partners.push(ptn);
   
@@ -1702,14 +1731,117 @@ document.getElementById('partner-register-form')?.addEventListener('submit', asy
 });
 
 document.getElementById('partner-login-form')?.addEventListener('submit', (e) => {
-  e.preventDefault(); const phone = toEn($("#ptn-login-phone").value); const pass = $("#ptn-login-pass").value; const p = cache.partners.find(x => x.phone === phone);
-  if(!p) return toast("همکاری با این شماره یافت نشد", true); if(p.status !== "active") return toast("حساب شما هنوز تایید نشده است", true); if(pass !== "123456") return toast("رمز عبور نادرست است (رمز تست: 123456)", true);
-  toast("خوش آمدید"); $("#partner-login-view").hidden = true; $("#partner-panel-view").hidden = false;
-  const myOrders = cache.orders.filter(o => o.partnerId === p.id || o.serviceType === 'spray'); const list = $("#ptn-orders-list");
-  list.innerHTML = myOrders.length ? myOrders.map(o => `<div class="admin-card"><strong>${esc(o.code)} - ${esc(o.serviceName)}</strong><div style="font-size:12px;color:var(--i500);margin:4px 0">${esc(o.name)} | ${esc(o.city)} | ${toFa(o.area)} هکتار</div></div>`).join("") : '<div class="empty">سفارشی ارجاع داده نشده</div>';
-});
-document.getElementById('partner-logout-btn')?.addEventListener('click', () => { $("#partner-login-view").hidden = false; $("#partner-panel-view").hidden = true; });
+  e.preventDefault(); 
+  const phone = toEn($("#ptn-login-phone").value); 
+  const pass = $("#ptn-login-pass").value; 
+  const p = cache.partners.find(x => x.phone === phone);
+  
+  if(!p) return toast("همکاری با این شماره یافت نشد", true); 
+  if(p.status !== "active") return toast("حساب شما هنوز تایید نشده است", true); 
+  if(p.password !== pass) return toast("رمز عبور نادرست است", true);
 
+  toast("خوش آمدید"); 
+  $("#partner-login-view").hidden = true; 
+  $("#partner-panel-view").hidden = false;
+  renderPartnerDashboard(p);
+});
+
+document.getElementById('partner-logout-btn')?.addEventListener('click', () => { 
+  localStorage.removeItem(LS.partner_session);
+  $("#partner-login-view").hidden = false; $("#partner-panel-view").hidden = true; 
+});
+
+document.querySelectorAll("#ptn-tabs button").forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll("#ptn-tabs button").forEach(x=>x.setAttribute("aria-selected", x===b?"true":"false"));
+    document.querySelectorAll(".admin-panel[data-ptn-panel]").forEach(p=>p.classList.toggle("active", p.dataset.ptnPanel===b.dataset.ptnTab));
+    if(b.dataset.ptnTab === 'schedule') { const s = read(LS.partner_session, null); if(s) renderPartnerAvailability(); }
+  };
+});
+
+window.renderPartnerDashboard = function(p) {
+    localStorage.setItem(LS.partner_session, JSON.stringify({ partnerId: p.id }));
+    $("#ptn-name").textContent = p.name;
+    
+    const myOrders = cache.orders.filter(o => o.partnerId === p.id); 
+    const list = $("#ptn-orders-list");
+    list.innerHTML = myOrders.length ? myOrders.map(o => `<div class="admin-card"><strong>${esc(o.code)} - ${esc(o.serviceName)}</strong><div style="font-size:12px;color:var(--i500);margin:4px 0">${esc(o.name)} | ${esc(o.city)} | ${toFa(o.area)} هکتار</div></div>`).join("") : '<div class="empty">سفارشی ارجاع داده نشده</div>';
+
+    if(p.type === 'mechanization') {
+        document.getElementById('ptn-edit-mach-fields').style.display = 'block';
+        document.getElementById('ptn-edit-impl-fields').style.display = 'block';
+        document.getElementById('ptn-edit-cities-fields').style.display = 'block';
+        $("#ptn-edit-machine").value = p.machine || "";
+        $("#ptn-edit-implements").value = p.implements || "";
+        $("#ptn-edit-cities").value = p.cities || "";
+    }
+    $("#ptn-edit-pass").value = "";
+}
+
+document.getElementById('partner-edit-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const s = read(LS.partner_session, null); if(!s) return;
+    const idx = cache.partners.findIndex(x => x.id === s.partnerId);
+    if(idx >= 0) {
+        const p = cache.partners[idx];
+        p.machine = $("#ptn-edit-machine").value;
+        p.implements = $("#ptn-edit-implements").value;
+        p.cities = $("#ptn-edit-cities").value;
+        const newPass = $("#ptn-edit-pass").value;
+        if(newPass) {
+            if(newPass.length < 6) return toast("رمز جدید باید حداقل ۶ کاراکتر باشد", true);
+            p.password = newPass;
+        }
+        await apiFetch("/api/partners", { method: "PUT", body: JSON.stringify(p) });
+        toast("✅ اطلاعات با موفقیت به‌روزرسانی شد");
+    }
+});
+
+const DAYS_OF_WEEK = ["شنبه", "یکشنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه", "پنجشنبه", "جمعه"];
+function renderPartnerAvailability() {
+  const s = read(LS.partner_session, null); if(!s) return;
+  const p = cache.partners.find(x => x.id === s.partnerId);
+  if(!p) return;
+  
+  let avail = [];
+  try { avail = typeof p.availability === 'string' ? JSON.parse(p.availability) : (p.availability || []); } catch(e) {}
+  if(!avail || !avail.length) avail = DAYS_OF_WEEK.map(d => ({ day: d, active: true, start: "08:00", end: "18:00" }));
+  
+  const container = $("#ptn-availability-container"); if(!container) return;
+  container.innerHTML = avail.map((a, idx) => `
+    <div style="display:flex; align-items:center; justify-content:space-between; background:var(--sur); border:1px solid var(--ln); padding:10px 14px; border-radius:10px;">
+      <div style="display:flex; align-items:center; gap:10px; width:100px;">
+        <input type="checkbox" id="avail-active-${idx}" ${a.active ? 'checked' : ''} onchange="document.getElementById('avail-times-${idx}').style.opacity = this.checked ? '1' : '0.3'" style="width:18px; height:18px; accent-color:var(--b500);">
+        <strong style="font-size:13px;">${a.day}</strong>
+      </div>
+      <div id="avail-times-${idx}" style="display:flex; align-items:center; gap:8px; opacity:${a.active ? '1' : '0.3'}; transition:all 0.2s;">
+        <span style="font-size:11px; color:var(--i500);">از</span>
+        <input type="time" id="avail-start-${idx}" value="${a.start}" style="border:1px solid var(--ln2); border-radius:6px; padding:4px 8px; font-size:12px;">
+        <span style="font-size:11px; color:var(--i500);">تا</span>
+        <input type="time" id="avail-end-${idx}" value="${a.end}" style="border:1px solid var(--ln2); border-radius:6px; padding:4px 8px; font-size:12px;">
+      </div>
+    </div>
+  `).join("");
+}
+
+document.getElementById('ptn-save-availability-btn')?.addEventListener('click', async () => {
+  const s = read(LS.partner_session, null); if(!s) return;
+  const partners = cache.partners; const idx = partners.findIndex(x => x.id === s.partnerId);
+  if(idx < 0) return;
+  
+  const newAvail = DAYS_OF_WEEK.map((d, i) => ({
+    day: d,
+    active: document.getElementById(`avail-active-${i}`).checked,
+    start: document.getElementById(`avail-start-${i}`).value,
+    end: document.getElementById(`avail-end-${i}`).value
+  }));
+  
+  partners[idx].availability = JSON.stringify(newAvail);
+  await apiFetch("/api/partners", { method: "PUT", body: JSON.stringify(partners[idx]) });
+  toast("✅ زمان‌بندی با موفقیت ذخیره شد");
+});
+
+// ---------------- پنل ادمین ----------------
 document.getElementById('admin-login-form')?.addEventListener('submit', async (e) => {
   e.preventDefault(); const otp = toEn($("#admin-otp").value.trim()); toast("در حال بررسی...");
   const res = await apiFetch("/api/admin/login", { method: "POST", body: JSON.stringify({ username: $("#admin-user").value, otpCode: otp }) });
@@ -1743,17 +1875,35 @@ function renderOrdersAdmin() {
   
   tb.innerHTML = orders.map(o => {
     const st = STATUS[o.status] || STATUS.pending;
+    const activePartners = cache.partners.filter(p => p.status === "active");
+    
+    let assignBtn = "";
+    if (o.status === 'scheduled') {
+        assignBtn = `
+          <select onchange="assignToPartner('${o.id}', this.value)" style="margin-top:5px; padding:4px; font-size:11px; width:100%; border-radius:6px; border:1px solid var(--b300);">
+            <option value="">ارجاع به همکار...</option>
+            ${activePartners.map(p => `<option value="${p.id}">${esc(p.name)} (${esc(p.city)})</option>`).join("")}
+          </select>
+        `;
+    } else if (o.partnerId) {
+        const ptn = activePartners.find(p => p.id === o.partnerId);
+        assignBtn = `<span style="font-size:11px; color:var(--purple);">👤 ${ptn ? ptn.name : 'همکار'}</span>`;
+    }
+
     const actions = `
-      <select onchange="changeOrderStatus('${o.id}', this.value)" style="padding:6px; border-radius:6px; border:1px solid var(--ln2); font-size:11.5px;">
-        <option value="pending" ${o.status==='pending'?'selected':''}>در انتظار پرداخت</option>
-        <option value="receipt_pending" ${o.status==='receipt_pending'?'selected':''}>بررسی فیش</option>
-        <option value="scheduled" ${o.status==='scheduled'?'selected':''}>تایید شد/زمان‌بندی</option>
-        <option value="assigned" ${o.status==='assigned'?'selected':''}>در راه / ارجاع</option>
-        <option value="in_progress" ${o.status==='in_progress'?'selected':''}>در حال انجام (حضور تایید شد)</option>
-        <option value="done" ${o.status==='done'?'selected':''}>اتمام کار (منتظر امتیاز)</option>
-        <option value="completed" ${o.status==='completed'?'selected':''}>تکمیل شده</option>
-        <option value="cancelled" ${o.status==='cancelled'?'selected':''}>لغو شده</option>
-      </select>
+      <div style="display:flex; flex-direction:column; gap:4px; min-width:130px;">
+          <select onchange="changeOrderStatus('${o.id}', this.value)" style="padding:6px; border-radius:6px; border:1px solid var(--ln2); font-size:11.5px;">
+            <option value="pending" ${o.status==='pending'?'selected':''}>در انتظار پرداخت</option>
+            <option value="receipt_pending" ${o.status==='receipt_pending'?'selected':''}>بررسی فیش</option>
+            <option value="scheduled" ${o.status==='scheduled'?'selected':''}>تایید شد/زمان‌بندی</option>
+            <option value="assigned" ${o.status==='assigned'?'selected':''}>ارجاع شده</option>
+            <option value="in_progress" ${o.status==='in_progress'?'selected':''}>در حال انجام</option>
+            <option value="done" ${o.status==='done'?'selected':''}>اتمام کار</option>
+            <option value="completed" ${o.status==='completed'?'selected':''}>تکمیل شده</option>
+            <option value="cancelled" ${o.status==='cancelled'?'selected':''}>لغو شده</option>
+          </select>
+          ${assignBtn}
+      </div>
     `;
     let ratingStars = o.rating ? '⭐'.repeat(o.rating) : '—';
     
@@ -1766,6 +1916,24 @@ function renderOrdersAdmin() {
       <td>${actions}</td>
     </tr>`;
   }).join("");
+}
+
+window.assignToPartner = async function(orderId, partnerId) {
+    if(!partnerId) return;
+    const o = cache.orders.find(x => x.id === orderId);
+    const p = cache.partners.find(x => x.id === partnerId);
+    if(!o || !p) return;
+
+    o.partnerId = partnerId;
+    o.status = 'assigned';
+    
+    await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id: orderId, status: "assigned", partnerId: partnerId }) });
+    
+    const smsText = `سفارش جدید به شما ارجاع شد.\nکد: ${o.code}\nمشتری: ${o.name}\nمساحت: ${o.area} هکتار\nشهر: ${o.city}\nلطفا وارد پنل همکار شوید.`;
+    await apiFetch("/api/sms/send", { method: "POST", body: JSON.stringify({ to: p.phone, text: smsText }) });
+
+    renderOrdersAdmin(); 
+    toast(`✅ سفارش به ${p.name} ارجاع شد و پیامک ارسال گردید.`);
 }
 
 function renderPayments() {
@@ -1812,7 +1980,6 @@ document.querySelectorAll("#admin-tabs button").forEach(b => {
   };
 });
 
-// 🔴 تابع پر کردن منوی تاریخ برای زمان‌بندی
 function populateSlotDates() {
     const sel = $("#slot-date-select");
     if(!sel) return;
@@ -1829,17 +1996,31 @@ function populateSlotDates() {
 }
 
 function renderSlots(){
-  populateSlotDates(); // پر کردن منوی تاریخ هر بار که تب باز می‌شود
+  populateSlotDates();
   
+  const srvSelect = $("#slot-service-select");
+  if(srvSelect) {
+      const activeServices = getConfig().services.filter(s => !s.hidden);
+      srvSelect.innerHTML = '<option value="">ابتدا دستگاه را انتخاب کنید</option>' + activeServices.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join("");
+  }
+
   const tb = $("#slot-tbody"); if(!tb) return;
   const all = cache.slots.sort((a,b)=>a.date.localeCompare(b.date));
-  if(!all.length) { tb.innerHTML='<tr><td colspan="5"><div class="empty">ظرفیتی ثبت نشده است</div></td></tr>'; return; }
+  if(!all.length) { tb.innerHTML='<tr><td colspan="6"><div class="empty">ظرفیتی ثبت نشده است</div></td></tr>'; return; }
+  
+  const allServices = getConfig().services;
+
   tb.innerHTML = all.map(s => {
      const booked = cache.orders.filter(o=>o.slotId===s.id && o.status!=="cancelled").length; 
      const rem = s.cap - booked;
      const st = rem <= 0 ? '<span class="status red">پر</span>' : '<span class="status green">آزاد</span>';
+     
+     const srv = allServices.find(x => x.id === s.serviceId);
+     const srvName = srv ? esc(srv.name) : '<span style="color:var(--dng)">نامشخص</span>';
+
      return `<tr>
        <td><code class="ltr" style="font-size:12px;">${esc(s.date)}</code></td>
+       <td><strong style="font-size:11.5px;">${srvName}</strong></td>
        <td>${toFa(s.cap)}</td>
        <td>${toFa(booked)}</td>
        <td><strong style="color:var(--${rem>0?'ok-fg':'dng-fg'})">${toFa(rem)}</strong></td>
@@ -1847,6 +2028,7 @@ function renderSlots(){
      </tr>`;
   }).join("");
 }
+
 window.deleteSlot = async function(id) {
   if(!confirm("حذف شود؟")) return;
   cache.slots = cache.slots.filter(x=>x.id!==id);
@@ -1854,31 +2036,35 @@ window.deleteSlot = async function(id) {
   renderSlots(); toast("حذف شد");
 }
 
-// 🔴 دکمه ثبت روز جدید با منوی کشویی
 $("#slot-add-btn")?.addEventListener("click", async () => {
+  const serviceId = $("#slot-service-select").value;
+  if(!serviceId) return toast("لطفاً ابتدا دستگاه را انتخاب کنید", true);
+  
   const date = $("#slot-date-select").value;
   if(!date) return toast("لطفاً تاریخ را از منو انتخاب کنید", true);
   
   const c = +toEn($("#slot-cap").value) || 1; 
   if(c <= 0) return toast("ظرفیت را وارد کنید", true);
   
-  const existingIdx = cache.slots.findIndex(s => s.date === date);
+  const existingIdx = cache.slots.findIndex(s => s.date === date && s.serviceId === serviceId);
   if(existingIdx >= 0) { 
       cache.slots[existingIdx].cap = c; 
       await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(cache.slots[existingIdx]) });
-      toast("ظرفیت به‌روزرسانی شد"); 
+      toast("ظرفیت این دستگاه در این تاریخ به‌روزرسانی شد"); 
   } else { 
-      const newSlot = { id: uid(), date: date, cap: c, createdAt: Date.now() };
+      const newSlot = { id: uid(), date: date, cap: c, createdAt: Date.now(), serviceId: serviceId };
       cache.slots.push(newSlot); 
       await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(newSlot) });
-      toast("✅ روز جدید ثبت شد"); 
+      toast("✅ روز جدید برای این دستگاه ثبت شد"); 
   }
   $("#slot-cap").value = "2"; 
   renderSlots();
 });
 
-// 🔴 دکمه پرکردن خودکار ۳۰ روز آینده (اصلاح شده)
 $("#slot-auto-fill-btn")?.addEventListener("click", async () => {
+   const serviceId = $("#slot-service-select").value;
+   if(!serviceId) return toast("لطفاً ابتدا دستگاه را انتخاب کنید", true);
+
    let added = 0;
    const today = new Date();
    const newSlotsToSync = [];
@@ -1890,8 +2076,8 @@ $("#slot-auto-fill-btn")?.addEventListener("click", async () => {
       const parts = jDate.split('/'); 
       const dateStr = `${toEn(parts[0])}/${toEn(parts[1])}/${toEn(parts[2])}`;
       
-      if(!cache.slots.some(s => s.date === dateStr)) { 
-          const newSlot = { id: uid(), date: dateStr, cap: 2, createdAt: Date.now() };
+      if(!cache.slots.some(s => s.date === dateStr && s.serviceId === serviceId)) { 
+          const newSlot = { id: uid(), date: dateStr, cap: 2, createdAt: Date.now(), serviceId: serviceId };
           cache.slots.push(newSlot); 
           newSlotsToSync.push(newSlot);
           added++; 
@@ -1904,11 +2090,22 @@ $("#slot-auto-fill-btn")?.addEventListener("click", async () => {
            await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(s) });
        }
        renderSlots(); 
-       toast(`✅ ${toFa(added)} روز به لیست اضافه شد.`);
+       toast(`✅ ${toFa(added)} روز برای این دستگاه اضافه شد.`);
    } else {
-       toast("تمام ۳۰ روز آینده از قبل ثبت شده‌اند.");
+       toast("تمام ۳۰ روز آینده برای این دستگاه از قبل ثبت شده‌اند.");
    }
 });
+
+window.toggleCustomUnit = function(prefix) {
+    const sel = document.getElementById(`${prefix}-srv-unit`);
+    const customInput = document.getElementById(`${prefix}-srv-unit-custom`);
+    if(sel.value === 'custom') {
+        customInput.style.display = 'block';
+        customInput.focus();
+    } else {
+        customInput.style.display = 'none';
+    }
+}
 
 function renderAdminServices() {
   const cfg = getConfig(); 
@@ -2006,7 +2203,20 @@ window.openEditService = function(id) {
   document.getElementById("edit-srv-id").value = srv.id;
   document.getElementById("edit-srv-name").value = srv.name;
   document.getElementById("edit-srv-rate").value = srv.rate;
-  document.getElementById("edit-srv-unit").value = srv.unit;
+  
+  const standardUnits = ['hectare', 'hour', 'meter', '1000m2', '1000L'];
+  const unitSelect = document.getElementById("edit-srv-unit");
+  const unitCustom = document.getElementById("edit-srv-unit-custom");
+  
+  if(standardUnits.includes(srv.unit)) {
+      unitSelect.value = srv.unit;
+      unitCustom.style.display = 'none';
+  } else {
+      unitSelect.value = 'custom';
+      unitCustom.style.display = 'block';
+      unitCustom.value = srv.unit; 
+  }
+
   document.getElementById("edit-srv-type").value = srv.type;
   
   const editSelect = document.getElementById("edit-srv-region");
@@ -2025,8 +2235,11 @@ document.getElementById("save-edit-srv-btn")?.addEventListener("click", async ()
   const id = document.getElementById("edit-srv-id").value;
   const name = document.getElementById("edit-srv-name").value.trim();
   const rate = +toEn(document.getElementById("edit-srv-rate").value) || 0;
-  const unit = document.getElementById("edit-srv-unit").value.trim(); 
   const type = document.getElementById("edit-srv-type").value;
+  
+  const unitSelect = document.getElementById("edit-srv-unit").value;
+  const unit = unitSelect === 'custom' ? document.getElementById("edit-srv-unit-custom").value.trim() : unitSelect;
+  
   const selectedRegions = Array.from(document.getElementById("edit-srv-region").selectedOptions).map(opt => opt.value);
   const region = selectedRegions.join(",");
   
@@ -2051,8 +2264,11 @@ document.getElementById("save-edit-srv-btn")?.addEventListener("click", async ()
 document.getElementById('srv-add-btn')?.addEventListener('click', async () => {
   const name = document.getElementById('srv-name').value.trim(); 
   const rate = +toEn(document.getElementById('srv-rate').value) || 0;
-  const unit = document.getElementById('srv-unit').value.trim(); 
   const type = document.getElementById('srv-type').value; 
+  
+  const unitSelect = document.getElementById('srv-unit').value;
+  const unit = unitSelect === 'custom' ? document.getElementById('srv-unit-custom').value.trim() : unitSelect;
+  
   const selectedRegions = Array.from(document.getElementById("srv-region").selectedOptions).map(opt => opt.value);
   const region = selectedRegions.join(",");
   
@@ -2064,7 +2280,9 @@ document.getElementById('srv-add-btn')?.addEventListener('click', async () => {
   
   document.getElementById('srv-name').value = ""; 
   document.getElementById('srv-rate').value = "1";
-  document.getElementById('srv-unit').value = "";
+  document.getElementById('srv-unit').value = "hectare";
+  document.getElementById('srv-unit-custom').value = "";
+  document.getElementById('srv-unit-custom').style.display = "none";
   Array.from(document.getElementById("srv-region").options).forEach(opt => opt.selected = false);
   
   renderAdminServices(); toast("✅ خدمت اضافه شد");
@@ -2193,26 +2411,22 @@ document.getElementById('guest-btn')?.addEventListener('click', () => {
     showScreen("home"); 
 });
 
-// 🚀 تابع راه‌اندازی اولیه (Boot)
 (async function boot(){
   await loadAll();
   if (isCustomerVerified() || isGuest()) { document.getElementById('welcome-overlay').classList.add('hidden'); }
   
   const c = getConfig();
   
-  // ۱. پر کردن استان‌ها در فرم ثبت نام همکار
   const ptnProv = $("#ptn-reg-prov");
   if(ptnProv) {
       ptnProv.innerHTML = '<option value="">انتخاب</option>' + c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
   }
 
-  // ۲. پر کردن استان‌ها در فرم افزودن خدمت (چند انتخابی)
   const srvRegion = $("#srv-region");
   if(srvRegion) {
       srvRegion.innerHTML = c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
   }
 
-  // ۳. پر کردن استان‌ها در مودال ویرایش خدمت (چند انتخابی)
   const editSrvRegion = $("#edit-srv-region");
   if(editSrvRegion) {
       editSrvRegion.innerHTML = c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
