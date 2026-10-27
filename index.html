@@ -397,8 +397,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     </div>
   </div>
 </div>
-  </section>
-  <section class="screen" id="screen-order-drone">
+</section>
+<section class="screen" id="screen-order-drone">
 <div class="panel">
 <div class="panel-head"><div><h3>ثبت سفارش سم‌پاشی هوایی</h3><p>اطلاعات مزرعه خود را برای پرواز پهپاد وارد کنید.</p></div></div>
 <form id="drone-order-form" novalidate>
@@ -441,39 +441,46 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 
 <section class="screen" id="screen-order-machinery">
 <div class="panel">
-<div class="panel-head"><div><h3>ثبت سفارش خدمات مکانیزاسیون</h3><p>می‌توانید همزمان چند عملیات را از منوی زیر انتخاب کنید.</p></div></div>
+<div class="panel-head"><div><h3>ثبت سفارش خدمات مکانیزاسیون</h3><p>لطفاً مراحل را به ترتیب طی کنید.</p></div></div>
 <form id="machinery-order-form" novalidate>
 <div class="form-grid">
   
-  <div class="field-wrap span-2" style="background:var(--b50); padding:16px; border-radius:12px; border:1px solid var(--b200);">
-    <label style="color:var(--b800); font-size:14px; font-weight:800; margin-bottom:10px; display:block;">🚜 عملیات مورد نیاز را انتخاب کنید *</label>
+  <!-- مرحله ۱: انتخاب دسته‌بندی -->
+  <div class="field-wrap span-2">
+    <label style="font-size:14px; font-weight:800; color:var(--b800); margin-bottom:8px;">۱. نوع عملیات را انتخاب کنید *</label>
+    <div id="mach-categories" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:10px;">
+      <!-- دکمه‌ها با جاوااسکریپت پر می‌شوند -->
+    </div>
+  </div>
+
+  <!-- مرحله ۲: انتخاب ادوات (بعد از انتخاب دسته ظاهر می‌شود) -->
+  <div class="field-wrap span-2" id="mach-services-wrapper" style="display:none; background:var(--b50); padding:16px; border-radius:12px; border:1px solid var(--b200); margin-top:10px;">
+    <label style="color:var(--b800); font-size:14px; font-weight:800; margin-bottom:10px; display:block;">۲. دستگاه/خدمت مورد نیاز را انتخاب کنید *</label>
     <select id="machinery-services-select" class="ltr" style="width:100%; height:46px; padding:0 12px; border-radius:10px; border:1.5px solid var(--b300); background:var(--sur); font-weight:700; color:var(--i900); cursor:pointer;">
-      <option value="">در حال بارگذاری...</option>
+      <option value="">ابتدا یک دستگاه انتخاب کنید...</option>
     </select>
     <span class="error" data-error-for="machinery-services" style="display:block; margin-top:8px;"></span>
     <div id="selected-services-chips" style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;"></div>
   </div>
 
-  <div class="field-wrap span-2" style="background:var(--inset); padding:12px; border-radius:12px; border:1px solid var(--ln);">
-    <p style="font-size:12px; color:var(--i500); margin:0 0 10px;">توجه: مساحت/حجم را بر اساس واحد انتخاب شده وارد کنید. سیستم به صورت خودکار محاسبه می‌کند.</p>
-    <div style="display:flex; gap:10px; align-items:flex-end;">
-      <div class="field-wrap" style="flex:2;">
-        <label for="mach-area">مقدار *</label>
-        <input id="mach-area" name="area" required inputmode="decimal" class="ltr" type="text" value="10000">
-        <span class="error" data-error-for="mach-area"></span>
-      </div>
-      <div class="field-wrap" style="flex:1;">
-        <label for="mach-area-unit">واحد *</label>
-        <select id="mach-area-unit" name="areaUnit" style="padding:12px 14px; height:46px; border:1px solid var(--ln2); border-radius:10px; background:var(--sur); font-size:13.5px;">
-          <option value="m2">متر مربع</option>
-          <option value="ha">هکتار (۱۰,۰۰۰ متر)</option>
-          <option value="1000m2">هزار متر مربع (۱/۱۰ هکتار)</option>
-          <option value="1000L">هزار لیتر (تانکر)</option>
-        </select>
-      </div>
+  <!-- مرحله ۳: مساحت -->
+  <div class="field-wrap span-2" style="background:var(--inset); padding:12px; border-radius:12px; border:1px solid var(--ln); margin-top:10px;">
+    <p style="font-size:12px; color:var(--i500); margin:0 0 10px;">۳. مساحت/حجم/زمان مورد نیاز را وارد کنید. سیستم به صورت خودکار بر اساس واحد هر دستگاه محاسبه می‌کند.</p>
+    <div class="field-wrap">
+      <label for="mach-area">مقدار / مساحت *</label>
+      <input id="mach-area" name="area" required inputmode="decimal" class="ltr" type="text" value="10000">
+      <span class="hint">مثال: اگر واحد دستگاه «هکتار» است، عدد را به متر وارد کنید. اگر «تن» است، وزن را وارد کنید.</span>
+      <span class="error" data-error-for="mach-area"></span>
     </div>
   </div>
 
+  <!-- محاسبه قیمت -->
+  <div class="field-wrap span-2">
+    <div class="price-card" style="margin-top:0;"><div><small>برآورد هزینه</small><div class="rate">جمع کل عملیات انتخاب شده</div></div><strong id="mach-total-price">—</strong></div>
+  </div>
+
+  <!-- مرحله ۴: مشخصات مشتری -->
+  <div class="field-wrap span-2" style="margin-top:10px;"><h4 style="margin:0; font-size:14px; color:var(--b800);">۴. مشخصات سفارش‌دهنده</h4></div>
   <div class="field-wrap"><label for="mach-cust">نام و نام خانوادگی *</label><input id="mach-cust" name="cust" required placeholder="علی محمدی"><span class="error" data-error-for="mach-cust"></span></div>
   <div class="field-wrap"><label for="mach-phone">موبایل *</label><input id="mach-phone" name="phone" required inputmode="numeric" class="ltr" placeholder="09123456789" maxlength="11"><span class="error" data-error-for="mach-phone"></span></div>
   <div class="field-wrap"><label for="mach-province">استان *</label><select id="mach-province" name="province" required><option value="">انتخاب</option></select><span class="error" data-error-for="mach-province"></span></div>
@@ -492,8 +499,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   <div class="field-wrap span-2"><label for="mach-slot-select">🗓️ تاریخ *</label><select id="mach-slot-select" name="slotId" required><option value="">در حال بارگذاری...</option></select><span class="hint" id="mach-slot-hint"></span><span class="error" data-error-for="mach-slot-select"></span></div>
   <div class="field-wrap span-2"><label for="mach-notes">توضیحات</label><textarea id="mach-notes" name="notes" rows="3"></textarea></div>
 </div>
-<div class="price-card"><div><small>برآورد هزینه</small><div class="rate">جمع کل عملیات انتخاب شده</div></div><strong id="mach-total-price">—</strong></div>
-<div class="actions"><button class="btn btn-gold" type="submit">ثبت سفارش ادوات</button><button class="btn btn-light" type="button" data-go="home">بازگشت</button></div>
+
+<div class="actions"><button class="btn btn-gold" type="submit">ثبت نهایی و پرداخت</button><button class="btn btn-light" type="button" data-go="home">بازگشت</button></div>
 </form>
 </div>
 </section>
@@ -852,8 +859,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   </div>
 </div>
 </div>
-  </section>
-  <!-- ==================== پنل همکار ==================== -->
+</section>
+<!-- ==================== پنل همکار ==================== -->
 <section class="screen" id="screen-partner">
 <div id="partner-login-view" class="auth-wrap">
 <div class="panel auth-panel">
@@ -962,7 +969,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
-<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۷.۰ · پلتفرم جامع کشاورزی</div>
+<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۸.۰ · پلتفرم جامع کشاورزی</div>
 </main>
 </div>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
@@ -1204,7 +1211,7 @@ function showScreen(name){
   if(name==="partner"){const lv=$("#partner-login-view"),pv=$("#partner-panel-view");if(lv)lv.hidden=false;if(pv)pv.hidden=true;}
   
   if(name==="order-drone"){ refreshDroneSelects(); updateDronePrice(); autoFillOrderForm('drone'); }
-  if(name==="order-machinery"){ renderMachineryServices(); refreshMachSelects(); updateMachPrice(); autoFillOrderForm('mach'); }
+  if(name==="order-machinery"){ renderMachineryServices(); refreshMachSelects(); autoFillOrderForm('mach'); }
   
   if(name==="history")renderHistory();
   if(name==="profile")renderProfile();
@@ -1476,40 +1483,69 @@ function updateDronePrice() {
 $("#drone-area")?.addEventListener("input", updateDronePrice);
 $("#drone-province")?.addEventListener("change", updateDronePrice);
 
+// ---------------- فرم مرحله‌به‌مرحله مکانیزاسیون ----------------
 let selectedMachinery = [];
-function renderMachineryServices() {
-  const c = getConfig();
-  const mechServices = c.services.filter(s => (s.type === 'machinery' || s.type === 'other') && !s.hidden);
-  const select = $("#machinery-services-select"); 
-  if(!select) return;
-  
-  const categories = {
-    land_prep: "🚜 آماده‌سازی زمین", planting: "🌱 کاشت", care: "💧 رسیدگی", harvest: "🌾 برداشت", other: "⚙️ سایر"
-  };
+let currentMachCategory = "";
 
-  let optionsHtml = '<option value="">➕ افزودن خدمت به لیست...</option>';
-  for (const [catKey, catName] of Object.entries(categories)) {
-      const catServices = mechServices.filter(s => (s.category || 'other') === catKey);
-      if (catServices.length > 0) {
-          optionsHtml += `<optgroup label="${catName}">`;
-          optionsHtml += catServices.map(s => {
-              const regionTxt = s.region ? ` - ${s.region.split(',').join('، ')}` : '';
-              return `<option value="${s.id}">${esc(s.name)}${regionTxt} (${fmt(s.rate)} تومان / ${esc(s.unit)})</option>`;
-          }).join("");
-          optionsHtml += `</optgroup>`;
-      }
-  }
-  select.innerHTML = optionsHtml;
+function renderMachineryServices() {
+  const categories = [
+    { id: 'land_prep', name: 'آماده‌سازی زمین', icon: '🚜' },
+    { id: 'planting', name: 'کاشت', icon: '🌱' },
+    { id: 'care', name: 'رسیدگی', icon: '💧' },
+    { id: 'harvest', name: 'برداشت', icon: '🌾' }
+  ];
+
+  const catBox = document.getElementById("mach-categories");
+  if(!catBox) return;
+
+  catBox.innerHTML = categories.map(c => `
+    <div class="category-btn" onclick="selectMachCategory('${c.id}')" id="cat-btn-${c.id}" 
+         style="background:var(--sur); border:1.5px solid var(--ln2); border-radius:12px; padding:16px; text-align:center; cursor:pointer; transition:all 0.2s;">
+      <div style="font-size:28px; margin-bottom:8px;">${c.icon}</div>
+      <strong style="font-size:13px; color:var(--i900);">${c.name}</strong>
+    </div>
+  `).join("");
+
+  document.getElementById("mach-services-wrapper").style.display = "none";
+  selectedMachinery = [];
+  currentMachCategory = "";
+  renderSelectedChips();
+  updateMachPrice();
+}
+
+window.selectMachCategory = function(catId) {
+  currentMachCategory = catId;
   
+  document.querySelectorAll('.category-btn').forEach(btn => {
+    btn.style.borderColor = 'var(--ln2)';
+    btn.style.background = 'var(--sur)';
+  });
+  const activeBtn = document.getElementById(`cat-btn-${catId}`);
+  if(activeBtn) {
+    activeBtn.style.borderColor = 'var(--b500)';
+    activeBtn.style.background = 'var(--b50)';
+  }
+
+  document.getElementById("mach-services-wrapper").style.display = "block";
+
+  const c = getConfig();
+  const catServices = c.services.filter(s => (s.type === 'machinery' || s.type === 'other') && !s.hidden && (s.category || 'other') === catId);
+  
+  const select = $("#machinery-services-select");
+  select.innerHTML = '<option value="">➕ افزودن دستگاه به لیست...</option>' + 
+    catServices.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join("");
+
   selectedMachinery = [];
   renderSelectedChips();
+  updateMachPrice();
 }
+
 function renderSelectedChips() {
   const box = $("#selected-services-chips");
   if(!box) return;
   
   if(selectedMachinery.length === 0) {
-    box.innerHTML = '<span style="font-size:12px; color:var(--i500);">هنوز خدمتی انتخاب نشده است.</span>';
+    box.innerHTML = '<span style="font-size:12px; color:var(--i500);">هنوز دستگاهی انتخاب نشده است.</span>';
   } else {
     const c = getConfig();
     box.innerHTML = selectedMachinery.map(id => {
@@ -1524,11 +1560,13 @@ function renderSelectedChips() {
     }).join("");
   }
 }
+
 window.removeMachinery = function(id) {
   selectedMachinery = selectedMachinery.filter(x => x !== id);
   renderSelectedChips();
   updateMachPrice();
 }
+
 $("#machinery-services-select")?.addEventListener("change", function() {
   const val = this.value;
   if(!val) return;
@@ -1539,6 +1577,32 @@ $("#machinery-services-select")?.addEventListener("change", function() {
   }
   this.value = "";
 });
+
+function updateMachPrice() {
+  const a = $("#mach-area"), p = $("#mach-total-price"); 
+  if(!a || !p) return;
+  
+  const rawVal = Math.max(0, Number(toEn(a.value).replace(/[^\d.]/g,""))||0); 
+  
+  const c = getConfig();
+  let total = 0;
+  
+  selectedMachinery.forEach(id => {
+    const srv = c.services.find(s => s.id === id);
+    if(srv) { 
+      if (srv.unit === 'hectare') {
+          total += (rawVal / 10000) * srv.rate;
+      } else if (srv.unit === '1000m2') {
+          total += (rawVal / 1000) * srv.rate;
+      } else {
+          total += rawVal * srv.rate;
+      }
+    }
+  });
+  
+  p.textContent = total > 0 ? fmtT(total) : "—";
+}
+$("#mach-area")?.addEventListener("input", updateMachPrice);
 
 function refreshMachSelects() {
   const c = getConfig();
@@ -1553,37 +1617,7 @@ function refreshMachSelects() {
   if(sel) sel.innerHTML = free.length ? '<option value="">انتخاب تاریخ</option>' + free.map(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return `<option value="${s.id}">${toFa(s.date)} (${toFa(s.cap-b)} ظرفیت)</option>`; }).join("") : '<option value="">تاریخی موجود نیست</option>';
 }
 
-function updateMachPrice() {
-  const a = $("#mach-area"), unitSelect = $("#mach-area-unit"), p = $("#mach-total-price"); 
-  if(!a || !p || !unitSelect) return;
-  
-  const rawVal = Math.max(0, Number(toEn(a.value).replace(/[^\d.]/g,""))||0); 
-  const unit = unitSelect.value;
-  
-  let areaVal = rawVal;
-  if(unit === 'ha') areaVal = rawVal * 10000;
-  else if(unit === '1000m2') areaVal = rawVal * 1000; 
-  
-  const ha = m2ToHa(areaVal); 
-  
-  const c = getConfig();
-  let total = 0;
-  
-  selectedMachinery.forEach(id => {
-    const srv = c.services.find(s => s.id === id);
-    if(srv) { 
-      if (srv.unit === 'hectare') total += ha * srv.rate;
-      else if (srv.unit === 'meter') total += rawVal * srv.rate; 
-      else if (srv.unit === '1000m2') total += rawVal * srv.rate; 
-      else if (srv.unit === '1000L') total += rawVal * srv.rate; 
-      else total += rawVal * srv.rate; 
-    }
-  });
-  p.textContent = total > 0 ? fmtT(total) : "—";
-}
-$("#mach-area")?.addEventListener("input", updateMachPrice);
-$("#mach-area-unit")?.addEventListener("change", updateMachPrice);
-
+// ------------------ موقعیت مکانی ------------------
 $("#drone-get-location-btn")?.addEventListener("click", () => {
   const btn = $("#drone-get-location-btn"), txt = $("#drone-loc-text");
   if (!navigator.geolocation) return toast("مرورگر شما از موقعیت‌یاب پشتیبانی نمی‌کند.", true);
@@ -1597,6 +1631,7 @@ $("#mach-get-location-btn")?.addEventListener("click", () => {
   navigator.geolocation.getCurrentPosition((pos) => { const lat = pos.coords.latitude.toFixed(6), lng = pos.coords.longitude.toFixed(6); $("#mach-loc-coords").value = `${lat},${lng}`; txt.textContent = `✅ ثبت شد (${lat}, ${lng})`; btn.disabled = false; btn.style.borderColor = "var(--b500)"; }, (err) => { txt.textContent = "دریافت موقعیت از GPS"; btn.disabled = false; toast("دسترسی رد شد.", true); }, { enableHighAccuracy: true, timeout: 10000 });
 });
 
+// ------------------ OTP ------------------
 function isOtpTimeAllowed() {
   const now = new Date(); const tehranTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Tehran"})); const hour = tehranTime.getHours();
   return hour >= 8 && hour < 23;
@@ -1641,6 +1676,7 @@ async function startPhoneVerification(phone) {
   }
 }
 
+// ------------------ ثبت سفارش پهپاد ------------------
 document.getElementById('drone-order-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const termsCheckbox = $("#drone-terms-checkbox");
@@ -1676,6 +1712,7 @@ document.getElementById('drone-order-form')?.addEventListener('submit', async (e
   PAY_ORDER = order; toast(`✅ سفارش پهپاد ثبت شد.`); showScreen("payment");
 });
 
+// ------------------ ثبت سفارش مکانیزاسیون (Wizard) ------------------
 document.getElementById('machinery-order-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
   if(selectedMachinery.length === 0) return toast("حداقل یک عملیات را انتخاب کنید", true);
@@ -1684,23 +1721,27 @@ document.getElementById('machinery-order-form')?.addEventListener('submit', asyn
   
   const c = getConfig(); 
   const rawVal = Math.max(0, Number(toEn($("#mach-area").value).replace(/[^\d.]/g,""))||0);
-  const unit = $("#mach-area-unit").value;
-  let areaVal = rawVal;
-  if(unit === 'ha') areaVal = rawVal * 10000;
-  else if(unit === '1000m2') areaVal = rawVal * 1000;
-  const ha = m2ToHa(areaVal); 
   
   const slot = cache.slots.find(x => x.id === $("#mach-slot-select").value);
   let totalAmount = 0; let names = [];
+  let haArea = 0;
   
-  selectedMachinery.forEach(id => {
+  // برای ذخیره در دیتابیس، مساحت کل (به هکتار) رو محاسبه میکنیم
+  selectedMachinery.forEach((id, index) => {
     const srv = c.services.find(s => s.id === id);
     if(srv) { 
-      if (srv.unit === 'hectare') totalAmount += ha * srv.rate;
-      else if (srv.unit === 'meter') totalAmount += rawVal * srv.rate;
-      else if (srv.unit === '1000m2') totalAmount += rawVal * srv.rate;
-      else if (srv.unit === '1000L') totalAmount += rawVal * srv.rate;
-      else totalAmount += rawVal * srv.rate;
+      if (srv.unit === 'hectare') {
+          const thisHa = rawVal / 10000;
+          totalAmount += thisHa * srv.rate;
+          if(index === 0) haArea = thisHa; // فقط برای ذخیره در فیلد area
+      } else if (srv.unit === '1000m2') {
+          const thisHa = rawVal / 1000;
+          totalAmount += thisHa * srv.rate;
+          if(index === 0) haArea = thisHa;
+      } else {
+          totalAmount += rawVal * srv.rate;
+          if(index === 0) haArea = rawVal; // اگر هکتار نبود، عدد خام رو ذخیره میکنیم
+      }
       names.push(srv.name);
     }
   });
@@ -1708,7 +1749,7 @@ document.getElementById('machinery-order-form')?.addEventListener('submit', asyn
   const order = { 
     id: uid(), code: `SP-${Date.now().toString().slice(-4)}`, name: $("#mach-cust").value.trim(), phone: phone, 
     province: $("#mach-province").value, city: $("#mach-city").value.trim(), village: $("#mach-village").value.trim(), 
-    crop: $("#mach-crop").value, area: ha, areaM2: areaVal, notes: $("#mach-notes").value.trim(), 
+    crop: $("#mach-crop").value, area: haArea, areaM2: rawVal, notes: $("#mach-notes").value.trim(), 
     amount: totalAmount, serviceType: selectedMachinery.join(","), serviceName: names.join(" + "), 
     status: "pending", createdAt: Date.now(), slotId: slot.id, slotDate: slot.date, location: $("#mach-loc-coords").value
   };
@@ -1718,10 +1759,11 @@ document.getElementById('machinery-order-form')?.addEventListener('submit', asyn
   
   setCustomerProfile({ name: order.name, province: order.province, city: order.city, village: order.village, crop: order.crop });
   
-  refreshHomeStats(); e.target.reset(); $("#mach-area").value = "10000"; updateMachPrice(); selectedMachinery = []; renderMachineryServices();
+  refreshHomeStats(); e.target.reset(); $("#mach-area").value = "10000"; selectedMachinery = []; renderMachineryServices();
   PAY_ORDER = order; toast(`✅ سفارش ادوات ثبت شد.`); showScreen("payment");
 });
 
+// ------------------ پرداخت و فیش ------------------
 function renderPayInfo() {
   const el = $("#pay-info"); if(!el) return;
   const o = PAY_ORDER;
@@ -1739,6 +1781,7 @@ async function saveReceiptData(orderId,file){
     } catch(e){ resolve(false); }
   });
 }
+
 document.getElementById('payment-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const fileInput = $("#receipt"); const file = fileInput?.files?.[0];
@@ -2166,21 +2209,11 @@ $("#slot-auto-fill-btn")?.addEventListener("click", async () => {
    }
 });
 
-window.toggleCustomUnit = function(prefix) {
-    const sel = document.getElementById(`${prefix}-srv-unit`);
-    const customInput = document.getElementById(`${prefix}-srv-unit-custom`);
-    if(sel.value === 'custom') {
-        customInput.style.display = 'block';
-        customInput.focus();
-    } else {
-        customInput.style.display = 'none';
-    }
-}
-
 function renderAdminServices() {
   const cfg = getConfig(); 
   const listContainer = document.getElementById('srv-list-container'); 
   const pricingTbody = document.getElementById('pricing-tbody');
+  
   const activeServices = cfg.services.filter(s => !s.hidden);
   
   if(!activeServices.length) { 
@@ -2189,53 +2222,79 @@ function renderAdminServices() {
     return; 
   }
 
-  const catFa = (c) => {
-      const map = { 'land_prep': 'آماده‌سازی', 'planting': 'کاشت', 'care': 'رسیدگی', 'harvest': 'برداشت', 'other': 'سایر' };
-      return map[c] || 'سایر';
+  const categories = {
+    land_prep: "🚜 آماده‌سازی زمین",
+    planting: "🌱 کاشت",
+    care: "💧 رسیدگی (سمپاشی، آبیاری...)",
+    harvest: "🌾 برداشت",
+    other: "⚙️ سایر خدمات"
   };
-  
+
   const renderRegionTags = (r) => {
       if(!r) return '<span style="color:var(--i400);">سراسری</span>';
       return r.split(',').map(reg => `<span style="color:var(--b600); background:var(--b50); padding:2px 6px; border-radius:4px; margin-left:4px; display:inline-block; margin-bottom:4px; font-size:11px;">📍 ${esc(reg)}</span>`).join("");
   };
 
   if (listContainer) {
-    listContainer.innerHTML = activeServices.map(s => `
-      <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; background:var(--sur); border:1px solid var(--ln); border-radius:12px; padding:12px 16px;">
-        <div style="flex:1; min-width:200px; font-weight:700; font-size:13px; color:var(--i900);">
-          ${esc(s.name)} 
-          <small style="color:var(--i500); font-weight:normal; display:block; margin-top:4px;">
-            واحد: ${esc(s.unit)} | دسته: ${catFa(s.category)} | ${s.type === 'drone' ? 'پهپاد' : 'مکانیزاسیون'}
-          </small>
-          <div style="margin-top:6px;">${renderRegionTags(s.region)}</div>
-        </div>
-        <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-          <input type="text" class="ltr" style="width:100px; padding:8px; height:36px; border:1px solid var(--ln2); border-radius:8px; text-align:center; font-weight:bold;" value="${s.rate}" id="srv-rate-${s.id}">
-          <button class="btn btn-light btn-sm" onclick="updateServiceRate('${s.id}')" title="ذخیره سریع نرخ" style="height:36px; width:36px; padding:0; display:grid; place-items:center;"><svg class="icon" style="width:16px; height:16px;"><use href="#i-save"/></svg></button>
-          <button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش کامل" style="height:36px; width:36px; padding:0; display:grid; place-items:center;"><svg class="icon" style="width:16px; height:16px;"><use href="#i-edit"/></svg></button>
-          <button class="btn btn-danger btn-sm" onclick="deleteService('${s.id}')" title="حذف" style="height:36px; width:36px; padding:0; display:grid; place-items:center;"><svg class="icon" style="width:16px; height:16px;"><use href="#i-trash"/></svg></button>
-        </div>
-      </div>
-    `).join("");
+    let listHtml = "";
+    
+    for (const [catKey, catName] of Object.entries(categories)) {
+        const catServices = activeServices.filter(s => (s.category || 'other') === catKey);
+        
+        if (catServices.length > 0) {
+            listHtml += `<div style="margin-top:16px; margin-bottom:8px; font-weight:900; color:var(--b800); font-size:14px; border-bottom:2px solid var(--b200); padding-bottom:4px;">${catName}</div>`;
+            
+            listHtml += catServices.map(s => `
+              <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; background:var(--sur); border:1px solid var(--ln); border-radius:12px; padding:12px 16px; margin-bottom:8px;">
+                <div style="flex:1; min-width:200px; font-weight:700; font-size:13px; color:var(--i900);">
+                  ${esc(s.name)} 
+                  <small style="color:var(--i500); font-weight:normal; display:block; margin-top:4px;">
+                    واحد: ${esc(s.unit)} | نوع: ${s.type === 'drone' ? 'پهپاد' : 'مکانیزاسیون'}
+                  </small>
+                  <div style="margin-top:6px;">${renderRegionTags(s.region)}</div>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+                  <input type="text" class="ltr" style="width:100px; padding:8px; height:36px; border:1px solid var(--ln2); border-radius:8px; text-align:center; font-weight:bold;" value="${s.rate}" id="srv-rate-${s.id}">
+                  <button class="btn btn-light btn-sm" onclick="updateServiceRate('${s.id}')" title="ذخیره سریع نرخ" style="height:36px; width:36px; padding:0; display:grid; place-items:center;">
+                    <svg class="icon" style="width:16px; height:16px;"><use href="#i-save"/></svg>
+                  </button>
+                  <button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش کامل" style="height:36px; width:36px; padding:0; display:grid; place-items:center;">
+                    <svg class="icon" style="width:16px; height:16px;"><use href="#i-edit"/></svg>
+                  </button>
+                  <button class="btn btn-danger btn-sm" onclick="deleteService('${s.id}')" title="حذف" style="height:36px; width:36px; padding:0; display:grid; place-items:center;">
+                    <svg class="icon" style="width:16px; height:16px;"><use href="#i-trash"/></svg>
+                  </button>
+                </div>
+              </div>
+            `).join("");
+        }
+    }
+    listContainer.innerHTML = listHtml;
   }
 
   if (pricingTbody) {
-    pricingTbody.innerHTML = activeServices.map(s => `
+    pricingTbody.innerHTML = activeServices.map(s => {
+      const catName = categories[s.category || 'other'].split(' ')[1]; 
+      return `
       <tr>
-        <td><strong>${esc(s.name)}</strong></td>
+        <td><strong>${esc(s.name)}</strong><br><small style="color:var(--i500)">${catName}</small></td>
         <td>${renderRegionTags(s.region)}</td>
         <td>${esc(s.unit)}</td>
         <td>
           <div style="display:flex; align-items:center; gap:6px;">
             <input type="text" class="ltr" style="width:100px; padding:6px; border:1px solid var(--ln2); border-radius:6px; text-align:center; font-weight:bold;" value="${s.rate}" id="price-tbl-${s.id}">
-            <button class="icon-mini" onclick="updateServiceRateFromTable('${s.id}')" title="ذخیره" style="width:28px; height:28px;"><svg class="icon" style="width:14px; height:14px;"><use href="#i-save"/></svg></button>
+            <button class="icon-mini" onclick="updateServiceRateFromTable('${s.id}')" title="ذخیره" style="width:28px; height:28px;">
+              <svg class="icon" style="width:14px; height:14px;"><use href="#i-save"/></svg>
+            </button>
           </div>
         </td>
         <td>
-          <button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش کامل" style="height:32px; padding:0 10px;"><svg class="icon" style="width:14px; height:14px;"><use href="#i-edit"/></svg> ویرایش</button>
+          <button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش کامل" style="height:32px; padding:0 10px;">
+             <svg class="icon" style="width:14px; height:14px;"><use href="#i-edit"/></svg> ویرایش
+          </button>
         </td>
       </tr>
-    `).join("");
+    `}).join("");
   }
 }
 
