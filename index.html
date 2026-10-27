@@ -258,17 +258,30 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
 </svg>
 
+<!-- 🔴 صفحه ورود سه‌گانه -->
 <div id="welcome-overlay">
   <div style="width:80px; height:80px; border-radius:24px; background:linear-gradient(145deg,var(--b500),var(--b700)); color:#fff; display:grid; place-items:center; font-size:36px; margin-bottom:20px; box-shadow:var(--brand);">🌿</div>
   <h2 style="font-size:22px; font-weight:900; color:var(--b800); margin:0 0 10px;">سم‌پاش هوشمند</h2>
-  <p style="font-size:14px; color:var(--i500); margin:0 0 30px; max-width:300px; line-height:1.8;">پلتفرم جامع خدمات کشاورزی. برای ثبت سفارش وارد شوید یا به عنوان مهمان از سایت دیدن کنید.</p>
+  <p style="font-size:14px; color:var(--i500); margin:0 0 30px; max-width:300px; line-height:1.8;">لطفاً نوع ورود خود را انتخاب کنید.</p>
+  
   <div style="width:100%; max-width:320px; display:flex; flex-direction:column; gap:12px;">
-    <button class="btn btn-green" id="welcome-login-btn" style="width:100%; padding:14px; font-size:15px;">
-      <svg class="icon"><use href="#i-sms"/></svg> ورود با شماره موبایل
+    <button class="btn btn-green" onclick="startFarmerLogin()" style="width:100%; padding:14px; font-size:15px; justify-content:center;">
+      <svg class="icon"><use href="#i-leaf"/></svg> ورود کشاورز
     </button>
-    <button class="btn btn-light" style="width:100%; padding:14px; font-size:15px;" id="guest-btn">
-      👀 ورود به عنوان مهمان
+    
+    <button class="btn btn-purple" onclick="startPartnerLogin()" style="width:100%; padding:14px; font-size:15px; justify-content:center;">
+      <svg class="icon"><use href="#i-partner"/></svg> ورود همکاران
     </button>
+    
+    <button class="btn" onclick="startAdminLogin()" style="width:100%; padding:14px; font-size:15px; justify-content:center; background:#24352d; color:#fff;">
+      <svg class="icon"><use href="#i-shield"/></svg> ورود مدیریت
+    </button>
+    
+    <div style="margin-top: 10px; padding-top: 15px; border-top: 1px dashed var(--ln);">
+      <button class="btn btn-light" id="guest-btn" style="width:100%; padding:10px; font-size:13px; justify-content:center;">
+        👀 ورود موقت (مهمان)
+      </button>
+    </div>
   </div>
 </div>
 
@@ -299,6 +312,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </aside>
 
 <main class="main">
+<!-- 🔴 هدر با دکمه خروج -->
 <header style="display:flex; flex-direction:row; justify-content:space-between; align-items:center; width:100%; padding:10px 16px; background:var(--sur); border-bottom:1px solid var(--ln); position:sticky; top:0; z-index:var(--z-header); box-sizing:border-box; height:70px; margin:0; direction:rtl;">
   <div style="display:flex; align-items:center;">
     <button id="mobile-menu-btn" class="mobile-menu-btn" style="background:none; border:none; padding:0; cursor:pointer; color:var(--i900); display:none;">
@@ -306,14 +320,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     </button>
   </div>
   <div style="display:flex; flex-direction:row; align-items:center; gap:22px;">
-    <div data-go="admin" style="display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; color:var(--i800);">
-      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-shield"/></svg>
-      <span style="font-size:11px; font-weight:800; margin-top:4px;">مدیریت</span>
-    </div>
-    <div data-go="partner" style="display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; color:var(--i800);">
-      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-partner"/></svg>
-      <span style="font-size:11px; font-weight:800; margin-top:4px;">همکاران</span>
-    </div>
     <div id="header-logout-btn" onclick="logoutCustomer()" hidden style="display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; color:var(--dng);">
       <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-logout"/></svg>
       <span style="font-size:11px; font-weight:800; margin-top:4px;">خروج</span>
@@ -445,15 +451,12 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <form id="machinery-order-form" novalidate>
 <div class="form-grid">
   
-  <!-- مرحله ۱: انتخاب دسته‌بندی -->
   <div class="field-wrap span-2">
     <label style="font-size:14px; font-weight:800; color:var(--b800); margin-bottom:8px;">۱. نوع عملیات را انتخاب کنید *</label>
     <div id="mach-categories" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:10px;">
-      <!-- دکمه‌ها با جاوااسکریپت پر می‌شوند -->
     </div>
   </div>
 
-  <!-- مرحله ۲: انتخاب ادوات (بعد از انتخاب دسته ظاهر می‌شود) -->
   <div class="field-wrap span-2" id="mach-services-wrapper" style="display:none; background:var(--b50); padding:16px; border-radius:12px; border:1px solid var(--b200); margin-top:10px;">
     <label style="color:var(--b800); font-size:14px; font-weight:800; margin-bottom:10px; display:block;">۲. دستگاه/خدمت مورد نیاز را انتخاب کنید *</label>
     <select id="machinery-services-select" class="ltr" style="width:100%; height:46px; padding:0 12px; border-radius:10px; border:1.5px solid var(--b300); background:var(--sur); font-weight:700; color:var(--i900); cursor:pointer;">
@@ -463,7 +466,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     <div id="selected-services-chips" style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;"></div>
   </div>
 
-  <!-- مرحله ۳: مساحت -->
   <div class="field-wrap span-2" style="background:var(--inset); padding:12px; border-radius:12px; border:1px solid var(--ln); margin-top:10px;">
     <p style="font-size:12px; color:var(--i500); margin:0 0 10px;">۳. مساحت/حجم/زمان مورد نیاز را وارد کنید. سیستم به صورت خودکار بر اساس واحد هر دستگاه محاسبه می‌کند.</p>
     <div class="field-wrap">
@@ -474,12 +476,10 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     </div>
   </div>
 
-  <!-- محاسبه قیمت -->
   <div class="field-wrap span-2">
     <div class="price-card" style="margin-top:0;"><div><small>برآورد هزینه</small><div class="rate">جمع کل عملیات انتخاب شده</div></div><strong id="mach-total-price">—</strong></div>
   </div>
 
-  <!-- مرحله ۴: مشخصات مشتری -->
   <div class="field-wrap span-2" style="margin-top:10px;"><h4 style="margin:0; font-size:14px; color:var(--b800);">۴. مشخصات سفارش‌دهنده</h4></div>
   <div class="field-wrap"><label for="mach-cust">نام و نام خانوادگی *</label><input id="mach-cust" name="cust" required placeholder="علی محمدی"><span class="error" data-error-for="mach-cust"></span></div>
   <div class="field-wrap"><label for="mach-phone">موبایل *</label><input id="mach-phone" name="phone" required inputmode="numeric" class="ltr" placeholder="09123456789" maxlength="11"><span class="error" data-error-for="mach-phone"></span></div>
@@ -600,7 +600,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="field-wrap" style="margin-bottom:12px"><label for="admin-user">نام کاربری</label><input id="admin-user" class="ltr" required autocomplete="username"></div>
 <div class="field-wrap" style="margin-bottom:12px"><label for="admin-pass">رمز</label><input id="admin-pass" class="ltr" type="password" required autocomplete="current-password"></div>
 <div class="field-wrap" style="margin-bottom:12px"><label for="admin-otp">کد امنیتی (Authenticator)</label><input id="admin-otp" class="ltr" inputmode="numeric" maxlength="6" required placeholder="123456"></div>
-<div class="actions" style="margin-top:18px"><button class="btn btn-green" type="submit"><svg class="icon"><use href="#i-shield"/></svg> ورود امن</button><button class="btn btn-light" type="button" data-go="home">انصراف</button></div>
+<div class="actions" style="margin-top:18px"><button class="btn btn-green" type="submit"><svg class="icon"><use href="#i-shield"/></svg> ورود امن</button><button class="btn btn-light" type="button" onclick="startAdminLogin()">بازگشت</button></div>
 </form>
 </div>
 </div>
@@ -663,14 +663,12 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="admin-card">
   <h4>تعیین ظرفیت روزها</h4>
   <div class="admin-grid">
-    
     <div class="field-wrap">
       <label for="slot-service-select">انتخاب دستگاه / خدمت *</label>
       <select id="slot-service-select" style="height:46px; padding:0 10px;">
         <option value="">ابتدا دستگاه را انتخاب کنید</option>
       </select>
     </div>
-
     <div class="field-wrap">
       <label for="slot-date-select">تاریخ (کشویی)</label>
       <select id="slot-date-select" style="height:46px; padding:0 10px; border-radius:10px; border:1px solid var(--ln2); width:100%;">
@@ -737,7 +735,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
         <div class="field-wrap">
           <label>استان‌ها (چند انتخابی)</label>
           <select id="srv-region" multiple style="height: 100px; padding: 10px; font-size:12px;">
-             <!-- گزینه‌ها با JS پر می‌شوند -->
           </select>
           <span style="font-size:11px; color:var(--i500); margin-top:4px;">برای انتخاب چند استان، در موبایل روی گزینه‌ها ضربه بزنید. (خالی = سراسری)</span>
         </div>
@@ -799,9 +796,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     <h4>لیست فایل‌های گالری</h4>
     <div id="kv-admin-videos-list" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:12px;"></div>
   </div>
-</div>
-
-<div class="admin-panel" data-panel="sms">
+  </div>
+  <div class="admin-panel" data-panel="sms">
   <div class="admin-card">
     <h4>📱 ارسال پیامک</h4>
     <div class="admin-grid">
@@ -860,19 +856,19 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </div>
 </section>
+
 <!-- ==================== پنل همکار ==================== -->
 <section class="screen" id="screen-partner">
 <div id="partner-login-view" class="auth-wrap">
 <div class="panel auth-panel">
-<div class="auth-head"><div class="lock-icon" style="background:linear-gradient(145deg,#8b5cf6,#6d28d9)"><svg class="icon"><use href="#i-partner"/></svg></div><h3>پنل همکار</h3></div>
+<div class="auth-head"><div class="lock-icon" style="background:linear-gradient(145deg,#8b5cf6,#6d28d9)"><svg class="icon"><use href="#i-partner"/></svg></div><h3>ورود همکاران</h3></div>
 <div style="display:flex;gap:6px;margin-bottom:18px;background:var(--inset);padding:5px;border-radius:12px">
 <button type="button" id="ptn-tab-login" class="btn btn-purple btn-sm" style="flex:1">ورود</button>
 <button type="button" id="ptn-tab-reg" class="btn btn-light btn-sm" style="flex:1">ثبت‌نام</button>
 </div>
 <form id="partner-login-form" novalidate>
-<div class="field-wrap" style="margin-bottom:12px"><label for="ptn-login-phone">موبایل *</label><input id="ptn-login-phone" class="ltr" required inputmode="numeric" maxlength="11"></div>
-<div class="field-wrap"><label for="ptn-login-pass">رمز *</label><input id="ptn-login-pass" class="ltr" type="password" required></div>
-<div class="actions" style="margin-top:18px"><button class="btn btn-purple" type="submit">ورود</button></div>
+<div class="field-wrap" style="margin-bottom:12px"><label for="ptn-login-phone">موبایل *</label><input id="ptn-login-phone" class="ltr" required inputmode="numeric" maxlength="11" placeholder="09123456789"></div>
+<div class="actions" style="margin-top:18px"><button class="btn btn-purple" type="submit" style="width:100%; justify-content:center;"><svg class="icon"><use href="#i-sms"/></svg> دریافت کد ورود</button></div>
 </form>
 <form id="partner-register-form" novalidate hidden>
 <div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-name">نام *</label><input id="ptn-reg-name" required></div>
@@ -969,7 +965,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </div>
 </section>
 
-<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۸.۰ · پلتفرم جامع کشاورزی</div>
+<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۹.۰ · پلتفرم جامع کشاورزی</div>
 </main>
 </div>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
@@ -1040,7 +1036,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     <div class="field-wrap" style="margin-bottom:20px;">
       <label>استان‌ها (چند انتخابی)</label>
       <select id="edit-srv-region" multiple style="height: 120px; padding: 10px; font-size:12px;">
-        <!-- گزینه‌ها با JS پر می‌شوند -->
       </select>
     </div>
     
@@ -1121,6 +1116,8 @@ const write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 
 const cache={orders:[],partners:[],slots:[],config:null};
 let PAY_ORDER=null;
+let OTP_LOGIN_TARGET = 'farmer'; // 🔴 متغیر برای تشخیص نوع ورود (کشاورز یا همکار)
+
 const getCustomerPhone=()=>read(LS.cust_phone,"");
 const setCustomerPhone=p=>{if(p)write(LS.cust_phone,toEn(p));else localStorage.removeItem(LS.cust_phone);renderCustomerAuth();refreshHomeStats();};
 const getCustomerProfile=()=>read(LS.cust_profile,{});
@@ -1128,6 +1125,26 @@ const setCustomerProfile=p=>{write(LS.cust_profile,p);renderProfile();};
 const isCustomerVerified=()=>{const v=read(LS.cust_verified,null);return v&&v.phone===getCustomerPhone()&&v.expires>Date.now();};
 const setCustomerVerified=phone=>write(LS.cust_verified,{phone,at:Date.now(),expires:Date.now()+90*24*3600*1000});
 const isGuest=()=>localStorage.getItem(LS.guest)==='true';
+
+// 🔴 توابع ورود از صفحه اصلی
+window.startFarmerLogin = function() {
+    document.getElementById('welcome-overlay').classList.add('hidden');
+    showScreen("home");
+    document.getElementById("home-phone-input")?.focus();
+}
+window.startPartnerLogin = function() {
+    document.getElementById('welcome-overlay').classList.add('hidden');
+    showScreen("partner");
+    document.getElementById('partner-login-view').hidden = false;
+    document.getElementById('partner-panel-view').hidden = true;
+    const ph = document.getElementById("ptn-login-phone"); if(ph) ph.value = "";
+}
+window.startAdminLogin = function() {
+    document.getElementById('welcome-overlay').classList.add('hidden');
+    showScreen("admin");
+    const lv = document.getElementById("admin-login-view"), pv = document.getElementById("admin-panel-view");
+    if(lv) lv.hidden = false; if(pv) pv.hidden = true;
+}
 
 function defaultConfig(){
   return {
@@ -1180,17 +1197,12 @@ async function apiFetch(path,opts={}){
 async function loadAll(){
   try{
     const [cf, ordRes, ptnRes, slotRes] = await Promise.all([
-        apiFetch("/api/config"),
-        apiFetch("/api/orders"),
-        apiFetch("/api/partners"),
-        apiFetch("/api/slots")
+        apiFetch("/api/config"), apiFetch("/api/orders"), apiFetch("/api/partners"), apiFetch("/api/slots")
     ]);
-    
     cache.config = (cf.ok && cf.data && Object.keys(cf.data).length) ? cf.data : read(LS.config,null);
     cache.orders = ordRes.ok ? ordRes.data : read(LS.orders, []);
     cache.partners = ptnRes.ok ? ptnRes.data : read(LS.partners, []);
     cache.slots = slotRes.ok ? slotRes.data : read(LS.slots, []);
-    
   }catch(e){console.error("Sync Error:", e);}
 }
 
@@ -1213,11 +1225,8 @@ function showScreen(name){
   if(name==="order-drone"){ refreshDroneSelects(); updateDronePrice(); autoFillOrderForm('drone'); }
   if(name==="order-machinery"){ renderMachineryServices(); refreshMachSelects(); autoFillOrderForm('mach'); }
   
-  if(name==="history")renderHistory();
-  if(name==="profile")renderProfile();
-  if(name==="messages")renderChat();
-  if(name==="videos")renderVideos();
-  if(name==="payment")renderPayInfo();
+  if(name==="history")renderHistory(); if(name==="profile")renderProfile(); if(name==="messages")renderChat();
+  if(name==="videos")renderVideos(); if(name==="payment")renderPayInfo();
   $$(".screen").forEach(s=>s.classList.remove("active"));t.classList.add("active");
   $$(".nav button").forEach(b=>{const on=b.dataset.screen===name;if(on)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");});
   window.scrollTo({top:0,behavior:"smooth"});
@@ -1235,8 +1244,7 @@ document.getElementById("mobile-menu-btn")?.addEventListener("click", (e) => {
   else { sb.classList.add("show"); ov.classList.add("show"); }
 });
 document.getElementById("sidebar-overlay")?.addEventListener("click", () => {
-  document.querySelector(".sidebar")?.classList.remove("show");
-  document.getElementById("sidebar-overlay")?.classList.remove("show");
+  document.querySelector(".sidebar")?.classList.remove("show"); document.getElementById("sidebar-overlay")?.classList.remove("show");
 });
 document.querySelectorAll(".nav button").forEach(btn => {
   btn.addEventListener("click", () => { document.querySelector(".sidebar")?.classList.remove("show"); document.getElementById("sidebar-overlay")?.classList.remove("show"); });
@@ -1249,8 +1257,12 @@ function renderCustomerAuth(){
   const sub=$("#home-orders-sub"); if(sub) sub.textContent = ph ? `سفارش‌های شماره ${toFa(ph)}` : "برای دیدن سفارش‌ها شماره خود را وارد کنید";
 }
 window.logoutCustomer = function() {
-  setCustomerPhone(""); localStorage.removeItem(LS.cust_verified); localStorage.removeItem(LS.guest);
-  showScreen("home"); document.getElementById('welcome-overlay').classList.remove('hidden'); toast("با موفقیت خارج شدید");
+  setCustomerPhone(""); 
+  localStorage.removeItem(LS.cust_verified); 
+  localStorage.removeItem(LS.guest);
+  showScreen("home"); 
+  document.getElementById('welcome-overlay').classList.remove('hidden'); 
+  toast("با موفقیت خارج شدید");
 };
 function renderTrustBar(){
   const allOrders=cache.orders.filter(o=>o.status!=="cancelled");
@@ -1266,7 +1278,7 @@ function renderHomeOrders(){
   if(!ph){box.innerHTML='<div class="empty"><span class="empty-emoji">🌱</span><strong>سلام!</strong>شماره‌ات را وارد کن تا سفارش‌هایت را ببینی.</div>';return;}
   if(!isCustomerVerified()){
     box.innerHTML='<div class="empty"><span class="empty-emoji">🔐</span><strong>شماره تأیید نشده</strong><button class="btn btn-green btn-sm empty-cta" id="reverify-btn">تأیید شماره</button></div>';
-    setTimeout(()=>{$("#reverify-btn")?.addEventListener("click",()=>startPhoneVerification(ph));},10);
+    setTimeout(()=>{$("#reverify-btn")?.addEventListener("click",()=>startPhoneVerification(ph,'farmer'));},10);
     return;
   }
   const mine=cache.orders.filter(o=>o.phone===ph).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,5);
@@ -1282,35 +1294,29 @@ function renderHomeOrders(){
     } else if (x.status === 'done') {
         actionBtn = `<button class="btn btn-gold btn-sm" onclick="openRatingModal('${x.id}')" style="margin-top:8px; width:100%;">⭐ ثبت امتیاز و پایان کار</button>`;
     }
-    
     return`<div class="order-row" style="display:flex; flex-direction:column; align-items:stretch;">
       <div style="display:flex; align-items:center; gap:12px; width:100%;">
         <div class="order-icon"><svg class="icon"><use href="#i-home"/></svg></div>
         <div class="order-main" style="flex:1;"><strong>${esc(x.serviceName)} · ${toFa(x.area)} هکتار</strong><small>${esc(x.code)}</small></div>
         <span class="status ${st.cls}">${st.label}</span>
-      </div>
-      ${actionBtn}
-    </div>`;
+      </div>${actionBtn}</div>`;
   }).join("");
 }
 
 window.confirmOperatorArrival = async function(id) {
-    const o = cache.orders.find(x => x.id === id);
-    if(!o) return;
+    const o = cache.orders.find(x => x.id === id); if(!o) return;
     if(confirm("آیا اپراتور در محل حاضر شده است؟ با تایید شما، عملیات آغاز می‌شود.")) {
         o.status = 'in_progress';
         await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id, status: "in_progress" }) });
         refreshHomeStats(); renderHistory(); toast("✅ حضور اپراتور تایید شد و عملیات آغاز شد.");
     }
 }
-
 window.openRatingModal = function(id) {
     document.getElementById('rating-order-id').value = id;
     document.getElementById('rating-review-text').value = "";
     document.querySelectorAll('#star-rating-box span').forEach(s => s.style.color = "var(--ln2)");
     document.getElementById('rating-modal').classList.add('show');
 }
-
 function refreshHomeStats(){
   const ph=getCustomerPhone();const ver=isCustomerVerified();
   const o=ver?cache.orders.filter(x=>x.phone===ph):[];
@@ -1326,13 +1332,7 @@ function renderProfile(){
   if(a)a.textContent=(prof.name||"ک").slice(0,1); if(n)n.textContent=prof.name||"کاربر کشاورز"; if(p)p.textContent=ph?toFa(ph):"—";
   const set=(id,v)=>{const el=document.getElementById(id);if(el)el.value=v;};
   set("prof-name",prof.name||""); set("prof-phone",ph?toFa(ph):""); set("prof-city",prof.city||"");
-  
-  const s = $("#prof-province");
-  if(s) {
-      const c = getConfig();
-      s.innerHTML = '<option value="">انتخاب</option>' + c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
-      if(prof.province) s.value = prof.province;
-  }
+  const s = $("#prof-province"); if(s) { const c = getConfig(); s.innerHTML = '<option value="">انتخاب</option>' + c.provinces.map(v => `<option value="${v}">${v}</option>`).join(""); if(prof.province) s.value = prof.province; }
 }
 function renderHistory() {
   const box = $("#history-list"); if(!box) return;
@@ -1343,7 +1343,6 @@ function renderHistory() {
   box.innerHTML = list.map(o => {
     const st = STATUS[o.status] || STATUS.pending;
     let actionBtn = "";
-    
     if (o.status === 'pending' || o.status === 'receipt_rejected') {
         actionBtn = `<button class="btn btn-gold btn-sm" onclick="goToPayment('${o.id}')" style="margin-top:8px; width:100%;">💳 پرداخت و ارسال فیش</button>`;
     } else if (o.status === 'assigned') {
@@ -1351,47 +1350,28 @@ function renderHistory() {
     } else if (o.status === 'done') {
         actionBtn = `<button class="btn btn-gold btn-sm" onclick="openRatingModal('${o.id}')" style="margin-top:8px; width:100%;">⭐ ثبت امتیاز</button>`;
     }
-    
     return `<div class="history-item" style="display:flex; flex-direction:column; gap:10px; padding:12px; border:1px solid var(--ln); border-radius:10px; margin-bottom:8px;">
-      <div style="display:flex; gap:10px;">
-        <div class="history-ic"><svg class="icon"><use href="#i-order"/></svg></div>
-        <div class="history-main">
+      <div style="display:flex; gap:10px;"><div class="history-ic"><svg class="icon"><use href="#i-order"/></svg></div><div class="history-main">
           <strong>${esc(o.serviceName)} · ${toFa(o.area)} هکتار</strong>
           <small><code class="ltr">${esc(o.code)}</code> · ${new Date(o.createdAt||Date.now()).toLocaleDateString("fa-IR")}</small>
           <div style="margin-top:6px"><span class="status ${st.cls}" style="font-size:10.5px">${st.label}</span></div>
-        </div>
-      </div>
-      ${actionBtn}
-    </div>`;
+      </div></div>${actionBtn}</div>`;
   }).join("");
 }
-
-window.goToPayment = function(id) {
-    const o = cache.orders.find(x => x.id === id);
-    if(!o) return;
-    PAY_ORDER = o;
-    showScreen("payment");
-}
-
+window.goToPayment = function(id) { const o = cache.orders.find(x => x.id === id); if(!o) return; PAY_ORDER = o; showScreen("payment"); }
 function renderVideos() {
   const grid = document.getElementById("kv-videos-grid"); if(!grid) return;
   const videos = read(LS.videos, []);
   if(!videos.length) { grid.innerHTML = '<div class="kv-empty"><strong>هنوز فایلی نیست</strong></div>'; return; }
   grid.innerHTML = videos.map(v => {
     const isVideo = v.type === 'video';
-    return `<article class="kv-card" style="border:1px solid var(--ln); border-radius:12px; overflow:hidden; background:var(--sur);">
-        ${isVideo ? `<video src="${esc(v.url)}" style="width:100%; height:200px; object-fit:cover;" controls></video>` : `<img src="${esc(v.url)}" style="width:100%; height:200px; object-fit:cover;">`}
-        <div style="padding:12px;"><h3 style="font-size:14px; font-weight:800; margin:0 0 4px;">${esc(v.title)}</h3><p style="font-size:12px; color:var(--i500); margin:0;">${esc(v.desc || '')}</p></div></article>`;
+    return `<article class="kv-card" style="border:1px solid var(--ln); border-radius:12px; overflow:hidden; background:var(--sur);">${isVideo ? `<video src="${esc(v.url)}" style="width:100%; height:200px; object-fit:cover;" controls></video>` : `<img src="${esc(v.url)}" style="width:100%; height:200px; object-fit:cover;">`}<div style="padding:12px;"><h3 style="font-size:14px; font-weight:800; margin:0 0 4px;">${esc(v.title)}</h3><p style="font-size:12px; color:var(--i500); margin:0;">${esc(v.desc || '')}</p></div></article>`;
   }).join("");
 }
 function renderChat() {
-  const box = $("#chat-body"); if(!box) return;
-  const msgs = read(LS.messages, []);
+  const box = $("#chat-body"); if(!box) return; const msgs = read(LS.messages, []);
   if(!msgs.length) { box.innerHTML = '<div class="bubble reply">سلام 👋 پیامت رو بنویس.</div>'; return; }
-  box.innerHTML = msgs.slice(-50).map(m => {
-    const me = m.from === "customer";
-    return `<div class="bubble ${me?"":"reply"}">${esc(m.text)}</div>`;
-  }).join("");
+  box.innerHTML = msgs.slice(-50).map(m => `<div class="bubble ${m.from === "customer"?"":"reply"}">${esc(m.text)}</div>`).join("");
   box.scrollTop = box.scrollHeight;
 }
 $("#msg-form")?.addEventListener("submit", e => {
@@ -1399,49 +1379,30 @@ $("#msg-form")?.addEventListener("submit", e => {
   const msgs = read(LS.messages, []); msgs.push({ id: uid(), from: "customer", phone: getCustomerPhone(), text: v, createdAt: Date.now() }); write(LS.messages, msgs);
   $("#msg-input").value = ""; renderChat(); toast("پیام ثبت شد.");
 });
-
 let currentRating = 0;
 document.querySelectorAll('#star-rating-box span').forEach(star => {
     star.addEventListener('click', function() {
         currentRating = +this.getAttribute('data-val');
-        document.querySelectorAll('#star-rating-box span').forEach(s => {
-            s.style.color = (+s.getAttribute('data-val') <= currentRating) ? "var(--gold)" : "var(--ln2)";
-        });
+        document.querySelectorAll('#star-rating-box span').forEach(s => s.style.color = (+s.getAttribute('data-val') <= currentRating) ? "var(--gold)" : "var(--ln2)");
     });
 });
-
 document.getElementById('submit-rating-btn')?.addEventListener('click', async () => {
-    const id = document.getElementById('rating-order-id').value;
-    const review = document.getElementById('rating-review-text').value.trim();
+    const id = document.getElementById('rating-order-id').value; const review = document.getElementById('rating-review-text').value.trim();
     if(currentRating === 0) return toast("لطفاً امتیاز خود را با کلیک روی ستاره‌ها انتخاب کنید.", true);
-    
     const o = cache.orders.find(x => x.id === id);
     if(o) {
-        o.status = 'completed';
-        o.rating = currentRating;
-        o.review = review;
+        o.status = 'completed'; o.rating = currentRating; o.review = review;
         await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id, status: "completed", rating: currentRating, review: review }) });
-        document.getElementById('rating-modal').classList.remove('show');
-        refreshHomeStats(); renderHistory();
-        toast("✅ از ثبت نظر و امتیاز شما سپاسگزاریم.");
+        document.getElementById('rating-modal').classList.remove('show'); refreshHomeStats(); renderHistory(); toast("✅ از ثبت نظر و امتیاز شما سپاسگزاریم.");
     }
 });
-
 document.getElementById("receipt")?.addEventListener("change", function(e) {
-    const file = e.target.files[0];
-    const box = document.getElementById("receipt-preview-box");
-    if (file && box) {
-        const url = URL.createObjectURL(file);
-        box.innerHTML = `<img src="${url}" style="max-width:100%; border-radius:10px; border:1px solid var(--ln); max-height:200px; object-fit:contain;">`;
-    }
+    const file = e.target.files[0]; const box = document.getElementById("receipt-preview-box");
+    if (file && box) { const url = URL.createObjectURL(file); box.innerHTML = `<img src="${url}" style="max-width:100%; border-radius:10px; border:1px solid var(--ln); max-height:200px; object-fit:contain;">`; }
 });
   function autoFillOrderForm(type) {
-  const phone = getCustomerPhone();
-  if (!phone) return;
-  
-  const prof = getCustomerProfile();
-  const prefix = type === 'drone' ? 'drone' : 'mach';
-
+  const phone = getCustomerPhone(); if (!phone) return;
+  const prof = getCustomerProfile(); const prefix = type === 'drone' ? 'drone' : 'mach';
   if (prof.name) document.getElementById(`${prefix}-cust`).value = prof.name;
   if (phone) document.getElementById(`${prefix}-phone`).value = phone;
   if (prof.province) document.getElementById(`${prefix}-province`).value = prof.province;
@@ -1454,29 +1415,21 @@ function refreshDroneSelects() {
   const c = getConfig();
   const fill = (sel, items, ph) => { if(!sel) return; sel.innerHTML = ph ? `<option value="">${ph}</option>` : ''; items.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`); };
   fill($("#drone-province"), c.provinces, "انتخاب"); fill($("#drone-crop"), c.crops, "انتخاب");
-  
   const droneSrv = c.services.find(s => s.type === 'drone' && !s.hidden) || c.services.find(s => s.id === 'spray');
-  
   const all = cache.slots.filter(s => s.serviceId === droneSrv.id).sort((a,b)=>a.date.localeCompare(b.date));
   const free = all.filter(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return b<s.cap; });
   const sel = $("#drone-slot-select");
   if(sel) sel.innerHTML = free.length ? '<option value="">انتخاب تاریخ</option>' + free.map(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return `<option value="${s.id}">${toFa(s.date)} (${toFa(s.cap-b)} ظرفیت)</option>`; }).join("") : '<option value="">تاریخی موجود نیست</option>';
-  
   updateDronePrice();
 }
 
 function updateDronePrice() {
   const a = $("#drone-area"), p = $("#drone-total-price"); if(!a || !p) return;
   const n = Math.max(0, Number(toEn(a.value).replace(/[^\d.]/g,""))||0); const ha = m2ToHa(n);
-  
-  const selectedProv = $("#drone-province")?.value || "";
-  const c = getConfig(); 
+  const selectedProv = $("#drone-province")?.value || ""; const c = getConfig(); 
   const drones = c.services.filter(s => s.type === 'drone' && !s.hidden);
-  
   let srv = drones.find(s => s.region && s.region.split(',').includes(selectedProv));
-  if (!srv) srv = drones.find(s => !s.region); 
-  if (!srv) srv = drones.find(s => s.id === 'spray'); 
-  
+  if (!srv) srv = drones.find(s => !s.region); if (!srv) srv = drones.find(s => s.id === 'spray'); 
   p.textContent = n > 0 && srv ? fmtT(ha * srv.rate) : "—";
   if($("#drone-base-rate") && srv) $("#drone-base-rate").textContent = fmt(srv.rate);
 }
@@ -1488,118 +1441,55 @@ let selectedMachinery = [];
 let currentMachCategory = "";
 
 function renderMachineryServices() {
-  const categories = [
-    { id: 'land_prep', name: 'آماده‌سازی زمین', icon: '🚜' },
-    { id: 'planting', name: 'کاشت', icon: '🌱' },
-    { id: 'care', name: 'رسیدگی', icon: '💧' },
-    { id: 'harvest', name: 'برداشت', icon: '🌾' }
-  ];
-
-  const catBox = document.getElementById("mach-categories");
-  if(!catBox) return;
-
-  catBox.innerHTML = categories.map(c => `
-    <div class="category-btn" onclick="selectMachCategory('${c.id}')" id="cat-btn-${c.id}" 
-         style="background:var(--sur); border:1.5px solid var(--ln2); border-radius:12px; padding:16px; text-align:center; cursor:pointer; transition:all 0.2s;">
-      <div style="font-size:28px; margin-bottom:8px;">${c.icon}</div>
-      <strong style="font-size:13px; color:var(--i900);">${c.name}</strong>
-    </div>
-  `).join("");
-
+  const categories = [ { id: 'land_prep', name: 'آماده‌سازی زمین', icon: '🚜' }, { id: 'planting', name: 'کاشت', icon: '🌱' }, { id: 'care', name: 'رسیدگی', icon: '💧' }, { id: 'harvest', name: 'برداشت', icon: '🌾' } ];
+  const catBox = document.getElementById("mach-categories"); if(!catBox) return;
+  catBox.innerHTML = categories.map(c => `<div class="category-btn" onclick="selectMachCategory('${c.id}')" id="cat-btn-${c.id}" style="background:var(--sur); border:1.5px solid var(--ln2); border-radius:12px; padding:16px; text-align:center; cursor:pointer; transition:all 0.2s;"><div style="font-size:28px; margin-bottom:8px;">${c.icon}</div><strong style="font-size:13px; color:var(--i900);">${c.name}</strong></div>`).join("");
   document.getElementById("mach-services-wrapper").style.display = "none";
-  selectedMachinery = [];
-  currentMachCategory = "";
-  renderSelectedChips();
-  updateMachPrice();
+  selectedMachinery = []; currentMachCategory = ""; renderSelectedChips(); updateMachPrice();
 }
 
 window.selectMachCategory = function(catId) {
   currentMachCategory = catId;
-  
-  document.querySelectorAll('.category-btn').forEach(btn => {
-    btn.style.borderColor = 'var(--ln2)';
-    btn.style.background = 'var(--sur)';
-  });
+  document.querySelectorAll('.category-btn').forEach(btn => { btn.style.borderColor = 'var(--ln2)'; btn.style.background = 'var(--sur)'; });
   const activeBtn = document.getElementById(`cat-btn-${catId}`);
-  if(activeBtn) {
-    activeBtn.style.borderColor = 'var(--b500)';
-    activeBtn.style.background = 'var(--b50)';
-  }
-
+  if(activeBtn) { activeBtn.style.borderColor = 'var(--b500)'; activeBtn.style.background = 'var(--b50)'; }
   document.getElementById("mach-services-wrapper").style.display = "block";
-
   const c = getConfig();
   const catServices = c.services.filter(s => (s.type === 'machinery' || s.type === 'other') && !s.hidden && (s.category || 'other') === catId);
-  
   const select = $("#machinery-services-select");
-  select.innerHTML = '<option value="">➕ افزودن دستگاه به لیست...</option>' + 
-    catServices.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join("");
-
-  selectedMachinery = [];
-  renderSelectedChips();
-  updateMachPrice();
+  select.innerHTML = '<option value="">➕ افزودن دستگاه به لیست...</option>' + catServices.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join("");
+  selectedMachinery = []; renderSelectedChips(); updateMachPrice();
 }
 
 function renderSelectedChips() {
-  const box = $("#selected-services-chips");
-  if(!box) return;
-  
-  if(selectedMachinery.length === 0) {
-    box.innerHTML = '<span style="font-size:12px; color:var(--i500);">هنوز دستگاهی انتخاب نشده است.</span>';
-  } else {
+  const box = $("#selected-services-chips"); if(!box) return;
+  if(selectedMachinery.length === 0) { box.innerHTML = '<span style="font-size:12px; color:var(--i500);">هنوز دستگاهی انتخاب نشده است.</span>'; } else {
     const c = getConfig();
     box.innerHTML = selectedMachinery.map(id => {
-      const srv = c.services.find(s => s.id === id);
-      if(!srv) return '';
-      return `
-        <div style="background:var(--b500); color:#fff; padding:6px 12px; border-radius:20px; display:flex; align-items:center; gap:8px; font-size:12px; font-weight:700; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
-          <span>${esc(srv.name)}</span>
-          <button type="button" onclick="removeMachinery('${srv.id}')" style="background:rgba(255,255,255,0.2); border:none; border-radius:50%; width:20px; height:20px; display:grid; place-items:center; cursor:pointer; color:#fff; font-size:14px;">&times;</button>
-        </div>
-      `;
+      const srv = c.services.find(s => s.id === id); if(!srv) return '';
+      return `<div style="background:var(--b500); color:#fff; padding:6px 12px; border-radius:20px; display:flex; align-items:center; gap:8px; font-size:12px; font-weight:700; box-shadow:0 2px 6px rgba(0,0,0,0.1);"><span>${esc(srv.name)}</span><button type="button" onclick="removeMachinery('${srv.id}')" style="background:rgba(255,255,255,0.2); border:none; border-radius:50%; width:20px; height:20px; display:grid; place-items:center; cursor:pointer; color:#fff; font-size:14px;">&times;</button></div>`;
     }).join("");
   }
 }
 
-window.removeMachinery = function(id) {
-  selectedMachinery = selectedMachinery.filter(x => x !== id);
-  renderSelectedChips();
-  updateMachPrice();
-}
-
+window.removeMachinery = function(id) { selectedMachinery = selectedMachinery.filter(x => x !== id); renderSelectedChips(); updateMachPrice(); }
 $("#machinery-services-select")?.addEventListener("change", function() {
-  const val = this.value;
-  if(!val) return;
-  if(!selectedMachinery.includes(val)) {
-    selectedMachinery.push(val);
-    renderSelectedChips();
-    updateMachPrice();
-  }
+  const val = this.value; if(!val) return;
+  if(!selectedMachinery.includes(val)) { selectedMachinery.push(val); renderSelectedChips(); updateMachPrice(); }
   this.value = "";
 });
 
 function updateMachPrice() {
-  const a = $("#mach-area"), p = $("#mach-total-price"); 
-  if(!a || !p) return;
-  
-  const rawVal = Math.max(0, Number(toEn(a.value).replace(/[^\d.]/g,""))||0); 
-  
-  const c = getConfig();
-  let total = 0;
-  
+  const a = $("#mach-area"), p = $("#mach-total-price"); if(!a || !p) return;
+  const rawVal = Math.max(0, Number(toEn(a.value).replace(/[^\d.]/g,""))||0); const c = getConfig(); let total = 0;
   selectedMachinery.forEach(id => {
     const srv = c.services.find(s => s.id === id);
     if(srv) { 
-      if (srv.unit === 'hectare') {
-          total += (rawVal / 10000) * srv.rate;
-      } else if (srv.unit === '1000m2') {
-          total += (rawVal / 1000) * srv.rate;
-      } else {
-          total += rawVal * srv.rate;
-      }
+      if (srv.unit === 'hectare') total += (rawVal / 10000) * srv.rate;
+      else if (srv.unit === '1000m2') total += (rawVal / 1000) * srv.rate;
+      else total += rawVal * srv.rate;
     }
   });
-  
   p.textContent = total > 0 ? fmtT(total) : "—";
 }
 $("#mach-area")?.addEventListener("input", updateMachPrice);
@@ -1608,9 +1498,7 @@ function refreshMachSelects() {
   const c = getConfig();
   const fill = (sel, items, ph) => { if(!sel) return; sel.innerHTML = ph ? `<option value="">${ph}</option>` : ''; items.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`); };
   fill($("#mach-province"), c.provinces, "انتخاب"); fill($("#mach-crop"), c.crops, "انتخاب");
-  
   const machSrvs = c.services.filter(s => s.type === 'machinery' && !s.hidden).map(s => s.id);
-  
   const all = cache.slots.filter(s => machSrvs.includes(s.serviceId)).sort((a,b)=>a.date.localeCompare(b.date));
   const free = all.filter(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return b<s.cap; });
   const sel = $("#mach-slot-select");
@@ -1632,11 +1520,9 @@ $("#mach-get-location-btn")?.addEventListener("click", () => {
 });
 
 // ------------------ OTP ------------------
-function isOtpTimeAllowed() {
-  const now = new Date(); const tehranTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Tehran"})); const hour = tehranTime.getHours();
-  return hour >= 8 && hour < 23;
-}
-async function startPhoneVerification(phone) {
+function isOtpTimeAllowed() { const now = new Date(); const tehranTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Tehran"})); const hour = tehranTime.getHours(); return hour >= 8 && hour < 23; }
+async function startPhoneVerification(phone, target = 'farmer') {
+  OTP_LOGIN_TARGET = target;
   if(!isOtpTimeAllowed()) return toast("ارسال پیامک فقط از ساعت ۸ صبح تا ۱۱ شب امکان‌پذیر است.", true);
   const res = await apiFetch("/api/otp/send", { method: "POST", body: JSON.stringify({ phone }) });
   if(!res.ok) return toast(res.data.error || "خطا در ارسال پیامک", true);
@@ -1652,15 +1538,12 @@ async function startPhoneVerification(phone) {
 
     otpInputs.forEach((inp, idx) => {
       inp.oninput = () => {
-        inp.value = toEn(inp.value).replace(/\D/g, "").slice(-1);
-        inp.classList.toggle("filled", !!inp.value);
+        inp.value = toEn(inp.value).replace(/\D/g, "").slice(-1); inp.classList.toggle("filled", !!inp.value);
         if(inp.value && idx < 5) otpInputs[idx+1].focus();
         const currentCode = otpInputs.map(x => x.value).join("");
         if(currentCode.length === 6) setTimeout(() => { document.getElementById("otp-verify-btn")?.click(); }, 100);
       };
-      inp.onkeydown = (e) => {
-        if(e.key === "Backspace" && !inp.value && idx > 0) { otpInputs[idx-1].focus(); otpInputs[idx-1].value = ""; otpInputs[idx-1].classList.remove("filled"); e.preventDefault(); }
-      };
+      inp.onkeydown = (e) => { if(e.key === "Backspace" && !inp.value && idx > 0) { otpInputs[idx-1].focus(); otpInputs[idx-1].value = ""; otpInputs[idx-1].classList.remove("filled"); e.preventDefault(); } };
     });
 
     document.getElementById("otp-verify-btn").onclick = async () => {
@@ -1669,8 +1552,19 @@ async function startPhoneVerification(phone) {
       const btn = document.getElementById("otp-verify-btn"); btn.disabled = true; btn.innerHTML = "در حال بررسی...";
       const verify = await apiFetch("/api/otp/verify", { method: "POST", body: JSON.stringify({ phone, code }) });
       btn.disabled = false; btn.innerHTML = "تأیید";
-      if(verify.ok) { setCustomerVerified(phone); setCustomerPhone(phone); back.classList.remove("show"); toast("✅ با موفقیت وارد شدید"); renderCustomerAuth(); refreshHomeStats(); } 
-      else { toast("کد نادرست است یا منقضی شده", true); otpInputs.forEach(i => i.value = ""); otpInputs[0].focus(); }
+      if(verify.ok) { 
+          back.classList.remove("show"); 
+          if (OTP_LOGIN_TARGET === 'partner') {
+              const p = cache.partners.find(x => x.phone === phone);
+              if(!p) { toast("همکاری با این شماره یافت نشد", true); return; }
+              if(p.status !== "active") { toast("حساب شما هنوز تایید نشده است", true); return; }
+              $("#partner-login-view").hidden = true; $("#partner-panel-view").hidden = false;
+              renderPartnerDashboard(p); toast(`✅ خوش آمدید ${p.name}`);
+          } else {
+              setCustomerVerified(phone); setCustomerPhone(phone); 
+              toast("✅ با موفقیت وارد شدید"); renderCustomerAuth(); refreshHomeStats(); 
+          }
+      } else { toast("کد نادرست است یا منقضی شده", true); otpInputs.forEach(i => i.value = ""); otpInputs[0].focus(); }
     };
     document.getElementById("otp-cancel-btn").onclick = () => { back.classList.remove("show"); };
   }
@@ -1681,33 +1575,20 @@ document.getElementById('drone-order-form')?.addEventListener('submit', async (e
   e.preventDefault();
   const termsCheckbox = $("#drone-terms-checkbox");
   if (termsCheckbox && !termsCheckbox.checked) return toast("برای ثبت سفارش، ابتدا باید تعهدنامه را مطالعه و تایید کنید.", true);
-
   const phone = toEn($("#drone-phone").value);
-  if(!(isCustomerVerified() && getCustomerPhone() === phone)){ await startPhoneVerification(phone); return; }
+  if(!(isCustomerVerified() && getCustomerPhone() === phone)){ await startPhoneVerification(phone, 'farmer'); return; }
   
-  const c = getConfig(); 
-  const selectedProv = $("#drone-province").value;
+  const c = getConfig(); const selectedProv = $("#drone-province").value;
   const drones = c.services.filter(s => s.type === 'drone' && !s.hidden);
   let srv = drones.find(s => s.region && s.region.split(',').includes(selectedProv));
-  if (!srv) srv = drones.find(s => !s.region); 
-  if (!srv) srv = drones.find(s => s.id === 'spray');
-
+  if (!srv) srv = drones.find(s => !s.region); if (!srv) srv = drones.find(s => s.id === 'spray');
   const ha = m2ToHa(+toEn($("#drone-area").value)); const slot = cache.slots.find(x => x.id === $("#drone-slot-select").value);
   const amount = ha * (srv ? srv.rate : 850000);
   
-  const order = { 
-    id: uid(), code: `SP-${Date.now().toString().slice(-4)}`, name: $("#drone-cust").value.trim(), phone: phone, 
-    province: $("#drone-province").value, city: $("#drone-city").value.trim(), village: $("#drone-village").value.trim(), 
-    crop: $("#drone-crop").value, area: ha, areaM2: +toEn($("#drone-area").value), notes: $("#drone-notes").value.trim(), 
-    amount, serviceType: srv.id, serviceName: srv.name, location: $("#drone-loc-coords").value, 
-    status: "pending", createdAt: Date.now(), slotId: slot.id, slotDate: slot.date 
-  };
-  
+  const order = { id: uid(), code: `SP-${Date.now().toString().slice(-4)}`, name: $("#drone-cust").value.trim(), phone: phone, province: $("#drone-province").value, city: $("#drone-city").value.trim(), village: $("#drone-village").value.trim(), crop: $("#drone-crop").value, area: ha, areaM2: +toEn($("#drone-area").value), notes: $("#drone-notes").value.trim(), amount, serviceType: srv.id, serviceName: srv.name, location: $("#drone-loc-coords").value, status: "pending", createdAt: Date.now(), slotId: slot.id, slotDate: slot.date };
   await apiFetch("/api/orders", { method: "POST", body: JSON.stringify(order) });
   cache.orders.push(order);
-  
   setCustomerProfile({ name: order.name, province: order.province, city: order.city, village: order.village, crop: order.crop });
-  
   refreshHomeStats(); e.target.reset(); $("#drone-area").value = "10000"; updateDronePrice(); refreshDroneSelects();
   PAY_ORDER = order; toast(`✅ سفارش پهپاد ثبت شد.`); showScreen("payment");
 });
@@ -1717,61 +1598,37 @@ document.getElementById('machinery-order-form')?.addEventListener('submit', asyn
   e.preventDefault();
   if(selectedMachinery.length === 0) return toast("حداقل یک عملیات را انتخاب کنید", true);
   const phone = toEn($("#mach-phone").value);
-  if(!(isCustomerVerified() && getCustomerPhone() === phone)){ await startPhoneVerification(phone); return; }
+  if(!(isCustomerVerified() && getCustomerPhone() === phone)){ await startPhoneVerification(phone, 'farmer'); return; }
   
-  const c = getConfig(); 
-  const rawVal = Math.max(0, Number(toEn($("#mach-area").value).replace(/[^\d.]/g,""))||0);
-  
+  const c = getConfig(); const rawVal = Math.max(0, Number(toEn($("#mach-area").value).replace(/[^\d.]/g,""))||0);
   const slot = cache.slots.find(x => x.id === $("#mach-slot-select").value);
-  let totalAmount = 0; let names = [];
-  let haArea = 0;
+  let totalAmount = 0; let names = []; let haArea = 0;
   
-  // برای ذخیره در دیتابیس، مساحت کل (به هکتار) رو محاسبه میکنیم
   selectedMachinery.forEach((id, index) => {
     const srv = c.services.find(s => s.id === id);
     if(srv) { 
-      if (srv.unit === 'hectare') {
-          const thisHa = rawVal / 10000;
-          totalAmount += thisHa * srv.rate;
-          if(index === 0) haArea = thisHa; // فقط برای ذخیره در فیلد area
-      } else if (srv.unit === '1000m2') {
-          const thisHa = rawVal / 1000;
-          totalAmount += thisHa * srv.rate;
-          if(index === 0) haArea = thisHa;
-      } else {
-          totalAmount += rawVal * srv.rate;
-          if(index === 0) haArea = rawVal; // اگر هکتار نبود، عدد خام رو ذخیره میکنیم
-      }
+      if (srv.unit === 'hectare') { const thisHa = rawVal / 10000; totalAmount += thisHa * srv.rate; if(index === 0) haArea = thisHa; }
+      else if (srv.unit === '1000m2') { const thisHa = rawVal / 1000; totalAmount += thisHa * srv.rate; if(index === 0) haArea = thisHa; }
+      else { totalAmount += rawVal * srv.rate; if(index === 0) haArea = rawVal; }
       names.push(srv.name);
     }
   });
   
-  const order = { 
-    id: uid(), code: `SP-${Date.now().toString().slice(-4)}`, name: $("#mach-cust").value.trim(), phone: phone, 
-    province: $("#mach-province").value, city: $("#mach-city").value.trim(), village: $("#mach-village").value.trim(), 
-    crop: $("#mach-crop").value, area: haArea, areaM2: rawVal, notes: $("#mach-notes").value.trim(), 
-    amount: totalAmount, serviceType: selectedMachinery.join(","), serviceName: names.join(" + "), 
-    status: "pending", createdAt: Date.now(), slotId: slot.id, slotDate: slot.date, location: $("#mach-loc-coords").value
-  };
-  
+  const order = { id: uid(), code: `SP-${Date.now().toString().slice(-4)}`, name: $("#mach-cust").value.trim(), phone: phone, province: $("#mach-province").value, city: $("#mach-city").value.trim(), village: $("#mach-village").value.trim(), crop: $("#mach-crop").value, area: haArea, areaM2: rawVal, notes: $("#mach-notes").value.trim(), amount: totalAmount, serviceType: selectedMachinery.join(","), serviceName: names.join(" + "), status: "pending", createdAt: Date.now(), slotId: slot.id, slotDate: slot.date, location: $("#mach-loc-coords").value };
   await apiFetch("/api/orders", { method: "POST", body: JSON.stringify(order) });
   cache.orders.push(order);
-  
   setCustomerProfile({ name: order.name, province: order.province, city: order.city, village: order.village, crop: order.crop });
-  
   refreshHomeStats(); e.target.reset(); $("#mach-area").value = "10000"; selectedMachinery = []; renderMachineryServices();
   PAY_ORDER = order; toast(`✅ سفارش ادوات ثبت شد.`); showScreen("payment");
 });
 
 // ------------------ پرداخت و فیش ------------------
 function renderPayInfo() {
-  const el = $("#pay-info"); if(!el) return;
-  const o = PAY_ORDER;
+  const el = $("#pay-info"); if(!el) return; const o = PAY_ORDER;
   if(!o) { el.innerHTML = '<div class="notice">برای پرداخت، از پیگیری سفارش را جستجو کنید.</div>'; return; }
   const cfg = getConfig();
   el.innerHTML = `<div class="receipt-card" style="margin-bottom:20px;"><div class="receipt-head"><div class="check"><svg class="icon"><use href="#i-check"/></svg></div><div style="flex:1"><strong>${esc(o.serviceName)}</strong><small>کد: ${esc(o.code)}</small></div></div><div class="receipt-body"><div><small>مبلغ قابل پرداخت</small><strong style="color:var(--b700);font-size:20px;">${fmtT(o.amount)}</strong></div><div><small>شماره کارت</small><strong style="direction:ltr;font-size:14px;">${esc(cfg.payment.card)}</strong></div><div><small>شماره شبا</small><strong style="direction:ltr;font-size:12px;">${esc(cfg.payment.iban)}</strong></div><div><small>صاحب حساب</small><strong>${esc(cfg.payment.holder)}</strong></div></div></div>`;
 }
-
 async function saveReceiptData(orderId,file){
   return new Promise(async(resolve)=>{
     if(!file)return resolve(false);
@@ -1781,31 +1638,15 @@ async function saveReceiptData(orderId,file){
     } catch(e){ resolve(false); }
   });
 }
-
 document.getElementById('payment-form')?.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const fileInput = $("#receipt"); const file = fileInput?.files?.[0];
+  e.preventDefault(); const fileInput = $("#receipt"); const file = fileInput?.files?.[0];
   if(!file) return toast("تصویر فیش را انتخاب کنید", true);
-  
-  const btn = e.target.querySelector('button[type="submit"]');
-  btn.disabled = true; btn.textContent = "در حال ارسال...";
-
-  const res = await saveReceiptData(PAY_ORDER.id, file);
-  
-  btn.disabled = false; btn.textContent = "ارسال فیش";
-
+  const btn = e.target.querySelector('button[type="submit"]'); btn.disabled = true; btn.textContent = "در حال ارسال...";
+  const res = await saveReceiptData(PAY_ORDER.id, file); btn.disabled = false; btn.textContent = "ارسال فیش";
   if(res) { 
-    toast("✅ فیش ارسال شد. منتظر تایید مدیر باشید."); 
-    const idx = cache.orders.findIndex(o => o.id === PAY_ORDER.id); 
-    if(idx >= 0) { 
-        cache.orders[idx].status = "receipt_pending"; 
-        await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id: PAY_ORDER.id, status: "receipt_pending" }) });
-    } 
-    fileInput.value = "";
-    const previewBox = document.getElementById("receipt-preview-box");
-    if(previewBox) previewBox.innerHTML = "";
-    
-    showScreen("history"); 
+    toast("✅ فیش ارسال شد. منتظر تایید مدیر باشید."); const idx = cache.orders.findIndex(o => o.id === PAY_ORDER.id); 
+    if(idx >= 0) { cache.orders[idx].status = "receipt_pending"; await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id: PAY_ORDER.id, status: "receipt_pending" }) }); } 
+    fileInput.value = ""; const previewBox = document.getElementById("receipt-preview-box"); if(previewBox) previewBox.innerHTML = ""; showScreen("history"); 
   } else toast("خطا در ارسال فیش. لطفا دوباره تلاش کنید.", true);
 });
 
@@ -1814,56 +1655,36 @@ document.getElementById("ptn-tab-login")?.addEventListener("click", () => { $("#
 document.getElementById("ptn-tab-reg")?.addEventListener("click", () => { $("#partner-login-form").hidden = true; $("#partner-register-form").hidden = false; $("#ptn-tab-reg").className = "btn btn-purple btn-sm"; $("#ptn-tab-login").className = "btn btn-light btn-sm"; });
 
 document.getElementById('partner-register-form')?.addEventListener('submit', async (e) => {
-  e.preventDefault(); 
-  const type = document.querySelector('input[name="ptn-type"]:checked').value; 
-  const name = $("#ptn-reg-name").value; 
-  const phone = toEn($("#ptn-reg-phone").value); 
-  const prov = $("#ptn-reg-prov").value; 
-  const county = $("#ptn-reg-county").value.trim(); 
-  const city = $("#ptn-reg-city").value.trim(); 
-  const village = $("#ptn-reg-village").value.trim();
-  const cities = $("#ptn-reg-cities")?.value || ""; 
-  const machine = $("#ptn-reg-machine")?.value.trim() || "";
-  const implementsList = $("#ptn-reg-implements")?.value.trim() || "";
-  const share = +toEn($("#ptn-reg-share").value) || 5; 
-  const pass = $("#ptn-reg-pass").value;
-  const pass2 = $("#ptn-reg-pass2").value;
-
+  e.preventDefault(); const type = document.querySelector('input[name="ptn-type"]:checked').value; 
+  const name = $("#ptn-reg-name").value; const phone = toEn($("#ptn-reg-phone").value); 
+  const prov = $("#ptn-reg-prov").value; const county = $("#ptn-reg-county").value.trim(); 
+  const city = $("#ptn-reg-city").value.trim(); const village = $("#ptn-reg-village").value.trim();
+  const cities = $("#ptn-reg-cities")?.value || ""; const machine = $("#ptn-reg-machine")?.value.trim() || "";
+  const implementsList = $("#ptn-reg-implements")?.value.trim() || ""; const share = +toEn($("#ptn-reg-share").value) || 5; 
+  const pass = $("#ptn-reg-pass").value; const pass2 = $("#ptn-reg-pass2").value;
   if(!name || !phone || !county || !city) return toast("لطفاً استان، شهرستان و شهر را وارد کنید", true); 
   if(type === 'mechanization' && (!machine || !implementsList || !cities)) return toast("اطلاعات دستگاه، ادوات و شهرهای تحت پوشش را کامل کنید", true);
   if(pass.length < 6) return toast("رمز باید حداقل ۶ کاراکتر باشد", true);
   if(pass !== pass2) return toast("تکرار رمز عبور مطابقت ندارد", true);
-  
   if(cache.partners.some(p => p.phone === phone)) return toast("این شماره قبلا ثبت شده", true);
-  
   const ptn = { id: uid(), type, name, phone, province: prov, county, city, village, machine, implements: implementsList, cities, share, status: "pending", password: pass };
-  await apiFetch("/api/partners", { method: "POST", body: JSON.stringify(ptn) });
-  cache.partners.push(ptn);
-  
-  toast("✅ ثبت‌نام انجام شد. منتظر تایید مدیر باشید."); 
-  e.target.reset(); 
-  $("#ptn-tab-login").click();
+  await apiFetch("/api/partners", { method: "POST", body: JSON.stringify(ptn) }); cache.partners.push(ptn);
+  toast("✅ ثبت‌نام انجام شد. منتظر تایید مدیر باشید."); e.target.reset(); $("#ptn-tab-login").click();
 });
 
 document.getElementById('partner-login-form')?.addEventListener('submit', (e) => {
-  e.preventDefault(); 
-  const phone = toEn($("#ptn-login-phone").value); 
-  const pass = $("#ptn-login-pass").value; 
+  e.preventDefault(); const phone = toEn($("#ptn-login-phone").value); 
+  if(!/^09\d{9}$/.test(phone)) return toast("شماره موبایل نامعتبر است", true);
   const p = cache.partners.find(x => x.phone === phone);
-  
   if(!p) return toast("همکاری با این شماره یافت نشد", true); 
   if(p.status !== "active") return toast("حساب شما هنوز تایید نشده است", true); 
-  if(p.password !== pass) return toast("رمز عبور نادرست است", true);
-
-  toast("خوش آمدید"); 
-  $("#partner-login-view").hidden = true; 
-  $("#partner-panel-view").hidden = false;
-  renderPartnerDashboard(p);
+  startPhoneVerification(phone, 'partner'); // 🔴 ارسال OTP برای همکار
 });
 
 document.getElementById('partner-logout-btn')?.addEventListener('click', () => { 
   localStorage.removeItem(LS.partner_session);
   $("#partner-login-view").hidden = false; $("#partner-panel-view").hidden = true; 
+  showScreen("home"); document.getElementById('welcome-overlay').classList.remove('hidden'); toast("از پنل همکاران خارج شدید");
 });
 
 document.querySelectorAll("#ptn-tabs button").forEach(b => {
@@ -1875,85 +1696,40 @@ document.querySelectorAll("#ptn-tabs button").forEach(b => {
 });
 
 window.renderPartnerDashboard = function(p) {
-    localStorage.setItem(LS.partner_session, JSON.stringify({ partnerId: p.id }));
-    $("#ptn-name").textContent = p.name;
-    
-    const myOrders = cache.orders.filter(o => o.partnerId === p.id); 
-    const list = $("#ptn-orders-list");
+    localStorage.setItem(LS.partner_session, JSON.stringify({ partnerId: p.id })); $("#ptn-name").textContent = p.name;
+    const myOrders = cache.orders.filter(o => o.partnerId === p.id); const list = $("#ptn-orders-list");
     list.innerHTML = myOrders.length ? myOrders.map(o => `<div class="admin-card"><strong>${esc(o.code)} - ${esc(o.serviceName)}</strong><div style="font-size:12px;color:var(--i500);margin:4px 0">${esc(o.name)} | ${esc(o.city)} | ${toFa(o.area)} هکتار</div></div>`).join("") : '<div class="empty">سفارشی ارجاع داده نشده</div>';
-
     if(p.type === 'mechanization') {
-        document.getElementById('ptn-edit-mach-fields').style.display = 'block';
-        document.getElementById('ptn-edit-impl-fields').style.display = 'block';
-        document.getElementById('ptn-edit-cities-fields').style.display = 'block';
-        $("#ptn-edit-machine").value = p.machine || "";
-        $("#ptn-edit-implements").value = p.implements || "";
-        $("#ptn-edit-cities").value = p.cities || "";
+        document.getElementById('ptn-edit-mach-fields').style.display = 'block'; document.getElementById('ptn-edit-impl-fields').style.display = 'block'; document.getElementById('ptn-edit-cities-fields').style.display = 'block';
+        $("#ptn-edit-machine").value = p.machine || ""; $("#ptn-edit-implements").value = p.implements || ""; $("#ptn-edit-cities").value = p.cities || "";
     }
     $("#ptn-edit-pass").value = "";
 }
 
 document.getElementById('partner-edit-form')?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const s = read(LS.partner_session, null); if(!s) return;
+    e.preventDefault(); const s = read(LS.partner_session, null); if(!s) return;
     const idx = cache.partners.findIndex(x => x.id === s.partnerId);
     if(idx >= 0) {
         const p = cache.partners[idx];
-        p.machine = $("#ptn-edit-machine").value;
-        p.implements = $("#ptn-edit-implements").value;
-        p.cities = $("#ptn-edit-cities").value;
+        p.machine = $("#ptn-edit-machine").value; p.implements = $("#ptn-edit-implements").value; p.cities = $("#ptn-edit-cities").value;
         const newPass = $("#ptn-edit-pass").value;
-        if(newPass) {
-            if(newPass.length < 6) return toast("رمز جدید باید حداقل ۶ کاراکتر باشد", true);
-            p.password = newPass;
-        }
-        await apiFetch("/api/partners", { method: "PUT", body: JSON.stringify(p) });
-        toast("✅ اطلاعات با موفقیت به‌روزرسانی شد");
+        if(newPass) { if(newPass.length < 6) return toast("رمز جدید باید حداقل ۶ کاراکتر باشد", true); p.password = newPass; }
+        await apiFetch("/api/partners", { method: "PUT", body: JSON.stringify(p) }); toast("✅ اطلاعات با موفقیت به‌روزرسانی شد");
     }
 });
 
 const DAYS_OF_WEEK = ["شنبه", "یکشنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه", "پنجشنبه", "جمعه"];
 function renderPartnerAvailability() {
-  const s = read(LS.partner_session, null); if(!s) return;
-  const p = cache.partners.find(x => x.id === s.partnerId);
-  if(!p) return;
-  
-  let avail = [];
-  try { avail = typeof p.availability === 'string' ? JSON.parse(p.availability) : (p.availability || []); } catch(e) {}
+  const s = read(LS.partner_session, null); if(!s) return; const p = cache.partners.find(x => x.id === s.partnerId); if(!p) return;
+  let avail = []; try { avail = typeof p.availability === 'string' ? JSON.parse(p.availability) : (p.availability || []); } catch(e) {}
   if(!avail || !avail.length) avail = DAYS_OF_WEEK.map(d => ({ day: d, active: true, start: "08:00", end: "18:00" }));
-  
   const container = $("#ptn-availability-container"); if(!container) return;
-  container.innerHTML = avail.map((a, idx) => `
-    <div style="display:flex; align-items:center; justify-content:space-between; background:var(--sur); border:1px solid var(--ln); padding:10px 14px; border-radius:10px;">
-      <div style="display:flex; align-items:center; gap:10px; width:100px;">
-        <input type="checkbox" id="avail-active-${idx}" ${a.active ? 'checked' : ''} onchange="document.getElementById('avail-times-${idx}').style.opacity = this.checked ? '1' : '0.3'" style="width:18px; height:18px; accent-color:var(--b500);">
-        <strong style="font-size:13px;">${a.day}</strong>
-      </div>
-      <div id="avail-times-${idx}" style="display:flex; align-items:center; gap:8px; opacity:${a.active ? '1' : '0.3'}; transition:all 0.2s;">
-        <span style="font-size:11px; color:var(--i500);">از</span>
-        <input type="time" id="avail-start-${idx}" value="${a.start}" style="border:1px solid var(--ln2); border-radius:6px; padding:4px 8px; font-size:12px;">
-        <span style="font-size:11px; color:var(--i500);">تا</span>
-        <input type="time" id="avail-end-${idx}" value="${a.end}" style="border:1px solid var(--ln2); border-radius:6px; padding:4px 8px; font-size:12px;">
-      </div>
-    </div>
-  `).join("");
+  container.innerHTML = avail.map((a, idx) => `<div style="display:flex; align-items:center; justify-content:space-between; background:var(--sur); border:1px solid var(--ln); padding:10px 14px; border-radius:10px;"><div style="display:flex; align-items:center; gap:10px; width:100px;"><input type="checkbox" id="avail-active-${idx}" ${a.active ? 'checked' : ''} onchange="document.getElementById('avail-times-${idx}').style.opacity = this.checked ? '1' : '0.3'" style="width:18px; height:18px; accent-color:var(--b500);"><strong style="font-size:13px;">${a.day}</strong></div><div id="avail-times-${idx}" style="display:flex; align-items:center; gap:8px; opacity:${a.active ? '1' : '0.3'}; transition:all 0.2s;"><span style="font-size:11px; color:var(--i500);">از</span><input type="time" id="avail-start-${idx}" value="${a.start}" style="border:1px solid var(--ln2); border-radius:6px; padding:4px 8px; font-size:12px;"><span style="font-size:11px; color:var(--i500);">تا</span><input type="time" id="avail-end-${idx}" value="${a.end}" style="border:1px solid var(--ln2); border-radius:6px; padding:4px 8px; font-size:12px;"></div></div>`).join("");
 }
-
 document.getElementById('ptn-save-availability-btn')?.addEventListener('click', async () => {
-  const s = read(LS.partner_session, null); if(!s) return;
-  const partners = cache.partners; const idx = partners.findIndex(x => x.id === s.partnerId);
-  if(idx < 0) return;
-  
-  const newAvail = DAYS_OF_WEEK.map((d, i) => ({
-    day: d,
-    active: document.getElementById(`avail-active-${i}`).checked,
-    start: document.getElementById(`avail-start-${i}`).value,
-    end: document.getElementById(`avail-end-${i}`).value
-  }));
-  
-  partners[idx].availability = JSON.stringify(newAvail);
-  await apiFetch("/api/partners", { method: "PUT", body: JSON.stringify(partners[idx]) });
-  toast("✅ زمان‌بندی با موفقیت ذخیره شد");
+  const s = read(LS.partner_session, null); if(!s) return; const partners = cache.partners; const idx = partners.findIndex(x => x.id === s.partnerId); if(idx < 0) return;
+  const newAvail = DAYS_OF_WEEK.map((d, i) => ({ day: d, active: document.getElementById(`avail-active-${i}`).checked, start: document.getElementById(`avail-start-${i}`).value, end: document.getElementById(`avail-end-${i}`).value }));
+  partners[idx].availability = JSON.stringify(newAvail); await apiFetch("/api/partners", { method: "PUT", body: JSON.stringify(partners[idx]) }); toast("✅ زمان‌بندی با موفقیت ذخیره شد");
 });
 
 // ---------------- پنل ادمین ----------------
@@ -1961,15 +1737,13 @@ document.getElementById('admin-login-form')?.addEventListener('submit', async (e
   e.preventDefault(); const otp = toEn($("#admin-otp").value.trim()); toast("در حال بررسی...");
   const res = await apiFetch("/api/admin/login", { method: "POST", body: JSON.stringify({ username: $("#admin-user").value, otpCode: otp }) });
   if(res.ok && res.data.success) { 
-    localStorage.setItem(LS.admin_token, res.data.token);
-    $("#admin-login-view").hidden = true; $("#admin-panel-view").hidden = false; 
-    toast("ورود موفق"); 
-    renderAdminServices(); renderPartners(); renderSlots(); renderDashboard(); renderPayments(); renderOrdersAdmin(); 
+    localStorage.setItem(LS.admin_token, res.data.token); $("#admin-login-view").hidden = true; $("#admin-panel-view").hidden = false; 
+    toast("ورود موفق"); renderAdminServices(); renderPartners(); renderSlots(); renderDashboard(); renderPayments(); renderOrdersAdmin(); 
   } else toast(res.data.error || "کد 2FA نادرست است", true);
 });
 document.getElementById('admin-logout-btn')?.addEventListener('click', () => { 
-    localStorage.removeItem(LS.admin_token);
-    $("#admin-login-view").hidden = false; $("#admin-panel-view").hidden = true; 
+    localStorage.removeItem(LS.admin_token); $("#admin-login-view").hidden = false; $("#admin-panel-view").hidden = true; 
+    showScreen("home"); document.getElementById('welcome-overlay').classList.remove('hidden'); toast("از پنل مدیریت خارج شدید");
 });
 
 function renderDashboard() {
@@ -1978,62 +1752,27 @@ function renderDashboard() {
 }
 
 function renderOrdersAdmin() {
-  const tb = document.getElementById("ord-tbody");
-  if (!tb) return;
-  
+  const tb = document.getElementById("ord-tbody"); if (!tb) return;
   const orders = [...cache.orders].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
   if (!orders.length) { tb.innerHTML = '<tr><td colspan="6"><div class="empty">هنوز سفارشی نیست</div></td></tr>'; return; }
   
   tb.innerHTML = orders.map(o => {
-    const st = STATUS[o.status] || STATUS.pending;
-    const activePartners = cache.partners.filter(p => p.status === "active");
-    let assignSection = "";
-    
+    const st = STATUS[o.status] || STATUS.pending; const activePartners = cache.partners.filter(p => p.status === "active"); let assignSection = "";
     if (o.status === 'scheduled') {
-        let matchingPartners = [];
-        if (o.serviceType === 'spray' || o.serviceType === 'drone') matchingPartners = activePartners.filter(p => p.type === 'drone');
-        else matchingPartners = activePartners.filter(p => p.type === 'mechanization');
-
+        let matchingPartners = []; if (o.serviceType === 'spray' || o.serviceType === 'drone') matchingPartners = activePartners.filter(p => p.type === 'drone'); else matchingPartners = activePartners.filter(p => p.type === 'mechanization');
         if (matchingPartners.length > 0) {
-            assignSection = `<div style="margin-top:10px; padding:8px; background:var(--b50); border:1px dashed var(--b300); border-radius:8px;">
-                <label style="font-size:11px; color:var(--b800); font-weight:800; display:block; margin-bottom:6px;">👇 جهت ارجاع، همکار را انتخاب کنید:</label>
-                <select onchange="assignToPartner('${o.id}', this.value)" style="width:100%; padding:8px; font-size:12px; border-radius:6px; border:1px solid var(--b400); font-weight:bold;">
-                  <option value="">انتخاب همکار...</option>
-                  ${matchingPartners.map(p => `<option value="${p.id}">${esc(p.name)} (${esc(p.city)})</option>`).join("")}
-                </select></div>`;
+            assignSection = `<div style="margin-top:10px; padding:8px; background:var(--b50); border:1px dashed var(--b300); border-radius:8px;"><label style="font-size:11px; color:var(--b800); font-weight:800; display:block; margin-bottom:6px;">👇 جهت ارجاع، همکار را انتخاب کنید:</label><select onchange="assignToPartner('${o.id}', this.value)" style="width:100%; padding:8px; font-size:12px; border-radius:6px; border:1px solid var(--b400); font-weight:bold;"><option value="">انتخاب همکار...</option>${matchingPartners.map(p => `<option value="${p.id}">${esc(p.name)} (${esc(p.city)})</option>`).join("")}</select></div>`;
         } else { assignSection = `<div style="margin-top:8px; font-size:11px; color:var(--dng); font-weight:bold;">⚠️ همکار فعالی نیست!</div>`; }
-    } else if (o.partnerId) {
-        const ptn = activePartners.find(p => p.id === o.partnerId);
-        assignSection = `<div style="margin-top:8px; font-size:12px; font-weight:800; color:var(--purple);">👤 ارجاع به: ${ptn ? ptn.name : 'همکار'}</div>`;
-    }
-
+    } else if (o.partnerId) { const ptn = activePartners.find(p => p.id === o.partnerId); assignSection = `<div style="margin-top:8px; font-size:12px; font-weight:800; color:var(--purple);">👤 ارجاع به: ${ptn ? ptn.name : 'همکار'}</div>`; }
     let ratingStars = o.rating ? '⭐'.repeat(o.rating) : '—';
-    
     return `<tr>
-      <td><code class="ltr">${esc(o.code)}</code></td>
-      <td><strong>${esc(o.name)}</strong><br><small style="color:var(--i500)">${esc(o.phone)}</small></td>
-      <td>${esc(o.serviceName)}</td>
-      <td><span class="status ${st.cls}">${st.label}</span></td>
-      <td style="color:var(--gold); font-size:14px;">${ratingStars}</td>
-      <td style="min-width:180px;">
-        <select onchange="changeOrderStatus('${o.id}', this.value)" style="padding:6px; border-radius:6px; border:1px solid var(--ln2); font-size:11.5px; margin-bottom:4px; width:100%;">
-          <option value="pending" ${o.status==='pending'?'selected':''}>در انتظار پرداخت</option>
-          <option value="receipt_pending" ${o.status==='receipt_pending'?'selected':''}>بررسی فیش</option>
-          <option value="scheduled" ${o.status==='scheduled'?'selected':''}>تایید شد / زمان‌بندی</option>
-          <option value="assigned" ${o.status==='assigned'?'selected':''}>ارجاع شده</option>
-          <option value="in_progress" ${o.status==='in_progress'?'selected':''}>در حال انجام</option>
-          <option value="done" ${o.status==='done'?'selected':''}>اتمام کار</option>
-          <option value="completed" ${o.status==='completed'?'selected':''}>تکمیل شده</option>
-          <option value="cancelled" ${o.status==='cancelled'?'selected':''}>لغو شده</option>
-        </select>${assignSection}
-      </td></tr>`;
+      <td><code class="ltr">${esc(o.code)}</code></td><td><strong>${esc(o.name)}</strong><br><small style="color:var(--i500)">${esc(o.phone)}</small></td><td>${esc(o.serviceName)}</td><td><span class="status ${st.cls}">${st.label}</span></td><td style="color:var(--gold); font-size:14px;">${ratingStars}</td>
+      <td style="min-width:180px;"><select onchange="changeOrderStatus('${o.id}', this.value)" style="padding:6px; border-radius:6px; border:1px solid var(--ln2); font-size:11.5px; margin-bottom:4px; width:100%;"><option value="pending" ${o.status==='pending'?'selected':''}>در انتظار پرداخت</option><option value="receipt_pending" ${o.status==='receipt_pending'?'selected':''}>بررسی فیش</option><option value="scheduled" ${o.status==='scheduled'?'selected':''}>تایید شد / زمان‌بندی</option><option value="assigned" ${o.status==='assigned'?'selected':''}>ارجاع شده</option><option value="in_progress" ${o.status==='in_progress'?'selected':''}>در حال انجام</option><option value="done" ${o.status==='done'?'selected':''}>اتمام کار</option><option value="completed" ${o.status==='completed'?'selected':''}>تکمیل شده</option><option value="cancelled" ${o.status==='cancelled'?'selected':''}>لغو شده</option></select>${assignSection}</td></tr>`;
   }).join("");
 }
 
 window.assignToPartner = async function(orderId, partnerId) {
-    if(!partnerId) return;
-    const o = cache.orders.find(x => x.id === orderId); const p = cache.partners.find(x => x.id === partnerId);
-    if(!o || !p) return;
+    if(!partnerId) return; const o = cache.orders.find(x => x.id === orderId); const p = cache.partners.find(x => x.id === partnerId); if(!o || !p) return;
     o.partnerId = partnerId; o.status = 'assigned';
     await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id: orderId, status: "assigned", partnerId: partnerId }) });
     const smsText = `سلام ${p.name} عزیز،\nیک سفارش جدید به شما ارجاع شد.\nکد سفارش: ${o.code}\nنام مشتری: ${o.name}\nشهر: ${o.city}\nمساحت: ${o.area} هکتار\nلطفاً جهت مشاهده جزئیات و تایید، وارد پنل همکار شوید.\nسم‌پاش هوشمند`;
@@ -2042,501 +1781,205 @@ window.assignToPartner = async function(orderId, partnerId) {
 }
 
 function renderPayments() {
-  const box = document.getElementById("payments-list"); if(!box) return;
-  const pendingOrders = cache.orders.filter(o => o.status === "receipt_pending");
+  const box = document.getElementById("payments-list"); if(!box) return; const pendingOrders = cache.orders.filter(o => o.status === "receipt_pending");
   if(!pendingOrders.length) { box.innerHTML = '<div class="empty">فیشی در انتظار تایید نیست</div>'; return; }
-  
-  box.innerHTML = pendingOrders.map(o => `
-    <div class="admin-card" style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px;">
-      <div style="flex:1; min-width:200px;"><strong>${esc(o.code)} - ${esc(o.name)}</strong><div style="font-size:12px; color:var(--i500); margin-top:4px;">مبلغ: ${fmtT(o.amount)}</div><div style="font-size:12px; color:var(--i500); margin-top:2px;">شماره: ${esc(o.phone)}</div></div>
-      <div style="display:flex; gap:8px; flex-wrap:wrap;">
-        <button class="btn btn-light btn-sm" onclick="viewReceipt('${o.id}')">👁️ مشاهده فیش</button>
-        <button class="btn btn-green btn-sm" onclick="changeOrderStatus('${o.id}', 'scheduled')">تایید</button>
-        <button class="btn btn-danger btn-sm" onclick="changeOrderStatus('${o.id}', 'receipt_rejected')">رد</button>
-      </div>
-    </div>
-  `).join("");
+  box.innerHTML = pendingOrders.map(o => `<div class="admin-card" style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px;"><div style="flex:1; min-width:200px;"><strong>${esc(o.code)} - ${esc(o.name)}</strong><div style="font-size:12px; color:var(--i500); margin-top:4px;">مبلغ: ${fmtT(o.amount)}</div><div style="font-size:12px; color:var(--i500); margin-top:2px;">شماره: ${esc(o.phone)}</div></div><div style="display:flex; gap:8px; flex-wrap:wrap;"><button class="btn btn-light btn-sm" onclick="viewReceipt('${o.id}')">👁️ مشاهده فیش</button><button class="btn btn-green btn-sm" onclick="changeOrderStatus('${o.id}', 'scheduled')">تایید</button><button class="btn btn-danger btn-sm" onclick="changeOrderStatus('${o.id}', 'receipt_rejected')">رد</button></div></div>`).join("");
 }
 
 window.viewReceipt = async function(orderId) {
-    const container = document.getElementById("receipt-image-container");
-    container.innerHTML = '<span style="color:var(--i500);">در حال دریافت تصویر...</span>';
-    document.getElementById("receipt-view-modal").classList.add("show");
+    const container = document.getElementById("receipt-image-container"); container.innerHTML = '<span style="color:var(--i500);">در حال دریافت تصویر...</span>'; document.getElementById("receipt-view-modal").classList.add("show");
     const res = await apiFetch(`/api/receipt?orderId=${orderId}`);
     if(res.ok && res.data.data) container.innerHTML = `<img src="${res.data.data}" style="max-width:100%; border-radius:8px; max-height:400px; object-fit:contain;">`;
     else container.innerHTML = '<span style="color:var(--dng);">تصویر فیش یافت نشد!</span>';
 }
-
 window.changeOrderStatus = async function(id, newStatus) {
     const o = cache.orders.find(x => x.id === id);
-    if(o) {
-        o.status = newStatus;
-        await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id, status: newStatus }) });
-        renderPayments(); renderDashboard(); renderOrdersAdmin(); toast("✅ وضعیت تغییر کرد");
-    }
+    if(o) { o.status = newStatus; await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id, status: newStatus }) }); renderPayments(); renderDashboard(); renderOrdersAdmin(); toast("✅ وضعیت تغییر کرد"); }
 }
 
 document.querySelectorAll("#admin-tabs button").forEach(b => {
   b.onclick = () => {
     document.querySelectorAll("#admin-tabs button").forEach(x=>x.setAttribute("aria-selected", x===b?"true":"false"));
     document.querySelectorAll(".admin-panel").forEach(p=>p.classList.toggle("active", p.dataset.panel===b.dataset.tab));
-    if(b.dataset.tab === 'services' || b.dataset.tab === 'pricing') renderAdminServices(); 
-    if(b.dataset.tab === 'partners') renderPartners(); 
-    if(b.dataset.tab === 'schedule') renderSlots(); 
-    if(b.dataset.tab === 'dash') renderDashboard();
-    if(b.dataset.tab === 'orders') renderOrdersAdmin();
-    if(b.dataset.tab === 'payments') renderPayments();
-    if(b.dataset.tab === 'videos') renderVideoAdmin(); 
-    if(b.dataset.tab === 'messages') renderAdminMessages();
-    if(b.dataset.tab === 'customers') renderCustomers();
-    if(b.dataset.tab === 'settings') loadPaymentSettings();
+    if(b.dataset.tab === 'services' || b.dataset.tab === 'pricing') renderAdminServices(); if(b.dataset.tab === 'partners') renderPartners(); if(b.dataset.tab === 'schedule') renderSlots(); if(b.dataset.tab === 'dash') renderDashboard();
+    if(b.dataset.tab === 'orders') renderOrdersAdmin(); if(b.dataset.tab === 'payments') renderPayments(); if(b.dataset.tab === 'videos') renderVideoAdmin(); if(b.dataset.tab === 'messages') renderAdminMessages();
+    if(b.dataset.tab === 'customers') renderCustomers(); if(b.dataset.tab === 'settings') loadPaymentSettings();
   };
 });
 
 function populateSlotDates() {
-    const sel = $("#slot-date-select");
-    if(!sel) return;
-    sel.innerHTML = '<option value="">انتخاب تاریخ</option>';
+    const sel = $("#slot-date-select"); if(!sel) return; sel.innerHTML = '<option value="">انتخاب تاریخ</option>';
     const today = new Date();
     for(let i = 0; i <= 60; i++) {
-        const d = new Date(today);
-        d.setDate(today.getDate() + i);
+        const d = new Date(today); d.setDate(today.getDate() + i);
         const jDate = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {year:"numeric", month:"2-digit", day:"2-digit"}).format(d);
-        const parts = jDate.split('/');
-        const dateStr = `${toEn(parts[0])}/${toEn(parts[1])}/${toEn(parts[2])}`;
+        const parts = jDate.split('/'); const dateStr = `${toEn(parts[0])}/${toEn(parts[1])}/${toEn(parts[2])}`;
         sel.innerHTML += `<option value="${dateStr}">${jDate}</option>`;
     }
 }
 
 function renderSlots(){
-  populateSlotDates();
-  
-  const srvSelect = $("#slot-service-select");
-  if(srvSelect) {
-      const activeServices = getConfig().services.filter(s => !s.hidden);
-      srvSelect.innerHTML = '<option value="">ابتدا دستگاه را انتخاب کنید</option>' + activeServices.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join("");
-  }
-
-  const tb = $("#slot-tbody"); if(!tb) return;
-  const all = cache.slots.sort((a,b)=>a.date.localeCompare(b.date));
+  populateSlotDates(); const srvSelect = $("#slot-service-select");
+  if(srvSelect) { const activeServices = getConfig().services.filter(s => !s.hidden); srvSelect.innerHTML = '<option value="">ابتدا دستگاه را انتخاب کنید</option>' + activeServices.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join(""); }
+  const tb = $("#slot-tbody"); if(!tb) return; const all = cache.slots.sort((a,b)=>a.date.localeCompare(b.date));
   if(!all.length) { tb.innerHTML='<tr><td colspan="6"><div class="empty">ظرفیتی ثبت نشده است</div></td></tr>'; return; }
-  
   const allServices = getConfig().services;
-
   tb.innerHTML = all.map(s => {
-     const booked = cache.orders.filter(o=>o.slotId===s.id && o.status!=="cancelled").length; 
-     const rem = s.cap - booked;
+     const booked = cache.orders.filter(o=>o.slotId===s.id && o.status!=="cancelled").length; const rem = s.cap - booked;
      const st = rem <= 0 ? '<span class="status red">پر</span>' : '<span class="status green">آزاد</span>';
-     
-     const srv = allServices.find(x => x.id === s.serviceId);
-     const srvName = srv ? esc(srv.name) : '<span style="color:var(--dng)">نامشخص</span>';
-
-     return `<tr>
-       <td><code class="ltr" style="font-size:12px;">${esc(s.date)}</code></td>
-       <td><strong style="font-size:11.5px;">${srvName}</strong></td>
-       <td>${toFa(s.cap)}</td>
-       <td>${toFa(booked)}</td>
-       <td><strong style="color:var(--${rem>0?'ok-fg':'dng-fg'})">${toFa(rem)}</strong></td>
-       <td style="text-align:center;"><button class="icon-mini danger" onclick="deleteSlot('${s.id}')" style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px;">✕</button></td>
-     </tr>`;
+     const srv = allServices.find(x => x.id === s.serviceId); const srvName = srv ? esc(srv.name) : '<span style="color:var(--dng)">نامشخص</span>';
+     return `<tr><td><code class="ltr" style="font-size:12px;">${esc(s.date)}</code></td><td><strong style="font-size:11.5px;">${srvName}</strong></td><td>${toFa(s.cap)}</td><td>${toFa(booked)}</td><td><strong style="color:var(--${rem>0?'ok-fg':'dng-fg'})">${toFa(rem)}</strong></td><td style="text-align:center;"><button class="icon-mini danger" onclick="deleteSlot('${s.id}')" style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px;">✕</button></td></tr>`;
   }).join("");
 }
 
 window.deleteSlot = async function(id) {
-  if(!confirm("حذف شود؟")) return;
-  cache.slots = cache.slots.filter(x=>x.id!==id);
-  await apiFetch("/api/slots", { method: "DELETE", body: JSON.stringify({id}) });
-  renderSlots(); toast("حذف شد");
+  if(!confirm("حذف شود؟")) return; cache.slots = cache.slots.filter(x=>x.id!==id); await apiFetch("/api/slots", { method: "DELETE", body: JSON.stringify({id}) }); renderSlots(); toast("حذف شد");
 }
 
 $("#slot-add-btn")?.addEventListener("click", async () => {
-  const serviceId = $("#slot-service-select").value;
-  if(!serviceId) return toast("لطفاً ابتدا دستگاه را انتخاب کنید", true);
-  
-  const date = $("#slot-date-select").value;
-  if(!date) return toast("لطفاً تاریخ را از منو انتخاب کنید", true);
-  
-  const c = +toEn($("#slot-cap").value) || 1; 
-  if(c <= 0) return toast("ظرفیت را وارد کنید", true);
-  
+  const serviceId = $("#slot-service-select").value; if(!serviceId) return toast("لطفاً ابتدا دستگاه را انتخاب کنید", true);
+  const date = $("#slot-date-select").value; if(!date) return toast("لطفاً تاریخ را از منو انتخاب کنید", true);
+  const c = +toEn($("#slot-cap").value) || 1; if(c <= 0) return toast("ظرفیت را وارد کنید", true);
   const existingIdx = cache.slots.findIndex(s => s.date === date && s.serviceId === serviceId);
-  if(existingIdx >= 0) { 
-      cache.slots[existingIdx].cap = c; 
-      await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(cache.slots[existingIdx]) });
-      toast("ظرفیت این دستگاه در این تاریخ به‌روزرسانی شد"); 
-  } else { 
-      const newSlot = { id: uid(), date: date, cap: c, createdAt: Date.now(), serviceId: serviceId };
-      cache.slots.push(newSlot); 
-      await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(newSlot) });
-      toast("✅ روز جدید برای این دستگاه ثبت شد"); 
-  }
-  $("#slot-cap").value = "2"; 
-  renderSlots();
+  if(existingIdx >= 0) { cache.slots[existingIdx].cap = c; await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(cache.slots[existingIdx]) }); toast("ظرفیت این دستگاه در این تاریخ به‌روزرسانی شد"); } 
+  else { const newSlot = { id: uid(), date: date, cap: c, createdAt: Date.now(), serviceId: serviceId }; cache.slots.push(newSlot); await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(newSlot) }); toast("✅ روز جدید برای این دستگاه ثبت شد"); }
+  $("#slot-cap").value = "2"; renderSlots();
 });
 
 $("#slot-auto-fill-btn")?.addEventListener("click", async () => {
-   const serviceId = $("#slot-service-select").value;
-   if(!serviceId) return toast("لطفاً ابتدا دستگاه را انتخاب کنید", true);
-
-   let added = 0;
-   const today = new Date();
-   const newSlotsToSync = [];
-
+   const serviceId = $("#slot-service-select").value; if(!serviceId) return toast("لطفاً ابتدا دستگاه را انتخاب کنید", true);
+   let added = 0; const today = new Date(); const newSlotsToSync = [];
    for(let i = 1; i <= 30; i++) {
-      const d = new Date(today); 
-      d.setDate(today.getDate() + i);
+      const d = new Date(today); d.setDate(today.getDate() + i);
       const jDate = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {year:"numeric", month:"2-digit", day:"2-digit"}).format(d);
-      const parts = jDate.split('/'); 
-      const dateStr = `${toEn(parts[0])}/${toEn(parts[1])}/${toEn(parts[2])}`;
-      
-      if(!cache.slots.some(s => s.date === dateStr && s.serviceId === serviceId)) { 
-          const newSlot = { id: uid(), date: dateStr, cap: 2, createdAt: Date.now(), serviceId: serviceId };
-          cache.slots.push(newSlot); 
-          newSlotsToSync.push(newSlot);
-          added++; 
-      }
+      const parts = jDate.split('/'); const dateStr = `${toEn(parts[0])}/${toEn(parts[1])}/${toEn(parts[2])}`;
+      if(!cache.slots.some(s => s.date === dateStr && s.serviceId === serviceId)) { const newSlot = { id: uid(), date: dateStr, cap: 2, createdAt: Date.now(), serviceId: serviceId }; cache.slots.push(newSlot); newSlotsToSync.push(newSlot); added++; }
    }
-   
-   if(added > 0) {
-       toast("در حال ذخیره در سرور...");
-       for(const s of newSlotsToSync) {
-           await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(s) });
-       }
-       renderSlots(); 
-       toast(`✅ ${toFa(added)} روز برای این دستگاه اضافه شد.`);
-   } else {
-       toast("تمام ۳۰ روز آینده برای این دستگاه از قبل ثبت شده‌اند.");
-   }
+   if(added > 0) { toast("در حال ذخیره در سرور..."); for(const s of newSlotsToSync) { await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(s) }); } renderSlots(); toast(`✅ ${toFa(added)} روز برای این دستگاه اضافه شد.`); } 
+   else { toast("تمام ۳۰ روز آینده برای این دستگاه از قبل ثبت شده‌اند."); }
 });
 
 function renderAdminServices() {
-  const cfg = getConfig(); 
-  const listContainer = document.getElementById('srv-list-container'); 
-  const pricingTbody = document.getElementById('pricing-tbody');
-  
+  const cfg = getConfig(); const listContainer = document.getElementById('srv-list-container'); const pricingTbody = document.getElementById('pricing-tbody');
   const activeServices = cfg.services.filter(s => !s.hidden);
-  
-  if(!activeServices.length) { 
-    if(listContainer) listContainer.innerHTML = '<div class="empty">خدمتی ثبت نشده است.</div>';
-    if(pricingTbody) pricingTbody.innerHTML = '<tr><td colspan="5"><div class="empty">خدمتی ثبت نشده است.</div></td></tr>';
-    return; 
-  }
-
-  const categories = {
-    land_prep: "🚜 آماده‌سازی زمین",
-    planting: "🌱 کاشت",
-    care: "💧 رسیدگی (سمپاشی، آبیاری...)",
-    harvest: "🌾 برداشت",
-    other: "⚙️ سایر خدمات"
-  };
-
-  const renderRegionTags = (r) => {
-      if(!r) return '<span style="color:var(--i400);">سراسری</span>';
-      return r.split(',').map(reg => `<span style="color:var(--b600); background:var(--b50); padding:2px 6px; border-radius:4px; margin-left:4px; display:inline-block; margin-bottom:4px; font-size:11px;">📍 ${esc(reg)}</span>`).join("");
-  };
-
+  if(!activeServices.length) { if(listContainer) listContainer.innerHTML = '<div class="empty">خدمتی ثبت نشده است.</div>'; if(pricingTbody) pricingTbody.innerHTML = '<tr><td colspan="5"><div class="empty">خدمتی ثبت نشده است.</div></td></tr>'; return; }
+  const categories = { land_prep: "🚜 آماده‌سازی زمین", planting: "🌱 کاشت", care: "💧 رسیدگی (سمپاشی، آبیاری...)", harvest: "🌾 برداشت", other: "⚙️ سایر خدمات" };
+  const renderRegionTags = (r) => { if(!r) return '<span style="color:var(--i400);">سراسری</span>'; return r.split(',').map(reg => `<span style="color:var(--b600); background:var(--b50); padding:2px 6px; border-radius:4px; margin-left:4px; display:inline-block; margin-bottom:4px; font-size:11px;">📍 ${esc(reg)}</span>`).join(""); };
   if (listContainer) {
     let listHtml = "";
-    
     for (const [catKey, catName] of Object.entries(categories)) {
         const catServices = activeServices.filter(s => (s.category || 'other') === catKey);
-        
         if (catServices.length > 0) {
             listHtml += `<div style="margin-top:16px; margin-bottom:8px; font-weight:900; color:var(--b800); font-size:14px; border-bottom:2px solid var(--b200); padding-bottom:4px;">${catName}</div>`;
-            
-            listHtml += catServices.map(s => `
-              <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; background:var(--sur); border:1px solid var(--ln); border-radius:12px; padding:12px 16px; margin-bottom:8px;">
-                <div style="flex:1; min-width:200px; font-weight:700; font-size:13px; color:var(--i900);">
-                  ${esc(s.name)} 
-                  <small style="color:var(--i500); font-weight:normal; display:block; margin-top:4px;">
-                    واحد: ${esc(s.unit)} | نوع: ${s.type === 'drone' ? 'پهپاد' : 'مکانیزاسیون'}
-                  </small>
-                  <div style="margin-top:6px;">${renderRegionTags(s.region)}</div>
-                </div>
-                <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-                  <input type="text" class="ltr" style="width:100px; padding:8px; height:36px; border:1px solid var(--ln2); border-radius:8px; text-align:center; font-weight:bold;" value="${s.rate}" id="srv-rate-${s.id}">
-                  <button class="btn btn-light btn-sm" onclick="updateServiceRate('${s.id}')" title="ذخیره سریع نرخ" style="height:36px; width:36px; padding:0; display:grid; place-items:center;">
-                    <svg class="icon" style="width:16px; height:16px;"><use href="#i-save"/></svg>
-                  </button>
-                  <button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش کامل" style="height:36px; width:36px; padding:0; display:grid; place-items:center;">
-                    <svg class="icon" style="width:16px; height:16px;"><use href="#i-edit"/></svg>
-                  </button>
-                  <button class="btn btn-danger btn-sm" onclick="deleteService('${s.id}')" title="حذف" style="height:36px; width:36px; padding:0; display:grid; place-items:center;">
-                    <svg class="icon" style="width:16px; height:16px;"><use href="#i-trash"/></svg>
-                  </button>
-                </div>
-              </div>
-            `).join("");
+            listHtml += catServices.map(s => `<div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; background:var(--sur); border:1px solid var(--ln); border-radius:12px; padding:12px 16px; margin-bottom:8px;"><div style="flex:1; min-width:200px; font-weight:700; font-size:13px; color:var(--i900);">${esc(s.name)}<small style="color:var(--i500); font-weight:normal; display:block; margin-top:4px;">واحد: ${esc(s.unit)} | نوع: ${s.type === 'drone' ? 'پهپاد' : 'مکانیزاسیون'}</small><div style="margin-top:6px;">${renderRegionTags(s.region)}</div></div><div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;"><input type="text" class="ltr" style="width:100px; padding:8px; height:36px; border:1px solid var(--ln2); border-radius:8px; text-align:center; font-weight:bold;" value="${s.rate}" id="srv-rate-${s.id}"><button class="btn btn-light btn-sm" onclick="updateServiceRate('${s.id}')" title="ذخیره سریع نرخ" style="height:36px; width:36px; padding:0; display:grid; place-items:center;"><svg class="icon" style="width:16px; height:16px;"><use href="#i-save"/></svg></button><button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش کامل" style="height:36px; width:36px; padding:0; display:grid; place-items:center;"><svg class="icon" style="width:16px; height:16px;"><use href="#i-edit"/></svg></button><button class="btn btn-danger btn-sm" onclick="deleteService('${s.id}')" title="حذف" style="height:36px; width:36px; padding:0; display:grid; place-items:center;"><svg class="icon" style="width:16px; height:16px;"><use href="#i-trash"/></svg></button></div></div>`).join("");
         }
     }
     listContainer.innerHTML = listHtml;
   }
-
   if (pricingTbody) {
     pricingTbody.innerHTML = activeServices.map(s => {
       const catName = categories[s.category || 'other'].split(' ')[1]; 
-      return `
-      <tr>
-        <td><strong>${esc(s.name)}</strong><br><small style="color:var(--i500)">${catName}</small></td>
-        <td>${renderRegionTags(s.region)}</td>
-        <td>${esc(s.unit)}</td>
-        <td>
-          <div style="display:flex; align-items:center; gap:6px;">
-            <input type="text" class="ltr" style="width:100px; padding:6px; border:1px solid var(--ln2); border-radius:6px; text-align:center; font-weight:bold;" value="${s.rate}" id="price-tbl-${s.id}">
-            <button class="icon-mini" onclick="updateServiceRateFromTable('${s.id}')" title="ذخیره" style="width:28px; height:28px;">
-              <svg class="icon" style="width:14px; height:14px;"><use href="#i-save"/></svg>
-            </button>
-          </div>
-        </td>
-        <td>
-          <button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش کامل" style="height:32px; padding:0 10px;">
-             <svg class="icon" style="width:14px; height:14px;"><use href="#i-edit"/></svg> ویرایش
-          </button>
-        </td>
-      </tr>
-    `}).join("");
+      return `<tr><td><strong>${esc(s.name)}</strong><br><small style="color:var(--i500)">${catName}</small></td><td>${renderRegionTags(s.region)}</td><td>${esc(s.unit)}</td><td><div style="display:flex; align-items:center; gap:6px;"><input type="text" class="ltr" style="width:100px; padding:6px; border:1px solid var(--ln2); border-radius:6px; text-align:center; font-weight:bold;" value="${s.rate}" id="price-tbl-${s.id}"><button class="icon-mini" onclick="updateServiceRateFromTable('${s.id}')" title="ذخیره" style="width:28px; height:28px;"><svg class="icon" style="width:14px; height:14px;"><use href="#i-save"/></svg></button></div></td><td><button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش کامل" style="height:32px; padding:0 10px;"><svg class="icon" style="width:14px; height:14px;"><use href="#i-edit"/></svg> ویرایش</button></td></tr>`}).join("");
   }
 }
 
 window.updateServiceRateFromTable = async function(id) {
-  const newRate = +toEn(document.getElementById(`price-tbl-${id}`).value) || 0;
-  if(newRate <= 0) return toast("نرخ نامعتبر است", true);
-  const cfg = getConfig(); const srv = cfg.services.find(s => s.id === id);
-  if(srv) { srv.rate = newRate; await setConfig(cfg); renderAdminServices(); toast("✅ نرخ به‌روزرسانی شد"); }
+  const newRate = +toEn(document.getElementById(`price-tbl-${id}`).value) || 0; if(newRate <= 0) return toast("نرخ نامعتبر است", true);
+  const cfg = getConfig(); const srv = cfg.services.find(s => s.id === id); if(srv) { srv.rate = newRate; await setConfig(cfg); renderAdminServices(); toast("✅ نرخ به‌روزرسانی شد"); }
 }
-
 window.updateServiceRate = async function(id) {
-  const newRate = +toEn(document.getElementById(`srv-rate-${id}`).value) || 0;
-  if(newRate <= 0) return toast("نرخ نامعتبر است", true);
-  const cfg = getConfig(); const srv = cfg.services.find(s => s.id === id);
-  if(srv) { srv.rate = newRate; await setConfig(cfg); renderAdminServices(); toast("✅ نرخ به‌روزرسانی شد"); }
+  const newRate = +toEn(document.getElementById(`srv-rate-${id}`).value) || 0; if(newRate <= 0) return toast("نرخ نامعتبر است", true);
+  const cfg = getConfig(); const srv = cfg.services.find(s => s.id === id); if(srv) { srv.rate = newRate; await setConfig(cfg); renderAdminServices(); toast("✅ نرخ به‌روزرسانی شد"); }
 }
 
 window.openEditService = function(id) {
   const cfg = getConfig(); const srv = cfg.services.find(s => s.id === id); if(!srv) return;
-  document.getElementById("edit-srv-id").value = srv.id;
-  document.getElementById("edit-srv-name").value = srv.name;
-  document.getElementById("edit-srv-rate").value = srv.rate;
-  document.getElementById("edit-srv-unit").value = srv.unit;
-  document.getElementById("edit-srv-type").value = srv.type;
-  document.getElementById("edit-srv-category").value = srv.category || 'other';
-  
-  const editSelect = document.getElementById("edit-srv-region");
-  Array.from(editSelect.options).forEach(opt => opt.selected = false);
+  document.getElementById("edit-srv-id").value = srv.id; document.getElementById("edit-srv-name").value = srv.name; document.getElementById("edit-srv-rate").value = srv.rate; document.getElementById("edit-srv-unit").value = srv.unit; document.getElementById("edit-srv-type").value = srv.type; document.getElementById("edit-srv-category").value = srv.category || 'other';
+  const editSelect = document.getElementById("edit-srv-region"); Array.from(editSelect.options).forEach(opt => opt.selected = false);
   if(srv.region) { srv.region.split(",").forEach(reg => { const opt = Array.from(editSelect.options).find(o => o.value === reg); if(opt) opt.selected = true; }); }
   document.getElementById("edit-service-modal").classList.add("show");
 }
 
 document.getElementById("save-edit-srv-btn")?.addEventListener("click", async () => {
-  const id = document.getElementById("edit-srv-id").value;
-  const name = document.getElementById("edit-srv-name").value.trim();
-  const rate = +toEn(document.getElementById("edit-srv-rate").value) || 0;
-  const unit = document.getElementById("edit-srv-unit").value.trim();
-  const type = document.getElementById("edit-srv-type").value;
-  const category = document.getElementById("edit-srv-category").value;
-  const region = Array.from(document.getElementById("edit-srv-region").selectedOptions).map(opt => opt.value).join(",");
-  
+  const id = document.getElementById("edit-srv-id").value; const name = document.getElementById("edit-srv-name").value.trim(); const rate = +toEn(document.getElementById("edit-srv-rate").value) || 0; const unit = document.getElementById("edit-srv-unit").value.trim(); const type = document.getElementById("edit-srv-type").value; const category = document.getElementById("edit-srv-category").value; const region = Array.from(document.getElementById("edit-srv-region").selectedOptions).map(opt => opt.value).join(",");
   if(!name || rate <= 0 || !unit) return toast("نام، نرخ و واحد را وارد کنید", true);
   const cfg = getConfig(); const srvIndex = cfg.services.findIndex(s => s.id === id);
-  if(srvIndex >= 0) {
-    cfg.services[srvIndex].name = name; cfg.services[srvIndex].rate = rate; cfg.services[srvIndex].unit = unit; 
-    cfg.services[srvIndex].type = type; cfg.services[srvIndex].category = category; cfg.services[srvIndex].region = region; 
-    await setConfig(cfg); document.getElementById("edit-service-modal").classList.remove("show");
-    renderAdminServices(); toast("✅ خدمت ویرایش شد");
-  }
+  if(srvIndex >= 0) { cfg.services[srvIndex].name = name; cfg.services[srvIndex].rate = rate; cfg.services[srvIndex].unit = unit; cfg.services[srvIndex].type = type; cfg.services[srvIndex].category = category; cfg.services[srvIndex].region = region; await setConfig(cfg); document.getElementById("edit-service-modal").classList.remove("show"); renderAdminServices(); toast("✅ خدمت ویرایش شد"); }
 });
 
 document.getElementById('srv-add-btn')?.addEventListener('click', async () => {
-  const name = document.getElementById('srv-name').value.trim(); 
-  const rate = +toEn(document.getElementById('srv-rate').value) || 0;
-  const unit = document.getElementById('srv-unit').value.trim(); 
-  const type = document.getElementById('srv-type').value; 
-  const category = document.getElementById('srv-category').value;
-  const region = Array.from(document.getElementById("srv-region").selectedOptions).map(opt => opt.value).join(",");
-  
+  const name = document.getElementById('srv-name').value.trim(); const rate = +toEn(document.getElementById('srv-rate').value) || 0; const unit = document.getElementById('srv-unit').value.trim(); const type = document.getElementById('srv-type').value; const category = document.getElementById('srv-category').value; const region = Array.from(document.getElementById("srv-region").selectedOptions).map(opt => opt.value).join(",");
   if(!name || rate <= 0 || !unit) return toast("نام، نرخ و واحد را وارد کنید", true);
-  const cfg = getConfig(); cfg.services.push({ id: uid(), name, rate, unit, type, category, region }); 
-  await setConfig(cfg);
-  
-  document.getElementById('srv-name').value = ""; document.getElementById('srv-rate').value = "1"; document.getElementById('srv-unit').value = "";
-  Array.from(document.getElementById("srv-region").options).forEach(opt => opt.selected = false);
+  const cfg = getConfig(); cfg.services.push({ id: uid(), name, rate, unit, type, category, region }); await setConfig(cfg);
+  document.getElementById('srv-name').value = ""; document.getElementById('srv-rate').value = "1"; document.getElementById('srv-unit').value = ""; Array.from(document.getElementById("srv-region").options).forEach(opt => opt.selected = false);
   renderAdminServices(); toast("✅ خدمت اضافه شد");
 });
 
-window.deleteService = async function(id) { 
-  if(!confirm("حذف شود؟")) return; 
-  const cfg = getConfig(); 
-  const srv = cfg.services.find(s => s.id === id);
-  if(srv) srv.hidden = true; 
-  await setConfig(cfg); renderAdminServices(); 
-};
+window.deleteService = async function(id) { if(!confirm("حذف شود؟")) return; const cfg = getConfig(); const srv = cfg.services.find(s => s.id === id); if(srv) srv.hidden = true; await setConfig(cfg); renderAdminServices(); };
 
 window.loadPaymentSettings = function() {
-    const cfg = getConfig();
-    if(cfg.payment) {
-        if($("#cfg-pay-card")) $("#cfg-pay-card").value = cfg.payment.card || "";
-        if($("#cfg-pay-iban")) $("#cfg-pay-iban").value = cfg.payment.iban || "";
-        if($("#cfg-pay-holder")) $("#cfg-pay-holder").value = cfg.payment.holder || "";
-    }
+    const cfg = getConfig(); if(cfg.payment) { if($("#cfg-pay-card")) $("#cfg-pay-card").value = cfg.payment.card || ""; if($("#cfg-pay-iban")) $("#cfg-pay-iban").value = cfg.payment.iban || ""; if($("#cfg-pay-holder")) $("#cfg-pay-holder").value = cfg.payment.holder || ""; }
 }
-
-window.savePaymentSettings = async function() {
-    const cfg = getConfig();
-    cfg.payment = { card: $("#cfg-pay-card").value.trim(), iban: $("#cfg-pay-iban").value.trim(), holder: $("#cfg-pay-holder").value.trim() };
-    await setConfig(cfg); toast("✅ تنظیمات پرداخت ذخیره شد");
-}
+window.savePaymentSettings = async function() { const cfg = getConfig(); cfg.payment = { card: $("#cfg-pay-card").value.trim(), iban: $("#cfg-pay-iban").value.trim(), holder: $("#cfg-pay-holder").value.trim() }; await setConfig(cfg); toast("✅ تنظیمات پرداخت ذخیره شد"); }
 
 document.getElementById("gal-upload-btn")?.addEventListener("click", async () => {
-  const title = document.getElementById("gal-title").value.trim();
-  const desc = document.getElementById("gal-desc").value.trim();
-  const file = document.getElementById("gal-file")?.files?.[0];
+  const title = document.getElementById("gal-title").value.trim(); const desc = document.getElementById("gal-desc").value.trim(); const file = document.getElementById("gal-file")?.files?.[0];
   if(!title || !file) return toast("عنوان و فایل الزامی است", true);
-  
-  const btn = document.getElementById("gal-upload-btn"); btn.disabled = true; btn.textContent = "در حال آپلود...";
-  const formData = new FormData(); formData.append('file', file);
-
+  const btn = document.getElementById("gal-upload-btn"); btn.disabled = true; btn.textContent = "در حال آپلود..."; const formData = new FormData(); formData.append('file', file);
   try {
-      const res = await fetch(`${API}/api/upload`, { method: 'POST', body: formData });
-      const data = await res.json();
-      if(data.ok) {
-          const videos = read(LS.videos, []); videos.push({ id: uid(), title, desc, url: data.url, type: data.type, createdAt: Date.now() });
-          write(LS.videos, videos); toast("✅ فایل آپلود شد");
-          document.getElementById("gal-title").value = ""; document.getElementById("gal-desc").value = ""; document.getElementById("gal-file").value = "";
-          renderVideoAdmin();
-      } else toast(data.error || "خطا", true);
+      const res = await fetch(`${API}/api/upload`, { method: 'POST', body: formData }); const data = await res.json();
+      if(data.ok) { const videos = read(LS.videos, []); videos.push({ id: uid(), title, desc, url: data.url, type: data.type, createdAt: Date.now() }); write(LS.videos, videos); toast("✅ فایل آپلود شد"); document.getElementById("gal-title").value = ""; document.getElementById("gal-desc").value = ""; document.getElementById("gal-file").value = ""; renderVideoAdmin(); } 
+      else toast(data.error || "خطا", true);
   } catch(e) { toast("خطای ارتباط", true); } finally { btn.disabled = false; btn.textContent = "آپلود فایل"; }
 });
 
 function renderVideoAdmin() {
-  const box = document.getElementById("kv-admin-videos-list"); if(!box) return; 
-  const items = read(LS.videos, []);
+  const box = document.getElementById("kv-admin-videos-list"); if(!box) return; const items = read(LS.videos, []);
   if(!items.length) { box.innerHTML = '<div class="empty">گالری خالی است</div>'; return; }
-  box.innerHTML = items.map((v, i) => `
-    <div style="background:var(--inset); border:1px solid var(--ln); border-radius:10px; overflow:hidden; display:flex; flex-direction:column;">
-      ${v.type === 'video' ? `<video src="${esc(v.url)}" style="width:100%; height:120px; object-fit:cover;" controls></video>` : `<img src="${esc(v.url)}" style="width:100%; height:120px; object-fit:cover;">`}
-      <div style="padding:10px; flex:1;"><strong style="font-size:12px; display:block; margin-bottom:4px;">${esc(v.title)}</strong><button class="btn btn-danger btn-sm" onclick="deleteVideo(${i})" style="width:100%; margin-top:8px;">حذف</button></div>
-    </div>
-  `).join("");
+  box.innerHTML = items.map((v, i) => `<div style="background:var(--inset); border:1px solid var(--ln); border-radius:10px; overflow:hidden; display:flex; flex-direction:column;">${v.type === 'video' ? `<video src="${esc(v.url)}" style="width:100%; height:120px; object-fit:cover;" controls></video>` : `<img src="${esc(v.url)}" style="width:100%; height:120px; object-fit:cover;">`}<div style="padding:10px; flex:1;"><strong style="font-size:12px; display:block; margin-bottom:4px;">${esc(v.title)}</strong><button class="btn btn-danger btn-sm" onclick="deleteVideo(${i})" style="width:100%; margin-top:8px;">حذف</button></div></div>`).join("");
 }
 window.deleteVideo = function(i) { if(!confirm("حذف شود؟")) return; const videos = read(LS.videos, []); videos.splice(i, 1); write(LS.videos, videos); renderVideoAdmin(); toast("حذف شد"); }
 
 function renderPartners() {
-  const list = document.getElementById('partners-list'); if(!list) return;
-  const all = cache.partners.filter(p => (p.type || "drone") === ptnFilterType);
+  const list = document.getElementById('partners-list'); if(!list) return; const all = cache.partners.filter(p => (p.type || "drone") === ptnFilterType);
   if(!all.length) { list.innerHTML = '<div class="empty">همکاری در این بخش ثبت نشده</div>'; return; }
-  list.innerHTML = all.map(p => `
-    <div class="admin-card" style="display:flex; gap:12px; align-items:flex-start;">
-      <div style="width:40px; height:40px; border-radius:12px; background:var(--purple-bg); color:var(--purple); display:grid; place-items:center; font-weight:800;">${esc(p.name.charAt(0))}</div>
-      <div style="flex:1;">
-        <strong>${esc(p.name)}</strong>
-        <div style="font-size:12px; color:var(--i500); margin-top:2px;">${esc(p.phone)} | ${esc(p.province)} - ${esc(p.county||'')} - ${esc(p.city)} ${p.village ? ' - روستای ' + esc(p.village) : ''}</div>
-        ${p.type === 'mechanization' ? `
-          <div style="font-size:11.5px; color:var(--i600); margin-top:6px; background:var(--sur); padding:8px; border-radius:8px; border:1px solid var(--ln); line-height:1.8;">
-            <div><strong style="color:var(--b700);">🚜 دستگاه:</strong> ${esc(p.machine || p.equipment || '-')}</div>
-            <div><strong style="color:var(--b700);">⚙️ ادوات:</strong> ${esc(p.implements || '-')}</div>
-            <div><strong style="color:var(--b700);">📍 شهرها:</strong> ${esc(p.cities || '-')}</div>
-          </div>` : ''}
-      </div>
-      <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
-        <span class="status ${p.status==='active'?'green':'amber'}">${p.status==='active'?'تایید':'در انتظار'}</span>
-        ${p.status!=='active' ? `<button class="btn btn-green btn-sm" onclick="approvePartner('${p.id}')">تایید</button>` : ''}
-      </div>
-    </div>
-  `).join("");
+  list.innerHTML = all.map(p => `<div class="admin-card" style="display:flex; gap:12px; align-items:flex-start;"><div style="width:40px; height:40px; border-radius:12px; background:var(--purple-bg); color:var(--purple); display:grid; place-items:center; font-weight:800;">${esc(p.name.charAt(0))}</div><div style="flex:1;"><strong>${esc(p.name)}</strong><div style="font-size:12px; color:var(--i500); margin-top:2px;">${esc(p.phone)} | ${esc(p.province)} - ${esc(p.county||'')} - ${esc(p.city)} ${p.village ? ' - روستای ' + esc(p.village) : ''}</div>${p.type === 'mechanization' ? `<div style="font-size:11.5px; color:var(--i600); margin-top:6px; background:var(--sur); padding:8px; border-radius:8px; border:1px solid var(--ln); line-height:1.8;"><div><strong style="color:var(--b700);">🚜 دستگاه:</strong> ${esc(p.machine || p.equipment || '-')}</div><div><strong style="color:var(--b700);">⚙️ ادوات:</strong> ${esc(p.implements || '-')}</div><div><strong style="color:var(--b700);">📍 شهرها:</strong> ${esc(p.cities || '-')}</div></div>` : ''}</div><div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;"><span class="status ${p.status==='active'?'green':'amber'}">${p.status==='active'?'تایید':'در انتظار'}</span>${p.status!=='active' ? `<button class="btn btn-green btn-sm" onclick="approvePartner('${p.id}')">تایید</button>` : ''}</div></div>`).join("");
 }
-window.approvePartner = async function(id) { 
-  const p = cache.partners.find(x=>x.id===id); 
-  if(p) { 
-      p.status = "active"; p.active = true; 
-      await apiFetch("/api/partners", { method: "PUT", body: JSON.stringify(p) });
-      renderPartners(); toast("✅ تایید شد"); 
-  } 
-}
-document.querySelectorAll('#admin-ptn-tabs button').forEach(btn => {
-  btn.onclick = () => { document.querySelectorAll('#admin-ptn-tabs button').forEach(b => b.setAttribute('aria-selected', 'false')); btn.setAttribute('aria-selected', 'true'); ptnFilterType = btn.dataset.ptnType; renderPartners(); };
-});
-window.togglePtnType = function(type) { 
-  const fields = document.getElementById('mechanization-fields'); 
-  if(fields) fields.style.display = type === 'mechanization' ? 'grid' : 'none'; 
-}
+window.approvePartner = async function(id) { const p = cache.partners.find(x=>x.id===id); if(p) { p.status = "active"; p.active = true; await apiFetch("/api/partners", { method: "PUT", body: JSON.stringify(p) }); renderPartners(); toast("✅ تایید شد"); } }
+document.querySelectorAll('#admin-ptn-tabs button').forEach(btn => { btn.onclick = () => { document.querySelectorAll('#admin-ptn-tabs button').forEach(b => b.setAttribute('aria-selected', 'false')); btn.setAttribute('aria-selected', 'true'); ptnFilterType = btn.dataset.ptnType; renderPartners(); }; });
+window.togglePtnType = function(type) { const fields = document.getElementById('mechanization-fields'); if(fields) fields.style.display = type === 'mechanization' ? 'grid' : 'none'; }
 
 function renderAdminMessages() {
   const box = document.getElementById("adm-messages-list"); if(!box) return; const msgs = read(LS.messages, []);
   if(!msgs.length) { box.innerHTML = '<div class="empty">پیامی وجود ندارد</div>'; return; }
   box.innerHTML = msgs.map(m => `<div style="background:var(--inset); padding:10px; border-radius:8px; margin-bottom:8px; font-size:13px;"><div style="font-size:11px; color:var(--i400); margin-bottom:4px;">${esc(m.phone)}</div>${esc(m.text)}</div>`).join("");
 }
-
-document.getElementById("admin-change-pass-form")?.addEventListener("submit", async e => {
-  e.preventDefault(); const newPass = document.getElementById("new-admin-pass").value; if(newPass.length < 6) return toast("رمز باید حداقل ۶ کاراکتر باشد", true);
-  toast("✅ رمز عبور تغییر کرد (در محیط واقعی باید به سرور ارسال شود)"); e.target.reset();
-});
+document.getElementById("admin-change-pass-form")?.addEventListener("submit", async e => { e.preventDefault(); const newPass = document.getElementById("new-admin-pass").value; if(newPass.length < 6) return toast("رمز باید حداقل ۶ کاراکتر باشد", true); toast("✅ رمز عبور تغییر کرد (در محیط واقعی باید به سرور ارسال شود)"); e.target.reset(); });
 
 function renderCustomers() {
-  const o = cache.orders;
-  const map = new Map();
-  o.forEach(x => {
-    if(!map.has(x.phone)) map.set(x.phone, {name: x.name, phone: x.phone, count: 0, area: 0, total: 0});
-    const m = map.get(x.phone); m.count++; m.area += +x.area || 0; if(x.status !== "cancelled") m.total += +x.amount || 0;
-  });
-  let rows = [...map.values()].sort((a, b) => b.count - a.count);
-  const tb = $("#adm-cust-tbody"); if(!tb) return;
+  const o = cache.orders; const map = new Map();
+  o.forEach(x => { if(!map.has(x.phone)) map.set(x.phone, {name: x.name, phone: x.phone, count: 0, area: 0, total: 0}); const m = map.get(x.phone); m.count++; m.area += +x.area || 0; if(x.status !== "cancelled") m.total += +x.amount || 0; });
+  let rows = [...map.values()].sort((a, b) => b.count - a.count); const tb = $("#adm-cust-tbody"); if(!tb) return;
   if(!rows.length) { tb.innerHTML = '<tr><td colspan="5"><div class="empty">هنوز مشتری‌ای سفارش نداده است</div></td></tr>'; return; }
   tb.innerHTML = rows.map(r => `<tr><td><strong>${esc(r.name)}</strong></td><td><code class="ltr" style="background:var(--inset); padding:2px 6px; border-radius:4px;">${esc(r.phone)}</code></td><td>${toFa(r.count)}</td><td>${toFa(r.area)} هکتار</td><td>${fmtT(r.total)}</td></tr>`).join("");
 }
+document.getElementById('sms-send-btn')?.addEventListener('click', async () => { const phone = toEn($("#sms-phone").value.trim()); const text = $("#sms-text").value.trim(); if(!/^09\d{9}$/.test(phone)) return toast("شماره موبایل نامعتبر است", true); if(!text) return toast("متن پیامک را وارد کنید", true); toast("در حال ارسال..."); const res = await apiFetch("/api/sms/send", { method: "POST", body: JSON.stringify({ to: phone, text }) }); if(res.ok) { toast("✅ پیامک با موفقیت ارسال شد"); $("#sms-text").value = ""; } else { toast(res.data.error || "خطا در ارسال پیامک", true); } });
+document.getElementById('backup-dl')?.addEventListener('click', () => { const data = { exportedAt: new Date().toISOString(), orders: cache.orders, partners: cache.partners, slots: cache.slots, messages: read(LS.messages, []), config: getConfig(), receipts: read(LS.receipts, {}), videos: read(LS.videos, []) }; const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `sph-backup-${Date.now()}.json`; a.click(); toast("✅ بکاپ دانلود شد"); });
+document.getElementById('backup-csv')?.addEventListener('click', () => { const rows = [["کد", "نام", "موبایل", "استان", "شهر", "خدمت", "مقدار", "مبلغ", "وضعیت", "تاریخ", "امتیاز"]].concat(cache.orders.map(o => [o.code, o.name, o.phone, o.province, o.city, o.serviceName || o.serviceType, o.area, o.amount, STATUS[o.status]?.label || o.status, new Date(o.createdAt || Date.now()).toLocaleDateString("fa-IR"), o.rating || 0])); const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n"); const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" }); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "orders-backup.csv"; a.click(); toast("✅ خروجی CSV دانلود شد"); });
+document.getElementById('restore-btn')?.addEventListener('click', async () => { const f = document.getElementById('restore-file')?.files?.[0]; if (!f) return toast("فایل بکاپ را انتخاب کنید", true); try { const data = JSON.parse(await f.text()); if (!confirm("داده‌های فعلی جایگزین می‌شوند؟")) return; if (data.orders) { cache.orders = data.orders; write(LS.orders, data.orders); } if (data.partners) { cache.partners = data.partners; write(LS.partners, data.partners); } if (data.slots) { cache.slots = data.slots; write(LS.slots, data.slots); } if (data.config) setConfig(data.config); toast("✅ بازیابی با موفقیت انجام شد (نیاز به همگام‌سازی دستی با سرور دارد)"); setTimeout(() => location.reload(), 1000); } catch (e) { toast("فایل نامعتبر است: " + e.message, true); } });
 
-document.getElementById('sms-send-btn')?.addEventListener('click', async () => {
-  const phone = toEn($("#sms-phone").value.trim()); const text = $("#sms-text").value.trim();
-  if(!/^09\d{9}$/.test(phone)) return toast("شماره موبایل نامعتبر است", true); if(!text) return toast("متن پیامک را وارد کنید", true);
-  toast("در حال ارسال...");
-  const res = await apiFetch("/api/sms/send", { method: "POST", body: JSON.stringify({ to: phone, text }) });
-  if(res.ok) { toast("✅ پیامک با موفقیت ارسال شد"); $("#sms-text").value = ""; } else { toast(res.data.error || "خطا در ارسال پیامک", true); }
-});
-
-document.getElementById('backup-dl')?.addEventListener('click', () => {
-  const data = { exportedAt: new Date().toISOString(), orders: cache.orders, partners: cache.partners, slots: cache.slots, messages: read(LS.messages, []), config: getConfig(), receipts: read(LS.receipts, {}), videos: read(LS.videos, []) };
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `sph-backup-${Date.now()}.json`; a.click(); toast("✅ بکاپ دانلود شد");
-});
-document.getElementById('backup-csv')?.addEventListener('click', () => {
-  const rows = [["کد", "نام", "موبایل", "استان", "شهر", "خدمت", "مقدار", "مبلغ", "وضعیت", "تاریخ", "امتیاز"]].concat(cache.orders.map(o => [o.code, o.name, o.phone, o.province, o.city, o.serviceName || o.serviceType, o.area, o.amount, STATUS[o.status]?.label || o.status, new Date(o.createdAt || Date.now()).toLocaleDateString("fa-IR"), o.rating || 0]));
-  const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n");
-  const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" }); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "orders-backup.csv"; a.click(); toast("✅ خروجی CSV دانلود شد");
-});
-document.getElementById('restore-btn')?.addEventListener('click', async () => {
-  const f = document.getElementById('restore-file')?.files?.[0]; if (!f) return toast("فایل بکاپ را انتخاب کنید", true);
-  try {
-    const data = JSON.parse(await f.text()); if (!confirm("داده‌های فعلی جایگزین می‌شوند؟")) return;
-    if (data.orders) { cache.orders = data.orders; write(LS.orders, data.orders); }
-    if (data.partners) { cache.partners = data.partners; write(LS.partners, data.partners); }
-    if (data.slots) { cache.slots = data.slots; write(LS.slots, data.slots); }
-    if (data.config) setConfig(data.config);
-    toast("✅ بازیابی با موفقیت انجام شد (نیاز به همگام‌سازی دستی با سرور دارد)"); setTimeout(() => location.reload(), 1000);
-  } catch (e) { toast("فایل نامعتبر است: " + e.message, true); }
-});
-
-document.getElementById("home-phone-save")?.addEventListener("click", async () => { const v = toEn(document.getElementById("home-phone-input").value.trim()); if(!/^09\d{9}$/.test(v)) return toast("شماره نامعتبر است.", true); await startPhoneVerification(v); });
+document.getElementById("home-phone-save")?.addEventListener("click", async () => { const v = toEn(document.getElementById("home-phone-input").value.trim()); if(!/^09\d{9}$/.test(v)) return toast("شماره نامعتبر است.", true); await startPhoneVerification(v, 'farmer'); });
 document.getElementById("home-phone-input")?.addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); document.getElementById("home-phone-save").click(); } });
-document.getElementById("welcome-login-btn")?.addEventListener("click", () => { document.getElementById('welcome-overlay').classList.add('hidden'); showScreen("home"); document.getElementById("home-phone-input")?.focus(); });
 
-document.getElementById('guest-btn')?.addEventListener('click', () => { 
-    localStorage.setItem(LS.guest, 'true'); 
-    document.getElementById('welcome-overlay').classList.add('hidden'); 
-    showScreen("home"); 
-});
+document.getElementById('guest-btn')?.addEventListener('click', () => { localStorage.setItem(LS.guest, 'true'); document.getElementById('welcome-overlay').classList.add('hidden'); showScreen("home"); });
 
 (async function boot(){
   await loadAll();
   if (isCustomerVerified() || isGuest()) { document.getElementById('welcome-overlay').classList.add('hidden'); }
-  
   const c = getConfig();
-  const ptnProv = $("#ptn-reg-prov");
-  if(ptnProv) ptnProv.innerHTML = '<option value="">انتخاب</option>' + c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
-
-  const srvRegion = $("#srv-region");
-  if(srvRegion) srvRegion.innerHTML = c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
-
-  const editSrvRegion = $("#edit-srv-region");
-  if(editSrvRegion) editSrvRegion.innerHTML = c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
-  
+  const ptnProv = $("#ptn-reg-prov"); if(ptnProv) ptnProv.innerHTML = '<option value="">انتخاب</option>' + c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
+  const srvRegion = $("#srv-region"); if(srvRegion) srvRegion.innerHTML = c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
+  const editSrvRegion = $("#edit-srv-region"); if(editSrvRegion) editSrvRegion.innerHTML = c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
   refreshHomeStats(); renderCustomerAuth();
 })();
 </script>
