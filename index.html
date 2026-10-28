@@ -403,8 +403,8 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     </div>
   </div>
 </div>
-</section>
-<section class="screen" id="screen-order-drone">
+  </section>
+  <section class="screen" id="screen-order-drone">
 <div class="panel">
 <div class="panel-head"><div><h3>ثبت سفارش سم‌پاشی هوایی</h3><p>اطلاعات مزرعه خود را برای پرواز پهپاد وارد کنید.</p></div></div>
 <form id="drone-order-form" novalidate>
@@ -453,8 +453,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   
   <div class="field-wrap span-2">
     <label style="font-size:14px; font-weight:800; color:var(--b800); margin-bottom:8px;">۱. نوع عملیات را انتخاب کنید *</label>
-    <div id="mach-categories" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:10px;">
-    </div>
+    <div id="mach-categories" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:10px;"></div>
   </div>
 
   <div class="field-wrap span-2" id="mach-services-wrapper" style="display:none; background:var(--b50); padding:16px; border-radius:12px; border:1px solid var(--b200); margin-top:10px;">
@@ -734,18 +733,15 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 
         <div class="field-wrap">
           <label>استان‌ها (چند انتخابی)</label>
-          <select id="srv-region" multiple style="height: 100px; padding: 10px; font-size:12px;">
-          </select>
+          <select id="srv-region" multiple style="height: 100px; padding: 10px; font-size:12px;"></select>
           <span style="font-size:11px; color:var(--i500); margin-top:4px;">برای انتخاب چند استان، در موبایل روی گزینه‌ها ضربه بزنید. (خالی = سراسری)</span>
         </div>
         
         <button class="btn btn-green" id="srv-add-btn" style="height:44px; padding:0 20px; width:100%; margin-top:12px;">
           <svg class="icon"><use href="#i-plus"/></svg> ثبت خدمت
         </button>
-        
       </div>
     </div>
-
     <div id="srv-list-container" style="display:flex; flex-direction:column; gap:10px;"></div>
   </div>
 </div>
@@ -754,17 +750,10 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   <div class="admin-card">
     <h4 style="margin:0 0 16px; font-size:15px;">💵 مدیریت تعرفه‌ها</h4>
     <p style="font-size:12.5px; color:var(--i500); margin-top:-10px; margin-bottom:16px;">در اینجا می‌توانید نرخ تمام خدمات را مشاهده و به سرعت ویرایش کنید.</p>
-    
     <div class="table-scroll">
       <table class="mini-table">
         <thead>
-          <tr>
-            <th>نام خدمت</th>
-            <th>منطقه / شهرستان</th>
-            <th>واحد</th>
-            <th>نرخ پایه (تومان)</th>
-            <th>عملیات</th>
-          </tr>
+          <tr><th>نام خدمت</th><th>منطقه / شهرستان</th><th>واحد</th><th>نرخ پایه (تومان)</th><th>عملیات</th></tr>
         </thead>
         <tbody id="pricing-tbody"></tbody>
       </table>
@@ -845,7 +834,6 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
       <div class="span-2"><button class="btn btn-green" onclick="savePaymentSettings()">💾 ذخیره تنظیمات پرداخت</button></div>
     </div>
   </div>
-
   <div class="admin-card">
     <h4>تغییر رمز عبور</h4>
     <form id="admin-change-pass-form" class="form-grid" novalidate>
@@ -871,13 +859,18 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="actions" style="margin-top:18px"><button class="btn btn-purple" type="submit" style="width:100%; justify-content:center;"><svg class="icon"><use href="#i-sms"/></svg> دریافت کد ورود</button></div>
 </form>
 <form id="partner-register-form" novalidate hidden>
-<div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-name">نام *</label><input id="ptn-reg-name" required></div>
+<div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-name">نام و نام خانوادگی *</label><input id="ptn-reg-name" required></div>
 <div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-phone">موبایل *</label><input id="ptn-reg-phone" required inputmode="numeric" class="ltr" maxlength="11"></div>
+<div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-father">نام پدر *</label><input id="ptn-reg-father" required></div>
+<div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-nid">کد ملی *</label><input id="ptn-reg-nid" class="ltr" required maxlength="10"></div>
 
 <div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-prov">استان *</label><select id="ptn-reg-prov" required><option value="">انتخاب</option></select></div>
 <div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-county">شهرستان *</label><input id="ptn-reg-county" required placeholder="مثلاً: دزفول"></div>
 <div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-city">شهر *</label><input id="ptn-reg-city" required placeholder="مثلاً: شوشتر"></div>
 <div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-village">روستا (اختیاری)</label><input id="ptn-reg-village" placeholder="نام روستا"></div>
+<div class="field-wrap span-2" style="margin-bottom:12px"><label>آدرس پستی *</label><textarea id="ptn-reg-address" required rows="2"></textarea></div>
+<div class="field-wrap" style="margin-bottom:12px"><label>شماره کارت *</label><input id="ptn-reg-card" class="ltr" required maxlength="16"></div>
+<div class="field-wrap" style="margin-bottom:12px"><label>شماره شبا *</label><input id="ptn-reg-sheba" class="ltr" required placeholder="IR..."></div>
 
 <div class="field-wrap span-2" style="margin-bottom:12px; background:var(--inset); padding:12px; border-radius:12px; border:1px solid var(--ln);">
   <label style="margin-bottom:8px; display:block;">نوع همکاری *</label>
@@ -893,11 +886,9 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   <div class="field-wrap span-2"><label>📍 شهرهای قابل پوشش *</label><input id="ptn-reg-cities" placeholder="تهران، کرج..."></div>
 </div>
 
-<div class="field-wrap" style="margin-bottom:12px">
-  <label for="ptn-reg-share" style="display:flex; align-items:center; gap:6px; color:var(--b800);">
-    <svg class="icon" style="width:16px; height:16px; color:var(--b600);"><use href="#i-percent"/></svg> درصد سهم مالک سایت *
-  </label>
-  <input id="ptn-reg-share" inputmode="numeric" class="ltr" value="5" required>
+<div class="field-wrap span-2" style="margin-bottom:12px;">
+  <button type="button" class="btn btn-light" onclick="getPartnerLocation()">📍 ثبت موقعیت مکانی من (خانه/محل کار)</button>
+  <input type="hidden" id="ptn-reg-lat"><input type="hidden" id="ptn-reg-lng">
 </div>
 
 <div class="field-wrap" style="margin-bottom:12px"><label for="ptn-reg-pass">رمز *</label><input id="ptn-reg-pass" required type="password" class="ltr"></div>
@@ -941,42 +932,33 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
     <h4>ویرایش مشخصات و دستگاه‌ها</h4>
     <form id="partner-edit-form" class="form-grid" novalidate>
       <div class="field-wrap span-2" id="ptn-edit-mach-fields" style="display:none;">
-        <label>🚜 دستگاه اصلی</label>
-        <input id="ptn-edit-machine">
+        <label>🚜 دستگاه اصلی</label><input id="ptn-edit-machine">
       </div>
       <div class="field-wrap span-2" id="ptn-edit-impl-fields" style="display:none;">
-        <label>⚙️ ادوات متصل</label>
-        <input id="ptn-edit-implements">
+        <label>⚙️ ادوات متصل</label><input id="ptn-edit-implements">
       </div>
       <div class="field-wrap span-2" id="ptn-edit-cities-fields" style="display:none;">
-        <label>📍 شهرهای قابل پوشش</label>
-        <input id="ptn-edit-cities">
+        <label>📍 شهرهای قابل پوشش</label><input id="ptn-edit-cities">
       </div>
       <div class="field-wrap span-2">
-        <label>رمز عبور جدید (اختیاری)</label>
-        <input id="ptn-edit-pass" type="password" placeholder="برای تغییر رمز، اینجا را پر کنید">
+        <label>رمز عبور جدید (اختیاری)</label><input id="ptn-edit-pass" type="password" placeholder="برای تغییر رمز، اینجا را پر کنید">
       </div>
-      <div class="span-2">
-        <button type="submit" class="btn btn-purple" style="width:100%;">💾 ذخیره تغییرات</button>
-      </div>
+      <div class="span-2"><button type="submit" class="btn btn-purple" style="width:100%;">💾 ذخیره تغییرات</button></div>
     </form>
   </div>
 </div>
 </div>
 </section>
 
-<div class="footer-note">سم‌پاش هوشمند · نسخه ۱۹.۰ · پلتفرم جامع کشاورزی</div>
+<div class="footer-note">سم‌پاش هوشمند · نسخه ۲۰.۰ · پلتفرم جامع کشاورزی</div>
 </main>
 </div>
 <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-<!-- مودال تعهدنامه پهپاد -->
+<!-- مودال‌ها -->
 <div class="modal-back" id="terms-modal">
   <div class="modal" style="max-width:500px;">
-    <h3 style="margin:0 0 16px; font-size:16px; color:var(--b800); display:flex; align-items:center; gap:8px;">
-      <svg class="icon" width="20" height="20" style="color:var(--b600)"><use href="#i-shield"/></svg> تعهدنامه سم‌پاشی هوایی
-    </h3>
-    
+    <h3 style="margin:0 0 16px; font-size:16px; color:var(--b800); display:flex; align-items:center; gap:8px;"><svg class="icon" width="20" height="20" style="color:var(--b600)"><use href="#i-shield"/></svg> تعهدنامه سم‌پاشی هوایی</h3>
     <div style="background:var(--inset); border:1px solid var(--ln); border-radius:12px; padding:16px; height:300px; overflow-y:auto; font-size:13px; line-height:2; color:var(--i700); text-align:justify;">
       <p><b>۱. صحت اطلاعات:</b> اینجانب متعهد می‌شوم کلیه اطلاعات وارد شده از جمله مساحت، نوع محصول، آدرس و موقعیت مکانی مزرعه را با نهایت دقت و صحت ثبت نمایم. هرگونه مغایرت در اطلاعات منجر به لغو سفارش یا محاسبه مجدد هزینه خواهد شد.</p>
       <p><b>۲. مسئولیت نوع سم و دُز مصرفی:</b> تعیین نوع سم، دُز مصرفی و زمان مناسب سم‌پاشی بر عهده مالک مزرعه (سفارش‌دهنده) می‌باشد. تیم سم‌پاشی تنها مسئولیت اجرای دقیق عملیات مطابق با دستورات شما را بر عهده دارد و در قبال اثرگذاری نوع سم یا خسارت ناشی از آن مسئولیتی ندارد.</p>
@@ -984,61 +966,26 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
       <p><b>۴. موانع فیزیکی:</b> سفارش‌دهنده موظف است موانع فیزیکی موجود در مزرعه (مانند درختان بلند، تیرهای برق، آنتن‌ها و...) را از قبل به تیم اطلاع دهد. در غیر این صورت، خسارات احتمالی به پهپاد بر عهده سفارش‌دهنده خواهد بود.</p>
       <p><b>۵. ایمنی و فاصله مجاز:</b> در حین انجام عملیات، سفارش‌دهنده موظف است در صورت حضور افراد یا دام در محل، آن‌ها را نسبت به رعایت فاصله ایمنی کامل از محل پرواز و فرود پهپاد و همچنین محل سم‌پاشی تا شعاع حداقل ۱۰ متر مطلع و ملزم نماید. در صورت بروز هرگونه حادثه ناشی از عدم رعایت این فاصله، مسئولیت آن تماماً بر عهده سفارش‌دهنده می‌باشد.</p>
     </div>
-    
-    <div class="actions" style="justify-content:center; margin-top:20px;">
-      <button class="btn btn-green" onclick="document.getElementById('terms-modal').classList.remove('show')" style="width:100%;">متوجه شدم و می‌پذیرم</button>
-    </div>
+    <div class="actions" style="justify-content:center; margin-top:20px;"><button class="btn btn-green" onclick="document.getElementById('terms-modal').classList.remove('show')" style="width:100%;">متوجه شدم و می‌پذیرم</button></div>
   </div>
 </div>
 
-<!-- مودال ویرایش خدمت -->
 <div class="modal-back" id="edit-service-modal">
   <div class="modal" style="max-width:420px;">
-    <h3 style="margin:0 0 16px; font-size:16px; color:var(--b800); display:flex; align-items:center; gap:8px;">
-      <svg class="icon" width="20" height="20" style="color:var(--b600)"><use href="#i-edit"/></svg> ویرایش خدمت
-    </h3>
+    <h3 style="margin:0 0 16px; font-size:16px; color:var(--b800); display:flex; align-items:center; gap:8px;"><svg class="icon" width="20" height="20" style="color:var(--b600)"><use href="#i-edit"/></svg> ویرایش خدمت</h3>
     <input type="hidden" id="edit-srv-id">
-    
-    <div class="field-wrap" style="margin-bottom:12px;">
-      <label>نام خدمت *</label>
-      <input id="edit-srv-name" style="height:44px;">
-    </div>
-    
-    <div class="field-wrap" style="margin-bottom:12px;">
-      <label>نرخ پایه (تومان) *</label>
-      <input id="edit-srv-rate" class="ltr" style="height:44px;">
-    </div>
-    
-    <div class="field-wrap" style="margin-bottom:12px;">
-      <label>واحد محاسبه *</label>
-      <input id="edit-srv-unit" type="text" style="height:44px;">
-    </div>
-    
-    <div class="field-wrap" style="margin-bottom:12px;">
-      <label>دسته‌بندی اصلی *</label>
+    <div class="field-wrap" style="margin-bottom:12px;"><label>نام خدمت *</label><input id="edit-srv-name" style="height:44px;"></div>
+    <div class="field-wrap" style="margin-bottom:12px;"><label>نرخ پایه (تومان) *</label><input id="edit-srv-rate" class="ltr" style="height:44px;"></div>
+    <div class="field-wrap" style="margin-bottom:12px;"><label>واحد محاسبه *</label><input id="edit-srv-unit" type="text" style="height:44px;"></div>
+    <div class="field-wrap" style="margin-bottom:12px;"><label>دسته‌بندی اصلی *</label>
       <select id="edit-srv-category" style="height:44px; padding:0 10px;">
-        <option value="land_prep">آماده‌سازی زمین</option>
-        <option value="planting">کاشت</option>
-        <option value="care">رسیدگی (سمپاشی، آبیاری...)</option>
-        <option value="harvest">برداشت</option>
-        <option value="other">سایر خدمات</option>
+        <option value="land_prep">آماده‌سازی زمین</option><option value="planting">کاشت</option><option value="care">رسیدگی (سمپاشی، آبیاری...)</option><option value="harvest">برداشت</option><option value="other">سایر خدمات</option>
       </select>
     </div>
-
-    <div class="field-wrap" style="margin-bottom:12px;">
-      <label>نوع دستگاه *</label>
-      <select id="edit-srv-type" style="height:44px; padding:0 10px;">
-        <option value="machinery">مکانیزاسیون</option>
-        <option value="drone">پهپاد</option>
-      </select>
+    <div class="field-wrap" style="margin-bottom:12px;"><label>نوع دستگاه *</label>
+      <select id="edit-srv-type" style="height:44px; padding:0 10px;"><option value="machinery">مکانیزاسیون</option><option value="drone">پهپاد</option></select>
     </div>
-
-    <div class="field-wrap" style="margin-bottom:20px;">
-      <label>استان‌ها (چند انتخابی)</label>
-      <select id="edit-srv-region" multiple style="height: 120px; padding: 10px; font-size:12px;">
-      </select>
-    </div>
-    
+    <div class="field-wrap" style="margin-bottom:20px;"><label>استان‌ها (چند انتخابی)</label><select id="edit-srv-region" multiple style="height: 120px; padding: 10px; font-size:12px;"></select></div>
     <div class="actions" style="justify-content:flex-end; margin-top:0;">
       <button class="btn btn-light" onclick="document.getElementById('edit-service-modal').classList.remove('show')">انصراف</button>
       <button class="btn btn-green" id="save-edit-srv-btn"><svg class="icon"><use href="#i-save"/></svg> ذخیره</button>
@@ -1046,35 +993,21 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   </div>
 </div>
 
-<!-- مودال ثبت امتیاز و نظر (برای مشتری) -->
 <div class="modal-back" id="rating-modal">
   <div class="modal" style="max-width:400px; text-align:center;">
     <h3 style="margin:0 0 16px; font-size:16px; color:var(--b800);">⭐ ثبت امتیاز و نظر</h3>
     <input type="hidden" id="rating-order-id">
-    
-    <div id="star-rating-box" style="display:flex; justify-content:center; gap:8px; font-size:36px; color:var(--ln2); cursor:pointer; margin-bottom:20px; direction:ltr;">
-      <span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span>
-    </div>
-    
-    <div class="field-wrap" style="margin-bottom:20px; text-align:right;">
-      <label>دیدگاه شما (اختیاری)</label>
-      <textarea id="rating-review-text" rows="3" placeholder="تجربه خود از این سفارش را بنویسید..."></textarea>
-    </div>
-    
-    <div class="actions" style="justify-content:center; margin-top:0;">
-      <button class="btn btn-green" id="submit-rating-btn" style="width:100%;">ثبت امتیاز و بستن سفارش</button>
-    </div>
+    <div id="star-rating-box" style="display:flex; justify-content:center; gap:8px; font-size:36px; color:var(--ln2); cursor:pointer; margin-bottom:20px; direction:ltr;"><span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span></div>
+    <div class="field-wrap" style="margin-bottom:20px; text-align:right;"><label>دیدگاه شما (اختیاری)</label><textarea id="rating-review-text" rows="3" placeholder="تجربه خود از این سفارش را بنویسید..."></textarea></div>
+    <div class="actions" style="justify-content:center; margin-top:0;"><button class="btn btn-green" id="submit-rating-btn" style="width:100%;">ثبت امتیاز و بستن سفارش</button></div>
   </div>
 </div>
 
-<!-- مودال مشاهده فیش پرداخت -->
 <div class="modal-back" id="receipt-view-modal">
   <div class="modal" style="max-width:500px; text-align:center;">
     <h3 style="margin:0 0 16px; font-size:16px; color:var(--b800);">🧾 تصویر فیش پرداخت</h3>
     <div id="receipt-image-container" style="background:var(--inset); border:1px solid var(--ln); border-radius:12px; padding:10px; margin-bottom:20px; min-height:200px; display:flex; align-items:center; justify-content:center;"></div>
-    <div class="actions" style="justify-content:center; margin-top:0;">
-      <button class="btn btn-light" onclick="document.getElementById('receipt-view-modal').classList.remove('show')" style="width:100%;">بستن</button>
-    </div>
+    <div class="actions" style="justify-content:center; margin-top:0;"><button class="btn btn-light" onclick="document.getElementById('receipt-view-modal').classList.remove('show')" style="width:100%;">بستن</button></div>
   </div>
 </div>
 
@@ -1116,17 +1049,16 @@ const write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 
 const cache={orders:[],partners:[],slots:[],config:null};
 let PAY_ORDER=null;
-let OTP_LOGIN_TARGET = 'farmer'; // 🔴 متغیر برای تشخیص نوع ورود (کشاورز یا همکار)
+let OTP_LOGIN_TARGET = 'farmer';
 
 const getCustomerPhone=()=>read(LS.cust_phone,"");
 const setCustomerPhone=p=>{if(p)write(LS.cust_phone,toEn(p));else localStorage.removeItem(LS.cust_phone);renderCustomerAuth();refreshHomeStats();};
 const getCustomerProfile=()=>read(LS.cust_profile,{});
-const setCustomerProfile=p=>{write(LS.cust_profile,p);renderProfile();};
+const setCustomerProfile=p=>{write(LS.cust_profile,{...p, phone: getCustomerPhone()});renderProfile();}; // 🔴 اتصال پروفایل به شماره
 const isCustomerVerified=()=>{const v=read(LS.cust_verified,null);return v&&v.phone===getCustomerPhone()&&v.expires>Date.now();};
 const setCustomerVerified=phone=>write(LS.cust_verified,{phone,at:Date.now(),expires:Date.now()+90*24*3600*1000});
 const isGuest=()=>localStorage.getItem(LS.guest)==='true';
 
-// 🔴 توابع ورود از صفحه اصلی
 window.startFarmerLogin = function() {
     document.getElementById('welcome-overlay').classList.add('hidden');
     showScreen("home");
@@ -1145,6 +1077,14 @@ window.startAdminLogin = function() {
     const lv = document.getElementById("admin-login-view"), pv = document.getElementById("admin-panel-view");
     if(lv) lv.hidden = false; if(pv) pv.hidden = true;
 }
+window.getPartnerLocation = function() {
+    if(!navigator.geolocation) return toast("مرورگر پشتیبانی نمی‌کند", true);
+    navigator.geolocation.getCurrentPosition(pos => {
+        document.getElementById('ptn-reg-lat').value = pos.coords.latitude;
+        document.getElementById('ptn-reg-lng').value = pos.coords.longitude;
+        toast("✅ موقعیت مکانی شما ثبت شد");
+    });
+}
 
 function defaultConfig(){
   return {
@@ -1158,30 +1098,19 @@ function defaultConfig(){
       { id: "pipe", name: "لوله‌گذاری و نوار تیپ", rate: 50000, unit: "meter", type: "machinery", category: "care" }
     ],
     payment:{card:"6104 3374 3811 1567",iban:"IR09 0120 0200 0008 6808 6339 3",holder:"شرکت سم‌پاش هوشمند"},
-    provinces: [
-      "تهران","البرز","اصفهان","فارس","خراسان رضوی","خراسان شمالی","خراسان جنوبی","آذربایجان شرقی","آذربایجان غربی","اردبیل","بوشهر","چهارمحال و بختیاری","خوزستان","زنجان","سمنان","سیستان و بلوچستان","قزوین","قم","کردستان","کرمان","کرمانشاه","کهگیلویه و بویراحمد","گلستان","گیلان","لرستان","مازندران","مرکزی","هرمزگان","همدان","یزد","ایلام"
-    ],
+    provinces: ["تهران","البرز","اصفهان","فارس","خراسان رضوی","خراسان شمالی","خراسان جنوبی","آذربایجان شرقی","آذربایجان غربی","اردبیل","بوشهر","چهارمحال و بختیاری","خوزستان","زنجان","سمنان","سیستان و بلوچستان","قزوین","قم","کردستان","کرمان","کرمانشاه","کهگیلویه و بویراحمد","گلستان","گیلان","لرستان","مازندران","مرکزی","هرمزگان","همدان","یزد","ایلام"],
     crops: ["گندم","جو","آفتابگردان","سیب‌زمینی","ذرت","باغ میوه","یونجه","سایر"]
   };
 }
 const getConfig=()=>{
-  const d=defaultConfig();
-  const c=Object.assign({}, d, cache.config||{});
-  c.provinces = d.provinces; 
-  if(!c.services) c.services = [];
-  d.services.forEach(defSrv => {
-     if(!c.services.some(s => s.id === defSrv.id)) {
-         defSrv.hidden = true; 
-         c.services.push(defSrv);
-     }
-  });
-  if(!Array.isArray(c.crops)||!c.crops.length)c.crops=d.crops;
-  if(!c.payment||typeof c.payment!=="object")c.payment=d.payment;
+  const d=defaultConfig(); const c=Object.assign({}, d, cache.config||{});
+  c.provinces = d.provinces; if(!c.services) c.services = [];
+  d.services.forEach(defSrv => { if(!c.services.some(s => s.id === defSrv.id)) { defSrv.hidden = true; c.services.push(defSrv); } });
+  if(!Array.isArray(c.crops)||!c.crops.length)c.crops=d.crops; if(!c.payment||typeof c.payment!=="object")c.payment=d.payment;
   return c;
 };
-
 const setConfig=async c=>{cache.config=c;write(LS.config,c);await apiFetch("/api/config",{method:"PUT",body:JSON.stringify(c)});};
-const STATUS={pending:{label:"در انتظار پرداخت",cls:""},scheduled:{label:"زمان‌بندی شد",cls:"green"},assigned:{label:"در راه / ارجاع",cls:"purple"},in_progress:{label:"در حال انجام",cls:"blue"},done:{label:"منتظر امتیاز",cls:"amber"},completed:{label:"تکمیل شده",cls:"green"},cancelled:{label:"لغو شده",cls:"red"},receipt_pending:{label:"در انتظار تأیید فیش",cls:"amber"},receipt_rejected:{label:"فیش رد شده",cls:"red"}};
+const STATUS={pending:{label:"در انتظار پرداخت",cls:""},scheduled:{label:"زمان‌بندی شد",cls:"green"},assigned:{label:"ارجاع به همکار",cls:"purple"},accepted:{label:"پذیرفته شده",cls:"blue"},arrived:{label:"منتظر تایید مشتری",cls:"amber"},in_progress:{label:"در حال انجام",cls:"blue"},done:{label:"منتظر امتیاز",cls:"amber"},completed:{label:"تکمیل شده",cls:"green"},cancelled:{label:"لغو شده",cls:"red"},receipt_pending:{label:"در انتظار تأیید فیش",cls:"amber"},receipt_rejected:{label:"فیش رد شده",cls:"red"}};
 
 const API="https://api.sampash-ai.ir";
 async function apiFetch(path,opts={}){
@@ -1189,16 +1118,13 @@ async function apiFetch(path,opts={}){
   const headers = {"Content-Type":"application/json", ...(opts.headers||{})};
   const token = localStorage.getItem(LS.admin_token);
   if(token && path.includes('/admin')) headers["Authorization"] = `Bearer ${token}`;
-  
   const o={...opts,headers};
-  try{const r=await fetch(url,o);const data=await r.json().catch(()=>({}));return{ok:r.ok,status:r.status,data};}catch(e){return{ok:false,status:0,data:{error:"ارتباط با سرور برقرار نشد."}};}
+  try{const r=await fetch(url,o);const data=await r.json().catch(()=>({}));return{ok:r.ok,status:r.status,data};}catch(e){return{ok:false,status:0,data:{error:"ارتباط برقرار نشد."}};}
 }
 
 async function loadAll(){
   try{
-    const [cf, ordRes, ptnRes, slotRes] = await Promise.all([
-        apiFetch("/api/config"), apiFetch("/api/orders"), apiFetch("/api/partners"), apiFetch("/api/slots")
-    ]);
+    const [cf, ordRes, ptnRes, slotRes] = await Promise.all([ apiFetch("/api/config"), apiFetch("/api/orders"), apiFetch("/api/partners"), apiFetch("/api/slots") ]);
     cache.config = (cf.ok && cf.data && Object.keys(cf.data).length) ? cf.data : read(LS.config,null);
     cache.orders = ordRes.ok ? ordRes.data : read(LS.orders, []);
     cache.partners = ptnRes.ok ? ptnRes.data : read(LS.partners, []);
@@ -1208,47 +1134,29 @@ async function loadAll(){
 
 function showScreen(name){
   if ((name === "order-drone" || name === "order-machinery") && isGuest() && !isCustomerVerified()) {
-    toast("برای ثبت سفارش، ابتدا باید وارد حساب خود شوید.", true);
-    document.getElementById('welcome-overlay').classList.remove('hidden'); 
-    return; 
+    toast("برای ثبت سفارش، ابتدا وارد شوید.", true); document.getElementById('welcome-overlay').classList.remove('hidden'); return; 
   }
   const t=document.getElementById("screen-"+name);if(!t)return;
-  
-  if(name==="admin"){
-    const lv=$("#admin-login-view"),pv=$("#admin-panel-view");
-    const token = localStorage.getItem(LS.admin_token);
-    if(token){ if(lv)lv.hidden=true; if(pv)pv.hidden=false; renderDashboard(); }
-    else { if(lv)lv.hidden=false; if(pv)pv.hidden=true; }
-  }
+  if(name==="admin"){ const lv=$("#admin-login-view"),pv=$("#admin-panel-view"); const token = localStorage.getItem(LS.admin_token); if(token){ if(lv)lv.hidden=true; if(pv)pv.hidden=false; renderDashboard(); } else { if(lv)lv.hidden=false; if(pv)pv.hidden=true; } }
   if(name==="partner"){const lv=$("#partner-login-view"),pv=$("#partner-panel-view");if(lv)lv.hidden=false;if(pv)pv.hidden=true;}
-  
   if(name==="order-drone"){ refreshDroneSelects(); updateDronePrice(); autoFillOrderForm('drone'); }
   if(name==="order-machinery"){ renderMachineryServices(); refreshMachSelects(); autoFillOrderForm('mach'); }
-  
-  if(name==="history")renderHistory(); if(name==="profile")renderProfile(); if(name==="messages")renderChat();
-  if(name==="videos")renderVideos(); if(name==="payment")renderPayInfo();
+  if(name==="history")renderHistory(); if(name==="profile")renderProfile(); if(name==="messages")renderChat(); if(name==="videos")renderVideos(); if(name==="payment")renderPayInfo();
   $$(".screen").forEach(s=>s.classList.remove("active"));t.classList.add("active");
   $$(".nav button").forEach(b=>{const on=b.dataset.screen===name;if(on)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current");});
   window.scrollTo({top:0,behavior:"smooth"});
 }
+
 document.addEventListener("click",e=>{
-  const go=e.target.closest("[data-go]");
-  if(go){if(go.tagName==="A")e.preventDefault();showScreen(go.dataset.go);return;}
-  const scr=e.target.closest("[data-screen]");
-  if(scr){showScreen(scr.dataset.screen);return;}
+  const go=e.target.closest("[data-go]"); if(go){if(go.tagName==="A")e.preventDefault();showScreen(go.dataset.go);return;}
+  const scr=e.target.closest("[data-screen]"); if(scr){showScreen(scr.dataset.screen);return;}
 });
 document.getElementById("mobile-menu-btn")?.addEventListener("click", (e) => {
-  e.preventDefault();
-  const sb = document.querySelector(".sidebar"), ov = document.getElementById("sidebar-overlay");
-  if(sb.classList.contains("show")) { sb.classList.remove("show"); ov.classList.remove("show"); } 
-  else { sb.classList.add("show"); ov.classList.add("show"); }
+  e.preventDefault(); const sb = document.querySelector(".sidebar"), ov = document.getElementById("sidebar-overlay");
+  if(sb.classList.contains("show")) { sb.classList.remove("show"); ov.classList.remove("show"); } else { sb.classList.add("show"); ov.classList.add("show"); }
 });
-document.getElementById("sidebar-overlay")?.addEventListener("click", () => {
-  document.querySelector(".sidebar")?.classList.remove("show"); document.getElementById("sidebar-overlay")?.classList.remove("show");
-});
-document.querySelectorAll(".nav button").forEach(btn => {
-  btn.addEventListener("click", () => { document.querySelector(".sidebar")?.classList.remove("show"); document.getElementById("sidebar-overlay")?.classList.remove("show"); });
-});
+document.getElementById("sidebar-overlay")?.addEventListener("click", () => { document.querySelector(".sidebar")?.classList.remove("show"); document.getElementById("sidebar-overlay")?.classList.remove("show"); });
+document.querySelectorAll(".nav button").forEach(btn => { btn.addEventListener("click", () => { document.querySelector(".sidebar")?.classList.remove("show"); document.getElementById("sidebar-overlay")?.classList.remove("show"); }); });
 
 function renderCustomerAuth(){
   const ph=getCustomerPhone(); const ver=isCustomerVerified();
@@ -1257,152 +1165,104 @@ function renderCustomerAuth(){
   const sub=$("#home-orders-sub"); if(sub) sub.textContent = ph ? `سفارش‌های شماره ${toFa(ph)}` : "برای دیدن سفارش‌ها شماره خود را وارد کنید";
 }
 window.logoutCustomer = function() {
-  setCustomerPhone(""); 
-  localStorage.removeItem(LS.cust_verified); 
-  localStorage.removeItem(LS.guest);
-  showScreen("home"); 
-  document.getElementById('welcome-overlay').classList.remove('hidden'); 
-  toast("با موفقیت خارج شدید");
+  setCustomerPhone(""); localStorage.removeItem(LS.cust_verified); localStorage.removeItem(LS.guest);
+  showScreen("home"); document.getElementById('welcome-overlay').classList.remove('hidden'); toast("با موفقیت خارج شدید");
 };
 function renderTrustBar(){
-  const allOrders=cache.orders.filter(o=>o.status!=="cancelled");
-  const totalArea=allOrders.reduce((s,o)=>s+(+o.area||0),0);
-  const users=new Set(allOrders.map(o=>o.phone)).size;
-  const ta=$("#trust-area"),tu=$("#trust-users");
-  if(ta)ta.textContent=toFa(totalArea); if(tu)tu.textContent=toFa(users);
+  const allOrders=cache.orders.filter(o=>o.status!=="cancelled"); const totalArea=allOrders.reduce((s,o)=>s+(+o.area||0),0); const users=new Set(allOrders.map(o=>o.phone)).size;
+  const ta=$("#trust-area"),tu=$("#trust-users"); if(ta)ta.textContent=toFa(totalArea); if(tu)tu.textContent=toFa(users);
 }
 
 function renderHomeOrders(){
-  const box=$("#home-orders");if(!box)return;
-  const ph=getCustomerPhone();
+  const box=$("#home-orders");if(!box)return; const ph=getCustomerPhone();
   if(!ph){box.innerHTML='<div class="empty"><span class="empty-emoji">🌱</span><strong>سلام!</strong>شماره‌ات را وارد کن تا سفارش‌هایت را ببینی.</div>';return;}
-  if(!isCustomerVerified()){
-    box.innerHTML='<div class="empty"><span class="empty-emoji">🔐</span><strong>شماره تأیید نشده</strong><button class="btn btn-green btn-sm empty-cta" id="reverify-btn">تأیید شماره</button></div>';
-    setTimeout(()=>{$("#reverify-btn")?.addEventListener("click",()=>startPhoneVerification(ph,'farmer'));},10);
-    return;
-  }
+  if(!isCustomerVerified()){ box.innerHTML='<div class="empty"><span class="empty-emoji">🔐</span><strong>شماره تأیید نشده</strong><button class="btn btn-green btn-sm empty-cta" id="reverify-btn">تأیید شماره</button></div>'; setTimeout(()=>{$("#reverify-btn")?.addEventListener("click",()=>startPhoneVerification(ph,'farmer'));},10); return; }
   const mine=cache.orders.filter(o=>o.phone===ph).sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).slice(0,5);
-  if(!mine.length){
-    box.innerHTML='<div class="empty"><span class="empty-emoji">🌾</span><strong>مزرعه‌ات آماده است؟</strong><button class="btn btn-gold btn-sm empty-cta" onclick="showScreen(\'order-drone\')">ثبت سفارش</button></div>';
-    return;
-  }
+  if(!mine.length){ box.innerHTML='<div class="empty"><span class="empty-emoji">🌾</span><strong>مزرعه‌ات آماده است؟</strong><button class="btn btn-gold btn-sm empty-cta" onclick="showScreen(\'order-drone\')">ثبت سفارش</button></div>'; return; }
   box.innerHTML=mine.map(x=>{
-    const st=STATUS[x.status]||STATUS.pending;
-    let actionBtn = "";
-    if (x.status === 'assigned') {
-        actionBtn = `<button class="btn btn-green btn-sm" onclick="confirmOperatorArrival('${x.id}')" style="margin-top:8px; width:100%;">✅ تایید حضور اپراتور</button>`;
-    } else if (x.status === 'done') {
-        actionBtn = `<button class="btn btn-gold btn-sm" onclick="openRatingModal('${x.id}')" style="margin-top:8px; width:100%;">⭐ ثبت امتیاز و پایان کار</button>`;
-    }
-    return`<div class="order-row" style="display:flex; flex-direction:column; align-items:stretch;">
-      <div style="display:flex; align-items:center; gap:12px; width:100%;">
-        <div class="order-icon"><svg class="icon"><use href="#i-home"/></svg></div>
-        <div class="order-main" style="flex:1;"><strong>${esc(x.serviceName)} · ${toFa(x.area)} هکتار</strong><small>${esc(x.code)}</small></div>
-        <span class="status ${st.cls}">${st.label}</span>
-      </div>${actionBtn}</div>`;
+    const st=STATUS[x.status]||STATUS.pending; let actionBtn = "";
+    if (x.status === 'assigned' || x.status === 'accepted') { actionBtn = `<div style="margin-top:8px; font-size:11.5px; color:var(--purple); font-weight:bold;">👤 اپراتور در راه است...</div>`; } 
+    else if (x.status === 'arrived') { actionBtn = `<button class="btn btn-green btn-sm" onclick="confirmOperatorArrival('${x.id}')" style="margin-top:8px; width:100%;">✅ تایید حضور اپراتور</button>`; } 
+    else if (x.status === 'done') { actionBtn = `<button class="btn btn-gold btn-sm" onclick="openRatingModal('${x.id}')" style="margin-top:8px; width:100%;">⭐ ثبت امتیاز و پایان کار</button>`; }
+    return`<div class="order-row" style="display:flex; flex-direction:column; align-items:stretch;"><div style="display:flex; align-items:center; gap:12px; width:100%;"><div class="order-icon"><svg class="icon"><use href="#i-home"/></svg></div><div class="order-main" style="flex:1;"><strong>${esc(x.serviceName)} · ${toFa(x.area)} هکتار</strong><small>${esc(x.code)}</small></div><span class="status ${st.cls}">${st.label}</span></div>${actionBtn}</div>`;
   }).join("");
 }
 
 window.confirmOperatorArrival = async function(id) {
     const o = cache.orders.find(x => x.id === id); if(!o) return;
+    const diff = Math.floor((Date.now() - (o.arrived_at || Date.now())) / 60000);
+    if(diff > 20) return toast("مهلت ۲۰ دقیقه‌ای به پایان رسیده است.", true);
+    
     if(confirm("آیا اپراتور در محل حاضر شده است؟ با تایید شما، عملیات آغاز می‌شود.")) {
-        o.status = 'in_progress';
-        await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id, status: "in_progress" }) });
+        o.status = 'in_progress'; o.customer_confirmed_at = Date.now();
+        await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id, status: "in_progress", customer_confirmed_at: Date.now() }) });
         refreshHomeStats(); renderHistory(); toast("✅ حضور اپراتور تایید شد و عملیات آغاز شد.");
     }
 }
-window.openRatingModal = function(id) {
-    document.getElementById('rating-order-id').value = id;
-    document.getElementById('rating-review-text').value = "";
-    document.querySelectorAll('#star-rating-box span').forEach(s => s.style.color = "var(--ln2)");
-    document.getElementById('rating-modal').classList.add('show');
-}
+window.openRatingModal = function(id) { document.getElementById('rating-order-id').value = id; document.getElementById('rating-review-text').value = ""; document.querySelectorAll('#star-rating-box span').forEach(s => s.style.color = "var(--ln2)"); document.getElementById('rating-modal').classList.add('show'); }
+
 function refreshHomeStats(){
-  const ph=getCustomerPhone();const ver=isCustomerVerified();
-  const o=ver?cache.orders.filter(x=>x.phone===ph):[];
-  const pend=o.filter(x=>["pending","scheduled","assigned","accepted","in_progress","receipt_pending"].includes(x.status)).length;
-  const area=o.reduce((s,x)=>s+(+x.area||0),0);
-  const el1=$("#stat-orders-count"),el2=$("#stat-orders-pending"),el3=$("#stat-area");
+  const ph=getCustomerPhone();const ver=isCustomerVerified(); const o=ver?cache.orders.filter(x=>x.phone===ph):[];
+  const pend=o.filter(x=>["pending","scheduled","assigned","accepted","arrived","in_progress","receipt_pending"].includes(x.status)).length;
+  const area=o.reduce((s,x)=>s+(+x.area||0),0); const el1=$("#stat-orders-count"),el2=$("#stat-orders-pending"),el3=$("#stat-area");
   if(el1)el1.textContent=toFa(o.length); if(el2)el2.textContent=toFa(pend); if(el3)el3.innerHTML=toFa(area)+' <span class="unit">هکتار</span>';
   renderHomeOrders(); renderTrustBar();
 }
+
 function renderProfile(){
-  const ph=getCustomerPhone();const prof=getCustomerProfile();
+  const ph = getCustomerPhone(); const storedProf = getCustomerProfile();
+  const prof = (ph && storedProf.phone === ph) ? storedProf : {}; // 🔴 پروفایل متصل به شماره
   const a=$("#profile-avatar-big"),n=$("#profile-name-big"),p=$("#profile-phone-big");
-  if(a)a.textContent=(prof.name||"ک").slice(0,1); if(n)n.textContent=prof.name||"کاربر کشاورز"; if(p)p.textContent=ph?toFa(ph):"—";
+  const displayName = ph ? (prof.name||"کاربر کشاورز") : "کاربر مهمان";
+  if(a) a.textContent = displayName.slice(0,1); if(n) n.textContent = displayName; if(p) p.textContent = ph ? toFa(ph) : "—";
   const set=(id,v)=>{const el=document.getElementById(id);if(el)el.value=v;};
-  set("prof-name",prof.name||""); set("prof-phone",ph?toFa(ph):""); set("prof-city",prof.city||"");
-  const s = $("#prof-province"); if(s) { const c = getConfig(); s.innerHTML = '<option value="">انتخاب</option>' + c.provinces.map(v => `<option value="${v}">${v}</option>`).join(""); if(prof.province) s.value = prof.province; }
+  set("prof-name", prof.name||""); set("prof-phone", ph ? toFa(ph) : ""); set("prof-city", prof.city||"");
+  const s = $("#prof-province"); if(s) { const c = getConfig(); s.innerHTML = '<option value="">انتخاب</option>' + c.provinces.map(v => `<option value="${v}">${v}</option>`).join(""); if(prof.province) s.value = prof.province; else s.value = ""; }
 }
+
 function renderHistory() {
-  const box = $("#history-list"); if(!box) return;
-  const ph = getCustomerPhone();
+  const box = $("#history-list"); if(!box) return; const ph = getCustomerPhone();
   if(!ph || !isCustomerVerified()) { box.innerHTML = '<div class="empty"><strong>شماره تأیید نشده</strong></div>'; return; }
   let list = cache.orders.filter(o => o.phone === ph).sort((a,b) => (b.createdAt||0) - (a.createdAt||0));
   if(!list.length) { box.innerHTML = '<div class="empty"><strong>سفارشی نیست</strong></div>'; return; }
   box.innerHTML = list.map(o => {
-    const st = STATUS[o.status] || STATUS.pending;
-    let actionBtn = "";
-    if (o.status === 'pending' || o.status === 'receipt_rejected') {
-        actionBtn = `<button class="btn btn-gold btn-sm" onclick="goToPayment('${o.id}')" style="margin-top:8px; width:100%;">💳 پرداخت و ارسال فیش</button>`;
-    } else if (o.status === 'assigned') {
-        actionBtn = `<button class="btn btn-green btn-sm" onclick="confirmOperatorArrival('${o.id}')" style="margin-top:8px; width:100%;">✅ تایید حضور اپراتور</button>`;
-    } else if (o.status === 'done') {
-        actionBtn = `<button class="btn btn-gold btn-sm" onclick="openRatingModal('${o.id}')" style="margin-top:8px; width:100%;">⭐ ثبت امتیاز</button>`;
-    }
-    return `<div class="history-item" style="display:flex; flex-direction:column; gap:10px; padding:12px; border:1px solid var(--ln); border-radius:10px; margin-bottom:8px;">
-      <div style="display:flex; gap:10px;"><div class="history-ic"><svg class="icon"><use href="#i-order"/></svg></div><div class="history-main">
-          <strong>${esc(o.serviceName)} · ${toFa(o.area)} هکتار</strong>
-          <small><code class="ltr">${esc(o.code)}</code> · ${new Date(o.createdAt||Date.now()).toLocaleDateString("fa-IR")}</small>
-          <div style="margin-top:6px"><span class="status ${st.cls}" style="font-size:10.5px">${st.label}</span></div>
-      </div></div>${actionBtn}</div>`;
+    const st = STATUS[o.status] || STATUS.pending; let actionBtn = "";
+    if (o.status === 'pending' || o.status === 'receipt_rejected') { actionBtn = `<button class="btn btn-gold btn-sm" onclick="goToPayment('${o.id}')" style="margin-top:8px; width:100%;">💳 پرداخت و ارسال فیش</button>`; } 
+    else if (o.status === 'assigned' || o.status === 'accepted') { actionBtn = `<div style="margin-top:8px; font-size:11.5px; color:var(--purple); font-weight:bold; text-align:center;">👤 اپراتور در راه است...</div>`; }
+    else if (o.status === 'arrived') {
+        const diff = Math.floor((Date.now() - (o.arrived_at || Date.now())) / 60000);
+        if(diff < 20) { actionBtn = `<button class="btn btn-green btn-sm" onclick="confirmOperatorArrival('${o.id}')" style="margin-top:8px; width:100%;">✅ تایید حضور اپراتور (${20 - diff} دقیقه فرصت)</button>`; }
+        else { actionBtn = `<div style="margin-top:8px; font-size:11.5px; color:var(--dng); font-weight:bold; text-align:center;">⏱️ مهلت تایید به پایان رسید.</div>`; }
+    } 
+    else if (o.status === 'done') { actionBtn = `<button class="btn btn-gold btn-sm" onclick="openRatingModal('${o.id}')" style="margin-top:8px; width:100%;">⭐ ثبت امتیاز</button>`; }
+    return `<div class="history-item" style="display:flex; flex-direction:column; gap:10px; padding:12px; border:1px solid var(--ln); border-radius:10px; margin-bottom:8px;"><div style="display:flex; gap:10px;"><div class="history-ic"><svg class="icon"><use href="#i-order"/></svg></div><div class="history-main"><strong>${esc(o.serviceName)} · ${toFa(o.area)} هکتار</strong><small><code class="ltr">${esc(o.code)}</code> · ${new Date(o.createdAt||Date.now()).toLocaleDateString("fa-IR")}</small><div style="margin-top:6px"><span class="status ${st.cls}" style="font-size:10.5px">${st.label}</span></div></div></div>${actionBtn}</div>`;
   }).join("");
 }
 window.goToPayment = function(id) { const o = cache.orders.find(x => x.id === id); if(!o) return; PAY_ORDER = o; showScreen("payment"); }
 function renderVideos() {
-  const grid = document.getElementById("kv-videos-grid"); if(!grid) return;
-  const videos = read(LS.videos, []);
+  const grid = document.getElementById("kv-videos-grid"); if(!grid) return; const videos = read(LS.videos, []);
   if(!videos.length) { grid.innerHTML = '<div class="kv-empty"><strong>هنوز فایلی نیست</strong></div>'; return; }
-  grid.innerHTML = videos.map(v => {
-    const isVideo = v.type === 'video';
-    return `<article class="kv-card" style="border:1px solid var(--ln); border-radius:12px; overflow:hidden; background:var(--sur);">${isVideo ? `<video src="${esc(v.url)}" style="width:100%; height:200px; object-fit:cover;" controls></video>` : `<img src="${esc(v.url)}" style="width:100%; height:200px; object-fit:cover;">`}<div style="padding:12px;"><h3 style="font-size:14px; font-weight:800; margin:0 0 4px;">${esc(v.title)}</h3><p style="font-size:12px; color:var(--i500); margin:0;">${esc(v.desc || '')}</p></div></article>`;
-  }).join("");
+  grid.innerHTML = videos.map(v => { const isVideo = v.type === 'video'; return `<article class="kv-card" style="border:1px solid var(--ln); border-radius:12px; overflow:hidden; background:var(--sur);">${isVideo ? `<video src="${esc(v.url)}" style="width:100%; height:200px; object-fit:cover;" controls></video>` : `<img src="${esc(v.url)}" style="width:100%; height:200px; object-fit:cover;">`}<div style="padding:12px;"><h3 style="font-size:14px; font-weight:800; margin:0 0 4px;">${esc(v.title)}</h3><p style="font-size:12px; color:var(--i500); margin:0;">${esc(v.desc || '')}</p></div></article>`; }).join("");
 }
 function renderChat() {
   const box = $("#chat-body"); if(!box) return; const msgs = read(LS.messages, []);
   if(!msgs.length) { box.innerHTML = '<div class="bubble reply">سلام 👋 پیامت رو بنویس.</div>'; return; }
-  box.innerHTML = msgs.slice(-50).map(m => `<div class="bubble ${m.from === "customer"?"":"reply"}">${esc(m.text)}</div>`).join("");
-  box.scrollTop = box.scrollHeight;
+  box.innerHTML = msgs.slice(-50).map(m => `<div class="bubble ${m.from === "customer"?"":"reply"}">${esc(m.text)}</div>`).join(""); box.scrollTop = box.scrollHeight;
 }
-$("#msg-form")?.addEventListener("submit", e => {
-  e.preventDefault(); const v = $("#msg-input").value.trim(); if(!v) return;
-  const msgs = read(LS.messages, []); msgs.push({ id: uid(), from: "customer", phone: getCustomerPhone(), text: v, createdAt: Date.now() }); write(LS.messages, msgs);
-  $("#msg-input").value = ""; renderChat(); toast("پیام ثبت شد.");
-});
+$("#msg-form")?.addEventListener("submit", e => { e.preventDefault(); const v = $("#msg-input").value.trim(); if(!v) return; const msgs = read(LS.messages, []); msgs.push({ id: uid(), from: "customer", phone: getCustomerPhone(), text: v, createdAt: Date.now() }); write(LS.messages, msgs); $("#msg-input").value = ""; renderChat(); toast("پیام ثبت شد."); });
 let currentRating = 0;
-document.querySelectorAll('#star-rating-box span').forEach(star => {
-    star.addEventListener('click', function() {
-        currentRating = +this.getAttribute('data-val');
-        document.querySelectorAll('#star-rating-box span').forEach(s => s.style.color = (+s.getAttribute('data-val') <= currentRating) ? "var(--gold)" : "var(--ln2)");
-    });
-});
+document.querySelectorAll('#star-rating-box span').forEach(star => { star.addEventListener('click', function() { currentRating = +this.getAttribute('data-val'); document.querySelectorAll('#star-rating-box span').forEach(s => s.style.color = (+s.getAttribute('data-val') <= currentRating) ? "var(--gold)" : "var(--ln2)"); }); });
 document.getElementById('submit-rating-btn')?.addEventListener('click', async () => {
     const id = document.getElementById('rating-order-id').value; const review = document.getElementById('rating-review-text').value.trim();
-    if(currentRating === 0) return toast("لطفاً امتیاز خود را با کلیک روی ستاره‌ها انتخاب کنید.", true);
+    if(currentRating === 0) return toast("لطفاً امتیاز خود را انتخاب کنید.", true);
     const o = cache.orders.find(x => x.id === id);
-    if(o) {
-        o.status = 'completed'; o.rating = currentRating; o.review = review;
-        await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id, status: "completed", rating: currentRating, review: review }) });
-        document.getElementById('rating-modal').classList.remove('show'); refreshHomeStats(); renderHistory(); toast("✅ از ثبت نظر و امتیاز شما سپاسگزاریم.");
-    }
+    if(o) { o.status = 'completed'; o.rating = currentRating; o.review = review; await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id, status: "completed", rating: currentRating, review: review }) }); document.getElementById('rating-modal').classList.remove('show'); refreshHomeStats(); renderHistory(); toast("✅ سپاسگزاریم."); }
 });
-document.getElementById("receipt")?.addEventListener("change", function(e) {
-    const file = e.target.files[0]; const box = document.getElementById("receipt-preview-box");
-    if (file && box) { const url = URL.createObjectURL(file); box.innerHTML = `<img src="${url}" style="max-width:100%; border-radius:10px; border:1px solid var(--ln); max-height:200px; object-fit:contain;">`; }
-});
+document.getElementById("receipt")?.addEventListener("change", function(e) { const file = e.target.files[0]; const box = document.getElementById("receipt-preview-box"); if (file && box) { const url = URL.createObjectURL(file); box.innerHTML = `<img src="${url}" style="max-width:100%; border-radius:10px; border:1px solid var(--ln); max-height:200px; object-fit:contain;">`; } });
   function autoFillOrderForm(type) {
   const phone = getCustomerPhone(); if (!phone) return;
-  const prof = getCustomerProfile(); const prefix = type === 'drone' ? 'drone' : 'mach';
+  const storedProf = getCustomerProfile(); if (storedProf.phone !== phone) return;
+  const prof = storedProf; const prefix = type === 'drone' ? 'drone' : 'mach';
   if (prof.name) document.getElementById(`${prefix}-cust`).value = prof.name;
   if (phone) document.getElementById(`${prefix}-phone`).value = phone;
   if (prof.province) document.getElementById(`${prefix}-province`).value = prof.province;
@@ -1412,242 +1272,120 @@ document.getElementById("receipt")?.addEventListener("change", function(e) {
 }
 
 function refreshDroneSelects() {
-  const c = getConfig();
-  const fill = (sel, items, ph) => { if(!sel) return; sel.innerHTML = ph ? `<option value="">${ph}</option>` : ''; items.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`); };
+  const c = getConfig(); const fill = (sel, items, ph) => { if(!sel) return; sel.innerHTML = ph ? `<option value="">${ph}</option>` : ''; items.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`); };
   fill($("#drone-province"), c.provinces, "انتخاب"); fill($("#drone-crop"), c.crops, "انتخاب");
   const droneSrv = c.services.find(s => s.type === 'drone' && !s.hidden) || c.services.find(s => s.id === 'spray');
   const all = cache.slots.filter(s => s.serviceId === droneSrv.id).sort((a,b)=>a.date.localeCompare(b.date));
   const free = all.filter(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return b<s.cap; });
-  const sel = $("#drone-slot-select");
-  if(sel) sel.innerHTML = free.length ? '<option value="">انتخاب تاریخ</option>' + free.map(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return `<option value="${s.id}">${toFa(s.date)} (${toFa(s.cap-b)} ظرفیت)</option>`; }).join("") : '<option value="">تاریخی موجود نیست</option>';
+  const sel = $("#drone-slot-select"); if(sel) sel.innerHTML = free.length ? '<option value="">انتخاب تاریخ</option>' + free.map(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return `<option value="${s.id}">${toFa(s.date)} (${toFa(s.cap-b)} ظرفیت)</option>`; }).join("") : '<option value="">تاریخی موجود نیست</option>';
   updateDronePrice();
 }
-
 function updateDronePrice() {
   const a = $("#drone-area"), p = $("#drone-total-price"); if(!a || !p) return;
   const n = Math.max(0, Number(toEn(a.value).replace(/[^\d.]/g,""))||0); const ha = m2ToHa(n);
-  const selectedProv = $("#drone-province")?.value || ""; const c = getConfig(); 
-  const drones = c.services.filter(s => s.type === 'drone' && !s.hidden);
-  let srv = drones.find(s => s.region && s.region.split(',').includes(selectedProv));
-  if (!srv) srv = drones.find(s => !s.region); if (!srv) srv = drones.find(s => s.id === 'spray'); 
-  p.textContent = n > 0 && srv ? fmtT(ha * srv.rate) : "—";
-  if($("#drone-base-rate") && srv) $("#drone-base-rate").textContent = fmt(srv.rate);
+  const selectedProv = $("#drone-province")?.value || ""; const c = getConfig(); const drones = c.services.filter(s => s.type === 'drone' && !s.hidden);
+  let srv = drones.find(s => s.region && s.region.split(',').includes(selectedProv)); if (!srv) srv = drones.find(s => !s.region); if (!srv) srv = drones.find(s => s.id === 'spray'); 
+  p.textContent = n > 0 && srv ? fmtT(ha * srv.rate) : "—"; if($("#drone-base-rate") && srv) $("#drone-base-rate").textContent = fmt(srv.rate);
 }
-$("#drone-area")?.addEventListener("input", updateDronePrice);
-$("#drone-province")?.addEventListener("change", updateDronePrice);
+$("#drone-area")?.addEventListener("input", updateDronePrice); $("#drone-province")?.addEventListener("change", updateDronePrice);
 
-// ---------------- فرم مرحله‌به‌مرحله مکانیزاسیون ----------------
-let selectedMachinery = [];
-let currentMachCategory = "";
-
+let selectedMachinery = []; let currentMachCategory = "";
 function renderMachineryServices() {
   const categories = [ { id: 'land_prep', name: 'آماده‌سازی زمین', icon: '🚜' }, { id: 'planting', name: 'کاشت', icon: '🌱' }, { id: 'care', name: 'رسیدگی', icon: '💧' }, { id: 'harvest', name: 'برداشت', icon: '🌾' } ];
   const catBox = document.getElementById("mach-categories"); if(!catBox) return;
   catBox.innerHTML = categories.map(c => `<div class="category-btn" onclick="selectMachCategory('${c.id}')" id="cat-btn-${c.id}" style="background:var(--sur); border:1.5px solid var(--ln2); border-radius:12px; padding:16px; text-align:center; cursor:pointer; transition:all 0.2s;"><div style="font-size:28px; margin-bottom:8px;">${c.icon}</div><strong style="font-size:13px; color:var(--i900);">${c.name}</strong></div>`).join("");
-  document.getElementById("mach-services-wrapper").style.display = "none";
-  selectedMachinery = []; currentMachCategory = ""; renderSelectedChips(); updateMachPrice();
+  document.getElementById("mach-services-wrapper").style.display = "none"; selectedMachinery = []; currentMachCategory = ""; renderSelectedChips(); updateMachPrice();
 }
-
 window.selectMachCategory = function(catId) {
-  currentMachCategory = catId;
-  document.querySelectorAll('.category-btn').forEach(btn => { btn.style.borderColor = 'var(--ln2)'; btn.style.background = 'var(--sur)'; });
-  const activeBtn = document.getElementById(`cat-btn-${catId}`);
-  if(activeBtn) { activeBtn.style.borderColor = 'var(--b500)'; activeBtn.style.background = 'var(--b50)'; }
+  currentMachCategory = catId; document.querySelectorAll('.category-btn').forEach(btn => { btn.style.borderColor = 'var(--ln2)'; btn.style.background = 'var(--sur)'; });
+  const activeBtn = document.getElementById(`cat-btn-${catId}`); if(activeBtn) { activeBtn.style.borderColor = 'var(--b500)'; activeBtn.style.background = 'var(--b50)'; }
   document.getElementById("mach-services-wrapper").style.display = "block";
-  const c = getConfig();
-  const catServices = c.services.filter(s => (s.type === 'machinery' || s.type === 'other') && !s.hidden && (s.category || 'other') === catId);
-  const select = $("#machinery-services-select");
-  select.innerHTML = '<option value="">➕ افزودن دستگاه به لیست...</option>' + catServices.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join("");
+  const c = getConfig(); const catServices = c.services.filter(s => (s.type === 'machinery' || s.type === 'other') && !s.hidden && (s.category || 'other') === catId);
+  const select = $("#machinery-services-select"); select.innerHTML = '<option value="">➕ افزودن دستگاه به لیست...</option>' + catServices.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join("");
   selectedMachinery = []; renderSelectedChips(); updateMachPrice();
 }
-
 function renderSelectedChips() {
   const box = $("#selected-services-chips"); if(!box) return;
-  if(selectedMachinery.length === 0) { box.innerHTML = '<span style="font-size:12px; color:var(--i500);">هنوز دستگاهی انتخاب نشده است.</span>'; } else {
-    const c = getConfig();
-    box.innerHTML = selectedMachinery.map(id => {
-      const srv = c.services.find(s => s.id === id); if(!srv) return '';
-      return `<div style="background:var(--b500); color:#fff; padding:6px 12px; border-radius:20px; display:flex; align-items:center; gap:8px; font-size:12px; font-weight:700; box-shadow:0 2px 6px rgba(0,0,0,0.1);"><span>${esc(srv.name)}</span><button type="button" onclick="removeMachinery('${srv.id}')" style="background:rgba(255,255,255,0.2); border:none; border-radius:50%; width:20px; height:20px; display:grid; place-items:center; cursor:pointer; color:#fff; font-size:14px;">&times;</button></div>`;
-    }).join("");
-  }
+  if(selectedMachinery.length === 0) { box.innerHTML = '<span style="font-size:12px; color:var(--i500);">هنوز دستگاهی انتخاب نشده است.</span>'; } 
+  else { const c = getConfig(); box.innerHTML = selectedMachinery.map(id => { const srv = c.services.find(s => s.id === id); if(!srv) return ''; return `<div style="background:var(--b500); color:#fff; padding:6px 12px; border-radius:20px; display:flex; align-items:center; gap:8px; font-size:12px; font-weight:700; box-shadow:0 2px 6px rgba(0,0,0,0.1);"><span>${esc(srv.name)}</span><button type="button" onclick="removeMachinery('${srv.id}')" style="background:rgba(255,255,255,0.2); border:none; border-radius:50%; width:20px; height:20px; display:grid; place-items:center; cursor:pointer; color:#fff; font-size:14px;">&times;</button></div>`; }).join(""); }
 }
-
 window.removeMachinery = function(id) { selectedMachinery = selectedMachinery.filter(x => x !== id); renderSelectedChips(); updateMachPrice(); }
-$("#machinery-services-select")?.addEventListener("change", function() {
-  const val = this.value; if(!val) return;
-  if(!selectedMachinery.includes(val)) { selectedMachinery.push(val); renderSelectedChips(); updateMachPrice(); }
-  this.value = "";
-});
-
+$("#machinery-services-select")?.addEventListener("change", function() { const val = this.value; if(!val) return; if(!selectedMachinery.includes(val)) { selectedMachinery.push(val); renderSelectedChips(); updateMachPrice(); } this.value = ""; });
 function updateMachPrice() {
   const a = $("#mach-area"), p = $("#mach-total-price"); if(!a || !p) return;
   const rawVal = Math.max(0, Number(toEn(a.value).replace(/[^\d.]/g,""))||0); const c = getConfig(); let total = 0;
-  selectedMachinery.forEach(id => {
-    const srv = c.services.find(s => s.id === id);
-    if(srv) { 
-      if (srv.unit === 'hectare') total += (rawVal / 10000) * srv.rate;
-      else if (srv.unit === '1000m2') total += (rawVal / 1000) * srv.rate;
-      else total += rawVal * srv.rate;
-    }
-  });
+  selectedMachinery.forEach(id => { const srv = c.services.find(s => s.id === id); if(srv) { if (srv.unit === 'hectare') total += (rawVal / 10000) * srv.rate; else if (srv.unit === '1000m2') total += (rawVal / 1000) * srv.rate; else total += rawVal * srv.rate; } });
   p.textContent = total > 0 ? fmtT(total) : "—";
 }
 $("#mach-area")?.addEventListener("input", updateMachPrice);
 
 function refreshMachSelects() {
-  const c = getConfig();
-  const fill = (sel, items, ph) => { if(!sel) return; sel.innerHTML = ph ? `<option value="">${ph}</option>` : ''; items.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`); };
+  const c = getConfig(); const fill = (sel, items, ph) => { if(!sel) return; sel.innerHTML = ph ? `<option value="">${ph}</option>` : ''; items.forEach(v => sel.innerHTML += `<option value="${v}">${v}</option>`); };
   fill($("#mach-province"), c.provinces, "انتخاب"); fill($("#mach-crop"), c.crops, "انتخاب");
   const machSrvs = c.services.filter(s => s.type === 'machinery' && !s.hidden).map(s => s.id);
   const all = cache.slots.filter(s => machSrvs.includes(s.serviceId)).sort((a,b)=>a.date.localeCompare(b.date));
   const free = all.filter(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return b<s.cap; });
-  const sel = $("#mach-slot-select");
-  if(sel) sel.innerHTML = free.length ? '<option value="">انتخاب تاریخ</option>' + free.map(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return `<option value="${s.id}">${toFa(s.date)} (${toFa(s.cap-b)} ظرفیت)</option>`; }).join("") : '<option value="">تاریخی موجود نیست</option>';
+  const sel = $("#mach-slot-select"); if(sel) sel.innerHTML = free.length ? '<option value="">انتخاب تاریخ</option>' + free.map(s => { const b = cache.orders.filter(o=>o.slotId===s.id&&o.status!=="cancelled").length; return `<option value="${s.id}">${toFa(s.date)} (${toFa(s.cap-b)} ظرفیت)</option>`; }).join("") : '<option value="">تاریخی موجود نیست</option>';
 }
 
-// ------------------ موقعیت مکانی ------------------
-$("#drone-get-location-btn")?.addEventListener("click", () => {
-  const btn = $("#drone-get-location-btn"), txt = $("#drone-loc-text");
-  if (!navigator.geolocation) return toast("مرورگر شما از موقعیت‌یاب پشتیبانی نمی‌کند.", true);
-  btn.disabled = true; txt.textContent = "در حال دریافت...";
-  navigator.geolocation.getCurrentPosition((pos) => { const lat = pos.coords.latitude.toFixed(6), lng = pos.coords.longitude.toFixed(6); $("#drone-loc-coords").value = `${lat},${lng}`; txt.textContent = `✅ ثبت شد (${lat}, ${lng})`; btn.disabled = false; btn.style.borderColor = "var(--b500)"; }, (err) => { txt.textContent = "دریافت موقعیت از GPS"; btn.disabled = false; toast("دسترسی رد شد.", true); }, { enableHighAccuracy: true, timeout: 10000 });
-});
-$("#mach-get-location-btn")?.addEventListener("click", () => {
-  const btn = $("#mach-get-location-btn"), txt = $("#mach-loc-text");
-  if (!navigator.geolocation) return toast("مرورگر شما از موقعیت‌یاب پشتیبانی نمی‌کند.", true);
-  btn.disabled = true; txt.textContent = "در حال دریافت...";
-  navigator.geolocation.getCurrentPosition((pos) => { const lat = pos.coords.latitude.toFixed(6), lng = pos.coords.longitude.toFixed(6); $("#mach-loc-coords").value = `${lat},${lng}`; txt.textContent = `✅ ثبت شد (${lat}, ${lng})`; btn.disabled = false; btn.style.borderColor = "var(--b500)"; }, (err) => { txt.textContent = "دریافت موقعیت از GPS"; btn.disabled = false; toast("دسترسی رد شد.", true); }, { enableHighAccuracy: true, timeout: 10000 });
-});
+$("#drone-get-location-btn")?.addEventListener("click", () => { const btn = $("#drone-get-location-btn"), txt = $("#drone-loc-text"); if (!navigator.geolocation) return toast("پشتیبانی نمی‌کند", true); btn.disabled = true; txt.textContent = "در حال دریافت..."; navigator.geolocation.getCurrentPosition((pos) => { const lat = pos.coords.latitude.toFixed(6), lng = pos.coords.longitude.toFixed(6); $("#drone-loc-coords").value = `${lat},${lng}`; txt.textContent = `✅ ثبت شد (${lat}, ${lng})`; btn.disabled = false; }, (err) => { txt.textContent = "دریافت موقعیت"; btn.disabled = false; }, { enableHighAccuracy: true, timeout: 10000 }); });
+$("#mach-get-location-btn")?.addEventListener("click", () => { const btn = $("#mach-get-location-btn"), txt = $("#mach-loc-text"); if (!navigator.geolocation) return toast("پشتیبانی نمی‌کند", true); btn.disabled = true; txt.textContent = "در حال دریافت..."; navigator.geolocation.getCurrentPosition((pos) => { const lat = pos.coords.latitude.toFixed(6), lng = pos.coords.longitude.toFixed(6); $("#mach-loc-coords").value = `${lat},${lng}`; txt.textContent = `✅ ثبت شد (${lat}, ${lng})`; btn.disabled = false; }, (err) => { txt.textContent = "دریافت موقعیت"; btn.disabled = false; }, { enableHighAccuracy: true, timeout: 10000 }); });
 
-// ------------------ OTP ------------------
 function isOtpTimeAllowed() { const now = new Date(); const tehranTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Tehran"})); const hour = tehranTime.getHours(); return hour >= 8 && hour < 23; }
 async function startPhoneVerification(phone, target = 'farmer') {
-  OTP_LOGIN_TARGET = target;
-  if(!isOtpTimeAllowed()) return toast("ارسال پیامک فقط از ساعت ۸ صبح تا ۱۱ شب امکان‌پذیر است.", true);
+  OTP_LOGIN_TARGET = target; if(!isOtpTimeAllowed()) return toast("ارسال پیامک از ۸ تا ۲۳ امکان‌پذیر است.", true);
   const res = await apiFetch("/api/otp/send", { method: "POST", body: JSON.stringify({ phone }) });
-  if(!res.ok) return toast(res.data.error || "خطا در ارسال پیامک", true);
-  if(res.data.sim) toast(`کد تست: ${res.data.code}`, false);
-  
+  if(!res.ok) return toast(res.data.error || "خطا", true); if(res.data.sim) toast(`کد تست: ${res.data.code}`, false);
   const back = document.getElementById("otp-modal-back");
   if(back) {
-    document.getElementById("otp-modal-phone").textContent = toFa(phone); 
-    const otpInputs = Array.from(document.querySelectorAll("#otp-inputs input"));
-    otpInputs.forEach(i => { i.value = ""; i.classList.remove("filled"); }); 
-    back.classList.add("show");
-    setTimeout(() => { if(otpInputs[0]) otpInputs[0].focus(); }, 100);
-
-    otpInputs.forEach((inp, idx) => {
-      inp.oninput = () => {
-        inp.value = toEn(inp.value).replace(/\D/g, "").slice(-1); inp.classList.toggle("filled", !!inp.value);
-        if(inp.value && idx < 5) otpInputs[idx+1].focus();
-        const currentCode = otpInputs.map(x => x.value).join("");
-        if(currentCode.length === 6) setTimeout(() => { document.getElementById("otp-verify-btn")?.click(); }, 100);
-      };
-      inp.onkeydown = (e) => { if(e.key === "Backspace" && !inp.value && idx > 0) { otpInputs[idx-1].focus(); otpInputs[idx-1].value = ""; otpInputs[idx-1].classList.remove("filled"); e.preventDefault(); } };
-    });
-
+    document.getElementById("otp-modal-phone").textContent = toFa(phone); const otpInputs = Array.from(document.querySelectorAll("#otp-inputs input"));
+    otpInputs.forEach(i => { i.value = ""; i.classList.remove("filled"); }); back.classList.add("show"); setTimeout(() => { if(otpInputs[0]) otpInputs[0].focus(); }, 100);
+    otpInputs.forEach((inp, idx) => { inp.oninput = () => { inp.value = toEn(inp.value).replace(/\D/g, "").slice(-1); inp.classList.toggle("filled", !!inp.value); if(inp.value && idx < 5) otpInputs[idx+1].focus(); if(otpInputs.map(x => x.value).join("").length === 6) setTimeout(() => { document.getElementById("otp-verify-btn")?.click(); }, 100); }; inp.onkeydown = (e) => { if(e.key === "Backspace" && !inp.value && idx > 0) { otpInputs[idx-1].focus(); otpInputs[idx-1].value = ""; otpInputs[idx-1].classList.remove("filled"); e.preventDefault(); } }; });
     document.getElementById("otp-verify-btn").onclick = async () => {
-      const code = otpInputs.map(i => toEn(i.value)).join("");
-      if(code.length !== 6) return toast("کد ۶ رقمی را کامل وارد کنید", true);
+      const code = otpInputs.map(i => toEn(i.value)).join(""); if(code.length !== 6) return toast("کد کامل نیست", true);
       const btn = document.getElementById("otp-verify-btn"); btn.disabled = true; btn.innerHTML = "در حال بررسی...";
-      const verify = await apiFetch("/api/otp/verify", { method: "POST", body: JSON.stringify({ phone, code }) });
-      btn.disabled = false; btn.innerHTML = "تأیید";
-      if(verify.ok) { 
-          back.classList.remove("show"); 
-          if (OTP_LOGIN_TARGET === 'partner') {
-              const p = cache.partners.find(x => x.phone === phone);
-              if(!p) { toast("همکاری با این شماره یافت نشد", true); return; }
-              if(p.status !== "active") { toast("حساب شما هنوز تایید نشده است", true); return; }
-              $("#partner-login-view").hidden = true; $("#partner-panel-view").hidden = false;
-              renderPartnerDashboard(p); toast(`✅ خوش آمدید ${p.name}`);
-          } else {
-              setCustomerVerified(phone); setCustomerPhone(phone); 
-              toast("✅ با موفقیت وارد شدید"); renderCustomerAuth(); refreshHomeStats(); 
-          }
-      } else { toast("کد نادرست است یا منقضی شده", true); otpInputs.forEach(i => i.value = ""); otpInputs[0].focus(); }
+      const verify = await apiFetch("/api/otp/verify", { method: "POST", body: JSON.stringify({ phone, code }) }); btn.disabled = false; btn.innerHTML = "تأیید";
+      if(verify.ok) { back.classList.remove("show"); if (OTP_LOGIN_TARGET === 'partner') { const p = cache.partners.find(x => x.phone === phone); if(!p) { toast("همکاری یافت نشد", true); return; } if(p.status !== "active") { toast("حساب تایید نشده", true); return; } $("#partner-login-view").hidden = true; $("#partner-panel-view").hidden = false; renderPartnerDashboard(p); toast(`✅ خوش آمدید ${p.name}`); } else { setCustomerVerified(phone); setCustomerPhone(phone); toast("✅ وارد شدید"); renderCustomerAuth(); refreshHomeStats(); } } 
+      else { toast("کد نادرست", true); otpInputs.forEach(i => i.value = ""); otpInputs[0].focus(); }
     };
     document.getElementById("otp-cancel-btn").onclick = () => { back.classList.remove("show"); };
   }
 }
 
-// ------------------ ثبت سفارش پهپاد ------------------
 document.getElementById('drone-order-form')?.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const termsCheckbox = $("#drone-terms-checkbox");
-  if (termsCheckbox && !termsCheckbox.checked) return toast("برای ثبت سفارش، ابتدا باید تعهدنامه را مطالعه و تایید کنید.", true);
-  const phone = toEn($("#drone-phone").value);
-  if(!(isCustomerVerified() && getCustomerPhone() === phone)){ await startPhoneVerification(phone, 'farmer'); return; }
-  
-  const c = getConfig(); const selectedProv = $("#drone-province").value;
-  const drones = c.services.filter(s => s.type === 'drone' && !s.hidden);
-  let srv = drones.find(s => s.region && s.region.split(',').includes(selectedProv));
-  if (!srv) srv = drones.find(s => !s.region); if (!srv) srv = drones.find(s => s.id === 'spray');
-  const ha = m2ToHa(+toEn($("#drone-area").value)); const slot = cache.slots.find(x => x.id === $("#drone-slot-select").value);
-  const amount = ha * (srv ? srv.rate : 850000);
-  
+  e.preventDefault(); const termsCheckbox = $("#drone-terms-checkbox"); if (termsCheckbox && !termsCheckbox.checked) return toast("تعهدنامه تایید نشده", true);
+  const phone = toEn($("#drone-phone").value); if(!(isCustomerVerified() && getCustomerPhone() === phone)){ await startPhoneVerification(phone, 'farmer'); return; }
+  const c = getConfig(); const selectedProv = $("#drone-province").value; const drones = c.services.filter(s => s.type === 'drone' && !s.hidden);
+  let srv = drones.find(s => s.region && s.region.split(',').includes(selectedProv)); if (!srv) srv = drones.find(s => !s.region); if (!srv) srv = drones.find(s => s.id === 'spray');
+  const ha = m2ToHa(+toEn($("#drone-area").value)); const slot = cache.slots.find(x => x.id === $("#drone-slot-select").value); const amount = ha * (srv ? srv.rate : 850000);
   const order = { id: uid(), code: `SP-${Date.now().toString().slice(-4)}`, name: $("#drone-cust").value.trim(), phone: phone, province: $("#drone-province").value, city: $("#drone-city").value.trim(), village: $("#drone-village").value.trim(), crop: $("#drone-crop").value, area: ha, areaM2: +toEn($("#drone-area").value), notes: $("#drone-notes").value.trim(), amount, serviceType: srv.id, serviceName: srv.name, location: $("#drone-loc-coords").value, status: "pending", createdAt: Date.now(), slotId: slot.id, slotDate: slot.date };
-  await apiFetch("/api/orders", { method: "POST", body: JSON.stringify(order) });
-  cache.orders.push(order);
-  setCustomerProfile({ name: order.name, province: order.province, city: order.city, village: order.village, crop: order.crop });
-  refreshHomeStats(); e.target.reset(); $("#drone-area").value = "10000"; updateDronePrice(); refreshDroneSelects();
-  PAY_ORDER = order; toast(`✅ سفارش پهپاد ثبت شد.`); showScreen("payment");
+  await apiFetch("/api/orders", { method: "POST", body: JSON.stringify(order) }); cache.orders.push(order); setCustomerProfile({ name: order.name, province: order.province, city: order.city, village: order.village, crop: order.crop });
+  refreshHomeStats(); e.target.reset(); $("#drone-area").value = "10000"; updateDronePrice(); refreshDroneSelects(); PAY_ORDER = order; toast(`✅ ثبت شد.`); showScreen("payment");
 });
 
-// ------------------ ثبت سفارش مکانیزاسیون (Wizard) ------------------
 document.getElementById('machinery-order-form')?.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  if(selectedMachinery.length === 0) return toast("حداقل یک عملیات را انتخاب کنید", true);
-  const phone = toEn($("#mach-phone").value);
-  if(!(isCustomerVerified() && getCustomerPhone() === phone)){ await startPhoneVerification(phone, 'farmer'); return; }
-  
-  const c = getConfig(); const rawVal = Math.max(0, Number(toEn($("#mach-area").value).replace(/[^\d.]/g,""))||0);
-  const slot = cache.slots.find(x => x.id === $("#mach-slot-select").value);
+  e.preventDefault(); if(selectedMachinery.length === 0) return toast("حداقل یک عملیات را انتخاب کنید", true);
+  const phone = toEn($("#mach-phone").value); if(!(isCustomerVerified() && getCustomerPhone() === phone)){ await startPhoneVerification(phone, 'farmer'); return; }
+  const c = getConfig(); const rawVal = Math.max(0, Number(toEn($("#mach-area").value).replace(/[^\d.]/g,""))||0); const slot = cache.slots.find(x => x.id === $("#mach-slot-select").value);
   let totalAmount = 0; let names = []; let haArea = 0;
-  
-  selectedMachinery.forEach((id, index) => {
-    const srv = c.services.find(s => s.id === id);
-    if(srv) { 
-      if (srv.unit === 'hectare') { const thisHa = rawVal / 10000; totalAmount += thisHa * srv.rate; if(index === 0) haArea = thisHa; }
-      else if (srv.unit === '1000m2') { const thisHa = rawVal / 1000; totalAmount += thisHa * srv.rate; if(index === 0) haArea = thisHa; }
-      else { totalAmount += rawVal * srv.rate; if(index === 0) haArea = rawVal; }
-      names.push(srv.name);
-    }
-  });
-  
+  selectedMachinery.forEach((id, index) => { const srv = c.services.find(s => s.id === id); if(srv) { if (srv.unit === 'hectare') { const thisHa = rawVal / 10000; totalAmount += thisHa * srv.rate; if(index === 0) haArea = thisHa; } else if (srv.unit === '1000m2') { const thisHa = rawVal / 1000; totalAmount += thisHa * srv.rate; if(index === 0) haArea = thisHa; } else { totalAmount += rawVal * srv.rate; if(index === 0) haArea = rawVal; } names.push(srv.name); } });
   const order = { id: uid(), code: `SP-${Date.now().toString().slice(-4)}`, name: $("#mach-cust").value.trim(), phone: phone, province: $("#mach-province").value, city: $("#mach-city").value.trim(), village: $("#mach-village").value.trim(), crop: $("#mach-crop").value, area: haArea, areaM2: rawVal, notes: $("#mach-notes").value.trim(), amount: totalAmount, serviceType: selectedMachinery.join(","), serviceName: names.join(" + "), status: "pending", createdAt: Date.now(), slotId: slot.id, slotDate: slot.date, location: $("#mach-loc-coords").value };
-  await apiFetch("/api/orders", { method: "POST", body: JSON.stringify(order) });
-  cache.orders.push(order);
-  setCustomerProfile({ name: order.name, province: order.province, city: order.city, village: order.village, crop: order.crop });
-  refreshHomeStats(); e.target.reset(); $("#mach-area").value = "10000"; selectedMachinery = []; renderMachineryServices();
-  PAY_ORDER = order; toast(`✅ سفارش ادوات ثبت شد.`); showScreen("payment");
+  await apiFetch("/api/orders", { method: "POST", body: JSON.stringify(order) }); cache.orders.push(order); setCustomerProfile({ name: order.name, province: order.province, city: order.city, village: order.village, crop: order.crop });
+  refreshHomeStats(); e.target.reset(); $("#mach-area").value = "10000"; selectedMachinery = []; renderMachineryServices(); PAY_ORDER = order; toast(`✅ ثبت شد.`); showScreen("payment");
 });
 
-// ------------------ پرداخت و فیش ------------------
 function renderPayInfo() {
   const el = $("#pay-info"); if(!el) return; const o = PAY_ORDER;
-  if(!o) { el.innerHTML = '<div class="notice">برای پرداخت، از پیگیری سفارش را جستجو کنید.</div>'; return; }
+  if(!o) { el.innerHTML = '<div class="notice">از پیگیری سفارش جستجو کنید.</div>'; return; }
   const cfg = getConfig();
-  el.innerHTML = `<div class="receipt-card" style="margin-bottom:20px;"><div class="receipt-head"><div class="check"><svg class="icon"><use href="#i-check"/></svg></div><div style="flex:1"><strong>${esc(o.serviceName)}</strong><small>کد: ${esc(o.code)}</small></div></div><div class="receipt-body"><div><small>مبلغ قابل پرداخت</small><strong style="color:var(--b700);font-size:20px;">${fmtT(o.amount)}</strong></div><div><small>شماره کارت</small><strong style="direction:ltr;font-size:14px;">${esc(cfg.payment.card)}</strong></div><div><small>شماره شبا</small><strong style="direction:ltr;font-size:12px;">${esc(cfg.payment.iban)}</strong></div><div><small>صاحب حساب</small><strong>${esc(cfg.payment.holder)}</strong></div></div></div>`;
+  el.innerHTML = `<div class="receipt-card" style="margin-bottom:20px;"><div class="receipt-head"><div class="check"><svg class="icon"><use href="#i-check"/></svg></div><div style="flex:1"><strong>${esc(o.serviceName)}</strong><small>کد: ${esc(o.code)}</small></div></div><div class="receipt-body"><div><small>مبلغ</small><strong style="color:var(--b700);font-size:20px;">${fmtT(o.amount)}</strong></div><div><small>کارت</small><strong style="direction:ltr;font-size:14px;">${esc(cfg.payment.card)}</strong></div><div><small>شبا</small><strong style="direction:ltr;font-size:12px;">${esc(cfg.payment.iban)}</strong></div><div><small>صاحب حساب</small><strong>${esc(cfg.payment.holder)}</strong></div></div></div>`;
 }
-async function saveReceiptData(orderId,file){
-  return new Promise(async(resolve)=>{
-    if(!file)return resolve(false);
-    try{
-      const img=new Image(); img.src=URL.createObjectURL(file);
-      img.onload=()=>{ const c=document.createElement("canvas"); c.width=Math.round(img.width*0.7); c.height=Math.round(img.height*0.7); c.getContext("2d").drawImage(img,0,0,c.width,c.height); const dataToSave=c.toDataURL("image/jpeg",0.7); fetch(`${API}/api/receipt`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ orderId, receiptData: dataToSave }) }).then(res=>{ if(res.ok){ resolve(true); } else resolve(false); }); };
-    } catch(e){ resolve(false); }
-  });
-}
+async function saveReceiptData(orderId,file){ return new Promise(async(resolve)=>{ if(!file)return resolve(false); try{ const img=new Image(); img.src=URL.createObjectURL(file); img.onload=()=>{ const c=document.createElement("canvas"); c.width=Math.round(img.width*0.7); c.height=Math.round(img.height*0.7); c.getContext("2d").drawImage(img,0,0,c.width,c.height); const dataToSave=c.toDataURL("image/jpeg",0.7); fetch(`${API}/api/receipt`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ orderId, receiptData: dataToSave }) }).then(res=>{ if(res.ok){ resolve(true); } else resolve(false); }); }; } catch(e){ resolve(false); } }); }
 document.getElementById('payment-form')?.addEventListener('submit', async (e) => {
-  e.preventDefault(); const fileInput = $("#receipt"); const file = fileInput?.files?.[0];
-  if(!file) return toast("تصویر فیش را انتخاب کنید", true);
-  const btn = e.target.querySelector('button[type="submit"]'); btn.disabled = true; btn.textContent = "در حال ارسال...";
-  const res = await saveReceiptData(PAY_ORDER.id, file); btn.disabled = false; btn.textContent = "ارسال فیش";
-  if(res) { 
-    toast("✅ فیش ارسال شد. منتظر تایید مدیر باشید."); const idx = cache.orders.findIndex(o => o.id === PAY_ORDER.id); 
-    if(idx >= 0) { cache.orders[idx].status = "receipt_pending"; await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id: PAY_ORDER.id, status: "receipt_pending" }) }); } 
-    fileInput.value = ""; const previewBox = document.getElementById("receipt-preview-box"); if(previewBox) previewBox.innerHTML = ""; showScreen("history"); 
-  } else toast("خطا در ارسال فیش. لطفا دوباره تلاش کنید.", true);
+  e.preventDefault(); const fileInput = $("#receipt"); const file = fileInput?.files?.[0]; if(!file) return toast("تصویر فیش انتخاب کنید", true);
+  const btn = e.target.querySelector('button[type="submit"]'); btn.disabled = true; btn.textContent = "در حال ارسال..."; const res = await saveReceiptData(PAY_ORDER.id, file); btn.disabled = false; btn.textContent = "ارسال فیش";
+  if(res) { toast("✅ فیش ارسال شد."); const idx = cache.orders.findIndex(o => o.id === PAY_ORDER.id); if(idx >= 0) { cache.orders[idx].status = "receipt_pending"; await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id: PAY_ORDER.id, status: "receipt_pending" }) }); } fileInput.value = ""; const previewBox = document.getElementById("receipt-preview-box"); if(previewBox) previewBox.innerHTML = ""; showScreen("history"); } 
+  else toast("خطا", true);
 });
 
 // ---------------- پنل همکار ----------------
@@ -1656,35 +1394,34 @@ document.getElementById("ptn-tab-reg")?.addEventListener("click", () => { $("#pa
 
 document.getElementById('partner-register-form')?.addEventListener('submit', async (e) => {
   e.preventDefault(); const type = document.querySelector('input[name="ptn-type"]:checked').value; 
-  const name = $("#ptn-reg-name").value; const phone = toEn($("#ptn-reg-phone").value); 
-  const prov = $("#ptn-reg-prov").value; const county = $("#ptn-reg-county").value.trim(); 
-  const city = $("#ptn-reg-city").value.trim(); const village = $("#ptn-reg-village").value.trim();
-  const cities = $("#ptn-reg-cities")?.value || ""; const machine = $("#ptn-reg-machine")?.value.trim() || "";
-  const implementsList = $("#ptn-reg-implements")?.value.trim() || ""; const share = +toEn($("#ptn-reg-share").value) || 5; 
+  const name = $("#ptn-reg-name").value; const phone = toEn($("#ptn-reg-phone").value); const prov = $("#ptn-reg-prov").value; 
+  const county = $("#ptn-reg-county").value.trim(); const city = $("#ptn-reg-city").value.trim(); const village = $("#ptn-reg-village").value.trim();
+  const address = $("#ptn-reg-address").value.trim(); const card = $("#ptn-reg-card").value.trim(); const sheba = $("#ptn-reg-sheba").value.trim();
+  const father = $("#ptn-reg-father").value.trim(); const nid = $("#ptn-reg-nid").value.trim();
+  const lat = $("#ptn-reg-lat").value; const lng = $("#ptn-reg-lng").value;
+  const cities = $("#ptn-reg-cities")?.value || ""; const machine = $("#ptn-reg-machine")?.value.trim() || ""; const implementsList = $("#ptn-reg-implements")?.value.trim() || ""; 
   const pass = $("#ptn-reg-pass").value; const pass2 = $("#ptn-reg-pass2").value;
-  if(!name || !phone || !county || !city) return toast("لطفاً استان، شهرستان و شهر را وارد کنید", true); 
-  if(type === 'mechanization' && (!machine || !implementsList || !cities)) return toast("اطلاعات دستگاه، ادوات و شهرهای تحت پوشش را کامل کنید", true);
-  if(pass.length < 6) return toast("رمز باید حداقل ۶ کاراکتر باشد", true);
-  if(pass !== pass2) return toast("تکرار رمز عبور مطابقت ندارد", true);
+  
+  if(!name || !phone || !county || !city || !address || !card || !sheba || !father || !nid) return toast("لطفاً تمام فیلدهای ستاره‌دار را پر کنید", true); 
+  if(type === 'mechanization' && (!machine || !implementsList || !cities)) return toast("اطلاعات دستگاه و شهرها را کامل کنید", true);
+  if(pass.length < 6) return toast("رمز حداقل ۶ کاراکتر", true); if(pass !== pass2) return toast("تکرار رمز مطابقت ندارد", true);
   if(cache.partners.some(p => p.phone === phone)) return toast("این شماره قبلا ثبت شده", true);
-  const ptn = { id: uid(), type, name, phone, province: prov, county, city, village, machine, implements: implementsList, cities, share, status: "pending", password: pass };
+  
+  const ptn = { id: uid(), type, name, phone, province: prov, county, city, village, machine, implements: implementsList, cities, share: 5, status: "pending", password: pass, father_name: father, national_id: nid, postal_address: address, card_number: card, sheba_number: sheba, lat, lng };
   await apiFetch("/api/partners", { method: "POST", body: JSON.stringify(ptn) }); cache.partners.push(ptn);
   toast("✅ ثبت‌نام انجام شد. منتظر تایید مدیر باشید."); e.target.reset(); $("#ptn-tab-login").click();
 });
 
 document.getElementById('partner-login-form')?.addEventListener('submit', (e) => {
-  e.preventDefault(); const phone = toEn($("#ptn-login-phone").value); 
-  if(!/^09\d{9}$/.test(phone)) return toast("شماره موبایل نامعتبر است", true);
-  const p = cache.partners.find(x => x.phone === phone);
-  if(!p) return toast("همکاری با این شماره یافت نشد", true); 
-  if(p.status !== "active") return toast("حساب شما هنوز تایید نشده است", true); 
-  startPhoneVerification(phone, 'partner'); // 🔴 ارسال OTP برای همکار
+  e.preventDefault(); const phone = toEn($("#ptn-login-phone").value); if(!/^09\d{9}$/.test(phone)) return toast("شماره نامعتبر", true);
+  const p = cache.partners.find(x => x.phone === phone); if(!p) return toast("همکاری یافت نشد", true); if(p.status !== "active") return toast("حساب تایید نشده", true); 
+  startPhoneVerification(phone, 'partner');
 });
 
 document.getElementById('partner-logout-btn')?.addEventListener('click', () => { 
-  localStorage.removeItem(LS.partner_session);
-  $("#partner-login-view").hidden = false; $("#partner-panel-view").hidden = true; 
-  showScreen("home"); document.getElementById('welcome-overlay').classList.remove('hidden'); toast("از پنل همکاران خارج شدید");
+  const session = read(LS.partner_session, null); localStorage.removeItem(LS.partner_session); $("#partner-panel-view").hidden = true;
+  if (session && session.isAdminImpersonating) { $("#admin-panel-view").hidden = false; showScreen("admin"); renderPartners(); toast("🔙 بازگشت به پنل مدیریت"); } 
+  else { $("#partner-login-view").hidden = false; showScreen("home"); document.getElementById('welcome-overlay').classList.remove('hidden'); toast("از پنل همکاران خارج شدید"); }
 });
 
 document.querySelectorAll("#ptn-tabs button").forEach(b => {
@@ -1698,24 +1435,49 @@ document.querySelectorAll("#ptn-tabs button").forEach(b => {
 window.renderPartnerDashboard = function(p) {
     localStorage.setItem(LS.partner_session, JSON.stringify({ partnerId: p.id })); $("#ptn-name").textContent = p.name;
     const myOrders = cache.orders.filter(o => o.partnerId === p.id); const list = $("#ptn-orders-list");
-    list.innerHTML = myOrders.length ? myOrders.map(o => `<div class="admin-card"><strong>${esc(o.code)} - ${esc(o.serviceName)}</strong><div style="font-size:12px;color:var(--i500);margin:4px 0">${esc(o.name)} | ${esc(o.city)} | ${toFa(o.area)} هکتار</div></div>`).join("") : '<div class="empty">سفارشی ارجاع داده نشده</div>';
-    if(p.type === 'mechanization') {
-        document.getElementById('ptn-edit-mach-fields').style.display = 'block'; document.getElementById('ptn-edit-impl-fields').style.display = 'block'; document.getElementById('ptn-edit-cities-fields').style.display = 'block';
-        $("#ptn-edit-machine").value = p.machine || ""; $("#ptn-edit-implements").value = p.implements || ""; $("#ptn-edit-cities").value = p.cities || "";
-    }
+    list.innerHTML = myOrders.length ? myOrders.map(o => {
+      let actionBtn = "";
+      if (o.status === 'assigned') {
+          const diff = Math.floor((Date.now() - (o.assigned_at || Date.now())) / 60000);
+          if (diff < 5) actionBtn = `<button class="btn btn-green btn-sm" onclick="acceptPartnerOrder('${o.id}')" style="width:100%; margin-top:8px;">✅ قبول سفارش (${5 - diff} دقیقه فرصت)</button>`;
+          else actionBtn = `<div style="color:var(--dng); font-size:11px; margin-top:8px;">⏱️ مهلت تایید به پایان رسید.</div>`;
+      } else if (o.status === 'accepted') {
+          actionBtn = `<button class="btn btn-gold btn-sm" onclick="partnerArrived('${o.id}')" style="width:100%; margin-top:8px;">📍 اعلام حضور در محل</button>`;
+      } else if (o.status === 'arrived') {
+          actionBtn = `<div style="color:var(--b600); font-size:11px; margin-top:8px;">⏳ منتظر تایید مشتری...</div>`;
+      } else if (o.status === 'in_progress') {
+          actionBtn = `<button class="btn btn-danger btn-sm" onclick="finishPartnerWork('${o.id}')" style="width:100%; margin-top:8px;">🏁 اتمام کار</button>`;
+      }
+      return `<div class="admin-card"><strong>${esc(o.code)} - ${esc(o.serviceName)}</strong><div style="font-size:12px;color:var(--i500);margin:4px 0">${esc(o.name)} | ${esc(o.city)} | ${toFa(o.area)} هکتار</div>${actionBtn}</div>`;
+    }).join("") : '<div class="empty">سفارشی ارجاع داده نشده</div>';
+    if(p.type === 'mechanization') { document.getElementById('ptn-edit-mach-fields').style.display = 'block'; document.getElementById('ptn-edit-impl-fields').style.display = 'block'; document.getElementById('ptn-edit-cities-fields').style.display = 'block'; $("#ptn-edit-machine").value = p.machine || ""; $("#ptn-edit-implements").value = p.implements || ""; $("#ptn-edit-cities").value = p.cities || ""; }
     $("#ptn-edit-pass").value = "";
 }
 
+window.acceptPartnerOrder = async function(orderId) {
+    const s = read(LS.partner_session, null); if(!s) return; const p = cache.partners.find(x => x.id === s.partnerId);
+    await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id: orderId, status: "accepted" }) });
+    const order = cache.orders.find(o => o.id === orderId); order.status = "accepted";
+    const smsText = `✅ سفارش ${order.code} توسط همکار (${p.name}) با کد ملی ${p.national_id} پذیرفته شد.`;
+    await apiFetch("/api/sms/send", { method: "POST", body: JSON.stringify({ to: order.phone, text: smsText }) });
+    toast("سفارش پذیرفته شد."); renderPartnerDashboard(p);
+}
+window.partnerArrived = async function(orderId) {
+    const s = read(LS.partner_session, null); if(!s) return; const p = cache.partners.find(x => x.id === s.partnerId);
+    await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id: orderId, status: "arrived", arrived_at: Date.now() }) });
+    const order = cache.orders.find(o => o.id === orderId); order.status = "arrived"; order.arrived_at = Date.now();
+    toast("حضور شما اعلام شد. منتظر تایید مشتری باشید."); renderPartnerDashboard(p);
+}
+window.finishPartnerWork = async function(orderId) {
+    const s = read(LS.partner_session, null); if(!s) return; const p = cache.partners.find(x => x.id === s.partnerId);
+    await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id: orderId, status: "done" }) });
+    const order = cache.orders.find(o => o.id === orderId); order.status = "done";
+    toast("کار به اتمام رسید. منتظر امتیاز مشتری."); renderPartnerDashboard(p);
+}
+
 document.getElementById('partner-edit-form')?.addEventListener('submit', async (e) => {
-    e.preventDefault(); const s = read(LS.partner_session, null); if(!s) return;
-    const idx = cache.partners.findIndex(x => x.id === s.partnerId);
-    if(idx >= 0) {
-        const p = cache.partners[idx];
-        p.machine = $("#ptn-edit-machine").value; p.implements = $("#ptn-edit-implements").value; p.cities = $("#ptn-edit-cities").value;
-        const newPass = $("#ptn-edit-pass").value;
-        if(newPass) { if(newPass.length < 6) return toast("رمز جدید باید حداقل ۶ کاراکتر باشد", true); p.password = newPass; }
-        await apiFetch("/api/partners", { method: "PUT", body: JSON.stringify(p) }); toast("✅ اطلاعات با موفقیت به‌روزرسانی شد");
-    }
+    e.preventDefault(); const s = read(LS.partner_session, null); if(!s) return; const idx = cache.partners.findIndex(x => x.id === s.partnerId);
+    if(idx >= 0) { const p = cache.partners[idx]; p.machine = $("#ptn-edit-machine").value; p.implements = $("#ptn-edit-implements").value; p.cities = $("#ptn-edit-cities").value; const newPass = $("#ptn-edit-pass").value; if(newPass) { if(newPass.length < 6) return toast("رمز حداقل ۶ کاراکتر", true); p.password = newPass; } await apiFetch("/api/partners", { method: "PUT", body: JSON.stringify(p) }); toast("✅ اطلاعات ذخیره شد"); }
 });
 
 const DAYS_OF_WEEK = ["شنبه", "یکشنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه", "پنجشنبه", "جمعه"];
@@ -1729,72 +1491,81 @@ function renderPartnerAvailability() {
 document.getElementById('ptn-save-availability-btn')?.addEventListener('click', async () => {
   const s = read(LS.partner_session, null); if(!s) return; const partners = cache.partners; const idx = partners.findIndex(x => x.id === s.partnerId); if(idx < 0) return;
   const newAvail = DAYS_OF_WEEK.map((d, i) => ({ day: d, active: document.getElementById(`avail-active-${i}`).checked, start: document.getElementById(`avail-start-${i}`).value, end: document.getElementById(`avail-end-${i}`).value }));
-  partners[idx].availability = JSON.stringify(newAvail); await apiFetch("/api/partners", { method: "PUT", body: JSON.stringify(partners[idx]) }); toast("✅ زمان‌بندی با موفقیت ذخیره شد");
+  partners[idx].availability = JSON.stringify(newAvail); await apiFetch("/api/partners", { method: "PUT", body: JSON.stringify(partners[idx]) }); toast("✅ زمان‌بندی ذخیره شد");
 });
 
 // ---------------- پنل ادمین ----------------
 document.getElementById('admin-login-form')?.addEventListener('submit', async (e) => {
   e.preventDefault(); const otp = toEn($("#admin-otp").value.trim()); toast("در حال بررسی...");
   const res = await apiFetch("/api/admin/login", { method: "POST", body: JSON.stringify({ username: $("#admin-user").value, otpCode: otp }) });
-  if(res.ok && res.data.success) { 
-    localStorage.setItem(LS.admin_token, res.data.token); $("#admin-login-view").hidden = true; $("#admin-panel-view").hidden = false; 
-    toast("ورود موفق"); renderAdminServices(); renderPartners(); renderSlots(); renderDashboard(); renderPayments(); renderOrdersAdmin(); 
-  } else toast(res.data.error || "کد 2FA نادرست است", true);
+  if(res.ok && res.data.success) { localStorage.setItem(LS.admin_token, res.data.token); $("#admin-login-view").hidden = true; $("#admin-panel-view").hidden = false; toast("ورود موفق"); renderAdminServices(); renderPartners(); renderSlots(); renderDashboard(); renderPayments(); renderOrdersAdmin(); } else toast(res.data.error || "کد 2FA نادرست", true);
 });
-document.getElementById('admin-logout-btn')?.addEventListener('click', () => { 
-    localStorage.removeItem(LS.admin_token); $("#admin-login-view").hidden = false; $("#admin-panel-view").hidden = true; 
-    showScreen("home"); document.getElementById('welcome-overlay').classList.remove('hidden'); toast("از پنل مدیریت خارج شدید");
-});
+document.getElementById('admin-logout-btn')?.addEventListener('click', () => { localStorage.removeItem(LS.admin_token); $("#admin-login-view").hidden = false; $("#admin-panel-view").hidden = true; showScreen("home"); document.getElementById('welcome-overlay').classList.remove('hidden'); toast("از پنل خارج شدید"); });
 
 function renderDashboard() {
-  const o = cache.orders, total = o.length; const pend = o.filter(x => ["pending","scheduled","assigned","accepted","receipt_pending","in_progress","done"].includes(x.status)).length; const rev = o.filter(x => x.status !== "cancelled").reduce((s, x) => s + (+x.amount || 0), 0);
+  const o = cache.orders, total = o.length; const pend = o.filter(x => ["pending","scheduled","assigned","accepted","arrived","receipt_pending","in_progress","done"].includes(x.status)).length; const rev = o.filter(x => x.status !== "cancelled").reduce((s, x) => s + (+x.amount || 0), 0);
   if($("#ad-total")) $("#ad-total").textContent = toFa(total); if($("#ad-pending")) $("#ad-pending").textContent = toFa(pend); if($("#ad-revenue")) $("#ad-revenue").textContent = fmt(rev);
 }
 
 function renderOrdersAdmin() {
   const tb = document.getElementById("ord-tbody"); if (!tb) return;
   const orders = [...cache.orders].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-  if (!orders.length) { tb.innerHTML = '<tr><td colspan="6"><div class="empty">هنوز سفارشی نیست</div></td></tr>'; return; }
-  
+  if (!orders.length) { tb.innerHTML = '<tr><td colspan="6"><div class="empty">سفارشی نیست</div></td></tr>'; return; }
   tb.innerHTML = orders.map(o => {
     const st = STATUS[o.status] || STATUS.pending; const activePartners = cache.partners.filter(p => p.status === "active"); let assignSection = "";
+    
+    // 🔴 چرخه جدید مدیریت
     if (o.status === 'scheduled') {
-        let matchingPartners = []; if (o.serviceType === 'spray' || o.serviceType === 'drone') matchingPartners = activePartners.filter(p => p.type === 'drone'); else matchingPartners = activePartners.filter(p => p.type === 'mechanization');
-        if (matchingPartners.length > 0) {
-            assignSection = `<div style="margin-top:10px; padding:8px; background:var(--b50); border:1px dashed var(--b300); border-radius:8px;"><label style="font-size:11px; color:var(--b800); font-weight:800; display:block; margin-bottom:6px;">👇 جهت ارجاع، همکار را انتخاب کنید:</label><select onchange="assignToPartner('${o.id}', this.value)" style="width:100%; padding:8px; font-size:12px; border-radius:6px; border:1px solid var(--b400); font-weight:bold;"><option value="">انتخاب همکار...</option>${matchingPartners.map(p => `<option value="${p.id}">${esc(p.name)} (${esc(p.city)})</option>`).join("")}</select></div>`;
-        } else { assignSection = `<div style="margin-top:8px; font-size:11px; color:var(--dng); font-weight:bold;">⚠️ همکار فعالی نیست!</div>`; }
-    } else if (o.partnerId) { const ptn = activePartners.find(p => p.id === o.partnerId); assignSection = `<div style="margin-top:8px; font-size:12px; font-weight:800; color:var(--purple);">👤 ارجاع به: ${ptn ? ptn.name : 'همکار'}</div>`; }
+        assignSection = `<div style="margin-top:10px; padding:8px; background:var(--b50); border:1px dashed var(--b300); border-radius:8px;">
+            <button class="btn btn-gold btn-sm" onclick="adminStartWork('${o.id}')" style="width:100%; margin-bottom:6px;">🚀 خودم انجام می‌دهم (اعلام حضور)</button>
+            <select onchange="assignToPartner('${o.id}', this.value)" style="width:100%; padding:8px; font-size:12px; border-radius:6px; border:1px solid var(--b400); font-weight:bold;">
+              <option value="">یا ارجاع به همکار...</option>
+              ${activePartners.filter(p => o.serviceType === 'spray' || o.serviceType === 'drone' ? p.type === 'drone' : p.type === 'mechanization').map(p => `<option value="${p.id}">${esc(p.name)} (${esc(p.city)})</option>`).join("")}
+            </select></div>`;
+    } else if (o.status === 'accepted') {
+        assignSection = `<button class="btn btn-gold btn-sm" onclick="adminStartWork('${o.id}')" style="width:100%; margin-top:6px;">📍 همکار رسید (اعلام حضور)</button>`;
+    } else if (o.status === 'in_progress') {
+        assignSection = `<button class="btn btn-danger btn-sm" onclick="adminFinishWork('${o.id}')" style="width:100%; margin-top:6px;">🏁 اتمام کار</button>`;
+    } else if (o.partnerId) {
+        const ptn = activePartners.find(p => p.id === o.partnerId);
+        assignSection = `<div style="margin-top:8px; font-size:11px; color:var(--purple);">👤 ${ptn ? ptn.name : 'همکار'}</div>`;
+    }
+
     let ratingStars = o.rating ? '⭐'.repeat(o.rating) : '—';
-    return `<tr>
-      <td><code class="ltr">${esc(o.code)}</code></td><td><strong>${esc(o.name)}</strong><br><small style="color:var(--i500)">${esc(o.phone)}</small></td><td>${esc(o.serviceName)}</td><td><span class="status ${st.cls}">${st.label}</span></td><td style="color:var(--gold); font-size:14px;">${ratingStars}</td>
-      <td style="min-width:180px;"><select onchange="changeOrderStatus('${o.id}', this.value)" style="padding:6px; border-radius:6px; border:1px solid var(--ln2); font-size:11.5px; margin-bottom:4px; width:100%;"><option value="pending" ${o.status==='pending'?'selected':''}>در انتظار پرداخت</option><option value="receipt_pending" ${o.status==='receipt_pending'?'selected':''}>بررسی فیش</option><option value="scheduled" ${o.status==='scheduled'?'selected':''}>تایید شد / زمان‌بندی</option><option value="assigned" ${o.status==='assigned'?'selected':''}>ارجاع شده</option><option value="in_progress" ${o.status==='in_progress'?'selected':''}>در حال انجام</option><option value="done" ${o.status==='done'?'selected':''}>اتمام کار</option><option value="completed" ${o.status==='completed'?'selected':''}>تکمیل شده</option><option value="cancelled" ${o.status==='cancelled'?'selected':''}>لغو شده</option></select>${assignSection}</td></tr>`;
+    return `<tr><td><code class="ltr">${esc(o.code)}</code></td><td><strong>${esc(o.name)}</strong><br><small style="color:var(--i500)">${esc(o.phone)}</small></td><td>${esc(o.serviceName)}</td><td><span class="status ${st.cls}">${st.label}</span></td><td style="color:var(--gold); font-size:14px;">${ratingStars}</td><td style="min-width:180px;"><select onchange="changeOrderStatus('${o.id}', this.value)" style="padding:6px; border-radius:6px; border:1px solid var(--ln2); font-size:11.5px; margin-bottom:4px; width:100%;"><option value="pending" ${o.status==='pending'?'selected':''}>در انتظار پرداخت</option><option value="receipt_pending" ${o.status==='receipt_pending'?'selected':''}>بررسی فیش</option><option value="scheduled" ${o.status==='scheduled'?'selected':''}>تایید شد / زمان‌بندی</option><option value="assigned" ${o.status==='assigned'?'selected':''}>ارجاع شده</option><option value="accepted" ${o.status==='accepted'?'selected':''}>پذیرفته شده</option><option value="arrived" ${o.status==='arrived'?'selected':''}>اعلام حضور</option><option value="in_progress" ${o.status==='in_progress'?'selected':''}>در حال انجام</option><option value="done" ${o.status==='done'?'selected':''}>اتمام کار</option><option value="completed" ${o.status==='completed'?'selected':''}>تکمیل شده</option><option value="cancelled" ${o.status==='cancelled'?'selected':''}>لغو شده</option></select>${assignSection}</td></tr>`;
   }).join("");
+}
+
+window.adminStartWork = async function(orderId) {
+    await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id: orderId, status: "arrived", arrived_at: Date.now() }) });
+    const o = cache.orders.find(x => x.id === orderId); if(o) { o.status = "arrived"; o.arrived_at = Date.now(); }
+    renderOrdersAdmin(); toast("📍 به مشتری اطلاع داده شد که شما در محل هستید.");
+}
+window.adminFinishWork = async function(orderId) {
+    await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id: orderId, status: "done" }) });
+    const o = cache.orders.find(x => x.id === orderId); if(o) o.status = "done";
+    renderOrdersAdmin(); toast("🏁 کار به اتمام رسید. منتظر تایید مشتری.");
 }
 
 window.assignToPartner = async function(orderId, partnerId) {
     if(!partnerId) return; const o = cache.orders.find(x => x.id === orderId); const p = cache.partners.find(x => x.id === partnerId); if(!o || !p) return;
-    o.partnerId = partnerId; o.status = 'assigned';
-    await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id: orderId, status: "assigned", partnerId: partnerId }) });
-    const smsText = `سلام ${p.name} عزیز،\nیک سفارش جدید به شما ارجاع شد.\nکد سفارش: ${o.code}\nنام مشتری: ${o.name}\nشهر: ${o.city}\nمساحت: ${o.area} هکتار\nلطفاً جهت مشاهده جزئیات و تایید، وارد پنل همکار شوید.\nسم‌پاش هوشمند`;
-    await apiFetch("/api/sms/send", { method: "POST", body: JSON.stringify({ to: p.phone, text: smsText }) });
-    renderOrdersAdmin(); toast(`✅ سفارش به ${p.name} ارجاع شد و پیامک ارسال گردید.`);
+    o.partnerId = partnerId; o.status = 'assigned'; o.assigned_at = Date.now();
+    await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id: orderId, status: "assigned", partnerId: partnerId, assigned_at: Date.now() }) });
+    renderOrdersAdmin(); toast(`✅ سفارش به ${p.name} ارجاع شد.`);
 }
 
 function renderPayments() {
   const box = document.getElementById("payments-list"); if(!box) return; const pendingOrders = cache.orders.filter(o => o.status === "receipt_pending");
-  if(!pendingOrders.length) { box.innerHTML = '<div class="empty">فیشی در انتظار تایید نیست</div>'; return; }
+  if(!pendingOrders.length) { box.innerHTML = '<div class="empty">فیشی در انتظار نیست</div>'; return; }
   box.innerHTML = pendingOrders.map(o => `<div class="admin-card" style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px;"><div style="flex:1; min-width:200px;"><strong>${esc(o.code)} - ${esc(o.name)}</strong><div style="font-size:12px; color:var(--i500); margin-top:4px;">مبلغ: ${fmtT(o.amount)}</div><div style="font-size:12px; color:var(--i500); margin-top:2px;">شماره: ${esc(o.phone)}</div></div><div style="display:flex; gap:8px; flex-wrap:wrap;"><button class="btn btn-light btn-sm" onclick="viewReceipt('${o.id}')">👁️ مشاهده فیش</button><button class="btn btn-green btn-sm" onclick="changeOrderStatus('${o.id}', 'scheduled')">تایید</button><button class="btn btn-danger btn-sm" onclick="changeOrderStatus('${o.id}', 'receipt_rejected')">رد</button></div></div>`).join("");
 }
 
 window.viewReceipt = async function(orderId) {
-    const container = document.getElementById("receipt-image-container"); container.innerHTML = '<span style="color:var(--i500);">در حال دریافت تصویر...</span>'; document.getElementById("receipt-view-modal").classList.add("show");
-    const res = await apiFetch(`/api/receipt?orderId=${orderId}`);
-    if(res.ok && res.data.data) container.innerHTML = `<img src="${res.data.data}" style="max-width:100%; border-radius:8px; max-height:400px; object-fit:contain;">`;
-    else container.innerHTML = '<span style="color:var(--dng);">تصویر فیش یافت نشد!</span>';
+    const container = document.getElementById("receipt-image-container"); container.innerHTML = '<span style="color:var(--i500);">در حال دریافت...</span>'; document.getElementById("receipt-view-modal").classList.add("show");
+    const res = await apiFetch(`/api/receipt?orderId=${orderId}`); if(res.ok && res.data.data) container.innerHTML = `<img src="${res.data.data}" style="max-width:100%; border-radius:8px; max-height:400px; object-fit:contain;">`; else container.innerHTML = '<span style="color:var(--dng);">یافت نشد!</span>';
 }
 window.changeOrderStatus = async function(id, newStatus) {
-    const o = cache.orders.find(x => x.id === id);
-    if(o) { o.status = newStatus; await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id, status: newStatus }) }); renderPayments(); renderDashboard(); renderOrdersAdmin(); toast("✅ وضعیت تغییر کرد"); }
+    const o = cache.orders.find(x => x.id === id); if(o) { o.status = newStatus; await apiFetch("/api/orders/status", { method: "PUT", body: JSON.stringify({ id, status: newStatus }) }); renderPayments(); renderDashboard(); renderOrdersAdmin(); toast("✅ وضعیت تغییر کرد"); }
 }
 
 document.querySelectorAll("#admin-tabs button").forEach(b => {
@@ -1810,127 +1581,82 @@ document.querySelectorAll("#admin-tabs button").forEach(b => {
 function populateSlotDates() {
     const sel = $("#slot-date-select"); if(!sel) return; sel.innerHTML = '<option value="">انتخاب تاریخ</option>';
     const today = new Date();
-    for(let i = 0; i <= 60; i++) {
-        const d = new Date(today); d.setDate(today.getDate() + i);
-        const jDate = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {year:"numeric", month:"2-digit", day:"2-digit"}).format(d);
-        const parts = jDate.split('/'); const dateStr = `${toEn(parts[0])}/${toEn(parts[1])}/${toEn(parts[2])}`;
-        sel.innerHTML += `<option value="${dateStr}">${jDate}</option>`;
-    }
+    for(let i = 0; i <= 60; i++) { const d = new Date(today); d.setDate(today.getDate() + i); const jDate = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {year:"numeric", month:"2-digit", day:"2-digit"}).format(d); const parts = jDate.split('/'); const dateStr = `${toEn(parts[0])}/${toEn(parts[1])}/${toEn(parts[2])}`; sel.innerHTML += `<option value="${dateStr}">${jDate}</option>`; }
 }
-
 function renderSlots(){
   populateSlotDates(); const srvSelect = $("#slot-service-select");
   if(srvSelect) { const activeServices = getConfig().services.filter(s => !s.hidden); srvSelect.innerHTML = '<option value="">ابتدا دستگاه را انتخاب کنید</option>' + activeServices.map(s => `<option value="${s.id}">${esc(s.name)}</option>`).join(""); }
   const tb = $("#slot-tbody"); if(!tb) return; const all = cache.slots.sort((a,b)=>a.date.localeCompare(b.date));
   if(!all.length) { tb.innerHTML='<tr><td colspan="6"><div class="empty">ظرفیتی ثبت نشده است</div></td></tr>'; return; }
   const allServices = getConfig().services;
-  tb.innerHTML = all.map(s => {
-     const booked = cache.orders.filter(o=>o.slotId===s.id && o.status!=="cancelled").length; const rem = s.cap - booked;
-     const st = rem <= 0 ? '<span class="status red">پر</span>' : '<span class="status green">آزاد</span>';
-     const srv = allServices.find(x => x.id === s.serviceId); const srvName = srv ? esc(srv.name) : '<span style="color:var(--dng)">نامشخص</span>';
-     return `<tr><td><code class="ltr" style="font-size:12px;">${esc(s.date)}</code></td><td><strong style="font-size:11.5px;">${srvName}</strong></td><td>${toFa(s.cap)}</td><td>${toFa(booked)}</td><td><strong style="color:var(--${rem>0?'ok-fg':'dng-fg'})">${toFa(rem)}</strong></td><td style="text-align:center;"><button class="icon-mini danger" onclick="deleteSlot('${s.id}')" style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px;">✕</button></td></tr>`;
-  }).join("");
+  tb.innerHTML = all.map(s => { const booked = cache.orders.filter(o=>o.slotId===s.id && o.status!=="cancelled").length; const rem = s.cap - booked; const st = rem <= 0 ? '<span class="status red">پر</span>' : '<span class="status green">آزاد</span>'; const srv = allServices.find(x => x.id === s.serviceId); const srvName = srv ? esc(srv.name) : '<span style="color:var(--dng)">نامشخص</span>'; return `<tr><td><code class="ltr" style="font-size:12px;">${esc(s.date)}</code></td><td><strong style="font-size:11.5px;">${srvName}</strong></td><td>${toFa(s.cap)}</td><td>${toFa(booked)}</td><td><strong style="color:var(--${rem>0?'ok-fg':'dng-fg'})">${toFa(rem)}</strong></td><td style="text-align:center;"><button class="icon-mini danger" onclick="deleteSlot('${s.id}')" style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px;">✕</button></td></tr>`; }).join("");
 }
 
-window.deleteSlot = async function(id) {
-  if(!confirm("حذف شود؟")) return; cache.slots = cache.slots.filter(x=>x.id!==id); await apiFetch("/api/slots", { method: "DELETE", body: JSON.stringify({id}) }); renderSlots(); toast("حذف شد");
-}
-
+window.deleteSlot = async function(id) { if(!confirm("حذف شود؟")) return; cache.slots = cache.slots.filter(x=>x.id!==id); await apiFetch("/api/slots", { method: "DELETE", body: JSON.stringify({id}) }); renderSlots(); toast("حذف شد"); }
 $("#slot-add-btn")?.addEventListener("click", async () => {
-  const serviceId = $("#slot-service-select").value; if(!serviceId) return toast("لطفاً ابتدا دستگاه را انتخاب کنید", true);
-  const date = $("#slot-date-select").value; if(!date) return toast("لطفاً تاریخ را از منو انتخاب کنید", true);
+  const serviceId = $("#slot-service-select").value; if(!serviceId) return toast("دستگاه را انتخاب کنید", true);
+  const date = $("#slot-date-select").value; if(!date) return toast("تاریخ را انتخاب کنید", true);
   const c = +toEn($("#slot-cap").value) || 1; if(c <= 0) return toast("ظرفیت را وارد کنید", true);
   const existingIdx = cache.slots.findIndex(s => s.date === date && s.serviceId === serviceId);
-  if(existingIdx >= 0) { cache.slots[existingIdx].cap = c; await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(cache.slots[existingIdx]) }); toast("ظرفیت این دستگاه در این تاریخ به‌روزرسانی شد"); } 
-  else { const newSlot = { id: uid(), date: date, cap: c, createdAt: Date.now(), serviceId: serviceId }; cache.slots.push(newSlot); await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(newSlot) }); toast("✅ روز جدید برای این دستگاه ثبت شد"); }
+  if(existingIdx >= 0) { cache.slots[existingIdx].cap = c; await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(cache.slots[existingIdx]) }); toast("ظرفیت به‌روزرسانی شد"); } 
+  else { const newSlot = { id: uid(), date: date, cap: c, createdAt: Date.now(), serviceId: serviceId }; cache.slots.push(newSlot); await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(newSlot) }); toast("✅ روز جدید ثبت شد"); }
   $("#slot-cap").value = "2"; renderSlots();
 });
-
 $("#slot-auto-fill-btn")?.addEventListener("click", async () => {
-   const serviceId = $("#slot-service-select").value; if(!serviceId) return toast("لطفاً ابتدا دستگاه را انتخاب کنید", true);
+   const serviceId = $("#slot-service-select").value; if(!serviceId) return toast("دستگاه را انتخاب کنید", true);
    let added = 0; const today = new Date(); const newSlotsToSync = [];
-   for(let i = 1; i <= 30; i++) {
-      const d = new Date(today); d.setDate(today.getDate() + i);
-      const jDate = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {year:"numeric", month:"2-digit", day:"2-digit"}).format(d);
-      const parts = jDate.split('/'); const dateStr = `${toEn(parts[0])}/${toEn(parts[1])}/${toEn(parts[2])}`;
-      if(!cache.slots.some(s => s.date === dateStr && s.serviceId === serviceId)) { const newSlot = { id: uid(), date: dateStr, cap: 2, createdAt: Date.now(), serviceId: serviceId }; cache.slots.push(newSlot); newSlotsToSync.push(newSlot); added++; }
-   }
-   if(added > 0) { toast("در حال ذخیره در سرور..."); for(const s of newSlotsToSync) { await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(s) }); } renderSlots(); toast(`✅ ${toFa(added)} روز برای این دستگاه اضافه شد.`); } 
-   else { toast("تمام ۳۰ روز آینده برای این دستگاه از قبل ثبت شده‌اند."); }
+   for(let i = 1; i <= 30; i++) { const d = new Date(today); d.setDate(today.getDate() + i); const jDate = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {year:"numeric", month:"2-digit", day:"2-digit"}).format(d); const parts = jDate.split('/'); const dateStr = `${toEn(parts[0])}/${toEn(parts[1])}/${toEn(parts[2])}`; if(!cache.slots.some(s => s.date === dateStr && s.serviceId === serviceId)) { const newSlot = { id: uid(), date: dateStr, cap: 2, createdAt: Date.now(), serviceId: serviceId }; cache.slots.push(newSlot); newSlotsToSync.push(newSlot); added++; } }
+   if(added > 0) { toast("در حال ذخیره..."); for(const s of newSlotsToSync) { await apiFetch("/api/slots", { method: "POST", body: JSON.stringify(s) }); } renderSlots(); toast(`✅ ${toFa(added)} روز اضافه شد.`); } else { toast("تمام ۳۰ روز ثبت شده‌اند."); }
 });
 
 function renderAdminServices() {
   const cfg = getConfig(); const listContainer = document.getElementById('srv-list-container'); const pricingTbody = document.getElementById('pricing-tbody');
   const activeServices = cfg.services.filter(s => !s.hidden);
-  if(!activeServices.length) { if(listContainer) listContainer.innerHTML = '<div class="empty">خدمتی ثبت نشده است.</div>'; if(pricingTbody) pricingTbody.innerHTML = '<tr><td colspan="5"><div class="empty">خدمتی ثبت نشده است.</div></td></tr>'; return; }
-  const categories = { land_prep: "🚜 آماده‌سازی زمین", planting: "🌱 کاشت", care: "💧 رسیدگی (سمپاشی، آبیاری...)", harvest: "🌾 برداشت", other: "⚙️ سایر خدمات" };
+  if(!activeServices.length) { if(listContainer) listContainer.innerHTML = '<div class="empty">خدمتی نیست</div>'; if(pricingTbody) pricingTbody.innerHTML = '<tr><td colspan="5"><div class="empty">خدمتی نیست</div></td></tr>'; return; }
+  const categories = { land_prep: "🚜 آماده‌سازی زمین", planting: "🌱 کاشت", care: "💧 رسیدگی", harvest: "🌾 برداشت", other: "⚙️ سایر" };
   const renderRegionTags = (r) => { if(!r) return '<span style="color:var(--i400);">سراسری</span>'; return r.split(',').map(reg => `<span style="color:var(--b600); background:var(--b50); padding:2px 6px; border-radius:4px; margin-left:4px; display:inline-block; margin-bottom:4px; font-size:11px;">📍 ${esc(reg)}</span>`).join(""); };
   if (listContainer) {
     let listHtml = "";
     for (const [catKey, catName] of Object.entries(categories)) {
         const catServices = activeServices.filter(s => (s.category || 'other') === catKey);
-        if (catServices.length > 0) {
-            listHtml += `<div style="margin-top:16px; margin-bottom:8px; font-weight:900; color:var(--b800); font-size:14px; border-bottom:2px solid var(--b200); padding-bottom:4px;">${catName}</div>`;
-            listHtml += catServices.map(s => `<div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; background:var(--sur); border:1px solid var(--ln); border-radius:12px; padding:12px 16px; margin-bottom:8px;"><div style="flex:1; min-width:200px; font-weight:700; font-size:13px; color:var(--i900);">${esc(s.name)}<small style="color:var(--i500); font-weight:normal; display:block; margin-top:4px;">واحد: ${esc(s.unit)} | نوع: ${s.type === 'drone' ? 'پهپاد' : 'مکانیزاسیون'}</small><div style="margin-top:6px;">${renderRegionTags(s.region)}</div></div><div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;"><input type="text" class="ltr" style="width:100px; padding:8px; height:36px; border:1px solid var(--ln2); border-radius:8px; text-align:center; font-weight:bold;" value="${s.rate}" id="srv-rate-${s.id}"><button class="btn btn-light btn-sm" onclick="updateServiceRate('${s.id}')" title="ذخیره سریع نرخ" style="height:36px; width:36px; padding:0; display:grid; place-items:center;"><svg class="icon" style="width:16px; height:16px;"><use href="#i-save"/></svg></button><button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش کامل" style="height:36px; width:36px; padding:0; display:grid; place-items:center;"><svg class="icon" style="width:16px; height:16px;"><use href="#i-edit"/></svg></button><button class="btn btn-danger btn-sm" onclick="deleteService('${s.id}')" title="حذف" style="height:36px; width:36px; padding:0; display:grid; place-items:center;"><svg class="icon" style="width:16px; height:16px;"><use href="#i-trash"/></svg></button></div></div>`).join("");
-        }
+        if (catServices.length > 0) { listHtml += `<div style="margin-top:16px; margin-bottom:8px; font-weight:900; color:var(--b800); font-size:14px; border-bottom:2px solid var(--b200); padding-bottom:4px;">${catName}</div>`; listHtml += catServices.map(s => `<div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; background:var(--sur); border:1px solid var(--ln); border-radius:12px; padding:12px 16px; margin-bottom:8px;"><div style="flex:1; min-width:200px; font-weight:700; font-size:13px; color:var(--i900);">${esc(s.name)}<small style="color:var(--i500); font-weight:normal; display:block; margin-top:4px;">واحد: ${esc(s.unit)} | نوع: ${s.type === 'drone' ? 'پهپاد' : 'مکانیزاسیون'}</small><div style="margin-top:6px;">${renderRegionTags(s.region)}</div></div><div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;"><input type="text" class="ltr" style="width:100px; padding:8px; height:36px; border:1px solid var(--ln2); border-radius:8px; text-align:center; font-weight:bold;" value="${s.rate}" id="srv-rate-${s.id}"><button class="btn btn-light btn-sm" onclick="updateServiceRate('${s.id}')" title="ذخیره" style="height:36px; width:36px; padding:0; display:grid; place-items:center;"><svg class="icon" style="width:16px; height:16px;"><use href="#i-save"/></svg></button><button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش" style="height:36px; width:36px; padding:0; display:grid; place-items:center;"><svg class="icon" style="width:16px; height:16px;"><use href="#i-edit"/></svg></button><button class="btn btn-danger btn-sm" onclick="deleteService('${s.id}')" title="حذف" style="height:36px; width:36px; padding:0; display:grid; place-items:center;"><svg class="icon" style="width:16px; height:16px;"><use href="#i-trash"/></svg></button></div></div>`).join(""); }
     }
     listContainer.innerHTML = listHtml;
   }
-  if (pricingTbody) {
-    pricingTbody.innerHTML = activeServices.map(s => {
-      const catName = categories[s.category || 'other'].split(' ')[1]; 
-      return `<tr><td><strong>${esc(s.name)}</strong><br><small style="color:var(--i500)">${catName}</small></td><td>${renderRegionTags(s.region)}</td><td>${esc(s.unit)}</td><td><div style="display:flex; align-items:center; gap:6px;"><input type="text" class="ltr" style="width:100px; padding:6px; border:1px solid var(--ln2); border-radius:6px; text-align:center; font-weight:bold;" value="${s.rate}" id="price-tbl-${s.id}"><button class="icon-mini" onclick="updateServiceRateFromTable('${s.id}')" title="ذخیره" style="width:28px; height:28px;"><svg class="icon" style="width:14px; height:14px;"><use href="#i-save"/></svg></button></div></td><td><button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش کامل" style="height:32px; padding:0 10px;"><svg class="icon" style="width:14px; height:14px;"><use href="#i-edit"/></svg> ویرایش</button></td></tr>`}).join("");
-  }
+  if (pricingTbody) { pricingTbody.innerHTML = activeServices.map(s => { const catName = categories[s.category || 'other'].split(' ')[1]; return `<tr><td><strong>${esc(s.name)}</strong><br><small style="color:var(--i500)">${catName}</small></td><td>${renderRegionTags(s.region)}</td><td>${esc(s.unit)}</td><td><div style="display:flex; align-items:center; gap:6px;"><input type="text" class="ltr" style="width:100px; padding:6px; border:1px solid var(--ln2); border-radius:6px; text-align:center; font-weight:bold;" value="${s.rate}" id="price-tbl-${s.id}"><button class="icon-mini" onclick="updateServiceRateFromTable('${s.id}')" title="ذخیره" style="width:28px; height:28px;"><svg class="icon" style="width:14px; height:14px;"><use href="#i-save"/></svg></button></div></td><td><button class="btn btn-gold btn-sm" onclick="openEditService('${s.id}')" title="ویرایش" style="height:32px; padding:0 10px;"><svg class="icon" style="width:14px; height:14px;"><use href="#i-edit"/></svg> ویرایش</button></td></tr>`}).join(""); }
 }
 
-window.updateServiceRateFromTable = async function(id) {
-  const newRate = +toEn(document.getElementById(`price-tbl-${id}`).value) || 0; if(newRate <= 0) return toast("نرخ نامعتبر است", true);
-  const cfg = getConfig(); const srv = cfg.services.find(s => s.id === id); if(srv) { srv.rate = newRate; await setConfig(cfg); renderAdminServices(); toast("✅ نرخ به‌روزرسانی شد"); }
-}
-window.updateServiceRate = async function(id) {
-  const newRate = +toEn(document.getElementById(`srv-rate-${id}`).value) || 0; if(newRate <= 0) return toast("نرخ نامعتبر است", true);
-  const cfg = getConfig(); const srv = cfg.services.find(s => s.id === id); if(srv) { srv.rate = newRate; await setConfig(cfg); renderAdminServices(); toast("✅ نرخ به‌روزرسانی شد"); }
-}
-
+window.updateServiceRateFromTable = async function(id) { const newRate = +toEn(document.getElementById(`price-tbl-${id}`).value) || 0; if(newRate <= 0) return toast("نرخ نامعتبر", true); const cfg = getConfig(); const srv = cfg.services.find(s => s.id === id); if(srv) { srv.rate = newRate; await setConfig(cfg); renderAdminServices(); toast("✅ نرخ به‌روز شد"); } }
+window.updateServiceRate = async function(id) { const newRate = +toEn(document.getElementById(`srv-rate-${id}`).value) || 0; if(newRate <= 0) return toast("نرخ نامعتبر", true); const cfg = getConfig(); const srv = cfg.services.find(s => s.id === id); if(srv) { srv.rate = newRate; await setConfig(cfg); renderAdminServices(); toast("✅ نرخ به‌روز شد"); } }
 window.openEditService = function(id) {
   const cfg = getConfig(); const srv = cfg.services.find(s => s.id === id); if(!srv) return;
   document.getElementById("edit-srv-id").value = srv.id; document.getElementById("edit-srv-name").value = srv.name; document.getElementById("edit-srv-rate").value = srv.rate; document.getElementById("edit-srv-unit").value = srv.unit; document.getElementById("edit-srv-type").value = srv.type; document.getElementById("edit-srv-category").value = srv.category || 'other';
-  const editSelect = document.getElementById("edit-srv-region"); Array.from(editSelect.options).forEach(opt => opt.selected = false);
-  if(srv.region) { srv.region.split(",").forEach(reg => { const opt = Array.from(editSelect.options).find(o => o.value === reg); if(opt) opt.selected = true; }); }
+  const editSelect = document.getElementById("edit-srv-region"); Array.from(editSelect.options).forEach(opt => opt.selected = false); if(srv.region) { srv.region.split(",").forEach(reg => { const opt = Array.from(editSelect.options).find(o => o.value === reg); if(opt) opt.selected = true; }); }
   document.getElementById("edit-service-modal").classList.add("show");
 }
-
 document.getElementById("save-edit-srv-btn")?.addEventListener("click", async () => {
   const id = document.getElementById("edit-srv-id").value; const name = document.getElementById("edit-srv-name").value.trim(); const rate = +toEn(document.getElementById("edit-srv-rate").value) || 0; const unit = document.getElementById("edit-srv-unit").value.trim(); const type = document.getElementById("edit-srv-type").value; const category = document.getElementById("edit-srv-category").value; const region = Array.from(document.getElementById("edit-srv-region").selectedOptions).map(opt => opt.value).join(",");
-  if(!name || rate <= 0 || !unit) return toast("نام، نرخ و واحد را وارد کنید", true);
+  if(!name || rate <= 0 || !unit) return toast("فیلدها را پر کنید", true);
   const cfg = getConfig(); const srvIndex = cfg.services.findIndex(s => s.id === id);
   if(srvIndex >= 0) { cfg.services[srvIndex].name = name; cfg.services[srvIndex].rate = rate; cfg.services[srvIndex].unit = unit; cfg.services[srvIndex].type = type; cfg.services[srvIndex].category = category; cfg.services[srvIndex].region = region; await setConfig(cfg); document.getElementById("edit-service-modal").classList.remove("show"); renderAdminServices(); toast("✅ خدمت ویرایش شد"); }
 });
-
 document.getElementById('srv-add-btn')?.addEventListener('click', async () => {
   const name = document.getElementById('srv-name').value.trim(); const rate = +toEn(document.getElementById('srv-rate').value) || 0; const unit = document.getElementById('srv-unit').value.trim(); const type = document.getElementById('srv-type').value; const category = document.getElementById('srv-category').value; const region = Array.from(document.getElementById("srv-region").selectedOptions).map(opt => opt.value).join(",");
-  if(!name || rate <= 0 || !unit) return toast("نام، نرخ و واحد را وارد کنید", true);
+  if(!name || rate <= 0 || !unit) return toast("فیلدها را پر کنید", true);
   const cfg = getConfig(); cfg.services.push({ id: uid(), name, rate, unit, type, category, region }); await setConfig(cfg);
   document.getElementById('srv-name').value = ""; document.getElementById('srv-rate').value = "1"; document.getElementById('srv-unit').value = ""; Array.from(document.getElementById("srv-region").options).forEach(opt => opt.selected = false);
   renderAdminServices(); toast("✅ خدمت اضافه شد");
 });
-
 window.deleteService = async function(id) { if(!confirm("حذف شود؟")) return; const cfg = getConfig(); const srv = cfg.services.find(s => s.id === id); if(srv) srv.hidden = true; await setConfig(cfg); renderAdminServices(); };
 
-window.loadPaymentSettings = function() {
-    const cfg = getConfig(); if(cfg.payment) { if($("#cfg-pay-card")) $("#cfg-pay-card").value = cfg.payment.card || ""; if($("#cfg-pay-iban")) $("#cfg-pay-iban").value = cfg.payment.iban || ""; if($("#cfg-pay-holder")) $("#cfg-pay-holder").value = cfg.payment.holder || ""; }
-}
+window.loadPaymentSettings = function() { const cfg = getConfig(); if(cfg.payment) { if($("#cfg-pay-card")) $("#cfg-pay-card").value = cfg.payment.card || ""; if($("#cfg-pay-iban")) $("#cfg-pay-iban").value = cfg.payment.iban || ""; if($("#cfg-pay-holder")) $("#cfg-pay-holder").value = cfg.payment.holder || ""; } }
 window.savePaymentSettings = async function() { const cfg = getConfig(); cfg.payment = { card: $("#cfg-pay-card").value.trim(), iban: $("#cfg-pay-iban").value.trim(), holder: $("#cfg-pay-holder").value.trim() }; await setConfig(cfg); toast("✅ تنظیمات پرداخت ذخیره شد"); }
 
 document.getElementById("gal-upload-btn")?.addEventListener("click", async () => {
   const title = document.getElementById("gal-title").value.trim(); const desc = document.getElementById("gal-desc").value.trim(); const file = document.getElementById("gal-file")?.files?.[0];
   if(!title || !file) return toast("عنوان و فایل الزامی است", true);
   const btn = document.getElementById("gal-upload-btn"); btn.disabled = true; btn.textContent = "در حال آپلود..."; const formData = new FormData(); formData.append('file', file);
-  try {
-      const res = await fetch(`${API}/api/upload`, { method: 'POST', body: formData }); const data = await res.json();
-      if(data.ok) { const videos = read(LS.videos, []); videos.push({ id: uid(), title, desc, url: data.url, type: data.type, createdAt: Date.now() }); write(LS.videos, videos); toast("✅ فایل آپلود شد"); document.getElementById("gal-title").value = ""; document.getElementById("gal-desc").value = ""; document.getElementById("gal-file").value = ""; renderVideoAdmin(); } 
-      else toast(data.error || "خطا", true);
-  } catch(e) { toast("خطای ارتباط", true); } finally { btn.disabled = false; btn.textContent = "آپلود فایل"; }
+  try { const res = await fetch(`${API}/api/upload`, { method: 'POST', body: formData }); const data = await res.json(); if(data.ok) { const videos = read(LS.videos, []); videos.push({ id: uid(), title, desc, url: data.url, type: data.type, createdAt: Date.now() }); write(LS.videos, videos); toast("✅ فایل آپلود شد"); document.getElementById("gal-title").value = ""; document.getElementById("gal-desc").value = ""; document.getElementById("gal-file").value = ""; renderVideoAdmin(); } else toast(data.error || "خطا", true); } catch(e) { toast("خطا", true); } finally { btn.disabled = false; btn.textContent = "آپلود فایل"; }
 });
 
 function renderVideoAdmin() {
@@ -1942,40 +1668,54 @@ window.deleteVideo = function(i) { if(!confirm("حذف شود؟")) return; const
 
 function renderPartners() {
   const list = document.getElementById('partners-list'); if(!list) return; const all = cache.partners.filter(p => (p.type || "drone") === ptnFilterType);
-  if(!all.length) { list.innerHTML = '<div class="empty">همکاری در این بخش ثبت نشده</div>'; return; }
-  list.innerHTML = all.map(p => `<div class="admin-card" style="display:flex; gap:12px; align-items:flex-start;"><div style="width:40px; height:40px; border-radius:12px; background:var(--purple-bg); color:var(--purple); display:grid; place-items:center; font-weight:800;">${esc(p.name.charAt(0))}</div><div style="flex:1;"><strong>${esc(p.name)}</strong><div style="font-size:12px; color:var(--i500); margin-top:2px;">${esc(p.phone)} | ${esc(p.province)} - ${esc(p.county||'')} - ${esc(p.city)} ${p.village ? ' - روستای ' + esc(p.village) : ''}</div>${p.type === 'mechanization' ? `<div style="font-size:11.5px; color:var(--i600); margin-top:6px; background:var(--sur); padding:8px; border-radius:8px; border:1px solid var(--ln); line-height:1.8;"><div><strong style="color:var(--b700);">🚜 دستگاه:</strong> ${esc(p.machine || p.equipment || '-')}</div><div><strong style="color:var(--b700);">⚙️ ادوات:</strong> ${esc(p.implements || '-')}</div><div><strong style="color:var(--b700);">📍 شهرها:</strong> ${esc(p.cities || '-')}</div></div>` : ''}</div><div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;"><span class="status ${p.status==='active'?'green':'amber'}">${p.status==='active'?'تایید':'در انتظار'}</span>${p.status!=='active' ? `<button class="btn btn-green btn-sm" onclick="approvePartner('${p.id}')">تایید</button>` : ''}</div></div>`).join("");
+  if(!all.length) { list.innerHTML = '<div class="empty">همکاری نیست</div>'; return; }
+  list.innerHTML = all.map(p => `<div class="admin-card" style="display:flex; gap:12px; align-items:flex-start;"><div style="width:40px; height:40px; border-radius:12px; background:var(--purple-bg); color:var(--purple); display:grid; place-items:center; font-weight:800;">${esc(p.name.charAt(0))}</div><div style="flex:1;"><strong>${esc(p.name)}</strong><div style="font-size:12px; color:var(--i500); margin-top:2px;">${esc(p.phone)} | ${esc(p.province)} - ${esc(p.county||'')} - ${esc(p.city)}</div><div style="font-size:11.5px; color:var(--i600); margin-top:6px; background:var(--sur); padding:8px; border-radius:8px; border:1px solid var(--ln); line-height:1.8;"><div><strong>کد ملی:</strong> ${esc(p.national_id || '-')}</div><div><strong>شبا:</strong> ${esc(p.sheba_number || '-')}</div></div></div><div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;"><span class="status ${p.status==='active'?'green':'amber'}">${p.status==='active'?'تایید':'در انتظار'}</span>${p.status!=='active' ? `<button class="btn btn-green btn-sm" onclick="approvePartner('${p.id}')">تایید</button>` : ''}${p.status==='active' ? `<button class="btn btn-purple btn-sm" onclick="adminLoginAsPartner('${p.id}')" style="margin-top:4px;" title="ورود به پنل">🔑 ورود به پنل</button>` : ''}</div></div>`).join("");
 }
 window.approvePartner = async function(id) { const p = cache.partners.find(x=>x.id===id); if(p) { p.status = "active"; p.active = true; await apiFetch("/api/partners", { method: "PUT", body: JSON.stringify(p) }); renderPartners(); toast("✅ تایید شد"); } }
 document.querySelectorAll('#admin-ptn-tabs button').forEach(btn => { btn.onclick = () => { document.querySelectorAll('#admin-ptn-tabs button').forEach(b => b.setAttribute('aria-selected', 'false')); btn.setAttribute('aria-selected', 'true'); ptnFilterType = btn.dataset.ptnType; renderPartners(); }; });
 window.togglePtnType = function(type) { const fields = document.getElementById('mechanization-fields'); if(fields) fields.style.display = type === 'mechanization' ? 'grid' : 'none'; }
 
+window.adminLoginAsPartner = function(partnerId) {
+    const p = cache.partners.find(x => x.id === partnerId); if(!p) return;
+    localStorage.setItem(LS.partner_session, JSON.stringify({ partnerId: p.id, isAdminImpersonating: true }));
+    $("#admin-panel-view").hidden = true; $("#partner-login-view").hidden = true; $("#partner-panel-view").hidden = false;
+    showScreen("partner"); renderPartnerDashboard(p); toast(`🔑 وارد پنل ${p.name} شدید (مدیر)`);
+}
+
 function renderAdminMessages() {
   const box = document.getElementById("adm-messages-list"); if(!box) return; const msgs = read(LS.messages, []);
-  if(!msgs.length) { box.innerHTML = '<div class="empty">پیامی وجود ندارد</div>'; return; }
+  if(!msgs.length) { box.innerHTML = '<div class="empty">پیامی نیست</div>'; return; }
   box.innerHTML = msgs.map(m => `<div style="background:var(--inset); padding:10px; border-radius:8px; margin-bottom:8px; font-size:13px;"><div style="font-size:11px; color:var(--i400); margin-bottom:4px;">${esc(m.phone)}</div>${esc(m.text)}</div>`).join("");
 }
-document.getElementById("admin-change-pass-form")?.addEventListener("submit", async e => { e.preventDefault(); const newPass = document.getElementById("new-admin-pass").value; if(newPass.length < 6) return toast("رمز باید حداقل ۶ کاراکتر باشد", true); toast("✅ رمز عبور تغییر کرد (در محیط واقعی باید به سرور ارسال شود)"); e.target.reset(); });
+document.getElementById("admin-change-pass-form")?.addEventListener("submit", async e => { e.preventDefault(); const newPass = document.getElementById("new-admin-pass").value; if(newPass.length < 6) return toast("رمز حداقل ۶ کاراکتر", true); toast("✅ رمز تغییر کرد (محیط تست)"); e.target.reset(); });
 
 function renderCustomers() {
   const o = cache.orders; const map = new Map();
   o.forEach(x => { if(!map.has(x.phone)) map.set(x.phone, {name: x.name, phone: x.phone, count: 0, area: 0, total: 0}); const m = map.get(x.phone); m.count++; m.area += +x.area || 0; if(x.status !== "cancelled") m.total += +x.amount || 0; });
   let rows = [...map.values()].sort((a, b) => b.count - a.count); const tb = $("#adm-cust-tbody"); if(!tb) return;
-  if(!rows.length) { tb.innerHTML = '<tr><td colspan="5"><div class="empty">هنوز مشتری‌ای سفارش نداده است</div></td></tr>'; return; }
+  if(!rows.length) { tb.innerHTML = '<tr><td colspan="5"><div class="empty">مشتری‌ای نیست</div></td></tr>'; return; }
   tb.innerHTML = rows.map(r => `<tr><td><strong>${esc(r.name)}</strong></td><td><code class="ltr" style="background:var(--inset); padding:2px 6px; border-radius:4px;">${esc(r.phone)}</code></td><td>${toFa(r.count)}</td><td>${toFa(r.area)} هکتار</td><td>${fmtT(r.total)}</td></tr>`).join("");
 }
-document.getElementById('sms-send-btn')?.addEventListener('click', async () => { const phone = toEn($("#sms-phone").value.trim()); const text = $("#sms-text").value.trim(); if(!/^09\d{9}$/.test(phone)) return toast("شماره موبایل نامعتبر است", true); if(!text) return toast("متن پیامک را وارد کنید", true); toast("در حال ارسال..."); const res = await apiFetch("/api/sms/send", { method: "POST", body: JSON.stringify({ to: phone, text }) }); if(res.ok) { toast("✅ پیامک با موفقیت ارسال شد"); $("#sms-text").value = ""; } else { toast(res.data.error || "خطا در ارسال پیامک", true); } });
+document.getElementById('sms-send-btn')?.addEventListener('click', async () => { const phone = toEn($("#sms-phone").value.trim()); const text = $("#sms-text").value.trim(); if(!/^09\d{9}$/.test(phone)) return toast("شماره نامعتبر", true); if(!text) return toast("متن را وارد کنید", true); toast("در حال ارسال..."); const res = await apiFetch("/api/sms/send", { method: "POST", body: JSON.stringify({ to: phone, text }) }); if(res.ok) { toast("✅ پیامک ارسال شد"); $("#sms-text").value = ""; } else { toast(res.data.error || "خطا", true); } });
 document.getElementById('backup-dl')?.addEventListener('click', () => { const data = { exportedAt: new Date().toISOString(), orders: cache.orders, partners: cache.partners, slots: cache.slots, messages: read(LS.messages, []), config: getConfig(), receipts: read(LS.receipts, {}), videos: read(LS.videos, []) }; const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `sph-backup-${Date.now()}.json`; a.click(); toast("✅ بکاپ دانلود شد"); });
 document.getElementById('backup-csv')?.addEventListener('click', () => { const rows = [["کد", "نام", "موبایل", "استان", "شهر", "خدمت", "مقدار", "مبلغ", "وضعیت", "تاریخ", "امتیاز"]].concat(cache.orders.map(o => [o.code, o.name, o.phone, o.province, o.city, o.serviceName || o.serviceType, o.area, o.amount, STATUS[o.status]?.label || o.status, new Date(o.createdAt || Date.now()).toLocaleDateString("fa-IR"), o.rating || 0])); const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g, '""')}"`).join(",")).join("\n"); const blob = new Blob(["\ufeff" + csv], { type: "text/csv;charset=utf-8" }); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "orders-backup.csv"; a.click(); toast("✅ خروجی CSV دانلود شد"); });
-document.getElementById('restore-btn')?.addEventListener('click', async () => { const f = document.getElementById('restore-file')?.files?.[0]; if (!f) return toast("فایل بکاپ را انتخاب کنید", true); try { const data = JSON.parse(await f.text()); if (!confirm("داده‌های فعلی جایگزین می‌شوند؟")) return; if (data.orders) { cache.orders = data.orders; write(LS.orders, data.orders); } if (data.partners) { cache.partners = data.partners; write(LS.partners, data.partners); } if (data.slots) { cache.slots = data.slots; write(LS.slots, data.slots); } if (data.config) setConfig(data.config); toast("✅ بازیابی با موفقیت انجام شد (نیاز به همگام‌سازی دستی با سرور دارد)"); setTimeout(() => location.reload(), 1000); } catch (e) { toast("فایل نامعتبر است: " + e.message, true); } });
+document.getElementById('restore-btn')?.addEventListener('click', async () => { const f = document.getElementById('restore-file')?.files?.[0]; if (!f) return toast("فایل را انتخاب کنید", true); try { const data = JSON.parse(await f.text()); if (!confirm("داده‌ها جایگزین شوند؟")) return; if (data.orders) { cache.orders = data.orders; write(LS.orders, data.orders); } if (data.partners) { cache.partners = data.partners; write(LS.partners, data.partners); } if (data.slots) { cache.slots = data.slots; write(LS.slots, data.slots); } if (data.config) setConfig(data.config); toast("✅ بازیابی شد"); setTimeout(() => location.reload(), 1000); } catch (e) { toast("فایل نامعتبر", true); } });
 
-document.getElementById("home-phone-save")?.addEventListener("click", async () => { const v = toEn(document.getElementById("home-phone-input").value.trim()); if(!/^09\d{9}$/.test(v)) return toast("شماره نامعتبر است.", true); await startPhoneVerification(v, 'farmer'); });
+document.getElementById("home-phone-save")?.addEventListener("click", async () => { const v = toEn(document.getElementById("home-phone-input").value.trim()); if(!/^09\d{9}$/.test(v)) return toast("شماره نامعتبر", true); await startPhoneVerification(v, 'farmer'); });
 document.getElementById("home-phone-input")?.addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); document.getElementById("home-phone-save").click(); } });
-
-document.getElementById('guest-btn')?.addEventListener('click', () => { localStorage.setItem(LS.guest, 'true'); document.getElementById('welcome-overlay').classList.add('hidden'); showScreen("home"); });
+document.getElementById('guest-btn')?.addEventListener('click', () => { localStorage.removeItem(LS.cust_phone); localStorage.removeItem(LS.cust_verified); localStorage.removeItem(LS.cust_profile); localStorage.setItem(LS.guest, 'true'); document.getElementById('welcome-overlay').classList.add('hidden'); showScreen("home"); });
 
 (async function boot(){
   await loadAll();
-  if (isCustomerVerified() || isGuest()) { document.getElementById('welcome-overlay').classList.add('hidden'); }
+  const isFarmer = isCustomerVerified() || isGuest();
+  const isPartner = localStorage.getItem(LS.partner_session) !== null;
+  const isAdmin = localStorage.getItem(LS.admin_token) !== null;
+
+  if (isFarmer || isPartner || isAdmin) {
+      document.getElementById('welcome-overlay').classList.add('hidden');
+      if (isAdmin) showScreen("admin"); else if (isPartner) showScreen("partner"); else showScreen("home");
+  } else { document.getElementById('welcome-overlay').classList.remove('hidden'); }
+
   const c = getConfig();
   const ptnProv = $("#ptn-reg-prov"); if(ptnProv) ptnProv.innerHTML = '<option value="">انتخاب</option>' + c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
   const srvRegion = $("#srv-region"); if(srvRegion) srvRegion.innerHTML = c.provinces.map(v => `<option value="${v}">${v}</option>`).join("");
