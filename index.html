@@ -302,23 +302,47 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   .charts-grid{grid-template-columns:1fr}.feature-badges{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:720px){
-  .shell{display:block !important; width:100%;}
-  .sidebar{position:fixed;top:0;right:0;width:280px;height:100vh;z-index:var(--z-sidebar);display:flex !important;flex-direction:column;padding:20px 14px;box-shadow:var(--sh5);overflow-y:auto;transform:translateX(100%);background:linear-gradient(180deg,var(--forest-700),var(--forest-600))}
-  .sidebar.show{transform:translateX(0) !important;}
-  .main{padding:16px 14px 80px !important; width:100% !important;}
-  .top-bar{padding:10px 14px; flex-direction:row !important; align-items:center !important;}
-  .notif-dropdown{width:280px;left:-10px}
-  .hero{display:flex !important;flex-direction:column !important;min-height:auto;background:var(--forest-700);position:relative;padding-bottom:20px}
+  html, body { max-width: 100vw !important; overflow-x: hidden !important; width: 100% !important; }
+  .shell{display:block !important; width:100% !important; overflow-x: hidden !important;}
+  
+  /* اصلاح سایدبار برای جلوگیری از هل دادن صفحه به چپ */
+  .sidebar {
+      position: fixed;
+      top: 0;
+      right: -100%; 
+      width: 280px;
+      height: 100vh;
+      z-index: var(--z-sidebar);
+      display: flex !important;
+      flex-direction: column;
+      padding: 20px 14px;
+      box-shadow: var(--sh5);
+      overflow-y: auto;
+      transition: right 0.3s ease;
+      background: linear-gradient(180deg, var(--forest-700), var(--forest-600));
+  }
+  .sidebar.show { right: 0 !important; }
+  
+  .main{padding:16px 14px 80px !important; width:100% !important; max-width: 100vw !important; box-sizing: border-box !important; overflow-x: hidden !important;}
+  .top-bar{padding:10px 14px; width: 100%; box-sizing: border-box;}
+  
+  /* اصلاح منوی اعلان‌ها تا از کادر بیرون نزند */
+  .notif-dropdown{width:280px; right:-10px; left:auto;}
+  
+  .hero{display:flex !important;flex-direction:column !important;min-height:auto;background:var(--forest-700);position:relative;padding-bottom:20px; width: 100%; box-sizing: border-box;}
   .hero-copy{padding:24px 20px 10px;z-index:2;position:relative;text-align:center;align-items:center}
   .hero h3{font-size:24px;margin-bottom:10px;text-align:center}
   .hero-subtitle{font-size:13px;margin-bottom:20px;line-height:1.8;text-align:center}
   .hero-cta{flex-direction:column;gap:10px;width:100%}.hero-cta button{width:100%;justify-content:center;padding:14px}
   .online-badge{margin:0 auto 14px}
   .hero-art{position:absolute;inset:0;width:100%;height:100%;opacity:.15;pointer-events:none;z-index:1}.hero-overlay{display:none}
+  
+  /* اصلاح کارت‌های آمار هدر */
   .hero-floating-stats{position:relative;inset:auto;display:flex;flex-direction:row;flex-wrap:wrap;gap:8px;margin:10px 20px 0;justify-content:center;z-index:2}
-  .hero-stat-card{flex:1;min-width:calc(33.333% - 6px);padding:10px 6px;flex-direction:column;text-align:center;gap:6px;border-radius:12px}
+  .hero-stat-card{width: calc(33.333% - 6px) !important; flex: none !important; padding:10px 6px; flex-direction:column; text-align:center; gap:6px; border-radius:12px; box-sizing: border-box;}
   .hero-stat-card .hs-icon{width:34px;height:34px;margin:0 auto;background:rgba(163,230,53,.15)}
   .hero-stat-card strong{font-size:14px}.hero-stat-card small{font-size:9.5px;line-height:1.4}
+
   .feature-badges{grid-template-columns:repeat(2,1fr);padding:16px;gap:16px;border-radius:var(--r-x)}
   .feature-badge{flex-direction:column;text-align:center;gap:8px}.feature-badge .fb-icon{width:46px;height:46px;margin:0 auto}
   .services-grid{grid-template-columns:repeat(2,1fr);gap:10px}
@@ -332,7 +356,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   .fab-chat{bottom:80px;left:16px;width:50px;height:50px}.fab-chat svg{width:22px;height:22px}
   .spray-alert{flex-direction:column;padding:12px}.img-upload-row,.report-images{grid-template-columns:1fr}
   .price-row{flex-direction:column;align-items:stretch}.price-row input{width:100%}
-}
+  }
 @media(min-width:721px){#mobile-menu-btn{display:none!important}.bottom-nav{display:none!important}}
 </style>
 </head>
