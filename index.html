@@ -294,105 +294,134 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .price-row{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--ln);border-radius:10px;padding:10px 12px;margin-bottom:8px;flex-wrap:wrap}
 .price-row .pr-name{flex:1;min-width:150px;font-size:13px;font-weight:700;color:var(--i900)}.price-row input{width:110px;padding:8px;border:1px solid var(--ln2);border-radius:8px;text-align:center;font-weight:700;font-size:13px}
 .price-row .pr-unit{font-size:11.5px;color:var(--i500);min-width:50px}.price-row .pr-default{font-size:11.5px;color:var(--i400);min-width:100px}
-/* ================= MOBILE FIX (ULTIMATE) ================= */
+/* ================= MOBILE FIX (BRUTE FORCE) ================= */
 @media (max-width: 1100px) {
-  /* قفل کردن عرض کل صفحه */
+  /* ۱. قفل کردن کل صفحه و جلوگیری از اسکرول افقی */
   html, body {
-    overflow-x: hidden !important;
     width: 100vw !important;
     max-width: 100vw !important;
+    overflow-x: hidden !important;
     margin: 0 !important;
     padding: 0 !important;
+    position: relative !important;
   }
 
-  /* تبدیل ساختار گرید دسکتاپ به حالت تک ستونه */
-  .shell {
-    display: block !important;
+  /* ۲. عرض بخش اصلی */
+  .shell, .main, .screen {
     width: 100% !important;
     max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .main {
+    padding: 12px 12px 80px 12px !important;
+    overflow: hidden !important;
   }
 
-  /* مخفی کردن سایدبار به سمت راست (با استفاده از ترنسفورم که خیلی مطمئن‌تره) */
+  /* ۳. جلوگیری از بیرون زدگی تمام کارت‌ها و کانتینرها */
+  .panel, .content-grid, .admin-card, .chart-card, .feature-badges, .services-section, .stats, .charts-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+
+  /* ۴. مخفی کردن کامل سایدبار در موبایل */
   .sidebar {
     position: fixed !important;
     top: 0 !important;
-    right: 0 !important;
+    right: -100% !important; 
     width: 280px !important;
     height: 100vh !important;
-    transform: translateX(100%) !important; /* هُل دادن به بیرون از صفحه */
-    transition: transform 0.3s ease !important;
+    transition: right 0.3s ease !important;
     z-index: 9999 !important;
   }
   .sidebar.show {
-    transform: translateX(0) !important; /* آوردن به داخل صفحه */
+    right: 0 !important;
   }
 
-  /* تنظیم بخش اصلی */
-  .main {
+  /* ۵. اصلاح کارت‌های دسترسی سریع (مشکل عکس شما) */
+  .quick-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important; /* دقیقاً ۲ ستون مساوی */
+    gap: 8px !important;
     width: 100% !important;
-    max-width: 100vw !important;
-    padding: 16px 12px 80px 12px !important;
+    max-width: 100% !important;
+  }
+  .quick {
+    width: 100% !important;
+    max-width: 100% !important;
     box-sizing: border-box !important;
+    padding: 12px 8px !important; /* کاهش حاشیه داخلی */
+  }
+  .quick strong { font-size: 12px !important; }
+  .quick small { font-size: 10.5px !important; }
+
+  /* ۶. اصلاح نوار سبز پایین (مشکل عکس شما) */
+  .trust-bar {
+    display: flex !important;
+    flex-direction: column !important; /* عمودی کردن */
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 12px !important;
+    gap: 12px !important;
+  }
+  .trust-bar .tb-item {
+    width: 100% !important;
+    justify-content: flex-start !important;
+  }
+  .trust-bar .tb-divider {
+    display: none !important; /* حذف خطوط جداکننده */
   }
 
-  /* منوی اعلان‌ها */
-  .notif-dropdown {
-    position: fixed !important;
-    top: 60px !important;
-    right: 10px !important;
-    left: 10px !important;
-    width: auto !important;
-  }
-
-  /* هدر (Hero) */
+  /* ۷. اصلاح کارت‌های بالای صفحه (Hero) */
   .hero {
+    width: 100% !important;
+    max-width: 100% !important;
     display: flex !important;
     flex-direction: column !important;
-    min-height: auto !important;
-  }
-  .hero-art {
-    display: none !important; /* مخفی کردن عکس پس‌زمینه برای جلوگیری از به هم ریختگی */
+    padding: 0 !important;
   }
   .hero-copy {
-    padding: 20px !important;
+    padding: 20px 12px !important;
     text-align: center !important;
-    align-items: center !important;
   }
+  .hero-cta {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+  .hero-cta button { width: 100% !important; }
+  
   .hero-floating-stats {
     position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
     display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    margin: 10px 0 !important;
-    gap: 10px !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 8px !important;
+    margin-top: 10px !important;
+    padding: 0 !important;
   }
   .hero-stat-card {
-    width: calc(50% - 10px) !important; /* دو کارت در هر ردیف */
+    width: 100% !important;
   }
 
-  /* تک ستونه کردن تمام گریدها و شبکه‌ها */
-  .services-grid, .stats, .charts-grid, .content-grid, .admin-grid, .form-grid, .kv-grid, .feature-badges, .ticket-layout {
+  /* ۸. تک ستونه کردن سایر گریدها */
+  .stats, .charts-grid, .content-grid, .admin-grid, .form-grid, .kv-grid, .ticket-layout {
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
     gap: 12px !important;
   }
 
-  /* جلوگیری از بیرون زدگی تصاویر و جدول‌ها */
-  img, table, .table-scroll {
-    max-width: 100% !important;
-  }
-
-  /* منوی پایین */
-  .bottom-nav {
-    display: flex !important;
-    width: 100vw !important;
-  }
-  
-  /* دکمه شناور چت */
-  .fab-chat {
-    bottom: 80px !important;
-    left: 16px !important;
+  /* ۹. اصلاح جدول‌ها (جهت جلوگیری از پهن شدن) */
+  .table-scroll {
+    width: 100% !important;
+    overflow-x: auto !important; /* اسکرول فقط داخل جدول */
   }
  }
 </style>
