@@ -652,6 +652,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   <div class="tb-item"><div class="tb-icon"><svg class="icon"><use href="#i-users"/></svg></div><div><strong id="trust-users">۰</strong><small>کشاورز راضی</small></div></div>
 </div>
 </section>
+
 <!-- ============ ORDER DRONE ============ -->
 <section class="screen" id="screen-order-drone">
 <div class="panel">
@@ -826,6 +827,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 </form>
 </div>
 </section>
+
 <!-- ============ TRACK ============ -->
 <section class="screen" id="screen-track">
 <div class="panel">
@@ -916,6 +918,7 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
   </form>
 </div>
 </section>
+
 <!-- ============ ADMIN ============ -->
 <section class="screen" id="screen-admin">
 <div id="admin-login-view" class="auth-wrap">
@@ -1214,6 +1217,9 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="footer-note">سم‌پاش هوشمند · شبکه هوشمند خدمات کشاورزی ایران · نسخه ۲۳.۰</div>
 </main>
 </div>
+
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
 <!-- ============ Bottom Nav ============ -->
 <nav class="bottom-nav">
   <button onclick="showScreen('home')" class="active" id="bnav-home"><svg class="icon"><use href="#i-home"/></svg>خانه</button>
@@ -1320,12 +1326,9 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 <div class="toast" id="toast"></div>
 <script>
 "use strict";
-
-// ============================================================
-// 🚀 تغییرات مربوط به Cloudflare Worker
-// ============================================================
-// آدرس ورکر کلادفلر خودت رو اینجا بذار:
-const API="https://api.sampash-ai.ir";
+/* ============================================================
+   سم‌پاش هوشمند v23 - Full script with all fixes & SNAP-like flow
+   ============================================================ */
 
 const $=(s,c=document)=>c.querySelector(s);
 const $$=(s,c=document)=>Array.from(c.querySelectorAll(s));
@@ -1357,7 +1360,7 @@ let toastTimer;const toastEl=$("#toast");
 function toast(m,e=false){if(!toastEl)return;toastEl.textContent=m;toastEl.classList.toggle("err",e);toastEl.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>toastEl.classList.remove("show"),3600);}
 
 // ============ LocalStorage keys ============
-const LS={admin_token:"sph_admin_token",config:"sph_config",orders:"sph_orders",partners:"sph_partners",slots:"sph_slots",cust_phone:"sph_cust_phone",cust_verified:"sph_cust_verified",cust_profile:"sph_cust_profile",videos:"sph_videos",guest:"sph_guest_mode",messages:"sph_messages",partner_session:"sph_partner_session",payouts:"sph_payouts",order_images:"sph_order_images",auth_token:"sph_auth_token"}; // 👈 توکن لاگین به LS اضافه شد
+const LS={admin_token:"sph_admin_token",config:"sph_config",orders:"sph_orders",partners:"sph_partners",slots:"sph_slots",cust_phone:"sph_cust_phone",cust_verified:"sph_cust_verified",cust_profile:"sph_cust_profile",videos:"sph_videos",guest:"sph_guest_mode",messages:"sph_messages",partner_session:"sph_partner_session",payouts:"sph_payouts",order_images:"sph_order_images"};
 const read=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v??d;}catch{return d;}};
 const write=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
 
@@ -1442,28 +1445,18 @@ const setConfig=async c=>{cache.config=c;write(LS.config,c);try{await apiFetch("
 
 const STATUS={pending:{label:"در انتظار پرداخت",cls:""},receipt_pending:{label:"در انتظار تأیید فیش",cls:"amber"},receipt_rejected:{label:"فیش رد شده",cls:"red"},scheduled:{label:"زمان‌بندی شد",cls:"green"},assigned:{label:"در حال ارسال به همکار",cls:"purple"},accepted:{label:"پذیرفته شده",cls:"blue"},on_the_way:{label:"همکار در راه است",cls:"blue"},arrived:{label:"منتظر تایید مشتری",cls:"amber"},in_progress:{label:"در حال انجام",cls:"blue"},done:{label:"منتظر گزارش و امتیاز",cls:"amber"},completed:{label:"تکمیل شده",cls:"green"},cancelled:{label:"لغو شده",cls:"red"},rejected:{label:"رد شده توسط کشاورز",cls:"red"}};
 
-// ============================================================
-// 🚀 توابع ارتباط با Cloudflare Worker (اصلاح شده)
-// ============================================================
+const API="https://api.sampash-ai.ir";
 async function apiFetch(path,opts={}){
   const url=path.startsWith("http")?path:API+path;
   const headers={"Content-Type":"application/json",...(opts.headers||{})};
-  
-  // اضافه کردن توکن ورود (JWT) به هدر درخواست
-  const token = localStorage.getItem(LS.auth_token) || localStorage.getItem(LS.admin_token);
-  if(token) {
-    headers["Authorization"] = `Bearer ${token}`;
-  }
-  
+  const token=localStorage.getItem(LS.admin_token);
+  if(token&&path.includes('/admin'))headers["Authorization"]=`Bearer ${token}`;
   const o={...opts,headers};
   try{
     const r=await fetch(url,o);
     const data=await r.json().catch(()=>({}));
     return{ok:r.ok,status:r.status,data};
-  }catch(e){
-    console.error("API Fetch Error:", e);
-    return{ok:false,status:0,data:{error:"ارتباط با سرور برقرار نشد."}};
-  }
+  }catch(e){return{ok:false,status:0,data:{error:"ارتباط برقرار نشد."}};}
 }
 
 async function loadAll(){
@@ -1471,25 +1464,16 @@ async function loadAll(){
     const [cf,ordRes,ptnRes,slotRes]=await Promise.all([
       apiFetch("/api/config"),apiFetch("/api/orders"),apiFetch("/api/partners"),apiFetch("/api/slots")
     ]);
-    
-    cache.config = cf.ok ? cf.data : read(LS.config, null);
-    cache.orders = ordRes.ok ? ordRes.data : read(LS.orders, []);
-    cache.partners = ptnRes.ok ? ptnRes.data : read(LS.partners, []);
-    cache.slots = slotRes.ok ? slotRes.data : read(LS.slots, []);
-    
-    // همگام‌سازی با حافظه محلی برای اطمینان از عملکرد آفلاین
-    if(cf.ok) write(LS.config, cf.data);
-    if(ordRes.ok) write(LS.orders, ordRes.data);
-    if(ptnRes.ok) write(LS.partners, ptnRes.data);
-    if(slotRes.ok) write(LS.slots, slotRes.data);
-    
+    cache.config=(cf.ok&&cf.data&&Object.keys(cf.data).length)?cf.data:read(LS.config,null);
+    cache.orders=ordRes.ok?ordRes.data:read(LS.orders,[]);
+    cache.partners=ptnRes.ok?ptnRes.data:read(LS.partners,[]);
+    cache.slots=slotRes.ok?slotRes.data:read(LS.slots,[]);
   }catch(e){console.error("Sync Error:",e);}
 }
 
 // ============ Login/Logout ============
 window.returnToLogin=function(){
   localStorage.removeItem(LS.admin_token);
-  localStorage.removeItem(LS.auth_token); // توکن جدید
   localStorage.removeItem(LS.partner_session);
   localStorage.removeItem(LS.cust_verified);
   localStorage.removeItem(LS.cust_phone);
@@ -1652,10 +1636,99 @@ function calcOrderFinance(order){
 }
 function getSettledAmount(partnerId){const payouts=read(LS.payouts,[]);return payouts.filter(p=>p.partnerId===partnerId).reduce((s,p)=>s+(+p.amount||0),0);}
 
+function renderFinance(){
+  const cfg=getConfig();
+  if($("#cfg-system-fee"))$("#cfg-system-fee").value=getSystemFeeRate();
+  if($("#cfg-partner-share"))$("#cfg-partner-share").value=cfg.finance?.defaultPartnerShare??85;
+  const filter=$("#fin-order-filter")?.value||"";
+  const orders=cache.orders.filter(o=>!filter||o.status===filter).filter(o=>o.status!=="cancelled").sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
+  const completed=cache.orders.filter(o=>o.status==="completed");
+  let totalRevenue=0,totalPartner=0,totalSystem=0,totalProfit=0;
+  completed.forEach(o=>{const f=calcOrderFinance(o);totalRevenue+=f.amount;totalPartner+=f.partnerCost;totalSystem+=f.systemFee;totalProfit+=f.netProfit;});
+  const summary=$("#fin-summary");
+  if(summary){summary.innerHTML=`
+    <div class="fin-card"><small>کل درآمد (تکمیل‌شده)</small><strong>${fmtT(totalRevenue)}</strong></div>
+    <div class="fin-card"><small>هزینه همکاران</small><strong>${fmtT(totalPartner)}</strong></div>
+    <div class="fin-card"><small>کارمزد سامانه</small><strong>${fmtT(totalSystem)}</strong></div>
+    <div class="fin-card profit"><small>سود واقعی</small><strong>${fmtT(totalProfit)}</strong></div>`;}
+  const tbody=$("#fin-tbody");
+  if(tbody){
+    if(!orders.length){tbody.innerHTML='<tr><td colspan="8"><div class="empty">سفارشی نیست</div></td></tr>';}
+    else{
+      tbody.innerHTML=orders.map(o=>{
+        const f=calcOrderFinance(o);
+        const p=cache.partners.find(x=>x.id===o.partnerId);
+        const st=STATUS[o.status]||STATUS.pending;
+        return `<tr><td><code class="ltr" style="font-size:11px;">${esc(o.code)}</code></td><td><strong style="font-size:12px;">${esc(o.name)}</strong></td><td>${p?esc(p.name):'<span style="color:var(--i400)">—</span>'}</td><td style="color:var(--forest-700);font-weight:800;">${fmtT(f.amount)}</td><td style="color:var(--dng);">${fmtT(f.partnerCost)}</td><td style="color:var(--purple);">${fmtT(f.systemFee)}</td><td style="color:var(--ok-fg);font-weight:900;">${fmtT(f.netProfit)}</td><td><span class="status ${st.cls}" style="font-size:10.5px;">${st.label}</span></td></tr>`;
+      }).join("");
+    }
+  }
+  const pbody=$("#fin-partner-tbody");
+  if(pbody){
+    const balances={};
+    cache.orders.filter(o=>o.status==="completed"&&o.partnerId).forEach(o=>{const f=calcOrderFinance(o);if(!balances[o.partnerId])balances[o.partnerId]={count:0,share:0};balances[o.partnerId].count++;balances[o.partnerId].share+=f.partnerCost;});
+    const rows=Object.entries(balances).map(([pid,b])=>{const p=cache.partners.find(x=>x.id===pid);const settled=getSettledAmount(pid);const remaining=b.share-settled;return{pid,name:p?.name||"حذف‌شده",type:p?.type||"—",...b,settled,remaining};});
+    if(!rows.length){pbody.innerHTML='<tr><td colspan="7"><div class="empty">هنوز سفارش تکمیل‌شده‌ای با همکار نیست</div></td></tr>';}
+    else{
+      pbody.innerHTML=rows.map(r=>`<tr><td><strong>${esc(r.name)}</strong></td><td><span class="status ${r.type==='drone'?'blue':'purple'}" style="font-size:10.5px;">${r.type==='drone'?'🛩️ پهپاد':'🚜 مکانیزاسیون'}</span></td><td>${toFa(r.count)}</td><td>${fmtT(r.share)}</td><td>${fmtT(r.settled)}</td><td style="font-weight:900;color:${r.remaining>0?'var(--dng)':'var(--ok-fg)'};">${r.remaining>0?'📤 بدهی: ':'📥 طلب: '}${fmtT(Math.abs(r.remaining))}</td><td><button class="btn btn-light btn-sm" onclick="settlePartner('${r.pid}')">تسویه</button></td></tr>`).join("");
+    }
+  }
+  renderAdminPartnerPrices();
+}
+window.settlePartner=function(partnerId){
+  const p=cache.partners.find(x=>x.id===partnerId);if(!p)return;
+  const amount=prompt(`مبلغ پرداختی به ${p.name} را وارد کنید (تومان):`,"0");
+  if(amount===null)return;
+  const n=+toEn(amount)||0;
+  if(n<=0)return toast("مبلغ نامعتبر",true);
+  const payouts=read(LS.payouts,[]);payouts.push({id:uid(),partnerId,amount:n,at:Date.now()});
+  write(LS.payouts,payouts);renderFinance();toast("✅ پرداخت ثبت شد");
+};
+function renderAdminPartnerPrices(){
+  const box=$("#admin-partner-prices-container");if(!box)return;
+  const cfg=getConfig();
+  const services=cfg.services.filter(s=>!s.hidden);
+  const partners=cache.partners.filter(p=>p.status==="active");
+  if(!partners.length){box.innerHTML='<div class="empty">همکار فعالی نیست</div>';return;}
+  box.innerHTML=partners.map(p=>`
+    <div style="background:var(--inset);border:1px solid var(--ln);border-radius:12px;padding:14px;margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+        <strong style="font-size:13.5px;">${esc(p.name)} <span class="status ${p.type==='drone'?'blue':'purple'}" style="font-size:10px;">${p.type==='drone'?'پهپاد':'مکانیزاسیون'}</span></strong>
+        <button class="btn btn-light btn-sm" onclick="saveAdminPartnerPrices('${p.id}')">💾 ذخیره تغییرات</button>
+      </div>
+      ${services.filter(s=>s.type===p.type).map(s=>{
+        const r=(p.customPrices&&p.customPrices[s.id])||s.rate;
+        return `<div class="price-row"><span class="pr-name">${esc(s.name)}</span><span class="pr-default">پیش‌فرض: ${fmtT(s.rate)}</span><input type="text" class="ltr" id="ad-pp-${p.id}-${s.id}" value="${r}"><span class="pr-unit">${esc(s.unit)}</span></div>`;
+      }).join("")}
+    </div>
+  `).join("");
+}
+window.saveAdminPartnerPrices=async function(partnerId){
+  const p=cache.partners.find(x=>x.id===partnerId);if(!p)return;
+  const cfg=getConfig();
+  const services=cfg.services.filter(s=>s.type===p.type);
+  const newPrices={...(p.customPrices||{})};
+  for(const s of services){
+    const inp=document.getElementById(`ad-pp-${p.id}-${s.id}`);
+    if(inp){const v=+toEn(inp.value)||0;if(v>0)newPrices[s.id]=v;else delete newPrices[s.id];}
+  }
+  p.customPrices=newPrices;
+  await apiFetch("/api/partners",{method:"PUT",body:JSON.stringify(p)});
+  toast("✅ قیمت‌ها ذخیره شد");renderFinance();
+};
+document.getElementById("fin-save-settings-btn")?.addEventListener("click",async()=>{
+  const fee=+toEn($("#cfg-system-fee").value)||15;
+  const share=+toEn($("#cfg-partner-share").value)||85;
+  if(fee<0||fee>100||share<0||share>100)return toast("درصد نامعتبر",true);
+  const cfg=getConfig();cfg.systemFeeRate=fee;cfg.finance={...(cfg.finance||{}),defaultPartnerShare:share};
+  await setConfig(cfg);renderFinance();toast("✅ تنظیمات مالی ذخیره شد");
+});
+$("#fin-order-filter")?.addEventListener("change",renderFinance);
+
 // ============ Report & Rating ============
 function getOrderImages(orderId){const all=read(LS.order_images,{});return all[orderId]||{before:null,after:null};}
 function saveOrderImages(orderId,key,dataUrl){const all=read(LS.order_images,{});if(!all[orderId])all[orderId]={before:null,after:null};all[orderId][key]=dataUrl;write(LS.order_images,all);}
-  window.openReportModal=function(orderId){
+window.openReportModal=function(orderId){
   const o=cache.orders.find(x=>x.id===orderId);if(!o)return;
   _currentReportOrderId=orderId;
   const imgs=getOrderImages(orderId);
@@ -2225,16 +2298,15 @@ async function startPhoneVerification(phone,target='farmer',pendingForm=null){
   OTP_LOGIN_TARGET=target;_pendingSubmit=pendingForm;
   if(!isOtpTimeAllowed())return toast("ارسال پیامک از ۸ تا ۲۳ امکان‌پذیر است.",true);
   const res=await apiFetch("/api/otp/send",{method:"POST",body:JSON.stringify({phone})});
-  if(!res.ok)return toast(res.data.error||"خطا در ارسال پیامک",true);
-  
-  if(res.data.sim){
+  if(!res.ok)return toast(res.data.error||"خطا",true);
+  if(res.data.sim && (location.hostname==='localhost'||location.protocol==='file:')){
+    toast(`کد تست: ${res.data.code}`,false);
     const demoEl=document.getElementById("otp-demo-code");
     if(demoEl)demoEl.textContent=res.data.code;
     document.getElementById("otp-demo-notice").style.display="block";
   }else{
     document.getElementById("otp-demo-notice").style.display="none";
   }
-  
   const back=document.getElementById("otp-modal-back");
   if(!back)return;
   document.getElementById("otp-modal-phone").textContent=toFa(phone);
@@ -2243,45 +2315,27 @@ async function startPhoneVerification(phone,target='farmer',pendingForm=null){
   back.classList.add("show");
   setTimeout(()=>{if(otpInputs[0])otpInputs[0].focus();},100);
   otpInputs.forEach((inp,idx)=>{inp.oninput=()=>{inp.value=toEn(inp.value).replace(/\D/g,"").slice(-1);inp.classList.toggle("filled",!!inp.value);if(inp.value&&idx<5)otpInputs[idx+1].focus();if(otpInputs.map(x=>x.value).join("").length===6)setTimeout(()=>{document.getElementById("otp-verify-btn")?.click();},100);};inp.onkeydown=e=>{if(e.key==="Backspace"&&!inp.value&&idx>0){otpInputs[idx-1].focus();otpInputs[idx-1].value="";otpInputs[idx-1].classList.remove("filled");e.preventDefault();}};});
-  
   document.getElementById("otp-verify-btn").onclick=async()=>{
     const code=otpInputs.map(i=>toEn(i.value)).join("");if(code.length!==6)return toast("کد کامل نیست",true);
     const btn=document.getElementById("otp-verify-btn");btn.disabled=true;btn.textContent="در حال بررسی...";
-    const verify=await apiFetch("/api/otp/verify",{method:"POST",body:JSON.stringify({phone,code})});
-    btn.disabled=false;btn.innerHTML="تأیید";
-    
+    const verify=await apiFetch("/api/otp/verify",{method:"POST",body:JSON.stringify({phone,code})});btn.disabled=false;btn.innerHTML="تأیید";
     if(verify.ok){
       back.classList.remove("show");
-      
-      // 👈 تغییر کلادفلر: ذخیره توکن لاگین که از ورکر دریافت می‌شود
-      if(verify.data.token){
-        localStorage.setItem(LS.auth_token, verify.data.token);
-      }
-      
       if(OTP_LOGIN_TARGET==='partner'){
         const p=cache.partners.find(x=>x.phone===phone);
         if(!p){toast("همکاری یافت نشد",true);$("#partner-login-view").hidden=false;$("#partner-panel-view").hidden=true;return;}
         if(p.status!=="active"){toast("حساب تایید نشده",true);$("#partner-login-view").hidden=false;$("#partner-panel-view").hidden=true;return;}
         $("#partner-login-view").hidden=true;$("#partner-panel-view").hidden=false;renderPartnerDashboard(p);toast(`✅ خوش آمدید ${p.name}`);
       }else{
-        setCustomerVerified(phone);setCustomerPhone(phone);toast("✅ وارد شدید");
-        
-        // 👈 تغییر کلادفلر: دریافت مجدد دیتا از سرور بعد از لاگین
-        await loadAll(); 
-        
-        renderCustomerAuth();refreshHomeStats();
+        setCustomerVerified(phone);setCustomerPhone(phone);toast("✅ وارد شدید");renderCustomerAuth();refreshHomeStats();
         if(_pendingSubmit){const f=_pendingSubmit;_pendingSubmit=null;setTimeout(()=>{try{f.requestSubmit?f.requestSubmit():f.dispatchEvent(new Event('submit',{cancelable:true,bubbles:true}));}catch(err){console.error(err);}},250);}
       }
-    }else{
-      toast(verify.data.error||"کد نادرست",true);
-      otpInputs.forEach(i=>i.value="");
-      if(otpInputs[0])otpInputs[0].focus();
-    }
+    }else{toast("کد نادرست",true);otpInputs.forEach(i=>i.value="");if(otpInputs[0])otpInputs[0].focus();}
   };
   document.getElementById("otp-cancel-btn").onclick=()=>{_pendingSubmit=null;back.classList.remove("show");};
 }
 
-// ============ Order submit handlers (متصل به ورکر) ============
+// ============ Order submit handlers ============
 document.getElementById('drone-order-form')?.addEventListener('submit',async(e)=>{
   e.preventDefault();
   if(!confirmSprayRisk())return;
@@ -2291,85 +2345,23 @@ document.getElementById('drone-order-form')?.addEventListener('submit',async(e)=
   let srv=drones.find(s=>s.region&&s.region.split(',').includes(selectedProv));if(!srv)srv=drones.find(s=>!s.region);if(!srv)srv=drones.find(s=>s.id==='spray');
   const ha=m2ToHa(+toEn($("#drone-area").value));const dateVal=$("#drone-slot-select").value;const amount=ha*(srv?srv.rate:850000);
   const matchingSlot=cache.slots.find(s=>s.date===dateVal && s.serviceId===(srv?srv.id:'spray'));
-  
-  // 👈 تغییر کلادفلر: ارسال سفارش به API
-  const orderData = {
-    service_id: srv.id,
-    service_name: srv.name,
-    area: ha,
-    area_m2: +toEn($("#drone-area").value),
-    location: $("#drone-loc-coords").value,
-    slot_id: matchingSlot ? matchingSlot.id : null,
-    slot_date: dateVal,
-    amount: amount,
-    notes: $("#drone-notes").value.trim(),
-    crop: $("#drone-crop").value
-  };
-  
-  const res = await apiFetch("/api/orders", { method: "POST", body: JSON.stringify(orderData) });
-  
-  if(res.ok && res.data.order){
-    toast(`✅ سفارش با کد ${res.data.order.code} ثبت شد.`);
-    
-    setCustomerProfile({name:$("#drone-cust").value.trim(),province:$("#drone-province").value,city:$("#drone-city").value.trim(),village:$("#drone-village").value.trim(),crop:$("#drone-crop").value});
-    
-    e.target.reset();
-    $("#drone-area").value="10000";
-    nextFormStep('drone',3,1);
-    updateDronePrice();
-    
-    PAY_ORDER = res.data.order;
-    await loadAll(); // دریافت مجدد لیست‌ها
-    refreshHomeStats();
-    showScreen("payment");
-  } else {
-    toast(res.data.error || "خطا در ثبت سفارش", true);
-  }
+  const order={id:uid(),code:`SP-${Date.now().toString().slice(-4)}`,name:$("#drone-cust").value.trim(),phone:phone,province:$("#drone-province").value,city:$("#drone-city").value.trim(),village:$("#drone-village").value.trim(),landName:$("#drone-land-name").value.trim(),crop:$("#drone-crop").value,area:ha,areaM2:+toEn($("#drone-area").value),notes:$("#drone-notes").value.trim(),amount,serviceType:srv.id,serviceName:srv.name,location:$("#drone-loc-coords").value,status:"pending",createdAt:Date.now(),slotDate:dateVal,slotId:matchingSlot?matchingSlot.id:null};
+  await apiFetch("/api/orders",{method:"POST",body:JSON.stringify(order)});cache.orders.push(order);
+  setCustomerProfile({name:order.name,province:order.province,city:order.city,village:order.village,crop:order.crop});
+  refreshHomeStats();e.target.reset();$("#drone-area").value="10000";nextFormStep('drone',3,1);updateDronePrice();PAY_ORDER=order;toast(`✅ ثبت شد.`);showScreen("payment");
 });
 
 document.getElementById('machinery-order-form')?.addEventListener('submit',async(e)=>{
-  e.preventDefault();
-  if(selectedMachinery.length===0)return toast("حداقل یک عملیات را انتخاب کنید",true);
+  e.preventDefault();if(selectedMachinery.length===0)return toast("حداقل یک عملیات را انتخاب کنید",true);
   const phone=toEn($("#mach-phone").value);if(!(isCustomerVerified()&&getCustomerPhone()===phone)){await startPhoneVerification(phone,'farmer',e.target);return;}
   const c=getConfig();const rawVal=Math.max(0,Number(toEn($("#mach-area").value).replace(/[^\d.]/g,""))||0);const dateVal=$("#mach-slot-select").value;
   let totalAmount=0;let names=[];let haArea=0;
   selectedMachinery.forEach((id,index)=>{const srv=c.services.find(s=>s.id===id);if(srv){if(srv.unit==='hectare'){const thisHa=rawVal/10000;totalAmount+=thisHa*srv.rate;if(index===0)haArea=thisHa;}else if(srv.unit==='1000m2'){const thisHa=rawVal/1000;totalAmount+=thisHa*srv.rate;if(index===0)haArea=thisHa;}else{totalAmount+=rawVal*srv.rate;if(index===0)haArea=rawVal;}names.push(srv.name);}});
   const matchingSlot=cache.slots.find(s=>s.date===dateVal && selectedMachinery.includes(s.serviceId));
-  
-  // 👈 تغییر کلادفلر: ارسال سفارش مکانیزاسیون به API
-  const orderData = {
-    service_type: selectedMachinery.join(","),
-    service_name: names.join(" + "),
-    area: haArea,
-    area_m2: rawVal,
-    location: $("#mach-loc-coords").value,
-    slot_id: matchingSlot ? matchingSlot.id : null,
-    slot_date: dateVal,
-    amount: totalAmount,
-    notes: $("#mach-notes").value.trim(),
-    crop: $("#mach-crop").value
-  };
-  
-  const res = await apiFetch("/api/orders", { method: "POST", body: JSON.stringify(orderData) });
-  
-  if(res.ok && res.data.order){
-    toast(`✅ سفارش ثبت شد.`);
-    
-    setCustomerProfile({name:$("#mach-cust").value.trim(),province:$("#mach-province").value,city:$("#mach-city").value.trim(),village:$("#mach-village").value.trim(),crop:$("#mach-crop").value});
-    
-    e.target.reset();
-    $("#mach-area").value="10000";
-    selectedMachinery=[];
-    renderMachineryServices();
-    nextFormStep('mach',3,1);
-    
-    PAY_ORDER = res.data.order;
-    await loadAll(); 
-    refreshHomeStats();
-    showScreen("payment");
-  } else {
-    toast(res.data.error || "خطا در ثبت سفارش", true);
-  }
+  const order={id:uid(),code:`SP-${Date.now().toString().slice(-4)}`,name:$("#mach-cust").value.trim(),phone:phone,province:$("#mach-province").value,city:$("#mach-city").value.trim(),village:$("#mach-village").value.trim(),landName:$("#mach-land-name").value.trim(),crop:$("#mach-crop").value,area:haArea,areaM2:rawVal,notes:$("#mach-notes").value.trim(),amount:totalAmount,serviceType:selectedMachinery.join(","),serviceName:names.join(" + "),status:"pending",createdAt:Date.now(),slotDate:dateVal,slotId:matchingSlot?matchingSlot.id:null,location:$("#mach-loc-coords").value};
+  await apiFetch("/api/orders",{method:"POST",body:JSON.stringify(order)});cache.orders.push(order);
+  setCustomerProfile({name:order.name,province:order.province,city:order.city,village:order.village,crop:order.crop});
+  refreshHomeStats();e.target.reset();$("#mach-area").value="10000";selectedMachinery=[];renderMachineryServices();nextFormStep('mach',3,1);PAY_ORDER=order;toast(`✅ ثبت شد.`);showScreen("payment");
 });
 
 // ============ Payment ============
@@ -2418,7 +2410,7 @@ document.getElementById('payment-form')?.addEventListener('submit',async(e)=>{
     if(idx>=0){cache.orders[idx].status="receipt_pending";await apiFetch("/api/orders/status",{method:"PUT",body:JSON.stringify({id:PAY_ORDER.id,status:"receipt_pending"})});}
     fileInput.value="";const previewBox=document.getElementById("receipt-preview-box");if(previewBox)previewBox.innerHTML="";
     progressContainer.classList.remove("show");showScreen("history");
-  }else toast("خطا در ارسال فیش",true);
+  }else toast("خطا",true);
 });
 document.getElementById("receipt")?.addEventListener("change",function(e){const file=e.target.files[0];const box=document.getElementById("receipt-preview-box");if(file&&box){const url=URL.createObjectURL(file);box.innerHTML=`<img src="${url}" style="max-width:100%;border-radius:10px;border:1px solid var(--ln);max-height:200px;object-fit:contain;">`;}});
 $("#copy-card")?.addEventListener("click",()=>{const c=getConfig();const card=c.payment.card.replace(/\s/g,'');if(navigator.clipboard){navigator.clipboard.writeText(card);toast("✅ شماره کارت کپی شد");}});
@@ -2631,7 +2623,7 @@ document.getElementById("ptn-save-prices-btn")?.addEventListener("click",async()
 });
 
 // FIX: 14-day availability
-function renderPartnerAvailability(partnerId){
+  function renderPartnerAvailability(partnerId){
   const p=cache.partners.find(x=>x.id===partnerId);if(!p)return;
   const box=$("#ptn-availability-container");if(!box)return;
   const unavailable=Array.isArray(p.unavailableDates)?p.unavailableDates:[];
@@ -2673,99 +2665,155 @@ document.getElementById("partner-edit-form")?.addEventListener("submit",async(e)
   await apiFetch("/api/partners",{method:"PUT",body:JSON.stringify(p)});
   toast("✅ تغییرات ذخیره شد");
 });
-// ============ Finance (مدیریت مالی) - بخش جا افتاده ============
-function renderFinance(){
-  const cfg=getConfig();
-  if($("#cfg-system-fee"))$("#cfg-system-fee").value=getSystemFeeRate();
-  if($("#cfg-partner-share"))$("#cfg-partner-share").value=cfg.finance?.defaultPartnerShare??85;
-  const filter=$("#fin-order-filter")?.value||"";
-  const orders=cache.orders.filter(o=>!filter||o.status===filter).filter(o=>o.status!=="cancelled").sort((a,b)=>(b.createdAt||0)-(a.createdAt||0));
-  const completed=cache.orders.filter(o=>o.status==="completed");
-  let totalRevenue=0,totalPartner=0,totalSystem=0,totalProfit=0;
-  completed.forEach(o=>{const f=calcOrderFinance(o);totalRevenue+=f.amount;totalPartner+=f.partnerCost;totalSystem+=f.systemFee;totalProfit+=f.netProfit;});
-  const summary=$("#fin-summary");
-  if(summary){summary.innerHTML=`
-    <div class="fin-card"><small>کل درآمد (تکمیل‌شده)</small><strong>${fmtT(totalRevenue)}</strong></div>
-    <div class="fin-card"><small>هزینه همکاران</small><strong>${fmtT(totalPartner)}</strong></div>
-    <div class="fin-card"><small>کارمزد سامانه</small><strong>${fmtT(totalSystem)}</strong></div>
-    <div class="fin-card profit"><small>سود واقعی</small><strong>${fmtT(totalProfit)}</strong></div>`;}
-  const tbody=$("#fin-tbody");
-  if(tbody){
-    if(!orders.length){tbody.innerHTML='<tr><td colspan="8"><div class="empty">سفارشی نیست</div></td></tr>';}
-    else{
-      tbody.innerHTML=orders.map(o=>{
-        const f=calcOrderFinance(o);
-        const p=cache.partners.find(x=>x.id===o.partnerId);
-        const st=STATUS[o.status]||STATUS.pending;
-        return `<tr><td><code class="ltr" style="font-size:11px;">${esc(o.code)}</code></td><td><strong style="font-size:12px;">${esc(o.name)}</strong></td><td>${p?esc(p.name):'<span style="color:var(--i400)">—</span>'}</td><td style="color:var(--forest-700);font-weight:800;">${fmtT(f.amount)}</td><td style="color:var(--dng);">${fmtT(f.partnerCost)}</td><td style="color:var(--purple);">${fmtT(f.systemFee)}</td><td style="color:var(--ok-fg);font-weight:900;">${fmtT(f.netProfit)}</td><td><span class="status ${st.cls}" style="font-size:10.5px;">${st.label}</span></td></tr>`;
-      }).join("");
-    }
-  }
-  const pbody=$("#fin-partner-tbody");
-  if(pbody){
-    const balances={};
-    cache.orders.filter(o=>o.status==="completed"&&o.partnerId).forEach(o=>{const f=calcOrderFinance(o);if(!balances[o.partnerId])balances[o.partnerId]={count:0,share:0};balances[o.partnerId].count++;balances[o.partnerId].share+=f.partnerCost;});
-    const rows=Object.entries(balances).map(([pid,b])=>{const p=cache.partners.find(x=>x.id===pid);const settled=getSettledAmount(pid);const remaining=b.share-settled;return{pid,name:p?.name||"حذف‌شده",type:p?.type||"—",...b,settled,remaining};});
-    if(!rows.length){pbody.innerHTML='<tr><td colspan="7"><div class="empty">هنوز سفارش تکمیل‌شده‌ای با همکار نیست</div></td></tr>';}
-    else{
-      pbody.innerHTML=rows.map(r=>`<tr><td><strong>${esc(r.name)}</strong></td><td><span class="status ${r.type==='drone'?'blue':'purple'}" style="font-size:10.5px;">${r.type==='drone'?'🛩️ پهپاد':'🚜 مکانیزاسیون'}</span></td><td>${toFa(r.count)}</td><td>${fmtT(r.share)}</td><td>${fmtT(r.settled)}</td><td style="font-weight:900;color:${r.remaining>0?'var(--dng)':'var(--ok-fg)'};">${r.remaining>0?'📤 بدهی: ':'📥 طلب: '}${fmtT(Math.abs(r.remaining))}</td><td><button class="btn btn-light btn-sm" onclick="settlePartner('${r.pid}')">تسویه</button></td></tr>`).join("");
-    }
-  }
-  renderAdminPartnerPrices();
-}
 
-window.settlePartner=function(partnerId){
-  const p=cache.partners.find(x=>x.id===partnerId);if(!p)return;
-  const amount=prompt(`مبلغ پرداختی به ${p.name} را وارد کنید (تومان):`,"0");
-  if(amount===null)return;
-  const n=+toEn(amount)||0;
-  if(n<=0)return toast("مبلغ نامعتبر",true);
-  const payouts=read(LS.payouts,[]);payouts.push({id:uid(),partnerId,amount:n,at:Date.now()});
-  write(LS.payouts,payouts);renderFinance();toast("✅ پرداخت ثبت شد");
+document.getElementById('partner-logout-btn')?.addEventListener('click',()=>{
+  const session=read(LS.partner_session,null);localStorage.removeItem(LS.partner_session);$("#partner-panel-view").hidden=true;
+  if(session&&session.isAdminImpersonating){$("#admin-panel-view").hidden=false;showScreen("admin");renderPartners();toast("🔙 بازگشت به پنل مدیریت");}
+  else{$("#partner-login-view").hidden=false;showScreen("home");document.getElementById('welcome-overlay').classList.remove('hidden');toast("از پنل همکاران خارج شدید");}
+});
+
+document.querySelectorAll("#ptn-tabs button").forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll("#ptn-tabs button").forEach(x=>x.setAttribute("aria-selected",x===b?"true":"false"));
+    document.querySelectorAll(".admin-panel[data-ptn-panel]").forEach(p=>p.classList.toggle("active",p.dataset.ptnPanel===b.dataset.ptnTab));
+    if(b.dataset.ptnTab==='pricing'){const s=read(LS.partner_session,null);if(s)renderPartnerPricing(s.partnerId);}
+    if(b.dataset.ptnTab==='schedule'){const s=read(LS.partner_session,null);if(s)renderPartnerAvailability(s.partnerId);}
+  };
+});
+
+window.renderPartnerDashboard=function(p){
+  localStorage.setItem(LS.partner_session,JSON.stringify({partnerId:p.id}));
+  $("#ptn-name").textContent=p.name;
+  const myOrders=cache.orders.filter(o=>o.partnerId===p.id);
+  const list=$("#ptn-orders-list");
+  list.innerHTML=myOrders.length?myOrders.map(o=>{
+    let actionBtn="";
+    if(o.status==='assigned'){
+      const diff=Math.floor((Date.now()-(o.assigned_at||Date.now()))/60000);
+      if(diff<10)actionBtn=`<button class="btn btn-green btn-sm" onclick="acceptPartnerOrder('${o.id}')" style="width:100%;margin-top:8px;">✅ قبول سفارش (${10-diff} دقیقه)</button>`;
+      else actionBtn=`<div style="color:var(--dng);font-size:11px;margin-top:8px;">⏱️ مهلت تایید تمام شد.</div>`;
+    }else if(o.status==='accepted'){
+      actionBtn=`<button class="btn btn-gold btn-sm" onclick="partnerOnTheWay('${o.id}')" style="width:100%;margin-top:8px;">🚀 شروع حرکت</button>`;
+    }else if(o.status==='on_the_way'){
+      actionBtn=`<button class="btn btn-green btn-sm" onclick="partnerArrived('${o.id}')" style="width:100%;margin-top:8px;">📍 رسیدم به محل</button>`;
+    }else if(o.status==='arrived'){
+      actionBtn=`<div style="color:var(--b600);font-size:11px;margin-top:8px;">⏳ منتظر تایید مشتری...</div>`;
+    }else if(o.status==='in_progress'){
+      actionBtn=`<button class="btn btn-green btn-sm" onclick="openPartnerReportForm('${o.id}')" style="width:100%;margin-top:8px;">📄 ثبت گزارش و پایان کار</button>`;
+    }
+    return `<div class="admin-card" style="border-left:4px solid var(--lime-500);"><strong>${esc(o.code)} - ${esc(o.serviceName)}</strong><div style="font-size:12px;color:var(--i500);margin:4px 0">${esc(o.name)} | ${esc(o.city)} | ${toFa(o.area)} هکتار</div>${actionBtn}</div>`;
+  }).join(""):'<div class="empty">سفارشی ارجاع داده نشده</div>';
+  const completed=myOrders.filter(o=>o.status==="completed");
+  let myEarnings=0;
+  completed.forEach(o=>{myEarnings+=calcOrderFinance(o).partnerCost;});
+  const settled=getSettledAmount(p.id);
+  const remaining=myEarnings-settled;
+  const eb=$("#ptn-earnings-box");
+  if(eb){eb.innerHTML=`
+    <div class="fin-card"><small>کل درآمد من</small><strong>${fmtT(myEarnings)}</strong></div>
+    <div class="fin-card"><small>پرداخت‌شده</small><strong>${fmtT(settled)}</strong></div>
+    <div class="fin-card ${remaining>0?'debt':'credit'}"><small>${remaining>0?'طلب من از سامانه':'تسویه‌شده'}</small><strong>${fmtT(Math.abs(remaining))}</strong></div>`;}
+  if(p.type==='mechanization'){
+    document.getElementById('ptn-edit-mach-fields').style.display='block';
+    document.getElementById('ptn-edit-impl-fields').style.display='block';
+    document.getElementById('ptn-edit-cities-fields').style.display='block';
+    $("#ptn-edit-machine").value=p.machine||"";$("#ptn-edit-implements").value=p.implements||"";$("#ptn-edit-cities").value=p.cities||"";
+  }
+  $("#ptn-edit-pass").value="";
 };
 
-function renderAdminPartnerPrices(){
-  const box=$("#admin-partner-prices-container");if(!box)return;
-  const cfg=getConfig();
-  const services=cfg.services.filter(s=>!s.hidden);
-  const partners=cache.partners.filter(p=>p.status==="active");
-  if(!partners.length){box.innerHTML='<div class="empty">همکار فعالی نیست</div>';return;}
-  box.innerHTML=partners.map(p=>`
-    <div style="background:var(--inset);border:1px solid var(--ln);border-radius:12px;padding:14px;margin-bottom:12px;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
-        <strong style="font-size:13.5px;">${esc(p.name)} <span class="status ${p.type==='drone'?'blue':'purple'}" style="font-size:10px;">${p.type==='drone'?'پهپاد':'مکانیزاسیون'}</span></strong>
-        <button class="btn btn-light btn-sm" onclick="saveAdminPartnerPrices('${p.id}')">💾 ذخیره تغییرات</button>
+window.acceptPartnerOrder=async function(orderId){
+  const s=read(LS.partner_session,null);if(!s)return;const p=cache.partners.find(x=>x.id===s.partnerId);
+  await apiFetch("/api/orders/status",{method:"PUT",body:JSON.stringify({id:orderId,status:"accepted"})});
+  const order=cache.orders.find(o=>o.id===orderId);order.status="accepted";order.partnerName=p.name;order.partnerPhone=p.phone;
+  toast("سفارش پذیرفته شد.");document.getElementById('partner-offer-modal').classList.remove('show');clearInterval(dispatchState.timer);renderPartnerDashboard(p);
+};
+window.partnerOnTheWay=async function(orderId){
+  const s=read(LS.partner_session,null);if(!s)return;const p=cache.partners.find(x=>x.id===s.partnerId);
+  await apiFetch("/api/orders/status",{method:"PUT",body:JSON.stringify({id:orderId,status:"on_the_way"})});
+  const order=cache.orders.find(o=>o.id===orderId);order.status="on_the_way";
+  toast("وضعیت به‌روزرسانی شد.");renderPartnerDashboard(p);
+};
+window.partnerArrived=async function(orderId){
+  const s=read(LS.partner_session,null);if(!s)return;const p=cache.partners.find(x=>x.id===s.partnerId);
+  await apiFetch("/api/orders/status",{method:"PUT",body:JSON.stringify({id:orderId,status:"arrived",arrived_at:Date.now()})});
+  const order=cache.orders.find(o=>o.id===orderId);order.status="arrived";order.arrived_at=Date.now();
+  toast("حضور شما اعلام شد.");renderPartnerDashboard(p);
+};
+window.openPartnerReportForm=function(orderId){
+  const o=cache.orders.find(x=>x.id===orderId);if(!o)return;
+  const imgs=getOrderImages(orderId);
+  const body=$("#report-body");
+  body.innerHTML=`
+    <div class="report-section">
+      <h5><svg class="icon" style="width:16px;height:16px;color:var(--lime-500)"><use href="#i-edit"/></svg> ثبت گزارش پایان کار</h5>
+      <div class="form-grid">
+        <div class="field-wrap span-2"><label>مساحت انجام‌شده (هکتار) *</label><input id="rpt-actual-area" class="ltr" inputmode="decimal" value="${o.area||1}"></div>
+        <div class="field-wrap span-2"><label>یادداشت فنی (اختیاری)</label><textarea id="rpt-note" rows="2" placeholder="نکات و مشاهدات..."></textarea></div>
       </div>
-      ${services.filter(s=>s.type===p.type).map(s=>{
-        const r=(p.customPrices&&p.customPrices[s.id])||s.rate;
-        return `<div class="price-row"><span class="pr-name">${esc(s.name)}</span><span class="pr-default">پیش‌فرض: ${fmtT(s.rate)}</span><input type="text" class="ltr" id="ad-pp-${p.id}-${s.id}" value="${r}"><span class="pr-unit">${esc(s.unit)}</span></div>`;
-      }).join("")}
     </div>
-  `).join("");
-}
+    <div class="report-section">
+      <h5><svg class="icon" style="width:16px;height:16px;color:var(--lime-500)"><use href="#i-image"/></svg> تصاویر قبل و بعد *</h5>
+      <div class="img-upload-row">
+        <div class="img-upload-card ${imgs.before?'has-image':''}" id="before-upload-card">
+          <small>📷 تصویر قبل</small>
+          ${imgs.before?`<img src="${imgs.before}" alt="قبل">`:''}
+          <input type="file" id="report-before-file" accept="image/*">
+          <label for="report-before-file" style="display:block;cursor:pointer;color:var(--forest-700);font-weight:800;font-size:12px;">${imgs.before?'تغییر تصویر':'انتخاب تصویر'}</label>
+        </div>
+        <div class="img-upload-card ${imgs.after?'has-image':''}" id="after-upload-card">
+          <small>📷 تصویر بعد</small>
+          ${imgs.after?`<img src="${imgs.after}" alt="بعد">`:''}
+          <input type="file" id="report-after-file" accept="image/*">
+          <label for="report-after-file" style="display:block;cursor:pointer;color:var(--forest-700);font-weight:800;font-size:12px;">${imgs.after?'تغییر تصویر':'انتخاب تصویر'}</label>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;width:100%;margin-top:10px;">
+      <button class="btn btn-light" onclick="document.getElementById('report-modal').classList.remove('show')" style="flex:1;justify-content:center;">انصراف</button>
+      <button class="btn btn-gold" onclick="submitPartnerReport('${orderId}')" style="flex:2;justify-content:center;"><svg class="icon"><use href="#i-check"/></svg> ثبت گزارش</button>
+    </div>`;
+  $("#report-before-file").addEventListener("change",e=>{const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{saveOrderImages(orderId,'before',ev.target.result);const card=$("#before-upload-card");card.classList.add("has-image");card.innerHTML=`<small>📷 تصویر قبل</small><img src="${ev.target.result}" alt="قبل"><label style="display:block;color:var(--ok-fg);font-weight:800;font-size:11px;">✅ ثبت شد</label>`;};reader.readAsDataURL(file);});
+  $("#report-after-file").addEventListener("change",e=>{const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=ev=>{saveOrderImages(orderId,'after',ev.target.result);const card=$("#after-upload-card");card.classList.add("has-image");card.innerHTML=`<small>📷 تصویر بعد</small><img src="${ev.target.result}" alt="بعد"><label style="display:block;color:var(--ok-fg);font-weight:800;font-size:11px;">✅ ثبت شد</label>`;};reader.readAsDataURL(file);});
+  document.getElementById('report-modal').classList.add('show');
+};
+window.submitPartnerReport=async function(orderId){
+  const imgs=getOrderImages(orderId);
+  if(!imgs.before||!imgs.after)return toast("لطفاً هر دو تصویر را آپلود کنید",true);
+  const actualArea=+toEn($("#rpt-actual-area").value)||0;
+  if(actualArea<=0)return toast("مساحت انجام‌شده را وارد کنید",true);
+  const note=$("#rpt-note").value.trim();
+  const o=cache.orders.find(x=>x.id===orderId);if(!o)return;
+  o.status="done";o.finished_at=Date.now();o.actualArea=actualArea;o.partner_note=note;
+  await apiFetch("/api/orders/status",{method:"PUT",body:JSON.stringify({id:orderId,status:"done",finished_at:Date.now(),actualArea,partner_note:note})});
+  document.getElementById('report-modal').classList.remove('show');
+  const p=cache.partners.find(x=>x.id===read(LS.partner_session,null)?.partnerId);
+  if(p)renderPartnerDashboard(p);
+  toast("✅ گزارش ثبت شد. منتظر تأیید کشاورز.");
+};
 
-window.saveAdminPartnerPrices=async function(partnerId){
+function renderPartnerPricing(partnerId){
   const p=cache.partners.find(x=>x.id===partnerId);if(!p)return;
   const cfg=getConfig();
-  const services=cfg.services.filter(s=>s.type===p.type);
+  const services=cfg.services.filter(s=>!s.hidden&&s.type===p.type);
+  const box=$("#ptn-pricing-list");if(!box)return;
+  if(!services.length){box.innerHTML='<div class="empty">خدمتی نیست</div>';return;}
+  box.innerHTML=services.map(s=>{
+    const customRate=(p.customPrices&&p.customPrices[s.id])||s.rate;
+    return `<div class="price-row"><span class="pr-name">${esc(s.name)}</span><span class="pr-default">پیش‌فرض: ${fmtT(s.rate)}</span><input type="text" class="ltr" id="ptn-price-${s.id}" value="${customRate}"><span class="pr-unit">${esc(s.unit)}</span></div>`;
+  }).join("");
+}
+document.getElementById("ptn-save-prices-btn")?.addEventListener("click",async()=>{
+  const s=read(LS.partner_session,null);if(!s)return;
+  const p=cache.partners.find(x=>x.id===s.partnerId);if(!p)return;
+  const cfg=getConfig();const services=cfg.services.filter(s2=>!s2.hidden&&s2.type===p.type);
   const newPrices={...(p.customPrices||{})};
-  for(const s of services){
-    const inp=document.getElementById(`ad-pp-${p.id}-${s.id}`);
-    if(inp){const v=+toEn(inp.value)||0;if(v>0)newPrices[s.id]=v;else delete newPrices[s.id];}
-  }
+  for(const srv of services){const inp=document.getElementById(`ptn-price-${srv.id}`);if(inp){const v=+toEn(inp.value)||0;if(v>0)newPrices[srv.id]=v;}}
   p.customPrices=newPrices;
   await apiFetch("/api/partners",{method:"PUT",body:JSON.stringify(p)});
-  toast("✅ قیمت‌ها ذخیره شد");renderFinance();
-};
-
-document.getElementById("fin-save-settings-btn")?.addEventListener("click",async()=>{
-  const fee=+toEn($("#cfg-system-fee").value)||15;
-  const share=+toEn($("#cfg-partner-share").value)||85;
-  if(fee<0||fee>100||share<0||share>100)return toast("درصد نامعتبر",true);
-  const cfg=getConfig();cfg.systemFeeRate=fee;cfg.finance={...(cfg.finance||{}),defaultPartnerShare:share};
-  await setConfig(cfg);renderFinance();toast("✅ تنظیمات مالی ذخیره شد");
+  toast("✅ قیمت‌های شما ذخیره شد");
 });
-$("#fin-order-filter")?.addEventListener("change",renderFinance);
+
 // ============ Admin Auth & Panel ============
 document.getElementById('admin-login-form')?.addEventListener('submit',async(e)=>{
   e.preventDefault();const otp=toEn($("#admin-otp").value.trim());toast("در حال بررسی...");
@@ -2934,147 +2982,41 @@ function renderPartners(){
   list.innerHTML=all.map(p=>`<div class="admin-card" style="display:flex;gap:12px;align-items:flex-start;"><div style="width:40px;height:40px;border-radius:12px;background:var(--purple-bg);color:var(--purple);display:grid;place-items:center;font-weight:800;">${esc(p.name.charAt(0))}</div><div style="flex:1;"><strong>${esc(p.name)}</strong><div style="font-size:12px;color:var(--i500);margin-top:2px;">${esc(p.phone)} | ${esc(p.province)} - ${esc(p.county||'')} - ${esc(p.city)}</div><div style="font-size:11.5px;color:var(--i600);margin-top:6px;background:#fff;padding:8px;border-radius:8px;border:1px solid var(--ln);line-height:1.8;"><div><strong>کد ملی:</strong> ${esc(p.national_id||'-')}</div><div><strong>شبا:</strong> ${esc(p.sheba_number||'-')}</div></div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;"><span class="status ${p.status==='active'?'green':'amber'}">${p.status==='active'?'فعال':'در انتظار'}</span>${p.status==='active' ? `<div style="display:flex; gap:4px; margin-top:4px;"><button class="btn ${p.identityVerified?'btn-light':'btn-gold'} btn-sm" onclick="verifyPartnerDocs('${p.id}', 'identity')" style="font-size:10px; padding:4px 8px;">${p.identityVerified?'✅ هویت':'⚠️ تایید هویت'}</button><button class="btn ${p.docsVerified?'btn-light':'btn-gold'} btn-sm" onclick="verifyPartnerDocs('${p.id}', 'docs')" style="font-size:10px; padding:4px 8px;">${p.docsVerified?'✅ مدارک':'⚠️ تایید مدارک'}</button></div>` : `<button class="btn btn-green btn-sm" onclick="approvePartner('${p.id}')">تایید کلی</button>`}${p.status==='active'?`<button class="btn btn-purple btn-sm" onclick="adminLoginAsPartner('${p.id}')" style="margin-top:4px;" title="ورود به پنل">🔑 ورود به پنل</button>`:''}</div></div>`).join("");
 }
 window.approvePartner=async function(id){const p=cache.partners.find(x=>x.id===id);if(p){p.status="active";p.active=true;await apiFetch("/api/partners",{method:"PUT",body:JSON.stringify(p)});renderPartners();renderNetworkDashboard();toast("✅ تایید شد");}};
-document.querySelectorAll('#admin-ptn-tabs button').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('#admin-ptn-tabs button').forEach
-                                                                                   document.querySelectorAll('#admin-ptn-tabs button').forEach(btn=>{
-  btn.onclick=()=>{
-    document.querySelectorAll('#admin-ptn-tabs button').forEach(b=>b.setAttribute('aria-selected','false'));
-    btn.setAttribute('aria-selected','true');
-    ptnFilterType=btn.dataset.ptnType;
-    renderPartners();
-  };
-});
+document.querySelectorAll('#admin-ptn-tabs button').forEach(btn=>{btn.onclick=()=>{document.querySelectorAll('#admin-ptn-tabs button').forEach(b=>b.setAttribute('aria-selected','false'));btn.setAttribute('aria-selected','true');ptnFilterType=btn.dataset.ptnType;renderPartners();};});
+window.adminLoginAsPartner=function(partnerId){const p=cache.partners.find(x=>x.id===partnerId);if(!p)return;localStorage.setItem(LS.partner_session,JSON.stringify({partnerId:p.id,isAdminImpersonating:true}));$("#admin-panel-view").hidden=true;$("#partner-login-view").hidden=true;$("#partner-panel-view").hidden=false;showScreen("partner");renderPartnerDashboard(p);toast(`🔑 وارد پنل ${p.name} شدید (مدیر)`);};
 
-window.adminLoginAsPartner=function(partnerId){
-  const p=cache.partners.find(x=>x.id===partnerId);if(!p)return;
-  localStorage.setItem(LS.partner_session,JSON.stringify({partnerId:p.id,isAdminImpersonating:true}));
-  $("#admin-panel-view").hidden=true;$("#partner-login-view").hidden=true;$("#partner-panel-view").hidden=false;
-  showScreen("partner");renderPartnerDashboard(p);
-  toast(`🔑 وارد پنل ${p.name} شدید (مدیر)`);
-};
+function renderAdminMessages(){const box=document.getElementById("adm-messages-list");if(!box)return;const msgs=read(LS.messages,[]);if(!msgs.length){box.innerHTML='<div class="empty">پیامی نیست</div>';return;}box.innerHTML=msgs.map(m=>`<div style="background:var(--inset);padding:10px;border-radius:8px;margin-bottom:8px;font-size:13px;"><div style="font-size:11px;color:var(--i400);margin-bottom:4px;">${esc(m.phone)}</div>${esc(m.text)}</div>`).join("");}
 
-function renderAdminMessages(){
-  const box=document.getElementById("adm-messages-list");if(!box)return;
-  const msgs=read(LS.messages,[]);
-  if(!msgs.length){box.innerHTML='<div class="empty">پیامی نیست</div>';return;}
-  box.innerHTML=msgs.map(m=>`<div style="background:var(--inset);padding:10px;border-radius:8px;margin-bottom:8px;font-size:13px;"><div style="font-size:11px;color:var(--i400);margin-bottom:4px;">${esc(m.phone)}</div>${esc(m.text)}</div>`).join("");
-}
+document.getElementById("admin-change-pass-form")?.addEventListener("submit",async e=>{e.preventDefault();const newPass=document.getElementById("new-admin-pass").value;if(newPass.length<6)return toast("رمز حداقل ۶ کاراکتر",true);toast("✅ رمز تغییر کرد");e.target.reset();});
 
-document.getElementById("admin-change-pass-form")?.addEventListener("submit",async e=>{
-  e.preventDefault();const newPass=document.getElementById("new-admin-pass").value;
-  if(newPass.length<6)return toast("رمز حداقل ۶ کاراکتر",true);
-  toast("✅ رمز تغییر کرد");e.target.reset();
-});
+function renderCustomers(){const o=cache.orders;const map=new Map();o.forEach(x=>{if(!map.has(x.phone))map.set(x.phone,{name:x.name,phone:x.phone,count:0,area:0,total:0});const m=map.get(x.phone);m.count++;m.area+=+x.area||0;if(x.status!=="cancelled")m.total+=+x.amount||0;});let rows=[...map.values()].sort((a,b)=>b.count-a.count);const tb=$("#adm-cust-tbody");if(!tb)return;if(!rows.length){tb.innerHTML='<tr><td colspan="5"><div class="empty">مشتری‌ای نیست</div></td></tr>';return;}tb.innerHTML=rows.map(r=>`<tr><td><strong>${esc(r.name)}</strong></td><td><code class="ltr" style="background:var(--inset);padding:2px 6px;border-radius:4px;">${esc(r.phone)}</code></td><td>${toFa(r.count)}</td><td>${toFa(r.area)} هکتار</td><td>${fmtT(r.total)}</td></tr>`).join("");}
 
-function renderCustomers(){
-  const o=cache.orders;const map=new Map();
-  o.forEach(x=>{
-    if(!map.has(x.phone))map.set(x.phone,{name:x.name,phone:x.phone,count:0,area:0,total:0});
-    const m=map.get(x.phone);m.count++;m.area+=+x.area||0;
-    if(x.status!=="cancelled")m.total+=+x.amount||0;
-  });
-  let rows=[...map.values()].sort((a,b)=>b.count-a.count);
-  const tb=$("#adm-cust-tbody");if(!tb)return;
-  if(!rows.length){tb.innerHTML='<tr><td colspan="5"><div class="empty">مشتری‌ای نیست</div></td></tr>';return;}
-  tb.innerHTML=rows.map(r=>`<tr><td><strong>${esc(r.name)}</strong></td><td><code class="ltr" style="background:var(--inset);padding:2px 6px;border-radius:4px;">${esc(r.phone)}</code></td><td>${toFa(r.count)}</td><td>${toFa(r.area)} هکتار</td><td>${fmtT(r.total)}</td></tr>`).join("");
-}
+document.getElementById('sms-send-btn')?.addEventListener('click',async()=>{const phone=toEn($("#sms-phone").value.trim());const text=$("#sms-text").value.trim();if(!/^09\d{9}$/.test(phone))return toast("شماره نامعتبر",true);if(!text)return toast("متن را وارد کنید",true);toast("در حال ارسال...");const res=await apiFetch("/api/sms/send",{method:"POST",body:JSON.stringify({to:phone,text})});if(res.ok){toast("✅ پیامک ارسال شد");$("#sms-text").value="";}else{toast(res.data.error||"خطا",true);}});
 
-document.getElementById('sms-send-btn')?.addEventListener('click',async()=>{
-  const phone=toEn($("#sms-phone").value.trim());const text=$("#sms-text").value.trim();
-  if(!/^09\d{9}$/.test(phone))return toast("شماره نامعتبر",true);
-  if(!text)return toast("متن را وارد کنید",true);
-  toast("در حال ارسال...");
-  const res=await apiFetch("/api/sms/send",{method:"POST",body:JSON.stringify({to:phone,text})});
-  if(res.ok){toast("✅ پیامک ارسال شد");$("#sms-text").value="";}else{toast(res.data.error||"خطا",true);}
-});
+document.getElementById('backup-dl')?.addEventListener('click',()=>{const data={exportedAt:new Date().toISOString(),orders:cache.orders,partners:cache.partners,slots:cache.slots,messages:read(LS.messages,[]),config:getConfig(),videos:read(LS.videos,[]),payouts:read(LS.payouts,[]),orderImages:read(LS.order_images,{})};const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`sph-backup-${Date.now()}.json`;a.click();toast("✅ بکاپ دانلود شد");});
+document.getElementById('backup-csv')?.addEventListener('click',()=>{const rows=[["کد","نام","موبایل","استان","شهر","خدمت","مقدار","مبلغ","وضعیت","تاریخ","امتیاز"]].concat(cache.orders.map(o=>[o.code,o.name,o.phone,o.province,o.city,o.serviceName||o.serviceType,o.area,o.amount,STATUS[o.status]?.label||o.status,new Date(o.createdAt||Date.now()).toLocaleDateString("fa-IR"),o.rating||0]));const csv=rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(",")).join("\n");const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="orders-backup.csv";a.click();toast("✅ خروجی CSV دانلود شد");});
+document.getElementById('restore-btn')?.addEventListener('click',async()=>{const f=document.getElementById('restore-file')?.files?.[0];if(!f)return toast("فایل را انتخاب کنید",true);try{const data=JSON.parse(await f.text());if(!confirm("داده‌ها جایگزین شوند؟"))return;if(data.orders){cache.orders=data.orders;write(LS.orders,data.orders);}if(data.partners){cache.partners=data.partners;write(LS.partners,data.partners);}if(data.slots){cache.slots=data.slots;write(LS.slots,data.slots);}if(data.config)setConfig(data.config);if(data.payouts)write(LS.payouts,data.payouts);if(data.orderImages)write(LS.order_images,data.orderImages);toast("✅ بازیابی شد");setTimeout(()=>location.reload(),1000);}catch(e){toast("فایل نامعتبر",true);}});
 
-document.getElementById('backup-dl')?.addEventListener('click',()=>{
-  const data={exportedAt:new Date().toISOString(),orders:cache.orders,partners:cache.partners,slots:cache.slots,messages:read(LS.messages,[]),config:getConfig(),videos:read(LS.videos,[]),payouts:read(LS.payouts,[]),orderImages:read(LS.order_images,{})};
-  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
-  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`sph-backup-${Date.now()}.json`;a.click();
-  toast("✅ بکاپ دانلود شد");
-});
-document.getElementById('backup-csv')?.addEventListener('click',()=>{
-  const rows=[["کد","نام","موبایل","استان","شهر","خدمت","مقدار","مبلغ","وضعیت","تاریخ","امتیاز"]].concat(cache.orders.map(o=>[o.code,o.name,o.phone,o.province,o.city,o.serviceName||o.serviceType,o.area,o.amount,STATUS[o.status]?.label||o.status,new Date(o.createdAt||Date.now()).toLocaleDateString("fa-IR"),o.rating||0]));
-  const csv=rows.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(",")).join("\n");
-  const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"});
-  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="orders-backup.csv";a.click();
-  toast("✅ خروجی CSV دانلود شد");
-});
-document.getElementById('restore-btn')?.addEventListener('click',async()=>{
-  const f=document.getElementById('restore-file')?.files?.[0];if(!f)return toast("فایل را انتخاب کنید",true);
-  try{
-    const data=JSON.parse(await f.text());
-    if(!confirm("داده‌ها جایگزین شوند؟"))return;
-    if(data.orders){cache.orders=data.orders;write(LS.orders,data.orders);}
-    if(data.partners){cache.partners=data.partners;write(LS.partners,data.partners);}
-    if(data.slots){cache.slots=data.slots;write(LS.slots,data.slots);}
-    if(data.config)setConfig(data.config);
-    if(data.payouts)write(LS.payouts,data.payouts);
-    if(data.orderImages)write(LS.order_images,data.orderImages);
-    toast("✅ بازیابی شد");setTimeout(()=>location.reload(),1000);
-  }catch(e){toast("فایل نامعتبر",true);}
-});
+document.getElementById("home-phone-save")?.addEventListener("click",async()=>{const v=toEn(document.getElementById("home-phone-input").value.trim());if(!/^09\d{9}$/.test(v))return toast("شماره نامعتبر",true);await startPhoneVerification(v,'farmer');});
+document.getElementById("home-phone-input")?.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();document.getElementById("home-phone-save").click();}});
+document.getElementById('guest-btn')?.addEventListener('click',()=>{localStorage.removeItem(LS.cust_phone);localStorage.removeItem(LS.cust_verified);localStorage.removeItem(LS.cust_profile);localStorage.setItem(LS.guest,'true');document.getElementById('welcome-overlay').classList.add('hidden');showScreen("home");});
 
-// ============ Home Phone / Guest Auth ============
-document.getElementById("home-phone-save")?.addEventListener("click",async()=>{
-  const v=toEn(document.getElementById("home-phone-input").value.trim());
-  if(!/^09\d{9}$/.test(v))return toast("شماره نامعتبر",true);
-  await startPhoneVerification(v,'farmer');
-});
-document.getElementById("home-phone-input")?.addEventListener("keydown",e=>{
-  if(e.key==="Enter"){e.preventDefault();document.getElementById("home-phone-save").click();}
-});
-document.getElementById('guest-btn')?.addEventListener('click',()=>{
-  localStorage.removeItem(LS.cust_phone);localStorage.removeItem(LS.cust_verified);localStorage.removeItem(LS.cust_profile);
-  localStorage.setItem(LS.guest,'true');
-  document.getElementById('welcome-overlay').classList.add('hidden');
-  showScreen("home");
-});
+window.startFarmerLogin=function(){document.getElementById('welcome-overlay').classList.add('hidden');showScreen("home");document.getElementById("home-phone-input")?.focus();};
+window.startPartnerLogin=function(){document.getElementById('welcome-overlay').classList.add('hidden');showScreen("partner");document.getElementById('partner-login-view').hidden=false;document.getElementById('partner-panel-view').hidden=true;const ph=document.getElementById("ptn-login-phone");if(ph)ph.value="";};
+window.startAdminLogin=function(){document.getElementById('welcome-overlay').classList.add('hidden');showScreen("admin");const lv=document.getElementById("admin-login-view"),pv=document.getElementById("admin-panel-view");if(lv)lv.hidden=false;if(pv)pv.hidden=true;};
 
-window.startFarmerLogin=function(){
-  document.getElementById('welcome-overlay').classList.add('hidden');
-  showScreen("home");
-  document.getElementById("home-phone-input")?.focus();
-};
-window.startPartnerLogin=function(){
-  document.getElementById('welcome-overlay').classList.add('hidden');
-  showScreen("partner");
-  document.getElementById('partner-login-view').hidden=false;
-  document.getElementById('partner-panel-view').hidden=true;
-  const ph=document.getElementById("ptn-login-phone");if(ph)ph.value="";
-};
-window.startAdminLogin=function(){
-  document.getElementById('welcome-overlay').classList.add('hidden');
-  showScreen("admin");
-  const lv=document.getElementById("admin-login-view"),pv=document.getElementById("admin-panel-view");
-  if(lv)lv.hidden=false;if(pv)pv.hidden=true;
-};
-
-// ============ Boot Sequence ============
 (async function boot(){
-  await loadAll(); // دریافت اطلاعات از Cloudflare Worker
-  
+  await loadAll();
   const isFarmer=isCustomerVerified()||isGuest();
   const isPartner=localStorage.getItem(LS.partner_session)!==null;
   const isAdmin=localStorage.getItem(LS.admin_token)!==null;
-  
-  if(isFarmer||isPartner||isAdmin){
-    document.getElementById('welcome-overlay').classList.add('hidden');
-    if(isAdmin)showScreen("admin");
-    else if(isPartner)showScreen("partner");
-    else showScreen("home");
-  }else{
-    document.getElementById('welcome-overlay').classList.remove('hidden');
-  }
-  
+  if(isFarmer||isPartner||isAdmin){document.getElementById('welcome-overlay').classList.add('hidden');if(isAdmin)showScreen("admin");else if(isPartner)showScreen("partner");else showScreen("home");}
+  else{document.getElementById('welcome-overlay').classList.remove('hidden');}
   const c=getConfig();
-  const ptnProv=$("#ptn-reg-prov");
-  if(ptnProv)ptnProv.innerHTML='<option value="">انتخاب</option>'+c.provinces.map(v=>`<option value="${v}">${v}</option>`).join("");
-  
+  const ptnProv=$("#ptn-reg-prov");if(ptnProv)ptnProv.innerHTML='<option value="">انتخاب</option>'+c.provinces.map(v=>`<option value="${v}">${v}</option>`).join("");
   fetchWeather('auto');
   renderSupportSettings();
-  refreshHomeStats();
-  renderCustomerAuth();
+  refreshHomeStats();renderCustomerAuth();
 })();
 
 </script>
