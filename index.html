@@ -294,7 +294,76 @@ code{font-family:ui-monospace,Menlo,monospace;font-size:.92em;background:var(--i
 .price-row{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--ln);border-radius:10px;padding:10px 12px;margin-bottom:8px;flex-wrap:wrap}
 .price-row .pr-name{flex:1;min-width:150px;font-size:13px;font-weight:700;color:var(--i900)}.price-row input{width:110px;padding:8px;border:1px solid var(--ln2);border-radius:8px;text-align:center;font-weight:700;font-size:13px}
 .price-row .pr-unit{font-size:11.5px;color:var(--i500);min-width:50px}.price-row .pr-default{font-size:11.5px;color:var(--i400);min-width:100px}
+/* Patch: Fix Admin & Partner Login Mobile Layout */
+@media(max-width: 720px) {
+    /* ۱. اجبار کل صفحه به حالت بلوکی و تمام عرض */
+    .shell, .main {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+    }
 
+    /* ۲. اصلاح کادر فرم ورود */
+    .auth-wrap {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 10px auto !important;
+        padding: 0 16px !important;
+        box-sizing: border-box !important;
+    }
+    .auth-panel {
+        width: 100% !important;
+        padding: 24px 16px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* ۳. اصلاح نوار بالای صفحه (مدیریت + زنگوله) */
+    .top-bar {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        padding: 12px 16px !important;
+        margin-bottom: 10px !important;
+        box-sizing: border-box !important;
+    }
+    .top-bar-title { font-size: 16px !important; }
+
+    /* ۴. اصلاح متن‌های پایین صفحه */
+    .footer-note {
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
+        padding: 20px 16px 100px 16px !important;
+        box-sizing: border-box !important;
+        line-height: 1.8 !important;
+    }
+
+    /* ۵. اصلاح فیلدهای ورودی تا از کادر بیرون نزنند */
+    .field-wrap input, .field-wrap select {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        font-size: 14px !important;
+    }
+    
+    /* ۶. اصلاح دکمه‌های ورود و انصراف */
+    .actions {
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+    .actions .btn {
+        width: 100% !important;
+        justify-content: center !important;
+        padding: 14px !important;
+    }
+  }
 /* ================= MOBILE FIX ================= */
 @media(max-width:1100px){
   .shell{grid-template-columns:220px minmax(0,1fr)}.main{padding:22px}
@@ -2537,6 +2606,60 @@ document.getElementById('guest-btn')?.addEventListener('click',()=>{
   
   renderSupportSettings(); renderNotifications(); refreshHomeStats(); renderCustomerAuth(); fetchWeather('auto');
 })();
+  // ==========================================
+// PATCH: ذخیره و بازیابی خودکار اطلاعات مشتری
+// ==========================================
+
+// ۱. تابعی برای پر کردن خودکار فرم
+window.autoFillOrderForm = function(type) {
+  const phone = getCustomerPhone();
+  if(!phone) return;
+  const storedProf = getCustomerProfile();
+  if(storedProf.phone !== phone) return;
+  const prof = storedProf;
+  const prefix = type === 'drone' ? 'drone' : 'mach';
+  
+  if(prof.name && $(`#${prefix}-cust`)) $(`#${prefix}-cust`).value = prof.name;
+  if(phone && $(`#${prefix}-phone`)) $(`#${prefix}-phone`).value = phone;
+  if(prof.province && $(`#${prefix}-province`)) $(`#${prefix}-province`).value = prof.province;
+  if(prof.city && $(`#${prefix}-city`)) $(`#${prefix}-city`).value = prof.city;
+  if(prof.village && $(`#${prefix}-village`)) $(`#${prefix}-village`).value = prof.village;
+  if(prof.crop && $(`#${prefix}-crop`)) $(`#${prefix}-crop`).value = prof.crop;
+};
+
+// ۲. بازنویسی تابع نمایش صفحه تا فرم‌ها به صورت خودکار پر شوند
+const _origShowScreen = window.showScreen;
+window.showScreen = function(name) {
+  _origShowScreen(name);
+  if(name === 'order-drone') setTimeout(() => autoFillOrderForm('drone'), 100);
+  if(name === 'order-machinery') setTimeout(() => autoFillOrderForm('mach'), 100);
+};
+
+// ۳. ذخیره اطلاعات به محض ثبت سفارش پهپاد
+document.getElementById('drone-order-form')?.addEventListener('submit', () => {
+  setTimeout(() => {
+    setCustomerProfile({
+      name: $("#drone-cust").value.trim(),
+      province: $("#drone-province").value,
+      city: $("#drone-city").value.trim(),
+      village: $("#drone-village").value.trim(),
+      crop: $("#drone-crop").value
+    });
+  }, 100);
+});
+
+// ۴. ذخیره اطلاعات به محض ثبت سفارش مکانیزاسیون
+document.getElementById('machinery-order-form')?.addEventListener('submit', () => {
+  setTimeout(() => {
+    setCustomerProfile({
+      name: $("#mach-cust").value.trim(),
+      province: $("#mach-province").value,
+      city: $("#mach-city").value.trim(),
+      village: $("#mach-village").value.trim(),
+      crop: $("#mach-crop").value
+    });
+  }, 100);
+});
 </script>
 </body>
 </html>
